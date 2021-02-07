@@ -2,60 +2,61 @@
 % Please edit documentation in R/sounding_plot.R
 \name{sounding_plot}
 \alias{sounding_plot}
-\title{Plot empty Skew-T diagram}
+\title{Plot Skew-T, hodograph and convective indices on a single layout}
 \usage{
 sounding_plot(
+  pressure,
+  altitude,
+  temp,
+  dpt,
+  wd,
+  ws,
+  convert = FALSE,
   ptop = 100,
-  isoterms_col = "#d8be9b",
-  temp_stripes = FALSE,
-  mixing_ratio_col = "#8470FF90",
-  dry_adiabats_col = "#d6878750",
-  moist_adiabats_col = "#00FF0095",
-  deg45 = FALSE,
-  isotherm0 = TRUE,
+  interpolate = TRUE,
+  title = "",
+  parcel = "MU",
   ...
 )
 }
 \arguments{
-\item{ptop}{Pressure top level to be used for plotting diagram. Valid options: 200, 150, 100 (default) and 50 hPa}
+\item{pressure}{- air pressure (hPa)}
 
-\item{isoterms_col}{color to be used for drawing dry isoterms}
+\item{altitude}{- in metres}
 
-\item{temp_stripes}{logical, whether to draw color stripes for isotherms}
+\item{temp}{- air temperature (degree Celsius)}
 
-\item{mixing_ratio_col}{color to be used for drawing mixing ratio isolines and labels. If set to NA or empty string isolines are not drawn}
+\item{dpt}{- dew point temperature (degree Celsius)}
 
-\item{dry_adiabats_col}{color to be used for drawing dry adiabats. If set to NA or not provided drawing lines skipped}
+\item{wd}{- wind direction in degrees (0-360)}
 
-\item{moist_adiabats_col}{color to be used for drawing moist adiabats. If set to NA or not provided drawing lines skipped}
+\item{ws}{- wind speed in m/s}
 
-\item{deg45}{whether to preserve 45 degrees for diagonal isolines on Skew-T diagram regardless ploting window aspect ratio. [Logical, default: FALSE]}
+\item{convert}{logical. Whether to convert wind speed from knots to m/s (default FALSE)}
 
-\item{isotherm0}{whether to deliminate 0 degree Celsius isother[Logical, default: TRUE]}
+\item{ptop}{Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)}
 
-\item{...}{additional (mostly graphical) parameters to be passed}
+\item{interpolate}{logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset}
+
+\item{title}{title to be added in the layout's header}
+
+\item{parcel}{tracing for "MU", "ML" or "SB" parcel}
+
+\item{...}{extra graphic arguments}
 }
 \description{
-Function for plotting a customized version of the Skew-T diagram. Please note that drawing Skew-T may require increasing size or modifying 
-aspect ratio of plotting window in order to provide readable results.
+Function to plot a composite of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
+on a single layout
 }
 \examples{
-sounding_plot(ptop = 100)
-
-sounding_plot(ptop = 150, temp_stripes = FALSE) # na color stripes for temperature
-
-sounding_plot(ptop = 100)
-title("Your title")
-mtext('WMO ID: 11035, 2011-08-23 1200 UTC', padj = -0.5, col = "white")
 data("sounding_wien")
-attach(sounding_wien)
-# dataset obtained from Wyoming University's sounding webpage:
-# climate::sounding_wyoming(wmo_id = 11035, yy = 2011, mm = 8, dd = 23, hh=12)[[1]]
+pressure = sounding_wien$PRES
+altitude = sounding_wien$HGHT
+temp = sounding_wien$TEMP
+dpt = sounding_wien$DWPT
+wd = sounding_wien$DRCT
+ws = sounding_wien$SKNT
+sounding_plot(pressure, altitude, temp, dpt, wd, ws)
 
-output <- parcel_helpers(PRES, HGHT, TEMP, DWPT, DRCT, SKNT)
-skewt_lines(output$dpt, output$pressure,type='l',col='forestgreen',lwd = 2.5)
-skewt_lines(output$temp,output$pressure,type='l',col='red', lwd = 2.5)
-skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)
-skewt_lines(output$tempV,output$pressure, col = "red3", lty = 3, lwd = 1.5)
 
 }

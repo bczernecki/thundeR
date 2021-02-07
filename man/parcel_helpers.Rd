@@ -26,8 +26,8 @@ on Skew-T diagrams
 \examples{
 data("sounding_wien")
 attach(sounding_wien)
-sounding_plot()
-output <- parcel_helpers(PRES, HGHT, TEMP, DWPT, DRCT, SKNT)
+skewt_plot()
+output = parcel_helpers(PRES, HGHT, TEMP, DWPT, DRCT, SKNT)
 skewt_lines(output$dpt, output$pressure, col = 'forestgreen',lwd = 2.5)
 skewt_lines(output$temp,output$pressure, col = 'red', lwd = 2.5)
 skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)

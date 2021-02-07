@@ -1,24 +1,24 @@
-Package: thundeR
+Package: thunder
 Type: Package
-Title: R package to calculate atmospheric convection indices
-Version: 0.0.4101
+Title: thunder - R package to calculate atmospheric convection indices
+Version: 0.0.1101
 Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("aut", "cre")),
     person("Piotr", "Szuster", email = "retsuz@gmail.com", role = c("aut")),
-    person("Mateusz", "Taszarek", email = "tornado@amu.edu.pl", role = c("aut")),
-    person("Jakub", "Nowosad", email = "nowosad.jakub@gmail.com", role = c("aut")))
+    person("Mateusz", "Taszarek", email = "tornado@amu.edu.pl", role = c("aut")))
 Author: Bartosz Czernecki [aut, cre]
 Maintainer: Bartosz Czernecki <nwp@amu.edu.pl>
-Description: Atmospheric Sounding - R tool for calculating atmospheric convection indices.
+Description: R tool for calculating atmospheric convection indices.
 License: GPL (>= 2)
 Imports:
     Rcpp (>= 0.12.9.4),
     climate,
-    dplyr
+    dplyr,
+    aiRthermo
 Depends:
     R (>= 3.5.0)
 Suggested: RadioSonde
 LinkingTo: Rcpp
 RoxygenNote: 7.1.0
 Encoding: UTF-8
-URL: https://github.com/bczernecki/sounding
-BugReports: https://github.com/bczernecki/sounding/issues
+URL: https://github.com/bczernecki/thunder
+BugReports: https://github.com/bczernecki/thunder/issues

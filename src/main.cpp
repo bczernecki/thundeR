@@ -3487,7 +3487,7 @@ int main(){
 //' @param dew dew point temperature [degree Celsius]
 //' @param angle wind direction [degrees]
 //' @param velocity wind speed [metres per second]
-//'	@param export_profile runtime parameters
+//' @param export_profile runtime parameters
 //' @examples 
 //' pressure <- c(1000, 855, 700, 500, 300, 100, 10)
 //' altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
@@ -3496,7 +3496,7 @@ int main(){
 //' wd <- c(0, 90, 135, 180, 270, 350, 0)
 //' ws <- c(5, 10, 20, 30, 40, 5, 0)
 //' sounding(pressure, altitude, temp, dpt, wd, ws)
-//' @useDynLib sounding
+//' @useDynLib thunder
 //' @importFrom Rcpp evalCpp
 //' @export
 // [[Rcpp::export]]
@@ -3507,8 +3507,8 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
                           Rcpp::NumericVector dew,
                           Rcpp::NumericVector angle,
                           Rcpp::NumericVector velocity,
-						  Rcpp::NumericVector export_profile,
-						  Rcpp::NumericVector accuracy
+                          Rcpp::NumericVector export_profile,
+                          Rcpp::NumericVector accuracy
 						  )
 {
   Sounding *sret;

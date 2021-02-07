@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // sounding_default
 Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure, Rcpp::NumericVector altitude, Rcpp::NumericVector temperature, Rcpp::NumericVector dew, Rcpp::NumericVector angle, Rcpp::NumericVector velocity, Rcpp::NumericVector export_profile, Rcpp::NumericVector accuracy);
-RcppExport SEXP _sounding_sounding_default(SEXP pressureSEXP, SEXP altitudeSEXP, SEXP temperatureSEXP, SEXP dewSEXP, SEXP angleSEXP, SEXP velocitySEXP, SEXP export_profileSEXP, SEXP accuracySEXP) {
+RcppExport SEXP _thunder_sounding_default(SEXP pressureSEXP, SEXP altitudeSEXP, SEXP temperatureSEXP, SEXP dewSEXP, SEXP angleSEXP, SEXP velocitySEXP, SEXP export_profileSEXP, SEXP accuracySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -25,11 +25,11 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_sounding_sounding_default", (DL_FUNC) &_sounding_sounding_default, 8},
+    {"_thunder_sounding_default", (DL_FUNC) &_thunder_sounding_default, 8},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_sounding(DllInfo *dll) {
+RcppExport void R_init_thunder(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

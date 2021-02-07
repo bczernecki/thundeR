@@ -1,229 +1,454 @@
-#' Plot empty Skew-T diagram
+#' Plot Skew-T, hodograph and convective indices on a single layout 
 #' 
-#' Function for plotting a customized version of the Skew-T diagram. Please note that drawing Skew-T may require increasing size or modifying 
-#' aspect ratio of plotting window in order to provide readable results.
-#'
-#' @import graphics
+#' Function to plot a composite of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
+#' on a single layout
 #' 
-#' @param ptop Pressure top level to be used for plotting diagram. Valid options: 200, 150, 100 (default) and 50 hPa
-#' @param temp_stripes logical, whether to draw color stripes for isotherms
-#' @param isoterms_col color to be used for drawing dry isoterms
-#' @param mixing_ratio_col color to be used for drawing mixing ratio isolines and labels. If set to NA or empty string isolines are not drawn
-#' @param dry_adiabats_col color to be used for drawing dry adiabats. If set to NA or not provided drawing lines skipped
-#' @param moist_adiabats_col color to be used for drawing moist adiabats. If set to NA or not provided drawing lines skipped
-#' @param deg45 whether to preserve 45 degrees for diagonal isolines on Skew-T diagram regardless ploting window aspect ratio. [Logical, default: FALSE]
-#' @param isotherm0 whether to deliminate 0 degree Celsius isother[Logical, default: TRUE]
-#' @param ... additional (mostly graphical) parameters to be passed
+#' @param pressure - air pressure (hPa)
+#' @param altitude - in metres
+#' @param temp - air temperature (degree Celsius)
+#' @param dpt - dew point temperature (degree Celsius)
+#' @param wd - wind direction in degrees (0-360)
+#' @param ws - wind speed in m/s
+#' @param convert logical. Whether to convert wind speed from knots to m/s (default FALSE)
+#' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
+#' @param interpolate logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset
+#' @param title title to be added in the layout's header
+#' @param parcel tracing for "MU", "ML" or "SB" parcel
+#' @param ... extra graphic arguments
 #' @export
+#' @import aiRthermo
 #' 
-#' @examples 
-#' sounding_plot(ptop = 100)
-#' 
-#' sounding_plot(ptop = 150, temp_stripes = FALSE) # na color stripes for temperature
-#' 
-#' sounding_plot(ptop = 100)
-#' title("Your title")
-#' mtext('WMO ID: 11035, 2011-08-23 1200 UTC', padj = -0.5, col = "white")
+#' @examples
 #' data("sounding_wien")
-#' attach(sounding_wien)
-#' # dataset obtained from Wyoming University's sounding webpage:
-#' # climate::sounding_wyoming(wmo_id = 11035, yy = 2011, mm = 8, dd = 23, hh=12)[[1]]
+#' pressure = sounding_wien$PRES
+#' altitude = sounding_wien$HGHT
+#' temp = sounding_wien$TEMP
+#' dpt = sounding_wien$DWPT
+#' wd = sounding_wien$DRCT
+#' ws = sounding_wien$SKNT
+#' sounding_plot(pressure, altitude, temp, dpt, wd, ws)
 #' 
-#' output <- parcel_helpers(PRES, HGHT, TEMP, DWPT, DRCT, SKNT)
-#' skewt_lines(output$dpt, output$pressure,type='l',col='forestgreen',lwd = 2.5)
-#' skewt_lines(output$temp,output$pressure,type='l',col='red', lwd = 2.5)
-#' skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)
-#' skewt_lines(output$tempV,output$pressure, col = "red3", lty = 3, lwd = 1.5)
-#' 
+#'
 
-sounding_plot <- function(ptop = 100, 
-                          isoterms_col = "#d8be9b",
-                          temp_stripes = FALSE, 
-                          mixing_ratio_col = "#8470FF90", 
-                          dry_adiabats_col = "#d6878750",
-                          moist_adiabats_col = "#00FF0095", 
-                          deg45 = FALSE,
-                          isotherm0=TRUE,
-                          ...){
+sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
+                         convert = FALSE, ptop = 100, interpolate = TRUE,
+                         title = "", parcel = "MU", ...){
   
-  if(deg45){
-    par(pty = "s") # preserve correct aspect ratio
+  dev_size = dev.size("in")
+  if(dev_size[1] < 10 | dev_size[2] < 7.5){
+    text = paste("Your display device is", dev_size[1], "x", dev_size[2], "in. \nIt is recommended to use at least 10 x 7.5 in. plotting window or consider saving the layout into file")
+    message(text)
   }
   
-  #par(pty = "s")
-  # marginesy w ukladzie: 
-  #c(bottom, left, top, right) 
-  #par(mar = c(2, 1.5, 1 ,6))
-  ymax <- skewty(1050)
-  #ymin <- skewty(50)
-  ymin <- skewty(ptop)
-  xmin <- skewtx(-50, skewty(1050))
-  # przesuwanie rysowanego zakresu na wykresie:
-  xmax <- skewtx(48.3, skewty(995))
+  ####
+  par(pty = "m")
+  plot.new()
+  par(fig = c(0.028, 0.51, 0.03, 0.95), 
+      new = T, 
+      mar=c(0, 0, 0, 0), 
+      oma=c(0, 0, 0, 0),
+      mgp=c(0,0.15,0))
   
-  xc <- c(xmin, xmin, xmax, xmax, xmin)
-  yc <- c(ymin, ymax, ymax, ymin, ymin)
-  
-  plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 1) 
-  
-  # par("usr")
-  # [1] -29.828975  23.667431  -2.424056  37.790678
-  # abline(v = c(-29.82, 23.66))
-  ypos <- skewty(1050)
-  degc <- seq(-50, 50, by = 10)
-  axis(1, at = skewtx(degc, ypos), labels = seq(-50, 50, by = 10), pos = ymax, cex.axis=0.65, padj=-0.15, tck=-0.01)
-  mtext(side = 1, line = 0, expression(paste("Temperature [°C]")), cex=0.65)
-  
-  pres <- c(1050, 1000, 850, 700, 500, 300, 200, 100)
-  NPRES <- length(pres)
-  xpl <- rep(xmin, times = NPRES)
-  xpr <- c(xmax, xmax, xmax, xmax, skewtx(20, skewty(500)))
-  
-  #abline(h = y)
-  ypos <- skewty(pres[2:NPRES])
-  axis(2, las = 1, at = ypos, labels = pres[2:NPRES], pos = xmin, cex.axis=0.65, lwd=0)
-  mtext(side = 2, line = 1.3, "Pressure [hPa]", padj = 2, cex=0.65)
-  # end of drawing diagram in square
-  
-  # dry isotherms
-  kinkx <- skewtx(10.5, skewty(400))
-  temp <- seq(from = -150, to = 60, by = 10)
-  NTEMP <- length(temp[temp < 60])
-  lendt <- rep(1050, NTEMP) # ograniczenie dolne w hPa
-  
-  #if(ptop == 150) lendt[1:8] <- c(222, 303, 414, 565, 770, 1050, 1050, 1050)
-  lendt[1:11] <- c(49, 63, 87, 118, 163, 222, 303, 414, 565, 770, 1050)
-  
-  inds <- seq(1, length(temp))[(temp > -50 & temp < 60)]
-  exponent <- (127.182 - (kinkx - 0.54 * temp[inds])/0.90692)/44.061
-  #rendt <- rep(50, NTEMP)
-  
-  rendt <- rep(ptop, NTEMP) # zmiana na 100-150 hpa
-  rendt[inds] <- 10^exponent # ograniczenie gorne w hPa
-  
-  # check limit of upper lines:
-  rendt[which(rendt < ptop)] = ptop # clip coordinates up to ptop
-  lendt[which(lendt < ptop)] = ptop
-  yl <- skewty(rendt)
-  xl <- skewtx(temp[temp < 60], yl)
-  yr <- skewty(lendt)
-  xr <- skewtx(temp[temp < 60], yr)
-  
-  segments(xl, yl, xr, yr, col = isoterms_col, lwd = 0.8)
-  
-  if(temp_stripes){
-    strt <- ifelse(ptop == 150, 1, 2)
-    for (i in seq(strt, length(xl), by = 2)){
-      polygon(x = c(xl[i], xr[i], xr[i+1], xl[i+1]), 
-              y = c(yl[i], yr[i], yr[i+1], yl[i+1]), 
-              border = NA,
-              col = "#f0e8f475")
-    }
+  ####
+  t_col <- function(color, percent, name = NULL) {
+    rgb.val <- col2rgb(color)
+    t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
+                 max = 255,
+                 alpha = (100 - percent) * 255 / 100,
+                 names = name)
+    invisible(t.col)
   }
   
-  if(isotherm0){
-    inds = which(temp == 0)
-    segments(xl[inds], yl[inds], xr[inds], yr[inds], col = 'blue3', lwd = 1, lty = 3)
-    inds = which(temp == -20)
-    segments(xl[inds], yl[inds], xr[inds], yr[inds], col = 'blue3', lwd = 1, lty = 3)
+  ####
+  output <- parcel_helpers(pressure, altitude, temp, dpt, wd, ws)
+  RH <- aiRthermo::dewpointdepression2rh(output$pressure*100, output$temp+273.15, output$temp-output$dpt, consts = export_constants())
+  SH <- aiRthermo::rh2shum(output$pressure*100, output$temp+273.15, RH, consts = export_constants())
+  E <- aiRthermo::q2e(output$pressure*100, SH, consts = export_constants())
+  W <- aiRthermo::e2w(E, output$pressure*100, consts = export_constants())
+  TLCL <- aiRthermo::boltonTLCL(output$temp+273.15, RH, consts = export_constants())
+  THETAE <- aiRthermo::equivalentPotentialTemperature(output$pressure*100, output$temp+273.15, W, TLCL, consts = export_constants())
+  
+  ####
+  skewt_plot()
+  skewt_lines(output$dpt, output$pressure, col = t_col('forestgreen',10), lwd = 2, ptop = 100)
+  skewt_lines(output$temp,output$pressure, col = t_col('red',10), lwd = 2, ptop = 100)
+  skewt_lines(output$tempV,output$pressure, col = t_col("red3",0), lwd = 1, lty = 3, ptop = 100)
+  
+  text(20, 28, "Hail Growth\nLayer (HGL)",col="#8470FF90",cex=0.65,srt=58)
+  
+  ####
+  parametry <- sounding_compute(pressure, altitude, temp, dpt, wd, ws)
+  LP <- max(which(!is.na(names(parametry))))
+  
+  ###
+  if(parcel=="ML"){
+    vsb_lcl = parametry[which(names(parametry[1:LP]) == "ML_LCL_HGT")] + output$altitude[1]
+    vsb_lfc = parametry[which(names(parametry[1:LP]) == "ML_LFC_HGT")] + output$altitude[1]
+    vsb_el = parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")] + output$altitude[1]
+    vsb_eff = (parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")]/2) + output$altitude[1]
+    ind_lcl = which.min(abs(output$altitude - vsb_lcl))
+    ind_lfc = which.min(abs(output$altitude - vsb_lfc))
+    ind_el = which.min(abs(output$altitude - vsb_el))
+    ind_eff = which.min(abs(output$altitude - vsb_eff))
+    y_eff = skewty(output$pressure[ind_eff])
+    x_eff = skewtx(output$ML[ind_eff],skewty(output$pressure[ind_eff]))
+    y_el = skewty(output$pressure[ind_el])
+    x_el = skewtx(output$ML[ind_el],skewty(output$pressure[ind_el]))
+    y_lfc = skewty(output$pressure[ind_lfc])
+    x_lfc = skewtx(output$ML[ind_lfc],skewty(output$pressure[ind_lfc]))
+    y_lcl = skewty(output$pressure[ind_lcl])
+    x_lcl = skewtx(output$ML[ind_lcl],skewty(output$pressure[ind_lcl]))
+    v <- skewty(c(output$pressure[ind_lfc:ind_el], output$pressure[ind_el:ind_lfc])) # extra checks for NA coded as -99
+    u <- skewtx(c(output$tempV[ind_lfc:ind_el], rev(output$ML[ind_lfc:ind_el])), v)
+    skewt_lines(output$ML,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
   }
-  # upper labels for temperature:
-  #ind <- (round(xl - max(xl),2) != 0) & (xl > xmin)
   
-  #text(xl, yl, temp)
-  
-  #text(xl[ind] - 0.3, yl[ind] + 1, 
-  #     labels = paste(" ", as.character(temp[ind])), col = isoterms_col, cex = 0.9)
-  # right labels for temperature:
-  #ind <- (round(xl - max(xl),2) != 0) 
-  #end of drawing isotherms
-  
-  # mixing ratio
-  temp1050 <- c(256.65, 265.25, 274.45, 284.40, 295.1)-273.15
-  temp600 <- c(250.15, 258.25, 266.90, 276.25, 286.25)-273.15
-  
-  yl <- skewty((rep(600, times = length(temp600))))
-  xr <- skewtx(temp1050, skewty(rep(1050, times = length(temp1050))))
-  yr <- skewty((rep(1050, times = length(temp1050))))
-  xl <- skewtx(temp600, skewty(rep(600, times = length(temp600))))
-  
-  if(!is.na(mixing_ratio_col) || mixing_ratio_col != ""){
-    segments(xl, yl, xr, yr, col = mixing_ratio_col, lwd = 0.8, lty = 1)
-    text(xl, yl + 0.75, labels = c(1, 2, 4, 8, 16), col = "#8470FF90", adj = 0.5, cex = 0.6)
+  if(parcel=="MU"){
+    vsb_lcl = parametry[which(names(parametry[1:LP]) == "MU_LCL_HGT")] + output$altitude[1]
+    vsb_lfc = parametry[which(names(parametry[1:LP]) == "MU_LFC_HGT")] + output$altitude[1]
+    vsb_el = parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")] + output$altitude[1]
+    vsb_eff = ((parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")]-parametry[which(names(parametry[1:LP]) == "HGT_max_thetae_03km")])/2) + output$altitude[1]
+    ind_lcl = which.min(abs(output$altitude - vsb_lcl))
+    ind_lfc = which.min(abs(output$altitude - vsb_lfc))
+    ind_el = which.min(abs(output$altitude - vsb_el))
+    ind_eff = which.min(abs(output$altitude - vsb_eff))
+    y_eff = skewty(output$pressure[ind_eff])
+    x_eff = skewtx(output$MU[ind_eff],skewty(output$pressure[ind_eff]))
+    y_el = skewty(output$pressure[ind_el])
+    x_el = skewtx(output$MU[ind_el],skewty(output$pressure[ind_el]))
+    y_lfc = skewty(output$pressure[ind_lfc])
+    x_lfc = skewtx(output$MU[ind_lfc],skewty(output$pressure[ind_lfc]))
+    y_lcl = skewty(output$pressure[ind_lcl])
+    x_lcl = skewtx(output$MU[ind_lcl],skewty(output$pressure[ind_lcl]))
+    v <- skewty(c(output$pressure[ind_lfc:ind_el], output$pressure[ind_el:ind_lfc])) # extra checks for NA coded as -99
+    u <- skewtx(c(output$tempV[ind_lfc:ind_el], rev(output$MU[ind_lfc:ind_el])), v)
+    skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
   }
   
-  # dry adiabats (theta):
-  theta <- seq(from = -50, to = 250, by = 10)
-  NTHETA <- length(theta)
-  lendth <- rep(ptop, times = NTHETA) # ustawic zasieg na 50 lub 100 hPa
-  lendth[1:8] <- c(950, 690, 500, 360, 250, 170, 110, 60)
-  
-  # correction for ptop
-  if((!is.na(dry_adiabats_col) || dry_adiabats_col != "")){
-    lendth[lendth < ptop] <- ptop
-    rendth <- rep(1050, times = NTHETA)
-    for (itheta in 1:NTHETA) {
-      p <- seq(from = lendth[itheta], to = rendth[itheta], length = 200)
-      sy <- skewty(p)
-      dry <- tda(theta[itheta], p)
-      sx <- skewtx(dry, sy)
-      sx <- sx[sx <= xmax]
-      if(length(sx)){
-        sy=sy[1:length(sx)]
-        lines(sx, sy, lty = 1, col = dry_adiabats_col, lwd = 0.7)
-      }
-    }
+  if(parcel=="SB"){
+    vsb_lcl = parametry[which(names(parametry[1:LP]) == "SB_LCL_HGT")] + output$altitude[1]
+    vsb_lfc = parametry[which(names(parametry[1:LP]) == "SB_LFC_HGT")] + output$altitude[1]
+    vsb_el = parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")] + output$altitude[1]
+    vsb_eff = (parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")]/2) + output$altitude[1]
+    ind_lcl = which.min(abs(output$altitude - vsb_lcl))
+    ind_lfc = which.min(abs(output$altitude - vsb_lfc))
+    ind_el = which.min(abs(output$altitude - vsb_el))
+    ind_eff = which.min(abs(output$altitude - vsb_eff))
+    y_eff = skewty(output$pressure[ind_eff])
+    x_eff = skewtx(output$SB[ind_eff],skewty(output$pressure[ind_eff]))
+    y_el = skewty(output$pressure[ind_el])
+    x_el = skewtx(output$SB[ind_el],skewty(output$pressure[ind_el]))
+    y_lfc = skewty(output$pressure[ind_lfc])
+    x_lfc = skewtx(output$SB[ind_lfc],skewty(output$pressure[ind_lfc]))
+    y_lcl = skewty(output$pressure[ind_lcl])
+    x_lcl = skewtx(output$SB[ind_lcl],skewty(output$pressure[ind_lcl]))
+    v <- skewty(c(output$pressure[ind_lfc:ind_el], output$pressure[ind_el:ind_lfc])) # extra checks for NA coded as -99
+    u <- skewtx(c(output$tempV[ind_lfc:ind_el], rev(output$SB[ind_lfc:ind_el])), v)
+    skewt_lines(output$SB,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
   }
-  # end of dry adiabats
   
+  ###
+  polygon(u, v, col = "#FFA50025", border = NA)
   
-  # beginning of moist adiabats:
-  if(!is.na(moist_adiabats_col) || moist_adiabats_col != ""){
-    p <- seq(from = 1050, to = ptop, by = -2)
-    npts <- length(p)
-    sy <- skewty(p)
-    sx <- double(length = npts)
-    
-    pseudo <- c(34,28, 21, 14, 5, -5,-18,-32,-45)
-    NPSEUDO <- length(pseudo)
-    holdx <- matrix(0, nrow = npts, ncol = NPSEUDO)
-    holdy <- matrix(0, nrow = npts, ncol = NPSEUDO)
-    for (ipseudo in 1:NPSEUDO) {
-      for (ilen in 1:npts) {
-        moist <- satlft(pseudo[ipseudo], p[ilen])
-        sx[ilen] <- skewtx(moist, sy[ilen])
-      }
-      inds <- (sx < xmin)
-      sx[inds] <- NA
-      sy[inds] <- NA
-      holdx[, ipseudo] <- sx
-      holdy[, ipseudo] <- sy
-    }
-    
-    for (ipseudo in 1:NPSEUDO) {
-      sx <- holdx[, ipseudo]
-      sy <- holdy[, ipseudo]
-      lines(sx, sy, lty = 3, col = moist_adiabats_col)
-      #text(sx[length(sx)]+0.5, sy[length(sy)]-0.5, as.character(pseudo[ipseudo]), 
-      #     col = moist_adiabats_col, adj = 0.5, cex = 0.75)
-    }
-  } # end of moist adiabats
+  ###
+  altitude_to_pressure = function(altitude){
+    skewty(output$pressure[which(output$altitude-output$altitude[1] == altitude)])
+  }
+
+  ###  
+  if(parcel=="SB"){
+    if(parametry[which(names(parametry[1:LP]) == "SB_CAPE")] > 0){
+    #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
+    text(x_el, y_el, paste0("---- SB EL"), pos = 4, cex = 0.62, col = "black")}
+    text(x_lcl, y_lcl, paste0("---- SB LCL"), pos = 4, cex = 0.62, col = "black")
+  }
   
-  # pp <- recordPlot()
-  # devtools::use_data(pp)
-  # #saveRDS(object = pp, file = "data/pp.rds") # opcjonalne zapisanie do wykorzystania potem
-  # rm(pp)
+  if(parcel=="MU"){
+    if(parametry[which(names(parametry[1:LP]) == "MU_CAPE")] > 0){
+    #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
+    text(x_el, y_el, paste0("---- MU EL"), pos = 4, cex = 0.62, col = "black")}
+    text(x_lcl, y_lcl, paste0("---- MU LCL"), pos = 4, cex = 0.62, col = "black")
+  }
+  
+  if(parcel=="ML"){
+    if(parametry[which(names(parametry[1:LP]) == "ML_CAPE")] > 0){
+    #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
+    text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black")}
+    text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")
+  }
+  
+  ###
+  text(-29, altitude_to_pressure(0), paste0("--- surface (",output$altitude[1]," m AGL) ---"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(1000), paste0("--- 1 km"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(2000), paste0("--- 2 km"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(3000), paste0("--- 3 km"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(4000), paste0("--- 4 km"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(5000), paste0("--- 5 km"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(6000), paste0("--- 6 km"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(8000), paste0("--- 8 km"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(10000), paste0("---10 km"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(12000), paste0("---12 km"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(14000), paste0("---14 km"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(16000), paste0("---16 km"), pos=4, cex = 0.65, col = "black")
+  
+  ###
+  par(fig = c(0.46, 0.57, 0.03, 0.95), new = TRUE, mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))
+  sounding_barbs(pres = output$pressure, ws = output$ws, wd = output$wd, altitude = output$altitude, convert = FALSE)
+  
+  ###
+  par(fig = c(0.54, 0.99, 0.063, 0.48), new = TRUE, mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))  
+  box()
+  
+  ###
+  FONTSIZE = 0.64
+  
+  ###
+  text(0.04, 43.1, "MIXR", cex = FONTSIZE, adj = c(0,0))
+  text(0.04, 41.1, "[g/kg]", cex = FONTSIZE-0.075, adj = c(0,0))
+  text(0.124, 43.1, "CAPE", cex = FONTSIZE, adj = c(0,0))
+  text(0.124, 41.1, "[J/kg]", cex = FONTSIZE-0.075, adj = c(0,0))
+  text(0.21, 43.1, "CAPE03", cex = FONTSIZE, adj = c(0,0))
+  text(0.21, 41.1, "[J/kg]", cex = FONTSIZE-0.075, adj = c(0,0))
+  text(0.325, 43.1, "CAPEHGL", cex = FONTSIZE, adj = c(0,0))
+  text(0.325, 41.1, "[J/kg]", cex = FONTSIZE-0.075, adj = c(0,0))
+  text(0.46, 43.1, "CIN", cex = FONTSIZE, adj = c(0,0))
+  text(0.46, 41.1, "[J/kg]", cex = FONTSIZE-0.075, adj = c(0,0))
+  text(0.54, 43.1, "LI", cex = FONTSIZE, adj = c(0,0))
+  text(0.54, 41.1, "[K]", cex = FONTSIZE-0.075, adj = c(0,0))
+  text(0.60, 43.1, "LCL", cex = FONTSIZE, adj = c(0,0))
+  text(0.60, 41.1, "[m]", cex = FONTSIZE-0.075, adj = c(0,0))
+  text(0.68, 43.1, "LFC", cex = FONTSIZE, adj = c(0,0))
+  text(0.68, 41.1, "[m]", cex = FONTSIZE-0.075, adj = c(0,0))
+  text(0.76, 43.1, "EL", cex = FONTSIZE, adj = c(0,0))
+  text(0.76, 41.1, "[m]", cex = FONTSIZE-0.075, adj = c(0,0))
+  text(0.855, 43.1, "WMAXSHEAR", cex = FONTSIZE, adj = c(0,0))
+  text(0.855, 41.1, "[m2/s2]", cex = FONTSIZE-0.075, adj = c(0,0))
+  
+  text(-0.016, 37.9, "SB", cex = FONTSIZE, adj = c(0,0))
+  text(-0.021, 34.7, "MU", cex = FONTSIZE, adj = c(0,0))
+  text(-0.016, 31.5, "ML", cex = FONTSIZE, adj = c(0,0))
+
+  text(0.04, 37.9, sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "SB_MIXR")],digits=1)), cex = FONTSIZE,adj = c(0,0))
+  text(0.04, 34.7, sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "MU_MIXR")],digits=1)), cex = FONTSIZE,adj = c(0,0))
+  text(0.04, 31.5, sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "ML_MIXR")],digits=1)), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.125, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.125, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.125, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.21, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_03km_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.21, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_03km_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.21, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_03km_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.325, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_HGL_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.325, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_HGL_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.325, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_HGL_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.46, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_CIN")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.46, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_CIN")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.46, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_CIN")],digits=0), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.54, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_LI")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.54, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_LI")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.54, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_LI")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.60, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_LCL_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.60, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_LCL_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.60, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_LCL_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.68, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_LFC_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.68, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_LFC_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.68, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_LFC_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.76, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.76, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.76, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.855, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_WMAXSHEAR")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.855, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_WMAXSHEAR")],digits=0), cex = FONTSIZE,adj = c(0,0))
+  text(0.855, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_WMAXSHEAR")],digits=0), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.925, 37.9, paste0("(E ",round(parametry[which(names(parametry[1:LP]) == "SB_EFF_WMAXSHEAR")],digits=0),")"), cex = FONTSIZE,adj = c(0,0))
+  text(0.925, 34.7, paste0("(E ",round(parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")],digits=0),")"), cex = FONTSIZE,adj = c(0,0))
+  text(0.925, 31.5, paste0("(E ",round(parametry[which(names(parametry[1:LP]) == "ML_EFF_WMAXSHEAR")],digits=0),")"), cex = FONTSIZE,adj = c(0,0))
+  
+  abline(30.25,0)
+  
+  ###
+
+  text(0.175, 27.55, "Bulk wind shear", cex = FONTSIZE, adj = c(1,0))
+  text(0.175, 25.55, "[m/s]", cex = FONTSIZE-0.075, adj = c(1,0))
+
+  text(0.11,22.55, "Sfc-1000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.12,22.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_01km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.11,19.15, "Sfc-3000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.12,19.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_03km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.11,15.75, "Sfc-6000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.12,15.75, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_06km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.11,12.35, "Sfc-8000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.12,12.35, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_08km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.11,8.95, "Sfc-HGL:", cex = FONTSIZE, adj = c(1,0))
+  text(0.12,8.95, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_SFC_to_HGL")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.11,5.55, "Effec. (SB):", cex = FONTSIZE, adj = c(1,0))
+  text(0.12,5.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_EFF_SB")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.11,2.15, "Effec. (MU):", cex = FONTSIZE, adj = c(1,0))
+  text(0.12,2.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_EFF_MU")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.11,-1.25, "Effec. (ML):", cex = FONTSIZE, adj = c(1,0))
+  text(0.12,-1.25, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_EFF_ML")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+
+  segments(0.19, -3, 0.19, 30.22)
+
+  ###
+  
+  text(0.4225, 27.55, "SRH RM", cex = FONTSIZE, adj = c(1,0))
+  text(0.4225, 25.55, "[m2/s2]", cex = FONTSIZE-0.075, adj = c(1,0))
+  
+  text(0.53, 27.55, "SRH LM", cex = FONTSIZE, adj = c(1,0))
+  text(0.53, 25.55, "[m2/s2]", cex = FONTSIZE-0.075, adj = c(1,0))
+  
+  text(0.335,22.55, "Sfc-100m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.345,22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.4525,22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   # 
-  # print(pp)
+  text(0.335,19.15, "Sfc-500m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.345,19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.4525,19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.335,15.75, "Sfc-1000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.345,15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.4525,15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
-  # draw pressure heights:
-  y <- skewty(pres)
-  segments(-27.85, y, 26, y, col = "black", lwd = 0.25, lty = 1)
-  # title("ala ma kota")
-  # mtext("ala nie ma kojota", side = 3, padj = -1)
+  text(0.335,12.35, "Sfc-3000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.345,12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.4525,12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
+  segments(0.545, 10.25, 0.545, 30.22)
+  segments(0.19, 10.25, 0.6, 10.25)
+  
+  ###
+  
+  text(0.77, 27.55, "Mean wind", cex = FONTSIZE, adj = c(1,0))
+  text(0.77, 25.55, "[m/s]", cex = FONTSIZE-0.075, adj = c(1,0))
+  
+  text(0.71,22.55, "Sfc-1000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.72,22.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_01km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.71,19.15, "Sfc-2000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.72,19.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_02km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.71,15.75, "1000-3000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.72,15.75, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_13km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.71,12.35, "Sfc-6000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.72,12.35, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_06km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+
+  ###
+  
+  text(1.025, 27.55, "Lapse rate", cex = FONTSIZE, adj = c(1,0))
+  text(1.025, 25.55, "[K/km]", cex = FONTSIZE-0.075, adj = c(1,0))
+  
+  text(0.95,22.55, "Sfc-1000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.96,22.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_01km")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.95,19.15, "Sfc-3000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.96,19.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_03km")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.95,15.75, "3000-6000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.96,15.75, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_36km")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.95,12.35, "500-700hPa:", cex = FONTSIZE, adj = c(1,0))
+  text(0.96,12.35, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_500700hPa")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
+  
+  segments(0.7875, 10.25, 0.7875, 30.22)
+  segments(0.6, 10.25, 1.2, 10.25)
+  
+  ####
+  
+  text(0.405,6.5, "Prcp. water [mm]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.415,6.5, paste0(round(parametry[which(names(parametry[1:LP]) == "PRCP_WATER")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.405,2.9, "2-5km RH [%]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.415,2.9, paste0(round(parametry[which(names(parametry[1:LP]) == "RH_25km")]*100,digits=0),""), cex = FONTSIZE,adj = c(0,0))
+
+  text(0.405,-0.7, "Sfc-2km RH [%]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.415,-0.7, paste0(round(parametry[which(names(parametry[1:LP]) == "RH_02km")]*100,digits=0),""), cex = FONTSIZE,adj = c(0,0))
+
+  segments(0.46, 10.25, 0.46, -3)
+  
+  ###
+  
+  text(0.78,6.5, "Sfc-2km mstr. flux [g/s/m2]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.79,6.5, paste0(round(parametry[which(names(parametry[1:LP]) == "Moisture_Flux_02km")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.78,2.9, "Sfc-4km DCAPE [J/kg]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.79,2.9, paste0(round(parametry[which(names(parametry[1:LP]) == "DCAPE")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.78,-0.7, "Sfc-4km delta theta-e [K]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.79,-0.7, paste0(round(parametry[which(names(parametry[1:LP]) == "Delta_thetae")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+
+  segments(0.865, 10.25, 0.865, -3)
+  
+  ###
+  
+  text(0.955,6.5, "SHIP:", cex = FONTSIZE, adj = c(1,0))
+  text(0.965,6.5, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "SHIP")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.955,2.9, "SCP:", cex = FONTSIZE, adj = c(1,0))
+  text(0.965,2.9, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "SCP_new")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.955,-0.7, "STP:", cex = FONTSIZE, adj = c(1,0))
+  text(0.965,-0.7, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "STP_new")],digits=1))), cex = FONTSIZE,adj = c(0,0))
+
+  ###
+  par(fig=c(0.54, 0.99, 0, 0.06), new = TRUE, mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
+  mtext(expression(paste(bold("thunder")," - Rawindsonde processing tool for R (2021)")),
+        line = -1.5, cex=0.8)
+  #box()
+  ###
+  
+  ###
+  par(fig = c(0.54, 0.68, 0.49, 0.69875), new = TRUE, 
+      mar = c(0.55, 0, 0, 0), oma = c(0, 0, 0, 0))  
+  plot(THETAE, output$altitude-output$altitude[1],xaxt="n",yaxt="n",xlab="",  
+       type='l',xlim=c(300,400),ylim=c(100,6500),lwd=2,col='magenta')
+  axis(4, at=seq(0,6000,1000), las = 1, padj=-0.7, hadj=1.25, xpd = TRUE, 
+       labels=c("sfc ","1 km","2 km","3 km","4 km","5 km","6 km"), 
+       cex.axis=0.58, tck=0.1, lwd=0.35)
+  axis(1, at=seq(300,400,25), xpd = TRUE, padj=-1.1, 
+       cex.axis=0.58, tck=-0.04, lwd=0.35)
+  text(350,6200, "Theta-e [K]", cex = 0.65, col = "black")
+  #box()
+  
+  ###
+  
+  par(fig = c(0.54, 0.68, 0.70875, 0.9175), new = TRUE, 
+      mar = c(0.55, 0, 0, 0), oma = c(0, 0, 0, 0))  
+  plot(RH, output$altitude-output$altitude[1],xaxt="n",yaxt="n",xlab="",  
+       type='l',xlim=c(0,100),ylim=c(100,6500),lwd=2,col='blue')
+  axis(4, at=seq(0,6000,1000), las = 1, padj=-0.7, hadj=1.25, xpd = TRUE, 
+       labels=c("sfc ","1 km","2 km","3 km","4 km","5 km","6 km"), 
+       cex.axis=0.58, tck=0.1, lwd=0.35)
+  axis(1, at=seq(0,100,20), xpd = TRUE, padj=-1.1, 
+       cex.axis=0.58, tck=-0.04, lwd=0.35)
+  text(50,6200, "RH [%]", cex = 0.65, col = "black")
+  #box()
+  
+  
+  par(fig = c(0.69, 0.99, 0.49, 0.9175), new = TRUE, 
+      mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
+  v = round(-output$ws * 0.514444 * cos(output$wd * pi/180), 2)
+  u = round(-output$ws * 0.514444 * sin(output$wd * pi/180), 2)
+  hodograph(u, v, output$altitude-output$altitude[1],max_speed = 25, frame = FALSE)
+  box()
+  
+  ###
+  title(title,outer=T,line=-1.5)
   
 }
-
-
-

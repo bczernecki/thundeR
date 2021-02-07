@@ -11,7 +11,7 @@
 #' @param dew dew point temperature [degree Celsius]
 #' @param angle wind direction [degrees]
 #' @param velocity wind speed [metres per second]
-#'	@param export_profile runtime parameters
+#' @param export_profile runtime parameters
 #' @examples 
 #' pressure <- c(1000, 855, 700, 500, 300, 100, 10)
 #' altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
@@ -20,10 +20,10 @@
 #' wd <- c(0, 90, 135, 180, 270, 350, 0)
 #' ws <- c(5, 10, 20, 30, 40, 5, 0)
 #' sounding(pressure, altitude, temp, dpt, wd, ws)
-#' @useDynLib sounding
+#' @useDynLib thunder
 #' @importFrom Rcpp evalCpp
 #' @export
 sounding_default <- function(pressure, altitude, temperature, dew, angle, velocity, export_profile, accuracy) {
-    .Call('_sounding_sounding_default', PACKAGE = 'sounding', pressure, altitude, temperature, dew, angle, velocity, export_profile, accuracy)
+    .Call('_thunder_sounding_default', PACKAGE = 'thunder', pressure, altitude, temperature, dew, angle, velocity, export_profile, accuracy)
 }
 
