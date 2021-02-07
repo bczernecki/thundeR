@@ -17,6 +17,7 @@
 #' @param ... extra graphic arguments
 #' @export
 #' @import aiRthermo
+#' @import grDevices
 #' 
 #' @examples
 #' data("sounding_wien")

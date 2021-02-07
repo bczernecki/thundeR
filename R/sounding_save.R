@@ -22,6 +22,8 @@
 #' @export
 #' @import aiRthermo
 #' @importFrom tools file_ext
+#' @importFrom grDevices dev.off
+#' @importFrom grDevices png
 #' 
 #' @examples
 #' data("sounding_wien")
@@ -42,10 +44,10 @@ sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
         stopifnot(length(filename) < 4)
         
         if(tools::file_ext(filename) == "png"){
-                png(filename = filename, width = 950, height = 600, pointsize = 17)
+                grDevices::png(filename = filename, width = 950, height = 600, pointsize = 17)
                 sounding_plot(pressure = pressure, altitude = altitude, temp = temp, 
                               dpt = dpt, wd = wd, ws = ws, title = title, ...)
-                dev.off()
+                grDevices::dev.off()
         }
                 
 }
