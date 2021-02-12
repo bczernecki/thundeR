@@ -12,6 +12,7 @@
 #' @param ws wind speed in knots(!)
 #' @param convert logical. Whether to convert wind speed from knots to m/s (default FALSE)
 #' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
+#' @param yaxs logic. Whether to add labels to heights on Y lab
 #' @param ... extra graphic arguments
 #' @export
 #' 
@@ -19,9 +20,9 @@
 #' # load examplary dataset:
 #' data("sounding_wien")
 #' attach(sounding_wien)
-#' sounding_wind(pres = PRES, ws = SKNT, convert = TRUE)
+#' sounding_wind(pres = PRES, ws = SKNT, convert = TRUE, yaxs = TRUE)
 
-sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, ...){
+sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ...){
         
         #sounding_wien$PRES; ws = sounding_wien$SKNT
         #par(pty = "s") # plot wyswietla sie w "kwadracie"
@@ -34,16 +35,11 @@ sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, ...){
                 ws <- ws * 0.51444
         }
         
-        
-        # marginesy w ukladzie: 
-        #c(bottom, left, top, right) 
-        #par(mar = c(2, 1.5, 1 ,6))
-        
+        # define plotting area limits:
         ymax <- skewty(1050)
         #ymin <- skewty(50)
         ymin <- skewty(ptop)
         xmin <- 0
-        # przesuwanie rysowanego zakresu na wykresie:
         xmax <- 60
         
         ws_units <- seq(0, xmax, by = 10)
@@ -60,10 +56,16 @@ sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, ...){
         NPRES <- length(prs)
         
         ypos <- skewty(prs[2:NPRES])
-        axis(2, at = ypos, labels = NA, pos = xmin, padj = 1)
         
-        # commented label for X-axis
-        #mtext(side = 2, line = 1.5, "Pressure (hPa)", padj = 2, cex=0.8)
+        if(yaxs){
+                axis(2, at = ypos, labels = prs[2:NPRES], pos = xmin, padj = 1)
+                # commented label for X-axis
+                mtext(side = 2, line = 1.5, "Pressure (hPa)", padj = 2, cex=0.8)
+                
+        } else {
+                axis(2, at = ypos, labels = NA, pos = xmin, padj = 1)
+        }
+        
         
         # end of drawing diagram in square
         
@@ -73,10 +75,8 @@ sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, ...){
         x <- rep(xmin, length(y))
         
         
-        points(x = ws[ind], y = y[ind],  cex = 1, pch = 19, col = "black")
-        #segments(x0 = 0.5, y0 = y, x1 = ws, y1 = y, col = data$cols, lwd = 5)
-        
-        #choragiewki(cx = x+1, cy = y, direction = df$wd, speed = df$ws)
+        # points(x = ws[ind], y = y[ind],  cex = 1, pch = 4, col = "black")
+        # segments(x0 = 0.5, y0 = y, x1 = ws, y1 = y, col = data$cols, lwd = 5)
         
         
         data = approx(y = ws, x = y, n = 300)
@@ -127,13 +127,12 @@ sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, ...){
         # improve layout
         lines(data$x, data$y, lwd = 2.5)
         #segments(x0 = ws_units, y0 = ymax, x1 = ws_units, y1 = ymin, lwd = 0.5, col = "black", lty = 3)
-        points(x = ws[ind], y = y[ind],  cex = 1, pch = 19, col = "black")
+        #points(x = ws[ind], y = y[ind],  cex = 1, pch = 19, col = "black")
         lines(x = ws[ind], y = y[ind],  cex = 1, pch = 19, col = "black")
         
         
-        # podejscie no. 2 do rozkminy:
+        # approach no. 2 for checking purposes
         for (i in 1:nrow(cols)){
-                print(i)
                 polygon(x = c(cols$x1[i]-1, cols$x1[i], cols$x1[i], cols$x1[i]-1),
                         y = c(ymax, ymax, ymin, ymin), 
                         col = cols$cols[i], border = NA)
@@ -145,7 +144,7 @@ sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, ...){
         
         lines(data$x, data$y, lwd = 2.5, col = "#00000080")
         segments(x0 = ws_units, y0 = ymax, x1 = ws_units, y1 = ymin, lwd = 0.5, col = "black", lty = 3)
-        points(x = ws[ind], y = y[ind],  cex = 0.8, pch = 19, col = "#00000095")
+        points(x = ws[ind], y = y[ind],  cex = 0.8, pch = 4, col = "#00000095")
         #lines(x = ws[ind], y = y[ind],  cex = 1, pch = 19, col = "black")
         
         

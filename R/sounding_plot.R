@@ -21,15 +21,12 @@
 #' 
 #' @examples
 #' data("sounding_wien")
-#' pressure = sounding_wien$PRES
-#' altitude = sounding_wien$HGHT
-#' temp = sounding_wien$TEMP
-#' dpt = sounding_wien$DWPT
-#' wd = sounding_wien$DRCT
-#' ws = sounding_wien$SKNT
-#' sounding_plot(pressure, altitude, temp, dpt, wd, ws)
+#' sounding_wien = na.omit(sounding_wien)
+#' attach(sounding_wien)
+#' sounding_plot(PRES, HGHT, TEMP, DWPT, DRCT, SKNT, 
+#'               parcel = "MU", title = "Wien - 2011/08/23, 12:00 UTC")
 #' 
-#'
+
 
 sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                          convert = FALSE, ptop = 100, interpolate = TRUE,
@@ -179,7 +176,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   }
   
   ###
-  text(-29, altitude_to_pressure(0), paste0("--- surface (",output$altitude[1]," m AGL) ---"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(0), paste0("--- surface (",output$altitude[1]," m) ---"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(1000), paste0("--- 1 km"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(2000), paste0("--- 2 km"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(3000), paste0("--- 3 km"), pos=4, cex = 0.65, col = "black")

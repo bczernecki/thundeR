@@ -18,7 +18,7 @@
 #' data("sounding_wien")
 #' attach(sounding_wien)
 #' skewt_plot()
-#' output = parcel_helpers(PRES, HGHT, TEMP, DWPT, DRCT, SKNT)
+#' output <- parcel_helpers(PRES, HGHT, TEMP, DWPT, DRCT, SKNT)
 #' skewt_lines(output$dpt, output$pressure, col = 'forestgreen',lwd = 2.5)
 #' skewt_lines(output$temp,output$pressure, col = 'red', lwd = 2.5)
 #' skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)
@@ -26,7 +26,9 @@
 
 parcel_helpers = function(pressure, altitude, temp, dpt, wd, ws){
 
-  parametry = sounding_compute(pressure, altitude, temp, dpt, wd, ws, export_profile = 1, accuracy = 3)
+  parametry = sounding_compute(pressure = pressure, altitude = altitude, 
+                               temp = temp, dpt = dpt, wd = wd, ws = ws, 
+                               export_profile = 1, accuracy = 3)
   
   LP = max(which(!is.na(names(parametry)))) # no. of parameters 
   ###
@@ -38,15 +40,15 @@ parcel_helpers = function(pressure, altitude, temp, dpt, wd, ws){
   SBw = parametry[(LP+pozMU+4):(LP+pozMU+pozALL+3)]
   MLw = parametry[(LP+pozMU+pozALL+5):(LP+pozMU+(2*pozALL)+4)]
   Pw = parametry[(LP+pozMU+(2*pozALL)+6):(LP+pozMU+(3*pozALL)+5)]
-  Hw = parametry[(LP+pozMU+(3*pozALL)+7):(LP+pozMU+(4*pozALL)+6)]
-  Tw = parametry[(LP+pozMU+(4*pozALL)+8):(LP+pozMU+(5*pozALL)+7)]
-  TDw = parametry[(LP+pozMU+(5*pozALL)+9):(LP+pozMU+(6*pozALL)+8)]
-  WDw = parametry[(LP+pozMU+(6*pozALL)+10):(LP+pozMU+(7*pozALL)+9)]
-  WSw = parametry[(LP+pozMU+(7*pozALL)+11):(LP+pozMU+(8*pozALL)+10)]
-  TVw = parametry[(LP+pozMU+(8*pozALL)+12):(LP+pozMU+(9*pozALL)+11)]
-  MUw = c(rep(NA,pozALL-pozMU),MUw) # correction for elevated MU
+  Hw <- parametry[(LP+pozMU+(3*pozALL)+7):(LP+pozMU+(4*pozALL)+6)]
+  Tw <- parametry[(LP+pozMU+(4*pozALL)+8):(LP+pozMU+(5*pozALL)+7)]
+  TDw <- parametry[(LP+pozMU+(5*pozALL)+9):(LP+pozMU+(6*pozALL)+8)]
+  WDw <- parametry[(LP+pozMU+(6*pozALL)+10):(LP+pozMU+(7*pozALL)+9)]
+  WSw <- parametry[(LP+pozMU+(7*pozALL)+11):(LP+pozMU+(8*pozALL)+10)]
+  TVw <- parametry[(LP+pozMU+(8*pozALL)+12):(LP+pozMU+(9*pozALL)+11)]
+  MUw <- c(rep(NA,pozALL-pozMU),MUw) # correction for elevated MU
   ###
-  res = data.frame(pressure = Pw,
+  res <- data.frame(pressure = Pw,
                     altitude = Hw,
                     temp = Tw, 
                     tempV = TVw, 

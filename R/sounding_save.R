@@ -27,13 +27,11 @@
 #' 
 #' @examples
 #' data("sounding_wien")
-#' pressure = sounding_wien$PRES
-#' altitude = sounding_wien$HGHT
-#' temp = sounding_wien$TEMP
-#' dpt = sounding_wien$DWPT
-#' wd = sounding_wien$DRCT
-#' ws = sounding_wien$SKNT
-#' sounding_save(filename = "myfile.png", pressure, altitude, temp, dpt, wd, ws)
+#' sounding_wien = na.omit(sounding_wien)
+#' attach(sounding_wien)
+#' sounding_save(filename = "myfile.png", 
+#'               PRES, HGHT, TEMP, DWPT, DRCT, SKNT, parcel = "MU", 
+#'               title = "Wien - 2011/08/23, 12:00 UTC")
 #' 
 #'
 
