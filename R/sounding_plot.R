@@ -43,15 +43,15 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   plot.new()
   par(fig = c(0.028, 0.51, 0.03, 0.95), 
       new = T, 
-      mar=c(0, 0, 0, 0), 
-      oma=c(0, 0, 0, 0),
-      mgp=c(0,0.15,0))
+      mar = c(0, 0, 0, 0), 
+      oma = c(0, 0, 0, 0),
+      mgp = c(0,0.15,0))
   
   ####
   t_col <- function(color, percent, name = NULL) {
     rgb.val <- col2rgb(color)
     t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
-                 max = 255,
+                 maxColorValue = 255,
                  alpha = (100 - percent) * 255 / 100,
                  names = name)
     invisible(t.col)

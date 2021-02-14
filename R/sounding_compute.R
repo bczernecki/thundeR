@@ -1,9 +1,11 @@
 #' Calculate convective indices
 #'
-#' Function calculates presently over 100 atmospheric thermal- and kinematic indices (e.g. CAPE, CIN, Lapse Rates, EHI, STP, SCP, etc...)
+#' Function calculates presently over 100 atmospheric thermal-, kinematic- and composite indices 
+#' (e.g. CAPE, CIN, Lapse Rates, EHI, STP, SCP, etc...)
 #' related mostly to severe weather phenomena (Thunderstorms, Large Hail, Tornadoes, etc...)
 #' 
-#' Wrapper for a generic sounding function. Please consider using a slightly faster sounding_default() for large databases (i.e. at least over 1,000,000 soundings).
+#' Wrapper for a generic C++ based function. Please consider using a slightly faster 
+#' `?sounding_default()` for computing large databases (i.e. at least over 1,000,000 soundings).
 #'
 #' @export
 #' 
@@ -131,7 +133,8 @@
 #' sounding_compute(pressure, altitude, temp, dpt, wd, ws)
 
 
-sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, export_profile = 0, accuracy = 1){
+sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, 
+                            export_profile = 0, accuracy = 1){
   
   tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy)
   

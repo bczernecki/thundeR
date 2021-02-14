@@ -23,6 +23,8 @@ sounding_barbs(
 
 \item{wd}{wind direction in degress}
 
+\item{altitude}{altitude in metres above sea level}
+
 \item{convert}{logical. Whether to convert wind speed from knots to m/s (default FALSE)}
 
 \item{ptop}{Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)}
@@ -41,6 +43,6 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
 # load examplary dataset:
 data("sounding_wien")
 attach(sounding_wien)
-sounding_barbs(pres = PRES, ws = SKNT, wd = DRCT, convert = TRUE)
+sounding_barbs(pres = PRES, ws = SKNT, wd = DRCT, altitude = HGHT, convert = TRUE)
 
 }

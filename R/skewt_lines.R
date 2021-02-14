@@ -11,11 +11,13 @@
 #' @export
 #' 
 #' @examples 
-#' sounding_plot() # draw empty skew-t diagram
 #' 
+#' # take a sample sounding profile:
 #' data("sounding_wien")
 #' attach(sounding_wien)
-#' sounding_plot()
+#' 
+#' # draw empty Skew-T plot:
+#' skewt_plot(temp_stripes = TRUE)
 #' 
 #' # draw line for dew-point temperature:
 #' skewt_lines(DWPT, PRES, type = 'l', col = 'forestgreen', lwd = 2.5) 
@@ -23,9 +25,9 @@
 #' skewt_lines(TEMP, PRES, type = 'l', col='red', lwd = 2.5) 
 #' 
 
-skewt_lines <- function (temp, pressure, ptop = 100, ...) {
-        ind <- pressure >= ptop
-        v <- skewty(pressure[ind]) # extra checks for NA coded as -99
-        u <- skewtx(temp[ind], v)
+skewt_lines = function (temp, pressure, ptop = 100, ...) {
+        ind = pressure >= ptop
+        v = skewty(pressure[ind]) # extra checks for NA coded as -99
+        u = skewtx(temp[ind], v)
         graphics::lines(u, v,  ...)
 }

@@ -20,11 +20,13 @@ Calculate X and Y coordinates for lines to be drawn on Skew-T diagram;
 Draw any line on Skew-T diagram using temperature and pressure as coordinates
 }
 \examples{
-sounding_plot() # draw empty skew-t diagram
 
+# take a sample sounding profile:
 data("sounding_wien")
 attach(sounding_wien)
-sounding_plot()
+
+# draw empty Skew-T plot:
+skewt_plot(temp_stripes = TRUE)
 
 # draw line for dew-point temperature:
 skewt_lines(DWPT, PRES, type = 'l', col = 'forestgreen', lwd = 2.5) 

@@ -28,8 +28,6 @@ hodograph(
 \item{lab_hghts}{label of numeric vector heights in km to be signed on hodograph; default: 1, 3, 6; NULL for skipping labels}
 
 \item{...}{other graphical parameters to be used with plot() function}
-
-\item{by_km}{logical, whether to draw changes in wind profile by 1 km interval (default); alternatively every single entry will be drawn}
 }
 \description{
 Plot hodograph to show changes of wind speed and direction in vertical profile
@@ -37,11 +35,11 @@ Plot hodograph to show changes of wind speed and direction in vertical profile
 \examples{
 data("sounding_wien")
 attach(sounding_wien)
-   # changing wind speed and direction to U and V wind components
-   # also changing units from knots to m/s
-   u = round(-SKNT * 0.514444 * sin(DRCT * pi/180), 2)
-   v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
-   # finally plot the hodograph:
-   hodograph(u, v, HGHT)
+# changing wind speed and direction to U and V wind components
+# also changing units from knots to m/s
+u = round(-SKNT * 0.514444 * sin(DRCT * pi/180), 2)
+v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
+# finally plot the hodograph:
+hodograph(u, v, HGHT)
 
 }

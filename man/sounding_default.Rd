@@ -2,7 +2,8 @@
 % Please edit documentation in R/RcppExports.R
 \name{sounding_default}
 \alias{sounding_default}
-\title{Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.}
+\title{Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
+Further details given in the sounding_compute() function}
 \usage{
 sounding_default(
   pressure,
@@ -29,9 +30,12 @@ sounding_default(
 \item{velocity}{wind speed [metres per second]}
 
 \item{export_profile}{runtime parameters}
+
+\item{accuracy}{accuracy of methods used for interpolating and integrating algorithms [1 - default, 2 - fast implementation, 3 - very accurate]}
 }
 \description{
 Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
+Further details given in the sounding_compute() function
 }
 \examples{
 pressure <- c(1000, 855, 700, 500, 300, 100, 10)
@@ -40,5 +44,5 @@ temp <- c(25, 10, 0, -15, -30, -50, -92)
 dpt <- c(20, 5, -5, -30, -55, -80, -99)
 wd <- c(0, 90, 135, 180, 270, 350, 0)
 ws <- c(5, 10, 20, 30, 40, 5, 0)
-sounding(pressure, altitude, temp, dpt, wd, ws)
+sounding_compute(pressure, altitude, temp, dpt, wd, ws)
 }

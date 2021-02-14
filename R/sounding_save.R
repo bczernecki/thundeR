@@ -43,8 +43,8 @@ sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
         
         if(tools::file_ext(filename) == "png"){
                 grDevices::png(filename = filename, width = 950, height = 600, pointsize = 17)
-                sounding_plot(pressure = pressure, altitude = altitude, temp = temp, 
-                              dpt = dpt, wd = wd, ws = ws, title = title, ...)
+                sounding_plot(pressure, altitude, temp, 
+                              dpt, wd, ws, title = title, ...)
                 grDevices::dev.off()
         }
                 

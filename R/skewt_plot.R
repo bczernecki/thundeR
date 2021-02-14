@@ -72,7 +72,7 @@ skewt_plot = function(ptop = 100,
   ypos <- skewty(1050)
   degc <- seq(-50, 50, by = 10)
   axis(1, at = skewtx(degc, ypos), labels = seq(-50, 50, by = 10), pos = ymax, cex.axis=0.65, padj=-0.15, tck=-0.01)
-  mtext(side = 1, line = 0, expression(paste("Temperature [°C]")), cex=0.65)
+  mtext(side = 1, line = 0, expression(paste("Temperature [\u00b0C]")), cex=0.65)
   
   pres <- c(1050, 1000, 850, 700, 500, 300, 200, 100)
   NPRES <- length(pres)
@@ -81,15 +81,15 @@ skewt_plot = function(ptop = 100,
   
   #abline(h = y)
   ypos <- skewty(pres[2:NPRES])
-  axis(2, las = 1, at = ypos, labels = pres[2:NPRES], pos = xmin, cex.axis=0.65, lwd=0)
-  mtext(side = 2, line = 1.3, "Pressure [hPa]", padj = 2, cex=0.65)
+  axis(2, las = 1, at = ypos, labels = pres[2:NPRES], pos = xmin, cex.axis = 0.65, lwd=0)
+  mtext(side = 2, line = 1.3, "Pressure [hPa]", padj = 2, cex = 0.65)
   # end of drawing diagram in square
   
   # dry isotherms
   kinkx <- skewtx(10.5, skewty(400))
   temp <- seq(from = -150, to = 60, by = 10)
   NTEMP <- length(temp[temp < 60])
-  lendt <- rep(1050, NTEMP) # ograniczenie dolne w hPa
+  lendt <- rep(1050, NTEMP) # lower limit in hPa
   
   #if(ptop == 150) lendt[1:8] <- c(222, 303, 414, 565, 770, 1050, 1050, 1050)
   lendt[1:11] <- c(49, 63, 87, 118, 163, 222, 303, 414, 565, 770, 1050)
@@ -98,8 +98,8 @@ skewt_plot = function(ptop = 100,
   exponent <- (127.182 - (kinkx - 0.54 * temp[inds])/0.90692)/44.061
   #rendt <- rep(50, NTEMP)
   
-  rendt <- rep(ptop, NTEMP) # zmiana na 100-150 hpa
-  rendt[inds] <- 10^exponent # ograniczenie gorne w hPa
+  rendt <- rep(ptop, NTEMP) # change for 100 or 150hpa
+  rendt[inds] <- 10^exponent # upper limit
   
   # check limit of upper lines:
   rendt[which(rendt < ptop)] = ptop # clip coordinates up to ptop
@@ -123,9 +123,9 @@ skewt_plot = function(ptop = 100,
   
   if(isotherm0){
     inds = which(temp == 0)
-    segments(xl[inds], yl[inds], xr[inds], yr[inds], col = 'blue3', lwd = 1, lty = 3)
+    segments(xl[inds], yl[inds], xr[inds], yr[inds], col = "blue3", lwd = 1, lty = 3)
     inds = which(temp == -20)
-    segments(xl[inds], yl[inds], xr[inds], yr[inds], col = 'blue3', lwd = 1, lty = 3)
+    segments(xl[inds], yl[inds], xr[inds], yr[inds], col = "blue3", lwd = 1, lty = 3)
   }
   # upper labels for temperature:
   #ind <- (round(xl - max(xl),2) != 0) & (xl > xmin)
@@ -155,7 +155,7 @@ skewt_plot = function(ptop = 100,
   # dry adiabats (theta):
   theta <- seq(from = -50, to = 250, by = 10)
   NTHETA <- length(theta)
-  lendth <- rep(ptop, times = NTHETA) # ustawic zasieg na 50 lub 100 hPa
+  lendth <- rep(ptop, times = NTHETA) # set limit to 50 or 100 hPa
   lendth[1:8] <- c(950, 690, 500, 360, 250, 170, 110, 60)
   
   # correction for ptop
@@ -219,11 +219,7 @@ skewt_plot = function(ptop = 100,
   # draw pressure heights:
   y <- skewty(pres)
   segments(-27.85, y, 26, y, col = "black", lwd = 0.25, lty = 1)
-  # title("ala ma kota")
-  # mtext("ala nie ma kojota", side = 3, padj = -1)
   
   
 }
-
-
 

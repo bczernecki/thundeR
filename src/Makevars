@@ -1,2 +1,0 @@
-CXXFLAGS=-O3 -Wall -pipe -pedantic -std=c++11 
-PKG_CXXFLAGS=-O3 -Wall -pipe -pedantic -std=c++11 

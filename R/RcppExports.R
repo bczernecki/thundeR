@@ -2,6 +2,7 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 #' Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
+#' Further details given in the sounding_compute() function
 #' 
 #' 
 #'
@@ -11,7 +12,8 @@
 #' @param dew dew point temperature [degree Celsius]
 #' @param angle wind direction [degrees]
 #' @param velocity wind speed [metres per second]
-#' @param export_profile runtime parameters
+#' @param export_profile runtime parameters 
+#' @param accuracy accuracy of methods used for interpolating and integrating algorithms [1 - default, 2 - fast implementation, 3 - very accurate]
 #' @examples 
 #' pressure <- c(1000, 855, 700, 500, 300, 100, 10)
 #' altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
@@ -19,7 +21,7 @@
 #' dpt <- c(20, 5, -5, -30, -55, -80, -99)
 #' wd <- c(0, 90, 135, 180, 270, 350, 0)
 #' ws <- c(5, 10, 20, 30, 40, 5, 0)
-#' sounding(pressure, altitude, temp, dpt, wd, ws)
+#' sounding_compute(pressure, altitude, temp, dpt, wd, ws)
 #' @useDynLib thunder
 #' @importFrom Rcpp evalCpp
 #' @export

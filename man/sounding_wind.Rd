@@ -27,5 +27,5 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
 # load examplary dataset:
 data("sounding_wien")
 attach(sounding_wien)
-sounding_wind(pres = PRES, ws = SKNT, convert = TRUE)
+sounding_wind(pres = PRES, ws = SKNT, convert = TRUE, yaxs = TRUE)
 }

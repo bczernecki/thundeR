@@ -1,11 +1,10 @@
 Package: thunder
 Type: Package
-Title: thunder - R package to calculate atmospheric convection indices
+Title: Severe Weather Atmospheric Convection Indices from Rawindsonde Data
 Version: 0.0.1101
 Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("aut", "cre")),
     person("Piotr", "Szuster", email = "retsuz@gmail.com", role = c("aut")),
     person("Mateusz", "Taszarek", email = "tornado@amu.edu.pl", role = c("aut")))
-Author: Bartosz Czernecki [aut, cre]
 Maintainer: Bartosz Czernecki <nwp@amu.edu.pl>
 Description: R tool for calculating atmospheric convection indices.
 License: GPL (>= 2)
@@ -16,7 +15,7 @@ Imports:
     aiRthermo
 Depends:
     R (>= 3.5.0)
-Suggested: RadioSonde
+Suggests: RadioSonde
 LinkingTo: Rcpp
 RoxygenNote: 7.1.0
 Encoding: UTF-8
