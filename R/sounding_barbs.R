@@ -16,6 +16,7 @@
 #' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param interpolate logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset
 #' @param showaxis logical, drawing bounding box with left axis for pressure heighs (default FALSE)
+#' @param barb_cex size of wind barbs (default = 0.3)
 #' @param ... extra graphic arguments
 #' @export
 #' 
@@ -28,7 +29,7 @@
 
 sounding_barbs <- function(pres, ws, wd, altitude, convert = FALSE,
                            ptop = 100, interpolate = TRUE, 
-                           showaxis = FALSE, ...){
+                           showaxis = FALSE, barb_cex = 0.3, ...){
   
   if(ptop > 200) {
     stop("\nptop argument needs to be set < 200 (hPa)!")
@@ -77,7 +78,7 @@ sounding_barbs <- function(pres, ws, wd, altitude, convert = FALSE,
   
   #segments(x0 = 0.5, y0 = y, x1 = ws, y1 = y, col = data$cols, lwd = 5)
   if(!interpolate){
-    windbarbs(cx = x[ind]+0.5, cy = y[ind],direction = wd[ind], speed = ws[ind], cex = 0.3)
+    windbarbs(cx = x[ind]+0.5, cy = y[ind],direction = wd[ind], speed = ws[ind], cex = barb_cex)
   }
   
   if(interpolate){
@@ -91,7 +92,7 @@ sounding_barbs <- function(pres, ws, wd, altitude, convert = FALSE,
     data$ws <- sqrt((data$u^2) + (data$v^2))
     data$wd <- round((180/pi * atan2(data$u, data$v) + 180))
     windbarbs(cx = rep(x = (xmin+xmax)/2, times = length(data$y)),
-              cy = data$y, direction = data$wd, speed = data$ws, cex = 0.4)
+              cy = data$y, direction = data$wd, speed = data$ws, cex = barb_cex)
   }
   #points(data$x, data$y, col = "blue")
   

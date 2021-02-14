@@ -3,12 +3,8 @@ thunder - R Package to compute convective indices from rawindsonde data
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
-<!-- badges: end -->
-To be changed when CRAN comes...
-[![CRAN status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
-[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
 
-`thunder` is a freeware R package for performing analyses on atmospheric sounding profiles.
+`thunder` is a freeware R package for performing analyses of servere weather atmospheric convective indices using sounding profiles.
 
 The main core of this computational code is a highly optimized version of C++ code dedicated for calculating sounding derived indices related with atmospheric convections.
 
@@ -30,6 +26,23 @@ library(devtools);install_github("bczernecki/thunder", auth_token = "")
 
 ## Usage
 -----
+
+### Draw Skew-T diagram, hodograph and most important indices on a single layout and save it to png file
+
+``` r
+data("sounding_wien") # take example dataset:
+pressure = sounding_wien$PRES
+altitude = sounding_wien$HGHT
+temp = sounding_wien$TEMP
+dpt = sounding_wien$DWPT
+wd = sounding_wien$DRCT
+ws = sounding_wien$SKNT
+sounding_save(filename = "myfile.png", title = "Vienna (2011/08/23, 1200 UTC)", pressure, altitude, temp, dpt, wd, ws)
+```
+
+![](inst/figures/my_file.svg)
+
+
 
 ### Compute convective indices based on a (randomly) generated pseudo radiosonde data:
 
@@ -97,21 +110,6 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws)
 #             1005.54              936.94              936.94              771.71
 ```
 
-
-### Draw Skew-T diagram, hodograph and most important indices on a single layout and save it to png file
-
-``` r
-data("sounding_wien")
-pressure = sounding_wien$PRES
-altitude = sounding_wien$HGHT
-temp = sounding_wien$TEMP
-dpt = sounding_wien$DWPT
-wd = sounding_wien$DRCT
-ws = sounding_wien$SKNT
-sounding_save(filename = "myfile.png", title = "Vienna (2011/08/23, 1200 UTC)", pressure, altitude, temp, dpt, wd, ws)
-```
-
-![](inst/figures/myfile.png)
 
 Contributions
 -------------
