@@ -14,7 +14,6 @@ using namespace std;
 
 const double kel = 273.15;
 const double g = 9.81;
-const double M_PI =3.14;
 class IndicesCollector;
 class InfoCollector;
 class Sounding;
