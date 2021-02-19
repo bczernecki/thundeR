@@ -2974,7 +2974,7 @@ double IndicesCollector::ML_EFF_WMAXSHEAR(){
 
 //##############################################################################################
 
-double IndicesCollector::NEWDTE(){
+double IndicesCollector::DeltaThetaE_HGL(){
   return Get(S->th->oe,0)-S->th->mthet;
 }
 
@@ -3049,42 +3049,42 @@ double IndicesCollector::RHMIDDLE(){
 }
 
 double IndicesCollector::Bunkers_RM_A(){
-	double *tab = S->ks->rm->toAV(); 
+	double *tab = S->ks->rm.toAV(); 
 	double angle = tab[0];
 	delete[] tab;
 	return angle;
 }
 
 double IndicesCollector::Bunkers_RM_M(){
-	double *tab = S->ks->rm->toAV(); 
+	double *tab = S->ks->rm.toAV(); 
 	double magnitude = tab[1]; 
 	delete[] tab;
 	return magnitude;
 }
 
 double IndicesCollector::Bunkers_LM_A(){
-	double *tab = S->ks->lm->toAV(); 
+	double *tab = S->ks->lm.toAV(); 
 	double angle = tab[0];
 	delete[] tab;
 	return angle;
 }
 
 double IndicesCollector::Bunkers_LM_M(){
-	double *tab = S->ks->lm->toAV(); 
+	double *tab = S->ks->lm.toAV(); 
 	double magnitude = tab[1]; 
 	delete[] tab;
 	return magnitude;
 }
 
 double IndicesCollector::Bunkers_MW_A(){
-	double *tab = this->mean06->toAV(); 
+	double *tab = this->mean06.toAV(); 
 	double angle = tab[0];
 	delete[] tab;
 	return angle;
 }
 
 double IndicesCollector::Bunkers_MW_M(){
-	double *tab = this->mean06->toAV(); 
+	double *tab = this->mean06.toAV(); 
 	double magnitude = tab[1]; 
 	delete[] tab;
 	return magnitude;
