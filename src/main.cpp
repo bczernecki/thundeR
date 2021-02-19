@@ -3683,7 +3683,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   int mulen, sblen,mllen,mustart;
 
   double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q);
-	int reslen= 100;
+	int reslen= 107;
 	int maxl=reslen;
 	if(export_profile[0]==1){
 	plen = sret->p->size();
