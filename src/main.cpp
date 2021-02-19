@@ -3077,14 +3077,14 @@ double IndicesCollector::Bunkers_LM_M(){
 }
 
 double IndicesCollector::Bunkers_MW_A(){
-	double *tab = this->mean06.toAV(); 
+	double *tab = S->ks->mean06.toAV(); 
 	double angle = tab[0];
 	delete[] tab;
 	return angle;
 }
 
 double IndicesCollector::Bunkers_MW_M(){
-	double *tab = this->mean06.toAV(); 
+	double *tab = S->ks->mean06.toAV();
 	double magnitude = tab[1]; 
 	delete[] tab;
 	return magnitude;
