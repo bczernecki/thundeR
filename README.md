@@ -3,6 +3,7 @@ thunder - R Package to compute convective indices from rawindsonde data
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
+[![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/master/graph/badge.svg)](https://codecov.io/gh/bczernecki/thunder?branch=master)
 <!-- badges: end -->
 To be changed when CRAN comes...
 [![CRAN status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
