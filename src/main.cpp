@@ -14,7 +14,6 @@ using namespace std;
 
 const double kel = 273.15;
 const double g = 9.81;
-
 class IndicesCollector;
 class InfoCollector;
 class Sounding;
@@ -477,6 +476,10 @@ class Kinematics:public InfoCollector{
   friend class IndicesCollector;
 private:
   list<Vector> *vw;
+  Vector mean0;
+  Vector mean6;
+  double nsurf;
+  double nsix;
   Vector v0;
   Vector v1;
   Vector v2;
@@ -540,7 +543,7 @@ private:
   
 public:
   Kinematics();
-  ~Kinematics();
+  virtual ~Kinematics();
   void putSecondPhaseLine(int i, double p, double h, double t, double d, double a, double v)
   {
     doSRH(i, p, h, t, d, a, v);
@@ -590,10 +593,14 @@ Kinematics::Kinematics(){
   this->mean06 = Vector(0, 0, 0);
   this->mean02 = Vector(0,0,0);
   this->mean13 = Vector(0,0,0);
+  this->mean0=Vector(0,0,0);
+  this->mean6=Vector(0,0,0);
   this->lasth = h0;
   this->vw = new list<Vector>();
   this->llj = Vector(0, 0, 0);
   n2=0;
+  nsurf=0;
+  nsix=0;
   n6=0;
   n1=0;
   n13=0;
@@ -686,7 +693,14 @@ void Kinematics::putMandatoryVectors(int i, double p, double h, double t, double
 
 void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, double a, double v, Vector v_)
 {
-  if (h - h0 <= 1000)
+  if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
+
+	if(h-h0<=500){
+		mean0+=v_;
+		nsurf+=1;
+	}
+	
+  if ((h - h0 <= 1000))
   {
     mean01 += v_;
     n1 += 1;
@@ -707,7 +721,13 @@ void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, d
   {
     mean06 += v_;
     n6 += 1;
+	
+	if(h-h0>=5500){
+		mean6+=v_;
+		nsix+=1;
+	}
   }
+}
 }
 
 void Kinematics::putLLJ(int i, double p, double h, double t,double d,double a,double v, Vector v_)
@@ -719,7 +739,7 @@ void Kinematics::putLLJ(int i, double p, double h, double t,double d,double a,do
 
 void Kinematics::putSpecificLine(int i, double p, double h, double t, double d, double a, double v)
 {
-  int index = this->vw->size();
+  //int index = this->vw->size();
   Vector v_ = Vector(a,v * 0.514444);
   this->vw->push_back(v_);
   this->putMandatoryVectors(i, p, h, t, d, a, v, v_);
@@ -736,7 +756,8 @@ void Kinematics::prepareSupercellVectors()
   Vector meanwind = this->mean06;
   Vector tv = Vector(0, 0, 1);
   Vector dev = Vector(0, 0, 0);
-  dev = Vector::vec(this->shear06(),tv);
+  Vector tshear = this->mean6-this->mean0;
+  dev = Vector::vec(tshear,tv);
   dev *= 7.5;
   dev *= 1.0 / this->shear06().abs();
   this->rm = meanwind - dev;
@@ -764,7 +785,7 @@ void Kinematics::prepareCorfidiVectors()
 
 void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,double v)
 {	
-  if (i < vw->size()-1&&h-h0<=3000)
+  if ((size_t)i < vw->size()-1&&h-h0<=3000)
   {
     std::list<Vector>::iterator it = vw->begin();
     std::advance(it, i);
@@ -824,6 +845,10 @@ void Kinematics::finishMeanVectors()
   else mean13 = Vector(0, 0, 0);
   if (n2 != 0) mean02 *= 1.0 / n2;
   else mean02 = Vector(0, 0, 0);
+  if(nsurf!=0)mean0/=nsurf;
+  else mean0=Vector(0,0,0);
+  if(nsix!=0)mean6/=nsix;
+  else mean6=Vector(0,0,0);
 }
 
 class LapseRate{
@@ -863,7 +888,7 @@ private:
   
   bool isSet;
   bool dcape_;
-  double lasth;
+  
   double h0;
   
   double dcape;
@@ -882,6 +907,7 @@ private:
   
   
 public:
+	double lasth;
 list<double> *getVirtualValues(){
 	  return this->virtualValues;
   }
@@ -1184,6 +1210,17 @@ public:
   double t10;
   int p10;
   
+  double downmr;
+  double downmrn;
+  double downo;
+  double downon;
+  
+  double thetd;
+  double thetn;
+  
+  double mthet;
+  double mthetn;
+  
   list<double>* wbt;
   list<double>* oe;
   list<double>* mixing;
@@ -1225,7 +1262,7 @@ public:
   void setMlIndex(int i, double p, double h, double t, double d, double a, double v);
   void putMlLine(int i, double p, double h, double t, double d, double a, double v);
   Thermodynamics();
-  ~Thermodynamics();
+  virtual ~Thermodynamics();
   void prepareMeanLayer();
   void putMeanLine(int i, double p, double h, double t, double d, double a, double v);
   void finish();
@@ -1303,6 +1340,15 @@ Thermodynamics::Thermodynamics(){
   meanmxr2=0;
   meand2=0;
   
+  downmr=0;
+  downmrn=0;
+  downo=0;
+  downon=0;
+  thetd=0;
+  thetn=0;
+  
+  mthet=0;
+  mthetn=0;
 }
 //---------------------------------------------------------------------------------------
 Thermodynamics::~Thermodynamics(){
@@ -1366,6 +1412,22 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
 	mo += O(t,p);
     n += 1;
   }
+  
+  
+  if((abs(h - h0) <= 5000)&&(abs(h - h0) >= 3000)&&(fmod(abs(h-h0),100.0)==0.0)){
+	downmr+=W(d,p);
+	downmrn+=1;
+	downo+=O(t,p);
+	downon+=1;
+	
+	thetd+=OE(t,d,p);
+	thetn+=1;
+  }
+  
+  if(t>=-20.0&&t<=0.0&&(fmod(abs(h-h0),100.0)==0.0)){
+	mthet+=OE(t,d,p);
+	mthetn+=1;
+  }
 }
 
 //---------------------------------------------------------------------------------------  
@@ -1389,13 +1451,14 @@ void Thermodynamics::determineDowndraft700(int i, double p, double h, double t, 
 
 void Thermodynamics::determineDowndraftByMinTHTE(int i, double p, double h, double t, double d, double a, double v)
 {
-  downdraft->seti700index(minTHTEpos);
-  if (i==minTHTEpos)
+  
+  if ((h-h0)==4000)
   {
-    downdraft->setInitialConditions(i, p, h, t, d, a, v, h0);
+    downdraft->seti700index(i);
+	
   }
   
-  if (i >= minTHTEpos)
+  if ((h-h0) >= 4000)
   {
     downdraft->putLine(i, p, h, t, d, a, v);
   }
@@ -1512,10 +1575,12 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
     putPWATER(i, p, h, t, d, a, v);
     putLowLapseRates(i, p, h, t, d, a, v);
     putZeroPos(i, p, h, t, d, a, v, wbt);
-	  
+	  if((fmod(abs(h-h0),100.0)==0.0)||h==h0){
 		if (abs(h - h0) <= 2000){
 			meanhum2+=ESAT(d)/ESAT(t);
 			meand2b+=1;
+			meanmxr2+=W(d, p);
+			meand2+=1;
 			}
 
 
@@ -1530,10 +1595,8 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
 	                meand25+=1.0;
                 }
 	
-		if (abs(h - h0) <= 2000){
-			meanmxr2+=W(d, p);
-			meand2+=1;
-		}
+		
+	  }
   }
   if (abs(h - h0) <= 1000 && mr1000<mr) mr1000 = mr;
   
@@ -1541,7 +1604,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   
   
   //determineDowndraft700(i, p, h, t, d, a, v);
-  determineDowndraftByMinTHTE(i, p, h, t, d, a, v);
+  
   surfaceBased->putLine(i, p, h, t, d, a, v);
   mostUnstable->putLine(i, p, h, t, d, a, v);
   //putShowalter(i, p, h, t, d, a, v);
@@ -1560,15 +1623,23 @@ void Thermodynamics::prepareMeanLayer()
   mmr /= n;
   mo /=n;
   n /= 2;
+  downmr/=downmrn;
+  downo/=downon;
+  thetd/=thetn;
+  mthet/=mthetn;
+  
   meanLayer->setInitialConditions(0, mp, mh, mt, md, 0, 0, h0);
   meanLayer->setInitialW(mmr, mo);
+  downdraft->setInitialConditions(0, 0, 0, 0, 0, 0, 0, h0);
   downdraft->prepareForDCAPE();
+  downdraft->setInitialW(downmr, downo);
 }
 //---------------------------------------------------------------------------------------  
 void Thermodynamics::putMeanLine(int i, double p, double h, double t, double d, double a, double v)
 {
   this->meanLayer->putLine(i, p, h, t, d, a, v);
-  this->downdraft->putLine(i, p, h, t, d, a, v);
+  determineDowndraftByMinTHTE(i, p, h, t, d, a, v);
+  //this->downdraft->putLine(i, p, h, t, d, a, v);
   putShowalter(i, p, h, t, d, a, v);
 }
 //---------------------------------------------------------------------------------------  
@@ -1707,6 +1778,7 @@ public:
   double MUHeight();
   double MinTHTEHeight();
   double DeltaThetaE();
+  double DeltaThetaE_HGL();
   double VDCAPE();	
   double VirtualColdPoolStrength();
   double WindIndex();
@@ -1741,6 +1813,12 @@ public:
   double SRH500LM();
   double SRH01LM();
   double SRH03LM();
+  double Bunkers_RM_A();
+  double Bunkers_RM_M();
+  double Bunkers_LM_A();
+  double Bunkers_LM_M();
+  double Bunkers_MW_A();
+  double Bunkers_MW_M();
   double K_Index();
   double Showalter_Index();	
   double TotalTotals();		
@@ -1819,7 +1897,7 @@ void Sounding::prepareCache(double p, double h){
   
   double AGLlh=lh-this->cache->getH0();
   double AGLh=h-this->cache->getH0();
-  int check1;
+  //int check1;
   for(int i=0;i<hlength;i++){
     if(this->h->size()>0)this->prepareElementaryCache(AGLlh,AGLh,harray,i,this->h,&(setHeightIndex),this->cache);
     if(i<plength)
@@ -1946,6 +2024,27 @@ void Sounding::secondPhase(){
     this->ks->putSecondPhaseLine(i, p_, h_, t_, d_, a_, v_);
     ++ih;++it;++id;++ia;++iv;++i;
   }
+  i=0;
+  
+  ih = this->h->begin();
+  it = this->t->begin();
+  id = this->d->begin();
+  ia = this->a->begin();
+  iv = this->v->begin();
+  double h0=*ih;
+  this->th->downdraft->lasth=h0;
+  for(ip = this->p->begin(); ip!=this->p->end(); ++ip){
+    double p_ = *ip;
+    double h_ = *ih;
+	if(h_-h0>=4000)break;
+    double t_ = *it;
+    double d_ = *id;
+    double a_ = *ia;
+    double v_ = *iv;
+    this->th->downdraft->putLine(i, p_, h_, t_, d_, a_, v_);
+    ++ih;++it;++id;++ia;++iv;++i;
+  }
+  
 }
 
 IndicesCollector::IndicesCollector(Thermodynamics *t, Cache *c, Kinematics *k,Sounding *Snd){
@@ -2420,7 +2519,7 @@ double IndicesCollector::MinTHTEHeight(){
 }
 
 double IndicesCollector::DeltaThetaE(){
-  return Get(S->th->oe,0)-S->th->minTHTE;
+  return Get(S->th->oe,0)-S->th->thetd;
 }
 
 double IndicesCollector::VirtualColdPoolStrength(){
@@ -2602,7 +2701,7 @@ double IndicesCollector::emubs(){
  
   if(middle ==hindex )destindex = index;
   else if (middle > hindex){
-        for(int i = index;i<S->h->size()-1;i++){
+        for(size_t i = index;i<S->h->size()-1;i++){
             double upper = Get(S->h,i+1);
             double lower = Get(S->h, i);
             if(middle>=lower && middle<=upper){
@@ -2649,7 +2748,7 @@ double IndicesCollector::esbbs(){
  
   if(middle ==hindex )destindex = index;
   else if (middle > hindex){
-        for(int i = index;i<S->h->size()-1;i++){
+        for(size_t i = index;i<S->h->size()-1;i++){
             double upper = Get(S->h,i+1);
             double lower = Get(S->h, i);
             if(middle>=lower && middle<=upper){
@@ -2696,7 +2795,7 @@ double IndicesCollector::emlbs(){
  
   if(middle ==hindex )destindex = index;
   else if (middle > hindex){
-        for(int i = index;i<S->h->size()-1;i++){
+        for(size_t i = index;i<S->h->size()-1;i++){
             double upper = Get(S->h,i+1);
             double lower = Get(S->h, i);
             if(middle>=lower && middle<=upper){
@@ -2875,6 +2974,10 @@ double IndicesCollector::ML_EFF_WMAXSHEAR(){
 
 //##############################################################################################
 
+double IndicesCollector::DeltaThetaE_HGL(){
+  return Get(S->th->oe,0)-S->th->mthet;
+}
+
 double IndicesCollector::BulkShearSfcTen(){
   int tail=0;
   int head = S->th->mintenpos;
@@ -2945,11 +3048,54 @@ double IndicesCollector::RHMIDDLE(){
 	return S->th->meanhumMIDDLE;
 }
 
+double IndicesCollector::Bunkers_RM_A(){
+	double *tab = S->ks->rm.toAV(); 
+	double angle = tab[0];
+	delete[] tab;
+	return angle;
+}
+
+double IndicesCollector::Bunkers_RM_M(){
+	double *tab = S->ks->rm.toAV(); 
+	double magnitude = tab[1]; 
+	delete[] tab;
+	return magnitude;
+}
+
+double IndicesCollector::Bunkers_LM_A(){
+	double *tab = S->ks->lm.toAV(); 
+	double angle = tab[0];
+	delete[] tab;
+	return angle;
+}
+
+double IndicesCollector::Bunkers_LM_M(){
+	double *tab = S->ks->lm.toAV(); 
+	double magnitude = tab[1]; 
+	delete[] tab;
+	return magnitude;
+}
+
+double IndicesCollector::Bunkers_MW_A(){
+	double *tab = S->ks->mean06.toAV(); 
+	double angle = tab[0];
+	delete[] tab;
+	return angle;
+}
+
+double IndicesCollector::Bunkers_MW_M(){
+	double *tab = S->ks->mean06.toAV();
+	double magnitude = tab[1]; 
+	delete[] tab;
+	return magnitude;
+}
+
+
 //##############################################################################################
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz);
-  double * vec = new double[100];
+  double * vec = new double[107];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->VLLMostUnstableCAPE();
   vec[2]=(*S)->getIndicesCollectorPointer()->MUmiddlecape();
@@ -3000,56 +3146,63 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[47]=(*S)->getIndicesCollectorPointer()->MUHeight();
   vec[48]=(*S)->getIndicesCollectorPointer()->MinTHTEHeight();
   vec[49]=(*S)->getIndicesCollectorPointer()->DeltaThetaE();
-  vec[50]=(*S)->getIndicesCollectorPointer()->VDCAPE(); 
-  vec[51]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();
-  vec[52]=(*S)->getIndicesCollectorPointer()->WindIndex();
-  vec[53]=(*S)->getIndicesCollectorPointer()->PWATER();
-  vec[54]=(*S)->getIndicesCollectorPointer()->MoistureFlux();
-  vec[55]=(*S)->getIndicesCollectorPointer()->RH02();
-  vec[56]=(*S)->getIndicesCollectorPointer()->RH25();
-  vec[57]=(*S)->getIndicesCollectorPointer()->RHMIDDLE();  
-  vec[58]=(*S)->getIndicesCollectorPointer()->BS01();
-  vec[59]=(*S)->getIndicesCollectorPointer()->BS02();
-  vec[60]=(*S)->getIndicesCollectorPointer()->BS03();
-  vec[61]=(*S)->getIndicesCollectorPointer()->BS06();
-  vec[62]=(*S)->getIndicesCollectorPointer()->BS08();
-  vec[63]=(*S)->getIndicesCollectorPointer()->BS36();
-  vec[64]=(*S)->getIndicesCollectorPointer()->BS18();
-  vec[65]=(*S)->getIndicesCollectorPointer()->emubs();
-  vec[66]=(*S)->getIndicesCollectorPointer()->esbbs();
-  vec[67]=(*S)->getIndicesCollectorPointer()->emlbs();
-  vec[68]=(*S)->getIndicesCollectorPointer()->BulkShearSfcTen();
-  vec[69]=(*S)->getIndicesCollectorPointer()->BulkShearMULFCTen();
-  vec[70]=(*S)->getIndicesCollectorPointer()->BulkShearSBLFCTen();
-  vec[71]=(*S)->getIndicesCollectorPointer()->BulkShearMLLFCTen();
-  vec[72]=(*S)->getIndicesCollectorPointer()->MeanWind01();
-  vec[73]=(*S)->getIndicesCollectorPointer()->MeanWind02();
-  vec[74]=(*S)->getIndicesCollectorPointer()->MeanWind06();
-  vec[75]=(*S)->getIndicesCollectorPointer()->MeanWind13();
-  vec[76]=(*S)->getIndicesCollectorPointer()->SRH100RM();
-  vec[77]=(*S)->getIndicesCollectorPointer()->SRH500RM();
-  vec[78]=(*S)->getIndicesCollectorPointer()->SRH01RM();
-  vec[79]=(*S)->getIndicesCollectorPointer()->SRH03RM();
-  vec[80]=(*S)->getIndicesCollectorPointer()->SRH100LM();
-  vec[81]=(*S)->getIndicesCollectorPointer()->SRH500LM();
-  vec[82]=(*S)->getIndicesCollectorPointer()->SRH01LM();
-  vec[83]=(*S)->getIndicesCollectorPointer()->SRH03LM();
-  vec[84]=(*S)->getIndicesCollectorPointer()->K_Index();
-  vec[85]=(*S)->getIndicesCollectorPointer()->Showalter_Index(); 
-  vec[86]=(*S)->getIndicesCollectorPointer()->TotalTotals();  
-  vec[87]=(*S)->getIndicesCollectorPointer()->SWEATIndex(); 
-  vec[88]=(*S)->getIndicesCollectorPointer()->STP();
-  vec[89]=(*S)->getIndicesCollectorPointer()->STPeff();
-  vec[90]=(*S)->getIndicesCollectorPointer()->SCP();
-  vec[91]=(*S)->getIndicesCollectorPointer()->SCPeff();
-  vec[92]=(*S)->getIndicesCollectorPointer()->SHP();
-  vec[93]=(*S)->getIndicesCollectorPointer()->DCP();
-  vec[94]=(*S)->getIndicesCollectorPointer()->MU_WMAXSHEAR();
-  vec[95]=(*S)->getIndicesCollectorPointer()->SB_WMAXSHEAR();
-  vec[96]=(*S)->getIndicesCollectorPointer()->ML_WMAXSHEAR();
-  vec[97]=(*S)->getIndicesCollectorPointer()->MU_EFF_WMAXSHEAR();
-  vec[98]=(*S)->getIndicesCollectorPointer()->SB_EFF_WMAXSHEAR();
-  vec[99]=(*S)->getIndicesCollectorPointer()->ML_EFF_WMAXSHEAR();
+  vec[50]=(*S)->getIndicesCollectorPointer()->DeltaThetaE_HGL();
+  vec[51]=(*S)->getIndicesCollectorPointer()->VDCAPE(); 
+  vec[52]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();
+  vec[53]=(*S)->getIndicesCollectorPointer()->WindIndex();
+  vec[54]=(*S)->getIndicesCollectorPointer()->PWATER();
+  vec[55]=(*S)->getIndicesCollectorPointer()->MoistureFlux();
+  vec[56]=(*S)->getIndicesCollectorPointer()->RH02();
+  vec[57]=(*S)->getIndicesCollectorPointer()->RH25();
+  vec[58]=(*S)->getIndicesCollectorPointer()->RHMIDDLE();  
+  vec[59]=(*S)->getIndicesCollectorPointer()->BS01();
+  vec[60]=(*S)->getIndicesCollectorPointer()->BS02();
+  vec[61]=(*S)->getIndicesCollectorPointer()->BS03();
+  vec[62]=(*S)->getIndicesCollectorPointer()->BS06();
+  vec[63]=(*S)->getIndicesCollectorPointer()->BS08();
+  vec[64]=(*S)->getIndicesCollectorPointer()->BS36();
+  vec[65]=(*S)->getIndicesCollectorPointer()->BS18();
+  vec[66]=(*S)->getIndicesCollectorPointer()->emubs();
+  vec[67]=(*S)->getIndicesCollectorPointer()->esbbs();
+  vec[68]=(*S)->getIndicesCollectorPointer()->emlbs();
+  vec[69]=(*S)->getIndicesCollectorPointer()->BulkShearSfcTen();
+  vec[70]=(*S)->getIndicesCollectorPointer()->BulkShearMULFCTen();
+  vec[71]=(*S)->getIndicesCollectorPointer()->BulkShearSBLFCTen();
+  vec[72]=(*S)->getIndicesCollectorPointer()->BulkShearMLLFCTen();
+  vec[73]=(*S)->getIndicesCollectorPointer()->MeanWind01();
+  vec[74]=(*S)->getIndicesCollectorPointer()->MeanWind02();
+  vec[75]=(*S)->getIndicesCollectorPointer()->MeanWind06();
+  vec[76]=(*S)->getIndicesCollectorPointer()->MeanWind13();
+  vec[77]=(*S)->getIndicesCollectorPointer()->SRH100RM();
+  vec[78]=(*S)->getIndicesCollectorPointer()->SRH500RM();
+  vec[79]=(*S)->getIndicesCollectorPointer()->SRH01RM();
+  vec[80]=(*S)->getIndicesCollectorPointer()->SRH03RM();
+  vec[81]=(*S)->getIndicesCollectorPointer()->SRH100LM();
+  vec[82]=(*S)->getIndicesCollectorPointer()->SRH500LM();
+  vec[83]=(*S)->getIndicesCollectorPointer()->SRH01LM();
+  vec[84]=(*S)->getIndicesCollectorPointer()->SRH03LM();
+  vec[85]=(*S)->getIndicesCollectorPointer()->Bunkers_RM_A();
+  vec[86]=(*S)->getIndicesCollectorPointer()->Bunkers_RM_M();
+  vec[87]=(*S)->getIndicesCollectorPointer()->Bunkers_LM_A();
+  vec[88]=(*S)->getIndicesCollectorPointer()->Bunkers_LM_M();
+  vec[89]=(*S)->getIndicesCollectorPointer()->Bunkers_MW_A();
+  vec[90]=(*S)->getIndicesCollectorPointer()->Bunkers_MW_M();
+  vec[91]=(*S)->getIndicesCollectorPointer()->K_Index();
+  vec[92]=(*S)->getIndicesCollectorPointer()->Showalter_Index(); 
+  vec[93]=(*S)->getIndicesCollectorPointer()->TotalTotals();  
+  vec[94]=(*S)->getIndicesCollectorPointer()->SWEATIndex(); 
+  vec[95]=(*S)->getIndicesCollectorPointer()->STP();
+  vec[96]=(*S)->getIndicesCollectorPointer()->STPeff();
+  vec[97]=(*S)->getIndicesCollectorPointer()->SCP();
+  vec[98]=(*S)->getIndicesCollectorPointer()->SCPeff();
+  vec[99]=(*S)->getIndicesCollectorPointer()->SHP();
+  vec[100]=(*S)->getIndicesCollectorPointer()->DCP();
+  vec[101]=(*S)->getIndicesCollectorPointer()->MU_WMAXSHEAR();
+  vec[102]=(*S)->getIndicesCollectorPointer()->SB_WMAXSHEAR();
+  vec[103]=(*S)->getIndicesCollectorPointer()->ML_WMAXSHEAR();
+  vec[104]=(*S)->getIndicesCollectorPointer()->MU_EFF_WMAXSHEAR();
+  vec[105]=(*S)->getIndicesCollectorPointer()->SB_EFF_WMAXSHEAR();
+  vec[106]=(*S)->getIndicesCollectorPointer()->ML_EFF_WMAXSHEAR();
   return vec;
 }
 
@@ -3074,7 +3227,7 @@ void listToArray(list<double> list, double * arr, int len){
 
 int interpolate(double **pu, double **hu, double **tu, double **du, double **au, double **vu, int n, double *p_arr=0, double *h_arr=0, int m=0, int o=0){
     double defp[]={850,700,500}; int plen = 3;
-    double defh[]={0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670, 680, 690, 700, 710, 720, 730, 740, 750, 775, 800, 825, 850, 875, 900, 925, 950, 975, 1000, 1025, 1050, 1075, 1100, 1125, 1150, 1175, 1200, 1225, 1250, 1275, 1300, 1325, 1350, 1375, 1400, 1425, 1450, 1475, 1500, 1525, 1550, 1575, 1600, 1625, 1650, 1675, 1700, 1725, 1750, 1775, 1800, 1825, 1850, 1875, 1900, 1925, 1950, 1975, 2000, 2025, 2050, 2075, 2100, 2125, 2150, 2175, 2200, 2225, 2250, 2275, 2300, 2325, 2350, 2375, 2400, 2425, 2450, 2475, 2500, 2525, 2550, 2575, 2600, 2625, 2650, 2675, 2700, 2725, 2750, 2775, 2800, 2825, 2850, 2875, 2900, 2925, 2950, 2975, 3000, 3050, 3100, 3150, 3200, 3250, 3300, 3350, 3400, 3450, 3500, 3550, 3600, 3650, 3700, 3750, 3800, 3850, 3900, 3950, 4000, 4050, 4100, 4150, 4200, 4250, 4300, 4350, 4400, 4450, 4500, 4550, 4600, 4650, 4700, 4750, 4800, 4850, 4900, 4950, 5000, 5050, 5100, 5150, 5200, 5250, 5300, 5350, 5400, 5450, 5500, 5550, 5600, 5650, 5700, 5750, 5800, 5850, 5900, 5950, 6000, 6100, 6200, 6300, 6400, 6500, 6600, 6700, 6800, 6900, 7000, 7100, 7200, 7300, 7400, 7500, 7600, 7700, 7800, 7900, 8000, 8100, 8200, 8300, 8400, 8500, 8600, 8700, 8800, 8900, 9000, 9100, 9200, 9300, 9400, 9500, 9600, 9700, 9800, 9900, 10000, 10100, 10200, 10300, 10400, 10500, 10600, 10700, 10800, 10900, 11000, 11100, 11200, 11300, 11400, 11500, 11600, 11700, 11800, 11900, 12000, 12250, 12500, 12750, 13000, 13250, 13500, 13750, 14000, 14250, 14500, 14750, 15000, 15250, 15500, 15750, 16000, 16250, 16500, 16750, 17000, 17250, 17500, 17750, 18000, 18250, 18500, 18750, 19000, 19250, 19500, 19750, 20000}; int hlen = 318;
+    double defh[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000, 5250, 5500, 5750, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 57;
     
     double * p = *pu;
     double * h = *hu;
@@ -3186,7 +3339,7 @@ int interpolate(double **pu, double **hu, double **tu, double **du, double **au,
 }
 int interpolate2(double **pu, double **hu, double **tu, double **du, double **au, double **vu, int n, double *p_arr=0, double *h_arr=0, int m=0, int o=0){
     double defp[]={850,700,500}; int plen = 3;
-    double defh[]={0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670, 680, 690, 700, 710, 720, 730, 740, 750, 775, 800, 825, 850, 875, 900, 925, 950, 975, 1000, 1025, 1050, 1075, 1100, 1125, 1150, 1175, 1200, 1225, 1250, 1275, 1300, 1325, 1350, 1375, 1400, 1425, 1450, 1475, 1500, 1525, 1550, 1575, 1600, 1625, 1650, 1675, 1700, 1725, 1750, 1775, 1800, 1825, 1850, 1875, 1900, 1925, 1950, 1975, 2000, 2025, 2050, 2075, 2100, 2125, 2150, 2175, 2200, 2225, 2250, 2275, 2300, 2325, 2350, 2375, 2400, 2425, 2450, 2475, 2500, 2525, 2550, 2575, 2600, 2625, 2650, 2675, 2700, 2725, 2750, 2775, 2800, 2825, 2850, 2875, 2900, 2925, 2950, 2975, 3000, 3050, 3100, 3150, 3200, 3250, 3300, 3350, 3400, 3450, 3500, 3550, 3600, 3650, 3700, 3750, 3800, 3850, 3900, 3950, 4000, 4050, 4100, 4150, 4200, 4250, 4300, 4350, 4400, 4450, 4500, 4550, 4600, 4650, 4700, 4750, 4800, 4850, 4900, 4950, 5000, 5050, 5100, 5150, 5200, 5250, 5300, 5350, 5400, 5450, 5500, 5550, 5600, 5650, 5700, 5750, 5800, 5850, 5900, 5950, 6000, 6100, 6200, 6300, 6400, 6500, 6600, 6700, 6800, 6900, 7000, 7100, 7200, 7300, 7400, 7500, 7600, 7700, 7800, 7900, 8000, 8100, 8200, 8300, 8400, 8500, 8600, 8700, 8800, 8900, 9000, 9100, 9200, 9300, 9400, 9500, 9600, 9700, 9800, 9900, 10000, 10100, 10200, 10300, 10400, 10500, 10600, 10700, 10800, 10900, 11000, 11100, 11200, 11300, 11400, 11500, 11600, 11700, 11800, 11900, 12000, 12250, 12500, 12750, 13000, 13250, 13500, 13750, 14000, 14250, 14500, 14750, 15000, 15250, 15500, 15750, 16000, 16250, 16500, 16750, 17000, 17250, 17500, 17750, 18000, 18250, 18500, 18750, 19000, 19250, 19500, 19750, 20000}; int hlen = 318;
+    double defh[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000, 5250, 5500, 5750, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 57;
   
     double * p = *pu;
     double * h = *hu;
@@ -3320,7 +3473,8 @@ double * sounding_default2(double* pressure,
     a[i]=angle[i];
     v[i]=velocity[i];
   }
-  double defh2[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000, 5250, 5500, 5750, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 57;
+	
+  double defh2[]={0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670, 680, 690, 700, 710, 720, 730, 740, 750, 775, 800, 825, 850, 875, 900, 925, 950, 975, 1000, 1025, 1050, 1075, 1100, 1125, 1150, 1175, 1200, 1225, 1250, 1275, 1300, 1325, 1350, 1375, 1400, 1425, 1450, 1475, 1500, 1525, 1550, 1575, 1600, 1625, 1650, 1675, 1700, 1725, 1750, 1775, 1800, 1825, 1850, 1875, 1900, 1925, 1950, 1975, 2000, 2025, 2050, 2075, 2100, 2125, 2150, 2175, 2200, 2225, 2250, 2275, 2300, 2325, 2350, 2375, 2400, 2425, 2450, 2475, 2500, 2525, 2550, 2575, 2600, 2625, 2650, 2675, 2700, 2725, 2750, 2775, 2800, 2825, 2850, 2875, 2900, 2925, 2950, 2975, 3000, 3050, 3100, 3150, 3200, 3250, 3300, 3350, 3400, 3450, 3500, 3550, 3600, 3650, 3700, 3750, 3800, 3850, 3900, 3950, 4000, 4050, 4100, 4150, 4200, 4250, 4300, 4350, 4400, 4450, 4500, 4550, 4600, 4650, 4700, 4750, 4800, 4850, 4900, 4950, 5000, 5050, 5100, 5150, 5200, 5250, 5300, 5350, 5400, 5450, 5500, 5550, 5600, 5650, 5700, 5750, 5800, 5850, 5900, 5950, 6000, 6100, 6200, 6300, 6400, 6500, 6600, 6700, 6800, 6900, 7000, 7100, 7200, 7300, 7400, 7500, 7600, 7700, 7800, 7900, 8000, 8100, 8200, 8300, 8400, 8500, 8600, 8700, 8800, 8900, 9000, 9100, 9200, 9300, 9400, 9500, 9600, 9700, 9800, 9900, 10000, 10100, 10200, 10300, 10400, 10500, 10600, 10700, 10800, 10900, 11000, 11100, 11200, 11300, 11400, 11500, 11600, 11700, 11800, 11900, 12000, 12250, 12500, 12750, 13000, 13250, 13500, 13750, 14000, 14250, 14500, 14750, 15000, 15250, 15500, 15750, 16000, 16250, 16500, 16750, 17000, 17250, 17500, 17750, 18000, 18250, 18500, 18750, 19000, 19250, 19500, 19750, 20000}; int hlen = 318;
   int step = 1000000;
   double *pp=0;double *hh=0; int ch=0;
   int u = interpolate(&p, &h,&t, &d, &a, &v, size,pp, hh, 0, ch);
@@ -3373,6 +3527,7 @@ void test(double p[], double h[], double t[], double d[], double  a[], double v[
 
           for(int i = 0; i < reslen; ++i) {
                   out[i] = result[i];
+				  
           }
           
           int i= reslen;
@@ -3475,10 +3630,9 @@ int main(){
 	int n =7;
 	test(p,h,t,d,a,v,n,1);
 	system("pause");
-}
-*/
+}*/
+
 //' Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
-//' Further details given in the sounding_compute() function
 //' 
 //' 
 //'
@@ -3488,8 +3642,7 @@ int main(){
 //' @param dew dew point temperature [degree Celsius]
 //' @param angle wind direction [degrees]
 //' @param velocity wind speed [metres per second]
-//' @param export_profile runtime parameters 
-//' @param accuracy accuracy of methods used for interpolating and integrating algorithms [1 - default, 2 - fast implementation, 3 - very accurate]
+//'	@param export_profile runtime parameters
 //' @examples 
 //' pressure <- c(1000, 855, 700, 500, 300, 100, 10)
 //' altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
@@ -3497,8 +3650,8 @@ int main(){
 //' dpt <- c(20, 5, -5, -30, -55, -80, -99)
 //' wd <- c(0, 90, 135, 180, 270, 350, 0)
 //' ws <- c(5, 10, 20, 30, 40, 5, 0)
-//' sounding_compute(pressure, altitude, temp, dpt, wd, ws)
-//' @useDynLib thunder
+//' sounding(pressure, altitude, temp, dpt, wd, ws)
+//' @useDynLib sounding
 //' @importFrom Rcpp evalCpp
 //' @export
 // [[Rcpp::export]]
@@ -3509,8 +3662,8 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
                           Rcpp::NumericVector dew,
                           Rcpp::NumericVector angle,
                           Rcpp::NumericVector velocity,
-                          Rcpp::NumericVector export_profile,
-                          Rcpp::NumericVector accuracy
+						  Rcpp::NumericVector export_profile,
+						  Rcpp::NumericVector accuracy
 						  )
 {
   Sounding *sret;
@@ -3530,7 +3683,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   int mulen, sblen,mllen,mustart;
 
   double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q);
-	int reslen= 100;
+	int reslen= 107;
 	int maxl=reslen;
 	if(export_profile[0]==1){
 	plen = sret->p->size();

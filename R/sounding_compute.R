@@ -61,6 +61,7 @@
 #'  \item HGT_max_thetae_03km
 #'  \item HGT_min_thetae_04km
 #'  \item Delta_thetae
+#'  \item Delta_thetae_HGL
 #'  \item DCAPE
 #'  \item Cold_Pool_Strength
 #'  \item Wind_Index  
@@ -95,6 +96,12 @@
 #'  \item SRH_500m_LM
 #'  \item SRH_1km_LM
 #'  \item SRH_3km_LM
+#'  \item Bunkers_RM_A
+#'  \item Bunkers_RM_M
+#'  \item Bunkers_LM_A
+#'  \item Bunkers_LM_M
+#'  \item Bunkers_MW_A
+#'  \item Bunkers_MW_M
 #'  \item K_Index
 #'  \item Showalter_Index
 #'  \item TotalTotals_Index
@@ -189,6 +196,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
   "HGT_max_thetae_03km",
   "HGT_min_thetae_04km",
   "Delta_thetae",
+  "Delta_thetae_HGL",
   "DCAPE",
   "Cold_Pool_Strength",
   "Wind_Index",
@@ -223,6 +231,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
   "SRH_500m_LM",
   "SRH_1km_LM",
   "SRH_3km_LM",
+  "Bunkers_RM_A",
+  "Bunkers_RM_M",
+  "Bunkers_LM_A",
+  "Bunkers_LM_M",
+  "Bunkers_MW_A",
+  "Bunkers_MW_M",
   "K_Index",
   "Showalter_Index",
   "TotalTotals_Index",
