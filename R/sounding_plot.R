@@ -176,7 +176,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   }
   
   ###
-  text(-29, altitude_to_pressure(0), paste0("--- surface (",output$altitude[1]," m) ---"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(0), paste0("--- SFC (",output$altitude[1]," m) ---"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(1000), paste0("--- 1 km"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(2000), paste0("--- 2 km"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(3000), paste0("--- 3 km"), pos=4, cex = 0.65, col = "black")
@@ -191,7 +191,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   ###
   par(fig = c(0.46, 0.57, 0.03, 0.95), new = TRUE, mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))
-  sounding_barbs(pres = output$pressure, ws = output$ws, wd = output$wd, altitude = output$altitude, convert = FALSE)
+  sounding_barbs(pres = output$pressure, ws = output$ws, wd = output$wd, 
+                 altitude = output$altitude, convert = FALSE, barb_cex = 0.5)
   
   ###
   par(fig = c(0.54, 0.99, 0.063, 0.48), new = TRUE, mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))  
@@ -431,7 +432,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   plot(RH, output$altitude-output$altitude[1],xaxt="n",yaxt="n",xlab="",  
        type='l',xlim=c(0,100),ylim=c(100,6500),lwd=2,col='blue')
   axis(4, at=seq(0,6000,1000), las = 1, padj=-0.7, hadj=1.25, xpd = TRUE, 
-       labels=c("sfc ","1 km","2 km","3 km","4 km","5 km","6 km"), 
+       labels=c("SFC","1 km","2 km","3 km","4 km","5 km","6 km"), 
        cex.axis=0.58, tck=0.1, lwd=0.35)
   axis(1, at=seq(0,100,20), xpd = TRUE, padj=-1.1, 
        cex.axis=0.58, tck=-0.04, lwd=0.35)

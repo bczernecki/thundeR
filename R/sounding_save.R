@@ -24,6 +24,7 @@
 #' @importFrom tools file_ext
 #' @importFrom grDevices dev.off
 #' @importFrom grDevices png
+#' @importFrom grDevices svg
 #' 
 #' @examples
 #' data("sounding_wien")
@@ -42,10 +43,19 @@ sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
         stopifnot(length(filename) < 4)
         
         if(tools::file_ext(filename) == "png"){
-                grDevices::png(filename = filename, width = 950, height = 600, pointsize = 17)
+                grDevices::png(filename = filename, width = 980, height = 600, pointsize = 17)
                 sounding_plot(pressure, altitude, temp, 
                               dpt, wd, ws, title = title, ...)
                 grDevices::dev.off()
         }
+        
+        
+        if(tools::file_ext(filename) == "svg"){
+                grDevices::svg(filename = filename, width = 9.80, height = 6.00, pointsize = 12)
+                sounding_plot(pressure, altitude, temp, 
+                              dpt, wd, ws, title = title)
+                grDevices::dev.off()
+        }
+        
                 
 }

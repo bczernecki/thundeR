@@ -13,6 +13,7 @@ sounding_barbs(
   ptop = 100,
   interpolate = TRUE,
   showaxis = FALSE,
+  barb_cex = 0.3,
   ...
 )
 }
@@ -32,6 +33,8 @@ sounding_barbs(
 \item{interpolate}{logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset}
 
 \item{showaxis}{logical, drawing bounding box with left axis for pressure heighs (default FALSE)}
+
+\item{barb_cex}{size of wind barbs (default = 0.3)}
 
 \item{...}{extra graphic arguments}
 }

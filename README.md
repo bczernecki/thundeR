@@ -3,36 +3,53 @@ thunder - R Package to compute convective indices from rawindsonde data
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
-[![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/master/graph/badge.svg)](https://codecov.io/gh/bczernecki/thunder?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/master/graph/badge.svg)](https://codecov.io/gh/bczernecki/thunder?branch=devel)
 <!-- badges: end -->
 To be changed when CRAN comes...
 [![CRAN status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
 
-`thunder` is a freeware R package for performing analyses on atmospheric sounding profiles.
+`thunder` is a freeware R package for performing analyses of servere weather-related atmospheric convective indices based on rawin sonde profiles.
 
-The main core of this computational code is a highly optimized version of C++ code dedicated for calculating sounding derived indices related with atmospheric convections.
+The main core of the algorithm used is a highly optimized version of C++ code dedicated for calculating sounding derived indices related with atmospheric convections.
 
 ## Installation
 ------------
 
-The stable version will be available on CRAN soon:
+The stable version can be installed from the CRAN repository:
 
 ``` r
 install.packages("thunder")
 ```
 
 
-The development version can be installed directly from this github repository:
+The development version can be installed directly from the github repository:
 
 ``` r
-library(devtools);install_github("bczernecki/thunder", auth_token = "")
+library(remotes);install_github("bczernecki/thunder")
 ```
 
 ## Usage
 -----
 
-### Compute convective indices based on a (randomly) generated pseudo radiosonde data:
+### Draw Skew-T diagram, hodograph and most important indices on a single layout and save it to png file
+
+``` r
+data("sounding_wien") # take example dataset:
+pressure = sounding_wien$PRES
+altitude = sounding_wien$HGHT
+temp = sounding_wien$TEMP
+dpt = sounding_wien$DWPT
+wd = sounding_wien$DRCT
+ws = sounding_wien$SKNT
+sounding_save(filename = "myfile.png", title = "Vienna (2011/08/23, 1200 UTC)", pressure, altitude, temp, dpt, wd, ws)
+```
+
+![](inst/figures/my_file.svg)
+
+
+
+### Compute all convective indices based on a random radiosonde data:
 
 ``` r
 library("thunder")
@@ -42,7 +59,7 @@ temp <- c(25, 10, 0, -15, -30, -50, -92) # air temperature
 dpt <- c(20, 5, -5, -30, -55, -80, -99) # dew point temperature
 wd <- c(0, 90, 135, 180, 270, 350, 0) # wind direction
 ws <- c(5, 10, 20, 30, 40, 5, 0) # wind speed
-options(digits = 2) # change formatting
+options(digits = 2) # change output formatting precision
 sounding_compute(pressure, altitude, temp, dpt, wd, ws)
 
 
@@ -98,21 +115,18 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws)
 #             1005.54              936.94              936.94              771.71
 ```
 
+### Draw a customized hodograph:
 
-### Draw Skew-T diagram, hodograph and most important indices on a single layout and save it to png file
-
-``` r
-data("sounding_wien")
-pressure = sounding_wien$PRES
-altitude = sounding_wien$HGHT
-temp = sounding_wien$TEMP
-dpt = sounding_wien$DWPT
-wd = sounding_wien$DRCT
-ws = sounding_wien$SKNT
-sounding_save(filename = "myfile.png", title = "Vienna (2011/08/23, 1200 UTC)", pressure, altitude, temp, dpt, wd, ws)
 ```
-
-![](inst/figures/myfile.png)
+data("sounding_wien")
+attach(sounding_wien)
+# changing wind speed and direction to U and V wind components
+# also changing units from knots to m/s
+u = round(-SKNT * 0.514444 * sin(DRCT * pi/180), 2)
+v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
+# finally plot the hodograph:
+hodograph(u, v, HGHT, max_speed = 30, max_hght = 10000); box(); title("Some title here")
+```
 
 Contributions
 -------------
