@@ -15,9 +15,13 @@ Imports:
     aiRthermo
 Depends:
     R (>= 3.5.0)
-Suggests: RadioSonde
+Suggests: 
+    RadioSonde,
+    knitr,
+    rmarkdown
 LinkingTo: Rcpp
 RoxygenNote: 7.1.0
 Encoding: UTF-8
 URL: https://github.com/bczernecki/thunder
 BugReports: https://github.com/bczernecki/thunder/issues
+VignetteBuilder: knitr

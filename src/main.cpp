@@ -1,8 +1,3 @@
-/**
-Cpp Sounding Processing Tool
-Piotr Szuster 2020
-retsuz@gmail.com
-**/
 #include <Rcpp.h>
 #include <cmath>
 #include <iostream>
@@ -3633,7 +3628,7 @@ int main(){
 }*/
 
 //' Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
-//' 
+//' Further details given in the sounding_compute() function
 //' 
 //'
 //' @param pressure pressure [hPa]
@@ -3642,7 +3637,8 @@ int main(){
 //' @param dew dew point temperature [degree Celsius]
 //' @param angle wind direction [degrees]
 //' @param velocity wind speed [metres per second]
-//'	@param export_profile runtime parameters
+//' @param accuracy accuracy of methods used for interpolating and integrating algorithms [1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate]
+//' @param export_profile runtime parameters
 //' @examples 
 //' pressure <- c(1000, 855, 700, 500, 300, 100, 10)
 //' altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
@@ -3650,8 +3646,8 @@ int main(){
 //' dpt <- c(20, 5, -5, -30, -55, -80, -99)
 //' wd <- c(0, 90, 135, 180, 270, 350, 0)
 //' ws <- c(5, 10, 20, 30, 40, 5, 0)
-//' sounding(pressure, altitude, temp, dpt, wd, ws)
-//' @useDynLib sounding
+//' sounding_compute(pressure, altitude, temp, dpt, wd, ws)
+//' @useDynLib thunder
 //' @importFrom Rcpp evalCpp
 //' @export
 // [[Rcpp::export]]
@@ -3662,8 +3658,8 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
                           Rcpp::NumericVector dew,
                           Rcpp::NumericVector angle,
                           Rcpp::NumericVector velocity,
-						  Rcpp::NumericVector export_profile,
-						  Rcpp::NumericVector accuracy
+		          Rcpp::NumericVector export_profile,
+			  Rcpp::NumericVector accuracy
 						  )
 {
   Sounding *sret;

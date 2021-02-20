@@ -127,7 +127,7 @@
 #' @param wd wind direction [degrees]
 #' @param ws wind speed [knots or m/s - TODO/TODISCUSS]
 #' @param export_profile  whether to export interpolated levels for drawing on Skew-T diagram. Binary [0 - default, no extra data for drawing exported, 1 - extracting data to be used ]
-#' @param accuracy how accurately integrate the positive/negative area. Valid options (1 - default, 2 - fast implementation, 3 - very accurate)
+#' @param accuracy how accurately integrate the positive/negative area. Valid options (1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate)
 #' @export 
 #' @examples
 #' pressure <- c(1000, 855, 700, 500, 300, 100, 10)

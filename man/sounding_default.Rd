@@ -31,7 +31,7 @@ sounding_default(
 
 \item{export_profile}{runtime parameters}
 
-\item{accuracy}{accuracy of methods used for interpolating and integrating algorithms [1 - default, 2 - fast implementation, 3 - very accurate]}
+\item{accuracy}{accuracy of methods used for interpolating and integrating algorithms [1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate]}
 }
 \description{
 Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
