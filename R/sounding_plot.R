@@ -34,7 +34,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   dev_size = dev.size("in")
   if(dev_size[1] < 10 | dev_size[2] < 7.5){
-    text = paste("Your display device is", dev_size[1], "x", dev_size[2], "in. \nIt is recommended to use at least 10 x 7.5 in. plotting window or consider saving the layout into file")
+    text = paste("Your display device is", dev_size[1], "x", dev_size[2], "in. \nIt is recommended to use at least 10 x 7.5 in. plotting window \nor consider saving the layout into file")
     message(text)
   }
   

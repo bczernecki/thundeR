@@ -1,0 +1,72 @@
+---
+title: "Introduction to the thunder package"
+author: "Bartosz Czernecki, Mateusz Taszarek, Piotr Szuster"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to the thunder package}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(scipen=999)
+```
+
+The goal of the  **thunder** R package is to calculate severe weather related set of algorithms that can be used for analyze and visualize atmospheric (pseudo-)soundings.
+
+## Functions
+
+- **sounding_compute()** - Description
+ 
+- **sounding_plot()** - Generate Skew-T, hodograph and summary of most important convective indices on a single plot
+ 
+- **sounding_save()** - Auxiliary function to 'sounding_plot' that plots a composite \ of Skew-T, hodograph and other relavant rawindsonde-derived profiles \ on a single layout and saves it into graphical file. \ Useful if graphical window is too small.
+
+- **get_sounding()** - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data) in a form convenient to use with `thunder` package
+
+
+## Examples
+
+Examples shows aplication of thunder
+
+#### Example 1
+
+Download exemplary sounding profile and create a composite layout:
+
+```{r example1, eval = TRUE, fig.width = 9, fig.height = 6, fig.fullwidth = TRUE}
+library(thunder)
+pressure <- c(1000, 855, 700, 500, 300, 100, 10)
+altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
+temp <- c(25, 10, 0, -15, -30, -50, -92)
+dpt <- c(20, 5, -5, -30, -55, -80, -99)
+wd <- c(0, 90, 135, 180, 270, 350, 0)
+ws <- c(5, 10, 20, 30, 40, 5, 0)
+sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
+              parcel = "MU", title = "Test thunder package")
+
+```
+
+### Example 2
+
+compute severe weather related indices
+
+```{r example2, eval = TRUE}
+sounding_compute(pressure, altitude, temp, dpt, wd, ws)
+```
+
+
+## Details:
+
+### 1. Accuracy tables for `sounding_compute()` 
+
+`accuracy = 1`:
+
+| Right | Left | Default | Center |
+|------:|:-----|---------|:------:|
+|   12  |  12  |    12   |    12  |
+|  123  |  123 |   123   |   123  |
+|    1  |    1 |     1   |     1  |

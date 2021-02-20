@@ -30,7 +30,7 @@ sounding_compute(
 
 \item{export_profile}{whether to export interpolated levels for drawing on Skew-T diagram. Binary [0 - default, no extra data for drawing exported, 1 - extracting data to be used ]}
 
-\item{accuracy}{how accurately integrate the positive/negative area. Valid options (1 - default, 2 - fast implementation, 3 - very accurate)}
+\item{accuracy}{how accurately integrate the positive/negative area. Valid options (1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate)}
 }
 \value{
 \enumerate{
@@ -84,6 +84,7 @@ sounding_compute(
  \item HGT_max_thetae_03km
  \item HGT_min_thetae_04km
  \item Delta_thetae
+ \item Delta_thetae_HGL
  \item DCAPE
  \item Cold_Pool_Strength
  \item Wind_Index  
@@ -118,6 +119,12 @@ sounding_compute(
  \item SRH_500m_LM
  \item SRH_1km_LM
  \item SRH_3km_LM
+ \item Bunkers_RM_A
+ \item Bunkers_RM_M
+ \item Bunkers_LM_A
+ \item Bunkers_LM_M
+ \item Bunkers_MW_A
+ \item Bunkers_MW_M
  \item K_Index
  \item Showalter_Index
  \item TotalTotals_Index

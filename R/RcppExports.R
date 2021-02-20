@@ -4,7 +4,6 @@
 #' Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
 #' Further details given in the sounding_compute() function
 #' 
-#' 
 #'
 #' @param pressure pressure [hPa]
 #' @param altitude altitude [meters above surface]
@@ -12,8 +11,8 @@
 #' @param dew dew point temperature [degree Celsius]
 #' @param angle wind direction [degrees]
 #' @param velocity wind speed [metres per second]
-#' @param export_profile runtime parameters 
-#' @param accuracy accuracy of methods used for interpolating and integrating algorithms [1 - default, 2 - fast implementation, 3 - very accurate]
+#' @param accuracy accuracy of methods used for interpolating and integrating algorithms [1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate]
+#' @param export_profile runtime parameters
 #' @examples 
 #' pressure <- c(1000, 855, 700, 500, 300, 100, 10)
 #' altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
