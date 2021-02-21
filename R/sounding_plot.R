@@ -29,9 +29,9 @@
 
 
 sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
-                         convert = FALSE, ptop = 100, interpolate = TRUE,
-                         title = "", parcel = "MU", ...){
-  
+                        convert = FALSE, ptop = 100, interpolate = TRUE,
+                        title = "", parcel = "MU", ...){
+
   dev_size = dev.size("in")
   if(dev_size[1] < 10 | dev_size[2] < 7.5){
     text = paste("Your display device is", dev_size[1], "x", dev_size[2], "in. \nIt is recommended to use at least 10 x 7.5 in. plotting window \nor consider saving the layout into file")
@@ -72,13 +72,74 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   skewt_lines(output$temp,output$pressure, col = t_col('red',10), lwd = 2, ptop = 100)
   skewt_lines(output$tempV,output$pressure, col = t_col("red3",0), lwd = 1, lty = 3, ptop = 100)
   
-  text(20, 28, "Hail Growth\nLayer (HGL)",col="#8470FF90",cex=0.65,srt=58)
+  text(20, 28, "Hail Growth\nLayer (HGL)",col="#8470FF90",cex=0.65,srt=56)
   
   ####
   parametry <- sounding_compute(pressure, altitude, temp, dpt, wd, ws)
   LP <- max(which(!is.na(names(parametry))))
+
+  ###
+  rect(10.5,37.5,26.1,44,col=rgb(255,255,255, maxColorValue = 255, alpha = 200),lwd=0.2)
+  text(11.25,43.25, "Possible storm hazards:",col="black",cex=0.7, adj=c(0,1))
+  
+  WIND=NA
+  HAIL=NA
+  TORN=NA
   
   ###
+  if((parametry[which(names(parametry[1:LP]) == "DCAPE")]>700 |
+     parametry[which(names(parametry[1:LP]) == "Delta_thetae")]>20 |
+     parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>450 |
+     parametry[which(names(parametry[1:LP]) == "MW_13km")]>15 | 
+     parametry[which(names(parametry[1:LP]) == "SCP_new")]>1) & 
+     parametry[which(names(parametry[1:LP]) == "MU_CAPE")]>150){
+    WIND=1
+  }
+
+  if((parametry[which(names(parametry[1:LP]) == "DCAPE")]>1100 |
+     parametry[which(names(parametry[1:LP]) == "Delta_thetae")]>35 |
+     parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>1000 |
+     parametry[which(names(parametry[1:LP]) == "MW_13km")]>25 |
+     parametry[which(names(parametry[1:LP]) == "SCP_new")]>10) & 
+     parametry[which(names(parametry[1:LP]) == "MU_CAPE")]>150){
+    WIND=2
+  }
+
+  if(WIND==1){text(11.25,41.75, "- 25m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
+  if(WIND==2){text(11.25,41.75, "- 32m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
+  
+  ###
+  if(parametry[which(names(parametry[1:LP]) == "SHIP")]>0.5 |
+     parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>450){
+    HAIL=1
+  }
+  
+  if(parametry[which(names(parametry[1:LP]) == "SHIP")]>1 |
+     parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>1000){
+    HAIL=2
+  }
+  
+  if(HAIL==1){text(11.25,40.25, "- 2cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
+  if(HAIL==2){text(11.25,40.25, "- 5cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
+
+  ###
+  if(parametry[which(names(parametry[1:LP]) == "STP")]>0.3 |
+     parametry[which(names(parametry[1:LP]) == "STP_new")]>0.3 |
+     parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>1000){
+    TORN=1
+  }
+  
+  if(parametry[which(names(parametry[1:LP]) == "STP")]>0.75 |
+     parametry[which(names(parametry[1:LP]) == "STP_new")]>0.75){
+    TORN=2
+  }
+  
+  if(TORN==1){text(11.25,38.75, "- F0+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
+  if(TORN==2){text(11.25,38.75, "- F2+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
+  
+  
+  ###
+  
   if(parcel=="ML"){
     vsb_lcl = parametry[which(names(parametry[1:LP]) == "ML_LCL_HGT")] + output$altitude[1]
     vsb_lfc = parametry[which(names(parametry[1:LP]) == "ML_LFC_HGT")] + output$altitude[1]
@@ -152,47 +213,55 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   altitude_to_pressure = function(altitude){
     skewty(output$pressure[which(output$altitude-output$altitude[1] == altitude)])
   }
-
+  
   ###  
   if(parcel=="SB"){
     if(parametry[which(names(parametry[1:LP]) == "SB_CAPE")] > 0){
-    #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-    text(x_el, y_el, paste0("---- SB EL"), pos = 4, cex = 0.62, col = "black")}
-    text(x_lcl, y_lcl, paste0("---- SB LCL"), pos = 4, cex = 0.62, col = "black")
+      #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
+      text(x_el, y_el, paste0("---- SB EL"), pos = 4, cex = 0.62, col = "black")
+    text(x_lcl, y_lcl, paste0("---- SB LCL"), pos = 4, cex = 0.62, col = "black")}
   }
   
   if(parcel=="MU"){
     if(parametry[which(names(parametry[1:LP]) == "MU_CAPE")] > 0){
-    #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-    text(x_el, y_el, paste0("---- MU EL"), pos = 4, cex = 0.62, col = "black")}
-    text(x_lcl, y_lcl, paste0("---- MU LCL"), pos = 4, cex = 0.62, col = "black")
+      #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
+      text(x_el, y_el, paste0("---- MU EL"), pos = 4, cex = 0.62, col = "black")
+    text(x_lcl, y_lcl, paste0("---- MU LCL"), pos = 4, cex = 0.62, col = "black")}
   }
   
   if(parcel=="ML"){
     if(parametry[which(names(parametry[1:LP]) == "ML_CAPE")] > 0){
-    #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-    text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black")}
-    text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")
+      #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
+      text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black")
+    text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")}
   }
   
   ###
-  text(-29, altitude_to_pressure(0), paste0("--- SFC (",output$altitude[1]," m) ---"), pos=4, cex = 0.65, col = "black")
+  text(-29, altitude_to_pressure(0), paste0("--- Sfc (",output$altitude[1]," m) ---"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(1000), paste0("--- 1 km"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(2000), paste0("--- 2 km"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(3000), paste0("--- 3 km"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(4000), paste0("--- 4 km"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(5000), paste0("--- 5 km"), pos=4, cex = 0.65, col = "black")
-  text(-29, altitude_to_pressure(6000), paste0("--- 6 km"), pos=4, cex = 0.65, col = "black")
-  text(-29, altitude_to_pressure(8000), paste0("--- 8 km"), pos=4, cex = 0.65, col = "black")
-  text(-29, altitude_to_pressure(10000), paste0("---10 km"), pos=4, cex = 0.65, col = "black")
-  text(-29, altitude_to_pressure(12000), paste0("---12 km"), pos=4, cex = 0.65, col = "black")
-  text(-29, altitude_to_pressure(14000), paste0("---14 km"), pos=4, cex = 0.65, col = "black")
-  text(-29, altitude_to_pressure(16000), paste0("---16 km"), pos=4, cex = 0.65, col = "black")
-  
+  if(output$pressure[output$altitude-output$altitude[1]==6000] > 100){text(-29, altitude_to_pressure(6000), paste0("--- 6 km"), pos=4, cex = 0.65, col = "black")}
+  if(output$pressure[output$altitude-output$altitude[1]==7000] > 100){text(-29, altitude_to_pressure(7000), paste0("--- 7 km"), pos=4, cex = 0.65, col = "black")}
+  if(output$pressure[output$altitude-output$altitude[1]==8000] > 100){text(-29, altitude_to_pressure(8000), paste0("--- 8 km"), pos=4, cex = 0.65, col = "black")}
+  if(output$pressure[output$altitude-output$altitude[1]==9000] > 100){text(-29, altitude_to_pressure(9000), paste0("--- 9 km"), pos=4, cex = 0.65, col = "black")}
+  if(output$pressure[output$altitude-output$altitude[1]==10000] > 100){text(-29, altitude_to_pressure(10000), paste0("--- 10 km"), pos=4, cex = 0.65, col = "black")}
+  if(output$pressure[output$altitude-output$altitude[1]==11000] > 100){text(-29, altitude_to_pressure(11000), paste0("--- 11 km"), pos=4, cex = 0.65, col = "black")}
+  if(output$pressure[output$altitude-output$altitude[1]==12000] > 100){text(-29, altitude_to_pressure(12000), paste0("--- 12 km"), pos=4, cex = 0.65, col = "black")}
+  if(output$pressure[output$altitude-output$altitude[1]==13000] > 100){text(-29, altitude_to_pressure(13000), paste0("--- 13 km"), pos=4, cex = 0.65, col = "black")}
+  if(output$pressure[output$altitude-output$altitude[1]==14000] > 100){text(-29, altitude_to_pressure(14000), paste0("--- 14 km"), pos=4, cex = 0.65, col = "black")}
+  if(output$pressure[output$altitude-output$altitude[1]==15000] > 100){text(-29, altitude_to_pressure(15000), paste0("--- 15 km"), pos=4, cex = 0.65, col = "black")}
+  if(output$pressure[output$altitude-output$altitude[1]==16000] > 100){text(-29, altitude_to_pressure(16000), paste0("--- 16 km"), pos=4, cex = 0.65, col = "black")}
+
   ###
   par(fig = c(0.46, 0.57, 0.03, 0.95), new = TRUE, mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))
-  sounding_barbs(pres = output$pressure, ws = output$ws, wd = output$wd, 
-                 altitude = output$altitude, convert = FALSE, barb_cex = 0.5)
+  sounding_barbs(pres = subset(output,output$pressure>100)$pressure, 
+                 ws = subset(output,output$pressure>100)$ws, 
+                 wd = subset(output,output$pressure>100)$wd, 
+                 altitude = subset(output,output$pressure>100)$altitude, 
+                 convert = FALSE, barb_cex = 0.5)
   
   ###
   par(fig = c(0.54, 0.99, 0.063, 0.48), new = TRUE, mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))  
@@ -226,7 +295,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(-0.016, 37.9, "SB", cex = FONTSIZE, adj = c(0,0))
   text(-0.021, 34.7, "MU", cex = FONTSIZE, adj = c(0,0))
   text(-0.016, 31.5, "ML", cex = FONTSIZE, adj = c(0,0))
-
+  
   text(0.04, 37.9, sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "SB_MIXR")],digits=1)), cex = FONTSIZE,adj = c(0,0))
   text(0.04, 34.7, sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "MU_MIXR")],digits=1)), cex = FONTSIZE,adj = c(0,0))
   text(0.04, 31.5, sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "ML_MIXR")],digits=1)), cex = FONTSIZE,adj = c(0,0))
@@ -238,7 +307,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.21, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_03km_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.21, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_03km_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.21, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_03km_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
-
+  
   text(0.325, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_HGL_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.325, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_HGL_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.325, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_HGL_CAPE")],digits=0), cex = FONTSIZE,adj = c(0,0))
@@ -246,7 +315,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.46, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_CIN")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.46, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_CIN")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.46, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_CIN")],digits=0), cex = FONTSIZE,adj = c(0,0))
-
+  
   text(0.54, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_LI")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.54, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_LI")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.54, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_LI")],digits=0), cex = FONTSIZE,adj = c(0,0))
@@ -262,11 +331,11 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.76, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.76, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.76, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")],digits=0), cex = FONTSIZE,adj = c(0,0))
-
+  
   text(0.855, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_WMAXSHEAR")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.855, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_WMAXSHEAR")],digits=0), cex = FONTSIZE,adj = c(0,0))
   text(0.855, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_WMAXSHEAR")],digits=0), cex = FONTSIZE,adj = c(0,0))
-
+  
   text(0.925, 37.9, paste0("(E ",round(parametry[which(names(parametry[1:LP]) == "SB_EFF_WMAXSHEAR")],digits=0),")"), cex = FONTSIZE,adj = c(0,0))
   text(0.925, 34.7, paste0("(E ",round(parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")],digits=0),")"), cex = FONTSIZE,adj = c(0,0))
   text(0.925, 31.5, paste0("(E ",round(parametry[which(names(parametry[1:LP]) == "ML_EFF_WMAXSHEAR")],digits=0),")"), cex = FONTSIZE,adj = c(0,0))
@@ -274,61 +343,61 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   abline(30.25,0)
   
   ###
-
+  
   text(0.175, 27.55, "Bulk wind shear", cex = FONTSIZE, adj = c(1,0))
   text(0.175, 25.55, "[m/s]", cex = FONTSIZE-0.075, adj = c(1,0))
-
-  text(0.11,22.55, "Sfc-1000m:", cex = FONTSIZE, adj = c(1,0))
+  
+  text(0.11,22.55, "Sfc – 1km:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,22.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_01km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.11,19.15, "Sfc-3000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.11,19.15, "Sfc – 3km:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,19.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_03km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.11,15.75, "Sfc-6000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.11,15.75, "Sfc – 6km:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,15.75, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_06km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
-
-  text(0.11,12.35, "Sfc-8000m:", cex = FONTSIZE, adj = c(1,0))
+  
+  text(0.11,12.35, "Sfc – 8km:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,12.35, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_08km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.11,8.95, "Sfc-HGL:", cex = FONTSIZE, adj = c(1,0))
+  text(0.11,8.95, "Sfc – HGL:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,8.95, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_SFC_to_HGL")],digits=1))), cex = FONTSIZE,adj = c(0,0))
-
+  
   text(0.11,5.55, "Effec. (SB):", cex = FONTSIZE, adj = c(1,0))
   text(0.12,5.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_EFF_SB")],digits=1))), cex = FONTSIZE,adj = c(0,0))
-
+  
   text(0.11,2.15, "Effec. (MU):", cex = FONTSIZE, adj = c(1,0))
   text(0.12,2.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_EFF_MU")],digits=1))), cex = FONTSIZE,adj = c(0,0))
-
+  
   text(0.11,-1.25, "Effec. (ML):", cex = FONTSIZE, adj = c(1,0))
   text(0.12,-1.25, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_EFF_ML")],digits=1))), cex = FONTSIZE,adj = c(0,0))
-
+  
   segments(0.19, -3, 0.19, 30.22)
-
+  
   ###
   
-  text(0.4225, 27.55, "SRH RM", cex = FONTSIZE, adj = c(1,0))
-  text(0.4225, 25.55, "[m2/s2]", cex = FONTSIZE-0.075, adj = c(1,0))
+  text(0.4375, 27.55, "SRH RM", cex = FONTSIZE, adj = c(1,0))
+  text(0.4375, 25.55, "[m2/s2]", cex = FONTSIZE-0.075, adj = c(1,0))
   
-  text(0.53, 27.55, "SRH LM", cex = FONTSIZE, adj = c(1,0))
-  text(0.53, 25.55, "[m2/s2]", cex = FONTSIZE-0.075, adj = c(1,0))
+  text(0.55, 27.55, "SRH LM", cex = FONTSIZE, adj = c(1,0))
+  text(0.55, 25.55, "[m2/s2]", cex = FONTSIZE-0.075, adj = c(1,0))
   
-  text(0.335,22.55, "Sfc-100m:", cex = FONTSIZE, adj = c(1,0))
-  text(0.345,22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
-  text(0.4525,22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.345,22.55, "Sfc – 100m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.36,22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.4725,22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   # 
-  text(0.335,19.15, "Sfc-500m:", cex = FONTSIZE, adj = c(1,0))
-  text(0.345,19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
-  text(0.4525,19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
-
-  text(0.335,15.75, "Sfc-1000m:", cex = FONTSIZE, adj = c(1,0))
-  text(0.345,15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
-  text(0.4525,15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.345,19.15, "Sfc – 500m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.36,19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.4725,19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.335,12.35, "Sfc-3000m:", cex = FONTSIZE, adj = c(1,0))
-  text(0.345,12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
-  text(0.4525,12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.345,15.75, "Sfc – 1km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.36,15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.4725,15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
-  segments(0.545, 10.25, 0.545, 30.22)
+  text(0.345,12.35, "Sfc – 3km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.36,12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.4725,12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  
+  segments(0.565, 10.25, 0.565, 30.22)
   segments(0.19, 10.25, 0.6, 10.25)
   
   ###
@@ -336,33 +405,33 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.77, 27.55, "Mean wind", cex = FONTSIZE, adj = c(1,0))
   text(0.77, 25.55, "[m/s]", cex = FONTSIZE-0.075, adj = c(1,0))
   
-  text(0.71,22.55, "Sfc-1000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.71,22.55, "Sfc – 1km:", cex = FONTSIZE, adj = c(1,0))
   text(0.72,22.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_01km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
-
-  text(0.71,19.15, "Sfc-2000m:", cex = FONTSIZE, adj = c(1,0))
+  
+  text(0.71,19.15, "Sfc – 2km:", cex = FONTSIZE, adj = c(1,0))
   text(0.72,19.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_02km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
-
-  text(0.71,15.75, "1000-3000m:", cex = FONTSIZE, adj = c(1,0))
+  
+  text(0.71,15.75, "1 – 3km:", cex = FONTSIZE, adj = c(1,0))
   text(0.72,15.75, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_13km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
-
-  text(0.71,12.35, "Sfc-6000m:", cex = FONTSIZE, adj = c(1,0))
+  
+  text(0.71,12.35, "Sfc – 6km:", cex = FONTSIZE, adj = c(1,0))
   text(0.72,12.35, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_06km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
-
+  
   ###
   
   text(1.025, 27.55, "Lapse rate", cex = FONTSIZE, adj = c(1,0))
   text(1.025, 25.55, "[K/km]", cex = FONTSIZE-0.075, adj = c(1,0))
   
-  text(0.95,22.55, "Sfc-1000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.95,22.55, "Sfc – 1km:", cex = FONTSIZE, adj = c(1,0))
   text(0.96,22.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_01km")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.95,19.15, "Sfc-3000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.95,19.15, "Sfc – 3km:", cex = FONTSIZE, adj = c(1,0))
   text(0.96,19.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_03km")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.95,15.75, "3000-6000m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.95,15.75, "3 – 6km:", cex = FONTSIZE, adj = c(1,0))
   text(0.96,15.75, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_36km")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.95,12.35, "500-700hPa:", cex = FONTSIZE, adj = c(1,0))
+  text(0.95,12.35, "500700 hPa:", cex = FONTSIZE, adj = c(1,0))
   text(0.96,12.35, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_500700hPa")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
   
   segments(0.7875, 10.25, 0.7875, 30.22)
@@ -370,28 +439,28 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   ####
   
-  text(0.405,6.5, "Prcp. water [mm]:", cex = FONTSIZE, adj = c(1,0))
-  text(0.415,6.5, paste0(round(parametry[which(names(parametry[1:LP]) == "PRCP_WATER")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
-
-  text(0.405,2.9, "2-5km RH [%]:", cex = FONTSIZE, adj = c(1,0))
-  text(0.415,2.9, paste0(round(parametry[which(names(parametry[1:LP]) == "RH_25km")]*100,digits=0),""), cex = FONTSIZE,adj = c(0,0))
-
-  text(0.405,-0.7, "Sfc-2km RH [%]:", cex = FONTSIZE, adj = c(1,0))
-  text(0.415,-0.7, paste0(round(parametry[which(names(parametry[1:LP]) == "RH_02km")]*100,digits=0),""), cex = FONTSIZE,adj = c(0,0))
-
-  segments(0.46, 10.25, 0.46, -3)
+  text(0.43,6.5, "Precip. water [mm]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.44,6.5, paste0(round(parametry[which(names(parametry[1:LP]) == "PRCP_WATER")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.43,2.9, "2 – 5km RH [%]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.44,2.9, paste0(round(parametry[which(names(parametry[1:LP]) == "RH_25km")]*100,digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  
+  text(0.43,-0.7, "Sfc – 2km RH [%]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.44,-0.7, paste0(round(parametry[which(names(parametry[1:LP]) == "RH_02km")]*100,digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  
+  segments(0.50, 10.25, 0.50, -3)
   
   ###
   
-  text(0.78,6.5, "Sfc-2km mstr. flux [g/s/m2]:", cex = FONTSIZE, adj = c(1,0))
-  text(0.79,6.5, paste0(round(parametry[which(names(parametry[1:LP]) == "Moisture_Flux_02km")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.77,6.3, "Moisture flux [g/s/m2]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.78,6.5, paste0(round(parametry[which(names(parametry[1:LP]) == "Moisture_Flux_02km")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.78,2.9, "Sfc-4km DCAPE [J/kg]:", cex = FONTSIZE, adj = c(1,0))
-  text(0.79,2.9, paste0(round(parametry[which(names(parametry[1:LP]) == "DCAPE")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  text(0.77,2.9, "⁠4km DCAPE [J/kg]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.78,2.9, paste0(round(parametry[which(names(parametry[1:LP]) == "DCAPE")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.78,-0.7, "Sfc-4km delta theta-e [K]:", cex = FONTSIZE, adj = c(1,0))
-  text(0.79,-0.7, paste0(round(parametry[which(names(parametry[1:LP]) == "Delta_thetae")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
-
+  text(0.77,-0.7, "4km delta theta-e [K]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.78,-0.7, paste0(round(parametry[which(names(parametry[1:LP]) == "Delta_thetae")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
+  
   segments(0.865, 10.25, 0.865, -3)
   
   ###
@@ -404,50 +473,90 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   text(0.955,-0.7, "STP:", cex = FONTSIZE, adj = c(1,0))
   text(0.965,-0.7, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "STP_new")],digits=1))), cex = FONTSIZE,adj = c(0,0))
-
-  ###
-  par(fig=c(0.54, 0.99, 0, 0.06), new = TRUE, mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
-  mtext(expression(paste(bold("thunder")," - Rawindsonde processing tool for R (2021)")),
-        line = -1.5, cex=0.8)
-  #box()
-  ###
   
   ###
+  par(fig=c(0.54, 0.99, 0, 0.06), new = TRUE, mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
+  mtext(expression(paste(bold("thundeR")," - rawindsonde processing tool for R (2021)")),
+        line = -1.5, cex=0.85)
+
+  ####
+  
   par(fig = c(0.54, 0.68, 0.49, 0.69875), new = TRUE, 
       mar = c(0.55, 0, 0, 0), oma = c(0, 0, 0, 0))  
   plot(THETAE, output$altitude-output$altitude[1],xaxt="n",yaxt="n",xlab="",  
-       type='l',xlim=c(300,400),ylim=c(100,6500),lwd=2,col='magenta')
-  axis(4, at=seq(0,6000,1000), las = 1, padj=-0.7, hadj=1.25, xpd = TRUE, 
-       labels=c("sfc ","1 km","2 km","3 km","4 km","5 km","6 km"), 
+       type='l',xlim=c(245,385),ylim=c(100,7500),lwd=2,col='magenta')
+  axis(4, at=seq(0,7000,1000), las = 1, padj=-0.6, hadj=1.25, xpd = TRUE, 
+       labels=c("sfc ","1 km","2 km","3 km","4 km","5 km","6 km","7 km"), 
        cex.axis=0.58, tck=0.1, lwd=0.35)
-  axis(1, at=seq(300,400,25), xpd = TRUE, padj=-1.1, 
+  axis(1, at=seq(245,385,25), xpd = TRUE, padj=-1.1, 
        cex.axis=0.58, tck=-0.04, lwd=0.35)
-  text(350,6200, "Theta-e [K]", cex = 0.65, col = "black")
-  #box()
+  text(315,7100, "Theta-e [K]", cex = 0.65, col = "black")
   
-  ###
+  ####
   
   par(fig = c(0.54, 0.68, 0.70875, 0.9175), new = TRUE, 
       mar = c(0.55, 0, 0, 0), oma = c(0, 0, 0, 0))  
   plot(RH, output$altitude-output$altitude[1],xaxt="n",yaxt="n",xlab="",  
-       type='l',xlim=c(0,100),ylim=c(100,6500),lwd=2,col='blue')
-  axis(4, at=seq(0,6000,1000), las = 1, padj=-0.7, hadj=1.25, xpd = TRUE, 
-       labels=c("SFC","1 km","2 km","3 km","4 km","5 km","6 km"), 
+       type='l',xlim=c(0,119),ylim=c(100,7500),lwd=2,col='blue')
+  axis(4, at=seq(0,7000,1000), las = 1, padj=-0.6, hadj=1.25, xpd = TRUE, 
+       labels=c("sfc ","1 km","2 km","3 km","4 km","5 km","6 km","7 km"), 
        cex.axis=0.58, tck=0.1, lwd=0.35)
-  axis(1, at=seq(0,100,20), xpd = TRUE, padj=-1.1, 
+  axis(1, at=seq(0,119,20), xpd = TRUE, padj=-1.1, 
        cex.axis=0.58, tck=-0.04, lwd=0.35)
-  text(50,6200, "RH [%]", cex = 0.65, col = "black")
-  #box()
-  
+  text(60,7100, "RH [%]", cex = 0.65, col = "black")
+
+  ####
   
   par(fig = c(0.69, 0.99, 0.49, 0.9175), new = TRUE, 
       mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
   v = round(-output$ws * 0.514444 * cos(output$wd * pi/180), 2)
   u = round(-output$ws * 0.514444 * sin(output$wd * pi/180), 2)
-  hodograph(u, v, output$altitude-output$altitude[1],max_speed = 25, frame = FALSE)
+  hodograph(u, v, output$altitude-output$altitude[1],max_speed = max_speed, frame = FALSE)
+ 
+  RM_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)
+  RM_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * sin(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
+  LM_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_LM_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_A")] * pi/180), 2)
+  LM_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_LM_M")] * sin(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
+  MW_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_MW_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_MW_A")] * pi/180), 2)
+  MW_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_MW_M")] * sin(parametry[which(names(parametry[1:LP]) == "Bunkers_MW_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
+
+  vectors_color <- rgb(128,128,128, maxColorValue = 255, alpha = 150)
+  circle_color <- rgb(255,255,255, maxColorValue = 255, alpha = 150)
+  points(LM_x,LM_y, cex = 1.75, pch = 1, col=vectors_color)
+  points(LM_x,LM_y, cex = 0.75, pch = 1, col='black')
+  points(RM_x,RM_y, cex = 1.75, pch = 1, col=vectors_color)
+  points(RM_x,RM_y, cex = 0.75, pch = 1, col='black')
+  arrows(0,0,MW_x,MW_y, lty=1, length = 0.11, angle = 22, code = 2, col = rgb(75,75,75, maxColorValue = 255, alpha = 100), lwd = 2.75)
+  text(LM_x,LM_y, font=2,"LM", col = vectors_color, adj = c(0.5, -1.5),cex = 0.5)
+  text(RM_x,RM_y, font=2,"RM", col = vectors_color, adj = c(0.5, 2.5),cex = 0.5)
+
+  ####
+  
+  max_speed <- max_speed*1.25
+  
+  rect(round(max_speed * 1.38  * cos(135 * pi/180), 2), 
+       round(max_speed * -0.72  * sin(135 * pi/180), 2), 
+       round(max_speed * 0.02  * cos(135 * pi/180), 2),
+       round(max_speed * -1.17  * sin(135 * pi/180), 2),
+       lty = par("lty"), lwd = 0, col=rgb(255,255,255, maxColorValue = 255, alpha = 200))
+  
+  text(round(max_speed * 1.37  * cos(135 * pi/180), 2), 
+       round(max_speed * -1.14 * sin(135 * pi/180), 2),  
+       adj=c(0,0),
+       labels = paste0("Right-moving: ",sprintf("%.0f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")],digits = 0)),"° / ", sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")],digits = 1))," m/s"), col = "gray20", cex = 0.66)
+  text(round(max_speed * 1.37 * cos(135 * pi/180), 2), 
+       round(max_speed * -0.99 * sin(135 * pi/180), 2),  
+       adj=c(0,0),
+       labels = paste0("Storm-motion: ",sprintf("%.0f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_MW_A")],digits = 0)),"° / ", sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_MW_M")],digits = 1))," m/s"), col = "gray20", cex = 0.66)
+  text(round(max_speed * 1.37  * cos(135 * pi/180), 2), 
+       round(max_speed * -0.84 * sin(135 * pi/180), 2),  
+       adj=c(0,0),
+       labels = paste0("Left-moving: ",sprintf("%.0f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_A")],digits = 0)),"° / ", sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_M")],digits = 1))," m/s"), col = "gray20", cex = 0.66)
+  
   box()
   
-  ###
+  ####
+  
   title(title,outer=T,line=-1.5)
   
 }
