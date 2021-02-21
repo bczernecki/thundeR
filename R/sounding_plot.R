@@ -32,7 +32,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                         convert = FALSE, ptop = 100, interpolate = TRUE,
                         title = "", parcel = "MU", ...){
 
-  dev_size = dev.size("in")
+    dev_size = dev.size("in")
   if(dev_size[1] < 10 | dev_size[2] < 7.5){
     text = paste("Your display device is", dev_size[1], "x", dev_size[2], "in. \nIt is recommended to use at least 10 x 7.5 in. plotting window \nor consider saving the layout into file")
     message(text)
@@ -105,6 +105,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     WIND=2
   }
 
+  if(is.na(WIND)){WIND=0}
   if(WIND==1){text(11.25,41.75, "- 25m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
   if(WIND==2){text(11.25,41.75, "- 32m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
   
@@ -119,6 +120,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     HAIL=2
   }
   
+  if(is.na(HAIL)){HAIL=0}
   if(HAIL==1){text(11.25,40.25, "- 2cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
   if(HAIL==2){text(11.25,40.25, "- 5cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
 
@@ -134,6 +136,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     TORN=2
   }
   
+  if(is.na(TORN)){TORN=0}
   if(TORN==1){text(11.25,38.75, "- F0+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
   if(TORN==2){text(11.25,38.75, "- F2+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
   
@@ -560,3 +563,4 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   title(title,outer=T,line=-1.5)
   
 }
+
