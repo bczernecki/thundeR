@@ -39,23 +39,23 @@
 sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
                          convert = FALSE, ptop = 100, interpolate = TRUE,
                          title = "", parcel = "MU", filename, ...){
-        
-        stopifnot(length(filename) < 4)
-        
-        if(tools::file_ext(filename) == "png"){
-                grDevices::png(filename = filename, width = 980, height = 600, pointsize = 17)
-                sounding_plot(pressure, altitude, temp, 
-                              dpt, wd, ws, title = title, ...)
-                grDevices::dev.off()
-        }
-        
-        
-        if(tools::file_ext(filename) == "svg"){
-                grDevices::svg(filename = filename, width = 9.80, height = 6.00, pointsize = 12)
-                sounding_plot(pressure, altitude, temp, 
-                              dpt, wd, ws, title = title)
-                grDevices::dev.off()
-        }
-        
-                
+  
+  stopifnot(length(filename) < 4)
+  
+  if(tools::file_ext(filename) == "png"){
+    grDevices::png(filename = filename, width = 2000, height = 1200, res = 200)
+    sounding_plot(pressure, altitude, temp, 
+                  dpt, wd, ws, title = title, ...)
+    grDevices::dev.off()
+  }
+  
+  
+  if(tools::file_ext(filename) == "svg"){
+    grDevices::svg(filename = filename, width = 20, height = 12, pointsize=24)
+    sounding_plot(pressure, altitude, temp, 
+                  dpt, wd, ws, title = title)
+    grDevices::dev.off()
+  }
+  
+  
 }
