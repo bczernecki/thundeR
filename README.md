@@ -1,4 +1,5 @@
-thunder - R Package to compute convective indices from rawindsonde data
+thunder - R Package to compute convective indices from rawindsonde data <img src="man/figures/logo.png" align="right" width="150" />
+
 ====================
 
 <!-- badges: start -->
