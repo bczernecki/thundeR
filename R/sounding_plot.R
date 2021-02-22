@@ -518,7 +518,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
   v = round(-output$ws * 0.514444 * cos(output$wd * pi/180), 2)
   u = round(-output$ws * 0.514444 * sin(output$wd * pi/180), 2)
-  hodograph(u, v, output$altitude-output$altitude[1], frame = FALSE, ...)
+  hodograph(u, v, output$altitude-output$altitude[1], max_speed = max_speed, frame = FALSE, ...)
  
   RM_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)
   RM_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * sin(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
