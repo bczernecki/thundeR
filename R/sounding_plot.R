@@ -82,8 +82,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   ###
   
   if(hazards==T){
-  rect(11.5,37.5,26.1,44,col=rgb(255,255,255, maxColorValue = 255, alpha = 200),lwd=0.2)
-  text(12.25,43.25, "Possible storm hazards:",col="black",cex=0.65, adj=c(0,1))
+  rect(10.75,37.5,26.1,44,col=rgb(255,255,255, maxColorValue = 255, alpha = 200),lwd=0.2)
+  text(11.5,43.25, "Possible storm hazards:",col="black",cex=0.65, adj=c(0,1))
   
   WIND=NA
   HAIL=NA
@@ -109,8 +109,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   }
 
   if(is.na(WIND)){WIND=0}
-  if(WIND==1){text(12.25,41.75, "- 25m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
-  if(WIND==2){text(12.25,41.75, "- 32m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
+  if(WIND==1){text(11.5,41.75, "- 25m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
+  if(WIND==2){text(11.5,41.75, "- 32m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
   
   ###
   if(parametry[which(names(parametry[1:LP]) == "SHIP")]>0.5 |
@@ -124,8 +124,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   }
   
   if(is.na(HAIL)){HAIL=0}
-  if(HAIL==1){text(12.25,40.25, "- 2cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
-  if(HAIL==2){text(12.25,40.25, "- 5cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
+  if(HAIL==1){text(11.5,40.25, "- 2cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
+  if(HAIL==2){text(11.5,40.25, "- 5cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
 
   ###
   if(parametry[which(names(parametry[1:LP]) == "STP")]>0.3 |
@@ -140,8 +140,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   }
   
   if(is.na(TORN)){TORN=0}
-  if(TORN==1){text(12.25,38.75, "- F0+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
-  if(TORN==2){text(12.25,38.75, "- F2+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
+  if(TORN==1){text(11.5,38.75, "- F0+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
+  if(TORN==2){text(11.5,38.75, "- F2+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
   
   }
   
@@ -351,8 +351,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   ###
   
-  text(0.173, 27.55, "Bulk wind shear", cex = FONTSIZE, adj = c(1,0))
-  text(0.173, 25.55, "[m/s]", cex = FONTSIZE-0.075, adj = c(1,0))
+  text(0.171, 27.55, "Bulk wind shear", cex = FONTSIZE, adj = c(1,0))
+  text(0.171, 25.55, "[m/s]", cex = FONTSIZE-0.075, adj = c(1,0))
   
   text(0.11,22.55, "Sfc - 1 km:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,22.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_01km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
