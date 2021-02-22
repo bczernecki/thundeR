@@ -39,7 +39,7 @@ jobs:
       R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
       RSPM: ${{ matrix.config.rspm }}
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      CODECOV_TOKEN=b5d38865-b712-4f87-aefa-92c24cd50f78
+      CODECOV_TOKEN: b5d38865-b712-4f87-aefa-92c24cd50f78
 
     steps:
       - uses: actions/checkout@v2
