@@ -16,6 +16,7 @@ sounding_plot(
   interpolate = TRUE,
   title = "",
   parcel = "MU",
+  max_speed = 25,
   ...
 )
 }
@@ -41,6 +42,8 @@ sounding_plot(
 \item{title}{title to be added in the layout's header}
 
 \item{parcel}{tracing for "MU", "ML" or "SB" parcel}
+
+\item{max_speed}{max speed for defining hodograph limits}
 
 \item{...}{extra graphic arguments}
 }
