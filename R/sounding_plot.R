@@ -76,7 +76,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(20, 28, "Hail Growth\nLayer (HGL)",col="#8470FF90",cex=0.65,srt=56)
   
   ####
-  parametry <- sounding_compute(pressure, altitude, temp, dpt, wd, ws)
+  parametry <- sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3)
   LP <- max(which(!is.na(names(parametry))))
 
   ###
