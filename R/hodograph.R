@@ -122,7 +122,7 @@ hodograph = function(u, v, hght,
     ux = approx(x = hght, y = u, xout = c(lab_hghts*1000))
     uy = approx(x = hght, y = v, xout = c(lab_hghts*1000))
     #points(ux$y, uy$y, cex = 0.5, pch = 19, col='black')
-    points(ux$y, uy$y, cex = 1.15, pch = 19, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 125))
+    points(ux$y, uy$y, cex = 1.15, pch = 21, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 125), bg = rgb(255, 255, 255, maxColorValue = 255, alpha = 125))
     text(font=2, ux$y, uy$y, labels = floor(lab_hghts), col = "black", cex = 0.65)
   }
   
