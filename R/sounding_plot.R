@@ -14,6 +14,7 @@
 #' @param interpolate logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset
 #' @param title title to be added in the layout's header
 #' @param parcel tracing for "MU", "ML" or "SB" parcel
+#' @param max_speed max speed for defining hodograph limits
 #' @param ... extra graphic arguments
 #' @export
 #' @import aiRthermo
@@ -30,7 +31,7 @@
 
 sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                         convert = FALSE, ptop = 100, interpolate = TRUE,
-                        title = "", parcel = "MU", ...){
+                        title = "", parcel = "MU", max_speed = 25, ...){
 
     dev_size = dev.size("in")
   if(dev_size[1] < 10 | dev_size[2] < 7.5){
@@ -350,19 +351,19 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.175, 27.55, "Bulk wind shear", cex = FONTSIZE, adj = c(1,0))
   text(0.175, 25.55, "[m/s]", cex = FONTSIZE-0.075, adj = c(1,0))
   
-  text(0.11,22.55, "Sfc – 1km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.11,22.55, "Sfc - 1km:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,22.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_01km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.11,19.15, "Sfc – 3km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.11,19.15, "Sfc - 3km:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,19.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_03km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.11,15.75, "Sfc – 6km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.11,15.75, "Sfc - 6km:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,15.75, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_06km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.11,12.35, "Sfc – 8km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.11,12.35, "Sfc - 8km:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,12.35, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_08km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.11,8.95, "Sfc – HGL:", cex = FONTSIZE, adj = c(1,0))
+  text(0.11,8.95, "Sfc - HGL:", cex = FONTSIZE, adj = c(1,0))
   text(0.12,8.95, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "BS_SFC_to_HGL")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
   text(0.11,5.55, "Effec. (SB):", cex = FONTSIZE, adj = c(1,0))
@@ -384,19 +385,19 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.55, 27.55, "SRH LM", cex = FONTSIZE, adj = c(1,0))
   text(0.55, 25.55, "[m2/s2]", cex = FONTSIZE-0.075, adj = c(1,0))
   
-  text(0.345,22.55, "Sfc – 100m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.345,22.55, "Sfc - 100m:", cex = FONTSIZE, adj = c(1,0))
   text(0.36,22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   text(0.4725,22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   # 
-  text(0.345,19.15, "Sfc – 500m:", cex = FONTSIZE, adj = c(1,0))
+  text(0.345,19.15, "Sfc - 500m:", cex = FONTSIZE, adj = c(1,0))
   text(0.36,19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   text(0.4725,19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.345,15.75, "Sfc – 1km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.345,15.75, "Sfc - 1km:", cex = FONTSIZE, adj = c(1,0))
   text(0.36,15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   text(0.4725,15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.345,12.35, "Sfc – 3km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.345,12.35, "Sfc - 3km:", cex = FONTSIZE, adj = c(1,0))
   text(0.36,12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_RM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   text(0.4725,12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_LM")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
@@ -408,16 +409,16 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.77, 27.55, "Mean wind", cex = FONTSIZE, adj = c(1,0))
   text(0.77, 25.55, "[m/s]", cex = FONTSIZE-0.075, adj = c(1,0))
   
-  text(0.71,22.55, "Sfc – 1km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.71,22.55, "Sfc - 1km:", cex = FONTSIZE, adj = c(1,0))
   text(0.72,22.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_01km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.71,19.15, "Sfc – 2km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.71,19.15, "Sfc - 2km:", cex = FONTSIZE, adj = c(1,0))
   text(0.72,19.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_02km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.71,15.75, "1 – 3km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.71,15.75, "1 - 3km:", cex = FONTSIZE, adj = c(1,0))
   text(0.72,15.75, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_13km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.71,12.35, "Sfc – 6km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.71,12.35, "Sfc - 6km:", cex = FONTSIZE, adj = c(1,0))
   text(0.72,12.35, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "MW_06km")],digits=1))), cex = FONTSIZE,adj = c(0,0))
   
   ###
@@ -425,13 +426,13 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(1.025, 27.55, "Lapse rate", cex = FONTSIZE, adj = c(1,0))
   text(1.025, 25.55, "[K/km]", cex = FONTSIZE-0.075, adj = c(1,0))
   
-  text(0.95,22.55, "Sfc – 1km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.95,22.55, "Sfc - 1km:", cex = FONTSIZE, adj = c(1,0))
   text(0.96,22.55, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_01km")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.95,19.15, "Sfc – 3km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.95,19.15, "Sfc - 3km:", cex = FONTSIZE, adj = c(1,0))
   text(0.96,19.15, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_03km")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.95,15.75, "3 – 6km:", cex = FONTSIZE, adj = c(1,0))
+  text(0.95,15.75, "3 - 6km:", cex = FONTSIZE, adj = c(1,0))
   text(0.96,15.75, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) == "LR_36km")]*-1,digits=1))), cex = FONTSIZE,adj = c(0,0))
   
   text(0.95,12.35, "500700 hPa:", cex = FONTSIZE, adj = c(1,0))
@@ -445,10 +446,10 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.43,6.5, "Precip. water [mm]:", cex = FONTSIZE, adj = c(1,0))
   text(0.44,6.5, paste0(round(parametry[which(names(parametry[1:LP]) == "PRCP_WATER")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.43,2.9, "2 – 5km RH [%]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.43,2.9, "2 - 5km RH [%]:", cex = FONTSIZE, adj = c(1,0))
   text(0.44,2.9, paste0(round(parametry[which(names(parametry[1:LP]) == "RH_25km")]*100,digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.43,-0.7, "Sfc – 2km RH [%]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.43,-0.7, "Sfc - 2km RH [%]:", cex = FONTSIZE, adj = c(1,0))
   text(0.44,-0.7, paste0(round(parametry[which(names(parametry[1:LP]) == "RH_02km")]*100,digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
   segments(0.50, 10.25, 0.50, -3)
@@ -458,7 +459,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.77,6.3, "Moisture flux [g/s/m2]:", cex = FONTSIZE, adj = c(1,0))
   text(0.78,6.5, paste0(round(parametry[which(names(parametry[1:LP]) == "Moisture_Flux_02km")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
-  text(0.77,2.9, "⁠4km DCAPE [J/kg]:", cex = FONTSIZE, adj = c(1,0))
+  text(0.77,2.9, "4km DCAPE [J/kg]:", cex = FONTSIZE, adj = c(1,0))
   text(0.78,2.9, paste0(round(parametry[which(names(parametry[1:LP]) == "DCAPE")],digits=0),""), cex = FONTSIZE,adj = c(0,0))
   
   text(0.77,-0.7, "4km delta theta-e [K]:", cex = FONTSIZE, adj = c(1,0))
@@ -514,7 +515,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
   v = round(-output$ws * 0.514444 * cos(output$wd * pi/180), 2)
   u = round(-output$ws * 0.514444 * sin(output$wd * pi/180), 2)
-  hodograph(u, v, output$altitude-output$altitude[1],max_speed = max_speed, frame = FALSE)
+  hodograph(u, v, output$altitude-output$altitude[1], frame = FALSE, ...)
  
   RM_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)
   RM_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * sin(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
@@ -546,15 +547,15 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(round(max_speed * 1.37  * cos(135 * pi/180), 2), 
        round(max_speed * -1.14 * sin(135 * pi/180), 2),  
        adj=c(0,0),
-       labels = paste0("Right-moving: ",sprintf("%.0f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")],digits = 0)),"° / ", sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")],digits = 1))," m/s"), col = "gray20", cex = 0.66)
+       labels = paste0("Right-moving: ",sprintf("%.0f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")],digits = 0)),"deg / ", sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")],digits = 1))," m/s"), col = "gray20", cex = 0.66)
   text(round(max_speed * 1.37 * cos(135 * pi/180), 2), 
        round(max_speed * -0.99 * sin(135 * pi/180), 2),  
        adj=c(0,0),
-       labels = paste0("Storm-motion: ",sprintf("%.0f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_MW_A")],digits = 0)),"° / ", sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_MW_M")],digits = 1))," m/s"), col = "gray20", cex = 0.66)
+       labels = paste0("Storm-motion: ",sprintf("%.0f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_MW_A")],digits = 0)),"deg / ", sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_MW_M")],digits = 1))," m/s"), col = "gray20", cex = 0.66)
   text(round(max_speed * 1.37  * cos(135 * pi/180), 2), 
        round(max_speed * -0.84 * sin(135 * pi/180), 2),  
        adj=c(0,0),
-       labels = paste0("Left-moving: ",sprintf("%.0f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_A")],digits = 0)),"° / ", sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_M")],digits = 1))," m/s"), col = "gray20", cex = 0.66)
+       labels = paste0("Left-moving: ",sprintf("%.0f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_A")],digits = 0)),"deg / ", sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_M")],digits = 1))," m/s"), col = "gray20", cex = 0.66)
   
   box()
   
