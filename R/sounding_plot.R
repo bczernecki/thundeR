@@ -81,7 +81,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
 
   ###
   
-  if(hazards=T){
+  if(hazards==T){
   rect(10.5,37.5,26.1,44,col=rgb(255,255,255, maxColorValue = 255, alpha = 200),lwd=0.2)
   text(11.25,43.25, "Possible storm hazards:",col="black",cex=0.7, adj=c(0,1))
   
