@@ -31,7 +31,7 @@
 
 sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                         convert = FALSE, ptop = 100, interpolate = TRUE,
-                        title = "", parcel = "MU", max_speed = 25, ...){
+                        title = "", parcel = "MU", max_speed = 25, hazards = FALSE, ...){
 
     dev_size = dev.size("in")
   if(dev_size[1] < 10 | dev_size[2] < 7.5){
@@ -80,6 +80,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   LP <- max(which(!is.na(names(parametry))))
 
   ###
+  
+  if(hazards=T){
   rect(10.5,37.5,26.1,44,col=rgb(255,255,255, maxColorValue = 255, alpha = 200),lwd=0.2)
   text(11.25,43.25, "Possible storm hazards:",col="black",cex=0.7, adj=c(0,1))
   
@@ -141,6 +143,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   if(TORN==1){text(11.25,38.75, "- F0+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
   if(TORN==2){text(11.25,38.75, "- F2+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
   
+  }
   
   ###
   
@@ -247,17 +250,17 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(-29, altitude_to_pressure(3000), paste0("--- 3 km"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(4000), paste0("--- 4 km"), pos=4, cex = 0.65, col = "black")
   text(-29, altitude_to_pressure(5000), paste0("--- 5 km"), pos=4, cex = 0.65, col = "black")
-  if(output$pressure[output$altitude-output$altitude[1]==6000] > 100){text(-29, altitude_to_pressure(6000), paste0("--- 6 km"), pos=4, cex = 0.65, col = "black")}
-  if(output$pressure[output$altitude-output$altitude[1]==7000] > 100){text(-29, altitude_to_pressure(7000), paste0("--- 7 km"), pos=4, cex = 0.65, col = "black")}
-  if(output$pressure[output$altitude-output$altitude[1]==8000] > 100){text(-29, altitude_to_pressure(8000), paste0("--- 8 km"), pos=4, cex = 0.65, col = "black")}
-  if(output$pressure[output$altitude-output$altitude[1]==9000] > 100){text(-29, altitude_to_pressure(9000), paste0("--- 9 km"), pos=4, cex = 0.65, col = "black")}
-  if(output$pressure[output$altitude-output$altitude[1]==10000] > 100){text(-29, altitude_to_pressure(10000), paste0("--- 10 km"), pos=4, cex = 0.65, col = "black")}
-  if(output$pressure[output$altitude-output$altitude[1]==11000] > 100){text(-29, altitude_to_pressure(11000), paste0("--- 11 km"), pos=4, cex = 0.65, col = "black")}
-  if(output$pressure[output$altitude-output$altitude[1]==12000] > 100){text(-29, altitude_to_pressure(12000), paste0("--- 12 km"), pos=4, cex = 0.65, col = "black")}
-  if(output$pressure[output$altitude-output$altitude[1]==13000] > 100){text(-29, altitude_to_pressure(13000), paste0("--- 13 km"), pos=4, cex = 0.65, col = "black")}
-  if(output$pressure[output$altitude-output$altitude[1]==14000] > 100){text(-29, altitude_to_pressure(14000), paste0("--- 14 km"), pos=4, cex = 0.65, col = "black")}
-  if(output$pressure[output$altitude-output$altitude[1]==15000] > 100){text(-29, altitude_to_pressure(15000), paste0("--- 15 km"), pos=4, cex = 0.65, col = "black")}
-  if(output$pressure[output$altitude-output$altitude[1]==16000] > 100){text(-29, altitude_to_pressure(16000), paste0("--- 16 km"), pos=4, cex = 0.65, col = "black")}
+  if(max(output$altitude-output$altitude[1]) > 6000){if(output$pressure[output$altitude-output$altitude[1]==6000] > 100){text(-29, altitude_to_pressure(6000), paste0("--- 6 km"), pos=4, cex = 0.65, col = "black")}}
+  if(max(output$altitude-output$altitude[1]) > 7000){if(output$pressure[output$altitude-output$altitude[1]==7000] > 100){text(-29, altitude_to_pressure(7000), paste0("--- 7 km"), pos=4, cex = 0.65, col = "black")}}
+  if(max(output$altitude-output$altitude[1]) > 8000){if(output$pressure[output$altitude-output$altitude[1]==8000] > 100){text(-29, altitude_to_pressure(8000), paste0("--- 8 km"), pos=4, cex = 0.65, col = "black")}}
+  if(max(output$altitude-output$altitude[1]) > 9000){if(output$pressure[output$altitude-output$altitude[1]==9000] > 100){text(-29, altitude_to_pressure(9000), paste0("--- 9 km"), pos=4, cex = 0.65, col = "black")}}
+  if(max(output$altitude-output$altitude[1]) > 10000){if(output$pressure[output$altitude-output$altitude[1]==10000] > 100){text(-29, altitude_to_pressure(10000), paste0("--- 10 km"), pos=4, cex = 0.65, col = "black")}}
+  if(max(output$altitude-output$altitude[1]) > 11000){if(output$pressure[output$altitude-output$altitude[1]==11000] > 100){text(-29, altitude_to_pressure(11000), paste0("--- 11 km"), pos=4, cex = 0.65, col = "black")}}
+  if(max(output$altitude-output$altitude[1]) > 12000){if(output$pressure[output$altitude-output$altitude[1]==12000] > 100){text(-29, altitude_to_pressure(12000), paste0("--- 12 km"), pos=4, cex = 0.65, col = "black")}}
+  if(max(output$altitude-output$altitude[1]) > 13000){if(output$pressure[output$altitude-output$altitude[1]==13000] > 100){text(-29, altitude_to_pressure(13000), paste0("--- 13 km"), pos=4, cex = 0.65, col = "black")}}
+  if(max(output$altitude-output$altitude[1]) > 14000){if(output$pressure[output$altitude-output$altitude[1]==14000] > 100){text(-29, altitude_to_pressure(14000), paste0("--- 14 km"), pos=4, cex = 0.65, col = "black")}}
+  if(max(output$altitude-output$altitude[1]) > 15000){if(output$pressure[output$altitude-output$altitude[1]==15000] > 100){text(-29, altitude_to_pressure(15000), paste0("--- 15 km"), pos=4, cex = 0.65, col = "black")}}
+  if(max(output$altitude-output$altitude[1]) > 16000){if(output$pressure[output$altitude-output$altitude[1]==16000] > 100){text(-29, altitude_to_pressure(16000), paste0("--- 16 km"), pos=4, cex = 0.65, col = "black")}}
 
   ###
   par(fig = c(0.46, 0.57, 0.03, 0.95), new = TRUE, mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))
