@@ -17,6 +17,7 @@ sounding_plot(
   title = "",
   parcel = "MU",
   max_speed = 25,
+  hazards = FALSE,
   ...
 )
 }
