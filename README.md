@@ -5,11 +5,9 @@
 <!-- badges: start --> 
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
 [![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/devel/graph/badge.svg?token=JGZPB7RUFI)](https://codecov.io/gh/bczernecki/thunder)
-
-<!-- badges: end -->
-To be changed when CRAN comes...
 [![CRAN status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
+<!-- badges: end -->
 
 `thunder` is a freeware R package for performing analyses of servere weather-related atmospheric convective indices based on rawin sonde profiles.
 
