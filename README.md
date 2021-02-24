@@ -130,6 +130,15 @@ v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
 hodograph(u, v, HGHT, max_speed = 30, max_hght = 10000); box(); title("Some title here")
 ```
 
+Development team
+-------------
+
+**thundeR** package has been developed by a team of 3 people, each having an equal contribution (listed in alphabetical order):
+- Bartosz Czernecki (Adam Mickiewicz University in Poznań, Poland)
+- Piotr Szuster (Cracow University of Technology, Poland)
+- Mateusz Taszarek (NOAA NSSL/CIMMS, United States)
+
+
 Contributions
 -------------
 
