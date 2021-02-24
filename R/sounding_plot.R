@@ -33,7 +33,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                         convert = FALSE, ptop = 100, interpolate = TRUE,
                         title = "", parcel = "MU", max_speed = 25, hazards = FALSE, ...){
 
-    dev_size = dev.size("in")
+   dev_size = dev.size("in")
 if(dev_size[1] < 10 | dev_size[2] < 7.5){
   text = paste("Your display device is", dev_size[1], "x", dev_size[2], "in. \nIt is recommended to use at least 10 x 7.5 in. plotting window \nor consider saving the layout into file")
   message(text)
@@ -491,7 +491,8 @@ text(0.965,-0.7, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) ==
 ###
 par(fig=c(0.54, 0.99, 0, 0.06), new = TRUE, mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
 mtext(expression(paste(bold("thundeR")," - rawindsonde processing tool for R v1.0 (2021)")),
-      line = -1.5, cex=0.7)
+      line = -1.2, cex=0.7)
+mtext("www.rawinsonde.com",line = -1.8, cex=0.7)
 
 ####
 
