@@ -2,8 +2,6 @@
 
 ###### Rawinsonde processing tool for R language <img src="man/figures/logo.png" align="right" width="200" />
 
-====================
-
 <!-- badges: start --> 
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
 [![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/devel/graph/badge.svg?token=JGZPB7RUFI)](https://codecov.io/gh/bczernecki/thunder)
