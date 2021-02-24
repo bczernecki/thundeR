@@ -133,7 +133,7 @@ Development team
 **thundeR** package has been developed by a team of 3 atmospheric scientists - each having an equal contribution (listed in alphabetical order):
 - Bartosz Czernecki (Adam Mickiewicz University in Poznań, Poland)
 - Piotr Szuster (Cracow University of Technology, Poland)
-- Mateusz Taszarek (NOAA NSSL/CIMMS, United States)
+- Mateusz Taszarek (NOAA NSSL/CIMMS in Norman, United States)
 
 
 Contributions
