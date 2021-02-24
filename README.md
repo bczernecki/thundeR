@@ -1,6 +1,6 @@
 # thundeR
 
-###### Rawinsonde processing tool for R language <img src="man/figures/logo.png" align="right" width="200" />
+###### R language package for processing convective parameters from rawinsonde data <img src="man/figures/logo.png" align="right" width="200" />
 
 <!-- badges: start --> 
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
