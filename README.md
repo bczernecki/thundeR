@@ -1,6 +1,6 @@
 # thundeR
 
-###### Rapid processing and visualisation of convective parameters from rawinsonde and NWP data <img src="man/figures/logo.png" align="right" width="250" />
+###### Rapid processing and visualisation of convective parameters from rawinsonde and NWP data <img src="man/figures/logo.png" align="right" width="200" />
 
 <!-- badges: start --> 
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
@@ -9,7 +9,7 @@
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
 <!-- badges: end -->
 
-`thundeR` is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large numerical datasets such as reanalyses or operational NWP models in a fairly low amount of time. This package was developed by research meteorologists specializing in severe convective storms and is constantly updated with new features. Its main purpose is to allow operational meteorologists and researchers a quick and easy evaluation of convective environments.
+**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large numerical datasets such as reanalyses or operational NWP models in a fairly low amount of time. This package was developed by research meteorologists specializing in severe convective storms and is constantly updated with new features. Its main purpose is to allow operational meteorologists and researchers a quick and easy evaluation of convective environments.
 
 
 ## Installation

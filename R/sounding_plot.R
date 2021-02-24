@@ -59,14 +59,14 @@ t_col <- function(color, percent, name = NULL) {
 }
 
 ####
-output <- parcel_helpers(pressure, altitude, temp, dpt, wd, ws)
-output2 <- parcel_helpers(pressure, altitude, temp, ifelse(dpt==-273,NA,dpt), wd, ws)
-RH <- aiRthermo::dewpointdepression2rh(output$pressure*100, output$temp+273.15, output$temp-output$dpt, consts = export_constants())
-SH <- aiRthermo::rh2shum(output$pressure*100, output$temp+273.15, RH, consts = export_constants())
-E <- aiRthermo::q2e(output$pressure*100, SH, consts = export_constants())
-W <- aiRthermo::e2w(E, output$pressure*100, consts = export_constants())
-TLCL <- aiRthermo::boltonTLCL(output$temp+273.15, RH, consts = export_constants())
-THETAE <- aiRthermo::equivalentPotentialTemperature(output$pressure*100, output$temp+273.15, W, TLCL, consts = export_constants())
+output = sounding_export(pressure, altitude, temp, dpt, wd, ws)
+output2 = sounding_export(pressure, altitude, temp, ifelse(dpt==-273, NA,dpt), wd, ws)
+RH = aiRthermo::dewpointdepression2rh(output$pressure*100, output$temp+273.15, output$temp-output$dpt, consts = export_constants())
+SH = aiRthermo::rh2shum(output$pressure*100, output$temp+273.15, RH, consts = export_constants())
+E = aiRthermo::q2e(output$pressure*100, SH, consts = export_constants())
+W = aiRthermo::e2w(E, output$pressure*100, consts = export_constants())
+TLCL = aiRthermo::boltonTLCL(output$temp+273.15, RH, consts = export_constants())
+THETAE = aiRthermo::equivalentPotentialTemperature(output$pressure*100, output$temp+273.15, W, TLCL, consts = export_constants())
 
 ####
 
@@ -526,7 +526,7 @@ par(fig = c(0.69, 0.99, 0.49, 0.9175), new = TRUE,
     mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
 v = round(-output$ws * 0.514444 * cos(output$wd * pi/180), 2)
 u = round(-output$ws * 0.514444 * sin(output$wd * pi/180), 2)
-hodograph(u, v, output$altitude-output$altitude[1], max_speed = max_speed, frame = FALSE, ...)
+sounding_hodograph(u, v, output$altitude-output$altitude[1], max_speed = max_speed, frame = FALSE, ...)
 
 RM_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)
 RM_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * sin(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))

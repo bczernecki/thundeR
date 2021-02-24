@@ -9,7 +9,7 @@
 #' @param pressure2 coordinates to be used base on air pressure vector
 #' @param ptop upper limit of drawn trajectory (default: 100 hPa); use only if a line goes beyond the drawing area
 #' @param ... other graphical parameters that can be passed to `graphics::lines()` function, such as `lwd`, `lty`, `col`, etc.
- 
+#' @noRd
 #' 
 
 parcel_shading <- function (temp1, pressure1, 
