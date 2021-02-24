@@ -60,6 +60,7 @@ t_col <- function(color, percent, name = NULL) {
 
 ####
 output <- parcel_helpers(pressure, altitude, temp, dpt, wd, ws)
+output2 <- parcel_helpers(pressure, altitude, temp, ifelse(dpt==-273,NA,dpt), wd, ws)
 RH <- aiRthermo::dewpointdepression2rh(output$pressure*100, output$temp+273.15, output$temp-output$dpt, consts = export_constants())
 SH <- aiRthermo::rh2shum(output$pressure*100, output$temp+273.15, RH, consts = export_constants())
 E <- aiRthermo::q2e(output$pressure*100, SH, consts = export_constants())
@@ -68,8 +69,9 @@ TLCL <- aiRthermo::boltonTLCL(output$temp+273.15, RH, consts = export_constants(
 THETAE <- aiRthermo::equivalentPotentialTemperature(output$pressure*100, output$temp+273.15, W, TLCL, consts = export_constants())
 
 ####
+
 skewt_plot()
-skewt_lines(output$dpt, output$pressure, col = t_col('forestgreen',10), lwd = 2, ptop = 100)
+skewt_lines(output2$dpt,output2$pressure, col = t_col('forestgreen',10), lwd = 2, ptop = 100)
 skewt_lines(output$temp,output$pressure, col = t_col('red',10), lwd = 2, ptop = 100)
 skewt_lines(output$tempV,output$pressure, col = t_col("red3",0), lwd = 1, lty = 3, ptop = 100)
 
@@ -214,6 +216,8 @@ if(parcel=="SB"){
 }
 
 ###
+u <- subset(u, v < 44)
+v <- subset(v, v < 44)
 polygon(u, v, col = "#FFA50025", border = NA)
 
 ###
@@ -225,31 +229,34 @@ altitude_to_pressure = function(altitude){
 if(parcel=="SB"){
   if(parametry[which(names(parametry[1:LP]) == "SB_CAPE")] > 0){
     #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-    text(x_el, y_el, paste0("---- SB EL"), pos = 4, cex = 0.62, col = "black")
-    text(x_lcl, y_lcl, paste0("---- SB LCL"), pos = 4, cex = 0.62, col = "black")}
+  if(output$pressure[which(output$altitude-output$altitude[1] == (parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")]))] > 100 & which(names(parametry[1:LP]) == "SB_EL_HGT")!=0){
+    text(x_el, y_el, paste0("---- SB EL"), pos = 4, cex = 0.62, col = "black") }
+    text(x_lcl, y_lcl, paste0("---- SB LCL"), pos = 4, cex = 0.62, col = "black") }
 }
 
 if(parcel=="MU"){
   if(parametry[which(names(parametry[1:LP]) == "MU_CAPE")] > 0){
     #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-    text(x_el, y_el, paste0("---- MU EL"), pos = 4, cex = 0.62, col = "black")
-    text(x_lcl, y_lcl, paste0("---- MU LCL"), pos = 4, cex = 0.62, col = "black")}
+    if(output$pressure[which(output$altitude-output$altitude[1] == (parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")]))] > 100 & which(names(parametry[1:LP]) == "MU_EL_HGT")!=0){
+      text(x_el, y_el, paste0("---- MU EL"), pos = 4, cex = 0.62, col = "black") }
+    text(x_lcl, y_lcl, paste0("---- MU LCL"), pos = 4, cex = 0.62, col = "black") }
 }
 
 if(parcel=="ML"){
   if(parametry[which(names(parametry[1:LP]) == "ML_CAPE")] > 0){
     #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-    text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black")
+    if(output$pressure[which(output$altitude-output$altitude[1] == (parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")]))] > 100 & which(names(parametry[1:LP]) == "ML_EL_HGT")!=0){
+      text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black") }
     text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")}
 }
 
 ###
 text(-29, altitude_to_pressure(0), paste0("--- Sfc (",output$altitude[1]," m) ---"), pos=4, cex = 0.65, col = "black")
-text(-29, altitude_to_pressure(1000), paste0("--- 1 km"), pos=4, cex = 0.65, col = "black")
-text(-29, altitude_to_pressure(2000), paste0("--- 2 km"), pos=4, cex = 0.65, col = "black")
-text(-29, altitude_to_pressure(3000), paste0("--- 3 km"), pos=4, cex = 0.65, col = "black")
-text(-29, altitude_to_pressure(4000), paste0("--- 4 km"), pos=4, cex = 0.65, col = "black")
-text(-29, altitude_to_pressure(5000), paste0("--- 5 km"), pos=4, cex = 0.65, col = "black")
+if(max(output$altitude-output$altitude[1]) > 1000){if(output$pressure[output$altitude-output$altitude[1]==1000] > 100){text(-29, altitude_to_pressure(1000), paste0("--- 1 km"), pos=4, cex = 0.65, col = "black")}}
+if(max(output$altitude-output$altitude[1]) > 2000){if(output$pressure[output$altitude-output$altitude[1]==2000] > 100){text(-29, altitude_to_pressure(2000), paste0("--- 2 km"), pos=4, cex = 0.65, col = "black")}}
+if(max(output$altitude-output$altitude[1]) > 3000){if(output$pressure[output$altitude-output$altitude[1]==3000] > 100){text(-29, altitude_to_pressure(3000), paste0("--- 3 km"), pos=4, cex = 0.65, col = "black")}}
+if(max(output$altitude-output$altitude[1]) > 4000){if(output$pressure[output$altitude-output$altitude[1]==4000] > 100){text(-29, altitude_to_pressure(4000), paste0("--- 4 km"), pos=4, cex = 0.65, col = "black")}}
+if(max(output$altitude-output$altitude[1]) > 5000){if(output$pressure[output$altitude-output$altitude[1]==5000] > 100){text(-29, altitude_to_pressure(5000), paste0("--- 5 km"), pos=4, cex = 0.65, col = "black")}}
 if(max(output$altitude-output$altitude[1]) > 6000){if(output$pressure[output$altitude-output$altitude[1]==6000] > 100){text(-29, altitude_to_pressure(6000), paste0("--- 6 km"), pos=4, cex = 0.65, col = "black")}}
 if(max(output$altitude-output$altitude[1]) > 7000){if(output$pressure[output$altitude-output$altitude[1]==7000] > 100){text(-29, altitude_to_pressure(7000), paste0("--- 7 km"), pos=4, cex = 0.65, col = "black")}}
 if(max(output$altitude-output$altitude[1]) > 8000){if(output$pressure[output$altitude-output$altitude[1]==8000] > 100){text(-29, altitude_to_pressure(8000), paste0("--- 8 km"), pos=4, cex = 0.65, col = "black")}}
