@@ -141,7 +141,7 @@
 
 
 sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, 
-                            export_profile = 0, accuracy = 1){
+                            export_profile = 0, accuracy){
   
   tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy)
   
