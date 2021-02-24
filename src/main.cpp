@@ -449,7 +449,7 @@ void setPressureIndex(int parrayI, int index, Cache *C){
 }
 //--------------------------------------------------------------------------------
 std::ostream& operator<< (std::ostream &wyjscie, const Cache &s){
-  wyjscie <<"ZAWARTOŚĆ CACHE:\nPOZIOMY CISNIENIA"<<endl;
+  wyjscie <<"ZAWARTOSC CACHE:\nPOZIOMY CISNIENIA"<<endl;
   for(int i=0;i<10;i++){
     wyjscie<< s.p[i]<<"\t";
   }wyjscie<<endl;

@@ -24,7 +24,7 @@
 #' @useDynLib thunder
 #' @importFrom Rcpp evalCpp
 #' @export
-sounding_default <- function(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy) {
-    .Call('_thunder_sounding_default', PACKAGE = 'thunder', pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy)
+sounding_default <- function(pressure, altitude, temperature, dew, angle, velocity, export_profile, accuracy) {
+    .Call('_thunder_sounding_default', PACKAGE = 'thunder', pressure, altitude, temperature, dew, angle, velocity, export_profile, accuracy)
 }
 

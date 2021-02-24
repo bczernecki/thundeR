@@ -15,8 +15,14 @@ windbarbs(cx, cy, direction, speed = NA, cex = 1)
 
 \item{speed}{wind speed in m/s}
 
-\item{cex}{symbole size. Default 1}
+\item{cex}{symbol size. Default 1}
 }
 \description{
 A slightly modified version of station.symbol function from the RadioSonde package.
+}
+\examples{
+plot(1)
+windbarbs(cx = 1, cy = 1, direction = 90, speed = 5)
+
+# try in a loop
 }
