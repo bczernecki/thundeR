@@ -15,6 +15,7 @@
 #' @param title title to be added in the layout's header
 #' @param parcel tracing for "MU", "ML" or "SB" parcel
 #' @param max_speed max speed for defining hodograph limits
+#' @param hazards logical. Whether to add extra information about possibility of severe weather risk
 #' @param ... extra graphic arguments
 #' @export
 #' @import aiRthermo
@@ -33,7 +34,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                         convert = FALSE, ptop = 100, interpolate = TRUE,
                         title = "", parcel = "MU", max_speed = 25, hazards = FALSE, ...){
 
-    dev_size = dev.size("in")
+   dev_size = dev.size("in")
 if(dev_size[1] < 10 | dev_size[2] < 7.5){
   text = paste("Your display device is", dev_size[1], "x", dev_size[2], "in. \nIt is recommended to use at least 10 x 7.5 in. plotting window \nor consider saving the layout into file")
   message(text)
@@ -59,17 +60,19 @@ t_col <- function(color, percent, name = NULL) {
 }
 
 ####
-output <- parcel_helpers(pressure, altitude, temp, dpt, wd, ws)
-RH <- aiRthermo::dewpointdepression2rh(output$pressure*100, output$temp+273.15, output$temp-output$dpt, consts = export_constants())
-SH <- aiRthermo::rh2shum(output$pressure*100, output$temp+273.15, RH, consts = export_constants())
-E <- aiRthermo::q2e(output$pressure*100, SH, consts = export_constants())
-W <- aiRthermo::e2w(E, output$pressure*100, consts = export_constants())
-TLCL <- aiRthermo::boltonTLCL(output$temp+273.15, RH, consts = export_constants())
-THETAE <- aiRthermo::equivalentPotentialTemperature(output$pressure*100, output$temp+273.15, W, TLCL, consts = export_constants())
+output = sounding_export(pressure, altitude, temp, dpt, wd, ws)
+output2 = sounding_export(pressure, altitude, temp, ifelse(dpt==-273, NA,dpt), wd, ws)
+RH = aiRthermo::dewpointdepression2rh(output$pressure*100, output$temp+273.15, output$temp-output$dpt, consts = export_constants())
+SH = aiRthermo::rh2shum(output$pressure*100, output$temp+273.15, RH, consts = export_constants())
+E = aiRthermo::q2e(output$pressure*100, SH, consts = export_constants())
+W = aiRthermo::e2w(E, output$pressure*100, consts = export_constants())
+TLCL = aiRthermo::boltonTLCL(output$temp+273.15, RH, consts = export_constants())
+THETAE = aiRthermo::equivalentPotentialTemperature(output$pressure*100, output$temp+273.15, W, TLCL, consts = export_constants())
 
 ####
+
 skewt_plot()
-skewt_lines(output$dpt, output$pressure, col = t_col('forestgreen',10), lwd = 2, ptop = 100)
+skewt_lines(output2$dpt,output2$pressure, col = t_col('forestgreen',10), lwd = 2, ptop = 100)
 skewt_lines(output$temp,output$pressure, col = t_col('red',10), lwd = 2, ptop = 100)
 skewt_lines(output$tempV,output$pressure, col = t_col("red3",0), lwd = 1, lty = 3, ptop = 100)
 
@@ -81,7 +84,7 @@ LP <- max(which(!is.na(names(parametry))))
 
 ###
 
-if(hazards==T){
+if(hazards){
   rect(10.75,37.5,26.1,44,col=rgb(255,255,255, maxColorValue = 255, alpha = 200),lwd=0.2)
   text(11.5,43.25, "Possible storm hazards:",col="black",cex=0.65, adj=c(0,1))
   
@@ -96,7 +99,7 @@ if(hazards==T){
       parametry[which(names(parametry[1:LP]) == "MW_13km")]>15 | 
       parametry[which(names(parametry[1:LP]) == "SCP_new")]>1) & 
      parametry[which(names(parametry[1:LP]) == "MU_CAPE")]>150){
-    WIND=1
+    WIND = 1
   }
   
   if((parametry[which(names(parametry[1:LP]) == "DCAPE")]>1100 |
@@ -105,25 +108,25 @@ if(hazards==T){
       parametry[which(names(parametry[1:LP]) == "MW_13km")]>25 |
       parametry[which(names(parametry[1:LP]) == "SCP_new")]>10) & 
      parametry[which(names(parametry[1:LP]) == "MU_CAPE")]>150){
-    WIND=2
+    WIND = 2
   }
   
-  if(is.na(WIND)){WIND=0}
+  if(is.na(WIND)){WIND = 0}
   if(WIND==1){text(11.5,41.75, "- 25m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
   if(WIND==2){text(11.5,41.75, "- 32m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
   
   ###
   if(parametry[which(names(parametry[1:LP]) == "SHIP")]>0.5 |
      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>450){
-    HAIL=1
+    HAIL = 1
   }
   
   if(parametry[which(names(parametry[1:LP]) == "SHIP")]>1 |
      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>1000){
-    HAIL=2
+    HAIL = 2
   }
   
-  if(is.na(HAIL)){HAIL=0}
+  if(is.na(HAIL)){HAIL = 0}
   if(HAIL==1){text(11.5,40.25, "- 2cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
   if(HAIL==2){text(11.5,40.25, "- 5cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
   
@@ -131,12 +134,12 @@ if(hazards==T){
   if(parametry[which(names(parametry[1:LP]) == "STP")]>0.3 |
      parametry[which(names(parametry[1:LP]) == "STP_new")]>0.3 |
      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>1000){
-    TORN=1
+    TORN = 1
   }
   
   if(parametry[which(names(parametry[1:LP]) == "STP")]>0.75 |
      parametry[which(names(parametry[1:LP]) == "STP_new")]>0.75){
-    TORN=2
+    TORN = 2
   }
   
   if(is.na(TORN)){TORN=0}
@@ -214,6 +217,8 @@ if(parcel=="SB"){
 }
 
 ###
+u <- subset(u, v < 44)
+v <- subset(v, v < 44)
 polygon(u, v, col = "#FFA50025", border = NA)
 
 ###
@@ -225,31 +230,34 @@ altitude_to_pressure = function(altitude){
 if(parcel=="SB"){
   if(parametry[which(names(parametry[1:LP]) == "SB_CAPE")] > 0){
     #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-    text(x_el, y_el, paste0("---- SB EL"), pos = 4, cex = 0.62, col = "black")
-    text(x_lcl, y_lcl, paste0("---- SB LCL"), pos = 4, cex = 0.62, col = "black")}
+  if(output$pressure[which(output$altitude-output$altitude[1] == (parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")]))] > 100 & which(names(parametry[1:LP]) == "SB_EL_HGT")!=0){
+    text(x_el, y_el, paste0("---- SB EL"), pos = 4, cex = 0.62, col = "black") }
+    text(x_lcl, y_lcl, paste0("---- SB LCL"), pos = 4, cex = 0.62, col = "black") }
 }
 
 if(parcel=="MU"){
   if(parametry[which(names(parametry[1:LP]) == "MU_CAPE")] > 0){
     #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-    text(x_el, y_el, paste0("---- MU EL"), pos = 4, cex = 0.62, col = "black")
-    text(x_lcl, y_lcl, paste0("---- MU LCL"), pos = 4, cex = 0.62, col = "black")}
+    if(output$pressure[which(output$altitude-output$altitude[1] == (parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")]))] > 100 & which(names(parametry[1:LP]) == "MU_EL_HGT")!=0){
+      text(x_el, y_el, paste0("---- MU EL"), pos = 4, cex = 0.62, col = "black") }
+    text(x_lcl, y_lcl, paste0("---- MU LCL"), pos = 4, cex = 0.62, col = "black") }
 }
 
 if(parcel=="ML"){
   if(parametry[which(names(parametry[1:LP]) == "ML_CAPE")] > 0){
     #text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-    text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black")
+    if(output$pressure[which(output$altitude-output$altitude[1] == (parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")]))] > 100 & which(names(parametry[1:LP]) == "ML_EL_HGT")!=0){
+      text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black") }
     text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")}
 }
 
 ###
 text(-29, altitude_to_pressure(0), paste0("--- Sfc (",output$altitude[1]," m) ---"), pos=4, cex = 0.65, col = "black")
-text(-29, altitude_to_pressure(1000), paste0("--- 1 km"), pos=4, cex = 0.65, col = "black")
-text(-29, altitude_to_pressure(2000), paste0("--- 2 km"), pos=4, cex = 0.65, col = "black")
-text(-29, altitude_to_pressure(3000), paste0("--- 3 km"), pos=4, cex = 0.65, col = "black")
-text(-29, altitude_to_pressure(4000), paste0("--- 4 km"), pos=4, cex = 0.65, col = "black")
-text(-29, altitude_to_pressure(5000), paste0("--- 5 km"), pos=4, cex = 0.65, col = "black")
+if(max(output$altitude-output$altitude[1]) > 1000){if(output$pressure[output$altitude-output$altitude[1]==1000] > 100){text(-29, altitude_to_pressure(1000), paste0("--- 1 km"), pos=4, cex = 0.65, col = "black")}}
+if(max(output$altitude-output$altitude[1]) > 2000){if(output$pressure[output$altitude-output$altitude[1]==2000] > 100){text(-29, altitude_to_pressure(2000), paste0("--- 2 km"), pos=4, cex = 0.65, col = "black")}}
+if(max(output$altitude-output$altitude[1]) > 3000){if(output$pressure[output$altitude-output$altitude[1]==3000] > 100){text(-29, altitude_to_pressure(3000), paste0("--- 3 km"), pos=4, cex = 0.65, col = "black")}}
+if(max(output$altitude-output$altitude[1]) > 4000){if(output$pressure[output$altitude-output$altitude[1]==4000] > 100){text(-29, altitude_to_pressure(4000), paste0("--- 4 km"), pos=4, cex = 0.65, col = "black")}}
+if(max(output$altitude-output$altitude[1]) > 5000){if(output$pressure[output$altitude-output$altitude[1]==5000] > 100){text(-29, altitude_to_pressure(5000), paste0("--- 5 km"), pos=4, cex = 0.65, col = "black")}}
 if(max(output$altitude-output$altitude[1]) > 6000){if(output$pressure[output$altitude-output$altitude[1]==6000] > 100){text(-29, altitude_to_pressure(6000), paste0("--- 6 km"), pos=4, cex = 0.65, col = "black")}}
 if(max(output$altitude-output$altitude[1]) > 7000){if(output$pressure[output$altitude-output$altitude[1]==7000] > 100){text(-29, altitude_to_pressure(7000), paste0("--- 7 km"), pos=4, cex = 0.65, col = "black")}}
 if(max(output$altitude-output$altitude[1]) > 8000){if(output$pressure[output$altitude-output$altitude[1]==8000] > 100){text(-29, altitude_to_pressure(8000), paste0("--- 8 km"), pos=4, cex = 0.65, col = "black")}}
@@ -484,7 +492,8 @@ text(0.965,-0.7, sprintf("%.1f",(round(parametry[which(names(parametry[1:LP]) ==
 ###
 par(fig=c(0.54, 0.99, 0, 0.06), new = TRUE, mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
 mtext(expression(paste(bold("thundeR")," - rawindsonde processing tool for R v1.0 (2021)")),
-      line = -1.5, cex=0.7)
+      line = -1.2, cex=0.7)
+mtext("www.rawinsonde.com",line = -1.8, cex=0.7)
 
 ####
 
@@ -518,7 +527,7 @@ par(fig = c(0.69, 0.99, 0.49, 0.9175), new = TRUE,
     mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
 v = round(-output$ws * 0.514444 * cos(output$wd * pi/180), 2)
 u = round(-output$ws * 0.514444 * sin(output$wd * pi/180), 2)
-hodograph(u, v, output$altitude-output$altitude[1], max_speed = max_speed, frame = FALSE, ...)
+sounding_hodograph(u, v, output$altitude-output$altitude[1], max_speed = max_speed, frame = FALSE, ...)
 
 RM_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)
 RM_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * sin(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))

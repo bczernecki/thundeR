@@ -4,8 +4,7 @@
 \name{sounding_wien}
 \alias{sounding_wien}
 \title{Examplary sounding dataset - sample from Vienna rawinsonde station (2011/08/23, 1200 UTC)}
-\format{
-A data frame with 87 rows and 11 variables:
+\format{A data frame with 87 rows and 11 variables:
 \describe{
   \item{PRES}{Air pressure in hPa}
   \item{HGHT}{Height in metres}
@@ -18,8 +17,7 @@ A data frame with 87 rows and 11 variables:
   \item{THTA}{K}
   \item{THTE}{K}
   \item{THTV}{K}
-}
-}
+}}
 \source{
 http://weather.uwyo.edu/upperair/sounding.html
 }

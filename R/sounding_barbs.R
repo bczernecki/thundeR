@@ -24,7 +24,9 @@
 #' # load examplary dataset:
 #' data("sounding_wien")
 #' attach(sounding_wien)
-#' sounding_barbs(pres = PRES, ws = SKNT, wd = DRCT, altitude = HGHT, convert = TRUE)
+#' 
+#' sounding_barbs(pres = PRES, ws = SKNT, wd = DRCT, altitude = HGHT, 
+#'                convert = TRUE, interpolate = FALSE)
 #'
 
 sounding_barbs <- function(pres, ws, wd, altitude, convert = FALSE,

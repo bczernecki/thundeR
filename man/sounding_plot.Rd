@@ -46,6 +46,8 @@ sounding_plot(
 
 \item{max_speed}{max speed for defining hodograph limits}
 
+\item{hazards}{logical. Whether to add extra information about possibility of severe weather risk}
+
 \item{...}{extra graphic arguments}
 }
 \description{

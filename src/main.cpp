@@ -449,7 +449,7 @@ void setPressureIndex(int parrayI, int index, Cache *C){
 }
 //--------------------------------------------------------------------------------
 std::ostream& operator<< (std::ostream &wyjscie, const Cache &s){
-  wyjscie <<"ZAWARTOŚĆ CACHE:\nPOZIOMY CISNIENIA"<<endl;
+  wyjscie <<"ZAWARTOSC CACHE:\nPOZIOMY CISNIENIA"<<endl;
   for(int i=0;i<10;i++){
     wyjscie<< s.p[i]<<"\t";
   }wyjscie<<endl;
@@ -701,7 +701,10 @@ void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, d
     n1 += 1;
     
   }
-  
+  }
+	
+  if((fmod(abs(h-h0),200.0)==0.0)||(h==h0)){
+	
   if (h-h0<=2000){
     mean02+=v_;
     n2+=1;
@@ -712,12 +715,14 @@ void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, d
     n13+=1;
     
   }
+	  
+	  
   if (h - h0 <= 6000)
   {
     mean06 += v_;
     n6 += 1;
 	
-	if(h-h0>=5500){
+	if(h-h0>=5400){
 		mean6+=v_;
 		nsix+=1;
 	}
@@ -1409,7 +1414,7 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
   }
   
   
-  if((abs(h - h0) <= 5000)&&(abs(h - h0) >= 3000)&&(fmod(abs(h-h0),100.0)==0.0)){
+  if((abs(h - h0) <= 5000)&&(abs(h - h0) >= 3000)&&(fmod(abs(h-h0),200.0)==0.0)){
 	downmr+=W(d,p);
 	downmrn+=1;
 	downo+=O(t,p);
@@ -1419,7 +1424,7 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
 	thetn+=1;
   }
   
-  if(t>=-20.0&&t<=0.0&&(fmod(abs(h-h0),100.0)==0.0)){
+  if(t>=-20.0&&t<=0.0){
 	mthet+=OE(t,d,p);
 	mthetn+=1;
   }
@@ -1570,28 +1575,25 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
     putPWATER(i, p, h, t, d, a, v);
     putLowLapseRates(i, p, h, t, d, a, v);
     putZeroPos(i, p, h, t, d, a, v, wbt);
-	  if((fmod(abs(h-h0),100.0)==0.0)||h==h0){
+	  if((fmod(abs(h-h0),200.0)==0.0)||h==h0){
 		if (abs(h - h0) <= 2000){
 			meanhum2+=ESAT(d)/ESAT(t);
 			meand2b+=1;
 			meanmxr2+=W(d, p);
 			meand2+=1;
 			}
-
+		   	 
+                if (abs(h - h0) >= 2000 && abs(h - h0) <= 5000){
+	                meanhum25+=ESAT(d)/ESAT(t);
+	                meand25+=1.0;
+                }
+	  }
 
 		if (t<=0&&t>=-20){
 			meanhumMIDDLE+=ESAT(d)/ESAT(t);
 			meandMIDDLE+=1;
 			}
-
-	 
-                if (abs(h - h0) >= 2000 && abs(h - h0) <= 5000){
-	                meanhum25+=ESAT(d)/ESAT(t);
-	                meand25+=1.0;
-                }
 	
-		
-	  }
   }
   if (abs(h - h0) <= 1000 && mr1000<mr) mr1000 = mr;
   
@@ -3222,7 +3224,7 @@ void listToArray(list<double> list, double * arr, int len){
 
 int interpolate(double **pu, double **hu, double **tu, double **du, double **au, double **vu, int n, double *p_arr=0, double *h_arr=0, int m=0, int o=0){
     double defp[]={850,700,500}; int plen = 3;
-    double defh[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000, 5250, 5500, 5750, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 57;
+    double defh[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3600, 3800, 4000, 4200, 4400, 4600, 4800, 5000, 5200, 5400, 5600, 5800, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 60;
     
     double * p = *pu;
     double * h = *hu;
@@ -3334,7 +3336,7 @@ int interpolate(double **pu, double **hu, double **tu, double **du, double **au,
 }
 int interpolate2(double **pu, double **hu, double **tu, double **du, double **au, double **vu, int n, double *p_arr=0, double *h_arr=0, int m=0, int o=0){
     double defp[]={850,700,500}; int plen = 3;
-    double defh[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3250, 3500, 3750, 4000, 4250, 4500, 4750, 5000, 5250, 5500, 5750, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 57;
+    double defh[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3600, 3800, 4000, 4200, 4400, 4600, 4800, 5000, 5200, 5400, 5600, 5800, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 60;
   
     double * p = *pu;
     double * h = *hu;

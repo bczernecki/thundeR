@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot empty Skew-T diagram — sounding_plot • sounding</title>
+<title>Plot Skew-T, hodograph and convective indices on a single layout — sounding_plot • thunder</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -39,9 +46,10 @@
 
 
 
-<meta property="og:title" content="Plot empty Skew-T diagram — sounding_plot" />
-<meta property="og:description" content="Function for plotting a customized version of the Skew-T diagram. Please note that drawing Skew-T may require increasing size or modifying 
-aspect ratio of plotting window in order to provide readable results." />
+<meta property="og:title" content="Plot Skew-T, hodograph and convective indices on a single layout — sounding_plot" />
+<meta property="og:description" content="Function to plot a composite of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
+on a single layout" />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -72,8 +80,8 @@ aspect ratio of plotting window in order to provide readable results." />
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">sounding</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4101</span>
+        <a class="navbar-link" href="../index.html">thunder</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1101</span>
       </span>
     </div>
 
@@ -81,18 +89,30 @@ aspect ratio of plotting window in order to provide readable results." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/getstarted.html">Introduction to the thundeR package</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bczernecki/sounding/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/bczernecki/thunder/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -109,25 +129,30 @@ aspect ratio of plotting window in order to provide readable results." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot empty Skew-T diagram</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bczernecki/sounding/blob/master/R/sounding_plot.R'><code>R/sounding_plot.R</code></a></small>
+    <h1>Plot Skew-T, hodograph and convective indices on a single layout</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/sounding_plot.R'><code>R/sounding_plot.R</code></a></small>
     <div class="hidden name"><code>sounding_plot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function for plotting a customized version of the Skew-T diagram. Please note that drawing Skew-T may require increasing size or modifying 
-aspect ratio of plotting window in order to provide readable results.</p>
+    <p>Function to plot a composite of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
+on a single layout</p>
     </div>
 
     <pre class="usage"><span class='fu'>sounding_plot</span><span class='op'>(</span>
+  <span class='va'>pressure</span>,
+  <span class='va'>altitude</span>,
+  <span class='va'>temp</span>,
+  <span class='va'>dpt</span>,
+  <span class='va'>wd</span>,
+  <span class='va'>ws</span>,
+  convert <span class='op'>=</span> <span class='cn'>FALSE</span>,
   ptop <span class='op'>=</span> <span class='fl'>100</span>,
-  isoterms_col <span class='op'>=</span> <span class='st'>"#d8be9b"</span>,
-  temp_stripes <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  mixing_ratio_col <span class='op'>=</span> <span class='st'>"#8470FF90"</span>,
-  dry_adiabats_col <span class='op'>=</span> <span class='st'>"#d6878750"</span>,
-  moist_adiabats_col <span class='op'>=</span> <span class='st'>"#00FF0095"</span>,
-  deg45 <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  isotherm0 <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  interpolate <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  title <span class='op'>=</span> <span class='st'>""</span>,
+  parcel <span class='op'>=</span> <span class='st'>"MU"</span>,
+  max_speed <span class='op'>=</span> <span class='fl'>25</span>,
+  hazards <span class='op'>=</span> <span class='cn'>FALSE</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -135,71 +160,83 @@ aspect ratio of plotting window in order to provide readable results.</p>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>pressure</th>
+      <td><p>- air pressure (hPa)</p></td>
+    </tr>
+    <tr>
+      <th>altitude</th>
+      <td><p>- in metres</p></td>
+    </tr>
+    <tr>
+      <th>temp</th>
+      <td><p>- air temperature (degree Celsius)</p></td>
+    </tr>
+    <tr>
+      <th>dpt</th>
+      <td><p>- dew point temperature (degree Celsius)</p></td>
+    </tr>
+    <tr>
+      <th>wd</th>
+      <td><p>- wind direction in degrees (0-360)</p></td>
+    </tr>
+    <tr>
+      <th>ws</th>
+      <td><p>- wind speed in m/s</p></td>
+    </tr>
+    <tr>
+      <th>convert</th>
+      <td><p>logical. Whether to convert wind speed from knots to m/s (default FALSE)</p></td>
+    </tr>
+    <tr>
       <th>ptop</th>
-      <td><p>Pressure top level to be used for plotting diagram. Valid options: 200, 150, 100 (default) and 50 hPa</p></td>
+      <td><p>Pressure top level to be used for plotting wind speed. Valid options should be &lt; 200 hPa (100 by default)</p></td>
     </tr>
     <tr>
-      <th>isoterms_col</th>
-      <td><p>color to be used for drawing dry isoterms</p></td>
+      <th>interpolate</th>
+      <td><p>logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset</p></td>
     </tr>
     <tr>
-      <th>temp_stripes</th>
-      <td><p>logical, whether to draw color stripes for isotherms</p></td>
+      <th>title</th>
+      <td><p>title to be added in the layout's header</p></td>
     </tr>
     <tr>
-      <th>mixing_ratio_col</th>
-      <td><p>color to be used for drawing mixing ratio isolines and labels. If set to NA or empty string isolines are not drawn</p></td>
+      <th>parcel</th>
+      <td><p>tracing for "MU", "ML" or "SB" parcel</p></td>
     </tr>
     <tr>
-      <th>dry_adiabats_col</th>
-      <td><p>color to be used for drawing dry adiabats. If set to NA or not provided drawing lines skipped</p></td>
+      <th>max_speed</th>
+      <td><p>max speed for defining hodograph limits</p></td>
     </tr>
     <tr>
-      <th>moist_adiabats_col</th>
-      <td><p>color to be used for drawing moist adiabats. If set to NA or not provided drawing lines skipped</p></td>
-    </tr>
-    <tr>
-      <th>deg45</th>
-      <td><p>whether to preserve 45 degrees for diagonal isolines on Skew-T diagram regardless ploting window aspect ratio. [Logical, default: FALSE]</p></td>
-    </tr>
-    <tr>
-      <th>isotherm0</th>
-      <td><p>whether to deliminate 0 degree Celsius isother[Logical, default: TRUE]</p></td>
+      <th>hazards</th>
+      <td><p>logical. Whether to add extra information about possibility of severe weather risk</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>additional (mostly graphical) parameters to be passed</p></td>
+      <td><p>extra graphic arguments</p></td>
     </tr>
     </table>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>sounding_plot</span><span class='op'>(</span>ptop <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
-</div><div class='img'><img src='sounding_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>sounding_plot</span><span class='op'>(</span>ptop <span class='op'>=</span> <span class='fl'>150</span>, temp_stripes <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span> <span class='co'># na color stripes for temperature</span>
-</div><div class='img'><img src='sounding_plot-2.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'>sounding_plot</span><span class='op'>(</span>ptop <span class='op'>=</span> <span class='fl'>100</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span><span class='op'>(</span><span class='st'>"Your title"</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/mtext.html'>mtext</a></span><span class='op'>(</span><span class='st'>'WMO ID: 11035, 2011-08-23 1200 UTC'</span>, padj <span class='op'>=</span> <span class='op'>-</span><span class='fl'>0.5</span>, col <span class='op'>=</span> <span class='st'>"white"</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"sounding_wien"</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"sounding_wien"</span><span class='op'>)</span>
+<span class='va'>sounding_wien</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/na.fail.html'>na.omit</a></span><span class='op'>(</span><span class='va'>sounding_wien</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/attach.html'>attach</a></span><span class='op'>(</span><span class='va'>sounding_wien</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 3):</span>
+</div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 3):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 4):</span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 4):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 5):</span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 5):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 6):</span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 6):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='input'><span class='co'># dataset obtained from Wyoming University's sounding webpage:</span>
-<span class='co'># climate::sounding_wyoming(wmo_id = 11035, yy = 2011, mm = 8, dd = 23, hh=12)[[1]]</span>
-
-<span class='va'>output</span> <span class='op'>&lt;-</span> <span class='fu'><a href='parcel_helpers.html'>parcel_helpers</a></span><span class='op'>(</span><span class='va'>PRES</span>, <span class='va'>HGHT</span>, <span class='va'>TEMP</span>, <span class='va'>DWPT</span>, <span class='va'>DRCT</span>, <span class='va'>SKNT</span><span class='op'>)</span>
-<span class='fu'><a href='skewt_lines.html'>skewt_lines</a></span><span class='op'>(</span><span class='va'>output</span><span class='op'>$</span><span class='va'>dpt</span>, <span class='va'>output</span><span class='op'>$</span><span class='va'>pressure</span>,type<span class='op'>=</span><span class='st'>'l'</span>,col<span class='op'>=</span><span class='st'>'forestgreen'</span>,lwd <span class='op'>=</span> <span class='fl'>2.5</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'><a href='skewt_lines.html'>skewt_lines</a></span><span class='op'>(</span><span class='va'>output</span><span class='op'>$</span><span class='va'>temp</span>,<span class='va'>output</span><span class='op'>$</span><span class='va'>pressure</span>,type<span class='op'>=</span><span class='st'>'l'</span>,col<span class='op'>=</span><span class='st'>'red'</span>, lwd <span class='op'>=</span> <span class='fl'>2.5</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'><a href='skewt_lines.html'>skewt_lines</a></span><span class='op'>(</span><span class='va'>output</span><span class='op'>$</span><span class='va'>MU</span>,<span class='va'>output</span><span class='op'>$</span><span class='va'>pressure</span>, col <span class='op'>=</span> <span class='st'>"orange"</span>, lty <span class='op'>=</span> <span class='fl'>1</span>, lwd <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'><a href='skewt_lines.html'>skewt_lines</a></span><span class='op'>(</span><span class='va'>output</span><span class='op'>$</span><span class='va'>tempV</span>,<span class='va'>output</span><span class='op'>$</span><span class='va'>pressure</span>, col <span class='op'>=</span> <span class='st'>"red3"</span>, lty <span class='op'>=</span> <span class='fl'>3</span>, lwd <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span>
-</div><div class='img'><img src='sounding_plot-3.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 7):</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='input'><span class='fu'>sounding_plot</span><span class='op'>(</span><span class='va'>PRES</span>, <span class='va'>HGHT</span>, <span class='va'>TEMP</span>, <span class='va'>DWPT</span>, <span class='va'>DRCT</span>, <span class='va'>SKNT</span>, 
+              parcel <span class='op'>=</span> <span class='st'>"MU"</span>, title <span class='op'>=</span> <span class='st'>"Wien - 2011/08/23, 12:00 UTC"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Your display device is 6.66666666666667 x 6.66666666666667 in. </span>
+#&gt; <span class='message'>It is recommended to use at least 10 x 7.5 in. plotting window </span>
+#&gt; <span class='message'>or consider saving the layout into file</span></div><div class='img'><img src='sounding_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -212,7 +249,7 @@ aspect ratio of plotting window in order to provide readable results.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek, Jakub Nowosad.</p>
+  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek.</p>
 </div>
 
 <div class="pkgdown">

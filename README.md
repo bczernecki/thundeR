@@ -1,19 +1,16 @@
-thunder - R Package to compute convective indices from rawindsonde data <img src="man/figures/logo.png" align="right" width="150" />
+# thundeR
 
-====================
+###### Rapid processing and visualisation of convective parameters from rawinsonde and NWP data <img src="man/figures/logo.png" align="right" width="200" />
 
 <!-- badges: start --> 
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
 [![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/devel/graph/badge.svg?token=JGZPB7RUFI)](https://codecov.io/gh/bczernecki/thunder)
-
-<!-- badges: end -->
-To be changed when CRAN comes...
 [![CRAN status](https://www.r-pkg.org/badges/version/climate)](https://cran.r-project.org/package=climate)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
+<!-- badges: end -->
 
-`thunder` is a freeware R package for performing analyses of servere weather-related atmospheric convective indices based on rawin sonde profiles.
+**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large numerical datasets such as reanalyses or operational NWP models in a fairly low amount of time. This package was developed by research meteorologists specializing in severe convective storms and is constantly updated with new features. Its main purpose is to allow operational meteorologists and researchers a quick and easy evaluation of convective environments.
 
-The main core of the algorithm used is a highly optimized version of C++ code dedicated for calculating sounding derived indices related with atmospheric convections.
 
 ## Installation
 ------------
@@ -129,6 +126,15 @@ v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
 # finally plot the hodograph:
 hodograph(u, v, HGHT, max_speed = 30, max_hght = 10000); box(); title("Some title here")
 ```
+
+Development team
+-------------
+
+**thundeR** package has been developed by a team of 3 atmospheric scientists - each having an equal contribution (listed in alphabetical order):
+- Bartosz Czernecki (Adam Mickiewicz University in Poznań, Poland)
+- Piotr Szuster (Cracow University of Technology, Poland)
+- Mateusz Taszarek (NOAA NSSL/CIMMS in Norman, United States)
+
 
 Contributions
 -------------

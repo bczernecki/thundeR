@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot vertical wind speed profile — sounding_wind • sounding</title>
+<title>Plot vertical wind speed profile — sounding_wind • thunder</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -42,6 +49,7 @@
 <meta property="og:title" content="Plot vertical wind speed profile — sounding_wind" />
 <meta property="og:description" content="Function for plotting wind speed profile. 
 TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T diagram." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -72,8 +80,8 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">sounding</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4101</span>
+        <a class="navbar-link" href="../index.html">thunder</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1101</span>
       </span>
     </div>
 
@@ -81,18 +89,30 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/getstarted.html">Introduction to the thundeR package</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bczernecki/sounding/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/bczernecki/thunder/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -110,7 +130,7 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot vertical wind speed profile</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bczernecki/sounding/blob/master/R/sounding_wind.R'><code>R/sounding_wind.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/sounding_wind.R'><code>R/sounding_wind.R</code></a></small>
     <div class="hidden name"><code>sounding_wind.Rd</code></div>
     </div>
 
@@ -119,7 +139,7 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
 TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sounding_wind</span><span class='op'>(</span><span class='va'>pres</span>, <span class='va'>ws</span>, ptop <span class='op'>=</span> <span class='fl'>100</span>, convert <span class='op'>=</span> <span class='cn'>FALSE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>sounding_wind</span><span class='op'>(</span><span class='va'>pres</span>, <span class='va'>ws</span>, ptop <span class='op'>=</span> <span class='fl'>100</span>, convert <span class='op'>=</span> <span class='cn'>FALSE</span>, yaxs <span class='op'>=</span> <span class='cn'>TRUE</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -141,6 +161,10 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
       <td><p>logical. Whether to convert wind speed from knots to m/s (default FALSE)</p></td>
     </tr>
     <tr>
+      <th>yaxs</th>
+      <td><p>logic. Whether to add labels to heights on Y lab</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>extra graphic arguments</p></td>
     </tr>
@@ -151,77 +175,22 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
     <pre class="examples"><div class='input'><span class='co'># load examplary dataset:</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"sounding_wien"</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/attach.html'>attach</a></span><span class='op'>(</span><span class='va'>sounding_wien</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 3):</span>
+</div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 3):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 4):</span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 4):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 5):</span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 5):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 6):</span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 6):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 7):</span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 7):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='input'><span class='fu'>sounding_wind</span><span class='op'>(</span>pres <span class='op'>=</span> <span class='va'>PRES</span>, ws <span class='op'>=</span> <span class='va'>SKNT</span>, convert <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;  chr [1:15] "white" "#c7ebfd" "#5689bc" "#62448e" "#007122" "#00ae00" ...</div><div class='output co'>#&gt; <span class='message'>Joining, by = "x1"</span></div><div class='img'><img src='sounding_wind-1.png' alt='' width='700' height='433' /></div><div class='output co'>#&gt; [1] 1
-#&gt; [1] 2
-#&gt; [1] 3
-#&gt; [1] 4
-#&gt; [1] 5
-#&gt; [1] 6
-#&gt; [1] 7
-#&gt; [1] 8
-#&gt; [1] 9
-#&gt; [1] 10
-#&gt; [1] 11
-#&gt; [1] 12
-#&gt; [1] 13
-#&gt; [1] 14
-#&gt; [1] 15
-#&gt; [1] 16
-#&gt; [1] 17
-#&gt; [1] 18
-#&gt; [1] 19
-#&gt; [1] 20
-#&gt; [1] 21
-#&gt; [1] 22
-#&gt; [1] 23
-#&gt; [1] 24
-#&gt; [1] 25
-#&gt; [1] 26
-#&gt; [1] 27
-#&gt; [1] 28
-#&gt; [1] 29
-#&gt; [1] 30
-#&gt; [1] 31
-#&gt; [1] 32
-#&gt; [1] 33
-#&gt; [1] 34
-#&gt; [1] 35
-#&gt; [1] 36
-#&gt; [1] 37
-#&gt; [1] 38
-#&gt; [1] 39
-#&gt; [1] 40
-#&gt; [1] 41
-#&gt; [1] 42
-#&gt; [1] 43
-#&gt; [1] 44
-#&gt; [1] 45
-#&gt; [1] 46
-#&gt; [1] 47
-#&gt; [1] 48
-#&gt; [1] 49
-#&gt; [1] 50
-#&gt; [1] 51
-#&gt; [1] 52
-#&gt; [1] 53
-#&gt; [1] 54
-#&gt; [1] 55
-#&gt; [1] 56
-#&gt; [1] 57
-#&gt; [1] 58
-#&gt; [1] 59
-#&gt; [1] 60</div></pre>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 8):</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_wien (pos = 9):</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='input'><span class='fu'>sounding_wind</span><span class='op'>(</span>pres <span class='op'>=</span> <span class='va'>PRES</span>, ws <span class='op'>=</span> <span class='va'>SKNT</span>, convert <span class='op'>=</span> <span class='cn'>TRUE</span>, yaxs <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;  chr [1:15] "white" "#c7ebfd" "#5689bc" "#62448e" "#007122" "#00ae00" ...</div><div class='output co'>#&gt; <span class='message'>Joining, by = "x1"</span></div><div class='img'><img src='sounding_wind-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -233,7 +202,7 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
 
       <footer>
       <div class="copyright">
-  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek, Jakub Nowosad.</p>
+  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek.</p>
 </div>
 
 <div class="pkgdown">

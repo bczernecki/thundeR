@@ -1,4 +1,4 @@
-#' parcel_helpers
+#' Sounding export
 #' 
 #' Internal function to be used for re-calculate parcel trajectories that can be analysed or drawn
 #' on Skew-T diagrams
@@ -18,13 +18,13 @@
 #' data("sounding_wien")
 #' attach(sounding_wien)
 #' skewt_plot()
-#' output <- parcel_helpers(PRES, HGHT, TEMP, DWPT, DRCT, SKNT)
+#' output <- sounding_export(PRES, HGHT, TEMP, DWPT, DRCT, SKNT)
 #' skewt_lines(output$dpt, output$pressure, col = 'forestgreen',lwd = 2.5)
 #' skewt_lines(output$temp,output$pressure, col = 'red', lwd = 2.5)
 #' skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)
 #' skewt_lines(output$tempV,output$pressure, col = "red3", lty = 3, lwd = 1.5)
 
-parcel_helpers = function(pressure, altitude, temp, dpt, wd, ws){
+sounding_export = function(pressure, altitude, temp, dpt, wd, ws){
 
   parametry = sounding_compute(pressure = pressure, altitude = altitude, 
                                temp = temp, dpt = dpt, wd = wd, ws = ws, 

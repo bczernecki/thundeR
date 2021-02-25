@@ -6,8 +6,16 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling. — sounding_default • sounding</title>
+<title>Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
+Further details given in the sounding_compute() function — sounding_default • thunder</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -39,8 +47,11 @@
 
 
 
-<meta property="og:title" content="Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling. — sounding_default" />
-<meta property="og:description" content="Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling." />
+<meta property="og:title" content="Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
+Further details given in the sounding_compute() function — sounding_default" />
+<meta property="og:description" content="Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
+Further details given in the sounding_compute() function" />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -71,8 +82,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">sounding</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4101</span>
+        <a class="navbar-link" href="../index.html">thunder</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1101</span>
       </span>
     </div>
 
@@ -80,18 +91,30 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/getstarted.html">Introduction to the thundeR package</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bczernecki/sounding/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/bczernecki/thunder/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -108,13 +131,15 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bczernecki/sounding/blob/master/R/RcppExports.R'><code>R/RcppExports.R</code></a></small>
+    <h1>Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
+Further details given in the sounding_compute() function</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/RcppExports.R'><code>R/RcppExports.R</code></a></small>
     <div class="hidden name"><code>sounding_default.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.</p>
+    <p>Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
+Further details given in the sounding_compute() function</p>
     </div>
 
     <pre class="usage"><span class='fu'>sounding_default</span><span class='op'>(</span>
@@ -159,6 +184,10 @@
       <th>export_profile</th>
       <td><p>runtime parameters</p></td>
     </tr>
+    <tr>
+      <th>accuracy</th>
+      <td><p>accuracy of methods used for interpolating and integrating algorithms [1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate]</p></td>
+    </tr>
     </table>
 
 
@@ -169,105 +198,61 @@
 <span class='va'>dpt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>30</span>, <span class='op'>-</span><span class='fl'>55</span>, <span class='op'>-</span><span class='fl'>80</span>, <span class='op'>-</span><span class='fl'>99</span><span class='op'>)</span>
 <span class='va'>wd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>90</span>, <span class='fl'>135</span>, <span class='fl'>180</span>, <span class='fl'>270</span>, <span class='fl'>350</span>, <span class='fl'>0</span><span class='op'>)</span>
 <span class='va'>ws</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>30</span>, <span class='fl'>40</span>, <span class='fl'>5</span>, <span class='fl'>0</span><span class='op'>)</span>
-<span class='fu'><a href='sounding.html'>sounding</a></span><span class='op'>(</span><span class='va'>pressure</span>, <span class='va'>altitude</span>, <span class='va'>temp</span>, <span class='va'>dpt</span>, <span class='va'>wd</span>, <span class='va'>ws</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;                 K_Index         Showalter_Index        Showalter_IndexV 
-#&gt;              24.3548387               4.1562269               3.8973024 
-#&gt;        MostUnstableCAPE      LLMostUnstableCAPE         MostUnstableCIN 
-#&gt;            1977.9611284             490.9840622               0.0000000 
-#&gt;         MostUnstableLCL         MostUnstableLFC          MostUnstableEL 
-#&gt;             730.0000000             730.0000000            8200.0000000 
-#&gt;          MostUnstableLI        MostUnstableVmax       VMostUnstableCAPE 
-#&gt;              -8.8515856              62.8961227            2195.4080279 
-#&gt;     VLLMostUnstableCAPE        VMostUnstableCIN        VMostUnstableLCL 
-#&gt;             575.5949289               0.0000000             730.0000000 
-#&gt;        VMostUnstableLFC         VMostUnstableEL         VMostUnstableLI 
-#&gt;             730.0000000            8200.0000000              -9.6328112 
-#&gt;       VMostUnstableVmax        SurfaceBasedCAPE      LLSurfaceBasedCAPE 
-#&gt;              66.2632331            1977.9611284             490.9840622 
-#&gt;         SurfaceBasedCIN         SurfaceBasedLCL         SurfaceBasedLFC 
-#&gt;               0.0000000             730.0000000             730.0000000 
-#&gt;          SurfaceBasedEL          SurfaceBasedLI        SurfaceBasedVmax 
-#&gt;            8200.0000000              -8.8515856              62.8961227 
-#&gt;       VSurfaceBasedCAPE     VLLSurfaceBasedCAPE        VSurfaceBasedCIN 
-#&gt;            2195.4080279             575.5949289               0.0000000 
-#&gt;        VSurfaceBasedLCL        VSurfaceBasedLFC         VSurfaceBasedEL 
-#&gt;             730.0000000             730.0000000            8200.0000000 
-#&gt;         VSurfaceBasedLI       VSurfaceBasedVmax           MeanLayerCAPE 
-#&gt;              -9.6328112              66.2632331            1393.5757769 
-#&gt;         LLMeanLayerCAPE            MeanLayerCIN            MeanLayerLCL 
-#&gt;             354.8296288              -4.9154595             975.0000000 
-#&gt;            MeanLayerLFC             MeanLayerEL             MeanLayerLI 
-#&gt;             975.0000000            7800.0000000              -6.5078356 
-#&gt;           MeanLayerVmax          VMeanLayerCAPE        VLLMeanLayerCAPE 
-#&gt;              52.7934802            1559.4107863             416.8828209 
-#&gt;           VMeanLayerCIN           VMeanLayerLCL           VMeanLayerLFC 
-#&gt;               0.0000000             975.0000000             975.0000000 
-#&gt;            VMeanLayerEL            VMeanLayerLI          VMeanLayerVmax 
-#&gt;            7800.0000000              -7.1536436              55.8464106 
-#&gt;                   DCAPE                  VDCAPE             CrossTotals 
-#&gt;             592.6149299             595.1254511              19.6774194 
-#&gt;          VerticalTotals             TotalTotals              SWEATIndex 
-#&gt;              24.6774194              44.3548387             106.4167937 
-#&gt;             LapseRate01             LapseRate24                 TQIndex 
-#&gt;             -10.0000000              -5.7671958              14.3548387 
-#&gt;              ZeroHeight       WetBulbZeroHeight                MUHeight 
-#&gt;            2500.0000000            2300.0000000               0.0000000 
-#&gt;           MinTHTEHeight                    BS01                    BS02 
-#&gt;            3700.0000000               3.8344392               8.7821084 
-#&gt;                    BS03                    BS36                    BS06 
-#&gt;              12.6559681               9.3692896              18.0055400 
-#&gt;                    BS08                    BS18              MeanWind06 
-#&gt;              17.4076782              20.2790725               5.1435831 
-#&gt;              MeanWind01             LowLevelJet                CorfidiA 
-#&gt;               2.3578380               5.2184586               2.3965245 
-#&gt;                CorfidiP               CorfidiII             RightMovers 
-#&gt;               5.4417418               6.5938954               5.5349145 
-#&gt;             LeftMoovers                   SRH01                   SRH03 
-#&gt;              11.6093762              32.5664002             105.8872562 
-#&gt;                   SRH13                 SRH01RM                 SRH03RM 
-#&gt;              73.3208560              29.4658276             136.4150701 
-#&gt;                 SRH13RM                 SRH01LM                 SRH03LM 
-#&gt;             106.9492425               3.1005726             -30.5278139 
-#&gt;                 SRH13LM             DeltaThetaE        ColdPoolStrength 
-#&gt;             -33.6283865              28.4624917              11.7673291 
-#&gt; VirtualColdPoolStrength               WindIndex                  PWATER 
-#&gt;              12.7695996              34.1174499              27.1046319 
-#&gt;           MLMixingRatio         MUELTemperature        MULCLTemperature 
-#&gt;              13.0204055             -28.2000000              17.7000000 
-#&gt;                MUMRatio         p500Temperature         p700Temperature 
-#&gt;              14.8759179             -15.0000000               0.0000000 
-#&gt;         p850Temperature            p500DewPoint            p700DewPoint 
-#&gt;               9.6774194             -30.0000000              -5.0000000 
-#&gt;            p850DewPoint               p500angle               p700angle 
-#&gt;               4.6774194             180.0000000             135.0000000 
-#&gt;               p850angle                p500wind                p700wind 
-#&gt;              92.5776165              30.0000000              20.0000000 
-#&gt;                p850wind         lapseRate500700         lapseRate500800 
-#&gt;              10.1438807              -4.2857143              -6.6666667 
-#&gt;                   emubs              middlecape                  mulift 
-#&gt;              14.1396985            1568.0098722              -9.4699943 
-#&gt;              MeanWind02              MeanWind13                     STP 
-#&gt;               2.8136754               6.8834936               0.2588377 
-#&gt;                     SCP                     SHP                     DCP 
-#&gt;               5.3924205               0.6080240               0.7289751 
-#&gt;                    EHI1                    EHI3               CAPESHEAR 
-#&gt;               0.4043095               1.8717921           28078.0332884 
-#&gt;               WMAXSHEAR             lapserate03           MeanLayerLCLT 
-#&gt;            1005.5447792              -9.0476190              15.2500000 
-#&gt;           MeanLayerLFCT            MeanLayerELT              p500height 
-#&gt;              15.2500000             -25.8000000            6000.0000000 
-#&gt;              p700height              p850height                  SRH500 
-#&gt;            2500.0000000            1532.2580645              15.8860489 
-#&gt;                SRH500RM                SRH500LM                  STPeff 
-#&gt;              14.3735744               1.5124744               0.1408585 
-#&gt;                  SCPeff                    LR36         BulkShearSfcTen 
-#&gt;               4.2346522              -4.2857143              15.5103770 
-#&gt;       BulkShearMuLFCTen             AzimuthMTen          WarmCloudDepth 
-#&gt;              14.0737010             169.3833380            1770.0000000 
-#&gt;            MoistureFlux               MeanHum02                  DOLLfc 
-#&gt;              28.4880717               0.7237979            1770.0000000 
-#&gt;               MeanHum25 
-#&gt;               0.5781903 </div></pre>
+<span class='fu'><a href='sounding_compute.html'>sounding_compute</a></span><span class='op'>(</span><span class='va'>pressure</span>, <span class='va'>altitude</span>, <span class='va'>temp</span>, <span class='va'>dpt</span>, <span class='va'>wd</span>, <span class='va'>ws</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE              MU_CIN 
+#&gt;        2209.1039279         545.0890580        1531.4875729           0.0000000 
+#&gt;          MU_LCL_HGT          MU_LFC_HGT           MU_EL_HGT               MU_LI 
+#&gt;         800.0000000         800.0000000        8500.0000000         -10.0067555 
+#&gt;             MU_WMAX          MU_EL_TEMP         MU_LCL_TEMP         MU_LFC_TEMP 
+#&gt;          66.4696010         -30.0000000          17.0000000          17.0000000 
+#&gt;             MU_MIXR             SB_CAPE        SB_03km_CAPE         SB_HGL_CAPE 
+#&gt;          14.8759179        2209.1039279         545.0890580        1531.4875729 
+#&gt;              SB_CIN          SB_LCL_HGT          SB_LFC_HGT           SB_EL_HGT 
+#&gt;           0.0000000         800.0000000         800.0000000        8500.0000000 
+#&gt;               SB_LI             SB_WMAX          SB_EL_TEMP         SB_LCL_TEMP 
+#&gt;         -10.0067555          66.4696010         -30.0000000          17.0000000 
+#&gt;         SB_LFC_TEMP             SB_MIXR             ML_CAPE        ML_03km_CAPE 
+#&gt;          17.0000000          14.8759179        1547.3689201         388.7163363 
+#&gt;         ML_HGL_CAPE              ML_CIN          ML_LCL_HGT          ML_LFC_HGT 
+#&gt;        1152.6374442           0.0000000        1000.0000000        1000.0000000 
+#&gt;           ML_EL_HGT               ML_LI             ML_WMAX          ML_EL_TEMP 
+#&gt;        8000.0000000          -7.1536436          55.6303680         -27.0000000 
+#&gt;         ML_LCL_TEMP         ML_LFC_TEMP             ML_MIXR             LR_01km 
+#&gt;          15.0000000          15.0000000          13.0204055         -10.0000000 
+#&gt;             LR_03km             LR_24km             LR_36km        LR_500700hPa 
+#&gt;          -9.0476190          -6.1038961          -4.2857143          -4.2857143 
+#&gt;        LR_500800hPa            FRZG_HGT    FRZG_wetbulb_HGT HGT_max_thetae_03km 
+#&gt;          -6.6666667        2500.0000000        2200.0000000           0.0000000 
+#&gt; HGT_min_thetae_04km        Delta_thetae    Delta_thetae_HGL               DCAPE 
+#&gt;        3800.0000000          28.0009332          26.8049107         477.9336017 
+#&gt;  Cold_Pool_Strength          Wind_Index          PRCP_WATER  Moisture_Flux_02km 
+#&gt;         300.8058715          33.2667140          27.1235111          30.4254807 
+#&gt;             RH_02km             RH_25km              RH_HGL             BS_01km 
+#&gt;           0.7197069           0.5550179           0.4647647           3.8344392 
+#&gt;             BS_02km             BS_03km             BS_06km             BS_08km 
+#&gt;           8.7821084          12.6559681          18.0055400          17.4076782 
+#&gt;             BS_36km             BS_18km           BS_EFF_MU           BS_EFF_SB 
+#&gt;           9.3692896          20.2790725          14.3078945          14.3078945 
+#&gt;           BS_EFF_ML       BS_SFC_to_HGL    BS_MU_LFC_to_HGL    BS_SB_LFC_to_HGL 
+#&gt;          13.9764580          15.4117174          13.8389122          13.8389122 
+#&gt;    BS_ML_LFC_to_HGL             MW_01km             MW_02km             MW_06km 
+#&gt;          13.5260745           2.4251123           3.3476466           7.8107005 
+#&gt;             MW_13km         SRH_100m_RM         SRH_500m_RM          SRH_1km_RM 
+#&gt;           6.8388866           3.7885778          18.9428891          41.6743560 
+#&gt;          SRH_3km_RM         SRH_100m_LM         SRH_500m_LM          SRH_1km_LM 
+#&gt;         151.2076663           1.4442966           7.2214832          15.8872630 
+#&gt;          SRH_3km_LM        Bunkers_RM_A        Bunkers_RM_M        Bunkers_LM_A 
+#&gt;          -9.0592785         206.2896732           7.5798202         123.1499182 
+#&gt;        Bunkers_LM_M        Bunkers_MW_A        Bunkers_MW_M             K_Index 
+#&gt;          12.7838072         151.9494361           7.8107005          24.3548387 
+#&gt;     Showalter_Index   TotalTotals_Index         SWEAT_Index                 STP 
+#&gt;           3.4174686          44.3548387         106.4167937           0.3683653 
+#&gt;             STP_new                 SCP             SCP_new                SHIP 
+#&gt;           0.1863946           6.0144526           4.7793153           0.6118171 
+#&gt;                 DCP        MU_WMAXSHEAR        SB_WMAXSHEAR        ML_WMAXSHEAR 
+#&gt;           0.8945340        1196.8210594        1196.8210594        1001.6548156 
+#&gt;    MU_EFF_WMAXSHEAR    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR 
+#&gt;         951.0400360         951.0400360         777.5155013 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -279,7 +264,7 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek, Jakub Nowosad.</p>
+  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek.</p>
 </div>
 
 <div class="pkgdown">

@@ -19,12 +19,11 @@
 #' u = round(-SKNT * 0.514444 * sin(DRCT * pi/180), 2)
 #' v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
 #' # finally plot the hodograph:
-#' hodograph(u, v, HGHT)
+#' sounding_hodograph(u, v, HGHT)
 #' 
 
 
-hodograph = function(u, v, hght,
-                     max_hght = 16000, max_speed = 25,
+sounding_hodograph = function(u, v, hght, max_hght = 16000, max_speed = 25,
                      lab_hghts = c(0, 1, 3, 6, 9, 12), ...){
   
   # clipping to define max_hght

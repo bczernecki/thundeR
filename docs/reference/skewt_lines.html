@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Add line to a Skew-T diagram — skewt_lines • sounding</title>
+<title>Add line to a Skew-T diagram — skewt_lines • thunder</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -42,6 +49,7 @@
 <meta property="og:title" content="Add line to a Skew-T diagram — skewt_lines" />
 <meta property="og:description" content="Calculate X and Y coordinates for lines to be drawn on Skew-T diagram;
 Draw any line on Skew-T diagram using temperature and pressure as coordinates" />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -72,8 +80,8 @@ Draw any line on Skew-T diagram using temperature and pressure as coordinates" /
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">sounding</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4101</span>
+        <a class="navbar-link" href="../index.html">thunder</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1101</span>
       </span>
     </div>
 
@@ -81,18 +89,30 @@ Draw any line on Skew-T diagram using temperature and pressure as coordinates" /
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/getstarted.html">Introduction to the thundeR package</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bczernecki/sounding/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/bczernecki/thunder/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -110,7 +130,7 @@ Draw any line on Skew-T diagram using temperature and pressure as coordinates" /
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add line to a Skew-T diagram</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bczernecki/sounding/blob/master/R/skewt_lines.R'><code>R/skewt_lines.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/skewt_lines.R'><code>R/skewt_lines.R</code></a></small>
     <div class="hidden name"><code>skewt_lines.Rd</code></div>
     </div>
 
@@ -144,15 +164,13 @@ Draw any line on Skew-T diagram using temperature and pressure as coordinates</p
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='sounding_plot.html'>sounding_plot</a></span><span class='op'>(</span><span class='op'>)</span> <span class='co'># draw empty skew-t diagram</span>
-</div><div class='input'>
+    <pre class="examples"><div class='input'>
+<span class='co'># take a sample sounding profile:</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='st'>"sounding_wien"</span><span class='op'>)</span>
 <span class='kw'><a href='https://rdrr.io/r/base/attach.html'>attach</a></span><span class='op'>(</span><span class='va'>sounding_wien</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 3):</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 4):</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='input'><span class='fu'><a href='sounding_plot.html'>sounding_plot</a></span><span class='op'>(</span><span class='op'>)</span>
+
+<span class='co'># draw empty Skew-T plot:</span>
+<span class='fu'><a href='skewt_plot.html'>skewt_plot</a></span><span class='op'>(</span>temp_stripes <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
 </div><div class='input'>
 <span class='co'># draw line for dew-point temperature:</span>
 <span class='fu'>skewt_lines</span><span class='op'>(</span><span class='va'>DWPT</span>, <span class='va'>PRES</span>, type <span class='op'>=</span> <span class='st'>'l'</span>, col <span class='op'>=</span> <span class='st'>'forestgreen'</span>, lwd <span class='op'>=</span> <span class='fl'>2.5</span><span class='op'>)</span> 
@@ -171,7 +189,7 @@ Draw any line on Skew-T diagram using temperature and pressure as coordinates</p
 
       <footer>
       <div class="copyright">
-  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek, Jakub Nowosad.</p>
+  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek.</p>
 </div>
 
 <div class="pkgdown">

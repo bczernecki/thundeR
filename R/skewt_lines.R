@@ -26,8 +26,9 @@
 #' 
 
 skewt_lines = function (temp, pressure, ptop = 100, ...) {
-        ind = pressure >= ptop
-        v = skewty(pressure[ind]) # extra checks for NA coded as -99
-        u = skewtx(temp[ind], v)
-        graphics::lines(u, v,  ...)
+  ind = pressure >= ptop
+  v = skewty(pressure[ind]) # extra checks for NA coded as -99
+  u = skewtx(temp[ind], v)
+  u[u<(-27.75) | u>(26.25)] <- NA # to avoid going above plotting area (works smoothly when data every 5m is provided)
+  graphics::lines(u, v,  ...)
 }

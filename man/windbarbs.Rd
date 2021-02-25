@@ -13,10 +13,24 @@ windbarbs(cx, cy, direction, speed = NA, cex = 1)
 
 \item{direction}{wind direction (0-360 degrees)}
 
-\item{speed}{wind speed in m/s}
+\item{speed}{wind speed in knots}
 
-\item{cex}{symbole size. Default 1}
+\item{cex}{symbol size. Default 1}
 }
 \description{
-A slightly modified version of station.symbol function from the RadioSonde package.
+Drawing wind barbs. This is a modified version of station.symbol function from the RadioSonde package. 
+Currently wind barbs are supported up to 190 knots.
+}
+\examples{
+plot(1, xaxt = 'n', yaxt = 'n')
+windbarbs(cx = 1, cy = 1, direction = 90, speed = 5)
+
+# multiplot
+par(mfrow=c(5,4), mar = c(1,1,1,1))
+for (i in 21:40){
+sc = 5
+plot(0:2, xaxt = 'n', yaxt = 'n')
+text(1.4,1, i*sc, cex = 3)
+windbarbs(cx = 2, cy = 1, direction = 60, speed = i*sc, cex = 5)
+}
 }
