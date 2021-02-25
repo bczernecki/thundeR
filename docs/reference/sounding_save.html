@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot Skew-T, hodograph and convective indices on a single layout — sounding_plot • thunder</title>
+<title>Save `sounding_layout` to a graphical file — sounding_save • thunder</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,11 @@
 
 
 
-<meta property="og:title" content="Plot Skew-T, hodograph and convective indices on a single layout — sounding_plot" />
-<meta property="og:description" content="Function to plot a composite of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
-on a single layout" />
+<meta property="og:title" content="Save `sounding_layout` to a graphical file — sounding_save" />
+<meta property="og:description" content="Auxiliary function to `sounding_plot` that plots a composite \
+of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
+on a single layout and saves it into graphical file. \
+Useful if graphical window is too small." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -129,17 +131,19 @@ on a single layout" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot Skew-T, hodograph and convective indices on a single layout</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/sounding_plot.R'><code>R/sounding_plot.R</code></a></small>
-    <div class="hidden name"><code>sounding_plot.Rd</code></div>
+    <h1>Save `sounding_layout` to a graphical file</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/sounding_save.R'><code>R/sounding_save.R</code></a></small>
+    <div class="hidden name"><code>sounding_save.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Function to plot a composite of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
-on a single layout</p>
+    <p>Auxiliary function to `sounding_plot` that plots a composite \
+of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
+on a single layout and saves it into graphical file. \
+Useful if graphical window is too small.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sounding_plot</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>sounding_save</span><span class='op'>(</span>
   <span class='va'>pressure</span>,
   <span class='va'>altitude</span>,
   <span class='va'>temp</span>,
@@ -151,8 +155,7 @@ on a single layout</p>
   interpolate <span class='op'>=</span> <span class='cn'>TRUE</span>,
   title <span class='op'>=</span> <span class='st'>""</span>,
   parcel <span class='op'>=</span> <span class='st'>"MU"</span>,
-  max_speed <span class='op'>=</span> <span class='fl'>25</span>,
-  hazards <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  <span class='va'>filename</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -204,12 +207,12 @@ on a single layout</p>
       <td><p>tracing for "MU", "ML" or "SB" parcel</p></td>
     </tr>
     <tr>
-      <th>max_speed</th>
-      <td><p>max speed for defining hodograph limits</p></td>
+      <th>filename</th>
+      <td><p>output file name with extension indicating file format (e.g. "my_plot.png" or "my_plot.svg")</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>extra graphic arguments</p></td>
+      <td><p>other arguments that can be used with `sounding_plot` or other graphic arguments</p></td>
     </tr>
     </table>
 
@@ -228,11 +231,15 @@ on a single layout</p>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 7):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='input'><span class='fu'>sounding_plot</span><span class='op'>(</span><span class='va'>PRES</span>, <span class='va'>HGHT</span>, <span class='va'>TEMP</span>, <span class='va'>DWPT</span>, <span class='va'>DRCT</span>, <span class='va'>SKNT</span>, 
-              parcel <span class='op'>=</span> <span class='st'>"MU"</span>, title <span class='op'>=</span> <span class='st'>"Wien - 2011/08/23, 12:00 UTC"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>Your display device is 6.66666666666667 x 6.66666666666667 in. </span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 8):</span>
+#&gt; <span class='message'></span>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='input'><span class='fu'>sounding_save</span><span class='op'>(</span>filename <span class='op'>=</span> <span class='st'>"myfile.png"</span>, 
+              <span class='va'>PRES</span>, <span class='va'>HGHT</span>, <span class='va'>TEMP</span>, <span class='va'>DWPT</span>, <span class='va'>DRCT</span>, <span class='va'>SKNT</span>, parcel <span class='op'>=</span> <span class='st'>"MU"</span>, 
+              title <span class='op'>=</span> <span class='st'>"Wien - 2011/08/23, 12:00 UTC"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>Your display device is 10 x 6 in. </span>
 #&gt; <span class='message'>It is recommended to use at least 10 x 7.5 in. plotting window </span>
-#&gt; <span class='message'>or consider saving the layout into file</span></div><div class='img'><img src='sounding_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; <span class='message'>or consider saving the layout into file</span></div><div class='input'>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

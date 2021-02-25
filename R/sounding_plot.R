@@ -15,6 +15,7 @@
 #' @param title title to be added in the layout's header
 #' @param parcel tracing for "MU", "ML" or "SB" parcel
 #' @param max_speed max speed for defining hodograph limits
+#' @param hazards logical. Whether to add extra information about possibility of severe weather risk
 #' @param ... extra graphic arguments
 #' @export
 #' @import aiRthermo
@@ -83,7 +84,7 @@ LP <- max(which(!is.na(names(parametry))))
 
 ###
 
-if(hazards==T){
+if(hazards){
   rect(10.75,37.5,26.1,44,col=rgb(255,255,255, maxColorValue = 255, alpha = 200),lwd=0.2)
   text(11.5,43.25, "Possible storm hazards:",col="black",cex=0.65, adj=c(0,1))
   
@@ -98,7 +99,7 @@ if(hazards==T){
       parametry[which(names(parametry[1:LP]) == "MW_13km")]>15 | 
       parametry[which(names(parametry[1:LP]) == "SCP_new")]>1) & 
      parametry[which(names(parametry[1:LP]) == "MU_CAPE")]>150){
-    WIND=1
+    WIND = 1
   }
   
   if((parametry[which(names(parametry[1:LP]) == "DCAPE")]>1100 |
@@ -107,25 +108,25 @@ if(hazards==T){
       parametry[which(names(parametry[1:LP]) == "MW_13km")]>25 |
       parametry[which(names(parametry[1:LP]) == "SCP_new")]>10) & 
      parametry[which(names(parametry[1:LP]) == "MU_CAPE")]>150){
-    WIND=2
+    WIND = 2
   }
   
-  if(is.na(WIND)){WIND=0}
+  if(is.na(WIND)){WIND = 0}
   if(WIND==1){text(11.5,41.75, "- 25m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
   if(WIND==2){text(11.5,41.75, "- 32m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
   
   ###
   if(parametry[which(names(parametry[1:LP]) == "SHIP")]>0.5 |
      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>450){
-    HAIL=1
+    HAIL = 1
   }
   
   if(parametry[which(names(parametry[1:LP]) == "SHIP")]>1 |
      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>1000){
-    HAIL=2
+    HAIL = 2
   }
   
-  if(is.na(HAIL)){HAIL=0}
+  if(is.na(HAIL)){HAIL = 0}
   if(HAIL==1){text(11.5,40.25, "- 2cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
   if(HAIL==2){text(11.5,40.25, "- 5cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
   
@@ -133,12 +134,12 @@ if(hazards==T){
   if(parametry[which(names(parametry[1:LP]) == "STP")]>0.3 |
      parametry[which(names(parametry[1:LP]) == "STP_new")]>0.3 |
      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")]>1000){
-    TORN=1
+    TORN = 1
   }
   
   if(parametry[which(names(parametry[1:LP]) == "STP")]>0.75 |
      parametry[which(names(parametry[1:LP]) == "STP_new")]>0.75){
-    TORN=2
+    TORN = 2
   }
   
   if(is.na(TORN)){TORN=0}

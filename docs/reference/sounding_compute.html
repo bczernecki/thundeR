@@ -6,8 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
-Further details given in the sounding_compute() function — sounding_default • thunder</title>
+<title>Calculate convective indices — sounding_compute • thunder</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -47,10 +46,10 @@ Further details given in the sounding_compute() function — sounding_default �
 
 
 
-<meta property="og:title" content="Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
-Further details given in the sounding_compute() function — sounding_default" />
-<meta property="og:description" content="Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
-Further details given in the sounding_compute() function" />
+<meta property="og:title" content="Calculate convective indices — sounding_compute" />
+<meta property="og:description" content="Function calculates presently over 100 atmospheric thermal-, kinematic- and composite indices 
+(e.g. CAPE, CIN, Lapse Rates, EHI, STP, SCP, etc...)
+related mostly to severe weather phenomena (Thunderstorms, Large Hail, Tornadoes, etc...)" />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -131,26 +130,26 @@ Further details given in the sounding_compute() function" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
-Further details given in the sounding_compute() function</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/RcppExports.R'><code>R/RcppExports.R</code></a></small>
-    <div class="hidden name"><code>sounding_default.Rd</code></div>
+    <h1>Calculate convective indices</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/sounding_compute.R'><code>R/sounding_compute.R</code></a></small>
+    <div class="hidden name"><code>sounding_compute.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
-Further details given in the sounding_compute() function</p>
+    <p>Function calculates presently over 100 atmospheric thermal-, kinematic- and composite indices 
+(e.g. CAPE, CIN, Lapse Rates, EHI, STP, SCP, etc...)
+related mostly to severe weather phenomena (Thunderstorms, Large Hail, Tornadoes, etc...)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sounding_default</span><span class='op'>(</span>
+    <pre class="usage"><span class='fu'>sounding_compute</span><span class='op'>(</span>
   <span class='va'>pressure</span>,
   <span class='va'>altitude</span>,
-  <span class='va'>temperature</span>,
-  <span class='va'>dew</span>,
-  <span class='va'>angle</span>,
-  <span class='va'>velocity</span>,
-  <span class='va'>export_profile</span>,
-  <span class='va'>accuracy</span>
+  <span class='va'>temp</span>,
+  <span class='va'>dpt</span>,
+  <span class='va'>wd</span>,
+  <span class='va'>ws</span>,
+  export_profile <span class='op'>=</span> <span class='fl'>0</span>,
+  accuracy <span class='op'>=</span> <span class='fl'>1</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -162,34 +161,151 @@ Further details given in the sounding_compute() function</p>
     </tr>
     <tr>
       <th>altitude</th>
-      <td><p>altitude [meters above surface]</p></td>
+      <td><p>altitude [metres]</p></td>
     </tr>
     <tr>
-      <th>temperature</th>
+      <th>temp</th>
       <td><p>air temperature [degree Celsius]</p></td>
     </tr>
     <tr>
-      <th>dew</th>
+      <th>dpt</th>
       <td><p>dew point temperature [degree Celsius]</p></td>
     </tr>
     <tr>
-      <th>angle</th>
+      <th>wd</th>
       <td><p>wind direction [degrees]</p></td>
     </tr>
     <tr>
-      <th>velocity</th>
-      <td><p>wind speed [metres per second]</p></td>
+      <th>ws</th>
+      <td><p>wind speed [knots or m/s - TODO/TODISCUSS]</p></td>
     </tr>
     <tr>
       <th>export_profile</th>
-      <td><p>runtime parameters</p></td>
+      <td><p>whether to export interpolated levels for drawing on Skew-T diagram. Binary [0 - default, no extra data for drawing exported, 1 - extracting data to be used ]</p></td>
     </tr>
     <tr>
       <th>accuracy</th>
-      <td><p>accuracy of methods used for interpolating and integrating algorithms [1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate]</p></td>
+      <td><p>how accurately integrate the positive/negative area. Valid options (1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate)</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    
+<ol>
+<li><p>MU_CAPE</p></li>
+<li><p>MU_03km_CAPE</p></li>
+<li><p>MU_HGL_CAPE</p></li>
+<li><p>MU_CIN</p></li>
+<li><p>MU_LCL_HGT</p></li>
+<li><p>MU_LFC_HGT</p></li>
+<li><p>MU_EL_HGT</p></li>
+<li><p>MU_LI</p></li>
+<li><p>MU_WMAX</p></li>
+<li><p>MU_EL_TEMP</p></li>
+<li><p>MU_LCL_TEMP</p></li>
+<li><p>MU_LFC_TEMP</p></li>
+<li><p>MU_MIXR</p></li>
+<li><p>SB_CAPE</p></li>
+<li><p>SB_03km_CAPE</p></li>
+<li><p>SB_HGL_CAPE</p></li>
+<li><p>SB_CIN</p></li>
+<li><p>SB_LCL_HGT</p></li>
+<li><p>SB_LFC_HGT</p></li>
+<li><p>SB_EL_HGT</p></li>
+<li><p>SB_LI</p></li>
+<li><p>SB_WMAX</p></li>
+<li><p>SB_EL_TEMP</p></li>
+<li><p>SB_LCL_TEMP</p></li>
+<li><p>SB_LFC_TEMP</p></li>
+<li><p>SB_MIXR</p></li>
+<li><p>ML_CAPE</p></li>
+<li><p>ML_03km_CAPE</p></li>
+<li><p>ML_HGL_CAPE</p></li>
+<li><p>ML_CIN</p></li>
+<li><p>ML_LCL_HGT</p></li>
+<li><p>ML_LFC_HGT</p></li>
+<li><p>ML_EL_HGT</p></li>
+<li><p>ML_LI</p></li>
+<li><p>ML_WMAX</p></li>
+<li><p>ML_EL_TEMP</p></li>
+<li><p>ML_LCL_TEMP</p></li>
+<li><p>ML_LFC_TEMP</p></li>
+<li><p>ML_MIXR</p></li>
+<li><p>LR_01km</p></li>
+<li><p>LR_03km</p></li>
+<li><p>LR_24km</p></li>
+<li><p>LR_36km</p></li>
+<li><p>LR_500700hPa</p></li>
+<li><p>LR_500800hPa</p></li>
+<li><p>FRZG_HGT</p></li>
+<li><p>FRZG_wetbulb_HGT</p></li>
+<li><p>HGT_max_thetae_03km</p></li>
+<li><p>HGT_min_thetae_04km</p></li>
+<li><p>Delta_thetae</p></li>
+<li><p>Delta_thetae_HGL</p></li>
+<li><p>DCAPE</p></li>
+<li><p>Cold_Pool_Strength</p></li>
+<li><p>Wind_Index</p></li>
+<li><p>PRCP_WATER</p></li>
+<li><p>Moisture_Flux_02km</p></li>
+<li><p>RH_02km</p></li>
+<li><p>RH_25km</p></li>
+<li><p>RH_HGL</p></li>
+<li><p>BS_01km</p></li>
+<li><p>BS_02km</p></li>
+<li><p>BS_03km</p></li>
+<li><p>BS_06km</p></li>
+<li><p>BS_08km</p></li>
+<li><p>BS_36km</p></li>
+<li><p>BS_18km</p></li>
+<li><p>BS_EFF_MU</p></li>
+<li><p>BS_EFF_SB</p></li>
+<li><p>BS_EFF_ML</p></li>
+<li><p>BS_SFC_to_HGL</p></li>
+<li><p>BS_MU_LFC_to_HGL</p></li>
+<li><p>BS_SB_LFC_to_HGL</p></li>
+<li><p>BS_ML_LFC_to_HGL</p></li>
+<li><p>MW_01km</p></li>
+<li><p>MW_02km</p></li>
+<li><p>MW_06km</p></li>
+<li><p>MW_13km</p></li>
+<li><p>SRH_100m_RM</p></li>
+<li><p>SRH_500m_RM</p></li>
+<li><p>SRH_1km_RM</p></li>
+<li><p>SRH_3km_RM</p></li>
+<li><p>SRH_100m_LM</p></li>
+<li><p>SRH_500m_LM</p></li>
+<li><p>SRH_1km_LM</p></li>
+<li><p>SRH_3km_LM</p></li>
+<li><p>Bunkers_RM_A</p></li>
+<li><p>Bunkers_RM_M</p></li>
+<li><p>Bunkers_LM_A</p></li>
+<li><p>Bunkers_LM_M</p></li>
+<li><p>Bunkers_MW_A</p></li>
+<li><p>Bunkers_MW_M</p></li>
+<li><p>K_Index</p></li>
+<li><p>Showalter_Index</p></li>
+<li><p>TotalTotals_Index</p></li>
+<li><p>SWEAT_Index</p></li>
+<li><p>STP</p></li>
+<li><p>STP_new</p></li>
+<li><p>SCP</p></li>
+<li><p>SCP_new</p></li>
+<li><p>SHIP</p></li>
+<li><p>DCP</p></li>
+<li><p>MU_WMAXSHEAR</p></li>
+<li><p>SB_WMAXSHEAR</p></li>
+<li><p>ML_WMAXSHEAR</p></li>
+<li><p>MU_EFF_WMAXSHEAR</p></li>
+<li><p>SB_EFF_WMAXSHEAR</p></li>
+<li><p>ML_EFF_WMAXSHEAR</p></li>
+</ol>
+
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>Wrapper for a generic C++ based function. Please consider using a slightly faster 
+`?sounding_default()` for computing large databases (i.e. at least over 1,000,000 soundings).</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='va'>pressure</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1000</span>, <span class='fl'>855</span>, <span class='fl'>700</span>, <span class='fl'>500</span>, <span class='fl'>300</span>, <span class='fl'>100</span>, <span class='fl'>10</span><span class='op'>)</span>
@@ -198,7 +314,8 @@ Further details given in the sounding_compute() function</p>
 <span class='va'>dpt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>30</span>, <span class='op'>-</span><span class='fl'>55</span>, <span class='op'>-</span><span class='fl'>80</span>, <span class='op'>-</span><span class='fl'>99</span><span class='op'>)</span>
 <span class='va'>wd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>90</span>, <span class='fl'>135</span>, <span class='fl'>180</span>, <span class='fl'>270</span>, <span class='fl'>350</span>, <span class='fl'>0</span><span class='op'>)</span>
 <span class='va'>ws</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>30</span>, <span class='fl'>40</span>, <span class='fl'>5</span>, <span class='fl'>0</span><span class='op'>)</span>
-<span class='fu'><a href='sounding_compute.html'>sounding_compute</a></span><span class='op'>(</span><span class='va'>pressure</span>, <span class='va'>altitude</span>, <span class='va'>temp</span>, <span class='va'>dpt</span>, <span class='va'>wd</span>, <span class='va'>ws</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/options.html'>options</a></span><span class='op'>(</span>scipen <span class='op'>=</span> <span class='fl'>999</span><span class='op'>)</span> <span class='co'># change formatting</span>
+<span class='fu'>sounding_compute</span><span class='op'>(</span><span class='va'>pressure</span>, <span class='va'>altitude</span>, <span class='va'>temp</span>, <span class='va'>dpt</span>, <span class='va'>wd</span>, <span class='va'>ws</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE              MU_CIN 
 #&gt;        2209.1039279         545.0890580        1531.4875729           0.0000000 
 #&gt;          MU_LCL_HGT          MU_LFC_HGT           MU_EL_HGT               MU_LI 

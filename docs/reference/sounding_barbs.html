@@ -6,8 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot wind profile using wind barbs — sounding_barbs • sounding</title>
+<title>Plot wind profile using wind barbs — sounding_barbs • thunder</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -42,6 +49,7 @@
 <meta property="og:title" content="Plot wind profile using wind barbs — sounding_barbs" />
 <meta property="og:description" content="Function for plotting wind direction and wind speed profile. 
 TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T diagram." />
+<meta property="og:image" content="/logo.png" />
 
 
 
@@ -72,8 +80,8 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">sounding</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.4101</span>
+        <a class="navbar-link" href="../index.html">thunder</a>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1101</span>
       </span>
     </div>
 
@@ -81,18 +89,30 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/getstarted.html">Introduction to the thundeR package</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bczernecki/sounding/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/bczernecki/thunder/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -110,7 +130,7 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Plot wind profile using wind barbs</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bczernecki/sounding/blob/master/R/sounding_barbs.R'><code>R/sounding_barbs.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/sounding_barbs.R'><code>R/sounding_barbs.R</code></a></small>
     <div class="hidden name"><code>sounding_barbs.Rd</code></div>
     </div>
 
@@ -128,6 +148,7 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
   ptop <span class='op'>=</span> <span class='fl'>100</span>,
   interpolate <span class='op'>=</span> <span class='cn'>TRUE</span>,
   showaxis <span class='op'>=</span> <span class='cn'>FALSE</span>,
+  barb_cex <span class='op'>=</span> <span class='fl'>0.3</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -147,6 +168,10 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
       <td><p>wind direction in degress</p></td>
     </tr>
     <tr>
+      <th>altitude</th>
+      <td><p>altitude in metres above sea level</p></td>
+    </tr>
+    <tr>
       <th>convert</th>
       <td><p>logical. Whether to convert wind speed from knots to m/s (default FALSE)</p></td>
     </tr>
@@ -163,6 +188,10 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
       <td><p>logical, drawing bounding box with left axis for pressure heighs (default FALSE)</p></td>
     </tr>
     <tr>
+      <th>barb_cex</th>
+      <td><p>size of wind barbs (default = 0.3)</p></td>
+    </tr>
+    <tr>
       <th>...</th>
       <td><p>extra graphic arguments</p></td>
     </tr>
@@ -177,10 +206,8 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 4):</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='output co'>#&gt; <span class='message'>Następujące obiekty zostały zakryte z sounding_wien (pos = 5):</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='input'><span class='fu'>sounding_barbs</span><span class='op'>(</span>pres <span class='op'>=</span> <span class='va'>PRES</span>, ws <span class='op'>=</span> <span class='va'>SKNT</span>, wd <span class='op'>=</span> <span class='va'>DRCT</span>, convert <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in (altitude - altitude[1]) %in% seq(0, 16000, 1000): brakuje argumentu 'altitude', a nie ma określonej wartości domyślnej</span></div><div class='img'><img src='sounding_barbs-1.png' alt='' width='700' height='433' /></div><div class='input'>
+#&gt; <span class='message'>    DRCT, DWPT, HGHT, MIXR, PRES, RELH, SKNT, TEMP, THTA, THTE, THTV</span></div><div class='input'><span class='fu'>sounding_barbs</span><span class='op'>(</span>pres <span class='op'>=</span> <span class='va'>PRES</span>, ws <span class='op'>=</span> <span class='va'>SKNT</span>, wd <span class='op'>=</span> <span class='va'>DRCT</span>, altitude <span class='op'>=</span> <span class='va'>HGHT</span>, convert <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='img'><img src='sounding_barbs-1.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -193,7 +220,7 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
 
       <footer>
       <div class="copyright">
-  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek, Jakub Nowosad.</p>
+  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek.</p>
 </div>
 
 <div class="pkgdown">

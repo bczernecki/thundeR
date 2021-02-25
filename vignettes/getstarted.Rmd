@@ -61,6 +61,21 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws)
 ```
 
 
+### Example 3
+
+Draw wind barbs:
+
+```{r example3, eval = TRUE, fig.width = 5, fig.height = 8, fig.fullwidth = TRUE}
+par(mfrow=c(8,5), mar = c(0,0,1,1)) # set small margins
+for (i in 1:40){
+sc = 5
+plot(0:2, xaxt = 'n', yaxt = 'n', type = "n")
+text(1.4,1, i*sc, cex = 1.5)
+windbarbs(cx = 1.8, cy = 1, direction = 60, speed = i*sc, cex = 3)
+}
+
+```
+
 ## Details:
 
 ### 1. Parameters:
