@@ -2,9 +2,11 @@ Package: thunder
 Type: Package
 Title: Severe Weather Atmospheric Convection Indices from Rawindsonde Data
 Version: 0.0.1101
-Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("aut", "cre")),
-    person("Piotr", "Szuster", email = "retsuz@gmail.com", role = c("aut")),
-    person("Mateusz", "Taszarek", email = "mateusz.taszarek@amu.edu.pl", role = c("aut")))
+Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("aut", "cre"),comment = c(ORCID = "0000-0001-6496-1386")),
+    person("Piotr", "Szuster", email = "retsuz@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-7937-8046
+")),
+    person("Mateusz", "Taszarek", email = "mateusz.taszarek@amu.edu.pl", role = c("aut"), 
+    comment = c(ORCID = "0000-0001-9578-5872")))
 Maintainer: Bartosz Czernecki <nwp@amu.edu.pl>
 Description: R tool for calculating atmospheric convection indices.
 License: GPL (>= 2)
