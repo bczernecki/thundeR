@@ -1,22 +1,18 @@
 #' Save `sounding_layout` to a graphical file
 #' 
 #' Auxiliary function to `sounding_plot` that plots a composite \
-#' of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
-#' on a single layout and saves it into graphical file. \
-#' Useful if graphical window is too small.
+#' of Skew-T, hodograph and selected convective parameters \
+#' on a single layout and saves as graphical file.
 #' 
 #' 
-#' @param pressure - air pressure (hPa)
-#' @param altitude - in metres
-#' @param temp - air temperature (degree Celsius)
-#' @param dpt - dew point temperature (degree Celsius)
-#' @param wd - wind direction in degrees (0-360)
-#' @param ws - wind speed in m/s
-#' @param convert logical. Whether to convert wind speed from knots to m/s (default FALSE)
-#' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
-#' @param interpolate logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset
-#' @param title title to be added in the layout's header
-#' @param parcel tracing for "MU", "ML" or "SB" parcel
+#' @param pressure - air pressure [hPa]
+#' @param altitude - altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0m)
+#' @param temp - air temperature [degree Celsius]
+#' @param dpt - dew point temperature [degree Celsius]
+#' @param wd - wind direction in degrees [azimuth in degrees]
+#' @param ws - wind speed [knots]
+#' @param title to be added in the layout's header
+#' @param parcel tracing on Skew-T for "MU", "ML" or "SB" parcel
 #' @param filename output file name with extension indicating file format (e.g. "my_plot.png" or "my_plot.svg")
 #' @param ... other arguments that can be used with `sounding_plot` or other graphic arguments
 #' @export
@@ -36,8 +32,11 @@
 #'
 
 sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
-                         convert = FALSE, ptop = 100, interpolate = TRUE,
                          title = "", parcel = "MU", filename, ...){
+  
+  convert = FALSE
+  ptop = 100 
+  interpolate = TRUE
   
   stopifnot(length(filename) < 4)
   
