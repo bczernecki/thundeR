@@ -9,7 +9,7 @@
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
 <!-- badges: end -->
 
-**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large numerical datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features. Its main purpose is to allow operational meteorologists and researchers for a quick and simple evaluation of convective environments. 
+**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features. 
 
 
 ## Installation
