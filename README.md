@@ -1,6 +1,6 @@
 # thundeR
 
-###### Rapid processing and visualisation of convective parameters from rawinsonde and NWP data <img src="man/figures/logo.png" align="right" width="200" />
+###### Rapid computation and visualisation of convective parameters from rawinsonde and NWP data <img src="man/figures/logo.png" align="right" width="200" />
 
 <!-- badges: start --> 
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
@@ -9,7 +9,7 @@
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
 <!-- badges: end -->
 
-**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large numerical datasets such as reanalyses or operational NWP models in a fairly low amount of time. This package was developed by research meteorologists specializing in severe convective storms and is constantly updated with new features. Its main purpose is to allow operational meteorologists and researchers a quick and easy evaluation of convective environments.
+**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large numerical datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features. Its main purpose is to allow operational meteorologists and researchers for a quick and simple evaluation of convective environments. 
 
 
 ## Installation
@@ -31,16 +31,16 @@ library(remotes);install_github("bczernecki/thunder")
 ## Usage
 -----
 
-### Draw Skew-T diagram, hodograph and most important indices on a single layout and save it to png file
+### Draw Skew-T diagram, hodograph and selected convective parameters on a single layout and save it to png file
 
 ``` r
-data("sounding_wien") # take example dataset:
-pressure = sounding_wien$PRES
-altitude = sounding_wien$HGHT
-temp = sounding_wien$TEMP
-dpt = sounding_wien$DWPT
-wd = sounding_wien$DRCT
-ws = sounding_wien$SKNT
+data("sounding_wien") # load example dataset (rawinsonde observation):
+pressure = sounding_wien$PRES # vector of pressure [hPa]
+altitude = sounding_wien$HGHT # vector of altitude [m above ground level]
+temp = sounding_wien$TEMP  # vector of air temperature [°C]
+dpt = sounding_wien$DWPT # vector of dew point temperature [°C]
+wd = sounding_wien$DRCT # vector of wind direction as azimuth [°]
+ws = sounding_wien$SKNT # vector of wind speed [kn]
 sounding_save(filename = "myfile.png", title = "Vienna (2011/08/23, 1200 UTC)", pressure, altitude, temp, dpt, wd, ws)
 ```
 
@@ -48,17 +48,18 @@ sounding_save(filename = "myfile.png", title = "Vienna (2011/08/23, 1200 UTC)", 
 
 
 
-### Compute all convective indices based on a random radiosonde data:
+### Compute all convective indices in a form of numeric vector based on a sample vertical profile data:
 
 ``` r
 library("thunder")
-pressure <- c(1000, 855, 700, 500, 300, 100, 10) # pressure
-altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000) # altitude
-temp <- c(25, 10, 0, -15, -30, -50, -92) # air temperature
-dpt <- c(20, 5, -5, -30, -55, -80, -99) # dew point temperature
-wd <- c(0, 90, 135, 180, 270, 350, 0) # wind direction
-ws <- c(5, 10, 20, 30, 40, 5, 0) # wind speed
-options(digits = 2) # change output formatting precision
+pressure <- c(1000, 855, 700, 500, 300, 100, 10) # pressure [hPa]
+altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000) # altitude [m above ground level]
+temp <- c(25, 10, 0, -15, -30, -50, -92) # air temperature [°C]
+dpt <- c(20, 5, -5, -30, -55, -80, -99) # dew point temperature [°C]
+wd <- c(0, 90, 135, 180, 270, 350, 0) # wind direction [°]
+ws <- c(5, 10, 20, 30, 40, 5, 0) # wind speed [kn]
+accuracy <- 2 # accuracy of computations where 3 = high accuracy (slow), 2 = medium accuracy (recommended), 1 = low accuracy (fast)
+options(digits = 2) # change output formatting precision 
 sounding_compute(pressure, altitude, temp, dpt, wd, ws)
 
 
@@ -127,13 +128,13 @@ v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
 hodograph(u, v, HGHT, max_speed = 30, max_hght = 10000); box(); title("Some title here")
 ```
 
-Development team
+Developers
 -------------
 
-**thundeR** package has been developed by a team of 3 atmospheric scientists - each having an equal contribution (listed in alphabetical order):
+**thundeR** package has been developed by atmospheric scientists, each having an equal contribution (alphabetical order):
 - Bartosz Czernecki (Adam Mickiewicz University in Poznań, Poland)
-- Piotr Szuster (Cracow University of Technology, Poland)
-- Mateusz Taszarek (NOAA NSSL/CIMMS in Norman, United States)
+- Piotr Szuster (University of Technology in Cracow, Poland)
+- Mateusz Taszarek (CIMMS/NSSL in Norman, Oklahoma, United States)
 
 
 Contributions
