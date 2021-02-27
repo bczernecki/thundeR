@@ -9,7 +9,13 @@
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/climate)](https://cran.r-project.org/package=climate)
 <!-- badges: end -->
 
-**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features. 
+**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational forecasting of severe convective storms. Core algorithm is based on C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features.
+
+
+## Online browser
+------------
+
+Online rawinsonde browser of **thundeR** package is available at www.rainwonde.com 
 
 
 ## Installation
@@ -58,9 +64,9 @@ temp <- c(25, 10, 0, -15, -30, -50, -92) # air temperature [°C]
 dpt <- c(20, 5, -5, -30, -55, -80, -99) # dew point temperature [°C]
 wd <- c(0, 90, 135, 180, 270, 350, 0) # wind direction [°]
 ws <- c(5, 10, 20, 30, 40, 5, 0) # wind speed [kn]
-accuracy <- 2 # accuracy of computations where 3 = high accuracy (slow), 2 = medium accuracy (recommended), 1 = low accuracy (fast)
+accuracy <- 2 # accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
 options(digits = 2) # change output formatting precision 
-sounding_compute(pressure, altitude, temp, dpt, wd, ws)
+sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
 
 #             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE              MU_CIN 
@@ -113,19 +119,6 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws)
 #                0.61                0.73             1193.11             1193.11 
 #        ML_WMAXSHEAR    MU_EFF_WMAXSHEAR    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR 
 #             1005.54              936.94              936.94              771.71
-```
-
-### Draw a customized hodograph:
-
-```
-data("sounding_wien")
-attach(sounding_wien)
-# changing wind speed and direction to U and V wind components
-# also changing units from knots to m/s
-u = round(-SKNT * 0.514444 * sin(DRCT * pi/180), 2)
-v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
-# finally plot the hodograph:
-hodograph(u, v, HGHT, max_speed = 30, max_hght = 10000); box(); title("Some title here")
 ```
 
 Developers
