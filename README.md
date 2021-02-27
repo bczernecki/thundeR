@@ -15,7 +15,7 @@
 ## Online browser
 ------------
 
-Online rawinsonde browser of **thundeR** package is available at www.rainwonde.com 
+Online rawinsonde browser of **thundeR** package is available at www.rawinsonde.com 
 
 
 ## Installation
