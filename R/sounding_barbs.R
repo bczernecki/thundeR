@@ -12,7 +12,7 @@
 #' @param ws wind speed in knots(!)
 #' @param wd wind direction in degress
 #' @param altitude altitude in metres above sea level
-#' @param convert logical. Whether to convert wind speed from knots to m/s (default FALSE)
+#' @param convert logical. Whether to convert wind speed from knots to m/s (default TRUE)
 #' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param interpolate logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset
 #' @param showaxis logical, drawing bounding box with left axis for pressure heighs (default FALSE)
@@ -25,7 +25,7 @@
 #' data("sounding_wien")
 #' attach(sounding_wien)
 #' 
-#' sounding_barbs(pres = PRES, ws = SKNT, wd = DRCT, altitude = HGHT, 
+#' sounding_barbs(pres = pressure, ws = ws, wd = wd, altitude = altitude, 
 #'                convert = TRUE, interpolate = FALSE)
 #'
 

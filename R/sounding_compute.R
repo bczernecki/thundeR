@@ -1,4 +1,4 @@
-#' Calculate convective indices
+#' Calculate indices
 #'
 #' Function calculates presently over 100 atmospheric thermal-, kinematic- and composite indices 
 #' (e.g. CAPE, CIN, Lapse Rates, EHI, STP, SCP, etc...)

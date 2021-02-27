@@ -4,7 +4,7 @@
 #' on a single layout
 #' 
 #' @param pressure - air pressure (hPa)
-#' @param altitude - in metres
+#' @param altitude - altitude in metres AMSL
 #' @param temp - air temperature (degree Celsius)
 #' @param dpt - dew point temperature (degree Celsius)
 #' @param wd - wind direction in degrees (0-360)
@@ -15,7 +15,7 @@
 #' @param title title to be added in the layout's header
 #' @param parcel tracing for "MU", "ML" or "SB" parcel
 #' @param max_speed max speed for defining hodograph limits
-#' @param hazards logical. Whether to add extra information about possibility of severe weather risk
+#' @param hazards logical. Whether to add extra information about possibility of severe weather risk (default  = FALSE)
 #' @param ... extra graphic arguments
 #' @export
 #' @import aiRthermo
@@ -25,7 +25,7 @@
 #' data("sounding_wien")
 #' sounding_wien = na.omit(sounding_wien)
 #' attach(sounding_wien)
-#' sounding_plot(PRES, HGHT, TEMP, DWPT, DRCT, SKNT, 
+#' sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
 #'               parcel = "MU", title = "Wien - 2011/08/23, 12:00 UTC")
 #' 
 

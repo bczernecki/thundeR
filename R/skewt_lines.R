@@ -20,9 +20,9 @@
 #' skewt_plot(temp_stripes = TRUE)
 #' 
 #' # draw line for dew-point temperature:
-#' skewt_lines(DWPT, PRES, type = 'l', col = 'forestgreen', lwd = 2.5) 
+#' skewt_lines(dpt, pressure, type = 'l', col = 'forestgreen', lwd = 2.5) 
 #' # draw line for air temperature:
-#' skewt_lines(TEMP, PRES, type = 'l', col='red', lwd = 2.5) 
+#' skewt_lines(temp, pressure, type = 'l', col='red', lwd = 2.5) 
 #' 
 
 skewt_lines = function (temp, pressure, ptop = 100, ...) {

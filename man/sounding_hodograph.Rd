@@ -2,12 +2,12 @@
 % Please edit documentation in R/sounding_hodograph.R
 \name{sounding_hodograph}
 \alias{sounding_hodograph}
-\title{Plot hodograph}
+\title{Plot hodograph based on rawinsonde data}
 \usage{
 sounding_hodograph(
   u,
   v,
-  hght,
+  altitude,
   max_hght = 16000,
   max_speed = 25,
   lab_hghts = c(0, 1, 3, 6, 9, 12),
@@ -17,9 +17,9 @@ sounding_hodograph(
 \arguments{
 \item{u}{u-wind wind vector components (m/s)}
 
-\item{v}{v-wind wind vector componente (m/s)}
+\item{v}{v-wind wind vector components (m/s)}
 
-\item{hght}{vector of altitudes (m)}
+\item{altitude}{vector of altitudes (m)}
 
 \item{max_hght}{max. altitude to be considered. 8 km used by default}
 
@@ -30,16 +30,16 @@ sounding_hodograph(
 \item{...}{other graphical parameters to be used with plot() function}
 }
 \description{
-Plot hodograph to show changes of wind speed and direction in vertical profile
+Plot rawinsonde hodograph to show changes of wind speed and direction in vertical profile
 }
 \examples{
 data("sounding_wien")
 attach(sounding_wien)
 # changing wind speed and direction to U and V wind components
 # also changing units from knots to m/s
-u = round(-SKNT * 0.514444 * sin(DRCT * pi/180), 2)
-v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
+u = round(-ws * 0.514444 * sin(wd * pi/180), 2)
+v = round(-ws * 0.514444 * cos(wd * pi/180), 2)
 # finally plot the hodograph:
-sounding_hodograph(u, v, HGHT)
+sounding_hodograph(u, v, altitude)
 
 }

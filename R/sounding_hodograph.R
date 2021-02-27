@@ -1,10 +1,10 @@
-#' Plot hodograph
+#' Plot hodograph based on rawinsonde data
 #' 
-#' Plot hodograph to show changes of wind speed and direction in vertical profile
+#' Plot rawinsonde hodograph to show changes of wind speed and direction in vertical profile
 #' 
 #' @param u u-wind wind vector components (m/s)
-#' @param v v-wind wind vector componente (m/s)
-#' @param hght vector of altitudes (m)
+#' @param v v-wind wind vector components (m/s)
+#' @param altitude vector of altitudes (m)
 #' @param max_hght max. altitude to be considered. 8 km used by default
 #' @param max_speed max. isoline (circle) to be drawn for wind speed; 30 m/s used as default
 #' @param lab_hghts label of numeric vector heights in km to be signed on hodograph; default: 1, 3, 6; NULL for skipping labels
@@ -16,19 +16,19 @@
 #' attach(sounding_wien)
 #' # changing wind speed and direction to U and V wind components
 #' # also changing units from knots to m/s
-#' u = round(-SKNT * 0.514444 * sin(DRCT * pi/180), 2)
-#' v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
+#' u = round(-ws * 0.514444 * sin(wd * pi/180), 2)
+#' v = round(-ws * 0.514444 * cos(wd * pi/180), 2)
 #' # finally plot the hodograph:
-#' sounding_hodograph(u, v, HGHT)
+#' sounding_hodograph(u, v, altitude)
 #' 
 
 
-sounding_hodograph = function(u, v, hght, max_hght = 16000, max_speed = 25,
+sounding_hodograph = function(u, v, altitude, max_hght = 16000, max_speed = 25,
                      lab_hghts = c(0, 1, 3, 6, 9, 12), ...){
   
   # clipping to define max_hght
-  ind = hght <= max_hght
-  hght = hght[ind]
+  ind = altitude <= max_hght
+  altitude = altitude[ind]
   u = u[ind]
   v = v[ind]
   
@@ -78,48 +78,48 @@ sounding_hodograph = function(u, v, hght, max_hght = 16000, max_speed = 25,
   # finally adding lines to hodograph:
   
   # find surface level
-  sfc = floor(hght/1000)[1]
+  sfc = floor(altitude/1000)[1]
   
-  ux = approx(x = hght, y = u, xout = seq(from = sfc, to = 1000, by = 50))$y
-  uy = approx(x = hght, y = v, xout = seq(from = sfc, to = 1000, by = 50))$y
+  ux = approx(x = altitude, y = u, xout = seq(from = sfc, to = 1000, by = 50))$y
+  uy = approx(x = altitude, y = v, xout = seq(from = sfc, to = 1000, by = 50))$y
   ux[1] = u[!is.na(u)][1]
   uy[1] = v[!is.na(v)][1]
   lines(ux, uy, lwd = 3, col = "magenta")
   
-  ux = approx(x = hght, y = u, xout = seq(from = 1000, to = 3000, by = 50))$y
-  uy = approx(x = hght, y = v, xout = seq(from = 1000, to = 3000, by = 50))$y
+  ux = approx(x = altitude, y = u, xout = seq(from = 1000, to = 3000, by = 50))$y
+  uy = approx(x = altitude, y = v, xout = seq(from = 1000, to = 3000, by = 50))$y
   #ux[1] = u[!is.na(u)][1]
   #uy[1] = v[!is.na(v)][1]
   lines(ux, uy, lwd = 3, col = "red")
   
-  ux = approx(x = hght, y = u, xout = seq(from = 3000, to = 9000, by = 50))$y
-  uy = approx(x = hght, y = v, xout = seq(from = 3000, to = 9000, by = 50))$y
+  ux = approx(x = altitude, y = u, xout = seq(from = 3000, to = 9000, by = 50))$y
+  uy = approx(x = altitude, y = v, xout = seq(from = 3000, to = 9000, by = 50))$y
   #ux[1] = u[!is.na(u)][1]
   #uy[1] = v[!is.na(v)][1]
   lines(ux, uy, lwd = 3, col = "orange")
   
-  ux = approx(x = hght, y = u, xout = seq(from = 6000, to = 9000, by = 50))$y
-  uy = approx(x = hght, y = v, xout = seq(from = 6000, to = 9000, by = 50))$y
+  ux = approx(x = altitude, y = u, xout = seq(from = 6000, to = 9000, by = 50))$y
+  uy = approx(x = altitude, y = v, xout = seq(from = 6000, to = 9000, by = 50))$y
   #ux[1] = u[!is.na(u)][1]
   #uy[1] = v[!is.na(v)][1]
   lines(ux, uy, lwd = 3, col = "yellow")
   
-  ux = approx(x = hght, y = u, xout = seq(from = 9000, to = 12000, by = 50))$y
-  uy = approx(x = hght, y = v, xout = seq(from = 9000, to = 12000, by = 50))$y
+  ux = approx(x = altitude, y = u, xout = seq(from = 9000, to = 12000, by = 50))$y
+  uy = approx(x = altitude, y = v, xout = seq(from = 9000, to = 12000, by = 50))$y
   #ux[1] = u[!is.na(u)][1]
   #uy[1] = v[!is.na(v)][1]
   lines(ux, uy, lwd = 3, col = "lightblue")
   
-  #ux = approx(x = hght, y = u, xout = seq(from = 12000, to = 16000, by = 50))$y
-  #uy = approx(x = hght, y = v, xout = seq(from = 12000, to = 16000, by = 50))$y
+  #ux = approx(x = altitude, y = u, xout = seq(from = 12000, to = 16000, by = 50))$y
+  #uy = approx(x = altitude, y = v, xout = seq(from = 12000, to = 16000, by = 50))$y
   #ux[1] = u[!is.na(u)][1]
   #uy[1] = v[!is.na(v)][1]
   #lines(ux, uy, lwd = 3, col = "lightblue")
   
   # adding label to heights if not NULL
   if(is.numeric(lab_hghts)){
-    ux = approx(x = hght, y = u, xout = c(lab_hghts*1000))
-    uy = approx(x = hght, y = v, xout = c(lab_hghts*1000))
+    ux = approx(x = altitude, y = u, xout = c(lab_hghts*1000))
+    uy = approx(x = altitude, y = v, xout = c(lab_hghts*1000))
     #points(ux$y, uy$y, cex = 0.5, pch = 19, col='black')
     points(ux$y, uy$y, cex = 1.15, pch = 21, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 125), bg = rgb(255, 255, 255, maxColorValue = 255, alpha = 125))
     text(font=2, ux$y, uy$y, labels = floor(lab_hghts), col = "black", cex = 0.65)
