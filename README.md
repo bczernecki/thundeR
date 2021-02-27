@@ -47,10 +47,10 @@ temp = sounding_wien$TEMP  # vector of air temperature [°C]
 dpt = sounding_wien$DWPT # vector of dew point temperature [°C]
 wd = sounding_wien$DRCT # vector of wind direction as azimuth [°]
 ws = sounding_wien$SKNT # vector of wind speed [kn]
-sounding_save(filename = "myfile.png", title = "Vienna (2011/08/23, 1200 UTC)", pressure, altitude, temp, dpt, wd, ws)
+sounding_save(filename = "myfile.png", title = "Vienna - 23 August 2011 1200 UTC", pressure, altitude, temp, dpt, wd, ws)
 ```
 
-![](inst/figures/my_file.svg)
+![](inst/figures/Vienna_profile.png)
 
 
 
@@ -124,7 +124,7 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 Developers
 -------------
 
-**thundeR** package has been developed by atmospheric scientists, each having an equal contribution (alphabetical order):
+**thundeR** package has been developed by atmospheric scientists, each having an equal contribution (listed in alphabetical order):
 - Bartosz Czernecki (Adam Mickiewicz University in Poznań, Poland)
 - Piotr Szuster (University of Technology in Cracow, Poland)
 - Mateusz Taszarek (CIMMS/NSSL in Norman, Oklahoma, United States)
