@@ -1,7 +1,6 @@
 #' Download rawinsonde measurement
 #' 
-#' Download rawinsonde measurement from sounding database of the University of Wyoming. 
-#' This is a wrapper for `climate::sounding_wyoming()` customized for the use with thundeR package.
+#' Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with `thunder` package.
 #' 
 #' @param wmo_id international WMO station code (e.g. 11035 for Vienna)
 #' @param yy year - single number (e.g. 2010)
