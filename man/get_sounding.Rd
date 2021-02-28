@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_sounding.R
 \name{get_sounding}
 \alias{get_sounding}
-\title{Download observational sounding dataset}
+\title{Download rawinsonde measurement}
 \source{
 http://weather.uwyo.edu/upperair/sounding.html
 }
@@ -10,49 +10,42 @@ http://weather.uwyo.edu/upperair/sounding.html
 get_sounding(wmo_id, yy, mm, dd, hh, metadata = FALSE)
 }
 \arguments{
-\item{wmo_id}{international WMO station code (World Meteorological Organization ID)}
+\item{wmo_id}{international WMO station code (e.g. 11035 for Vienna)}
 
-\item{yy}{year - single number}
+\item{yy}{year - single number (e.g. 2010)}
 
-\item{mm}{month - single number denoting month}
+\item{mm}{month - single number (e.g. 5)}
 
-\item{dd}{day - single number denoting day}
+\item{dd}{day - single number (e.g. 23)}
 
-\item{hh}{hour - single number denoting initial hour of sounding; for most stations this measurement is done twice a day (i.e. at 12 and 00 UTC), sporadically 4 times a day}
+\item{hh}{hour - single number (e.g. 0)}
 
 \item{metadata}{- logical, whether to return metadata of downloaded sounding; default FALSE}
 }
 \value{
 Returns two lists with values described at: weather.uwyo.edu ; The first list contains:
 \enumerate{
- \item pressure - Air Pressure (hPa)
- \item altitude - Altitude (metres AMSL)
- \item temp - Temperature (degree C)
- \item dpt - Dew point (C)
- \item rh - Relative humidity (%)
- \item mixr - Mixing ratio (g/kg)
- \item wd - Wind direction (deg)
- \item ws - Wind speed (knots)
- \item thta - THETA-A (K)
- \item thte - Equivalent Potential Temperature (THETA-E) (K)
- \item thtv - THETA-V (K)
+ \item pressure - pressure [hPa]
+ \item altitude - altitude [metres above sea level]
+ \item temp - temperature [degree C]
+ \item dpt - dew point [degree C]
+ \item wd - wind direction [azimuth as degrees]
+ \item ws - wind speed [kn]
  }
- If metadata = TRUE then retrieved data is wrapped to a list with the second one containing metadata
+ If metadata = TRUE then retrieved data is wrapped to a list with the second element containing metadata
 }
 \description{
-Download rawinsonde dataset for vertical profile of atmosphere from University of Wyoming's database. 
-This is a wrapper for `climate::sounding_wyoming()` customized for easier use within thundeR,
-such as customizing headers to align to naming convention used or dealing with missing data.
+Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package.
 }
 \examples{
 \donttest{
-# generate the date to download a random dataset for 12120 station (LEBA, PL):
+# download rawinsonde profile from Leba station (WMO ID: 12120) for 20 August 2010 1200 UTC:
 
   profile = get_sounding(wmo_id = 12120, 
-                         yy = sample(2000:2019,1),
-                         mm = sample(1:12,1), 
-                         dd = sample(1:20,1), 
-                         hh = 0)
+                         yy = 2010,
+                         mm = 8, 
+                         dd = 20, 
+                         hh = 12)
   head(profile)
   
 }

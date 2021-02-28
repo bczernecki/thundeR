@@ -5,7 +5,7 @@
 \title{Plot wind profile using wind barbs}
 \usage{
 sounding_barbs(
-  pres,
+  pressure,
   ws,
   wd,
   altitude,
@@ -18,15 +18,15 @@ sounding_barbs(
 )
 }
 \arguments{
-\item{pres}{pressure levels}
+\item{pressure}{- pressure [hPa]}
 
-\item{ws}{wind speed in knots(!)}
+\item{ws}{- wind speed [knots]}
 
-\item{wd}{wind direction in degress}
+\item{wd}{- wind direction [azimuth as degress]}
 
-\item{altitude}{altitude in metres above sea level}
+\item{altitude}{- altitude [m]}
 
-\item{convert}{logical. Whether to convert wind speed from knots to m/s (default TRUE)}
+\item{convert}{- logical, whether to convert wind speed from knots to m/s (default TRUE)}
 
 \item{ptop}{Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)}
 
@@ -47,7 +47,7 @@ TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T di
 data("sounding_wien")
 attach(sounding_wien)
 
-sounding_barbs(pres = pressure, ws = ws, wd = wd, altitude = altitude, 
+sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude, 
                convert = TRUE, interpolate = FALSE)
 
 }

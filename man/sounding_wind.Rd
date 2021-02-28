@@ -7,13 +7,13 @@
 sounding_wind(pressure, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ...)
 }
 \arguments{
-\item{pressure}{pressuresure levels}
+\item{pressure}{- pressure [hPa]}
 
-\item{ws}{wind speed in knots(!)}
+\item{ws}{- wind speed [kn]}
 
 \item{ptop}{pressuresure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)}
 
-\item{convert}{logical. Whether to convert wind speed from knots to m/s (default FALSE)}
+\item{convert}{- logical, whether to convert wind speed from knots to m/s (default FALSE)}
 
 \item{yaxs}{logic. Whether to add labels to heights on Y lab}
 
@@ -21,7 +21,7 @@ sounding_wind(pressure, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ...)
 }
 \description{
 Function for plotting wind speed profile. 
-TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
+Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
 }
 \examples{
 # load examplary dataset:

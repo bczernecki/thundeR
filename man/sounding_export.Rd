@@ -7,21 +7,20 @@
 sounding_export(pressure, altitude, temp, dpt, wd, ws)
 }
 \arguments{
-\item{pressure}{- air pressure (hPa)}
+\item{pressure}{- pressure [hPa]}
 
-\item{altitude}{- in metres}
+\item{altitude}{- altitude [meters]}
 
-\item{temp}{- air temperature (degree Celsius)}
+\item{temp}{- temperature [degree Celsius]}
 
-\item{dpt}{- dew point temperature (degree Celsius)}
+\item{dpt}{- dew point temperature [degree Celsius]}
 
-\item{wd}{- wind direction in degrees (0-360)}
+\item{wd}{- wind direction [azimuth in degrees]}
 
-\item{ws}{- wind speed in [m/s or knots / TODO / TODISCUSS]}
+\item{ws}{- wind speed [kn]}
 }
 \description{
-Internal function to be used for re-calculate parcel trajectories that can be analysed or drawn
-on Skew-T diagrams
+Internal package function for exporting interpolated profile with 5m steps
 }
 \examples{
 data("sounding_wien")

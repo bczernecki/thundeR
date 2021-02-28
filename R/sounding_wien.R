@@ -11,13 +11,20 @@
 #' 
 #' @format A data frame with 88 rows and 6 variables as described in `get_sounding()`
 #'
+#'
+#'
 #' \describe{
 #'   \item{pressure}{pressure [hPa]}
 #'   \item{altitude}{altitude [m]}
-#'   \item{temp}{temperutre [degree Celsius]}
-#'   \item{dpt}{dew point temperutre [degree Celsius]}
+#'   \item{temp}{temperature [degree Celsius]}
+#'   \item{dpt}{dew point temperature [degree Celsius]}
+#'   \item{rh}{relative humidity [percent]}
+#'   \item{mixr}{mixing ratio [g/kg]}
 #'   \item{wd}{wind direction [azimuth as degrees]}
-#'   \item{ws}{wind speed [kn]}
+#'   \item{ws}{wind speed [knots]}
+#'   \item{thta}{THETA-A [K]}
+#'   \item{thte}{THETA-E [K]}
+#'   \item{thtv}{THETA-V [K]}
 #' }
 #' 
 #' @source http://weather.uwyo.edu/upperair/sounding.html
