@@ -1,21 +1,17 @@
 #' Plot Skew-T, hodograph and convective indices on a single layout 
 #' 
-#' Function to plot a composite of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
-#' on a single layout
+#' Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
 #' 
-#' @param pressure - air pressure (hPa)
-#' @param altitude - altitude in metres AMSL
-#' @param temp - air temperature (degree Celsius)
-#' @param dpt - dew point temperature (degree Celsius)
-#' @param wd - wind direction in degrees (0-360)
-#' @param ws - wind speed in m/s
-#' @param convert logical. Whether to convert wind speed from knots to m/s (default FALSE)
-#' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
-#' @param interpolate logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset
-#' @param title title to be added in the layout's header
-#' @param parcel tracing for "MU", "ML" or "SB" parcel
-#' @param max_speed max speed for defining hodograph limits
-#' @param hazards logical. Whether to add extra information about possibility of severe weather risk (default  = FALSE)
+#' @param pressure - pressure [hPa]
+#' @param altitude - altitude [meters]
+#' @param temp - temperature [degree Celsius]
+#' @param dpt - dew point temperature [degree Celsius]
+#' @param wd - wind direction [azimuth in degrees]
+#' @param ws - wind speed [kn]
+#' @param title - title to be added in the layout's header
+#' @param parcel - parrcel tracing on Skew-T for "MU", "ML" or "SB" parcel
+#' @param max_speed - range of the hodograph to be drawn, 25 m/s used as default
+#' @param hazards - logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)
 #' @param ... extra graphic arguments
 #' @export
 #' @import aiRthermo
@@ -29,11 +25,13 @@
 #'               parcel = "MU", title = "Wien - 2011/08/23, 12:00 UTC")
 #' 
 
-
 sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
-                        convert = FALSE, ptop = 100, interpolate = TRUE,
                         title = "", parcel = "MU", max_speed = 25, hazards = FALSE, ...){
 
+   convert = FALSE
+   ptop = 100 
+   interpolate = TRUE
+  
    dev_size = dev.size("in")
 if(dev_size[1] < 10 | dev_size[2] < 7.5){
   text = paste("Your display device is", dev_size[1], "x", dev_size[2], "in. \nIt is recommended to use at least 10 x 7.5 in. plotting window \nor consider saving the layout into file")
@@ -525,9 +523,8 @@ text(60,7100, "RH [%]", cex = 0.65, col = "black")
 
 par(fig = c(0.69, 0.99, 0.49, 0.9175), new = TRUE, 
     mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
-v = round(-output$ws * 0.514444 * cos(output$wd * pi/180), 2)
-u = round(-output$ws * 0.514444 * sin(output$wd * pi/180), 2)
-sounding_hodograph(u, v, output$altitude-output$altitude[1], max_speed = max_speed, frame = FALSE, ...)
+
+sounding_hodograph(ws, wd, output$altitude-output$altitude[1], max_speed = max_speed, frame = FALSE, ...)
 
 RM_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)
 RM_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * sin(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
