@@ -11,9 +11,6 @@ sounding_plot(
   dpt,
   wd,
   ws,
-  convert = FALSE,
-  ptop = 100,
-  interpolate = TRUE,
   title = "",
   parcel = "MU",
   max_speed = 25,
@@ -22,37 +19,30 @@ sounding_plot(
 )
 }
 \arguments{
-\item{pressure}{- air pressure (hPa)}
+\item{pressure}{- pressure [hPa]}
 
-\item{altitude}{- altitude in metres AMSL}
+\item{altitude}{- altitude [meters]}
 
-\item{temp}{- air temperature (degree Celsius)}
+\item{temp}{- temperature [degree Celsius]}
 
-\item{dpt}{- dew point temperature (degree Celsius)}
+\item{dpt}{- dew point temperature [degree Celsius]}
 
-\item{wd}{- wind direction in degrees (0-360)}
+\item{wd}{- wind direction [azimuth in degrees]}
 
-\item{ws}{- wind speed in m/s}
+\item{ws}{- wind speed [knots]}
 
-\item{convert}{logical. Whether to convert wind speed from knots to m/s (default FALSE)}
+\item{title}{- title to be added in the layout's header}
 
-\item{ptop}{Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)}
+\item{parcel}{- parcel tracing on Skew-T for "MU", "ML" or "SB" parcel}
 
-\item{interpolate}{logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset}
+\item{max_speed}{- range of the hodograph to be drawn, 25 m/s used as default}
 
-\item{title}{title to be added in the layout's header}
-
-\item{parcel}{tracing for "MU", "ML" or "SB" parcel}
-
-\item{max_speed}{max speed for defining hodograph limits}
-
-\item{hazards}{logical. Whether to add extra information about possibility of severe weather risk (default  = FALSE)}
+\item{hazards}{- logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)}
 
 \item{...}{extra graphic arguments}
 }
 \description{
-Function to plot a composite of Skew-T, hodograph and other relavant rawindsonde-derived profiles \
-on a single layout
+Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
 }
 \examples{
 data("sounding_wien")

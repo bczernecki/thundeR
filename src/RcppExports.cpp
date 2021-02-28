@@ -6,20 +6,20 @@
 using namespace Rcpp;
 
 // sounding_default
-Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure, Rcpp::NumericVector altitude, Rcpp::NumericVector temperature, Rcpp::NumericVector dew, Rcpp::NumericVector angle, Rcpp::NumericVector velocity, Rcpp::NumericVector export_profile, Rcpp::NumericVector accuracy);
-RcppExport SEXP _thunder_sounding_default(SEXP pressureSEXP, SEXP altitudeSEXP, SEXP temperatureSEXP, SEXP dewSEXP, SEXP angleSEXP, SEXP velocitySEXP, SEXP export_profileSEXP, SEXP accuracySEXP) {
+Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure, Rcpp::NumericVector altitude, Rcpp::NumericVector temp, Rcpp::NumericVector dpt, Rcpp::NumericVector wd, Rcpp::NumericVector ws, Rcpp::NumericVector export_profile, Rcpp::NumericVector accuracy);
+RcppExport SEXP _thunder_sounding_default(SEXP pressureSEXP, SEXP altitudeSEXP, SEXP tempSEXP, SEXP dptSEXP, SEXP wdSEXP, SEXP wsSEXP, SEXP export_profileSEXP, SEXP accuracySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type pressure(pressureSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type altitude(altitudeSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type temperature(temperatureSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type dew(dewSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type angle(angleSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type velocity(velocitySEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type temp(tempSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type dpt(dptSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type wd(wdSEXP);
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type ws(wsSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type export_profile(export_profileSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type accuracy(accuracySEXP);
-    rcpp_result_gen = Rcpp::wrap(sounding_default(pressure, altitude, temperature, dew, angle, velocity, export_profile, accuracy));
+    rcpp_result_gen = Rcpp::wrap(sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy));
     return rcpp_result_gen;
 END_RCPP
 }

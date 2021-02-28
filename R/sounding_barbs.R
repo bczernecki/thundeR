@@ -1,7 +1,7 @@
 #' Plot wind profile using wind barbs
 #' 
-#' Function for plotting wind direction and wind speed profile. 
-#' TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
+#' Function for plotting wind direction and wind speed profile with the use of wind barbs.
+#' Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
 #'
 #' @import stats
 #' @import utils
@@ -9,7 +9,7 @@
 #' @importFrom grDevices colorRampPalette
 #'
 #' @param pressure - pressure [hPa] 
-#' @param ws - wind speed [kn]
+#' @param ws - wind speed [knots]
 #' @param wd - wind direction [azimuth as degress]
 #' @param altitude - altitude [m]
 #' @param convert - logical, whether to convert wind speed from knots to m/s (default TRUE)
@@ -25,8 +25,8 @@
 #' data("sounding_wien")
 #' attach(sounding_wien)
 #' 
-#' sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude, 
-#'                convert = TRUE, interpolate = FALSE)
+#' sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
+#'                convert = TRUE, interpolate = FALSE, showaxis = TRUE)
 #'
 
 sounding_barbs <- function(pressure, ws, wd, altitude, convert = FALSE,

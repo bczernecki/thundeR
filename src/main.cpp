@@ -3634,21 +3634,21 @@ int main(){
 //' 
 //'
 //' @param pressure pressure [hPa]
-//' @param altitude altitude [meters above surface]
-//' @param temperature air temperature [degree Celsius]
-//' @param dew dew point temperature [degree Celsius]
-//' @param angle wind direction [degrees]
-//' @param velocity wind speed [metres per second]
-//' @param accuracy accuracy of methods used for interpolating and integrating algorithms [1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate]
-//' @param export_profile runtime parameters
+//' @param altitude altitude [meters]
+//' @param temp temperature [degree Celsius]
+//' @param dpt dew point temperature [degree Celsius]
+//' @param wd wind direction [azimuth in degrees]
+//' @param ws wind speed [knots]
+//' @param export_profile possibility to export interpolated profile on the levels defined in accuracy configuration
+//' @param accuracy accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
 //' @examples 
-//' pressure <- c(1000, 855, 700, 500, 300, 100, 10)
-//' altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
-//' temp <- c(25, 10, 0, -15, -30, -50, -92)
-//' dpt <- c(20, 5, -5, -30, -55, -80, -99)
-//' wd <- c(0, 90, 135, 180, 270, 350, 0)
-//' ws <- c(5, 10, 20, 30, 40, 5, 0)
-//' sounding_compute(pressure, altitude, temp, dpt, wd, ws)
+//' pressure = c(1000, 855, 700, 500, 300, 100, 10) 
+//' altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000)
+//' temp = c(25, 10, 0, -15, -30, -50, -92)
+//' dpt = c(20, 5, -5, -30, -55, -80, -99)
+//' wd = c(0, 90, 135, 180, 270, 350, 0)
+//' ws = c(5, 10, 20, 30, 40, 5, 0)
+//' sounding_default(pressure, altitude, temp, dpt, wd, ws, accuracy = 1, export_profile = 0)
 //' @useDynLib thunder
 //' @importFrom Rcpp evalCpp
 //' @export
@@ -3656,10 +3656,10 @@ int main(){
 
 Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
                           Rcpp::NumericVector altitude,
-                          Rcpp::NumericVector temperature,
-                          Rcpp::NumericVector dew,
-                          Rcpp::NumericVector angle,
-                          Rcpp::NumericVector velocity,
+                          Rcpp::NumericVector temp,
+                          Rcpp::NumericVector dpt,
+                          Rcpp::NumericVector wd,
+                          Rcpp::NumericVector ws,
 		          Rcpp::NumericVector export_profile,
 			  Rcpp::NumericVector accuracy
 						  )
@@ -3671,10 +3671,10 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   for(int i=0; i<size;i++){
     p[i]=pressure[i];
     h[i]=altitude[i];
-    t[i]=temperature[i];
-    d[i]=dew[i];
-    a[i]=angle[i];
-    v[i]=velocity[i];
+    t[i]=temp[i];
+    d[i]=dpt[i];
+    a[i]=wd[i];
+    v[i]=ws[i];
   }
   int q= accuracy[0];
   int plen,hlen,tlen,dlen,alen,vlen,tvlen;

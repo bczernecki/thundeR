@@ -8,10 +8,10 @@ Further details given in the sounding_compute() function}
 sounding_default(
   pressure,
   altitude,
-  temperature,
-  dew,
-  angle,
-  velocity,
+  temp,
+  dpt,
+  wd,
+  ws,
   export_profile,
   accuracy
 )
@@ -19,30 +19,30 @@ sounding_default(
 \arguments{
 \item{pressure}{pressure [hPa]}
 
-\item{altitude}{altitude [meters above surface]}
+\item{altitude}{altitude [meters]}
 
-\item{temperature}{air temperature [degree Celsius]}
+\item{temp}{temperature [degree Celsius]}
 
-\item{dew}{dew point temperature [degree Celsius]}
+\item{dpt}{dew point temperature [degree Celsius]}
 
-\item{angle}{wind direction [degrees]}
+\item{wd}{wind direction [azimuth in degrees]}
 
-\item{velocity}{wind speed [metres per second]}
+\item{ws}{wind speed [knots]}
 
-\item{export_profile}{runtime parameters}
+\item{export_profile}{possibility to export interpolated profile on the levels defined in accuracy configuration}
 
-\item{accuracy}{accuracy of methods used for interpolating and integrating algorithms [1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate]}
+\item{accuracy}{accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)}
 }
 \description{
 Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
 Further details given in the sounding_compute() function
 }
 \examples{
-pressure <- c(1000, 855, 700, 500, 300, 100, 10)
-altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
-temp <- c(25, 10, 0, -15, -30, -50, -92)
-dpt <- c(20, 5, -5, -30, -55, -80, -99)
-wd <- c(0, 90, 135, 180, 270, 350, 0)
-ws <- c(5, 10, 20, 30, 40, 5, 0)
-sounding_compute(pressure, altitude, temp, dpt, wd, ws)
+pressure = c(1000, 855, 700, 500, 300, 100, 10) 
+altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000)
+temp = c(25, 10, 0, -15, -30, -50, -92)
+dpt = c(20, 5, -5, -30, -55, -80, -99)
+wd = c(0, 90, 135, 180, 270, 350, 0)
+ws = c(5, 10, 20, 30, 40, 5, 0)
+sounding_default(pressure, altitude, temp, dpt, wd, ws, accuracy = 1, export_profile = 0)
 }

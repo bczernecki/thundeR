@@ -7,9 +7,9 @@
 #' @param temp - temperature [degree Celsius]
 #' @param dpt - dew point temperature [degree Celsius]
 #' @param wd - wind direction [azimuth in degrees]
-#' @param ws - wind speed [kn]
+#' @param ws - wind speed [knots]
 #' @param title - title to be added in the layout's header
-#' @param parcel - parrcel tracing on Skew-T for "MU", "ML" or "SB" parcel
+#' @param parcel - parcel tracing on Skew-T for "MU", "ML" or "SB" parcel
 #' @param max_speed - range of the hodograph to be drawn, 25 m/s used as default
 #' @param hazards - logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)
 #' @param ... extra graphic arguments
@@ -48,9 +48,9 @@ par(fig = c(0.028, 0.51, 0.03, 0.95),
     mgp = c(0,0.15,0))
 
 ####
-t_col <- function(color, percent, name = NULL) {
-  rgb.val <- col2rgb(color)
-  t.col <- rgb(rgb.val[1], rgb.val[2], rgb.val[3],
+t_col = function(color, percent, name = NULL) {
+  rgb.val = col2rgb(color)
+  t.col = rgb(rgb.val[1], rgb.val[2], rgb.val[3],
                maxColorValue = 255,
                alpha = (100 - percent) * 255 / 100,
                names = name)
@@ -77,8 +77,8 @@ skewt_lines(output$tempV,output$pressure, col = t_col("red3",0), lwd = 1, lty = 
 text(20, 28, "Hail Growth\nLayer (HGL)",col="#8470FF90",cex=0.65,srt=56)
 
 ####
-parametry <- sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3)
-LP <- max(which(!is.na(names(parametry))))
+parametry = sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3)
+LP = max(which(!is.na(names(parametry))))
 
 ###
 
@@ -86,9 +86,9 @@ if(hazards){
   rect(10.75,37.5,26.1,44,col=rgb(255,255,255, maxColorValue = 255, alpha = 200),lwd=0.2)
   text(11.5,43.25, "Possible storm hazards:",col="black",cex=0.65, adj=c(0,1))
   
-  WIND=NA
-  HAIL=NA
-  TORN=NA
+  WIND = NA
+  HAIL = NA
+  TORN = NA
   
   ###
   if((parametry[which(names(parametry[1:LP]) == "DCAPE")]>700 |
@@ -110,8 +110,8 @@ if(hazards){
   }
   
   if(is.na(WIND)){WIND = 0}
-  if(WIND==1){text(11.5,41.75, "- 25m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
-  if(WIND==2){text(11.5,41.75, "- 32m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
+  if(WIND ==1 ){text(11.5,41.75, "- 25m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
+  if(WIND ==2 ){text(11.5,41.75, "- 32m/s+ severe wind",  font=1, col="blue",cex=0.67, adj=c(0,1))}
   
   ###
   if(parametry[which(names(parametry[1:LP]) == "SHIP")]>0.5 |
@@ -125,8 +125,8 @@ if(hazards){
   }
   
   if(is.na(HAIL)){HAIL = 0}
-  if(HAIL==1){text(11.5,40.25, "- 2cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
-  if(HAIL==2){text(11.5,40.25, "- 5cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
+  if(HAIL ==1 ){text(11.5,40.25, "- 2cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
+  if(HAIL ==2 ){text(11.5,40.25, "- 5cm+ large hail",  font=1, col="forestgreen",cex=0.67, adj=c(0,1))}
   
   ###
   if(parametry[which(names(parametry[1:LP]) == "STP")]>0.3 |
@@ -140,9 +140,9 @@ if(hazards){
     TORN = 2
   }
   
-  if(is.na(TORN)){TORN=0}
-  if(TORN==1){text(11.5,38.75, "- F0+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
-  if(TORN==2){text(11.5,38.75, "- F2+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
+  if(is.na(TORN)){TORN = 0}
+  if(TORN ==1 ){text(11.5,38.75, "- F0+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
+  if(TORN ==2 ){text(11.5,38.75, "- F2+ tornado",  font=1, col="red",cex=0.67, adj=c(0,1))}
   
 }
 
@@ -165,8 +165,8 @@ if(parcel=="ML"){
   x_lfc = skewtx(output$ML[ind_lfc],skewty(output$pressure[ind_lfc]))
   y_lcl = skewty(output$pressure[ind_lcl])
   x_lcl = skewtx(output$ML[ind_lcl],skewty(output$pressure[ind_lcl]))
-  v <- skewty(c(output$pressure[ind_lfc:ind_el], output$pressure[ind_el:ind_lfc])) # extra checks for NA coded as -99
-  u <- skewtx(c(output$tempV[ind_lfc:ind_el], rev(output$ML[ind_lfc:ind_el])), v)
+  v = skewty(c(output$pressure[ind_lfc:ind_el], output$pressure[ind_el:ind_lfc])) # extra checks for NA coded as -99
+  u = skewtx(c(output$tempV[ind_lfc:ind_el], rev(output$ML[ind_lfc:ind_el])), v)
   skewt_lines(output$ML,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
 }
 
@@ -187,8 +187,8 @@ if(parcel=="MU"){
   x_lfc = skewtx(output$MU[ind_lfc],skewty(output$pressure[ind_lfc]))
   y_lcl = skewty(output$pressure[ind_lcl])
   x_lcl = skewtx(output$MU[ind_lcl],skewty(output$pressure[ind_lcl]))
-  v <- skewty(c(output$pressure[ind_lfc:ind_el], output$pressure[ind_el:ind_lfc])) # extra checks for NA coded as -99
-  u <- skewtx(c(output$tempV[ind_lfc:ind_el], rev(output$MU[ind_lfc:ind_el])), v)
+  v = skewty(c(output$pressure[ind_lfc:ind_el], output$pressure[ind_el:ind_lfc])) # extra checks for NA coded as -99
+  u = skewtx(c(output$tempV[ind_lfc:ind_el], rev(output$MU[ind_lfc:ind_el])), v)
   skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
 }
 
@@ -209,14 +209,14 @@ if(parcel=="SB"){
   x_lfc = skewtx(output$SB[ind_lfc],skewty(output$pressure[ind_lfc]))
   y_lcl = skewty(output$pressure[ind_lcl])
   x_lcl = skewtx(output$SB[ind_lcl],skewty(output$pressure[ind_lcl]))
-  v <- skewty(c(output$pressure[ind_lfc:ind_el], output$pressure[ind_el:ind_lfc])) # extra checks for NA coded as -99
-  u <- skewtx(c(output$tempV[ind_lfc:ind_el], rev(output$SB[ind_lfc:ind_el])), v)
+  v = skewty(c(output$pressure[ind_lfc:ind_el], output$pressure[ind_el:ind_lfc])) # extra checks for NA coded as -99
+  u = skewtx(c(output$tempV[ind_lfc:ind_el], rev(output$SB[ind_lfc:ind_el])), v)
   skewt_lines(output$SB,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
 }
 
 ###
-u <- subset(u, v < 44)
-v <- subset(v, v < 44)
+u = subset(u, v < 44)
+v = subset(v, v < 44)
 polygon(u, v, col = "#FFA50025", border = NA)
 
 ###
@@ -270,10 +270,11 @@ if(max(output$altitude-output$altitude[1]) > 16000){if(output$pressure[output$al
 
 ###
 par(fig = c(0.46, 0.57, 0.03, 0.95), new = TRUE, mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))
-sounding_barbs(pres = subset(output,output$pressure>100)$pressure, 
-               ws = subset(output,output$pressure>100)$ws, 
-               wd = subset(output,output$pressure>100)$wd, 
-               altitude = subset(output,output$pressure>100)$altitude, 
+over100 = output[["pressure"]] > 100
+sounding_barbs(pressure = output[["pressure"]][over100],
+               ws = output[["ws"]][over100], 
+               wd = output[["wd"]][over100], 
+               altitude = output[["altitude"]][over100], 
                convert = FALSE, barb_cex = 0.8)
 
 ###
@@ -538,8 +539,8 @@ LM_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_LM_M")] * sin(p
 MW_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_MW_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_MW_A")] * pi/180), 2)
 MW_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_MW_M")] * sin(parametry[which(names(parametry[1:LP]) == "Bunkers_MW_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
 
-vectors_color <- rgb(128,128,128, maxColorValue = 255, alpha = 150)
-circle_color <- rgb(255,255,255, maxColorValue = 255, alpha = 150)
+vectors_color = rgb(128,128,128, maxColorValue = 255, alpha = 150)
+circle_color = rgb(255,255,255, maxColorValue = 255, alpha = 150)
 points(LM_x,LM_y, cex = 1.75, pch = 1, col=vectors_color)
 points(LM_x,LM_y, cex = 0.75, pch = 1, col='black')
 points(RM_x,RM_y, cex = 1.75, pch = 1, col=vectors_color)
@@ -550,7 +551,7 @@ text(RM_x,RM_y, font=2,"RM", col = vectors_color, adj = c(0.5, 2.5),cex = 0.5)
 
 ####
 
-max_speed <- max_speed*1.25
+max_speed = max_speed*1.25
 
 rect(round(max_speed * 1.38  * cos(135 * pi/180), 2), 
      round(max_speed * -0.72  * sin(135 * pi/180), 2), 

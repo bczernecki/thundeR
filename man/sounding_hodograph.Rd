@@ -5,27 +5,27 @@
 \title{Plot hodograph based on rawinsonde data}
 \usage{
 sounding_hodograph(
-  u,
-  v,
+  ws,
+  wd,
   altitude,
-  max_hght = 16000,
+  max_hght = 12000,
   max_speed = 25,
   lab_hghts = c(0, 1, 3, 6, 9, 12),
   ...
 )
 }
 \arguments{
-\item{u}{u-wind wind vector components (m/s)}
+\item{ws}{- wind speed [kn]}
 
-\item{v}{v-wind wind vector components (m/s)}
+\item{wd}{- wind direction [azimuth in degrees]}
 
-\item{altitude}{vector of altitudes (m)}
+\item{altitude}{- altitudes (metres)}
 
-\item{max_hght}{max. altitude to be considered. 8 km used by default}
+\item{max_hght}{- maximum altitude to be considered on the hodograph, 12 km used by default}
 
-\item{max_speed}{max. isoline (circle) to be drawn for wind speed; 30 m/s used as default}
+\item{max_speed}{- range of the hodograph to be drawn, 25 m/s used as default}
 
-\item{lab_hghts}{label of numeric vector heights in km to be signed on hodograph; default: 1, 3, 6; NULL for skipping labels}
+\item{lab_hghts}{- height labels to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels}
 
 \item{...}{other graphical parameters to be used with plot() function}
 }
@@ -35,11 +35,6 @@ Plot rawinsonde hodograph to show changes of wind speed and direction in vertica
 \examples{
 data("sounding_wien")
 attach(sounding_wien)
-# changing wind speed and direction to U and V wind components
-# also changing units from knots to m/s
-u = round(-ws * 0.514444 * sin(wd * pi/180), 2)
-v = round(-ws * 0.514444 * cos(wd * pi/180), 2)
-# finally plot the hodograph:
-sounding_hodograph(u, v, altitude)
-
+# plot the hodograph:
+sounding_hodograph(ws, wd, altitude)
 }

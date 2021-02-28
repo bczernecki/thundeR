@@ -2,35 +2,24 @@
 % Please edit documentation in R/sounding_compute.R
 \name{sounding_compute}
 \alias{sounding_compute}
-\title{Calculate indices}
+\title{Calculate parameters}
 \usage{
-sounding_compute(
-  pressure,
-  altitude,
-  temp,
-  dpt,
-  wd,
-  ws,
-  export_profile = 0,
-  accuracy = 1
-)
+sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 }
 \arguments{
 \item{pressure}{pressure [hPa]}
 
 \item{altitude}{altitude [metres]}
 
-\item{temp}{air temperature [degree Celsius]}
+\item{temp}{temperature [degree Celsius]}
 
 \item{dpt}{dew point temperature [degree Celsius]}
 
-\item{wd}{wind direction [degrees]}
+\item{wd}{wind direction [azimuth in degrees]}
 
-\item{ws}{wind speed [knots or m/s - TODO/TODISCUSS]}
+\item{ws}{wind speed [knots]}
 
-\item{export_profile}{whether to export interpolated levels for drawing on Skew-T diagram. Binary [0 - default, no extra data for drawing exported, 1 - extracting data to be used ]}
-
-\item{accuracy}{how accurately integrate the positive/negative area. Valid options (1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate)}
+\item{accuracy}{accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)}
 }
 \value{
 \enumerate{
@@ -144,21 +133,16 @@ sounding_compute(
 }
 }
 \description{
-Function calculates presently over 100 atmospheric thermal-, kinematic- and composite indices 
-(e.g. CAPE, CIN, Lapse Rates, EHI, STP, SCP, etc...)
-related mostly to severe weather phenomena (Thunderstorms, Large Hail, Tornadoes, etc...)
-}
-\details{
-Wrapper for a generic C++ based function. Please consider using a slightly faster 
-`?sounding_default()` for computing large databases (i.e. at least over 1,000,000 soundings).
+Function for calculating convective parameters commonly used in the operational prediction of severe convective storms.
 }
 \examples{
-pressure <- c(1000, 855, 700, 500, 300, 100, 10)
-altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
-temp <- c(25, 10, 0, -15, -30, -50, -92)
-dpt <- c(20, 5, -5, -30, -55, -80, -99)
-wd <- c(0, 90, 135, 180, 270, 350, 0)
-ws <- c(5, 10, 20, 30, 40, 5, 0)
+pressure = c(1000, 855, 700, 500, 300, 100, 10)
+altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000)
+temp = c(25, 10, 0, -15, -30, -50, -92)
+dpt = c(20, 5, -5, -30, -55, -80, -99)
+wd = c(0, 90, 135, 180, 270, 350, 0)
+ws = c(5, 10, 20, 30, 40, 5, 0)
+accuracy = 2 
 options(scipen = 999) # change formatting
-sounding_compute(pressure, altitude, temp, dpt, wd, ws)
+sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 }
