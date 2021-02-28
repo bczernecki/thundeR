@@ -1,17 +1,17 @@
 #' Plot vertical wind speed profile
 #' 
 #' Function for plotting wind speed profile. 
-#' TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
+#' Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
 #'
 #' @import stats
 #' @import utils
 #' @importFrom dplyr left_join
 #' @importFrom grDevices colorRampPalette
 #'
-#' @param pres pressure levels 
-#' @param ws wind speed in knots(!)
-#' @param convert logical. Whether to convert wind speed from knots to m/s (default FALSE)
-#' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
+#' @param pressure - pressure [hPa] 
+#' @param ws - wind speed [kn]
+#' @param convert - logical, whether to convert wind speed from knots to m/s (default FALSE)
+#' @param ptop pressuresure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param yaxs logic. Whether to add labels to heights on Y lab
 #' @param ... extra graphic arguments
 #' @export
@@ -20,12 +20,12 @@
 #' # load examplary dataset:
 #' data("sounding_wien")
 #' attach(sounding_wien)
-#' sounding_wind(pres = PRES, ws = SKNT, convert = TRUE, yaxs = TRUE)
+#' sounding_wind(pressure = pressure, ws = ws, convert = TRUE, yaxs = TRUE)
 
-sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ...){
+sounding_wind <- function(pressure, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ...){
         
-        #sounding_wien$PRES; ws = sounding_wien$SKNT
-        #par(pty = "s") # plot wyswietla sie w "kwadracie"
+        #sounding_wien$pressure; ws = sounding_wien$ws
+        #par(pty = "s") # draw diagram in "rectangle"
         if(ptop > 200) {
                 stop("\nptop argument needs to be set < 200 (hPa)!")
         }
@@ -40,7 +40,7 @@ sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ..
         #ymin <- skewty(50)
         ymin <- skewty(ptop)
         xmin <- 0
-        xmax <- 60
+        xmax <- 80
         
         ws_units <- seq(0, xmax, by = 10)
         
@@ -53,14 +53,14 @@ sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ..
         
         segments(x0 = ws_units, y0 = ymax, x1 = ws_units, y1 = ymin, lwd = 0.5, col = "black", lty = 3)
         prs <- c(1050, 1000, 850, 700, 500, 400, 300, seq(from = 200, to = ptop, by = -50))
-        NPRES <- length(prs)
+        Npressure <- length(prs)
         
-        ypos <- skewty(prs[2:NPRES])
+        ypos <- skewty(prs[2:Npressure])
         
         if(yaxs){
-                axis(2, at = ypos, labels = prs[2:NPRES], pos = xmin, padj = 1)
+                axis(2, at = ypos, labels = prs[2:Npressure], pos = xmin, padj = 1)
                 # commented label for X-axis
-                mtext(side = 2, line = 1.5, "Pressure (hPa)", padj = 2, cex=0.8)
+                mtext(side = 2, line = 1.5, "pressure (hPa)", padj = 2, cex=0.8)
                 
         } else {
                 axis(2, at = ypos, labels = NA, pos = xmin, padj = 1)
@@ -69,8 +69,8 @@ sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ..
         
         # end of drawing diagram in square
         
-        # draw pressure heights:
-        y <- skewty(pres)
+        # draw pressuresure heights:
+        y <- skewty(pressure)
         ind = y < ymin # clipping to max visible height
         x <- rep(xmin, length(y))
         
@@ -90,8 +90,8 @@ sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ..
         
         str(cols)
         
-        cols = data.frame(x1 = 1:60, 
-                          cols = paste0(colorRampPalette(cols)(60), "90"), 
+        cols = data.frame(x1 = 1:80, 
+                          cols = paste0(colorRampPalette(cols)(80), "90"), 
                           stringsAsFactors = FALSE)
         
         
@@ -105,7 +105,7 @@ sounding_wind <- function(pres, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ..
         
         #segments(x0 = 0.5, y0 = data$y, x1 = data$x, y1 = data$y, col = data$cols, lwd = 5)
         
-        #lines(x = df$ws, y = skewty(df$pressure), lwd = 5, col = "white")
+        #lines(x = df$ws, y = skewty(df$pressuresure), lwd = 5, col = "white")
         
         
         # wariant no. 2 z wypelnieniem gradientem

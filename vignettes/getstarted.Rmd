@@ -16,37 +16,37 @@ knitr::opts_chunk$set(
 options(scipen=999)
 ```
 
-`**thundeR**` is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large numerical datasets such as reanalyses or operational NWP models in a fairly low amount of time. This package was developed by research meteorologists specializing in severe convective storms and is constantly updated with new features. Its main purpose is to allow operational meteorologists and researchers a quick and easy evaluation of convective environments.
+`**thundeR**` is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large numerical datasets such as reanalyses or operational NWP models in a fairly low amount of time. This package was developed by research meteorologists specializing in severe convective storms and is constantly updated with new features. Its main purpose is to allow operational meteorologists and researchers a quick and easy evaluation of convective environments..
 
 
 
 ## Main functions:
 
-- `**sounding_compute()**` - Function calculates presently over 100 atmospheric thermal-, kinematic- and composite indices (e.g. CAPE, CIN, Lapse Rates, EHI, STP, SCP, etc...) related mostly to severe weather phenomena (Thunderstorms, Large Hail, Tornadoes, etc...)
+- `**sounding_compute()**` - Function for calculating convective parameters commonly used in the operational prediction of severe convective storms.
  
-- `**sounding_plot()**` - Generate Skew-T, hodograph and summary of most important convective indices on a single plot
- 
-- `**sounding_save()**` - Auxiliary function to 'sounding_plot' that plots a composite \ of Skew-T, hodograph and other relavant rawindsonde-derived profiles \ on a single layout and saves it into graphical file. \ Useful if graphical window is too small.
+- `**sounding_plot()**` - Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
 
-- `**get_sounding()**` - Downloading measurements of the vertical profile of atmosphere (aka rawinsonde data) in a form convenient to use with `thunder` package
+- `**sounding_save()**` - Auxiliary function to 'sounding_plot' that plots a composite \ of Skew-T, hodograph and selected convective parameters \ on a single layout and saves as graphical file.
+
+- `**get_sounding()**` - Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with `thundeR` package.
 
 
 ## Examples
 
-Examples shows aplication of thunder
+Examples show aplication of thundeR package functions
 
 #### Example 1
 
-Download exemplary sounding profile and create a composite layout:
+Plot sounding profile based on a sample vertical profile data
 
 ```{r example1, eval = TRUE, fig.width = 9, fig.height = 6, fig.fullwidth = TRUE}
 library(thunder)
-pressure <- c(1000, 855, 700, 500, 300, 100, 10)
-altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
-temp <- c(25, 10, 0, -15, -30, -50, -92)
-dpt <- c(20, 5, -5, -30, -55, -80, -99)
-wd <- c(0, 90, 135, 180, 270, 350, 0)
-ws <- c(5, 10, 20, 30, 40, 5, 0)
+pressure <- c(1000, 855, 700, 500, 300, 100, 10) # pressure [hPa]
+altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000) # altitude [m above ground level]
+temp <- c(25, 10, 0, -15, -30, -50, -92) # air temperature [°C]
+dpt <- c(20, 5, -5, -30, -55, -80, -99) # dew point temperature [°C]
+wd <- c(0, 90, 135, 180, 270, 350, 0) # wind direction [°]
+ws <- c(5, 10, 20, 30, 40, 5, 0) # wind speed [kn]
 sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
               parcel = "MU", title = "Test thunder package")
 
@@ -54,10 +54,10 @@ sounding_plot(pressure, altitude, temp, dpt, wd, ws,
 
 ### Example 2
 
-compute severe weather related indices
+Compute convective parameters with medium accuracy (~ 10x faster than high accuracy setting)
 
 ```{r example2, eval = TRUE}
-sounding_compute(pressure, altitude, temp, dpt, wd, ws)
+sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 ```
 
 
@@ -250,76 +250,77 @@ Below is the full list of parameters computed with the `sounding_compute()` func
 
 [81] SRH_3km_RM – storm-relative helicity between surface and 3 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   	
 
-[81] SRH_100m_LM – storm-relative helicity between surface and 100m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   
+[82] SRH_100m_LM – storm-relative helicity between surface and 100m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   
 
-[82] SRH_500m_LM – storm-relative helicity between surface and 500m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    
+[83] SRH_500m_LM – storm-relative helicity between surface and 500m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    
 
-[83] SRH_1km_LM – storm-relative helicity between surface and 1 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    	
+[84] SRH_1km_LM – storm-relative helicity between surface and 1 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    	
 
-[84] SRH_3km_LM – storm-relative helicity between surface and 3 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    	
+[85] SRH_3km_LM – storm-relative helicity between surface and 3 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    	
 
-[85] Bunkers_RM_A – azimuth for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.   	
-[86] Bunkers_RM_M – wind speed for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s. 
+[86] Bunkers_RM_A – azimuth for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.   
 
-[87] Bunkers_LM_A  – azimuth for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.	
+[87] Bunkers_RM_M – wind speed for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s. 
 
-[88] Bunkers_LM_M – wind speed for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s.  	
+[88] Bunkers_LM_A  – azimuth for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.	
 
-[89] Bunkers_MW_A  – azimuth for mean storm motion vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.	
+[89] Bunkers_LM_M – wind speed for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s.  	
 
-[90] Bunkers_MW_M – wind speed for mean storm motion vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s.  	
+[90] Bunkers_MW_A  – azimuth for mean storm motion vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.	
+
+[91] Bunkers_MW_M – wind speed for mean storm motion vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s.  	
 
 **Composite parameters:**
 
-[91] K_Index 	– based on original formula from George (1960): "Weather Forecasting for Aeronautics" Academic Press, London, 1960, p. 673. Units are K.
+[92] K_Index 	– based on original formula from George (1960): "Weather Forecasting for Aeronautics" Academic Press, London, 1960, p. 673. Units are K.
 
-[92] Showalter_Index – based on original formula from Showalter (1953), doi: https://doi.org/10.1175/1520-0477-34.6.250. Units are K.  
+[93] Showalter_Index – based on original formula from Showalter (1953), doi: https://doi.org/10.1175/1520-0477-34.6.250. Units are K.  
 
-[93] TotalTotals_Index – based on original formula from Miller (1972): "Notes on analysis and severe-storm forecasting procedures of the Air Force Global Weather Central", AWS Tech. Rpt. 200(rev), Air Weather Service, Scott AFB, IL. Units are K.
+[94] TotalTotals_Index – based on original formula from Miller (1972): "Notes on analysis and severe-storm forecasting procedures of the Air Force Global Weather Central", AWS Tech. Rpt. 200(rev), Air Weather Service, Scott AFB, IL. Units are K.
 
-[94] SWEAT_Index – based on original formula from Bidner (1970): "The Air Force Global Weather Central severe weather threat (SWEAT) index—A preliminary report". Air Weather Service Aerospace Sciences Review, AWS RP 105-2, No. 70-3, 2-5. Parameter is dimensionless.
+[95] SWEAT_Index – based on original formula from Bidner (1970): "The Air Force Global Weather Central severe weather threat (SWEAT) index—A preliminary report". Air Weather Service Aerospace Sciences Review, AWS RP 105-2, No. 70-3, 2-5. Parameter is dimensionless.
 	
-[95] STP – based on the fixed layer formula currently used on the Storm Prediction Center mesoanalysis (https://www.spc.noaa.gov/exper/mesoanalysis/) as of 1 March 2021. Parameter is dimensionless. 	
+[96] STP – based on the fixed layer formula currently used on the Storm Prediction Center mesoanalysis (https://www.spc.noaa.gov/exper/mesoanalysis/) as of 1 March 2021. Parameter is dimensionless. 	
 
-[96] STP_new – based on original formula from Coffer et al. (2019), doi: https://doi.org/10.1175/WAF-D-19-0115.1. Parameter is dimensionless.	
+[97] STP_new – based on original formula from Coffer et al. (2019), doi: https://doi.org/10.1175/WAF-D-19-0115.1. Parameter is dimensionless.	
 
-[97] SCP – based on Thompson et al. (2007), "An update to the supercell composite and significant tornado parameters". Preprints, 22nd Conf. on Severe Local Storms, Hyannis, MA, Amer. Meteor. Soc. P (Vol. 8), but with effective SRH replaced with surface to 3 km AGL SRH and effective bulk wind shear replaced with surface to 6 km AGL bulk wind shear. Parameter is dimensionless.  	
+[98] SCP – based on Thompson et al. (2007), "An update to the supercell composite and significant tornado parameters". Preprints, 22nd Conf. on Severe Local Storms, Hyannis, MA, Amer. Meteor. Soc. P (Vol. 8), but with effective SRH replaced with surface to 3 km AGL SRH and effective bulk wind shear replaced with surface to 6 km AGL bulk wind shear. Parameter is dimensionless.  	
 
-[98] SCP_new – based on formula from Gropp and Davenport (2018), doi: https://doi.org/10.1175/WAF-D-17-0150.1, but with effective SRH replaced with surface to 3 km AGL SRH. Parameter is dimensionless.	 	
+[99] SCP_new – based on formula from Gropp and Davenport (2018), doi: https://doi.org/10.1175/WAF-D-17-0150.1, but with effective SRH replaced with surface to 3 km AGL SRH. Parameter is dimensionless.	 	
 
-[99] SHIP – based on formula currently used on the Storm Prediction Center mesoanalysis (https://www.spc.noaa.gov/exper/mesoanalysis/) as of 1 March 2021. Parameter is dimensionless.  	
+[100] SHIP – based on formula currently used on the Storm Prediction Center mesoanalysis (https://www.spc.noaa.gov/exper/mesoanalysis/) as of 1 March 2021. Parameter is dimensionless.  	
 
-[100] DCP – based on formula currently used on the Storm Prediction Center mesoanalysis (https://www.spc.noaa.gov/exper/mesoanalysis/) as of 1 March 2021. Parameter is dimensionless.   	
+[101] DCP – based on formula currently used on the Storm Prediction Center mesoanalysis (https://www.spc.noaa.gov/exper/mesoanalysis/) as of 1 March 2021. Parameter is dimensionless.   	
 
-[101] MU_WMAXSHEAR – most-unstable WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	
+[102] MU_WMAXSHEAR – most-unstable WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	
 
-[102] SB_WMAXSHEAR – surface-based WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 		
+[103] SB_WMAXSHEAR – surface-based WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 		
 
-[103] ML_WMAXSHEAR – mixed-layer WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	 	
+[104] ML_WMAXSHEAR – mixed-layer WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	 	
 
-[104] MU_EFF_WMAXSHEAR – most-unstable WMAX multiplied by most-unstable effective bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	 	
+[105] MU_EFF_WMAXSHEAR – most-unstable WMAX multiplied by most-unstable effective bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	 	
 
-[105] SB_EFF_WMAXSHEAR – surface-based WMAX multiplied by surface-based effective bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	  	
+[106] SB_EFF_WMAXSHEAR – surface-based WMAX multiplied by surface-based effective bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	  	
 
-[106] ML_EFF_WMAXSHEAR – mixed-layer WMAX multiplied by mixed-layer effective bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	  	
+[107] ML_EFF_WMAXSHEAR – mixed-layer WMAX multiplied by mixed-layer effective bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	  	
 
 ### 2. Accuracy tables for `sounding_compute()` 
 
-The interpolation algorithm used in the `sounding_compute()` function for integrating positive or negative (i.e. CAPE/CIN) buoyancy area impacts accuracy and speed of the performed task. The valid options for the `accuracy` parameter are: 1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate) with the following vertical layers to be used for computations:
+The interpolation algorithm used in the `sounding_compute()` function impacts accuracy of parameters such as CAPE or CIN and the performance of the script. The valid options for the `accuracy` parameter are 1, 2 or 3:
 
-`accuracy = 1` - High performance but low accuracy. Dedicated for extremely large dataset or operational predictions when output data needs to be quickly available. 60 vertical layers. Approx. 20 times faster than high accuracy (3) settings:
+`accuracy = 1` - High performance but low accuracy. Dedicated for large dataset when output data needs to be quickly available (e.g. operational numerical weather models). This option is around 20 times faster than high accuracy (3) setting. Interpolation is peformed for 60 levels (m AGL): 
 
 ```{r accuracy1, echo = FALSE}
 c(0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3600, 3800, 4000, 4200, 4400, 4600, 4800, 5000, 5200, 5400, 5600, 5800, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000)
 ```
 
-`accuracy = 2` - Compromise between performance and accuracy. Recommended for processing large numerical weather prediction datasets such as meteorological reanalysis. Approx. 10 times faster than high accuracy (3) settings:
+`accuracy = 2` - Compromise between script performance and accuracy. Recommended for processing large numerical weather prediction datasets such as meteorological reanalyses for research studies. This option is around 10 times faster than high accuracy (3) setting. Interpolation is peformed for 318 levels (m AGL): 
 
 ```{r accuracy2, echo = FALSE}
 c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400, 410, 420, 430, 440, 450, 460, 470, 480, 490, 500, 510, 520, 530, 540, 550, 560, 570, 580, 590, 600, 610, 620, 630, 640, 650, 660, 670, 680, 690, 700, 710, 720, 730, 740, 750, 775, 800, 825, 850, 875, 900, 925, 950, 975, 1000, 1025, 1050, 1075, 1100, 1125, 1150, 1175, 1200, 1225, 1250, 1275, 1300, 1325, 1350, 1375, 1400, 1425, 1450, 1475, 1500, 1525, 1550, 1575, 1600, 1625, 1650, 1675, 1700, 1725, 1750, 1775, 1800, 1825, 1850, 1875, 1900, 1925, 1950, 1975, 2000, 2025, 2050, 2075, 2100, 2125, 2150, 2175, 2200, 2225, 2250, 2275, 2300, 2325, 2350, 2375, 2400, 2425, 2450, 2475, 2500, 2525, 2550, 2575, 2600, 2625, 2650, 2675, 2700, 2725, 2750, 2775, 2800, 2825, 2850, 2875, 2900, 2925, 2950, 2975, 3000, 3050, 3100, 3150, 3200, 3250, 3300, 3350, 3400, 3450, 3500, 3550, 3600, 3650, 3700, 3750, 3800, 3850, 3900, 3950, 4000, 4050, 4100, 4150, 4200, 4250, 4300, 4350, 4400, 4450, 4500, 4550, 4600, 4650, 4700, 4750, 4800, 4850, 4900, 4950, 5000, 5050, 5100, 5150, 5200, 5250, 5300, 5350, 5400, 5450, 5500, 5550, 5600, 5650, 5700, 5750, 5800, 5850, 5900, 5950, 6000, 6100, 6200, 6300, 6400, 6500, 6600, 6700, 6800, 6900, 7000, 7100, 7200, 7300, 7400, 7500, 7600, 7700, 7800, 7900, 8000, 8100, 8200, 8300, 8400, 8500, 8600, 8700, 8800, 8900, 9000, 9100, 9200, 9300, 9400, 9500, 9600, 9700, 9800, 9900, 10000, 10100, 10200, 10300, 10400, 10500, 10600, 10700, 10800, 10900, 11000, 11100, 11200, 11300, 11400, 11500, 11600, 11700, 11800, 11900, 12000, 12250, 12500, 12750, 13000, 13250, 13500, 13750, 14000, 14250, 14500, 14750, 15000, 15250, 15500, 15750, 16000, 16250, 16500, 16750, 17000, 17250, 17500, 17750, 18000, 18250, 18500, 18750, 19000, 19250, 19500, 19750, 20000)
 ```
 
-`accuracy = 3`: High accuracy - low performance setting recommended for viewing individual profiles. Interpolation done with 5 m vertical resolution step (i.e.: `0, 5, 10, ... 20000` m AGL)
+`accuracy = 3`: High accuracy but low performance setting. Recommended for analysing individual profiles. Interpolation is performed with 5 m vertical resolution step up to 20 km AGL (i.e.: `0, 5, 10, ... 20000` m AGL)
 
 ### Performance comparison:
 
@@ -331,6 +332,3 @@ print(t1)
 print(t2)
 print(t3)
 ```
-
-
-

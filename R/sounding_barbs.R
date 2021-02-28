@@ -8,11 +8,11 @@
 #' @importFrom dplyr left_join
 #' @importFrom grDevices colorRampPalette
 #'
-#' @param pres pressure levels 
-#' @param ws wind speed in knots(!)
-#' @param wd wind direction in degress
-#' @param altitude altitude in metres above sea level
-#' @param convert logical. Whether to convert wind speed from knots to m/s (default FALSE)
+#' @param pressure - pressure [hPa] 
+#' @param ws - wind speed [kn]
+#' @param wd - wind direction [azimuth as degress]
+#' @param altitude - altitude [m]
+#' @param convert - logical, whether to convert wind speed from knots to m/s (default TRUE)
 #' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param interpolate logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset
 #' @param showaxis logical, drawing bounding box with left axis for pressure heighs (default FALSE)
@@ -25,11 +25,11 @@
 #' data("sounding_wien")
 #' attach(sounding_wien)
 #' 
-#' sounding_barbs(pres = PRES, ws = SKNT, wd = DRCT, altitude = HGHT, 
+#' sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude, 
 #'                convert = TRUE, interpolate = FALSE)
 #'
 
-sounding_barbs <- function(pres, ws, wd, altitude, convert = FALSE,
+sounding_barbs <- function(pressure, ws, wd, altitude, convert = FALSE,
                            ptop = 100, interpolate = TRUE, 
                            showaxis = FALSE, barb_cex = 0.3, ...){
   
@@ -59,7 +59,7 @@ sounding_barbs <- function(pres, ws, wd, altitude, convert = FALSE,
   
   if(showaxis) plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 1)
   
-  prs <- pres[which((altitude-altitude[1]) %in% seq(0,16000,500))]
+  prs <- pressure[which((altitude-altitude[1]) %in% seq(0,16000,500))]
   #prs <- c(1050, 1000, 850, 700, 500, 400, 300, seq(from = 200, to = ptop, by = -50))
   NPRES <- length(prs)
   
@@ -74,7 +74,7 @@ sounding_barbs <- function(pres, ws, wd, altitude, convert = FALSE,
   # end of drawing diagram in square
   
   # draw pressure heights:
-  y <- skewty(pres)
+  y <- skewty(pressure)
   ind = y < ymin # clipping to max visible height
   x <- rep(xmin, length(y))
   

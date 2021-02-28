@@ -55,10 +55,9 @@ Useful if graphical window is too small.
 }
 \examples{
 data("sounding_wien")
-sounding_wien = na.omit(sounding_wien)
 attach(sounding_wien)
 sounding_save(filename = "myfile.png", 
-              PRES, HGHT, TEMP, DWPT, DRCT, SKNT, parcel = "MU", 
+              pressure, altitude, temp, dpt, wd, ws, parcel = "MU", 
               title = "Wien - 2011/08/23, 12:00 UTC")
 
 

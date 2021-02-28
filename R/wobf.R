@@ -1,5 +1,4 @@
-"wobf" <-
-function(temp)
+"wobf" = function(temp)
 {
 #
 # Copyright 2001,2002 Tim Hoar
