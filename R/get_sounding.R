@@ -3,7 +3,7 @@
 #' Download rawinsonde measurement from sounding database of the University of Wyoming. 
 #' This is a wrapper for `climate::sounding_wyoming()` customized for the use with thundeR package.
 #' 
-#' @param wmo_id international WMO station code (World Meteorological Organization ID, e.g. 11035 for Vienna)
+#' @param wmo_id international WMO station code (e.g. 11035 for Vienna)
 #' @param yy year - single number (e.g. 2010)
 #' @param mm month - single number denoting month (e.g. 5)
 #' @param dd day - single number denoting day (e.g. 23)
@@ -13,12 +13,12 @@
 #' @importFrom climate sounding_wyoming
 #' @return Returns two lists with values described at: weather.uwyo.edu ; The first list contains:
 #' \enumerate{
-#'  \item pressure - Air Pressure [hPa]
-#'  \item altitude - Altitude [metres above sea level]
-#'  \item temp - Temperature [degree C]
-#'  \item dpt - Dew point [degree C]
-#'  \item wd - Wind direction [azimuth as degrees]
-#'  \item ws - Wind speed [kn]
+#'  \item pressure - pressure [hPa]
+#'  \item altitude - altitude [metres above sea level]
+#'  \item temp - temperature [degree C]
+#'  \item dpt - dew point [degree C]
+#'  \item wd - wind direction [azimuth as degrees]
+#'  \item ws - wind speed [kn]
 #'  }
 #'  If metadata = TRUE then retrieved data is wrapped to a list with the second element containing metadata 
 #'
