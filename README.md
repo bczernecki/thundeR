@@ -135,7 +135,7 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
 **thundeR** package has been developed by atmospheric scientists, each having an equal contribution (listed in alphabetical order):
 - Bartosz Czernecki (Adam Mickiewicz University in Poznań, Poland)
-- Piotr Szuster (University of Technology in Cracow, Poland)
+- Piotr Szuster (Cracow University of Technology, Poland)
 - Mateusz Taszarek (CIMMS/NSSL in Norman, Oklahoma, United States)
 
 ### Contributions
