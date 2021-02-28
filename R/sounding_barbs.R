@@ -8,7 +8,7 @@
 #' @importFrom dplyr left_join
 #' @importFrom grDevices colorRampPalette
 #'
-#' @param pres - pressure [hPa] 
+#' @param pressure - pressure [hPa] 
 #' @param ws - wind speed [kn]
 #' @param wd - wind direction [azimuth as degress]
 #' @param altitude - altitude [m]
@@ -25,7 +25,7 @@
 #' data("sounding_wien")
 #' attach(sounding_wien)
 #' 
-#' sounding_barbs(pres = pressure, ws = ws, wd = wd, altitude = altitude, 
+#' sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude, 
 #'                convert = TRUE, interpolate = FALSE)
 #'
 
@@ -74,7 +74,7 @@ sounding_barbs <- function(pressure, ws, wd, altitude, convert = FALSE,
   # end of drawing diagram in square
   
   # draw pressure heights:
-  y <- skewty(pres)
+  y <- skewty(pressure)
   ind = y < ymin # clipping to max visible height
   x <- rep(xmin, length(y))
   
