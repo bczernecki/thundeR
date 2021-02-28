@@ -40,7 +40,7 @@ sounding_wind <- function(pressure, ws, ptop = 100, convert = FALSE, yaxs = TRUE
         #ymin <- skewty(50)
         ymin <- skewty(ptop)
         xmin <- 0
-        xmax <- 60
+        xmax <- 80
         
         ws_units <- seq(0, xmax, by = 10)
         
@@ -90,8 +90,8 @@ sounding_wind <- function(pressure, ws, ptop = 100, convert = FALSE, yaxs = TRUE
         
         str(cols)
         
-        cols = data.frame(x1 = 1:60, 
-                          cols = paste0(colorRampPalette(cols)(60), "90"), 
+        cols = data.frame(x1 = 1:80, 
+                          cols = paste0(colorRampPalette(cols)(80), "90"), 
                           stringsAsFactors = FALSE)
         
         
