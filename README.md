@@ -12,13 +12,13 @@
 **`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational forecasting of severe convective storms. Core algorithm is based on C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features.
 
 
-## Online browser
+Online browser
 -------------
 
 Online rawinsonde browser of **thundeR** package is available at www.rawinsonde.com 
 
 
-## Installation
+Installation
 -------------
 
 The stable version can be installed from the CRAN repository:
@@ -34,7 +34,7 @@ The development version can be installed directly from the github repository:
 library(remotes);install_github("bczernecki/thunder")
 ```
 
-## Usage
+Usage
 -------------
 
 ### Draw Skew-T, hodograph and convective parameters on a single layout and export to png file
@@ -130,7 +130,7 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 #             1005.54              936.94              936.94              771.71
 ```
 
-## Developers
+Developers
 -------------
 
 **thundeR** package has been developed by atmospheric scientists, each having an equal contribution (listed in alphabetical order):
@@ -138,8 +138,7 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 - Piotr Szuster (University of Technology in Cracow, Poland)
 - Mateusz Taszarek (CIMMS/NSSL in Norman, Oklahoma, United States)
 
-
-## Contributions
+Contributions
 -------------
 
 [Feel free to submit issues and enhancement requests.](https://github.com/bczernecki/thunder/issues)
