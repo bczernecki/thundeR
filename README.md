@@ -37,34 +37,43 @@ library(remotes);install_github("bczernecki/thunder")
 ## Usage
 -----
 
-### Draw Skew-T diagram, hodograph and selected convective parameters on a single layout and save it to png file
+### Draw Skew-T, hodograph and convective parameters on a single layout and export to png file
 
 ``` r
-data("sounding_wien") # load example dataset (rawinsonde observation):
+data("sounding_wien") # load example dataset (Vienna rawinsonde profile for 23 Aug 2011 12UTC):
 pressure = sounding_wien$PRES # vector of pressure [hPa]
 altitude = sounding_wien$HGHT # vector of altitude [m above ground level]
 temp = sounding_wien$TEMP  # vector of air temperature [°C]
 dpt = sounding_wien$DWPT # vector of dew point temperature [°C]
 wd = sounding_wien$DRCT # vector of wind direction as azimuth [°]
 ws = sounding_wien$SKNT # vector of wind speed [kn]
-sounding_save(filename = "myfile.png", title = "Vienna - 23 August 2011 1200 UTC", pressure, altitude, temp, dpt, wd, ws)
+sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC", pressure, altitude, temp, dpt, wd, ws)
 ```
 
 ![](inst/figures/Vienna_profile.png)
 
 
+### Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file  
 
-### Compute all convective indices in a form of numeric vector based on a sample vertical profile data:
+``` r
+profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
+sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999 0000 UTC", profile$pressure, profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
+```
+
+![](inst/figures/Vienna_profile.png)
+
+
+### Compute convective parameters as a vector object based on a sample vertical profile data:
 
 ``` r
 library("thunder")
-pressure <- c(1000, 855, 700, 500, 300, 100, 10) # pressure [hPa]
-altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000) # altitude [m above ground level]
-temp <- c(25, 10, 0, -15, -30, -50, -92) # air temperature [°C]
-dpt <- c(20, 5, -5, -30, -55, -80, -99) # dew point temperature [°C]
-wd <- c(0, 90, 135, 180, 270, 350, 0) # wind direction [°]
-ws <- c(5, 10, 20, 30, 40, 5, 0) # wind speed [kn]
-accuracy <- 2 # accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
+pressure = c(1000, 855, 700, 500, 300, 100, 10) # pressure [hPa]
+altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000) # altitude [m above ground level]
+temp = c(25, 10, 0, -15, -30, -50, -92) # air temperature [°C]
+dpt = c(20, 5, -5, -30, -55, -80, -99) # dew point temperature [°C]
+wd = c(0, 90, 135, 180, 270, 350, 0) # wind direction [°]
+ws = c(5, 10, 20, 30, 40, 5, 0) # wind speed [kn]
+accuracy = 2 # accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
 options(digits = 2) # change output formatting precision 
 sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
