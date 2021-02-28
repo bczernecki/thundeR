@@ -526,6 +526,11 @@ par(fig = c(0.69, 0.99, 0.49, 0.9175), new = TRUE,
 
 sounding_hodograph(ws, wd, output$altitude-output$altitude[1], max_speed = max_speed, frame = FALSE, ...)
 
+up = round(max_speed * -1.55  * cos(135 * pi/180), 2)
+vp = round(max_speed * 1.35 * sin(135 * pi/180), 2)
+points(up, vp, pch = 19, col = "white", cex = 2)
+text(up, vp, labels = "[m/s]", col = "gray20", cex = 0.75)
+  
 RM_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)
 RM_x = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_RM_M")] * sin(parametry[which(names(parametry[1:LP]) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
 LM_y = round(-parametry[which(names(parametry[1:LP]) == "Bunkers_LM_M")] * cos(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_A")] * pi/180), 2)
@@ -566,7 +571,7 @@ text(round(max_speed * 1.37  * cos(135 * pi/180), 2),
      adj=c(0,0),
      labels = paste0("Left-moving: ",sprintf("%.0f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_A")],digits = 0))," / ", sprintf("%.1f",round(parametry[which(names(parametry[1:LP]) == "Bunkers_LM_M")],digits = 1))," m/s"), col = "black", cex = 0.66)
 
-box()
+#box()
 
 ####
 
