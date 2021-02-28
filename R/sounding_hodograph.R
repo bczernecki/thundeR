@@ -2,29 +2,26 @@
 #' 
 #' Plot rawinsonde hodograph to show changes of wind speed and direction in vertical profile
 #' 
-#' @param u u-wind wind vector components (m/s)
-#' @param v v-wind wind vector components (m/s)
-#' @param altitude vector of altitudes (m)
-#' @param max_hght max. altitude to be considered. 8 km used by default
-#' @param max_speed max. isoline (circle) to be drawn for wind speed; 30 m/s used as default
-#' @param lab_hghts label of numeric vector heights in km to be signed on hodograph; default: 1, 3, 6; NULL for skipping labels
+#' @param wd - wind direction [azimuth in degrees]
+#' @param ws - wind speed [kn]
+#' @param altitude - altitudes (metres)
+#' @param max_hght - maximum altitude to be considered on the hodograph, 12 km used by default
+#' @param max_speed - range of the hodograph to be drawn, 25 m/s used as default
+#' @param lab_hghts - height labels to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels
 #' @param ... other graphical parameters to be used with plot() function
 #'
 #' @export
 #' @examples
 #' data("sounding_wien")
 #' attach(sounding_wien)
-#' # changing wind speed and direction to U and V wind components
-#' # also changing units from knots to m/s
-#' u = round(-ws * 0.514444 * sin(wd * pi/180), 2)
-#' v = round(-ws * 0.514444 * cos(wd * pi/180), 2)
-#' # finally plot the hodograph:
-#' sounding_hodograph(u, v, altitude)
-#' 
+#' # plot the hodograph:
+#' sounding_hodograph(ws, wd, altitude)
 
-
-sounding_hodograph = function(u, v, altitude, max_hght = 16000, max_speed = 25,
+sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25,
                      lab_hghts = c(0, 1, 3, 6, 9, 12), ...){
+  
+  u = round(-ws * 0.514444 * sin(wd * pi/180), 2)
+  v = round(-ws * 0.514444 * cos(wd * pi/180), 2)
   
   # clipping to define max_hght
   ind = altitude <= max_hght
