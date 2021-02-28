@@ -8,11 +8,11 @@
 #' @importFrom dplyr left_join
 #' @importFrom grDevices colorRampPalette
 #'
-#' @param pres pressure levels 
-#' @param ws wind speed in knots(!)
-#' @param wd wind direction in degress
-#' @param altitude altitude in metres above sea level
-#' @param convert logical. Whether to convert wind speed from knots to m/s (default TRUE)
+#' @param pres - pressure [hPa] 
+#' @param ws - wind speed [kn]
+#' @param wd - wind direction [azimuth as degress]
+#' @param altitude - altitude [m]
+#' @param convert - logical, whether to convert wind speed from knots to m/s (default TRUE)
 #' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param interpolate logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset
 #' @param showaxis logical, drawing bounding box with left axis for pressure heighs (default FALSE)
