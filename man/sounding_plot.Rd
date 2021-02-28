@@ -24,7 +24,7 @@ sounding_plot(
 \arguments{
 \item{pressure}{- air pressure (hPa)}
 
-\item{altitude}{- altitude in metres AMSL}
+\item{altitude}{- in metres}
 
 \item{temp}{- air temperature (degree Celsius)}
 
@@ -46,7 +46,7 @@ sounding_plot(
 
 \item{max_speed}{max speed for defining hodograph limits}
 
-\item{hazards}{logical. Whether to add extra information about possibility of severe weather risk (default  = FALSE)}
+\item{hazards}{logical. Whether to add extra information about possibility of severe weather risk}
 
 \item{...}{extra graphic arguments}
 }
@@ -58,7 +58,7 @@ on a single layout
 data("sounding_wien")
 sounding_wien = na.omit(sounding_wien)
 attach(sounding_wien)
-sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
+sounding_plot(PRES, HGHT, TEMP, DWPT, DRCT, SKNT, 
               parcel = "MU", title = "Wien - 2011/08/23, 12:00 UTC")
 
 }

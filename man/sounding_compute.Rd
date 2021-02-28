@@ -2,7 +2,7 @@
 % Please edit documentation in R/sounding_compute.R
 \name{sounding_compute}
 \alias{sounding_compute}
-\title{Calculate indices}
+\title{Calculate convective indices}
 \usage{
 sounding_compute(
   pressure,

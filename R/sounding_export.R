@@ -1,14 +1,15 @@
 #' Sounding export
 #' 
-#' Internal package function for exporting interpolated profile with 5m steps
+#' Internal function to be used for re-calculate parcel trajectories that can be analysed or drawn
+#' on Skew-T diagrams
 #' 
 #' 
-#' @param pressure - pressure [hPa]
-#' @param altitude - altitude [meters]
-#' @param temp - temperature [degree Celsius]
-#' @param dpt - dew point temperature [degree Celsius]
-#' @param wd - wind direction [azimuth in degrees]
-#' @param ws - wind speed [kn]
+#' @param pressure - air pressure (hPa)
+#' @param altitude - in metres
+#' @param temp - air temperature (degree Celsius)
+#' @param dpt - dew point temperature (degree Celsius)
+#' @param wd - wind direction in degrees (0-360)
+#' @param ws - wind speed in [m/s or knots / TODO / TODISCUSS]
 #' 
 #' @importFrom climate sounding_wyoming
 #' @export
@@ -17,7 +18,7 @@
 #' data("sounding_wien")
 #' attach(sounding_wien)
 #' skewt_plot()
-#' output <- sounding_export(pressure, altitude, temp, dpt, wd, ws)
+#' output <- sounding_export(PRES, HGHT, TEMP, DWPT, DRCT, SKNT)
 #' skewt_lines(output$dpt, output$pressure, col = 'forestgreen',lwd = 2.5)
 #' skewt_lines(output$temp,output$pressure, col = 'red', lwd = 2.5)
 #' skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)
@@ -25,13 +26,11 @@
 
 sounding_export = function(pressure, altitude, temp, dpt, wd, ws){
 
-  parametry = sounding_default(pressure = pressure, altitude = altitude, 
+  parametry = sounding_compute(pressure = pressure, altitude = altitude, 
                                temp = temp, dpt = dpt, wd = wd, ws = ws, 
                                export_profile = 1, accuracy = 3)
   
-  LP = length(sounding_default(pressure = pressure, altitude = altitude, 
-                               temp = temp, dpt = dpt, wd = wd, ws = ws, 
-                               export_profile = 0, accuracy = 1)) # no. of parameters 
+  LP = max(which(!is.na(names(parametry)))) # no. of parameters 
   ###
   pozMU = parametry[LP+1]
   MUs = parametry[LP+2]

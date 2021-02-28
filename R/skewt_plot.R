@@ -26,8 +26,10 @@
 #' mtext('WMO ID: 11035, 2011-08-23 1200 UTC', padj = -0.5, col = "white")
 #' data("sounding_wien")
 #' attach(sounding_wien)
+#' # dataset obtained from Wyoming University's sounding webpage:
+#' # climate::sounding_wyoming(wmo_id = 11035, yy = 2011, mm = 8, dd = 23, hh=12)[[1]]
 #' 
-#' output <- sounding_export(pressure, altitude, temp, dpt, wd, ws)
+#' output <- sounding_export(PRES, HGHT, TEMP, DWPT, DRCT, SKNT)
 #' skewt_lines(output$dpt, output$pressure,type='l',col='forestgreen',lwd = 2.5)
 #' skewt_lines(output$temp,output$pressure,type='l',col='red', lwd = 2.5)
 #' skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)

@@ -759,7 +759,7 @@ void Kinematics::prepareSupercellVectors()
   Vector tshear = this->mean6-this->mean0;
   dev = Vector::vec(tshear,tv);
   dev *= 7.5;
-  dev *= 1.0 / tshear.abs();
+  dev *= 1.0 / this->shear06().abs();
   this->rm = meanwind - dev;
   this->lm = meanwind + dev;
   
