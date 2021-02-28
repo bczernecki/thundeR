@@ -29,7 +29,9 @@ sounding_export = function(pressure, altitude, temp, dpt, wd, ws){
                                temp = temp, dpt = dpt, wd = wd, ws = ws, 
                                export_profile = 1, accuracy = 3)
   
-  LP = max(which(!is.na(names(parametry)))) # no. of parameters 
+  LP = length(sounding_default(pressure = pressure, altitude = altitude, 
+                               temp = temp, dpt = dpt, wd = wd, ws = ws, 
+                               export_profile = 0, accuracy = 1)) # no. of parameters 
   ###
   pozMU = parametry[LP+1]
   MUs = parametry[LP+2]
