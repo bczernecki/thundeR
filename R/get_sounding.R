@@ -5,9 +5,9 @@
 #' 
 #' @param wmo_id international WMO station code (e.g. 11035 for Vienna)
 #' @param yy year - single number (e.g. 2010)
-#' @param mm month - single number denoting month (e.g. 5)
-#' @param dd day - single number denoting day (e.g. 23)
-#' @param hh hour - single number denoting hour of measurement, for most stations it will 12 or 00 UTC (e.g. 0).
+#' @param mm month - single number (e.g. 5)
+#' @param dd day - single number (e.g. 23)
+#' @param hh hour - single number (e.g. 0)
 #' @param metadata - logical, whether to return metadata of downloaded sounding; default FALSE
 #' 
 #' @importFrom climate sounding_wyoming
