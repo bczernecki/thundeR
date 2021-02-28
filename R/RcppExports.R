@@ -9,7 +9,7 @@
 #' @param altitude - altitude [meters]
 #' @param temp - temperature [degree Celsius]
 #' @param dpt - dew point temperature [degree Celsius]
-#' @param ws - wind direction [azimuth in degrees]
+#' @param wd - wind direction [azimuth in degrees]
 #' @param ws - wind speed [kn]
 #' @param export_profile - possibility to export interpolated profile on the levels defined in accuracy configuration
 #' @param accuracy - accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
