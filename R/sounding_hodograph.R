@@ -66,12 +66,6 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
   
   sapply(seq(from = 0, to = max(xlm + 20), by = 5), draw_circle)
   
-  # add units [m/s] in a hodograph corner
-  up = round(max_speed * -1.55  * cos(135 * pi/180), 2)
-  vp = round(max_speed * 1.35 * sin(135 * pi/180), 2)
-  points(up, vp, pch = 19, col = "white", cex = 2)
-  text(up, vp, labels = "[m/s]", col = "gray20", cex = 0.75)
-  
   # finally adding lines to hodograph:
   
   # find surface level
@@ -121,5 +115,5 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
     points(ux$y, uy$y, cex = 1.15, pch = 21, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 125), bg = rgb(255, 255, 255, maxColorValue = 255, alpha = 125))
     text(font=2, ux$y, uy$y, labels = floor(lab_hghts), col = "black", cex = 0.65)
   }
-  
+  box()
 }
