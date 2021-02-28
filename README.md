@@ -13,13 +13,13 @@
 
 
 ## Online browser
-------------
+-------------
 
 Online rawinsonde browser of **thundeR** package is available at www.rawinsonde.com 
 
 
 ## Installation
-------------
+-------------
 
 The stable version can be installed from the CRAN repository:
 
@@ -35,7 +35,7 @@ library(remotes);install_github("bczernecki/thunder")
 ```
 
 ## Usage
------
+-------------
 
 ### Draw Skew-T, hodograph and convective parameters on a single layout and export to png file
 
@@ -130,7 +130,7 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 #             1005.54              936.94              936.94              771.71
 ```
 
-Developers
+## Developers
 -------------
 
 **thundeR** package has been developed by atmospheric scientists, each having an equal contribution (listed in alphabetical order):
@@ -139,7 +139,7 @@ Developers
 - Mateusz Taszarek (CIMMS/NSSL in Norman, Oklahoma, United States)
 
 
-Contributions
+## Contributions
 -------------
 
 [Feel free to submit issues and enhancement requests.](https://github.com/bczernecki/thunder/issues)
