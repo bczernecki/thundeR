@@ -12,13 +12,13 @@
 **`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational forecasting of severe convective storms. Core algorithm is based on C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features.
 
 
-Online browser
+### Online browser
 -------------
 
 Online rawinsonde browser of **thundeR** package is available at www.rawinsonde.com 
 
 
-Installation
+### Installation
 -------------
 
 The stable version can be installed from the CRAN repository:
@@ -34,10 +34,10 @@ The development version can be installed directly from the github repository:
 library(remotes);install_github("bczernecki/thunder")
 ```
 
-Usage
+### Usage
 -------------
 
-### Draw Skew-T, hodograph and convective parameters on a single layout and export to png file
+#### Draw Skew-T, hodograph and convective parameters on a single layout and export to png file
 
 ``` r
 data("sounding_wien") # load example dataset (Vienna rawinsonde profile for 23 Aug 2011 12UTC):
@@ -53,7 +53,7 @@ sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC
 ![](inst/figures/Vienna_profile.png)
 
 
-### Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file  
+#### Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file  
 
 ``` r
 profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
@@ -63,7 +63,7 @@ sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999
 ![](inst/figures/Vienna_profile.png)
 
 
-### Compute convective parameters as a vector object based on a sample vertical profile data:
+#### Compute convective parameters as a vector object based on a sample vertical profile data:
 
 ``` r
 library("thunder")
@@ -130,7 +130,7 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 #             1005.54              936.94              936.94              771.71
 ```
 
-Developers
+### Developers
 -------------
 
 **thundeR** package has been developed by atmospheric scientists, each having an equal contribution (listed in alphabetical order):
@@ -138,7 +138,7 @@ Developers
 - Piotr Szuster (University of Technology in Cracow, Poland)
 - Mateusz Taszarek (CIMMS/NSSL in Norman, Oklahoma, United States)
 
-Contributions
+### Contributions
 -------------
 
 [Feel free to submit issues and enhancement requests.](https://github.com/bczernecki/thunder/issues)
