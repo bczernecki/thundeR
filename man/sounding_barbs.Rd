@@ -39,15 +39,15 @@ sounding_barbs(
 \item{...}{extra graphic arguments}
 }
 \description{
-Function for plotting wind direction and wind speed profile. 
-TODO: Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
+Function for plotting wind direction and wind speed profile with the use of wind barbs.
+Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
 }
 \examples{
 # load examplary dataset:
 data("sounding_wien")
 attach(sounding_wien)
 
-sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude, 
-               convert = TRUE, interpolate = FALSE)
+sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
+               convert = TRUE, interpolate = FALSE, showaxis = TRUE)
 
 }
