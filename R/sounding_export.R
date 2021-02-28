@@ -25,7 +25,7 @@
 
 sounding_export = function(pressure, altitude, temp, dpt, wd, ws){
 
-  parametry = sounding_compute(pressure = pressure, altitude = altitude, 
+  parametry = sounding_default(pressure = pressure, altitude = altitude, 
                                temp = temp, dpt = dpt, wd = wd, ws = ws, 
                                export_profile = 1, accuracy = 3)
   
