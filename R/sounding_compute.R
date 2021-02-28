@@ -1,11 +1,6 @@
-#' Calculate indices
+#' Calculate parameters
 #'
-#' Function calculates presently over 100 atmospheric thermal-, kinematic- and composite indices 
-#' (e.g. CAPE, CIN, Lapse Rates, EHI, STP, SCP, etc...)
-#' related mostly to severe weather phenomena (Thunderstorms, Large Hail, Tornadoes, etc...)
-#' 
-#' Wrapper for a generic C++ based function. Please consider using a slightly faster 
-#' `?sounding_default()` for computing large databases (i.e. at least over 1,000,000 soundings).
+#' Function for calculating convective parameters commonly used in the operational prediction of severe convective storms. 
 #'
 #' @export
 #' 
@@ -120,14 +115,13 @@
 #'  \item ML_EFF_WMAXSHEAR
 #' }
 #'
-#' @param pressure pressure [hPa]
-#' @param altitude altitude [metres]
-#' @param temp air temperature [degree Celsius]
-#' @param dpt dew point temperature [degree Celsius]
-#' @param wd wind direction [degrees]
-#' @param ws wind speed [knots or m/s - TODO/TODISCUSS]
-#' @param export_profile  whether to export interpolated levels for drawing on Skew-T diagram. Binary [0 - default, no extra data for drawing exported, 1 - extracting data to be used ]
-#' @param accuracy how accurately integrate the positive/negative area. Valid options (1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate)
+#' @param pressure - pressure [hPa]
+#' @param altitude - altitude [metres]
+#' @param temp - temperature [degree Celsius]
+#' @param dpt - dew point temperature [degree Celsius]
+#' @param wd - wind direction [azimuth in degrees]
+#' @param ws - wind speed [kn]
+#' @param accuracy - accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
 #' @export 
 #' @examples
 #' pressure <- c(1000, 855, 700, 500, 300, 100, 10)
@@ -136,12 +130,13 @@
 #' dpt <- c(20, 5, -5, -30, -55, -80, -99)
 #' wd <- c(0, 90, 135, 180, 270, 350, 0)
 #' ws <- c(5, 10, 20, 30, 40, 5, 0)
+#' accuracy <- 2 
 #' options(scipen = 999) # change formatting
-#' sounding_compute(pressure, altitude, temp, dpt, wd, ws)
+#' sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
-
-sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, 
-                            export_profile = 0, accuracy = 1){
+sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2){
+  
+  export_profile = 0 
   
   tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy)
   
