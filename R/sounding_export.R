@@ -1,15 +1,14 @@
 #' Sounding export
 #' 
-#' Internal function to be used for re-calculate parcel trajectories that can be analysed or drawn
-#' on Skew-T diagrams
+#' Internal package function for exporting interpolated profile with 5m steps
 #' 
 #' 
-#' @param pressure - air pressure (hPa)
-#' @param altitude - in metres
-#' @param temp - air temperature (degree Celsius)
-#' @param dpt - dew point temperature (degree Celsius)
-#' @param wd - wind direction in degrees (0-360)
-#' @param ws - wind speed in [m/s or knots / TODO / TODISCUSS]
+#' @param pressure - pressure [hPa]
+#' @param altitude - altitude [meters]
+#' @param temp - temperature [degree Celsius]
+#' @param dpt - dew point temperature [degree Celsius]
+#' @param wd - wind direction [azimuth in degrees]
+#' @param ws - wind speed [kn]
 #' 
 #' @importFrom climate sounding_wyoming
 #' @export
