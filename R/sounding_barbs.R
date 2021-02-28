@@ -29,7 +29,7 @@
 #'                convert = TRUE, interpolate = FALSE)
 #'
 
-sounding_barbs <- function(pres, ws, wd, altitude, convert = FALSE,
+sounding_barbs <- function(pressure, ws, wd, altitude, convert = FALSE,
                            ptop = 100, interpolate = TRUE, 
                            showaxis = FALSE, barb_cex = 0.3, ...){
   
@@ -59,7 +59,7 @@ sounding_barbs <- function(pres, ws, wd, altitude, convert = FALSE,
   
   if(showaxis) plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 1)
   
-  prs <- pres[which((altitude-altitude[1]) %in% seq(0,16000,500))]
+  prs <- pressure[which((altitude-altitude[1]) %in% seq(0,16000,500))]
   #prs <- c(1050, 1000, 850, 700, 500, 400, 300, seq(from = 200, to = ptop, by = -50))
   NPRES <- length(prs)
   
