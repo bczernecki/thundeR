@@ -2,12 +2,12 @@
 #' 
 #' Plot rawinsonde hodograph to show changes of wind speed and direction in vertical profile
 #' 
-#' @param wd - wind direction [azimuth in degrees]
-#' @param ws - wind speed [kn]
-#' @param altitude - altitudes (metres)
-#' @param max_hght - maximum altitude to be considered on the hodograph, 12 km used by default
-#' @param max_speed - range of the hodograph to be drawn, 25 m/s used as default
-#' @param lab_hghts - height labels to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels
+#' @param wd wind direction [azimuth in degrees]
+#' @param ws wind speed [knots]
+#' @param altitude altitude [m]
+#' @param max_hght maximum altitude [km] to be considered on the hodograph, 12 km used by default
+#' @param max_speed - limit of the hodograph to be drawn [m/s], 25 m/s used as default
+#' @param lab_hghts - height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels
 #' @param ... other graphical parameters to be used with plot() function
 #'
 #' @export

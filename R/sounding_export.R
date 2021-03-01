@@ -1,14 +1,14 @@
 #' Sounding export
 #' 
-#' Internal package function for exporting interpolated profile with 5m steps
+#' Internal package function for exporting interpolated profile with 5 m steps
 #' 
 #' 
-#' @param pressure - pressure [hPa]
-#' @param altitude - altitude [meters]
-#' @param temp - temperature [degree Celsius]
-#' @param dpt - dew point temperature [degree Celsius]
-#' @param wd - wind direction [azimuth in degrees]
-#' @param ws - wind speed [kn]
+#' @param pressure pressure [hPa]
+#' @param altitude altitude [meters]
+#' @param temp temperature [degree Celsius]
+#' @param dpt dew point temperature [degree Celsius]
+#' @param wd wind direction [azimuth in degrees]
+#' @param ws wind speed [knots]
 #' 
 #' @importFrom climate sounding_wyoming
 #' @export

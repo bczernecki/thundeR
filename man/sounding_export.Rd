@@ -7,20 +7,20 @@
 sounding_export(pressure, altitude, temp, dpt, wd, ws)
 }
 \arguments{
-\item{pressure}{- pressure [hPa]}
+\item{pressure}{pressure [hPa]}
 
-\item{altitude}{- altitude [meters]}
+\item{altitude}{altitude [meters]}
 
-\item{temp}{- temperature [degree Celsius]}
+\item{temp}{temperature [degree Celsius]}
 
-\item{dpt}{- dew point temperature [degree Celsius]}
+\item{dpt}{dew point temperature [degree Celsius]}
 
-\item{wd}{- wind direction [azimuth in degrees]}
+\item{wd}{wind direction [azimuth in degrees]}
 
-\item{ws}{- wind speed [kn]}
+\item{ws}{wind speed [knots]}
 }
 \description{
-Internal package function for exporting interpolated profile with 5m steps
+Internal package function for exporting interpolated profile with 5 m steps
 }
 \examples{
 data("sounding_wien")

@@ -14,10 +14,10 @@
 #' \enumerate{
 #'  \item pressure - pressure [hPa]
 #'  \item altitude - altitude [metres above sea level]
-#'  \item temp - temperature [degree C]
-#'  \item dpt - dew point [degree C]
+#'  \item temp - temperature [degree Celsius]
+#'  \item dpt - dew point [degree Celsius]
 #'  \item wd - wind direction [azimuth as degrees]
-#'  \item ws - wind speed [kn]
+#'  \item ws - wind speed [knots]
 #'  }
 #'  If metadata = TRUE then retrieved data is wrapped to a list with the second element containing metadata 
 #'

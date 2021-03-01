@@ -22,7 +22,7 @@ sounding_barbs(
 
 \item{ws}{- wind speed [knots]}
 
-\item{wd}{- wind direction [azimuth as degress]}
+\item{wd}{- wind direction [azimuth in degrees]}
 
 \item{altitude}{- altitude [m]}
 

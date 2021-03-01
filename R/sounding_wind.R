@@ -8,9 +8,9 @@
 #' @importFrom dplyr left_join
 #' @importFrom grDevices colorRampPalette
 #'
-#' @param pressure - pressure [hPa] 
-#' @param ws - wind speed [kn]
-#' @param convert - logical, whether to convert wind speed from knots to m/s (default FALSE)
+#' @param pressure pressure [hPa] 
+#' @param ws wind speed [knots]
+#' @param convert logical, whether to convert wind speed from knots to m/s (default FALSE)
 #' @param ptop pressuresure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param yaxs logic. Whether to add labels to heights on Y lab
 #' @param ... extra graphic arguments

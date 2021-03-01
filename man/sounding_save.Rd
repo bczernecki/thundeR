@@ -18,15 +18,15 @@ sounding_save(
 )
 }
 \arguments{
-\item{pressure}{- air pressure [hPa]}
+\item{pressure}{pressure [hPa]}
 
-\item{altitude}{- altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0m)}
+\item{altitude}{altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m)}
 
-\item{temp}{- air temperature [degree Celsius]}
+\item{temp}{temperature [degree Celsius]}
 
-\item{dpt}{- dew point temperature [degree Celsius]}
+\item{dpt}{dew point temperature [degree Celsius]}
 
-\item{wd}{- wind direction in degrees [azimuth in degrees]}
+\item{wd}{wind direction in degrees [azimuth in degrees]}
 
 \item{ws}{- wind speed [knots]}
 
