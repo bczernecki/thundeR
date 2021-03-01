@@ -20,6 +20,8 @@
 sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25,
                      lab_hghts = c(0, 1, 3, 6, 9, 12), ...){
   
+  altitude = altitude - altitude[1]
+  
   u = round(-ws * 0.514444 * sin(wd * pi/180), 2)
   v = round(-ws * 0.514444 * cos(wd * pi/180), 2)
   
