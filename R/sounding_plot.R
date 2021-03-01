@@ -525,7 +525,7 @@ text(60,7100, "RH [%]", cex = 0.65, col = "black")
 par(fig = c(0.69, 0.99, 0.49, 0.9175), new = TRUE, 
     mar = c(0, 0, 0, 0), oma=c(0, 0, 0, 0))
 
-sounding_hodograph(ws, wd, output$altitude-output$altitude[1], max_speed = max_speed, frame = FALSE, ...)
+sounding_hodograph(output$ws, output$wd, output$altitude-output$altitude[1], max_speed = max_speed, frame = FALSE, ...)
 
 up = round(max_speed * -1.55  * cos(135 * pi/180), 2)
 vp = round(max_speed * 1.35 * sin(135 * pi/180), 2)
