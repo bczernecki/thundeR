@@ -411,3 +411,10 @@ print(t1)
 print(t2)
 print(t3)
 ```
+
+### Important notes
+
+- Remember to always input wind speed data in knots. 
+- Script will always consider first height level as the surface (h = 0), therefore input height data can be as above sea level (ASL) or above ground level (AGL). 
+- For efficiency purposes it is highly recommended to input data for a maximum of 16-18 km AGL or lower.
+- Values of parameters will be different for different accuracy settings. 
