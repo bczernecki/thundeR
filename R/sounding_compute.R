@@ -1,6 +1,6 @@
 #' Calculate convective parameters
 #'
-#' Function for calculating convective parameters commonly used in the operational prediction of severe convective storms. Returns vector of parameters
+#' A core function for calculating convective parameters commonly used in the operational prediction of severe convective storms. Returns a vector of parameters. 
 #'
 #' @export
 #' 
