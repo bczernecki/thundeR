@@ -1,6 +1,6 @@
 # thundeR
 
-###### Rapid computation and visualisation of convective parameters from rawinsonde and NWP data <img src="man/figures/logo.png" align="right" width="180" /> 
+###### Rapid computation and visualisation of convective parameters from rawinsonde and NWP data <img src="man/figures/logo.png" align="right" width="150" /> 
 
 <!-- badges: start --> 
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
@@ -158,6 +158,8 @@ skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop=150, col="blue")
 
 **TUTAJ TRZEBA WRZUCIC PNG**
 
+
+
 #### Accuracy tables for `sounding_compute()` 
 
 The interpolation algorithm used in the `sounding_compute()` function impacts accuracy of parameters such as CAPE or CIN and the performance of the script. The valid options for the `accuracy` parameter are 1, 2 or 3:
@@ -175,6 +177,7 @@ c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170,
 ```
 
 `accuracy = 3`: High accuracy but low performance setting. Recommended for analysing individual profiles. Interpolation is performed with 5 m vertical resolution step up to 20 km AGL (i.e.: `0, 5, 10, ... 20000` m AGL)
+
 
 
 ### Developers
