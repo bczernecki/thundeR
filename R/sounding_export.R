@@ -4,7 +4,7 @@
 #' 
 #' 
 #' @param pressure pressure [hPa]
-#' @param altitude altitude [meters]
+#' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) altitude [meters]
 #' @param temp temperature [degree Celsius]
 #' @param dpt dew point temperature [degree Celsius]
 #' @param wd wind direction [azimuth in degrees]
@@ -14,11 +14,11 @@
 #' @export
 #' 
 #' @examples 
-#' data("sounding_wien")
-#' attach(sounding_wien)
+#' data("sounding_vienna")
+#' attach(sounding_vienna)
 #' skewt_plot()
-#' output <- sounding_export(pressure, altitude, temp, dpt, wd, ws)
-#' skewt_lines(output$dpt, output$pressure, col = 'forestgreen',lwd = 2.5)
+#' output = sounding_export(pressure, altitude, temp, dpt, wd, ws)
+#' skewt_lines(output$dpt, output$pressure, col = 'forestgreen', lwd = 2.5)
 #' skewt_lines(output$temp,output$pressure, col = 'red', lwd = 2.5)
 #' skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)
 #' skewt_lines(output$tempV,output$pressure, col = "red3", lty = 3, lwd = 1.5)

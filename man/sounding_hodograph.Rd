@@ -19,22 +19,22 @@ sounding_hodograph(
 
 \item{wd}{wind direction [azimuth in degrees]}
 
-\item{altitude}{altitude [m]}
+\item{altitude}{altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) altitude [m]}
 
 \item{max_hght}{maximum altitude [km] to be considered on the hodograph, 12 km used by default}
 
-\item{max_speed}{- limit of the hodograph to be drawn [m/s], 25 m/s used as default}
+\item{max_speed}{- displayed range of the drawn hodograph [m/s], 25 m/s used as default}
 
 \item{lab_hghts}{- height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels}
 
 \item{...}{other graphical parameters to be used with plot() function}
 }
 \description{
-Plot rawinsonde hodograph to show changes of wind speed and direction in vertical profile
+Plot rawinsonde hodograph to show changes in wind speed and direction with height
 }
 \examples{
-data("sounding_wien")
-attach(sounding_wien)
-# plot the hodograph:
-sounding_hodograph(ws, wd, altitude)
+chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+sounding_hodograph(ws = chanhassen$ws, wd = chanhassen$wd, 
+                   altitude = chanhassen$altitude,max_speed = 40)
+title("Chanhasses - 10 May 2001, 00:00 UTC")
 }

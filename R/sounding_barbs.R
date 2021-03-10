@@ -11,7 +11,7 @@
 #' @param pressure - pressure [hPa] 
 #' @param ws - wind speed [knots]
 #' @param wd - wind direction [azimuth in degrees]
-#' @param altitude - altitude [m]
+#' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [m]
 #' @param convert - logical, whether to convert wind speed from knots to m/s (default TRUE)
 #' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param interpolate logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset
@@ -22,8 +22,8 @@
 #' 
 #' @examples 
 #' # load examplary dataset:
-#' data("sounding_wien")
-#' attach(sounding_wien)
+#' data("sounding_vienna")
+#' attach(sounding_vienna)
 #' 
 #' sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
 #'                convert = TRUE, interpolate = FALSE, showaxis = TRUE)

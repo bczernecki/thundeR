@@ -6,7 +6,7 @@
 #' 
 #' 
 #' @param pressure pressure [hPa]
-#' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m)
+#' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as a surface, i.e h = 0 m)
 #' @param temp temperature [degree Celsius]
 #' @param dpt dew point temperature [degree Celsius]
 #' @param wd wind direction in degrees [azimuth in degrees]
@@ -23,11 +23,11 @@
 #' @importFrom grDevices svg
 #' 
 #' @examples
-#' data("sounding_wien")
-#' attach(sounding_wien)
+#' data("sounding_vienna")
+#' attach(sounding_vienna)
 #' sounding_save(filename = "myfile.png", 
 #'               pressure, altitude, temp, dpt, wd, ws, parcel = "MU", 
-#'               title = "Wien - 2011/08/23, 12:00 UTC")
+#'               title = "Vienna - 23 August 2011, 12:00 UTC")
 #' 
 #'
 

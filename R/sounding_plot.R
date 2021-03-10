@@ -3,7 +3,7 @@
 #' Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
 #' 
 #' @param pressure - pressure [hPa]
-#' @param altitude - altitude [meters]
+#' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [meters]
 #' @param temp - temperature [degree Celsius]
 #' @param dpt - dew point temperature [degree Celsius]
 #' @param wd - wind direction [azimuth in degrees]
@@ -18,11 +18,11 @@
 #' @import grDevices
 #' 
 #' @examples
-#' data("sounding_wien")
-#' sounding_wien = na.omit(sounding_wien)
-#' attach(sounding_wien)
+#' data("sounding_vienna")
+#' sounding_vienna = na.omit(sounding_vienna)
+#' attach(sounding_vienna)
 #' sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
-#'               parcel = "MU", title = "Wien - 2011/08/23, 12:00 UTC")
+#'               parcel = "MU", title = "Vienna - 23 August 2011, 12:00 UTC")
 #' 
 
 sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,

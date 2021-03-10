@@ -13,10 +13,10 @@
 #' @return Returns two lists with values described at: weather.uwyo.edu ; The first list contains:
 #' \enumerate{
 #'  \item pressure - pressure [hPa]
-#'  \item altitude - altitude [metres above sea level]
+#'  \item altitude - altitude [meters]
 #'  \item temp - temperature [degree Celsius]
-#'  \item dpt - dew point [degree Celsius]
-#'  \item wd - wind direction [azimuth as degrees]
+#'  \item dpt - dew point temperature [degree Celsius]
+#'  \item wd - wind direction [azimuth in degrees]
 #'  \item ws - wind speed [knots]
 #'  }
 #'  If metadata = TRUE then retrieved data is wrapped to a list with the second element containing metadata 
@@ -52,7 +52,7 @@ get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE){
   if(!metadata){
     sounding_data = sounding_data[[1]]    
   }
-                                            return(sounding_data)
+  return(sounding_data)
 }
 
 

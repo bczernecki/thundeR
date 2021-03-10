@@ -112,14 +112,14 @@
 <h3 class="hasAnchor">
 <a href="#draw-skew-t-diagram-hodograph-and-most-important-indices-on-a-single-layout-and-save-it-to-png-file" class="anchor"></a>Draw Skew-T diagram, hodograph and most important indices on a single layout and save it to png file</h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"sounding_wien"</span><span class="op">)</span> <span class="co"># take example dataset:</span>
-<span class="va">pressure</span> <span class="op">=</span> <span class="va">sounding_wien</span><span class="op">$</span><span class="va">PRES</span>
-<span class="va">altitude</span> <span class="op">=</span> <span class="va">sounding_wien</span><span class="op">$</span><span class="va">HGHT</span>
-<span class="va">temp</span> <span class="op">=</span> <span class="va">sounding_wien</span><span class="op">$</span><span class="va">TEMP</span>
-<span class="va">dpt</span> <span class="op">=</span> <span class="va">sounding_wien</span><span class="op">$</span><span class="va">DWPT</span>
-<span class="va">wd</span> <span class="op">=</span> <span class="va">sounding_wien</span><span class="op">$</span><span class="va">DRCT</span>
-<span class="va">ws</span> <span class="op">=</span> <span class="va">sounding_wien</span><span class="op">$</span><span class="va">SKNT</span>
-<span class="fu"><a href="reference/sounding_save.html">sounding_save</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"myfile.png"</span>, title <span class="op">=</span> <span class="st">"Vienna (2011/08/23, 1200 UTC)"</span>, <span class="va">pressure</span>, <span class="va">altitude</span>, <span class="va">temp</span>, <span class="va">dpt</span>, <span class="va">wd</span>, <span class="va">ws</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"sounding_vienna"</span><span class="op">)</span> <span class="co"># take example dataset:</span>
+<span class="va">pressure</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">PRES</span>
+<span class="va">altitude</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">HGHT</span>
+<span class="va">temp</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">TEMP</span>
+<span class="va">dpt</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">DWPT</span>
+<span class="va">wd</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">DRCT</span>
+<span class="va">ws</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">SKNT</span>
+<span class="fu"><a href="reference/sounding_save.html">sounding_save</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"myfile.png"</span>, title <span class="op">=</span> <span class="st">"Vienna (23 August 2011, 1200 UTC)"</span>, <span class="va">pressure</span>, <span class="va">altitude</span>, <span class="va">temp</span>, <span class="va">dpt</span>, <span class="va">wd</span>, <span class="va">ws</span><span class="op">)</span></code></pre></div>
 <p><img src="inst/figures/my_file.svg"></p>
 </div>
 <div id="compute-all-convective-indices-based-on-a-random-radiosonde-data" class="section level3">
@@ -191,8 +191,8 @@
 <div id="draw-a-customized-hodograph" class="section level3">
 <h3 class="hasAnchor">
 <a href="#draw-a-customized-hodograph" class="anchor"></a>Draw a customized hodograph:</h3>
-<pre><code><a href="https://rdrr.io/r/utils/data.html">data("sounding_wien")
-attach(sounding_wien)
+<pre><code><a href="https://rdrr.io/r/utils/data.html">data("sounding_vienna")
+attach(sounding_vienna)
 # changing wind speed and direction to U and V wind components
 # also changing units from knots to m/s
 u = round(-SKNT * 0.514444 * sin(DRCT * pi/180), 2)
