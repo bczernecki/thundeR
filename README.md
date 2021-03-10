@@ -183,7 +183,7 @@ c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170,
 
 - Remember to always input wind speed data in knots. 
 - Script will always consider first height level as the surface (h = 0), therefore input height data can be as above sea level (ASL) or above ground level (AGL). 
-- Script performs computations up to 20 km AGL.
+- For efficiency purposes it is highly recommended to input data for a maximum of 16-18 km AGL or lower.
 - Values of parameters will be different for different accuracy settings. 
 
 
