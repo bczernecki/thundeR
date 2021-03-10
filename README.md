@@ -42,11 +42,11 @@ library(remotes);install_github("bczernecki/thunder")
 ``` r
 data("sounding_vienna") # load example dataset (Vienna rawinsonde profile for 23 Aug 2011 12UTC):
 pressure = sounding_vienna$pressure # vector of pressure [hPa]
-altitude = sounding_vienna$altitude # vector of altitude [m above ground level]
-temp = sounding_vienna$temp  # vector of air temperature [°C]
-dpt = sounding_vienna$dpt # vector of dew point temperature [°C]
-wd = sounding_vienna$wd # vector of wind direction as azimuth [°]
-ws = sounding_vienna$ws # vector of wind speed [kn]
+altitude = sounding_vienna$altitude # vector of altitude [meters]
+temp = sounding_vienna$temp  # vector of temperature [degree Celsius]
+dpt = sounding_vienna$dpt # vector of dew point temperature [degree Celsius]
+wd = sounding_vienna$wd # vector of wind direction [azimuth in degrees]
+ws = sounding_vienna$ws # vector of wind speed [knots]
 sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC", pressure, altitude, temp, dpt, wd, ws)
 ```
 
