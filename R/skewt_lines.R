@@ -13,8 +13,8 @@
 #' @examples 
 #' 
 #' # take a sample sounding profile:
-#' data("sounding_wien")
-#' attach(sounding_wien)
+#' data("sounding_vienna")
+#' attach(sounding_vienna)
 #' 
 #' # draw empty Skew-T plot:
 #' skewt_plot(temp_stripes = TRUE)

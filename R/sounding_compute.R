@@ -1,6 +1,6 @@
-#' Calculate parameters
+#' Calculate convective parameters
 #'
-#' Function for calculating convective parameters commonly used in the operational prediction of severe convective storms. 
+#' A core function for calculating convective parameters commonly used in the operational prediction of severe convective storms. Returns a vector of parameters. 
 #'
 #' @export
 #' 
@@ -116,7 +116,7 @@
 #' }
 #'
 #' @param pressure  pressure [hPa]
-#' @param altitude  altitude [metres]
+#' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m)  altitude [metres]
 #' @param temp  temperature [degree Celsius]
 #' @param dpt  dew point temperature [degree Celsius]
 #' @param wd  wind direction [azimuth in degrees]
@@ -131,7 +131,7 @@
 #' wd = c(0, 90, 135, 180, 270, 350, 0)
 #' ws = c(5, 10, 20, 30, 40, 5, 0)
 #' accuracy = 2 
-#' options(scipen = 999) # change formatting
+#' options(digits = 2) #change output formatting precision 
 #' sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
 sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2){

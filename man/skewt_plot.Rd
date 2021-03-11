@@ -47,8 +47,8 @@ skewt_plot(ptop = 150, temp_stripes = FALSE) # na color stripes for temperature
 skewt_plot(ptop = 100)
 title("Your title")
 mtext('WMO ID: 11035, 2011-08-23 1200 UTC', padj = -0.5, col = "white")
-data("sounding_wien")
-attach(sounding_wien)
+data("sounding_vienna")
+attach(sounding_vienna)
 
 output <- sounding_export(pressure, altitude, temp, dpt, wd, ws)
 skewt_lines(output$dpt, output$pressure,type='l',col='forestgreen',lwd = 2.5)

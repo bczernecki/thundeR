@@ -22,9 +22,9 @@ sounding_barbs(
 
 \item{ws}{- wind speed [knots]}
 
-\item{wd}{- wind direction [azimuth as degress]}
+\item{wd}{- wind direction [azimuth in degrees]}
 
-\item{altitude}{- altitude [m]}
+\item{altitude}{altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [m]}
 
 \item{convert}{- logical, whether to convert wind speed from knots to m/s (default TRUE)}
 
@@ -44,8 +44,8 @@ Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
 }
 \examples{
 # load examplary dataset:
-data("sounding_wien")
-attach(sounding_wien)
+data("sounding_vienna")
+attach(sounding_vienna)
 
 sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
                convert = TRUE, interpolate = FALSE, showaxis = TRUE)

@@ -1,5 +1,8 @@
 comment: false
 
+ignore:
+  - "R/sounding_plot.R"  # don't test graphical functions
+
 coverage:
   status:
     project:

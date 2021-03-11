@@ -8,32 +8,30 @@
 #' @importFrom dplyr left_join
 #' @importFrom grDevices colorRampPalette
 #'
-#' @param pressure - pressure [hPa] 
-#' @param ws - wind speed [kn]
-#' @param convert - logical, whether to convert wind speed from knots to m/s (default FALSE)
-#' @param ptop pressuresure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
+#' @param pressure pressure [hPa] 
+#' @param ws wind speed [knots]
+#' @param ptop pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param yaxs logic. Whether to add labels to heights on Y lab
 #' @param ... extra graphic arguments
 #' @export
 #' 
 #' @examples 
 #' # load examplary dataset:
-#' data("sounding_wien")
-#' attach(sounding_wien)
-#' sounding_wind(pressure = pressure, ws = ws, convert = TRUE, yaxs = TRUE)
+#' data("sounding_vienna")
+#' attach(sounding_vienna)
+#' sounding_wind(pressure = pressure, ws = ws, yaxs = TRUE)
 
-sounding_wind <- function(pressure, ws, ptop = 100, convert = FALSE, yaxs = TRUE, ...){
+sounding_wind <- function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         
-        #sounding_wien$pressure; ws = sounding_wien$ws
+        #sounding_vienna$pressure; ws = sounding_vienna$ws
         #par(pty = "s") # draw diagram in "rectangle"
         if(ptop > 200) {
                 stop("\nptop argument needs to be set < 200 (hPa)!")
         }
         
-        # whether to convert wind speed from knots to m/s
-        if(convert) {
-                ws <- ws * 0.51444
-        }
+        # convert wind speed from knots to m/s
+        ws <- ws * 0.51444
+
         
         # define plotting area limits:
         ymax <- skewty(1050)

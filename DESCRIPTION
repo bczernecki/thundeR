@@ -1,10 +1,10 @@
 Package: thunder
 Type: Package
 Title: Atmospheric Convection Indices from Rawinsonde Data
-Version: 0.0.1101
+Version: 0.0.12
 Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("aut", "cre"),comment = c(ORCID = "0000-0001-6496-1386")),
     person("Piotr", "Szuster", email = "retsuz@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-7937-8046")),
-    person("Mateusz", "Taszarek", email = "mateusz.taszarek@amu.edu.pl", role = c("aut"), 
+    person("Mateusz", "Taszarek", email = "mateusz.taszarek@noaa.gov", role = c("aut"), 
     comment = c(ORCID = "0000-0001-9578-5872")))
 Maintainer: Bartosz Czernecki <nwp@amu.edu.pl>
 Description: R tool for calculating atmospheric convection indices.
@@ -23,7 +23,7 @@ Suggests:
     testthat (>= 2.0.0),
     covr
 LinkingTo: Rcpp
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Encoding: UTF-8
 URL: https://github.com/bczernecki/thunder
 BugReports: https://github.com/bczernecki/thunder/issues

@@ -21,7 +21,7 @@ sounding_plot(
 \arguments{
 \item{pressure}{- pressure [hPa]}
 
-\item{altitude}{- altitude [meters]}
+\item{altitude}{altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [meters]}
 
 \item{temp}{- temperature [degree Celsius]}
 
@@ -45,10 +45,10 @@ sounding_plot(
 Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
 }
 \examples{
-data("sounding_wien")
-sounding_wien = na.omit(sounding_wien)
-attach(sounding_wien)
+data("sounding_vienna")
+sounding_vienna = na.omit(sounding_vienna)
+attach(sounding_vienna)
 sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
-              parcel = "MU", title = "Wien - 2011/08/23, 12:00 UTC")
+              parcel = "MU", title = "Vienna - 23 August 2011, 12:00 UTC")
 
 }

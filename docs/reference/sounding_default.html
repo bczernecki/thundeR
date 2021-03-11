@@ -16,29 +16,21 @@ Further details given in the sounding_compute() function â€” sounding_default â€
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
-
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
-
-<!-- bootstrap-toc -->
-<link rel="stylesheet" href="../bootstrap-toc.css">
-<script src="../bootstrap-toc.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
 
-<!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -46,13 +38,14 @@ Further details given in the sounding_compute() function â€” sounding_default â€
 
 
 
-
 <meta property="og:title" content="Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
 Further details given in the sounding_compute() function â€” sounding_default" />
+
 <meta property="og:description" content="Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
 Further details given in the sounding_compute() function" />
-<meta property="og:image" content="/logo.png" />
 
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
 
 
 
@@ -66,10 +59,9 @@ Further details given in the sounding_compute() function" />
 <![endif]-->
 
 
-
   </head>
 
-  <body data-spy="scroll" data-target="#toc">
+  <body>
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -83,7 +75,7 @@ Further details given in the sounding_compute() function" />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">thunder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1101</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.12</span>
       </span>
     </div>
 
@@ -91,7 +83,7 @@ Further details given in the sounding_compute() function" />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -111,10 +103,11 @@ Further details given in the sounding_compute() function" />
   </ul>
 </li>
       </ul>
+      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bczernecki/thunder/">
-    <span class="fab fa-github fa-lg"></span>
+  <a href="https://github.com/bczernecki/thunder">
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -125,7 +118,6 @@ Further details given in the sounding_compute() function" />
 </div><!--/.navbar -->
 
       
-
       </header>
 
 <div class="row">
@@ -138,21 +130,23 @@ Further details given in the sounding_compute() function</h1>
     </div>
 
     <div class="ref-description">
+    
     <p>Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
 Further details given in the sounding_compute() function</p>
+    
     </div>
 
-    <pre class="usage"><span class='fu'>sounding_default</span><span class='op'>(</span>
-  <span class='va'>pressure</span>,
-  <span class='va'>altitude</span>,
-  <span class='va'>temperature</span>,
-  <span class='va'>dew</span>,
-  <span class='va'>angle</span>,
-  <span class='va'>velocity</span>,
-  <span class='va'>export_profile</span>,
-  <span class='va'>accuracy</span>
-<span class='op'>)</span></pre>
-
+    <pre class="usage"><span class='fu'>sounding_default</span>(
+  <span class='no'>pressure</span>,
+  <span class='no'>altitude</span>,
+  <span class='no'>temp</span>,
+  <span class='no'>dpt</span>,
+  <span class='no'>wd</span>,
+  <span class='no'>ws</span>,
+  <span class='no'>export_profile</span>,
+  <span class='no'>accuracy</span>
+)</pre>
+    
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -162,105 +156,65 @@ Further details given in the sounding_compute() function</p>
     </tr>
     <tr>
       <th>altitude</th>
-      <td><p>altitude [meters above surface]</p></td>
+      <td><p>altitude [meters]</p></td>
     </tr>
     <tr>
-      <th>temperature</th>
-      <td><p>air temperature [degree Celsius]</p></td>
+      <th>temp</th>
+      <td><p>temperature [degree Celsius]</p></td>
     </tr>
     <tr>
-      <th>dew</th>
+      <th>dpt</th>
       <td><p>dew point temperature [degree Celsius]</p></td>
     </tr>
     <tr>
-      <th>angle</th>
-      <td><p>wind direction [degrees]</p></td>
+      <th>wd</th>
+      <td><p>wind direction [azimuth in degrees]</p></td>
     </tr>
     <tr>
-      <th>velocity</th>
-      <td><p>wind speed [metres per second]</p></td>
+      <th>ws</th>
+      <td><p>wind speed [knots]</p></td>
     </tr>
     <tr>
       <th>export_profile</th>
-      <td><p>runtime parameters</p></td>
+      <td><p>possibility to export interpolated profile on the levels defined in accuracy configuration</p></td>
     </tr>
     <tr>
       <th>accuracy</th>
-      <td><p>accuracy of methods used for interpolating and integrating algorithms [1 - fast implementation (default), 2 - medium accuracy, 3 - very accurate]</p></td>
+      <td><p>accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)</p></td>
     </tr>
     </table>
-
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>pressure</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1000</span>, <span class='fl'>855</span>, <span class='fl'>700</span>, <span class='fl'>500</span>, <span class='fl'>300</span>, <span class='fl'>100</span>, <span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>altitude</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1500</span>, <span class='fl'>2500</span>, <span class='fl'>6000</span>, <span class='fl'>8500</span>, <span class='fl'>12000</span>, <span class='fl'>25000</span><span class='op'>)</span>
-<span class='va'>temp</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>25</span>, <span class='fl'>10</span>, <span class='fl'>0</span>, <span class='op'>-</span><span class='fl'>15</span>, <span class='op'>-</span><span class='fl'>30</span>, <span class='op'>-</span><span class='fl'>50</span>, <span class='op'>-</span><span class='fl'>92</span><span class='op'>)</span>
-<span class='va'>dpt</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>20</span>, <span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>5</span>, <span class='op'>-</span><span class='fl'>30</span>, <span class='op'>-</span><span class='fl'>55</span>, <span class='op'>-</span><span class='fl'>80</span>, <span class='op'>-</span><span class='fl'>99</span><span class='op'>)</span>
-<span class='va'>wd</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>90</span>, <span class='fl'>135</span>, <span class='fl'>180</span>, <span class='fl'>270</span>, <span class='fl'>350</span>, <span class='fl'>0</span><span class='op'>)</span>
-<span class='va'>ws</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>30</span>, <span class='fl'>40</span>, <span class='fl'>5</span>, <span class='fl'>0</span><span class='op'>)</span>
-<span class='fu'><a href='sounding_compute.html'>sounding_compute</a></span><span class='op'>(</span><span class='va'>pressure</span>, <span class='va'>altitude</span>, <span class='va'>temp</span>, <span class='va'>dpt</span>, <span class='va'>wd</span>, <span class='va'>ws</span><span class='op'>)</span>
-</div><div class='output co'>#&gt;             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE              MU_CIN 
-#&gt;        2209.1039279         545.0890580        1531.4875729           0.0000000 
-#&gt;          MU_LCL_HGT          MU_LFC_HGT           MU_EL_HGT               MU_LI 
-#&gt;         800.0000000         800.0000000        8500.0000000         -10.0067555 
-#&gt;             MU_WMAX          MU_EL_TEMP         MU_LCL_TEMP         MU_LFC_TEMP 
-#&gt;          66.4696010         -30.0000000          17.0000000          17.0000000 
-#&gt;             MU_MIXR             SB_CAPE        SB_03km_CAPE         SB_HGL_CAPE 
-#&gt;          14.8759179        2209.1039279         545.0890580        1531.4875729 
-#&gt;              SB_CIN          SB_LCL_HGT          SB_LFC_HGT           SB_EL_HGT 
-#&gt;           0.0000000         800.0000000         800.0000000        8500.0000000 
-#&gt;               SB_LI             SB_WMAX          SB_EL_TEMP         SB_LCL_TEMP 
-#&gt;         -10.0067555          66.4696010         -30.0000000          17.0000000 
-#&gt;         SB_LFC_TEMP             SB_MIXR             ML_CAPE        ML_03km_CAPE 
-#&gt;          17.0000000          14.8759179        1547.3689201         388.7163363 
-#&gt;         ML_HGL_CAPE              ML_CIN          ML_LCL_HGT          ML_LFC_HGT 
-#&gt;        1152.6374442           0.0000000        1000.0000000        1000.0000000 
-#&gt;           ML_EL_HGT               ML_LI             ML_WMAX          ML_EL_TEMP 
-#&gt;        8000.0000000          -7.1536436          55.6303680         -27.0000000 
-#&gt;         ML_LCL_TEMP         ML_LFC_TEMP             ML_MIXR             LR_01km 
-#&gt;          15.0000000          15.0000000          13.0204055         -10.0000000 
-#&gt;             LR_03km             LR_24km             LR_36km        LR_500700hPa 
-#&gt;          -9.0476190          -6.1038961          -4.2857143          -4.2857143 
-#&gt;        LR_500800hPa            FRZG_HGT    FRZG_wetbulb_HGT HGT_max_thetae_03km 
-#&gt;          -6.6666667        2500.0000000        2200.0000000           0.0000000 
-#&gt; HGT_min_thetae_04km        Delta_thetae    Delta_thetae_HGL               DCAPE 
-#&gt;        3800.0000000          28.0009332          26.8049107         477.9336017 
-#&gt;  Cold_Pool_Strength          Wind_Index          PRCP_WATER  Moisture_Flux_02km 
-#&gt;         300.8058715          33.2667140          27.1235111          30.4254807 
-#&gt;             RH_02km             RH_25km              RH_HGL             BS_01km 
-#&gt;           0.7197069           0.5550179           0.4647647           3.8344392 
-#&gt;             BS_02km             BS_03km             BS_06km             BS_08km 
-#&gt;           8.7821084          12.6559681          18.0055400          17.4076782 
-#&gt;             BS_36km             BS_18km           BS_EFF_MU           BS_EFF_SB 
-#&gt;           9.3692896          20.2790725          14.3078945          14.3078945 
-#&gt;           BS_EFF_ML       BS_SFC_to_HGL    BS_MU_LFC_to_HGL    BS_SB_LFC_to_HGL 
-#&gt;          13.9764580          15.4117174          13.8389122          13.8389122 
-#&gt;    BS_ML_LFC_to_HGL             MW_01km             MW_02km             MW_06km 
-#&gt;          13.5260745           2.4251123           3.3476466           7.8107005 
-#&gt;             MW_13km         SRH_100m_RM         SRH_500m_RM          SRH_1km_RM 
-#&gt;           6.8388866           3.7885778          18.9428891          41.6743560 
-#&gt;          SRH_3km_RM         SRH_100m_LM         SRH_500m_LM          SRH_1km_LM 
-#&gt;         151.2076663           1.4442966           7.2214832          15.8872630 
-#&gt;          SRH_3km_LM        Bunkers_RM_A        Bunkers_RM_M        Bunkers_LM_A 
-#&gt;          -9.0592785         206.2896732           7.5798202         123.1499182 
-#&gt;        Bunkers_LM_M        Bunkers_MW_A        Bunkers_MW_M             K_Index 
-#&gt;          12.7838072         151.9494361           7.8107005          24.3548387 
-#&gt;     Showalter_Index   TotalTotals_Index         SWEAT_Index                 STP 
-#&gt;           3.4174686          44.3548387         106.4167937           0.3683653 
-#&gt;             STP_new                 SCP             SCP_new                SHIP 
-#&gt;           0.1863946           6.0144526           4.7793153           0.6118171 
-#&gt;                 DCP        MU_WMAXSHEAR        SB_WMAXSHEAR        ML_WMAXSHEAR 
-#&gt;           0.8945340        1196.8210594        1196.8210594        1001.6548156 
-#&gt;    MU_EFF_WMAXSHEAR    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR 
-#&gt;         951.0400360         951.0400360         777.5155013 </div></pre>
+    <pre class="examples"><div class='input'><span class='no'>pressure</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1000</span>, <span class='fl'>855</span>, <span class='fl'>700</span>, <span class='fl'>500</span>, <span class='fl'>300</span>, <span class='fl'>100</span>, <span class='fl'>10</span>)
+<span class='no'>altitude</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>1500</span>, <span class='fl'>2500</span>, <span class='fl'>6000</span>, <span class='fl'>8500</span>, <span class='fl'>12000</span>, <span class='fl'>25000</span>)
+<span class='no'>temp</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>25</span>, <span class='fl'>10</span>, <span class='fl'>0</span>, -<span class='fl'>15</span>, -<span class='fl'>30</span>, -<span class='fl'>50</span>, -<span class='fl'>92</span>)
+<span class='no'>dpt</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>20</span>, <span class='fl'>5</span>, -<span class='fl'>5</span>, -<span class='fl'>30</span>, -<span class='fl'>55</span>, -<span class='fl'>80</span>, -<span class='fl'>99</span>)
+<span class='no'>wd</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>90</span>, <span class='fl'>135</span>, <span class='fl'>180</span>, <span class='fl'>270</span>, <span class='fl'>350</span>, <span class='fl'>0</span>)
+<span class='no'>ws</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>5</span>, <span class='fl'>10</span>, <span class='fl'>20</span>, <span class='fl'>30</span>, <span class='fl'>40</span>, <span class='fl'>5</span>, <span class='fl'>0</span>)
+<span class='fu'>sounding_default</span>(<span class='no'>pressure</span>, <span class='no'>altitude</span>, <span class='no'>temp</span>, <span class='no'>dpt</span>, <span class='no'>wd</span>, <span class='no'>ws</span>, <span class='kw'>accuracy</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>export_profile</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt;   [1] 2209.10  545.09 1531.49    0.00  800.00  800.00 8500.00  -10.01   66.47
+#&gt;  [10]  -30.00   17.00   17.00   14.88 2209.10  545.09 1531.49    0.00  800.00
+#&gt;  [19]  800.00 8500.00  -10.01   66.47  -30.00   17.00   17.00   14.88 1547.37
+#&gt;  [28]  388.72 1152.64    0.00 1000.00 1000.00 8000.00   -7.15   55.63  -27.00
+#&gt;  [37]   15.00   15.00   13.02  -10.00   -9.05   -6.10   -4.29   -4.29   -6.67
+#&gt;  [46] 2500.00 2200.00    0.00 3800.00   28.00   26.80  477.93  300.81   33.27
+#&gt;  [55]   27.12   30.43    0.72    0.56    0.46    3.83    8.78   12.66   18.01
+#&gt;  [64]   17.41    9.37   20.28   14.31   14.31   13.98   15.41   13.84   13.84
+#&gt;  [73]   13.53    2.43    3.35    7.81    6.84    3.87   19.33   42.53  156.55
+#&gt;  [82]    1.37    6.83   15.03  -14.41  209.40    7.79  122.06   13.18  151.95
+#&gt;  [91]    7.81   24.35    3.42   44.35  106.42    0.38    0.19    6.23    4.95
+#&gt; [100]    0.61    0.89 1196.82 1196.82 1001.65  951.04  951.04  777.52</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+            
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
   </div>
 </div>
-
 
       <footer>
       <div class="copyright">
@@ -268,16 +222,13 @@ Further details given in the sounding_compute() function</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
-
       </footer>
    </div>
 
   
 
-
   </body>
 </html>
-
 

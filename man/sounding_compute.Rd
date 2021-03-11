@@ -2,14 +2,14 @@
 % Please edit documentation in R/sounding_compute.R
 \name{sounding_compute}
 \alias{sounding_compute}
-\title{Calculate parameters}
+\title{Calculate convective parameters}
 \usage{
 sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 }
 \arguments{
 \item{pressure}{pressure [hPa]}
 
-\item{altitude}{altitude [metres]}
+\item{altitude}{altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m)  altitude [metres]}
 
 \item{temp}{temperature [degree Celsius]}
 
@@ -133,7 +133,7 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 }
 }
 \description{
-Function for calculating convective parameters commonly used in the operational prediction of severe convective storms.
+A core function for calculating convective parameters commonly used in the operational prediction of severe convective storms. Returns a vector of parameters.
 }
 \examples{
 pressure = c(1000, 855, 700, 500, 300, 100, 10)
@@ -143,6 +143,6 @@ dpt = c(20, 5, -5, -30, -55, -80, -99)
 wd = c(0, 90, 135, 180, 270, 350, 0)
 ws = c(5, 10, 20, 30, 40, 5, 0)
 accuracy = 2 
-options(scipen = 999) # change formatting
+options(digits = 2) #change output formatting precision 
 sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 }

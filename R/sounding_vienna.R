@@ -1,5 +1,5 @@
-#' @name sounding_wien
-#' @aliases sounding_wien
+#' @name sounding_vienna
+#' @aliases sounding_vienna
 #' @title Examplary sounding dataset - sample from Vienna (WMO ID: 11035) - 23 August 2011, 1200 UTC
 #'
 #' @description The object contains pre-downloaded sounding dataset from University of Wyoming sounding database.
@@ -18,20 +18,15 @@
 #'   \item{altitude}{altitude [m]}
 #'   \item{temp}{temperature [degree Celsius]}
 #'   \item{dpt}{dew point temperature [degree Celsius]}
-#'   \item{rh}{relative humidity [percent]}
-#'   \item{mixr}{mixing ratio [g/kg]}
 #'   \item{wd}{wind direction [azimuth as degrees]}
 #'   \item{ws}{wind speed [knots]}
-#'   \item{thta}{THETA-A [K]}
-#'   \item{thte}{THETA-E [K]}
-#'   \item{thtv}{THETA-V [K]}
 #' }
 #' 
 #' @source http://weather.uwyo.edu/upperair/sounding.html
 #' @docType data
 #' @keywords datasets thunder
-#' @usage data("sounding_wien")
+#' @usage data("sounding_vienna")
 #' @examples
-#' data(sounding_wien)
-#' head(sounding_wien)
-"sounding_wien"
+#' data(sounding_vienna)
+#' head(sounding_vienna)
+"sounding_vienna"
