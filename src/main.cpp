@@ -168,47 +168,38 @@ public:
   double* toAV();
   
   
-  friend std::ostream& operator<< (std::ostream &wyjscie, const Vector &v);
   
   double abs();
 };
 
-//--------------------------------------------------------------------------------
 Vector::Vector(double X, double Y, double Z){
   this->x=X;
   this->y=Y;
   this->z=Z;
 }
-//--------------------------------------------------------------------------------
 Vector::Vector(double a,double v){
   this->x = v * cos(M_PI * a / 180.0);
   this->y = v * sin(M_PI * a / 180.0);
   this->z=0;
 }
-//--------------------------------------------------------------------------------
 Vector Vector::operator*(double const& r){
   return Vector(this->x*r,this->y*r,this->z*r);
 }
-//--------------------------------------------------------------------------------
 Vector Vector::operator/(double const& r){
   return Vector(this->x/r,this->y/r,this->z/r);
 }
-//--------------------------------------------------------------------------------
 Vector Vector::operator+(Vector const& r){
   return Vector(this->x+r.x,this->y+r.y,this->z+r.z);
 }
-//--------------------------------------------------------------------------------
 Vector Vector::operator-(Vector const& r){
   return Vector(this->x-r.x,this->y-r.y,this->z-r.z);
 }
-//--------------------------------------------------------------------------------
 Vector Vector::operator=(Vector const& r){
   x=r.x;
   y=r.y;
   z=r.z;
   return *this;
 }
-//--------------------------------------------------------------------------------
 Vector Vector::operator*=(double const& r){
   Vector tmp= Vector(this->x*r,this->y*r,this->z*r);
   this->x=tmp.x;
@@ -216,7 +207,6 @@ Vector Vector::operator*=(double const& r){
   this->z=tmp.z;
   return *this;
 }
-//--------------------------------------------------------------------------------
 Vector Vector::operator/=(double const& r){
   Vector tmp= Vector(this->x/r,this->y/r,this->z/r);
   this->x=tmp.x;
@@ -224,7 +214,6 @@ Vector Vector::operator/=(double const& r){
   this->z=tmp.z;
   return *this;
 }
-//--------------------------------------------------------------------------------
 Vector Vector::operator+=(Vector const& r){
   Vector tmp= Vector(this->x+r.x,this->y+r.y,this->z+r.z);
   this->x=tmp.x;
@@ -232,7 +221,6 @@ Vector Vector::operator+=(Vector const& r){
   this->z=tmp.z;
   return *this;
 }
-//--------------------------------------------------------------------------------
 Vector Vector::operator-=(Vector const& r){
   Vector tmp= Vector(this->x-r.x,this->y-r.y,this->z-r.z);
   this->x=tmp.x;
@@ -240,24 +228,20 @@ Vector Vector::operator-=(Vector const& r){
   this->z=tmp.z;
   return *this;
 }
-//--------------------------------------------------------------------------------
 double Vector::scalar(Vector const& r){
   return this->x*r.x + this->y*r.y + this->z*r.z;
 }
-//--------------------------------------------------------------------------------
 Vector Vector::vec(Vector const& l, Vector const& r){
   double a = l.y * r.z - l.z * r.y;
   double b = l.z * r.x - r.z * l.x;
   double c = l.x * r.y - l.y * r.x;
   return Vector(a,b,c);
 }
-//--------------------------------------------------------------------------------
 Vector::Vector(){
   this->x=0;
   this->y=0;
   this->z=0;
 }
-//--------------------------------------------------------------------------------
 double* Vector::toAV(){
   double *result = new double[2];
   result[1]=sqrt(this->x*this->x + this->y*this->y + this->z*this->z);
@@ -265,27 +249,15 @@ double* Vector::toAV(){
   double y= this->y;
   double angle = atan2(y,x)*180/M_PI;
   if(angle<0)angle =360+angle;
-  /*	if (x < 0 and y > 0 ) angle = 180-angle;
-  else if (x < 0 and y < 0 ) angle = 180+angle;
-  else if (x > 0 and y < 0 ) angle = 360-angle;
-  */
-  
   
   result[0]=angle;
   return result;
 }
-//--------------------------------------------------------------------------------
-std::ostream& operator<< (std::ostream &wyjscie, const Vector &v){
-  wyjscie <<"["<<v.x <<" "<<v.y<<" "<< v.z << "]"<<std::endl;
-  return wyjscie;
-}
-//--------------------------------------------------------------------------------
 double Vector::abs(){
   double v = sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
   return v;
 }
 
-//--------------------------------------------------------------------------------
 class InfoCollector
 {
 protected:
@@ -337,7 +309,6 @@ private:
   double h0;
   
 public:
-  friend std::ostream& operator<< (std::ostream &wyjscie, const Cache &s);
   Cache();
   ~Cache();
   int getPressureIndex(double pressure);
@@ -350,7 +321,6 @@ public:
   
 };
 
-//--------------------------------------------------------------------------------
 Cache::Cache(){
   this->pindex = new int[10];
   this->p = new double[10];
@@ -361,7 +331,6 @@ Cache::Cache(){
   this->initp();
   this->inith();
 }
-//--------------------------------------------------------------------------------
 Cache::~Cache(){
   delete(this->pindex);
   delete(this->p);
@@ -369,7 +338,6 @@ Cache::~Cache(){
   delete(this->hindex);
   delete(this->h);
 }
-//--------------------------------------------------------------------------------
 void Cache::initp(){
   for(int i=0;i<10;i++){
     this->pindex[i]=-1;
@@ -385,7 +353,6 @@ void Cache::initp(){
   this->p[8]=200;
   this->p[9]=100;
 }
-//--------------------------------------------------------------------------------
 void Cache::inith(){
   for(int i=0;i<15;i++){
     this->hindex[i]=-1;
@@ -406,21 +373,18 @@ void Cache::inith(){
   this->h[13]=9000;
   this->h[14]=10000;
 }
-//--------------------------------------------------------------------------------
 int Cache::getHeightIndex(double height){
   for(int i=0; i<15; i++){
     if(this->h[i]==height)return this->hindex[i];
   }
   return -1;
 }
-//--------------------------------------------------------------------------------
 int Cache::getPressureIndex(double pressure){
   for(int i=0; i<10; i++){
     if(this->p[i]==pressure)return this->pindex[i];
   }
   return -1;
 }
-//--------------------------------------------------------------------------------
 double * Cache::getArray(int i, int* len){
   if(i==0){
     (*len)=10;
@@ -430,43 +394,19 @@ double * Cache::getArray(int i, int* len){
     return this->h;
   }
 }
-//--------------------------------------------------------------------------------
 double Cache::getH0(){
   return this->h0;
 }
-//--------------------------------------------------------------------------------
 void Cache::setH0(double val){
   this->h0=val;
 }
-//--------------------------------------------------------------------------------
 void setHeightIndex(int harrayI, int index, Cache *C){
   C->hindex[harrayI]=index;
 }
-//--------------------------------------------------------------------------------
 void setPressureIndex(int parrayI, int index, Cache *C){
   C->pindex[parrayI]=index;
   
 }
-//--------------------------------------------------------------------------------
-std::ostream& operator<< (std::ostream &wyjscie, const Cache &s){
-  wyjscie <<"ZAWARTOSC CACHE:\nPOZIOMY CISNIENIA"<<endl;
-  for(int i=0;i<10;i++){
-    wyjscie<< s.p[i]<<"\t";
-  }wyjscie<<endl;
-  for(int i=0;i<10;i++){
-    wyjscie<< s.pindex[i]<<"\t";
-  }wyjscie<<endl;
-  
-  wyjscie <<"POZIOMY WYSOKOSCI"<<endl;
-  for(int i=0;i<15;i++){
-    wyjscie<< s.h[i]<<"\t";
-  }wyjscie<<endl;
-  for(int i=0;i<15;i++){
-    wyjscie<< s.hindex[i]<<"\t";
-  }wyjscie<<endl;
-  return wyjscie;
-}
-
 class Kinematics:public InfoCollector{
   friend class IndicesCollector;
 private:
@@ -617,11 +557,9 @@ Kinematics::Kinematics(){
   srh03lmf = 0;
   srh03rmf = 0;
 }
-//---------------------------------------------------------------------------------------
 Kinematics::~Kinematics(){
   delete(this->vw);
 }
-//---------------------------------------------------------------------------------------
 void Kinematics::putMandatoryVectors(int i, double p, double h, double t, double d, double a, double v, Vector v_)
 {
   Cache *c = this->cache;
@@ -739,7 +677,6 @@ void Kinematics::putLLJ(int i, double p, double h, double t,double d,double a,do
 
 void Kinematics::putSpecificLine(int i, double p, double h, double t, double d, double a, double v)
 {
-  //int index = this->vw->size();
   Vector v_ = Vector(a,v * 0.514444);
   this->vw->push_back(v_);
   this->putMandatoryVectors(i, p, h, t, d, a, v, v_);
@@ -919,7 +856,6 @@ list<double> *getVirtualValues(){
   void prepareForDCAPE();
   void putLine(int i, double p, double h, double t, double d, double a, double v);
   void finish();
-  friend std::ostream& operator<< (ostream &wyjscie, const LapseRate &s);
   void seti700index(int value){
 	  i700index=value;
   }
@@ -936,27 +872,22 @@ void LapseRate::allocate(){
   tcin = 0;
   tvcin = 0;
 }
-//---------------------------------------------------------------------------------------
 void LapseRate::setInitialW(double w_, double o_){
 	this->w = w_;
 	this->vw = w_;
 	this->o=o_;
 	this->vo=o_;
 }
-//---------------------------------------------------------------------------------------
 void LapseRate::free(){
   delete(this->values);
   delete(this->virtualValues);
 }
-//---------------------------------------------------------------------------------------
 LapseRate::LapseRate(){
   this->allocate();
 }
-//---------------------------------------------------------------------------------------
 LapseRate::~LapseRate(){
   this->free();
 }
-//---------------------------------------------------------------------------------------
 void LapseRate::setInitialConditions(int i, double p, double h, double t, double d, double a, double v, double h0){
   this->free();
   this->allocate();
@@ -973,7 +904,6 @@ void LapseRate::setInitialConditions(int i, double p, double h, double t, double
   this->lasth = h;
   this->tch= W(d,p);
 }
-//---------------------------------------------------------------------------------------
 void LapseRate::testSpecificLCL(int i,double p,double t,double tmr, double tda, int* lclInd_, int* lfcInd_, list<double>* curve_, double*os_){
   if ((*lclInd_) == -1)
   {
@@ -991,7 +921,6 @@ void LapseRate::testSpecificLCL(int i,double p,double t,double tmr, double tda, 
     }
   }
 }
-//---------------------------------------------------------------------------------------
 void LapseRate::doRest(int i, double p,double h, double t, double TSA, int* lfcInd_, double* cape_, double* to3, double* cin_, int* elInd_, list<double>* curve_){
   curve_->push_back(TSA);
   double dz = abs(h - lasth);
@@ -1032,7 +961,6 @@ void LapseRate::doRest(int i, double p,double h, double t, double TSA, int* lfcI
     }
   }
 }
-//---------------------------------------------------------------------------------------
 void LapseRate::putClassicLine(int i, double p, double h, double t,double d, double a, double v){
   double tmr = TMR(w, p);
   double tda = TDA(o, p);
@@ -1072,7 +1000,6 @@ void LapseRate::putClassicLine(int i, double p, double h, double t,double d, dou
             }
 
 }
-//---------------------------------------------------------------------------------------
 void LapseRate::prepareForDCAPE(){
   this->free();
   values = new list<double>();
@@ -1084,7 +1011,6 @@ void LapseRate::prepareForDCAPE(){
   dcape_ = true;
   lasth = h0;
 }
-//---------------------------------------------------------------------------------------
 void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, double a, double v)
 {
   this->vLclIndex = lclIndex;
@@ -1137,14 +1063,12 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
     }
   }
 }
-//---------------------------------------------------------------------------------------
 void LapseRate::putLine(int i, double p, double h, double t, double d, double a, double v){
   if (i >= startIndex) {
     putClassicLine(i, p, h, t, d, a, v);
     putVirtualLine(i, p, h, t, d, a, v); 
     lasth = h;}
 }
-//---------------------------------------------------------------------------------------
 void LapseRate::finish(){
   if (cape ==0) cin = 0;
   if (vcape ==0) vcin = 0;
@@ -1152,22 +1076,6 @@ void LapseRate::finish(){
   if (dvcape > 0) dvcape = 0;
   dvcape = abs(dvcape);
   dcape = abs(dcape);
-}
-//---------------------------------------------------------------------------------------
-std::ostream& operator<< (ostream &wyjscie, const LapseRate &s){
-  if(!s.dcape_){
-    
-    wyjscie<< "CAPE: " << s.cape <<"[J/kg]\n";
-    wyjscie << "0-3km CAPE: " << s.to3cape<< "[J/kg]\n";
-    wyjscie << "CIN: " << s.cin<< "[J/kg]\n";
-    wyjscie << "CAPEV: " << s.vcape<<"[J/kg]\n";
-    wyjscie << "0-3km CAPEV: " << s.vto3cape<< + "[J/kg]\n";
-    wyjscie << "CINV: " << s.vcin<< + "[J/kg]\n";
-  }else{
-    wyjscie<< "DCAPE: " << s.dcape <<"[J/kg]\n";
-    wyjscie<< "DVCAPE: " << s.dvcape <<"[J/kg]\n";
-  }
-  return wyjscie;
 }
 
 class Thermodynamics:public InfoCollector{
@@ -1266,12 +1174,11 @@ public:
   void prepareMeanLayer();
   void putMeanLine(int i, double p, double h, double t, double d, double a, double v);
   void finish();
-  friend std::ostream& operator<< (std::ostream &wyjscie, const Thermodynamics &s);
+
   
   
 };
 
-//---------------------------------------------------------------------------------------
 void Thermodynamics::putMinTHTE(int i, double p, double h, double oe){
 	
   if (h-h0 <= 4000 && oe < minTHTE){
@@ -1279,16 +1186,13 @@ void Thermodynamics::putMinTHTE(int i, double p, double h, double oe){
     minTHTEpos = i;
   }
 }
-//---------------------------------------------------------------------------------------
 void Thermodynamics::setMlIndex(int i, double p, double h, double t, double d, double a, double v){
   this->meanLayer->setInitialConditions(i, p, h, t,d, a, v,h0);
   this->meanLayer->setInitialW(mmr, mo);
 }
-//---------------------------------------------------------------------------------------
 void Thermodynamics::putMlLine(int i, double p, double h, double t, double d, double a, double v){
   this->meanLayer->putLine(i, p, h, t, d, a, v);
 }
-//---------------------------------------------------------------------------------------
 Thermodynamics::Thermodynamics(){
   mr1000 = 0;
   meanLayerZHeight=500.0;
@@ -1350,7 +1254,6 @@ Thermodynamics::Thermodynamics(){
   mthet=0;
   mthetn=0;
 }
-//---------------------------------------------------------------------------------------
 Thermodynamics::~Thermodynamics(){
   delete(this->wbt);
   delete(this->oe);
@@ -1362,7 +1265,6 @@ Thermodynamics::~Thermodynamics(){
   delete(this->showalter);
   delete(this->virt);
 }
-//---------------------------------------------------------------------------------------
 void Thermodynamics::startConditions(int i, double p, double h, double t, double d, double a, double v, double oe)
 {
   this->t0 = t;
@@ -1390,7 +1292,6 @@ void Thermodynamics::startConditions(int i, double p, double h, double t, double
   meanmxr2=W(d, p);
   meand2=1;
 }
-//---------------------------------------------------------------------------------------
 void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, double a, double v, double oe)
 {
   if (oe > maxOE && h-h0 <= 3000)
@@ -1399,7 +1300,6 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
     this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
   }
 }
-//---------------------------------------------------------------------------------------        
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
 {
   if (   ((abs(h - h0) < meanLayerZHeight)&&(fmod(abs(h-h0),100.0)==0.0))  ||(h==h0) )
@@ -1429,9 +1329,6 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
 	mthetn+=1;
   }
 }
-
-//---------------------------------------------------------------------------------------  
-
 void Thermodynamics::determineDowndraft700(int i, double p, double h, double t, double d, double a, double v)
 {
   int t700p = this->cache->getPressureIndex(700);
@@ -1447,8 +1344,6 @@ void Thermodynamics::determineDowndraft700(int i, double p, double h, double t, 
   }
 }
 
-//---------------------------------------------------------------------------------------  
-
 void Thermodynamics::determineDowndraftByMinTHTE(int i, double p, double h, double t, double d, double a, double v)
 {
   
@@ -1463,7 +1358,6 @@ void Thermodynamics::determineDowndraftByMinTHTE(int i, double p, double h, doub
     downdraft->putLine(i, p, h, t, d, a, v);
   }
 }
-//---------------------------------------------------------------------------------------  
 void Thermodynamics::putShowalter(int i, double p, double h, double t, double d, double a, double v)
 {
   int lindex = cache->getPressureIndex(850);
@@ -1477,14 +1371,12 @@ void Thermodynamics::putShowalter(int i, double p, double h, double t, double d,
     showalter->putLine(i, p, h, t, d, a, v);
   }
 }
-//---------------------------------------------------------------------------------------  
 void Thermodynamics::putPWATER( int i, double p, double h, double t, double d, double a, double v)
 {
   std::list<double>::iterator it = mixing->begin();
   std::advance(it, i);
   pwater += 0.5*(lastp - p) * (*(it)+*(--it));
 }
-//---------------------------------------------------------------------------------------  
 void Thermodynamics::putLowLapseRates(int i, double p, double h, double t, double d, double a,double v)
 {
   if (h <= h0 + 1000)
@@ -1499,7 +1391,6 @@ void Thermodynamics::putLowLapseRates(int i, double p, double h, double t, doubl
     h24 += h - lasth;
   }
 }
-//---------------------------------------------------------------------------------------  
 void Thermodynamics::finishLowLapseRates()
 {
   h01 /= 1000;
@@ -1510,7 +1401,6 @@ void Thermodynamics::finishLowLapseRates()
   if (h24 != 0) lr24 /= h24;
   else lr24 = 0;
 }
-//--------------------------------------------------------------------------------------- 
 void Thermodynamics::ZeroPosStartingConditions(int i, double p, double h, double t, double d, double a, double v, double wbt)
 {
   wbzeropos = i;
@@ -1521,7 +1411,6 @@ void Thermodynamics::ZeroPosStartingConditions(int i, double p, double h, double
   minten = abs(t+10);
   
 }
-//---------------------------------------------------------------------------------------  
 void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, double a, double v, double wbt)
 {
   double t_zero = abs(t);
@@ -1538,7 +1427,7 @@ void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, d
     minten = imten;
     mintenpos = i;
   }
-//  else mintenpos = this->th->mostUnstable->startIndex;
+
   
   if (t_wb0 < wb0)
   {
@@ -1546,7 +1435,6 @@ void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, d
     wbzeropos = i;
   }
 }
-//---------------------------------------------------------------------------------------  
 void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double d, double a, double v)
 {
   double syf = 0;
@@ -1597,24 +1485,18 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   }
   if (abs(h - h0) <= 1000 && mr1000<mr) mr1000 = mr;
   
- 
-  
-  
-  //determineDowndraft700(i, p, h, t, d, a, v);
-  
   surfaceBased->putLine(i, p, h, t, d, a, v);
   mostUnstable->putLine(i, p, h, t, d, a, v);
-  //putShowalter(i, p, h, t, d, a, v);
+
   lastp = p;
   lastt = t;
   lasth = h;
 }
-//---------------------------------------------------------------------------------------
 void Thermodynamics::prepareMeanLayer()
 {
   if (n == 0) n = 1;
   mh /= n;
-  mp = p0; //zmiana startu ML parceli na surface
+  mp = p0; 
   mt /= n;
   md /= n;
   mmr /= n;
@@ -1631,15 +1513,12 @@ void Thermodynamics::prepareMeanLayer()
   downdraft->prepareForDCAPE();
   downdraft->setInitialW(downmr, downo);
 }
-//---------------------------------------------------------------------------------------  
 void Thermodynamics::putMeanLine(int i, double p, double h, double t, double d, double a, double v)
 {
   this->meanLayer->putLine(i, p, h, t, d, a, v);
   determineDowndraftByMinTHTE(i, p, h, t, d, a, v);
-  //this->downdraft->putLine(i, p, h, t, d, a, v);
   putShowalter(i, p, h, t, d, a, v);
 }
-//---------------------------------------------------------------------------------------  
 void Thermodynamics::finish(){
   this->mostUnstable->finish();
   this->surfaceBased->finish();
@@ -1653,14 +1532,7 @@ void Thermodynamics::finish(){
   meanhumMIDDLE/=meandMIDDLE; 
   meanmxr2/=meand2;
 }
-//---------------------------------------------------------------------------------------  
-std::ostream& operator<< (std::ostream &wyjscie, const Thermodynamics &s){
-  wyjscie << *s.mostUnstable << endl;
-  wyjscie << *s.surfaceBased << endl;
-  wyjscie << *s.meanLayer << endl;
-  wyjscie << *s.downdraft << endl;
-  return wyjscie;
-}
+
 class Sounding{
   friend class IndicesCollector;
 private:
@@ -1684,7 +1556,6 @@ public:  Thermodynamics *th;
   list<double>* a;
   list<double>* v;
   IndicesCollector *ic;
-  friend std::ostream& operator<< (ostream &wyjscie, const Sounding &s);
   Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz=10);
   ~Sounding();
   IndicesCollector * getIndicesCollectorPointer(){
@@ -1695,7 +1566,6 @@ public:  Thermodynamics *th;
 
 
 #define NULLPOINTER (void*)0
-//-------------------------------------------------------------------------------------------------------------------
 int checkCrossing(double v1, double v2, double cv){
   if(v1==cv)return 0;
   else if(v2==cv)return 1;
@@ -1710,12 +1580,10 @@ int checkCrossing(double v1, double v2, double cv){
   }
   return -1;
 }
-//-------------------------------------------------------------------------------------------------------------------
 bool Sounding::checkarguments(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_){
   if(p_==NULLPOINTER||h_==NULLPOINTER||t_==NULLPOINTER||d_==NULLPOINTER||a_==NULLPOINTER||v_==NULLPOINTER)return false;
   return true;
 }
-//-------------------------------------------------------------------------------------------------------------------
 class IndicesCollector{
 private:
   Thermodynamics *th;
@@ -1834,7 +1702,6 @@ public:
   double ML_EFF_WMAXSHEAR();
 };
 
-//--------------------------------------------------------------------------------------------------------------------
 void Sounding::alloc(){
   this->p=new list<double>();
   this->h=new list<double>();
@@ -1849,7 +1716,6 @@ void Sounding::alloc(){
   ks->setSoundingCache(cache);
   this->ic=new IndicesCollector(this->th,this->cache,this->ks, this);
 }
-//-------------------------------------------------------------------------------------------------------------------
 void Sounding::free(){
   delete(this->p);
   delete(this->h);
@@ -1865,7 +1731,6 @@ void Sounding::free(){
   delete(this->ks);
   delete(this->cache);
 }
-//-------------------------------------------------------------------------------------------------------------------
 void Sounding::prepareElementaryCache(double lval, double rval, double * rarr, int rindex, list<double>* vlist, void(*pointer)(int, int, Cache*), Cache* C){
   int check1;
   int index;
@@ -1881,7 +1746,6 @@ void Sounding::prepareElementaryCache(double lval, double rval, double * rarr, i
     
   }
 }
-//-------------------------------------------------------------------------------------------------------------------
 void Sounding::prepareCache(double p, double h){
   int	plength;
   double *parray = this->cache->getArray(0,&plength);
@@ -1894,7 +1758,6 @@ void Sounding::prepareCache(double p, double h){
   
   double AGLlh=lh-this->cache->getH0();
   double AGLh=h-this->cache->getH0();
-  //int check1;
   for(int i=0;i<hlength;i++){
     if(this->h->size()>0)this->prepareElementaryCache(AGLlh,AGLh,harray,i,this->h,&(setHeightIndex),this->cache);
     if(i<plength)
@@ -1902,7 +1765,6 @@ void Sounding::prepareCache(double p, double h){
   }
   
 }
-//-------------------------------------------------------------------------------------------------------------------
 void Sounding::insertSingleLine(double p,double h, double t,double d, Vector V){
   this->prepareCache(p,h);
   int i =(this->p->size())-1;
@@ -1919,7 +1781,6 @@ void Sounding::insertSingleLine(double p,double h, double t,double d, Vector V){
   this->th->putLine(i+1, p, h, t, d, av[0], av[1]/0.514444);
   this->ks->putLine(i+1, p, h, t, d, av[0], av[1]/0.514444);
 }
-//-------------------------------------------------------------------------------------------------------------------
 void Sounding::insertLine(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int i, double dz){
   double tp = p_[i], th = h_[i], tt = t_[i], td = d_[i], ta = a_[i], tv = v_[i];
   double np = p_[i+1], nh = h_[i+1], nt = t_[i+1], nd = d_[i+1], na = a_[i+1], nv = v_[i+1]; 
@@ -1951,7 +1812,6 @@ void Sounding::insertLine(double *p_, double *h_, double *t_, double *d_, double
   }
   
 }
-//-------------------------------------------------------------------------------------------------------------------
 Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz){
   this->alloc();
   bool valid = this->checkarguments(p_,h_,t_,d_,a_,v_);
@@ -1974,34 +1834,14 @@ Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, d
   
   
 }
-//-------------------------------------------------------------------------------------------------------------------
 Sounding::~Sounding(){
   this->free();
 }
-//-------------------------------------------------------------------------------------------------------------------
-std::ostream& operator<< (ostream &wyjscie, const Sounding &s){
-  wyjscie <<"i\tP[hPa]\t"<<"H[m]\t"<< "T[*C]\t"<< "D[*C]\t"<< "A[*]\t"<< "V[kt]\t"<<endl;
-  list<double>::iterator ip;
-  list<double>::iterator ih = s.h->begin();
-  list<double>::iterator it = s.t->begin();
-  list<double>::iterator id = s.d->begin();
-  list<double>::iterator ia = s.a->begin();
-  list<double>::iterator iv = s.v->begin();
-  int i=0;
-  for(ip = s.p->begin(); ip!=s.p->end(); ++ip){
-    wyjscie <<i<<"\t"""<< (floor(*ip*10))*0.1<<'\t'<< (floor(*ih*10))/10<<'\t'<< (floor(*it*10))/10<<'\t'<< (floor(*id*10))/10<<'\t'<< (floor(*ia*10))/10<<'\t'<< (floor(*iv*10))/10<<'\t'<<endl;
-    ++ih;++it;++id;++ia;++iv;++i;
-  }
-  wyjscie<<endl<< *s.cache<< *s.th;
-  return wyjscie;
-}
-//------------------------------------------------------------------------------------------------------------------
 void Sounding::finish(){
   th->finish();
   ks->finish();
   
 }
-//------------------------------------------------------------------------------------------------------------------
 void Sounding::secondPhase(){
   list<double>::iterator ip;
   list<double>::iterator ih = this->h->begin();
@@ -2051,7 +1891,6 @@ IndicesCollector::IndicesCollector(Thermodynamics *t, Cache *c, Kinematics *k,So
   this->S=Snd;
 }
 
-//############################################################################################
 
 double IndicesCollector::K_Index() {
   
@@ -2116,9 +1955,6 @@ double IndicesCollector::SWEATIndex(){
   double res = x + 20 * term + 2 * v850 + v500 + shear;
   return res;
 }
-
-//##############################################################################################
-
 double IndicesCollector::VMostUnstableCAPE()
 {
   
@@ -2218,9 +2054,6 @@ double IndicesCollector::MULCLTemperature(){
 double IndicesCollector::MULFCTemperature(){
   return Get(S->t,S->th->mostUnstable->vLfcIndex);
 }
-
-
-//##############################################################################################
 
 double IndicesCollector::VSurfaceBasedCAPE()
 {
@@ -2322,8 +2155,6 @@ double IndicesCollector::SBLFCTemperature(){
   return Get(S->t,S->th->surfaceBased->vLfcIndex);
 }
 
-//##############################################################################################
-
 double IndicesCollector::VMeanLayerCAPE()
 {
   
@@ -2424,7 +2255,6 @@ double IndicesCollector::MLLFCTemperature(){
   return Get(S->t,S->th->meanLayer->vLfcIndex);
 }
 
-//##############################################################################################
 
 double IndicesCollector::VDCAPE(){
   return S->th->downdraft->dvcape;
@@ -2551,9 +2381,6 @@ double IndicesCollector::SBMRatio(){
   return Get(S->th->mixing,S->th->surfaceBased->startIndex);
 }
 
-
-//##############################################################################################
-
 double IndicesCollector::BS01(){
   int tail=0;
   int head = cache->getHeightIndex(1000);
@@ -2631,7 +2458,6 @@ double IndicesCollector::BS18(){
   return result.abs();
 }
 
-//##############################################################################################
 
 double IndicesCollector::MeanWind06(){
   return S->ks->mean06.abs();
@@ -2649,7 +2475,6 @@ double IndicesCollector::MeanWind13(){
   return S->ks->mean13.abs();
 }
 
-//##############################################################################################
 
 double IndicesCollector::SRH100RM(){
   return S->ks->srh100rm;
@@ -2683,7 +2508,6 @@ double IndicesCollector::SRH03LM(){
   return S->ks->srh03lm;
 }
 
-//##############################################################################################
 
 double IndicesCollector::emubs(){
   Vector gVector = Get(S->ks->vw,S->th->mostUnstable->startIndex);
@@ -2826,7 +2650,6 @@ double IndicesCollector::emlbs(){
   return effSHR;
 }
 
-//##############################################################################################
 
 double IndicesCollector::MUmiddlecape(){
   return S->th->mostUnstable->middlecape;
@@ -2840,7 +2663,6 @@ double IndicesCollector::MLmiddlecape(){
   return S->th->meanLayer->middlecape;
 }
 
-//##############################################################################################
 
 double IndicesCollector::STP(){
   double sbcape = this->VSurfaceBasedCAPE()/1500;
@@ -2935,7 +2757,7 @@ double IndicesCollector::SHP(){
 }
 
 double IndicesCollector::DCP(){
-  //DCP = (DCAPE/980)*(MUCAPE/2000)*(0-6 km shear/20 kt)*(0-6 km mean wind/16 kt) 
+
   double dcape = this->VDCAPE()/980;
   double mucape = this->VMostUnstableCAPE()/2000;
   double shear = this->BS06()/(20*0.514444444 );
@@ -2943,7 +2765,6 @@ double IndicesCollector::DCP(){
   return dcape*mucape*shear*mw;
 }
 
-//##############################################################################################
 
 double IndicesCollector::MU_WMAXSHEAR(){
   return this->VMostUnstableVmax()*this->BS06();
@@ -2969,7 +2790,6 @@ double IndicesCollector::ML_EFF_WMAXSHEAR(){
   return this->VMeanLayerVmax()*this->emlbs();
 }
 
-//##############################################################################################
 
 double IndicesCollector::DeltaThetaE_HGL(){
   return Get(S->th->oe,0)-S->th->mthet;
@@ -3088,7 +2908,6 @@ double IndicesCollector::Bunkers_MW_M(){
 }
 
 
-//##############################################################################################
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz);
@@ -3497,162 +3316,6 @@ double * sounding_default2(double* pressure,
   return result;
  
 }
-
-
-void test(double p[], double h[], double t[], double d[], double  a[], double v[], int n, int parameter){
-	Sounding *sret;
-	int size = n;
-	double *result = sounding_default2(p,h,t,d,a,v,size,&sret,parameter);
-	int reslen= 145;
-	
-	int plen = sret->p->size();
-  	int hlen = sret->h->size();
-  	int tlen = sret->t->size();
-  	int dlen = sret->d->size();
-  	int alen = sret->a->size();
-  	int vlen = sret->v->size();
-  	int tvlen = sret->th->virt->size();
-  	
-  	int mulen = sret->th->mostUnstable->getVirtualValues()->size();
-  	int sblen = sret->th->surfaceBased->getVirtualValues()->size();
-  	int mllen = sret->th->meanLayer->getVirtualValues()->size();
-  	int mustart= sret->th->mostUnstable->startIndex;
-  	int maxl=reslen+2+mulen+1+sblen+1+mllen+plen+1+hlen+1+tlen+1+dlen+1+alen+1+vlen+1+tvlen+1+10;
-  	
-  	double * out = new double [maxl];
-  	//Rcpp::NumericVector out(maxl);
-
-          for(int i = 0; i < reslen; ++i) {
-                  out[i] = result[i];
-				  
-          }
-          
-          int i= reslen;
-          out[i] = mulen;i++;
-          out[i] = mustart;i++;
-          
-          for (std::list<double>::iterator it = sret->th->mostUnstable->getVirtualValues()->begin(); it != sret->th->mostUnstable->getVirtualValues()->end(); ++it){
-          	double temp = 0;
-			temp= *it;
-    		out[i]=temp;
-    		i++;
-		  }
-          out[i]=sblen;i++;
-          
-          for (std::list<double>::iterator it = sret->th->surfaceBased->getVirtualValues()->begin(); it != sret->th->surfaceBased->getVirtualValues()->end(); ++it){
-          	double temp = 0;
-			temp= *it;
-    		out[i]=temp;
-    		i++;
-		  }
-		  
-		  out[i]=mllen; i++;
-		  
-		  for (std::list<double>::iterator it = sret->th->meanLayer->getVirtualValues()->begin(); it != sret->th->meanLayer->getVirtualValues()->end(); ++it){
-          	double temp = 0;
-			temp= *it;
-    		out[i]=temp;
-    		i++;
-		  }
-		  
-		  out[i]=plen;i++;
-		  for (std::list<double>::iterator it = sret->p->begin(); it != sret->p->end(); ++it){
-          	double temp = 0;
-			temp= *it;
-    		out[i]=temp;
-    		i++;
-		  }
-		  
-		  out[i]=hlen;i++;
-		  for (std::list<double>::iterator it = sret->h->begin(); it != sret->h->end(); ++it){
-          	double temp = 0;
-			temp= *it;
-    		out[i]=temp;
-    		i++;
-		  }
-		  out[i]=tlen;i++;
-		  for (std::list<double>::iterator it = sret->t->begin(); it != sret->t->end(); ++it){
-          	double temp = 0;
-			temp= *it;
-    		out[i]=temp;
-    		i++;
-		  }
-		  out[i]=dlen;i++;
-		  for (std::list<double>::iterator it = sret->d->begin(); it != sret->d->end(); ++it){
-          	double temp = 0;
-			temp= *it;
-    		out[i]=temp;
-    		i++;
-		  }
-		  out[i]=alen;i++;
-		  for (std::list<double>::iterator it = sret->a->begin(); it != sret->a->end(); ++it){
-          	double temp = 0;
-			temp= *it;
-    		out[i]=temp;
-    		i++;
-		  }
-		  out[i]=vlen;i++;
-		  
-		  for (std::list<double>::iterator it = sret->v->begin(); it != sret->v->end(); ++it){
-          	double temp = 0;
-			temp= *it;
-    		out[i]=temp;
-    		i++;
-		  }
-		  
-		  out[i]=tvlen;i++;
-		  for (std::list<double>::iterator it = sret->th->virt->begin(); it != sret->th->virt->end(); ++it){
-          	double temp = 0;
-			temp= *it;
-    		out[i]=temp;
-    		i++;
-		  }
-		  
-  		out[i]=-999;
-  	
-	delete sret;
-	delete[] result;
-	delete []out;
-	
-}
-
-/*
-int main(){
-	double  p[] = {1000, 855, 700, 500, 300, 100, 10};
-	double  h[] = {0, 1500, 2500, 6000, 8500, 12000, 25000};
-	double  t[] = {25, 10, 0, -15, -30, -50, -92};
-	double  d[] = {20, 5, -5, -30, -55, -80, -99};
-	double  a[] = {0, 90, 135, 180, 270, 350, 0};
-	double  v[] = {5, 10, 20, 30, 40, 5, 0};
-	int n =7;
-	test(p,h,t,d,a,v,n,1);
-	system("pause");
-}*/
-
-//' Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
-//' Further details given in the sounding_compute() function
-//' 
-//'
-//' @param pressure pressure [hPa]
-//' @param altitude altitude [meters]
-//' @param temp temperature [degree Celsius]
-//' @param dpt dew point temperature [degree Celsius]
-//' @param wd wind direction [azimuth in degrees]
-//' @param ws wind speed [knots]
-//' @param export_profile possibility to export interpolated profile on the levels defined in accuracy configuration
-//' @param accuracy accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
-//' @examples 
-//' pressure = c(1000, 855, 700, 500, 300, 100, 10) 
-//' altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000)
-//' temp = c(25, 10, 0, -15, -30, -50, -92)
-//' dpt = c(20, 5, -5, -30, -55, -80, -99)
-//' wd = c(0, 90, 135, 180, 270, 350, 0)
-//' ws = c(5, 10, 20, 30, 40, 5, 0)
-//' sounding_default(pressure, altitude, temp, dpt, wd, ws, accuracy = 1, export_profile = 0)
-//' @useDynLib thunder
-//' @importFrom Rcpp evalCpp
-//' @export
-// [[Rcpp::export]]
 
 Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
                           Rcpp::NumericVector altitude,
