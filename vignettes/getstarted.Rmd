@@ -286,7 +286,7 @@ Below is the full list of parameters computed and exported with the `sounding_co
 
 [53] Cold_Pool_Strength – difference between surface temperature and temperature of the downdraft (derived from DCAPE) at the surface. Units are K.
 
-[54] Wind_Index – based on original formula from McCann (1994), doi: https://doi.org/10.1175/1520-0434(1994)009<0532:WNIFFM>2.0.CO;2. Units indicate estimated wind gust potential in knots. 
+[54] Wind_Index – based on original formula from McCann (1994), doi:  10.1175/1520-0434(1994)009<0532:WNIFFM>2.0.CO;2. Units indicate estimated wind gust potential in knots. 
 
 [55] PRCP_WATER – precipitable water (entire column). Units are mm.
 
@@ -314,11 +314,11 @@ Below is the full list of parameters computed and exported with the `sounding_co
 
 [66] BS_18km – bulk wind shear between 1 and 8 km AGL. Units are m/s. 	
 
-[67] BS_EFF_MU – effective shear based on most-unstable parcel (highest theta-e between surface and 3 km AGL). See Thompson et al. (2007), doi: https://doi.org/10.1175/WAF969.1 for further details. Units are m/s. 	
+[67] BS_EFF_MU – effective shear based on most-unstable parcel (highest theta-e between surface and 3 km AGL). See Thompson et al. (2007), doi: 10.1175/WAF969.1 for further details. Units are m/s. 	
 
-[68] BS_EFF_SB – effective shear based on surface-based parcel. See Thompson et al. (2007), doi: https://doi.org/10.1175/WAF969.1 for further details. Units are m/s. 	 	
+[68] BS_EFF_SB – effective shear based on surface-based parcel. See Thompson et al. (2007), doi: 10.1175/WAF969.1 for further details. Units are m/s. 	 	
 
-[69] BS_EFF_ML – effective shear based on mixed-layer parcel (theta and mixing ratio averaged over 0–500m AGL layer and initialized from surface). See Thompson et al. (2007), doi: https://doi.org/10.1175/WAF969.1 for further details. Units are m/s. 		
+[69] BS_EFF_ML – effective shear based on mixed-layer parcel (theta and mixing ratio averaged over 0–500m AGL layer and initialized from surface). See Thompson et al. (2007), doi: 10.1175/WAF969.1 for further details. Units are m/s. 		
 
 [70] BS_SFC_to_HGL – bulk wind shear between surface and −10°C. Units are m/s.  	
 
@@ -336,39 +336,39 @@ Below is the full list of parameters computed and exported with the `sounding_co
 
 [77] MW_13km – mean wind speed between 1 and 3 km AGL layer. Units are m/s.  
 
-[78] SRH_100m_RM – storm-relative helicity between surface and 100m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.  
+[78] SRH_100m_RM – storm-relative helicity between surface and 100m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi:  10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.  
 
-[79] SRH_500m_RM – storm-relative helicity between surface and 500m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   
+[79] SRH_500m_RM – storm-relative helicity between surface and 500m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   
 
-[80] SRH_1km_RM – storm-relative helicity between surface and 1 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   	
+[80] SRH_1km_RM – storm-relative helicity between surface and 1 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   	
 
-[81] SRH_3km_RM – storm-relative helicity between surface and 3 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   	
+[81] SRH_3km_RM – storm-relative helicity between surface and 3 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   	
 
-[82] SRH_100m_LM – storm-relative helicity between surface and 100m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   
+[82] SRH_100m_LM – storm-relative helicity between surface and 100m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   
 
-[83] SRH_500m_LM – storm-relative helicity between surface and 500m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    
+[83] SRH_500m_LM – storm-relative helicity between surface and 500m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    
 
-[84] SRH_1km_LM – storm-relative helicity between surface and 1 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    	
+[84] SRH_1km_LM – storm-relative helicity between surface and 1 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    	
 
-[85] SRH_3km_LM – storm-relative helicity between surface and 3 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    	
+[85] SRH_3km_LM – storm-relative helicity between surface and 3 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    	
 
-[86] Bunkers_RM_A – azimuth for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.   
+[86] Bunkers_RM_A – azimuth for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.   
 
-[87] Bunkers_RM_M – wind speed for right-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s. 
+[87] Bunkers_RM_M – wind speed for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s. 
 
-[88] Bunkers_LM_A  – azimuth for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.	
+[88] Bunkers_LM_A  – azimuth for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.	
 
-[89] Bunkers_LM_M – wind speed for left-moving supercell vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s.  	
+[89] Bunkers_LM_M – wind speed for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s.  	
 
-[90] Bunkers_MW_A  – azimuth for mean storm motion vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.	
+[90] Bunkers_MW_A  – azimuth for mean storm motion vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.	
 
-[91] Bunkers_MW_M – wind speed for mean storm motion vector. See Bunkers et al. (2002), doi: https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s.  	
+[91] Bunkers_MW_M – wind speed for mean storm motion vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s.  	
 
 **Composite parameters:**
 
 [92] K_Index 	– based on original formula from George (1960): "Weather Forecasting for Aeronautics" Academic Press, London, 1960, p. 673. Units are K.
 
-[93] Showalter_Index – based on original formula from Showalter (1953), doi: https://doi.org/10.1175/1520-0477-34.6.250. Units are K.  
+[93] Showalter_Index – based on original formula from Showalter (1953), doi: 10.1175/1520-0477-34.6.250. Units are K.  
 
 [94] TotalTotals_Index – based on original formula from Miller (1972): "Notes on analysis and severe-storm forecasting procedures of the Air Force Global Weather Central", AWS Tech. Rpt. 200(rev), Air Weather Service, Scott AFB, IL. Units are K.
 
@@ -376,27 +376,27 @@ Below is the full list of parameters computed and exported with the `sounding_co
 	
 [96] STP – based on the fixed layer formula currently used on the Storm Prediction Center mesoanalysis (https://www.spc.noaa.gov/exper/mesoanalysis/) as of 1 March 2021. Parameter is dimensionless. 	
 
-[97] STP_new – based on original formula from Coffer et al. (2019), doi: https://doi.org/10.1175/WAF-D-19-0115.1. Parameter is dimensionless.	
+[97] STP_new – based on original formula from Coffer et al. (2019), doi: 10.1175/WAF-D-19-0115.1. Parameter is dimensionless.	
 
 [98] SCP – based on Thompson et al. (2007), "An update to the supercell composite and significant tornado parameters". Preprints, 22nd Conf. on Severe Local Storms, Hyannis, MA, Amer. Meteor. Soc. P (Vol. 8), but with effective SRH replaced with surface to 3 km AGL SRH and effective bulk wind shear replaced with surface to 6 km AGL bulk wind shear. Parameter is dimensionless.  	
 
-[99] SCP_new – based on formula from Gropp and Davenport (2018), doi: https://doi.org/10.1175/WAF-D-17-0150.1, but with effective SRH replaced with surface to 3 km AGL SRH. Parameter is dimensionless.	 	
+[99] SCP_new – based on formula from Gropp and Davenport (2018), doi: 10.1175/WAF-D-17-0150.1, but with effective SRH replaced with surface to 3 km AGL SRH. Parameter is dimensionless.	 	
 
 [100] SHIP – based on formula currently used on the Storm Prediction Center mesoanalysis (https://www.spc.noaa.gov/exper/mesoanalysis/) as of 1 March 2021. Parameter is dimensionless.  	
 
 [101] DCP – based on formula currently used on the Storm Prediction Center mesoanalysis (https://www.spc.noaa.gov/exper/mesoanalysis/) as of 1 March 2021. Parameter is dimensionless.   	
 
-[102] MU_WMAXSHEAR – most-unstable WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	
+[102] MU_WMAXSHEAR – most-unstable WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	
 
-[103] SB_WMAXSHEAR – surface-based WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 		
+[103] SB_WMAXSHEAR – surface-based WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 		
 
-[104] ML_WMAXSHEAR – mixed-layer WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	 	
+[104] ML_WMAXSHEAR – mixed-layer WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	 	
 
-[105] MU_EFF_WMAXSHEAR – most-unstable WMAX multiplied by most-unstable effective bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	 	
+[105] MU_EFF_WMAXSHEAR – most-unstable WMAX multiplied by most-unstable effective bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	 	
 
-[106] SB_EFF_WMAXSHEAR – surface-based WMAX multiplied by surface-based effective bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	  	
+[106] SB_EFF_WMAXSHEAR – surface-based WMAX multiplied by surface-based effective bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	  	
 
-[107] ML_EFF_WMAXSHEAR – mixed-layer WMAX multiplied by mixed-layer effective bulk wind shear. See Taszarek et al. (2020), doi: https://doi.org/10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	  	
+[107] ML_EFF_WMAXSHEAR – mixed-layer WMAX multiplied by mixed-layer effective bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2. 	 	  	
 
 ### 2. Accuracy tables for `sounding_compute()` 
 
