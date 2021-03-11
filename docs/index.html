@@ -5,27 +5,26 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Severe Weather Atmospheric Convection Indices from Rawinsonde Data • thunder</title>
+<title>Atmospheric Convection Indices from Rawinsonde Data • thunder</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
-<script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Severe Weather Atmospheric Convection Indices from Rawinsonde Data">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script><meta property="og:title" content="Atmospheric Convection Indices from Rawinsonde Data">
 <meta property="og:description" content="R tool for calculating atmospheric convection indices.">
 <meta property="og:image" content="/logo.png">
+<meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body data-spy="scroll" data-target="#toc">
+<body>
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">thunder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1101</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.12</span>
       </span>
     </div>
 
@@ -46,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
+    <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -68,8 +67,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/bczernecki/thunder/">
-    <span class="fab fa-github fa-lg"></span>
+  <a href="https://github.com/bczernecki/thunder">
+    <span class="fa fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -82,59 +81,66 @@
 <!--/.navbar -->
 
       
-
       </header><div class="row">
   <div class="contents col-md-9">
 <div id="thunder" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#thunder" class="anchor"></a>thundeR</h1></div>
-<div id="rapid-processing-and-visualisation-of-convective-parameters-from-rawinsonde-and-nwp-data-" class="section level6">
-<h6>Rapid processing and visualisation of convective parameters from rawinsonde and NWP data <img src="reference/figures/logo.png" align="right" width="200">
-</h6>
+<a href="#thunder" class="anchor"></a>thundeR <img src="reference/figures/logo.png" align="right" width="150">
+</h1></div>
+<p><strong>Rapid computation and visualisation of convective parameters from rawinsonde and NWP data</strong></p>
 <!-- badges: start -->
-
-<p><strong><code>thundeR</code></strong> is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large numerical datasets such as reanalyses or operational NWP models in a fairly low amount of time. This package was developed by research meteorologists specializing in severe convective storms and is constantly updated with new features. Its main purpose is to allow operational meteorologists and researchers a quick and easy evaluation of convective environments.</p>
+<p><a href="https://github.com/bczernecki/thunder/actions"><img src="https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a> <a href="https://codecov.io/gh/bczernecki/thunder"><img src="https://codecov.io/gh/bczernecki/thunder/branch/devel/graph/badge.svg?token=JGZPB7RUFI" alt="Codecov test coverage"></a> <a href="https://cran.r-project.org/package=thunder"><img src="https://www.r-pkg.org/badges/version/thunder" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=thunder"><img src="http://cranlogs.r-pkg.org/badges/thunder" alt="CRAN RStudio mirror downloads"></a> <!-- badges: end --></p>
+<p><strong><code>thundeR</code></strong> is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational forecasting of severe convective storms. Core algorithm is based on C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features.</p>
+<div id="online-browser" class="section level3">
+<h3 class="hasAnchor">
+<a href="#online-browser" class="anchor"></a>Online browser</h3>
+<p>Online rawinsonde browser of <strong>thundeR</strong> package is available at www.rawinsonde.com</p>
 </div>
-<div id="-installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#-installation" class="anchor"></a>## Installation</h2>
+<div id="installation" class="section level3">
+<h3 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h3>
 <p>The stable version can be installed from the CRAN repository:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"thunder"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"thunder"</span>)</code></pre></div>
 <p>The development version can be installed directly from the github repository:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://remotes.r-lib.org">remotes</a></span><span class="op">)</span>;<span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"bczernecki/thunder"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">remotes<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/remotes/topics/install_github">install_github</a></span>(<span class="st">"bczernecki/thunder"</span>)</code></pre></div>
 </div>
-<div id="-usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#-usage" class="anchor"></a>## Usage</h2>
-<div id="draw-skew-t-diagram-hodograph-and-most-important-indices-on-a-single-layout-and-save-it-to-png-file" class="section level3">
+<div id="usage" class="section level3">
 <h3 class="hasAnchor">
-<a href="#draw-skew-t-diagram-hodograph-and-most-important-indices-on-a-single-layout-and-save-it-to-png-file" class="anchor"></a>Draw Skew-T diagram, hodograph and most important indices on a single layout and save it to png file</h3>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"sounding_vienna"</span><span class="op">)</span> <span class="co"># take example dataset:</span>
-<span class="va">pressure</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">PRES</span>
-<span class="va">altitude</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">HGHT</span>
-<span class="va">temp</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">TEMP</span>
-<span class="va">dpt</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">DWPT</span>
-<span class="va">wd</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">DRCT</span>
-<span class="va">ws</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">SKNT</span>
-<span class="fu"><a href="reference/sounding_save.html">sounding_save</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"myfile.png"</span>, title <span class="op">=</span> <span class="st">"Vienna (23 August 2011, 1200 UTC)"</span>, <span class="va">pressure</span>, <span class="va">altitude</span>, <span class="va">temp</span>, <span class="va">dpt</span>, <span class="va">wd</span>, <span class="va">ws</span><span class="op">)</span></code></pre></div>
-<p><img src="inst/figures/my_file.svg"></p>
+<a href="#usage" class="anchor"></a>Usage</h3>
+<div id="draw-skew-t-hodograph-and-convective-parameters-on-a-single-layout-and-export-to-png-file" class="section level4">
+<h4 class="hasAnchor">
+<a href="#draw-skew-t-hodograph-and-convective-parameters-on-a-single-layout-and-export-to-png-file" class="anchor"></a>Draw Skew-T, hodograph and convective parameters on a single layout and export to png file</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"sounding_vienna"</span>) <span class="co"># load example dataset (Vienna rawinsonde profile for 23 Aug 2011 12UTC):</span>
+pressure =<span class="st"> </span>sounding_vienna<span class="op">$</span>pressure <span class="co"># vector of pressure [hPa]</span>
+altitude =<span class="st"> </span>sounding_vienna<span class="op">$</span>altitude <span class="co"># vector of altitude [meters]</span>
+temp =<span class="st"> </span>sounding_vienna<span class="op">$</span>temp  <span class="co"># vector of temperature [degree Celsius]</span>
+dpt =<span class="st"> </span>sounding_vienna<span class="op">$</span>dpt <span class="co"># vector of dew point temperature [degree Celsius]</span>
+wd =<span class="st"> </span>sounding_vienna<span class="op">$</span>wd <span class="co"># vector of wind direction [azimuth in degrees]</span>
+ws =<span class="st"> </span>sounding_vienna<span class="op">$</span>ws <span class="co"># vector of wind speed [knots]</span>
+<span class="kw"><a href="reference/sounding_save.html">sounding_save</a></span>(<span class="dt">filename =</span> <span class="st">"Vienna.png"</span>, <span class="dt">title =</span> <span class="st">"Vienna - 23 August 2011 1200 UTC"</span>, pressure, altitude, temp, dpt, wd, ws)</code></pre></div>
+<p><img src="inst/figures/Vienna.png"></p>
 </div>
-<div id="compute-all-convective-indices-based-on-a-random-radiosonde-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#compute-all-convective-indices-based-on-a-random-radiosonde-data" class="anchor"></a>Compute all convective indices based on a random radiosonde data:</h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="st"><a href="https://github.com/bczernecki/thunder">"thunder"</a></span><span class="op">)</span>
-<span class="va">pressure</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1000</span>, <span class="fl">855</span>, <span class="fl">700</span>, <span class="fl">500</span>, <span class="fl">300</span>, <span class="fl">100</span>, <span class="fl">10</span><span class="op">)</span> <span class="co"># pressure</span>
-<span class="va">altitude</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1500</span>, <span class="fl">2500</span>, <span class="fl">6000</span>, <span class="fl">8500</span>, <span class="fl">12000</span>, <span class="fl">25000</span><span class="op">)</span> <span class="co"># altitude</span>
-<span class="va">temp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">25</span>, <span class="fl">10</span>, <span class="fl">0</span>, <span class="op">-</span><span class="fl">15</span>, <span class="op">-</span><span class="fl">30</span>, <span class="op">-</span><span class="fl">50</span>, <span class="op">-</span><span class="fl">92</span><span class="op">)</span> <span class="co"># air temperature</span>
-<span class="va">dpt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">5</span>, <span class="op">-</span><span class="fl">5</span>, <span class="op">-</span><span class="fl">30</span>, <span class="op">-</span><span class="fl">55</span>, <span class="op">-</span><span class="fl">80</span>, <span class="op">-</span><span class="fl">99</span><span class="op">)</span> <span class="co"># dew point temperature</span>
-<span class="va">wd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">90</span>, <span class="fl">135</span>, <span class="fl">180</span>, <span class="fl">270</span>, <span class="fl">350</span>, <span class="fl">0</span><span class="op">)</span> <span class="co"># wind direction</span>
-<span class="va">ws</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>, <span class="fl">5</span>, <span class="fl">0</span><span class="op">)</span> <span class="co"># wind speed</span>
-<span class="fu"><a href="https://rdrr.io/r/base/options.html">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="co"># change output formatting precision</span>
-<span class="fu"><a href="reference/sounding_compute.html">sounding_compute</a></span><span class="op">(</span><span class="va">pressure</span>, <span class="va">altitude</span>, <span class="va">temp</span>, <span class="va">dpt</span>, <span class="va">wd</span>, <span class="va">ws</span><span class="op">)</span>
+<div id="download-north-platte-rawinsonde-profile-for-03-jul-1999-00utc-and-export-to-png-file" class="section level4">
+<h4 class="hasAnchor">
+<a href="#download-north-platte-rawinsonde-profile-for-03-jul-1999-00utc-and-export-to-png-file" class="anchor"></a>Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">profile =<span class="st"> </span><span class="kw"><a href="reference/get_sounding.html">get_sounding</a></span>(<span class="dt">wmo_id =</span> <span class="dv">72562</span>, <span class="dt">yy =</span> <span class="dv">1999</span>, <span class="dt">mm =</span> <span class="dv">7</span>, <span class="dt">dd =</span> <span class="dv">3</span>,<span class="dt">hh =</span> <span class="dv">0</span>)
+<span class="kw"><a href="reference/sounding_save.html">sounding_save</a></span>(<span class="dt">filename =</span> <span class="st">"NorthPlatte.png"</span>, <span class="dt">title =</span> <span class="st">"North Platte - 03 July 1999 0000 UTC"</span>, profile<span class="op">$</span>pressure, profile<span class="op">$</span>altitude, profile<span class="op">$</span>temp, profile<span class="op">$</span>dpt, profile<span class="op">$</span>wd, profile<span class="op">$</span>ws)</code></pre></div>
+<p><img src="inst/figures/NorthPlatte.png"></p>
+</div>
+<div id="compute-convective-parameters-based-on-a-sample-vertical-profile-data" class="section level4">
+<h4 class="hasAnchor">
+<a href="#compute-convective-parameters-based-on-a-sample-vertical-profile-data" class="anchor"></a>Compute convective parameters based on a sample vertical profile data:</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"thunder"</span>)
+
+pressure =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1000</span>, <span class="dv">855</span>, <span class="dv">700</span>, <span class="dv">500</span>, <span class="dv">300</span>, <span class="dv">100</span>, <span class="dv">10</span>) <span class="co"># pressure [hPa]</span>
+altitude =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">1500</span>, <span class="dv">2500</span>, <span class="dv">6000</span>, <span class="dv">8500</span>, <span class="dv">12000</span>, <span class="dv">25000</span>) <span class="co"># altitude [meters]</span>
+temp =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">25</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">15</span>, <span class="op">-</span><span class="dv">30</span>, <span class="op">-</span><span class="dv">50</span>, <span class="op">-</span><span class="dv">92</span>) <span class="co"># temperature [degree Celsius]</span>
+dpt =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">20</span>, <span class="dv">5</span>, <span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">30</span>, <span class="op">-</span><span class="dv">55</span>, <span class="op">-</span><span class="dv">80</span>, <span class="op">-</span><span class="dv">99</span>) <span class="co"># dew point temperature [degree Celsius]</span>
+wd =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">90</span>, <span class="dv">135</span>, <span class="dv">180</span>, <span class="dv">270</span>, <span class="dv">350</span>, <span class="dv">0</span>) <span class="co"># wind direction [azimuth in degress]</span>
+ws =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">5</span>, <span class="dv">0</span>) <span class="co"># wind speed [knots]</span>
+accuracy =<span class="st"> </span><span class="dv">2</span> <span class="co"># accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)</span>
+<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">digits =</span> <span class="dv">2</span>) <span class="co"># change output formatting precision </span>
+<span class="kw"><a href="reference/sounding_compute.html">sounding_compute</a></span>(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
 
 <span class="co">#             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE              MU_CIN </span>
@@ -188,42 +194,84 @@
 <span class="co">#        ML_WMAXSHEAR    MU_EFF_WMAXSHEAR    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR </span>
 <span class="co">#             1005.54              936.94              936.94              771.71</span></code></pre></div>
 </div>
-<div id="draw-a-customized-hodograph" class="section level3">
+<div id="hodograph-example" class="section level4">
+<h4 class="hasAnchor">
+<a href="#hodograph-example" class="anchor"></a>Hodograph example:</h4>
+<p>Download sounding and draw hodograph:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chanhassen =<span class="st"> </span><span class="kw"><a href="reference/get_sounding.html">get_sounding</a></span>(<span class="dt">wmo_id =</span> <span class="dv">72649</span>, <span class="dt">yy =</span> <span class="dv">2001</span>, <span class="dt">mm =</span> <span class="dv">5</span>, <span class="dt">dd =</span> <span class="dv">10</span>, <span class="dt">hh =</span> <span class="dv">00</span>)
+<span class="kw"><a href="reference/sounding_hodograph.html">sounding_hodograph</a></span>(<span class="dt">ws =</span> chanhassen<span class="op">$</span>ws, <span class="dt">wd =</span> chanhassen<span class="op">$</span>wd, 
+                   <span class="dt">altitude =</span> chanhassen<span class="op">$</span>altitude,<span class="dt">max_speed =</span> <span class="dv">40</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/title">title</a></span>(<span class="st">"Chanhasses - 10 May 2001, 00:00 UTC"</span>)</code></pre></div>
+<p><img src="inst/figures/hodograph.png"></p>
+</div>
+<div id="customized-skew-t-plot" class="section level4">
+<h4 class="hasAnchor">
+<a href="#customized-skew-t-plot" class="anchor"></a>Customized Skew-T plot:</h4>
+<p>Download sounding and draw customized Skew-T plot (e.g. up to 150 hPa instead of default 100 hPa):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chanhassen =<span class="st"> </span><span class="kw"><a href="reference/get_sounding.html">get_sounding</a></span>(<span class="dt">wmo_id =</span> <span class="dv">72649</span>, <span class="dt">yy =</span> <span class="dv">2001</span>, <span class="dt">mm =</span> <span class="dv">5</span>, <span class="dt">dd =</span> <span class="dv">10</span>, <span class="dt">hh =</span> <span class="dv">00</span>)
+<span class="kw"><a href="reference/skewt_plot.html">skewt_plot</a></span>(<span class="dt">ptop =</span> <span class="dv">150</span>, <span class="dt">deg45 =</span> <span class="ot">TRUE</span>, <span class="dt">temp_stripes =</span> <span class="ot">TRUE</span>)
+<span class="kw"><a href="reference/skewt_lines.html">skewt_lines</a></span>(chanhassen<span class="op">$</span>temp, chanhassen<span class="op">$</span>pressure, <span class="dt">ptop =</span> <span class="dv">150</span>, <span class="dt">col=</span><span class="st">"red"</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)
+<span class="kw"><a href="reference/skewt_lines.html">skewt_lines</a></span>(chanhassen<span class="op">$</span>dpt, chanhassen<span class="op">$</span>pressure, <span class="dt">ptop =</span> <span class="dv">150</span>, <span class="dt">col=</span><span class="st">"blue"</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)</code></pre></div>
+<p><img src="inst/figures/skewt_customized.png"></p>
+</div>
+<div id="wind-speed-profile" class="section level4">
+<h4 class="hasAnchor">
+<a href="#wind-speed-profile" class="anchor"></a>Wind speed profile:</h4>
+<p>Download sounding and draw vertical wind speed profile with accompanying wind barbs:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/grDevices/topics/dev">dev.off</a></span>()
+chanhassen =<span class="st"> </span><span class="kw"><a href="reference/get_sounding.html">get_sounding</a></span>(<span class="dt">wmo_id =</span> <span class="dv">72649</span>, <span class="dt">yy =</span> <span class="dv">2001</span>, <span class="dt">mm =</span> <span class="dv">5</span>, <span class="dt">dd =</span> <span class="dv">10</span>, <span class="dt">hh =</span> <span class="dv">00</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">fig =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.1</span>, <span class="fl">0.75</span>, <span class="fl">0.15</span>, <span class="fl">0.9</span>), <span class="dt">new =</span> <span class="ot">TRUE</span>, <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">oma =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))
+<span class="kw"><a href="reference/sounding_wind.html">sounding_wind</a></span>(<span class="dt">pressure =</span> chanhassen<span class="op">$</span>pressure, <span class="dt">ws =</span> chanhassen<span class="op">$</span>ws, <span class="dt">yaxs =</span> <span class="ot">TRUE</span>)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/title">title</a></span>(<span class="st">"Wind profile: Chanhassen - 10 May 2001 0000 UTC"</span>, <span class="dt">outer =</span> F)
+<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">fig =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.65</span>, <span class="fl">0.95</span>, <span class="fl">0.15</span>, <span class="fl">0.9</span>), <span class="dt">new =</span> <span class="ot">TRUE</span>, <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">oma =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))
+<span class="kw"><a href="reference/sounding_barbs.html">sounding_barbs</a></span>(chanhassen<span class="op">$</span>pressure, chanhassen<span class="op">$</span>ws, chanhassen<span class="op">$</span>wd, chanhassen<span class="op">$</span>altitude, <span class="dt">interpolate =</span> <span class="ot">FALSE</span>, <span class="dt">barb_cex =</span> <span class="dv">1</span>)</code></pre></div>
+<p><img src="inst/figures/wind_profile.png"></p>
+</div>
+<div id="accuracy-tables-for-sounding_compute" class="section level4">
+<h4 class="hasAnchor">
+<a href="#accuracy-tables-for-sounding_compute" class="anchor"></a>Accuracy tables for <code><a href="reference/sounding_compute.html">sounding_compute()</a></code>
+</h4>
+<p>The interpolation algorithm used in the <code><a href="reference/sounding_compute.html">sounding_compute()</a></code> function impacts accuracy of parameters such as CAPE or CIN and the performance of the script. The valid options for the <code>accuracy</code> parameter are 1, 2 or 3:</p>
+<p><strong>accuracy = 1</strong> - High performance but low accuracy. Dedicated for large dataset when output data needs to be quickly available (e.g. operational numerical weather models). This option is around 20 times faster than high accuracy (3) setting. Interpolation is peformed for 60 levels (m AGL):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">300</span>, <span class="dv">400</span>, <span class="dv">500</span>, <span class="dv">600</span>, <span class="dv">700</span>, <span class="dv">800</span>, <span class="dv">900</span>, <span class="dv">1000</span>, <span class="dv">1100</span>, <span class="dv">1200</span>, <span class="dv">1300</span>, <span class="dv">1400</span>, <span class="dv">1600</span>, <span class="dv">1800</span>, <span class="dv">2000</span>, <span class="dv">2200</span>, <span class="dv">2400</span>, <span class="dv">2600</span>, <span class="dv">2800</span>, <span class="dv">3000</span>, <span class="dv">3200</span>, <span class="dv">3400</span>, <span class="dv">3600</span>, <span class="dv">3800</span>, <span class="dv">4000</span>, <span class="dv">4200</span>, <span class="dv">4400</span>, <span class="dv">4600</span>, <span class="dv">4800</span>, <span class="dv">5000</span>, <span class="dv">5200</span>, <span class="dv">5400</span>, <span class="dv">5600</span>, <span class="dv">5800</span>, <span class="dv">6000</span>, <span class="dv">6500</span>, <span class="dv">7000</span>, <span class="dv">7500</span>, <span class="dv">8000</span>, <span class="dv">8500</span>, <span class="dv">9000</span>, <span class="dv">9500</span>, <span class="dv">10000</span>, <span class="dv">10500</span>, <span class="dv">11000</span>, <span class="dv">11500</span>, <span class="dv">12000</span>, <span class="dv">12500</span>, <span class="dv">13000</span>, <span class="dv">13500</span>, <span class="dv">14000</span>, <span class="dv">15000</span>, <span class="dv">16000</span>, <span class="dv">17000</span>, <span class="dv">18000</span>, <span class="dv">19000</span>, <span class="dv">20000</span>)</code></pre></div>
+<p><strong>accuracy = 2</strong> - Compromise between script performance and accuracy. Recommended for efficient processing of large numerical weather prediction datasets such as meteorological reanalyses for research studies. This option is around 10 times faster than high accuracy (3) setting. Interpolation is peformed for 318 levels (m AGL):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>, <span class="dv">60</span>, <span class="dv">70</span>, <span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>, <span class="dv">110</span>, <span class="dv">120</span>, <span class="dv">130</span>, <span class="dv">140</span>, <span class="dv">150</span>, <span class="dv">160</span>, <span class="dv">170</span>, <span class="dv">180</span>, <span class="dv">190</span>, <span class="dv">200</span>, <span class="dv">210</span>, <span class="dv">220</span>, <span class="dv">230</span>, <span class="dv">240</span>, <span class="dv">250</span>, <span class="dv">260</span>, <span class="dv">270</span>, <span class="dv">280</span>, <span class="dv">290</span>, <span class="dv">300</span>, <span class="dv">310</span>, <span class="dv">320</span>, <span class="dv">330</span>, <span class="dv">340</span>, <span class="dv">350</span>, <span class="dv">360</span>, <span class="dv">370</span>, <span class="dv">380</span>, <span class="dv">390</span>, <span class="dv">400</span>, <span class="dv">410</span>, <span class="dv">420</span>, <span class="dv">430</span>, <span class="dv">440</span>, <span class="dv">450</span>, <span class="dv">460</span>, <span class="dv">470</span>, <span class="dv">480</span>, <span class="dv">490</span>, <span class="dv">500</span>, <span class="dv">510</span>, <span class="dv">520</span>, <span class="dv">530</span>, <span class="dv">540</span>, <span class="dv">550</span>, <span class="dv">560</span>, <span class="dv">570</span>, <span class="dv">580</span>, <span class="dv">590</span>, <span class="dv">600</span>, <span class="dv">610</span>, <span class="dv">620</span>, <span class="dv">630</span>, <span class="dv">640</span>, <span class="dv">650</span>, <span class="dv">660</span>, <span class="dv">670</span>, <span class="dv">680</span>, <span class="dv">690</span>, <span class="dv">700</span>, <span class="dv">710</span>, <span class="dv">720</span>, <span class="dv">730</span>, <span class="dv">740</span>, <span class="dv">750</span>, <span class="dv">775</span>, <span class="dv">800</span>, <span class="dv">825</span>, <span class="dv">850</span>, <span class="dv">875</span>, <span class="dv">900</span>, <span class="dv">925</span>, <span class="dv">950</span>, <span class="dv">975</span>, <span class="dv">1000</span>, <span class="dv">1025</span>, <span class="dv">1050</span>, <span class="dv">1075</span>, <span class="dv">1100</span>, <span class="dv">1125</span>, <span class="dv">1150</span>, <span class="dv">1175</span>, <span class="dv">1200</span>, <span class="dv">1225</span>, <span class="dv">1250</span>, <span class="dv">1275</span>, <span class="dv">1300</span>, <span class="dv">1325</span>, <span class="dv">1350</span>, <span class="dv">1375</span>, <span class="dv">1400</span>, <span class="dv">1425</span>, <span class="dv">1450</span>, <span class="dv">1475</span>, <span class="dv">1500</span>, <span class="dv">1525</span>, <span class="dv">1550</span>, <span class="dv">1575</span>, <span class="dv">1600</span>, <span class="dv">1625</span>, <span class="dv">1650</span>, <span class="dv">1675</span>, <span class="dv">1700</span>, <span class="dv">1725</span>, <span class="dv">1750</span>, <span class="dv">1775</span>, <span class="dv">1800</span>, <span class="dv">1825</span>, <span class="dv">1850</span>, <span class="dv">1875</span>, <span class="dv">1900</span>, <span class="dv">1925</span>, <span class="dv">1950</span>, <span class="dv">1975</span>, <span class="dv">2000</span>, <span class="dv">2025</span>, <span class="dv">2050</span>, <span class="dv">2075</span>, <span class="dv">2100</span>, <span class="dv">2125</span>, <span class="dv">2150</span>, <span class="dv">2175</span>, <span class="dv">2200</span>, <span class="dv">2225</span>, <span class="dv">2250</span>, <span class="dv">2275</span>, <span class="dv">2300</span>, <span class="dv">2325</span>, <span class="dv">2350</span>, <span class="dv">2375</span>, <span class="dv">2400</span>, <span class="dv">2425</span>, <span class="dv">2450</span>, <span class="dv">2475</span>, <span class="dv">2500</span>, <span class="dv">2525</span>, <span class="dv">2550</span>, <span class="dv">2575</span>, <span class="dv">2600</span>, <span class="dv">2625</span>, <span class="dv">2650</span>, <span class="dv">2675</span>, <span class="dv">2700</span>, <span class="dv">2725</span>, <span class="dv">2750</span>, <span class="dv">2775</span>, <span class="dv">2800</span>, <span class="dv">2825</span>, <span class="dv">2850</span>, <span class="dv">2875</span>, <span class="dv">2900</span>, <span class="dv">2925</span>, <span class="dv">2950</span>, <span class="dv">2975</span>, <span class="dv">3000</span>, <span class="dv">3050</span>, <span class="dv">3100</span>, <span class="dv">3150</span>, <span class="dv">3200</span>, <span class="dv">3250</span>, <span class="dv">3300</span>, <span class="dv">3350</span>, <span class="dv">3400</span>, <span class="dv">3450</span>, <span class="dv">3500</span>, <span class="dv">3550</span>, <span class="dv">3600</span>, <span class="dv">3650</span>, <span class="dv">3700</span>, <span class="dv">3750</span>, <span class="dv">3800</span>, <span class="dv">3850</span>, <span class="dv">3900</span>, <span class="dv">3950</span>, <span class="dv">4000</span>, <span class="dv">4050</span>, <span class="dv">4100</span>, <span class="dv">4150</span>, <span class="dv">4200</span>, <span class="dv">4250</span>, <span class="dv">4300</span>, <span class="dv">4350</span>, <span class="dv">4400</span>, <span class="dv">4450</span>, <span class="dv">4500</span>, <span class="dv">4550</span>, <span class="dv">4600</span>, <span class="dv">4650</span>, <span class="dv">4700</span>, <span class="dv">4750</span>, <span class="dv">4800</span>, <span class="dv">4850</span>, <span class="dv">4900</span>, <span class="dv">4950</span>, <span class="dv">5000</span>, <span class="dv">5050</span>, <span class="dv">5100</span>, <span class="dv">5150</span>, <span class="dv">5200</span>, <span class="dv">5250</span>, <span class="dv">5300</span>, <span class="dv">5350</span>, <span class="dv">5400</span>, <span class="dv">5450</span>, <span class="dv">5500</span>, <span class="dv">5550</span>, <span class="dv">5600</span>, <span class="dv">5650</span>, <span class="dv">5700</span>, <span class="dv">5750</span>, <span class="dv">5800</span>, <span class="dv">5850</span>, <span class="dv">5900</span>, <span class="dv">5950</span>, <span class="dv">6000</span>, <span class="dv">6100</span>, <span class="dv">6200</span>, <span class="dv">6300</span>, <span class="dv">6400</span>, <span class="dv">6500</span>, <span class="dv">6600</span>, <span class="dv">6700</span>, <span class="dv">6800</span>, <span class="dv">6900</span>, <span class="dv">7000</span>, <span class="dv">7100</span>, <span class="dv">7200</span>, <span class="dv">7300</span>, <span class="dv">7400</span>, <span class="dv">7500</span>, <span class="dv">7600</span>, <span class="dv">7700</span>, <span class="dv">7800</span>, <span class="dv">7900</span>, <span class="dv">8000</span>, <span class="dv">8100</span>, <span class="dv">8200</span>, <span class="dv">8300</span>, <span class="dv">8400</span>, <span class="dv">8500</span>, <span class="dv">8600</span>, <span class="dv">8700</span>, <span class="dv">8800</span>, <span class="dv">8900</span>, <span class="dv">9000</span>, <span class="dv">9100</span>, <span class="dv">9200</span>, <span class="dv">9300</span>, <span class="dv">9400</span>, <span class="dv">9500</span>, <span class="dv">9600</span>, <span class="dv">9700</span>, <span class="dv">9800</span>, <span class="dv">9900</span>, <span class="dv">10000</span>, <span class="dv">10100</span>, <span class="dv">10200</span>, <span class="dv">10300</span>, <span class="dv">10400</span>, <span class="dv">10500</span>, <span class="dv">10600</span>, <span class="dv">10700</span>, <span class="dv">10800</span>, <span class="dv">10900</span>, <span class="dv">11000</span>, <span class="dv">11100</span>, <span class="dv">11200</span>, <span class="dv">11300</span>, <span class="dv">11400</span>, <span class="dv">11500</span>, <span class="dv">11600</span>, <span class="dv">11700</span>, <span class="dv">11800</span>, <span class="dv">11900</span>, <span class="dv">12000</span>, <span class="dv">12250</span>, <span class="dv">12500</span>, <span class="dv">12750</span>, <span class="dv">13000</span>, <span class="dv">13250</span>, <span class="dv">13500</span>, <span class="dv">13750</span>, <span class="dv">14000</span>, <span class="dv">14250</span>, <span class="dv">14500</span>, <span class="dv">14750</span>, <span class="dv">15000</span>, <span class="dv">15250</span>, <span class="dv">15500</span>, <span class="dv">15750</span>, <span class="dv">16000</span>, <span class="dv">16250</span>, <span class="dv">16500</span>, <span class="dv">16750</span>, <span class="dv">17000</span>, <span class="dv">17250</span>, <span class="dv">17500</span>, <span class="dv">17750</span>, <span class="dv">18000</span>, <span class="dv">18250</span>, <span class="dv">18500</span>, <span class="dv">18750</span>, <span class="dv">19000</span>, <span class="dv">19250</span>, <span class="dv">19500</span>, <span class="dv">19750</span>, <span class="dv">20000</span>)</code></pre></div>
+<p><strong>accuracy = 3</strong>: High accuracy but low performance setting. Recommended for analysing individual profiles. Interpolation is performed with 5 m vertical resolution step up to 20 km AGL (i.e.: <code>0, 5, 10, ... 20000</code> m AGL)</p>
+</div>
+</div>
+<div id="important-notes" class="section level3">
 <h3 class="hasAnchor">
-<a href="#draw-a-customized-hodograph" class="anchor"></a>Draw a customized hodograph:</h3>
-<pre><code><a href="https://rdrr.io/r/utils/data.html">data("sounding_vienna")
-attach(sounding_vienna)
-# changing wind speed and direction to U and V wind components
-# also changing units from knots to m/s
-u = round(-SKNT * 0.514444 * sin(DRCT * pi/180), 2)
-v = round(-SKNT * 0.514444 * cos(DRCT * pi/180), 2)
-# finally plot the hodograph:
-hodograph(u, v, HGHT, max_speed = 30, max_hght = 10000); box(); title("Some title here")</a></code></pre>
+<a href="#important-notes" class="anchor"></a>Important notes</h3>
+<ul>
+<li>Remember to always input wind speed data in knots.</li>
+<li>Script will always consider first height level as the surface (h = 0), therefore input height data can be as above sea level (ASL) or above ground level (AGL).</li>
+<li>For efficiency purposes it is highly recommended to clip input data for a maximum of 16-18 km AGL or lower.</li>
+<li>Values of parameters will be different for different accuracy settings.</li>
+</ul>
 </div>
-</div>
-<div id="development-team" class="section level2">
-<h2 class="hasAnchor">
-<a href="#development-team" class="anchor"></a>Development team</h2>
-<p><strong>thundeR</strong> package has been developed by a team of 3 atmospheric scientists - each having an equal contribution (listed in alphabetical order):</p>
+<div id="developers" class="section level3">
+<h3 class="hasAnchor">
+<a href="#developers" class="anchor"></a>Developers</h3>
+<p><strong>thundeR</strong> package has been developed by atmospheric scientists, each having an equal contribution (listed in alphabetical order):</p>
 <ul>
 <li>Bartosz Czernecki (Adam Mickiewicz University in Poznań, Poland)</li>
 <li>Piotr Szuster (Cracow University of Technology, Poland)</li>
-<li>Mateusz Taszarek (NOAA NSSL/CIMMS in Norman, United States)</li>
+<li>Mateusz Taszarek (CIMMS/NSSL in Norman, Oklahoma, United States)</li>
 </ul>
 </div>
-<div id="contributions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#contributions" class="anchor"></a>Contributions</h2>
+<div id="contributions" class="section level3">
+<h3 class="hasAnchor">
+<a href="#contributions" class="anchor"></a>Contributions</h3>
 <p><a href="https://github.com/bczernecki/thunder/issues">Feel free to submit issues and enhancement requests.</a></p>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/bczernecki/thunder/">https://​github.com/​bczernecki/​thunder/​</a>
+<li>Browse source code at <br><a href="https://github.com/bczernecki/thunder">https://​github.com/​bczernecki/​thunder</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/bczernecki/thunder/issues">https://​github.com/​bczernecki/​thunder/​issues</a>
 </li>
@@ -239,38 +287,26 @@ hodograph(u, v, HGHT, max_speed = 30, max_hght = 10000); box(); title("Some titl
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Bartosz Czernecki <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-6496-1386" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Piotr Szuster <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7937-8046" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Mateusz Taszarek <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-9578-5872" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Bartosz Czernecki <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-6496-1386" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Piotr Szuster <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7937-8046" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
+<li>Mateusz Taszarek <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-9578-5872" target="orcid.widget"><img src="https://members.orcid.org/sites/default/files/vector_iD_icon.svg" class="orcid" alt="ORCID" height="16"></a> </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/bczernecki/thunder/actions"><img src="https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://codecov.io/gh/bczernecki/thunder"><img src="https://codecov.io/gh/bczernecki/thunder/branch/devel/graph/badge.svg?token=JGZPB7RUFI" alt="Codecov test coverage"></a></li>
-<li><a href="https://cran.r-project.org/package=climate"><img src="https://www.r-pkg.org/badges/version/climate" alt="CRAN status"></a></li>
-<li><a href="https://cran.r-project.org/package=climate"><img src="http://cranlogs.r-pkg.org/badges/climate" alt="CRAN RStudio mirror downloads"></a></li>
-</ul>
+  </div>
 </div>
-</div>
-</div>
-
 
       <footer><div class="copyright">
   <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
 </div>
-
       </footer>
 </div>
 
   
-
 
   </body>
 </html>

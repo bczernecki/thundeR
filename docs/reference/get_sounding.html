@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Plot Skew-T, hodograph and convective indices on a single layout — sounding_plot • thunder</title>
+<title>Download rawinsonde measurement — get_sounding • thunder</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -37,9 +37,9 @@
 
 
 
-<meta property="og:title" content="Plot Skew-T, hodograph and convective indices on a single layout — sounding_plot" />
+<meta property="og:title" content="Download rawinsonde measurement — get_sounding" />
 
-<meta property="og:description" content="Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout" />
+<meta property="og:description" content="Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package." />
 
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
@@ -120,105 +120,89 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Plot Skew-T, hodograph and convective indices on a single layout</h1>
-    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/sounding_plot.R'><code>R/sounding_plot.R</code></a></small>
-    <div class="hidden name"><code>sounding_plot.Rd</code></div>
+    <h1>Download rawinsonde measurement</h1>
+    <small class="dont-index">Source: <a href='https://github.com/bczernecki/thunder/blob/master/R/get_sounding.R'><code>R/get_sounding.R</code></a></small>
+    <div class="hidden name"><code>get_sounding.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout</p>
+    <p>Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>sounding_plot</span>(
-  <span class='no'>pressure</span>,
-  <span class='no'>altitude</span>,
-  <span class='no'>temp</span>,
-  <span class='no'>dpt</span>,
-  <span class='no'>wd</span>,
-  <span class='no'>ws</span>,
-  <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>parcel</span> <span class='kw'>=</span> <span class='st'>"MU"</span>,
-  <span class='kw'>max_speed</span> <span class='kw'>=</span> <span class='fl'>25</span>,
-  <span class='kw'>hazards</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_sounding</span>(<span class='no'>wmo_id</span>, <span class='no'>yy</span>, <span class='no'>mm</span>, <span class='no'>dd</span>, <span class='no'>hh</span>, <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>pressure</th>
-      <td><p>- pressure [hPa]</p></td>
+      <th>wmo_id</th>
+      <td><p>international WMO station code (e.g. 11035 for Vienna)</p></td>
     </tr>
     <tr>
-      <th>altitude</th>
-      <td><p>altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [meters]</p></td>
+      <th>yy</th>
+      <td><p>year - single number (e.g. 2010)</p></td>
     </tr>
     <tr>
-      <th>temp</th>
-      <td><p>- temperature [degree Celsius]</p></td>
+      <th>mm</th>
+      <td><p>month - single number (e.g. 5)</p></td>
     </tr>
     <tr>
-      <th>dpt</th>
-      <td><p>- dew point temperature [degree Celsius]</p></td>
+      <th>dd</th>
+      <td><p>day - single number (e.g. 23)</p></td>
     </tr>
     <tr>
-      <th>wd</th>
-      <td><p>- wind direction [azimuth in degrees]</p></td>
+      <th>hh</th>
+      <td><p>hour - single number (e.g. 0)</p></td>
     </tr>
     <tr>
-      <th>ws</th>
-      <td><p>- wind speed [knots]</p></td>
-    </tr>
-    <tr>
-      <th>title</th>
-      <td><p>- title to be added in the layout's header</p></td>
-    </tr>
-    <tr>
-      <th>parcel</th>
-      <td><p>- parcel tracing on Skew-T for "MU", "ML" or "SB" parcel</p></td>
-    </tr>
-    <tr>
-      <th>max_speed</th>
-      <td><p>- range of the hodograph to be drawn, 25 m/s used as default</p></td>
-    </tr>
-    <tr>
-      <th>hazards</th>
-      <td><p>- logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)</p></td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td><p>extra graphic arguments</p></td>
+      <th>metadata</th>
+      <td><p>- logical, whether to return metadata of downloaded sounding; default FALSE</p></td>
     </tr>
     </table>
     
+    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
+
+    <p>http://weather.uwyo.edu/upperair/sounding.html</p>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>Returns two lists with values described at: weather.uwyo.edu ; The first list contains:</p><ol>
+<li><p>pressure - pressure [hPa]</p></li>
+<li><p>altitude - altitude [meters]</p></li>
+<li><p>temp - temperature [degree Celsius]</p></li>
+<li><p>dpt - dew point temperature [degree Celsius]</p></li>
+<li><p>wd - wind direction [azimuth in degrees]</p></li>
+<li><p>ws - wind speed [knots]</p></li>
+</ol><p>If metadata = TRUE then retrieved data is wrapped to a list with the second element containing metadata</p>
+    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/data'>data</a></span>(<span class='st'>"sounding_vienna"</span>)
-<span class='no'>sounding_vienna</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/na.fail'>na.omit</a></span>(<span class='no'>sounding_vienna</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/attach'>attach</a></span>(<span class='no'>sounding_vienna</span>)</div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_vienna (pos = 3):</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    altitude, dpt, pressure, temp, wd, ws</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_vienna (pos = 4):</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    altitude, dpt, pressure, temp, wd, ws</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_vienna (pos = 5):</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    altitude, dpt, pressure, temp, wd, ws</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from sounding_vienna (pos = 6):</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    altitude, dpt, pressure, temp, wd, ws</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from package:datasets:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    pressure</span></div><div class='input'><span class='fu'>sounding_plot</span>(<span class='no'>pressure</span>, <span class='no'>altitude</span>, <span class='no'>temp</span>, <span class='no'>dpt</span>, <span class='no'>wd</span>, <span class='no'>ws</span>,
-              <span class='kw'>parcel</span> <span class='kw'>=</span> <span class='st'>"MU"</span>, <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Vienna - 23 August 2011, 12:00 UTC"</span>)</div><div class='output co'>#&gt; <span class='message'>Your display device is 7 x 7 in. </span>
-#&gt; <span class='message'>It is recommended to use at least 10 x 7.5 in. plotting window </span>
-#&gt; <span class='message'>or consider saving the layout into file</span></div><div class='img'><img src='sounding_plot-1.png' alt='' width='700' height='433' /></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='co'># download rawinsonde profile from Leba station (WMO ID: 12120) for 20 August 2010 1200 UTC:</span>
+
+  <span class='no'>profile</span> <span class='kw'>=</span> <span class='fu'>get_sounding</span>(<span class='kw'>wmo_id</span> <span class='kw'>=</span> <span class='fl'>12120</span>,
+                         <span class='kw'>yy</span> <span class='kw'>=</span> <span class='fl'>2010</span>,
+                         <span class='kw'>mm</span> <span class='kw'>=</span> <span class='fl'>8</span>,
+                         <span class='kw'>dd</span> <span class='kw'>=</span> <span class='fl'>20</span>,
+                         <span class='kw'>hh</span> <span class='kw'>=</span> <span class='fl'>12</span>)</div><div class='output co'>#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2010&amp;MONTH=08&amp;FROM=2012&amp;TO=2012&amp;STNM=12120"</div><div class='output co'>#&gt; <span class='message'>/tmp/Rtmpt0YZL8/file3795695eb712</span></div><div class='input'>  <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>profile</span>)</div><div class='output co'>#&gt;   pressure altitude temp  dpt  wd ws
+#&gt; 1     1021        6 19.8 13.8 265 12
+#&gt; 2     1020       14 18.4 11.4 265 12
+#&gt; 3     1000      183 16.6 11.6 265 14
+#&gt; 4      962      512 13.6  9.2 265 16
+#&gt; 5      955      573 13.6  4.6 265 16
+#&gt; 6      925      841 11.2  3.2 265 17</div><div class='input'>  
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-            
+      
+      <li><a href="#source">Source</a></li>
+
+      <li><a href="#value">Value</a></li>
+      
       <li><a href="#examples">Examples</a></li>
     </ul>
 

@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 options(digits=2)
 ```
 
-`**thundeR**` is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational forecasting of severe convective storms. Core algorithm is based on C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features.
+**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational forecasting of severe convective storms. Core algorithm is based on C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features.
 
 ## Online browser:
 
@@ -25,13 +25,13 @@ Online rawinsonde browser of `thundeR` package is available at www.rawinsonde.co
 
 ## Main functions:
 
-- `**sounding_compute()**` - A core function for calculating convective parameters commonly used in the operational prediction of severe convective storms. Returns a vector of parameters.
+- **`sounding_compute()`** - A core function for calculating convective parameters commonly used in the operational prediction of severe convective storms. Returns a vector of parameters.
  
-- `**sounding_plot()**` - Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
+- **`sounding_plot()`** - Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
 - 
-- `**sounding_save()**` - Auxiliary function to `sounding_plot` that plots a composite of Skew-T, hodograph and selected convective parameters on a single layout and exports graphical file.
+- **`sounding_save()`**` - Auxiliary function to `sounding_plot` that plots a composite of Skew-T, hodograph and selected convective parameters on a single layout and exports graphical file.
 
-- `**get_sounding()**` - Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with `thundeR` package.
+- **`get_sounding()`** - Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with `thundeR` package.
 
 
 ## Examples
@@ -42,7 +42,8 @@ Examples show aplication of selected `thundeR` package functions
 
 Draw Skew-T, hodograph and convective parameters on a single layout and export to png file:
 
-``` r
+```{r example1, eval = TRUE, fig.width=9, fig.height=6, fig.fullwidth = TRUE}
+library(thunder)
 data("sounding_vienna") # load example dataset (Vienna rawinsonde profile for 23 Aug 2011 12UTC):
 pressure = sounding_vienna$pressure # vector of pressure [hPa]
 altitude = sounding_vienna$altitude # vector of altitude [meters]
@@ -57,7 +58,7 @@ sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC
 
 Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file: 
 
-``` r
+```{r example2, eval = TRUE}
 profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
 sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999 0000 UTC", profile$pressure, profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
 ```
@@ -66,7 +67,7 @@ sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999
 
 Compute convective parameters based on a sample vertical profile data:
 
-``` r
+```{r example3, eval = TRUE, fig.width=8, fig.height=8, fig.fullwidth = TRUE}
 library("thunder")
 
 pressure = c(1000, 855, 700, 500, 300, 100, 10) # pressure [hPa]
@@ -136,7 +137,7 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
 Download sounding and draw hodograph:
 
-``` r 
+```{r example4, eval = TRUE, fig.width=6, fig.height=6, fig.fullwidth = TRUE}
 chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
 sounding_hodograph(ws = chanhassen$ws, wd = chanhassen$wd, 
                    altitude = chanhassen$altitude,max_speed = 40)
@@ -147,12 +148,26 @@ title("Chanhasses - 10 May 2001, 00:00 UTC")
 
 Download sounding and draw customized Skew-T plot (e.g. up to 150 hPa instead of default 100 hPa):
 
-```r 
+```{r example5, eval = TRUE, fig.width=7, fig.height=8, fig.fullwidth = TRUE}
 chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
 skewt_plot(ptop=150)
-skewt_lines(chanhassen$temp, chanhassen$pressure, ptop=150, col="red")
-skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop=150, col="blue")
+skewt_lines(chanhassen$temp, chanhassen$pressure, ptop = 150, col="red")
+skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop = 150, col="blue")
 ```
+
+### Example 6
+
+Wind speed vertical profile with wind barbs:
+
+```{r example6, eval = TRUE, fig.width=8, fig.height=6, fig.fullwidth = TRUE}
+chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+par(fig = c(0.1, 0.75, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
+sounding_wind(pressure = chanhassen$pressure, ws = chanhassen$ws, yaxs = TRUE)
+title("Wind profile: Chanhassen - 10 May 2001 0000 UTC", outer = F)
+par(fig = c(0.65, 0.95, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
+sounding_barbs(chanhassen$pressure, chanhassen$ws, chanhassen$wd, chanhassen$altitude, interpolate = FALSE, barb_cex = 1)
+```
+
 
 
 ## Details:
@@ -404,9 +419,11 @@ c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170,
 ### Performance comparison:
 
 ```{r performace, echo=TRUE}
-t1 = system.time(sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 1))
-t2 = system.time(sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 2))
-t3 = system.time(sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3))
+library(thunder)
+data("sounding_vienna")
+t1 = system.time(sounding_compute(sounding_vienna$pressure, sounding_vienna$altitude, sounding_vienna$temp, sounding_vienna$dpt, sounding_vienna$wd, sounding_vienna$ws, accuracy = 1))
+t2 = system.time(sounding_compute(sounding_vienna$pressure, sounding_vienna$altitude, sounding_vienna$temp, sounding_vienna$dpt, sounding_vienna$wd, sounding_vienna$ws, accuracy = 2))
+t3 = system.time(sounding_compute(sounding_vienna$pressure, sounding_vienna$altitude, sounding_vienna$temp, sounding_vienna$dpt, sounding_vienna$wd, sounding_vienna$ws, accuracy = 3))
 print(t1)
 print(t2)
 print(t3)

@@ -133,7 +133,7 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 }
 }
 \description{
-Function for calculating convective parameters commonly used in the operational prediction of severe convective thunderstorms
+A core function for calculating convective parameters commonly used in the operational prediction of severe convective storms. Returns a vector of parameters.
 }
 \examples{
 pressure = c(1000, 855, 700, 500, 300, 100, 10)
