@@ -1,13 +1,13 @@
 Package: thunder
 Type: Package
-Title: Computation And Visualisation Of Atmopsheric Convective Parameters
+Title: Computation and Visualisation of Atmospheric Convective Parameters
 Version: 0.0.12
 Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("aut", "cre"),comment = c(ORCID = "0000-0001-6496-1386")),
     person("Piotr", "Szuster", email = "retsuz@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-7937-8046")),
     person("Mateusz", "Taszarek", email = "mateusz.taszarek@noaa.gov", role = c("aut"), 
     comment = c(ORCID = "0000-0001-9578-5872")))
 Maintainer: Bartosz Czernecki <nwp@amu.edu.pl>
-Description: R tool for calculating over 100 atmospheric convection indices
+Description: R tool for calculating over 100 atmospheric convection indices from rawinsonde profiles
 License: GPL (>= 2)
 Imports:
     Rcpp (>= 0.12.9.4),
