@@ -106,8 +106,7 @@
 <a href="#main-functions" class="anchor"></a>Main functions:</h2>
 <ul>
 <li><p><strong><code><a href="../reference/sounding_compute.html">sounding_compute()</a></code></strong> - A core function for calculating convective parameters commonly used in the operational prediction of severe convective storms. Returns a vector of parameters.</p></li>
-<li>
-<strong><code><a href="../reference/sounding_plot.html">sounding_plot()</a></code></strong> - Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout</li>
+<li><p><strong><code><a href="../reference/sounding_plot.html">sounding_plot()</a></code></strong> - Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout</p></li>
 <li>
 <li><p><strong><code><a href="../reference/sounding_save.html">sounding_save()</a></code></strong><code>- Auxiliary function to</code>sounding_plot` that plots a composite of Skew-T, hodograph and selected convective parameters on a single layout and exports graphical file.</p></li>
 <li><p><strong><code><a href="../reference/get_sounding.html">get_sounding()</a></code></strong> - Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with <code>thundeR</code> package.</p></li>
@@ -121,211 +120,213 @@
 <h4 class="hasAnchor">
 <a href="#example-1" class="anchor"></a>Example 1</h4>
 <p>Draw Skew-T, hodograph and convective parameters on a single layout and export to png file:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(thunder)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"sounding_vienna"</span>) <span class="co"># load example dataset (Vienna rawinsonde profile for 23 Aug 2011 12UTC):</span>
-pressure =<span class="st"> </span>sounding_vienna<span class="op">$</span>pressure <span class="co"># vector of pressure [hPa]</span>
-altitude =<span class="st"> </span>sounding_vienna<span class="op">$</span>altitude <span class="co"># vector of altitude [meters]</span>
-temp =<span class="st"> </span>sounding_vienna<span class="op">$</span>temp  <span class="co"># vector of temperature [degree Celsius]</span>
-dpt =<span class="st"> </span>sounding_vienna<span class="op">$</span>dpt <span class="co"># vector of dew point temperature [degree Celsius]</span>
-wd =<span class="st"> </span>sounding_vienna<span class="op">$</span>wd <span class="co"># vector of wind direction [azimuth in degrees]</span>
-ws =<span class="st"> </span>sounding_vienna<span class="op">$</span>ws <span class="co"># vector of wind speed [knots]</span>
-<span class="kw"><a href="../reference/sounding_save.html">sounding_save</a></span>(<span class="dt">filename =</span> <span class="st">"Vienna.png"</span>, <span class="dt">title =</span> <span class="st">"Vienna - 23 August 2011 1200 UTC"</span>, pressure, altitude, temp, dpt, wd, ws)
-<span class="co">#&gt; Your display device is 10 x 6 in. </span>
-<span class="co">#&gt; It is recommended to use at least 10 x 7.5 in. plotting window </span>
-<span class="co">#&gt; or consider saving the layout into file</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(thunder)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"sounding_vienna"</span>) <span class="co"># load example dataset (Vienna rawinsonde profile for 23 Aug 2011 12UTC):</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>pressure <span class="ot">=</span> sounding_vienna<span class="sc">$</span>pressure <span class="co"># vector of pressure [hPa]</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>altitude <span class="ot">=</span> sounding_vienna<span class="sc">$</span>altitude <span class="co"># vector of altitude [meters]</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span> sounding_vienna<span class="sc">$</span>temp  <span class="co"># vector of temperature [degree Celsius]</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>dpt <span class="ot">=</span> sounding_vienna<span class="sc">$</span>dpt <span class="co"># vector of dew point temperature [degree Celsius]</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">=</span> sounding_vienna<span class="sc">$</span>wd <span class="co"># vector of wind direction [azimuth in degrees]</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>ws <span class="ot">=</span> sounding_vienna<span class="sc">$</span>ws <span class="co"># vector of wind speed [knots]</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sounding_save</span>(<span class="at">filename =</span> <span class="st">"Vienna.png"</span>, <span class="at">title =</span> <span class="st">"Vienna - 23 August 2011 1200 UTC"</span>, pressure, altitude, temp, dpt, wd, ws)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Your display device is 10 x 6 in. </span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; It is recommended to use at least 10 x 7.5 in. plotting window </span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; or consider saving the layout into file</span></span></code></pre></div>
+<p><img src="../inst/figures/Vienna.png" alt="Vienna" width="1000"></p>
 </div>
 <div id="example-2" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-2" class="anchor"></a>Example 2</h3>
 <p>Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">profile =<span class="st"> </span><span class="kw"><a href="../reference/get_sounding.html">get_sounding</a></span>(<span class="dt">wmo_id =</span> <span class="dv">72562</span>, <span class="dt">yy =</span> <span class="dv">1999</span>, <span class="dt">mm =</span> <span class="dv">7</span>, <span class="dt">dd =</span> <span class="dv">3</span>,<span class="dt">hh =</span> <span class="dv">0</span>)
-<span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=1999&amp;MONTH=07&amp;FROM=0300&amp;TO=0300&amp;STNM=72562"</span>
-<span class="co">#&gt; /tmp/Rtmp6FZGiA/file386629500dff</span>
-<span class="kw"><a href="../reference/sounding_save.html">sounding_save</a></span>(<span class="dt">filename =</span> <span class="st">"NorthPlatte.png"</span>, <span class="dt">title =</span> <span class="st">"North Platte - 03 July 1999 0000 UTC"</span>, profile<span class="op">$</span>pressure, profile<span class="op">$</span>altitude, profile<span class="op">$</span>temp, profile<span class="op">$</span>dpt, profile<span class="op">$</span>wd, profile<span class="op">$</span>ws)
-<span class="co">#&gt; Your display device is 10 x 6 in. </span>
-<span class="co">#&gt; It is recommended to use at least 10 x 7.5 in. plotting window </span>
-<span class="co">#&gt; or consider saving the layout into file</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>profile <span class="ot">=</span> <span class="fu">get_sounding</span>(<span class="at">wmo_id =</span> <span class="dv">72562</span>, <span class="at">yy =</span> <span class="dv">1999</span>, <span class="at">mm =</span> <span class="dv">7</span>, <span class="at">dd =</span> <span class="dv">3</span>,<span class="at">hh =</span> <span class="dv">0</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=1999&amp;MONTH=07&amp;FROM=0300&amp;TO=0300&amp;STNM=72562"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; /tmp/Rtmp51d1pn/file346977cd9bf0</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sounding_save</span>(<span class="at">filename =</span> <span class="st">"NorthPlatte.png"</span>, <span class="at">title =</span> <span class="st">"North Platte - 03 July 1999 0000 UTC"</span>, profile<span class="sc">$</span>pressure, profile<span class="sc">$</span>altitude, profile<span class="sc">$</span>temp, profile<span class="sc">$</span>dpt, profile<span class="sc">$</span>wd, profile<span class="sc">$</span>ws)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Your display device is 10 x 6 in. </span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; It is recommended to use at least 10 x 7.5 in. plotting window </span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; or consider saving the layout into file</span></span></code></pre></div>
+<p><img src="../inst/figures/NorthPlatte.png" alt="North Platte" width="1000"></p>
 </div>
 <div id="example-3" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-3" class="anchor"></a>Example 3</h3>
 <p>Compute convective parameters based on a sample vertical profile data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"thunder"</span>)
-
-pressure =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1000</span>, <span class="dv">855</span>, <span class="dv">700</span>, <span class="dv">500</span>, <span class="dv">300</span>, <span class="dv">100</span>, <span class="dv">10</span>) <span class="co"># pressure [hPa]</span>
-altitude =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">1500</span>, <span class="dv">2500</span>, <span class="dv">6000</span>, <span class="dv">8500</span>, <span class="dv">12000</span>, <span class="dv">25000</span>) <span class="co"># altitude [meters]</span>
-temp =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">25</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="op">-</span><span class="dv">15</span>, <span class="op">-</span><span class="dv">30</span>, <span class="op">-</span><span class="dv">50</span>, <span class="op">-</span><span class="dv">92</span>) <span class="co"># temperature [degree Celsius]</span>
-dpt =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">20</span>, <span class="dv">5</span>, <span class="op">-</span><span class="dv">5</span>, <span class="op">-</span><span class="dv">30</span>, <span class="op">-</span><span class="dv">55</span>, <span class="op">-</span><span class="dv">80</span>, <span class="op">-</span><span class="dv">99</span>) <span class="co"># dew point temperature [degree Celsius]</span>
-wd =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">90</span>, <span class="dv">135</span>, <span class="dv">180</span>, <span class="dv">270</span>, <span class="dv">350</span>, <span class="dv">0</span>) <span class="co"># wind direction [azimuth in degress]</span>
-ws =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">5</span>, <span class="dv">0</span>) <span class="co"># wind speed [knots]</span>
-accuracy =<span class="st"> </span><span class="dv">2</span> <span class="co"># accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/options">options</a></span>(<span class="dt">digits =</span> <span class="dv">2</span>) <span class="co"># change output formatting precision </span>
-<span class="kw"><a href="../reference/sounding_compute.html">sounding_compute</a></span>(pressure, altitude, temp, dpt, wd, ws, accuracy)
-<span class="co">#&gt;             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE </span>
-<span class="co">#&gt;             2195.41              575.59             1568.01 </span>
-<span class="co">#&gt;              MU_CIN          MU_LCL_HGT          MU_LFC_HGT </span>
-<span class="co">#&gt;                0.00              730.00              730.00 </span>
-<span class="co">#&gt;           MU_EL_HGT               MU_LI             MU_WMAX </span>
-<span class="co">#&gt;             8200.00               -9.63               66.26 </span>
-<span class="co">#&gt;          MU_EL_TEMP         MU_LCL_TEMP         MU_LFC_TEMP </span>
-<span class="co">#&gt;              -28.20               17.70               17.70 </span>
-<span class="co">#&gt;             MU_MIXR             SB_CAPE        SB_03km_CAPE </span>
-<span class="co">#&gt;               14.88             2195.41              575.59 </span>
-<span class="co">#&gt;         SB_HGL_CAPE              SB_CIN          SB_LCL_HGT </span>
-<span class="co">#&gt;             1568.01                0.00              730.00 </span>
-<span class="co">#&gt;          SB_LFC_HGT           SB_EL_HGT               SB_LI </span>
-<span class="co">#&gt;              730.00             8200.00               -9.63 </span>
-<span class="co">#&gt;             SB_WMAX          SB_EL_TEMP         SB_LCL_TEMP </span>
-<span class="co">#&gt;               66.26              -28.20               17.70 </span>
-<span class="co">#&gt;         SB_LFC_TEMP             SB_MIXR             ML_CAPE </span>
-<span class="co">#&gt;               17.70               14.88             1559.41 </span>
-<span class="co">#&gt;        ML_03km_CAPE         ML_HGL_CAPE              ML_CIN </span>
-<span class="co">#&gt;              416.88             1187.96                0.00 </span>
-<span class="co">#&gt;          ML_LCL_HGT          ML_LFC_HGT           ML_EL_HGT </span>
-<span class="co">#&gt;              975.00              975.00             7800.00 </span>
-<span class="co">#&gt;               ML_LI             ML_WMAX          ML_EL_TEMP </span>
-<span class="co">#&gt;               -7.15               55.85              -25.80 </span>
-<span class="co">#&gt;         ML_LCL_TEMP         ML_LFC_TEMP             ML_MIXR </span>
-<span class="co">#&gt;               15.25               15.25               13.02 </span>
-<span class="co">#&gt;             LR_01km             LR_03km             LR_24km </span>
-<span class="co">#&gt;              -10.00               -9.05               -5.77 </span>
-<span class="co">#&gt;             LR_36km        LR_500700hPa        LR_500800hPa </span>
-<span class="co">#&gt;               -4.29               -4.29               -6.67 </span>
-<span class="co">#&gt;            FRZG_HGT    FRZG_wetbulb_HGT HGT_max_thetae_03km </span>
-<span class="co">#&gt;             2500.00             2300.00                0.00 </span>
-<span class="co">#&gt; HGT_min_thetae_04km        Delta_thetae    Delta_thetae_HGL </span>
-<span class="co">#&gt;             3700.00               28.00               26.67 </span>
-<span class="co">#&gt;               DCAPE  Cold_Pool_Strength          Wind_Index </span>
-<span class="co">#&gt;              578.58              300.81               34.12 </span>
-<span class="co">#&gt;          PRCP_WATER  Moisture_Flux_02km             RH_02km </span>
-<span class="co">#&gt;               27.10               30.43                0.72 </span>
-<span class="co">#&gt;             RH_25km              RH_HGL             BS_01km </span>
-<span class="co">#&gt;                0.56                0.46                3.83 </span>
-<span class="co">#&gt;             BS_02km             BS_03km             BS_06km </span>
-<span class="co">#&gt;                8.78               12.66               18.01 </span>
-<span class="co">#&gt;             BS_08km             BS_36km             BS_18km </span>
-<span class="co">#&gt;               17.41                9.37               20.28 </span>
-<span class="co">#&gt;           BS_EFF_MU           BS_EFF_SB           BS_EFF_ML </span>
-<span class="co">#&gt;               14.14               14.14               13.82 </span>
-<span class="co">#&gt;       BS_SFC_to_HGL    BS_MU_LFC_to_HGL    BS_SB_LFC_to_HGL </span>
-<span class="co">#&gt;               15.51               14.07               14.07 </span>
-<span class="co">#&gt;    BS_ML_LFC_to_HGL             MW_01km             MW_02km </span>
-<span class="co">#&gt;               13.69                2.43                3.35 </span>
-<span class="co">#&gt;             MW_06km             MW_13km         SRH_100m_RM </span>
-<span class="co">#&gt;                7.81                6.84                3.87 </span>
-<span class="co">#&gt;         SRH_500m_RM          SRH_1km_RM          SRH_3km_RM </span>
-<span class="co">#&gt;               19.33               39.63              152.52 </span>
-<span class="co">#&gt;         SRH_100m_LM         SRH_500m_LM          SRH_1km_LM </span>
-<span class="co">#&gt;                1.37                6.83               14.00 </span>
-<span class="co">#&gt;          SRH_3km_LM        Bunkers_RM_A        Bunkers_RM_M </span>
-<span class="co">#&gt;              -13.13              209.40                7.79 </span>
-<span class="co">#&gt;        Bunkers_LM_A        Bunkers_LM_M        Bunkers_MW_A </span>
-<span class="co">#&gt;              122.06               13.18              151.95 </span>
-<span class="co">#&gt;        Bunkers_MW_M             K_Index     Showalter_Index </span>
-<span class="co">#&gt;                7.81               24.35                3.90 </span>
-<span class="co">#&gt;   TotalTotals_Index         SWEAT_Index                 STP </span>
-<span class="co">#&gt;               44.35              106.42                0.35 </span>
-<span class="co">#&gt;             STP_new                 SCP             SCP_new </span>
-<span class="co">#&gt;                0.19                6.03                4.73 </span>
-<span class="co">#&gt;                SHIP                 DCP        MU_WMAXSHEAR </span>
-<span class="co">#&gt;                0.61                1.08             1193.11 </span>
-<span class="co">#&gt;        SB_WMAXSHEAR        ML_WMAXSHEAR    MU_EFF_WMAXSHEAR </span>
-<span class="co">#&gt;             1193.11             1005.54              936.94 </span>
-<span class="co">#&gt;    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR </span>
-<span class="co">#&gt;              936.94              771.71</span>
-
-
-<span class="co">#             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE              MU_CIN </span>
-<span class="co">#             2195.41              575.59             1568.01                0.00 </span>
-<span class="co">#          MU_LCL_HGT          MU_LFC_HGT           MU_EL_HGT               MU_LI </span>
-<span class="co">#              730.00              730.00             8200.00               -9.63 </span>
-<span class="co">#             MU_WMAX          MU_EL_TEMP         MU_LCL_TEMP         MU_LFC_TEMP </span>
-<span class="co">#               66.26              -28.20               17.70               17.70 </span>
-<span class="co">#             MU_MIXR             SB_CAPE        SB_03km_CAPE         SB_HGL_CAPE </span>
-<span class="co">#               14.88             2195.41              575.59             1568.01 </span>
-<span class="co">#              SB_CIN          SB_LCL_HGT          SB_LFC_HGT           SB_EL_HGT </span>
-<span class="co">#                0.00              730.00              730.00             8200.00 </span>
-<span class="co">#               SB_LI             SB_WMAX          SB_EL_TEMP         SB_LCL_TEMP </span>
-<span class="co">#               -9.63               66.26              -28.20               17.70 </span>
-<span class="co">#         SB_LFC_TEMP             SB_MIXR             ML_CAPE        ML_03km_CAPE </span>
-<span class="co">#               17.70               14.88             1559.41              416.88 </span>
-<span class="co">#         ML_HGL_CAPE              ML_CIN          ML_LCL_HGT          ML_LFC_HGT </span>
-<span class="co">#             1187.96                0.00              975.00              975.00 </span>
-<span class="co">#           ML_EL_HGT               ML_LI             ML_WMAX          ML_EL_TEMP </span>
-<span class="co">#             7800.00               -7.15               55.85              -25.80 </span>
-<span class="co">#         ML_LCL_TEMP         ML_LFC_TEMP             ML_MIXR             LR_01km </span>
-<span class="co">#               15.25               15.25               13.02              -10.00 </span>
-<span class="co">#             LR_03km             LR_24km             LR_36km        LR_500700hPa </span>
-<span class="co">#               -9.05               -5.77               -4.29               -4.29 </span>
-<span class="co">#        LR_500800hPa            FRZG_HGT    FRZG_wetbulb_HGT HGT_max_thetae_03km </span>
-<span class="co">#               -6.67             2500.00             2300.00                0.00 </span>
-<span class="co"># HGT_min_thetae_04km        Delta_thetae               DCAPE  Cold_Pool_Strength </span>
-<span class="co">#             3700.00               28.46              595.13               12.77 </span>
-<span class="co">#        Wind_Index            PRCP_WATER  Moisture_Flux_02km             RH_02km </span>
-<span class="co">#               34.12               27.10               28.49                0.72 </span>
-<span class="co">#             RH_25km              RH_HGL             BS_01km             BS_02km </span>
-<span class="co">#                0.58                0.46                3.83                8.78 </span>
-<span class="co">#             BS_03km             BS_06km             BS_08km             BS_36km </span>
-<span class="co">#               12.66               18.01               17.41                9.37 </span>
-<span class="co">#             BS_18km           BS_EFF_MU           BS_EFF_SB           BS_EFF_ML </span>
-<span class="co">#               20.28               14.14               14.14               13.82 </span>
-<span class="co">#       BS_SFC_to_HGL    BS_MU_LFC_to_HGL    BS_SB_LFC_to_HGL    BS_ML_LFC_to_HGL </span>
-<span class="co">#               15.51               14.07               14.07               13.69 </span>
-<span class="co">#             MW_01km             MW_02km             MW_06km             MW_13km </span>
-<span class="co">#                2.36                2.81                5.14                6.88 </span>
-<span class="co">#         SRH_100m_RM         SRH_500m_RM          SRH_1km_RM          SRH_3km_RM </span>
-<span class="co">#                2.87               14.37               29.47              136.42 </span>
-<span class="co">#         SRH_100m_LM         SRH_500m_LM          SRH_1km_LM          SRH_3km_LM </span>
-<span class="co">#                0.30                1.51                3.10              -30.53 </span>
-<span class="co">#             K_Index     Showalter_Index   TotalTotals_Index         SWEAT_Index </span>
-<span class="co">#               24.35                3.90               44.35              106.42 </span>
-<span class="co">#                 STP             STP_new                 SCP             SCP_new </span>
-<span class="co">#                0.26                0.14                5.39                4.23 </span>
-<span class="co">#                SHIP                 DCP        MU_WMAXSHEAR        SB_WMAXSHEAR </span>
-<span class="co">#                0.61                0.73             1193.11             1193.11 </span>
-<span class="co">#        ML_WMAXSHEAR    MU_EFF_WMAXSHEAR    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR </span>
-<span class="co">#             1005.54              936.94              936.94              771.71</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"thunder"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>pressure <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">1000</span>, <span class="dv">855</span>, <span class="dv">700</span>, <span class="dv">500</span>, <span class="dv">300</span>, <span class="dv">100</span>, <span class="dv">10</span>) <span class="co"># pressure [hPa]</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>altitude <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1500</span>, <span class="dv">2500</span>, <span class="dv">6000</span>, <span class="dv">8500</span>, <span class="dv">12000</span>, <span class="dv">25000</span>) <span class="co"># altitude [meters]</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">10</span>, <span class="dv">0</span>, <span class="sc">-</span><span class="dv">15</span>, <span class="sc">-</span><span class="dv">30</span>, <span class="sc">-</span><span class="dv">50</span>, <span class="sc">-</span><span class="dv">92</span>) <span class="co"># temperature [degree Celsius]</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>dpt <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">5</span>, <span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">30</span>, <span class="sc">-</span><span class="dv">55</span>, <span class="sc">-</span><span class="dv">80</span>, <span class="sc">-</span><span class="dv">99</span>) <span class="co"># dew point temperature [degree Celsius]</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>wd <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">90</span>, <span class="dv">135</span>, <span class="dv">180</span>, <span class="dv">270</span>, <span class="dv">350</span>, <span class="dv">0</span>) <span class="co"># wind direction [azimuth in degress]</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>ws <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">5</span>, <span class="dv">0</span>) <span class="co"># wind speed [knots]</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">=</span> <span class="dv">2</span> <span class="co"># accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="co"># change output formatting precision </span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">sounding_compute</span>(pressure, altitude, temp, dpt, wd, ws, accuracy)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE </span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             2195.41              575.59             1568.01 </span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              MU_CIN          MU_LCL_HGT          MU_LFC_HGT </span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                0.00              730.00              730.00 </span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           MU_EL_HGT               MU_LI             MU_WMAX </span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             8200.00               -9.63               66.26 </span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          MU_EL_TEMP         MU_LCL_TEMP         MU_LFC_TEMP </span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              -28.20               17.70               17.70 </span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             MU_MIXR             SB_CAPE        SB_03km_CAPE </span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               14.88             2195.41              575.59 </span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         SB_HGL_CAPE              SB_CIN          SB_LCL_HGT </span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             1568.01                0.00              730.00 </span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          SB_LFC_HGT           SB_EL_HGT               SB_LI </span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              730.00             8200.00               -9.63 </span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             SB_WMAX          SB_EL_TEMP         SB_LCL_TEMP </span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               66.26              -28.20               17.70 </span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         SB_LFC_TEMP             SB_MIXR             ML_CAPE </span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               17.70               14.88             1559.41 </span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        ML_03km_CAPE         ML_HGL_CAPE              ML_CIN </span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              416.88             1187.96                0.00 </span></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          ML_LCL_HGT          ML_LFC_HGT           ML_EL_HGT </span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              975.00              975.00             7800.00 </span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               ML_LI             ML_WMAX          ML_EL_TEMP </span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               -7.15               55.85              -25.80 </span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         ML_LCL_TEMP         ML_LFC_TEMP             ML_MIXR </span></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               15.25               15.25               13.02 </span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             LR_01km             LR_03km             LR_24km </span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              -10.00               -9.05               -5.77 </span></span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             LR_36km        LR_500700hPa        LR_500800hPa </span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               -4.29               -4.29               -6.67 </span></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;            FRZG_HGT    FRZG_wetbulb_HGT HGT_max_thetae_03km </span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             2500.00             2300.00                0.00 </span></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; HGT_min_thetae_04km        Delta_thetae    Delta_thetae_HGL </span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             3700.00               28.00               26.67 </span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               DCAPE  Cold_Pool_Strength          Wind_Index </span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              578.58              300.81               34.12 </span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          PRCP_WATER  Moisture_Flux_02km             RH_02km </span></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               27.10               30.43                0.72 </span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             RH_25km              RH_HGL             BS_01km </span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                0.56                0.46                3.83 </span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             BS_02km             BS_03km             BS_06km </span></span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                8.78               12.66               18.01 </span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             BS_08km             BS_36km             BS_18km </span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               17.41                9.37               20.28 </span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;           BS_EFF_MU           BS_EFF_SB           BS_EFF_ML </span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               14.14               14.14               13.82 </span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;       BS_SFC_to_HGL    BS_MU_LFC_to_HGL    BS_SB_LFC_to_HGL </span></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               15.51               14.07               14.07 </span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    BS_ML_LFC_to_HGL             MW_01km             MW_02km </span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               13.69                2.43                3.35 </span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             MW_06km             MW_13km         SRH_100m_RM </span></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                7.81                6.84                3.87 </span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         SRH_500m_RM          SRH_1km_RM          SRH_3km_RM </span></span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               19.33               39.63              152.52 </span></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         SRH_100m_LM         SRH_500m_LM          SRH_1km_LM </span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                1.37                6.83               14.00 </span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;          SRH_3km_LM        Bunkers_RM_A        Bunkers_RM_M </span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              -13.13              209.40                7.79 </span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        Bunkers_LM_A        Bunkers_LM_M        Bunkers_MW_A </span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              122.06               13.18              151.95 </span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        Bunkers_MW_M             K_Index     Showalter_Index </span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                7.81               24.35                3.90 </span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   TotalTotals_Index         SWEAT_Index                 STP </span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               44.35              106.42                0.35 </span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             STP_new                 SCP             SCP_new </span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                0.19                6.03                4.73 </span></span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                SHIP                 DCP        MU_WMAXSHEAR </span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                0.61                1.08             1193.11 </span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;        SB_WMAXSHEAR        ML_WMAXSHEAR    MU_EFF_WMAXSHEAR </span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;             1193.11             1005.54              936.94 </span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR </span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;              936.94              771.71</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a><span class="co">#             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE              MU_CIN </span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="co">#             2195.41              575.59             1568.01                0.00 </span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="co">#          MU_LCL_HGT          MU_LFC_HGT           MU_EL_HGT               MU_LI </span></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="co">#              730.00              730.00             8200.00               -9.63 </span></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="co">#             MU_WMAX          MU_EL_TEMP         MU_LCL_TEMP         MU_LFC_TEMP </span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="co">#               66.26              -28.20               17.70               17.70 </span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="co">#             MU_MIXR             SB_CAPE        SB_03km_CAPE         SB_HGL_CAPE </span></span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="co">#               14.88             2195.41              575.59             1568.01 </span></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a><span class="co">#              SB_CIN          SB_LCL_HGT          SB_LFC_HGT           SB_EL_HGT </span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="co">#                0.00              730.00              730.00             8200.00 </span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a><span class="co">#               SB_LI             SB_WMAX          SB_EL_TEMP         SB_LCL_TEMP </span></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="co">#               -9.63               66.26              -28.20               17.70 </span></span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a><span class="co">#         SB_LFC_TEMP             SB_MIXR             ML_CAPE        ML_03km_CAPE </span></span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a><span class="co">#               17.70               14.88             1559.41              416.88 </span></span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a><span class="co">#         ML_HGL_CAPE              ML_CIN          ML_LCL_HGT          ML_LFC_HGT </span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a><span class="co">#             1187.96                0.00              975.00              975.00 </span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a><span class="co">#           ML_EL_HGT               ML_LI             ML_WMAX          ML_EL_TEMP </span></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a><span class="co">#             7800.00               -7.15               55.85              -25.80 </span></span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a><span class="co">#         ML_LCL_TEMP         ML_LFC_TEMP             ML_MIXR             LR_01km </span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a><span class="co">#               15.25               15.25               13.02              -10.00 </span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a><span class="co">#             LR_03km             LR_24km             LR_36km        LR_500700hPa </span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="co">#               -9.05               -5.77               -4.29               -4.29 </span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a><span class="co">#        LR_500800hPa            FRZG_HGT    FRZG_wetbulb_HGT HGT_max_thetae_03km </span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="co">#               -6.67             2500.00             2300.00                0.00 </span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="co"># HGT_min_thetae_04km        Delta_thetae               DCAPE  Cold_Pool_Strength </span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="co">#             3700.00               28.46              595.13               12.77 </span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="co">#        Wind_Index            PRCP_WATER  Moisture_Flux_02km             RH_02km </span></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="co">#               34.12               27.10               28.49                0.72 </span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="co">#             RH_25km              RH_HGL             BS_01km             BS_02km </span></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="co">#                0.58                0.46                3.83                8.78 </span></span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="co">#             BS_03km             BS_06km             BS_08km             BS_36km </span></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a><span class="co">#               12.66               18.01               17.41                9.37 </span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a><span class="co">#             BS_18km           BS_EFF_MU           BS_EFF_SB           BS_EFF_ML </span></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a><span class="co">#               20.28               14.14               14.14               13.82 </span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a><span class="co">#       BS_SFC_to_HGL    BS_MU_LFC_to_HGL    BS_SB_LFC_to_HGL    BS_ML_LFC_to_HGL </span></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a><span class="co">#               15.51               14.07               14.07               13.69 </span></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a><span class="co">#             MW_01km             MW_02km             MW_06km             MW_13km </span></span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a><span class="co">#                2.36                2.81                5.14                6.88 </span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a><span class="co">#         SRH_100m_RM         SRH_500m_RM          SRH_1km_RM          SRH_3km_RM </span></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a><span class="co">#                2.87               14.37               29.47              136.42 </span></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a><span class="co">#         SRH_100m_LM         SRH_500m_LM          SRH_1km_LM          SRH_3km_LM </span></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a><span class="co">#                0.30                1.51                3.10              -30.53 </span></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="co">#             K_Index     Showalter_Index   TotalTotals_Index         SWEAT_Index </span></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="co">#               24.35                3.90               44.35              106.42 </span></span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="co">#                 STP             STP_new                 SCP             SCP_new </span></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="co">#                0.26                0.14                5.39                4.23 </span></span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="co">#                SHIP                 DCP        MU_WMAXSHEAR        SB_WMAXSHEAR </span></span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="co">#                0.61                0.73             1193.11             1193.11 </span></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a><span class="co">#        ML_WMAXSHEAR    MU_EFF_WMAXSHEAR    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR </span></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="co">#             1005.54              936.94              936.94              771.71</span></span></code></pre></div>
 </div>
 <div id="example-4" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-4" class="anchor"></a>Example 4</h3>
 <p>Download sounding and draw hodograph:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chanhassen =<span class="st"> </span><span class="kw"><a href="../reference/get_sounding.html">get_sounding</a></span>(<span class="dt">wmo_id =</span> <span class="dv">72649</span>, <span class="dt">yy =</span> <span class="dv">2001</span>, <span class="dt">mm =</span> <span class="dv">5</span>, <span class="dt">dd =</span> <span class="dv">10</span>, <span class="dt">hh =</span> <span class="dv">00</span>)
-<span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2001&amp;MONTH=05&amp;FROM=1000&amp;TO=1000&amp;STNM=72649"</span>
-<span class="co">#&gt; /tmp/Rtmp6FZGiA/file38664ec82e89</span>
-<span class="kw"><a href="../reference/sounding_hodograph.html">sounding_hodograph</a></span>(<span class="dt">ws =</span> chanhassen<span class="op">$</span>ws, <span class="dt">wd =</span> chanhassen<span class="op">$</span>wd, 
-                   <span class="dt">altitude =</span> chanhassen<span class="op">$</span>altitude,<span class="dt">max_speed =</span> <span class="dv">40</span>)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/title">title</a></span>(<span class="st">"Chanhasses - 10 May 2001, 00:00 UTC"</span>)</code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>chanhassen <span class="ot">=</span> <span class="fu">get_sounding</span>(<span class="at">wmo_id =</span> <span class="dv">72649</span>, <span class="at">yy =</span> <span class="dv">2001</span>, <span class="at">mm =</span> <span class="dv">5</span>, <span class="at">dd =</span> <span class="dv">10</span>, <span class="at">hh =</span> <span class="dv">00</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2001&amp;MONTH=05&amp;FROM=1000&amp;TO=1000&amp;STNM=72649"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; /tmp/Rtmp51d1pn/file34694583e2f9</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sounding_hodograph</span>(<span class="at">ws =</span> chanhassen<span class="sc">$</span>ws, <span class="at">wd =</span> chanhassen<span class="sc">$</span>wd, </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">altitude =</span> chanhassen<span class="sc">$</span>altitude,<span class="at">max_speed =</span> <span class="dv">40</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Chanhasses - 10 May 2001, 00:00 UTC"</span>)</span></code></pre></div>
 <p><img src="getstarted_files/figure-html/example4-1.png" width="576"></p>
 </div>
 <div id="example-5" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-5" class="anchor"></a>Example 5</h3>
 <p>Download sounding and draw customized Skew-T plot (e.g. up to 150 hPa instead of default 100 hPa):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chanhassen =<span class="st"> </span><span class="kw"><a href="../reference/get_sounding.html">get_sounding</a></span>(<span class="dt">wmo_id =</span> <span class="dv">72649</span>, <span class="dt">yy =</span> <span class="dv">2001</span>, <span class="dt">mm =</span> <span class="dv">5</span>, <span class="dt">dd =</span> <span class="dv">10</span>, <span class="dt">hh =</span> <span class="dv">00</span>)
-<span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2001&amp;MONTH=05&amp;FROM=1000&amp;TO=1000&amp;STNM=72649"</span>
-<span class="co">#&gt; /tmp/Rtmp6FZGiA/file386679cf1e20</span>
-<span class="kw"><a href="../reference/skewt_plot.html">skewt_plot</a></span>(<span class="dt">ptop=</span><span class="dv">150</span>)
-<span class="kw"><a href="../reference/skewt_lines.html">skewt_lines</a></span>(chanhassen<span class="op">$</span>temp, chanhassen<span class="op">$</span>pressure, <span class="dt">ptop =</span> <span class="dv">150</span>, <span class="dt">col=</span><span class="st">"red"</span>)
-<span class="kw"><a href="../reference/skewt_lines.html">skewt_lines</a></span>(chanhassen<span class="op">$</span>dpt, chanhassen<span class="op">$</span>pressure, <span class="dt">ptop =</span> <span class="dv">150</span>, <span class="dt">col=</span><span class="st">"blue"</span>)</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>chanhassen <span class="ot">=</span> <span class="fu">get_sounding</span>(<span class="at">wmo_id =</span> <span class="dv">72649</span>, <span class="at">yy =</span> <span class="dv">2001</span>, <span class="at">mm =</span> <span class="dv">5</span>, <span class="at">dd =</span> <span class="dv">10</span>, <span class="at">hh =</span> <span class="dv">00</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2001&amp;MONTH=05&amp;FROM=1000&amp;TO=1000&amp;STNM=72649"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; /tmp/Rtmp51d1pn/file34699c5be5e</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skewt_plot</span>(<span class="at">ptop=</span><span class="dv">150</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">skewt_lines</span>(chanhassen<span class="sc">$</span>temp, chanhassen<span class="sc">$</span>pressure, <span class="at">ptop =</span> <span class="dv">150</span>, <span class="at">col=</span><span class="st">"red"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">skewt_lines</span>(chanhassen<span class="sc">$</span>dpt, chanhassen<span class="sc">$</span>pressure, <span class="at">ptop =</span> <span class="dv">150</span>, <span class="at">col=</span><span class="st">"blue"</span>)</span></code></pre></div>
 <p><img src="getstarted_files/figure-html/example5-1.png" width="672"></p>
 </div>
 <div id="example-6" class="section level3">
 <h3 class="hasAnchor">
 <a href="#example-6" class="anchor"></a>Example 6</h3>
 <p>Wind speed vertical profile with wind barbs:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">chanhassen =<span class="st"> </span><span class="kw"><a href="../reference/get_sounding.html">get_sounding</a></span>(<span class="dt">wmo_id =</span> <span class="dv">72649</span>, <span class="dt">yy =</span> <span class="dv">2001</span>, <span class="dt">mm =</span> <span class="dv">5</span>, <span class="dt">dd =</span> <span class="dv">10</span>, <span class="dt">hh =</span> <span class="dv">00</span>)
-<span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2001&amp;MONTH=05&amp;FROM=1000&amp;TO=1000&amp;STNM=72649"</span>
-<span class="co">#&gt; /tmp/Rtmp6FZGiA/file38667c4c982a</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">fig =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.1</span>, <span class="fl">0.75</span>, <span class="fl">0.15</span>, <span class="fl">0.9</span>), <span class="dt">new =</span> <span class="ot">TRUE</span>, <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">oma =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))
-<span class="co">#&gt; Warning in par(fig = c(0.1, 0.75, 0.15, 0.9), new = TRUE, mar = c(1, 1, :</span>
-<span class="co">#&gt; calling par(new=TRUE) with no plot</span>
-<span class="kw"><a href="../reference/sounding_wind.html">sounding_wind</a></span>(<span class="dt">pressure =</span> chanhassen<span class="op">$</span>pressure, <span class="dt">ws =</span> chanhassen<span class="op">$</span>ws, <span class="dt">yaxs =</span> <span class="ot">TRUE</span>)
-<span class="co">#&gt;  chr [1:15] "white" "#c7ebfd" "#5689bc" "#62448e" "#007122" "#00ae00" ...</span>
-<span class="co">#&gt; Joining, by = "x1"</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/title">title</a></span>(<span class="st">"Wind profile: Chanhassen - 10 May 2001 0000 UTC"</span>, <span class="dt">outer =</span> F)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/graphics/topics/par">par</a></span>(<span class="dt">fig =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.65</span>, <span class="fl">0.95</span>, <span class="fl">0.15</span>, <span class="fl">0.9</span>), <span class="dt">new =</span> <span class="ot">TRUE</span>, <span class="dt">mar =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">oma =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))
-<span class="kw"><a href="../reference/sounding_barbs.html">sounding_barbs</a></span>(chanhassen<span class="op">$</span>pressure, chanhassen<span class="op">$</span>ws, chanhassen<span class="op">$</span>wd, chanhassen<span class="op">$</span>altitude, <span class="dt">interpolate =</span> <span class="ot">FALSE</span>, <span class="dt">barb_cex =</span> <span class="dv">1</span>)</code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>chanhassen <span class="ot">=</span> <span class="fu">get_sounding</span>(<span class="at">wmo_id =</span> <span class="dv">72649</span>, <span class="at">yy =</span> <span class="dv">2001</span>, <span class="at">mm =</span> <span class="dv">5</span>, <span class="at">dd =</span> <span class="dv">10</span>, <span class="at">hh =</span> <span class="dv">00</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2001&amp;MONTH=05&amp;FROM=1000&amp;TO=1000&amp;STNM=72649"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; /tmp/Rtmp51d1pn/file34693ee75680</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">fig =</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.75</span>, <span class="fl">0.15</span>, <span class="fl">0.9</span>), <span class="at">new =</span> <span class="cn">TRUE</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning in par(fig = c(0.1, 0.75, 0.15, 0.9), new = TRUE, mar = c(1, 1, :</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; calling par(new=TRUE) with no plot</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">sounding_wind</span>(<span class="at">pressure =</span> chanhassen<span class="sc">$</span>pressure, <span class="at">ws =</span> chanhassen<span class="sc">$</span>ws, <span class="at">yaxs =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  chr [1:15] "white" "#c7ebfd" "#5689bc" "#62448e" "#007122" "#00ae00" ...</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Joining, by = "x1"</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Wind profile: Chanhassen - 10 May 2001 0000 UTC"</span>, <span class="at">outer =</span> F)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">fig =</span> <span class="fu">c</span>(<span class="fl">0.65</span>, <span class="fl">0.95</span>, <span class="fl">0.15</span>, <span class="fl">0.9</span>), <span class="at">new =</span> <span class="cn">TRUE</span>, <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>))</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">sounding_barbs</span>(chanhassen<span class="sc">$</span>pressure, chanhassen<span class="sc">$</span>ws, chanhassen<span class="sc">$</span>wd, chanhassen<span class="sc">$</span>altitude, <span class="at">interpolate =</span> <span class="cn">FALSE</span>, <span class="at">barb_cex =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="getstarted_files/figure-html/example6-1.png" width="768"></p>
 </div>
 </div>
@@ -391,7 +392,7 @@ accuracy =<span class="st"> </span><span class="dv">2</span> <span class="co"># 
 <p>[51] Delta_thetae_HGL – difference in theta-e between mean in a hail growth layer (between 0°C and −20°C) and surface. Units are K.</p>
 <p>[52] DCAPE – downdraft convective available potential energy, initialized from 4 km AGL with a mean theta-e in 3–5 km AGL layer. Units are J/kg.</p>
 <p>[53] Cold_Pool_Strength – difference between surface temperature and temperature of the downdraft (derived from DCAPE) at the surface. Units are K.</p>
-<p>[54] Wind_Index – based on original formula from McCann (1994), doi: <a href="https://doi.org/10.1175/1520-0434(1994)009" class="uri">https://doi.org/10.1175/1520-0434(1994)009</a>&lt;0532:WNIFFM&gt;2.0.CO;2. Units indicate estimated wind gust potential in knots.</p>
+<p>[54] Wind_Index – based on original formula from McCann (1994), doi: 10.1175/1520-0434(1994)009&lt;0532:WNIFFM&gt;2.0.CO;2. Units indicate estimated wind gust potential in knots.</p>
 <p>[55] PRCP_WATER – precipitable water (entire column). Units are mm.</p>
 <p>[56] Moisture_Flux_02km – mean wind speed multiplied by mean mixing ratio in the layer between surface and 2 km AGL. Units are g/s/m2.</p>
 <p>[57] RH_02km – mean relative humidity between surface and 2 km AGL layer. Units are %.</p>
@@ -405,9 +406,9 @@ accuracy =<span class="st"> </span><span class="dv">2</span> <span class="co"># 
 <p>[64] BS_08km – bulk wind shear between surface and 8 km AGL. Units are m/s.</p>
 <p>[65] BS_36km – bulk wind shear between 3 and 6 km AGL. Units are m/s.</p>
 <p>[66] BS_18km – bulk wind shear between 1 and 8 km AGL. Units are m/s.</p>
-<p>[67] BS_EFF_MU – effective shear based on most-unstable parcel (highest theta-e between surface and 3 km AGL). See Thompson et al. (2007), doi: <a href="https://doi.org/10.1175/WAF969.1" class="uri">https://doi.org/10.1175/WAF969.1</a> for further details. Units are m/s.</p>
-<p>[68] BS_EFF_SB – effective shear based on surface-based parcel. See Thompson et al. (2007), doi: <a href="https://doi.org/10.1175/WAF969.1" class="uri">https://doi.org/10.1175/WAF969.1</a> for further details. Units are m/s.</p>
-<p>[69] BS_EFF_ML – effective shear based on mixed-layer parcel (theta and mixing ratio averaged over 0–500m AGL layer and initialized from surface). See Thompson et al. (2007), doi: <a href="https://doi.org/10.1175/WAF969.1" class="uri">https://doi.org/10.1175/WAF969.1</a> for further details. Units are m/s.</p>
+<p>[67] BS_EFF_MU – effective shear based on most-unstable parcel (highest theta-e between surface and 3 km AGL). See Thompson et al. (2007), doi: 10.1175/WAF969.1 for further details. Units are m/s.</p>
+<p>[68] BS_EFF_SB – effective shear based on surface-based parcel. See Thompson et al. (2007), doi: 10.1175/WAF969.1 for further details. Units are m/s.</p>
+<p>[69] BS_EFF_ML – effective shear based on mixed-layer parcel (theta and mixing ratio averaged over 0–500m AGL layer and initialized from surface). See Thompson et al. (2007), doi: 10.1175/WAF969.1 for further details. Units are m/s.</p>
 <p>[70] BS_SFC_to_HGL – bulk wind shear between surface and −10°C. Units are m/s.</p>
 <p>[71] BS_MU_LFC_to_HGL – bulk wind shear between most-unstable level of free convection and −10°C. Units are m/s.</p>
 <p>[72] BS_SB_LFC_to_HGL – bulk wind shear between surface-based level of free convection and −10°C. Units are m/s.</p>
@@ -416,37 +417,37 @@ accuracy =<span class="st"> </span><span class="dv">2</span> <span class="co"># 
 <p>[75] MW_02km – mean wind speed between surface and 2 km AGL layer. Units are m/s.</p>
 <p>[76] MW_06km – mean wind speed between surface and 6 km AGL layer. Units are m/s.</p>
 <p>[77] MW_13km – mean wind speed between 1 and 3 km AGL layer. Units are m/s.</p>
-<p>[78] SRH_100m_RM – storm-relative helicity between surface and 100m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
-<p>[79] SRH_500m_RM – storm-relative helicity between surface and 500m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
-<p>[80] SRH_1km_RM – storm-relative helicity between surface and 1 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
-<p>[81] SRH_3km_RM – storm-relative helicity between surface and 3 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
-<p>[82] SRH_100m_LM – storm-relative helicity between surface and 100m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
-<p>[83] SRH_500m_LM – storm-relative helicity between surface and 500m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
-<p>[84] SRH_1km_LM – storm-relative helicity between surface and 1 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
-<p>[85] SRH_3km_LM – storm-relative helicity between surface and 3 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
-<p>[86] Bunkers_RM_A – azimuth for right-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are °.</p>
-<p>[87] Bunkers_RM_M – wind speed for right-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m/s.</p>
-<p>[88] Bunkers_LM_A – azimuth for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are °.</p>
-<p>[89] Bunkers_LM_M – wind speed for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m/s.</p>
-<p>[90] Bunkers_MW_A – azimuth for mean storm motion vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are °.</p>
-<p>[91] Bunkers_MW_M – wind speed for mean storm motion vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m/s.</p>
+<p>[78] SRH_100m_RM – storm-relative helicity between surface and 100m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
+<p>[79] SRH_500m_RM – storm-relative helicity between surface and 500m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
+<p>[80] SRH_1km_RM – storm-relative helicity between surface and 1 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
+<p>[81] SRH_3km_RM – storm-relative helicity between surface and 3 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
+<p>[82] SRH_100m_LM – storm-relative helicity between surface and 100m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
+<p>[83] SRH_500m_LM – storm-relative helicity between surface and 500m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
+<p>[84] SRH_1km_LM – storm-relative helicity between surface and 1 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
+<p>[85] SRH_3km_LM – storm-relative helicity between surface and 3 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m2/s2.</p>
+<p>[86] Bunkers_RM_A – azimuth for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are °.</p>
+<p>[87] Bunkers_RM_M – wind speed for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m/s.</p>
+<p>[88] Bunkers_LM_A – azimuth for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are °.</p>
+<p>[89] Bunkers_LM_M – wind speed for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m/s.</p>
+<p>[90] Bunkers_MW_A – azimuth for mean storm motion vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are °.</p>
+<p>[91] Bunkers_MW_M – wind speed for mean storm motion vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2 for further details. Units are m/s.</p>
 <p><strong>Composite parameters:</strong></p>
 <p>[92] K_Index – based on original formula from George (1960): “Weather Forecasting for Aeronautics” Academic Press, London, 1960, p. 673. Units are K.</p>
-<p>[93] Showalter_Index – based on original formula from Showalter (1953), doi: <a href="https://doi.org/10.1175/1520-0477-34.6.250" class="uri">https://doi.org/10.1175/1520-0477-34.6.250</a>. Units are K.</p>
+<p>[93] Showalter_Index – based on original formula from Showalter (1953), doi: 10.1175/1520-0477-34.6.250. Units are K.</p>
 <p>[94] TotalTotals_Index – based on original formula from Miller (1972): “Notes on analysis and severe-storm forecasting procedures of the Air Force Global Weather Central”, AWS Tech. Rpt. 200(rev), Air Weather Service, Scott AFB, IL. Units are K.</p>
-<p>[95] SWEAT_Index – based on original formula from Bidner (1970): “The Air Force Global Weather Central severe weather threat (SWEAT) index—A preliminary report”. Air Weather Service Aerospace Sciences Review, AWS RP 105-2, No. 70-3, 2-5. Parameter is dimensionless.</p>
+<p>[95] SWEAT_Index – based on original formula from Bidner (1970): “The Air Force Global Weather Central severe weather threat (SWEAT) index—A preliminary report”. Air Weather Service Aerospace Sciences Review, AWS RP 105-2, No. 70-3, 2-5. Parameter is dimensionless.</p>
 <p>[96] STP – based on the fixed layer formula currently used on the Storm Prediction Center mesoanalysis (<a href="https://www.spc.noaa.gov/exper/mesoanalysis/" class="uri">https://www.spc.noaa.gov/exper/mesoanalysis/</a>) as of 1 March 2021. Parameter is dimensionless.</p>
-<p>[97] STP_new – based on original formula from Coffer et al. (2019), doi: <a href="https://doi.org/10.1175/WAF-D-19-0115.1" class="uri">https://doi.org/10.1175/WAF-D-19-0115.1</a>. Parameter is dimensionless.</p>
-<p>[98] SCP – based on Thompson et al. (2007), “An update to the supercell composite and significant tornado parameters”. Preprints, 22nd Conf. on Severe Local Storms, Hyannis, MA, Amer. Meteor. Soc. P (Vol. 8), but with effective SRH replaced with surface to 3 km AGL SRH and effective bulk wind shear replaced with surface to 6 km AGL bulk wind shear. Parameter is dimensionless.</p>
-<p>[99] SCP_new – based on formula from Gropp and Davenport (2018), doi: <a href="https://doi.org/10.1175/WAF-D-17-0150.1" class="uri">https://doi.org/10.1175/WAF-D-17-0150.1</a>, but with effective SRH replaced with surface to 3 km AGL SRH. Parameter is dimensionless.</p>
+<p>[97] STP_new – based on original formula from Coffer et al. (2019), doi: 10.1175/WAF-D-19-0115.1. Parameter is dimensionless.</p>
+<p>[98] SCP – based on Thompson et al. (2007), “An update to the supercell composite and significant tornado parameters”. Preprints, 22nd Conf. on Severe Local Storms, Hyannis, MA, Amer. Meteor. Soc. P (Vol. 8), but with effective SRH replaced with surface to 3 km AGL SRH and effective bulk wind shear replaced with surface to 6 km AGL bulk wind shear. Parameter is dimensionless.</p>
+<p>[99] SCP_new – based on formula from Gropp and Davenport (2018), doi: 10.1175/WAF-D-17-0150.1, but with effective SRH replaced with surface to 3 km AGL SRH. Parameter is dimensionless.</p>
 <p>[100] SHIP – based on formula currently used on the Storm Prediction Center mesoanalysis (<a href="https://www.spc.noaa.gov/exper/mesoanalysis/" class="uri">https://www.spc.noaa.gov/exper/mesoanalysis/</a>) as of 1 March 2021. Parameter is dimensionless.</p>
 <p>[101] DCP – based on formula currently used on the Storm Prediction Center mesoanalysis (<a href="https://www.spc.noaa.gov/exper/mesoanalysis/" class="uri">https://www.spc.noaa.gov/exper/mesoanalysis/</a>) as of 1 March 2021. Parameter is dimensionless.</p>
-<p>[102] MU_WMAXSHEAR – most-unstable WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further details. Units are m2/s2.</p>
-<p>[103] SB_WMAXSHEAR – surface-based WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further details. Units are m2/s2.</p>
-<p>[104] ML_WMAXSHEAR – mixed-layer WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further details. Units are m2/s2.</p>
-<p>[105] MU_EFF_WMAXSHEAR – most-unstable WMAX multiplied by most-unstable effective bulk wind shear. See Taszarek et al. (2020), doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further details. Units are m2/s2.</p>
-<p>[106] SB_EFF_WMAXSHEAR – surface-based WMAX multiplied by surface-based effective bulk wind shear. See Taszarek et al. (2020), doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further details. Units are m2/s2.</p>
-<p>[107] ML_EFF_WMAXSHEAR – mixed-layer WMAX multiplied by mixed-layer effective bulk wind shear. See Taszarek et al. (2020), doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further details. Units are m2/s2.</p>
+<p>[102] MU_WMAXSHEAR – most-unstable WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2.</p>
+<p>[103] SB_WMAXSHEAR – surface-based WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2.</p>
+<p>[104] ML_WMAXSHEAR – mixed-layer WMAX multiplied by surface to 6 km AGL bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2.</p>
+<p>[105] MU_EFF_WMAXSHEAR – most-unstable WMAX multiplied by most-unstable effective bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2.</p>
+<p>[106] SB_EFF_WMAXSHEAR – surface-based WMAX multiplied by surface-based effective bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2.</p>
+<p>[107] ML_EFF_WMAXSHEAR – mixed-layer WMAX multiplied by mixed-layer effective bulk wind shear. See Taszarek et al. (2020), doi: 10.1175/JCLI-D-20-0346.1 for further details. Units are m2/s2.</p>
 </div>
 <div id="accuracy-tables-for-sounding_compute" class="section level3">
 <h3 class="hasAnchor">
@@ -495,20 +496,20 @@ accuracy =<span class="st"> </span><span class="dv">2</span> <span class="co"># 
 <div id="performance-comparison" class="section level3">
 <h3 class="hasAnchor">
 <a href="#performance-comparison" class="anchor"></a>Performance comparison:</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(thunder)
-<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"sounding_vienna"</span>)
-t1 =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.time">system.time</a></span>(<span class="kw"><a href="../reference/sounding_compute.html">sounding_compute</a></span>(sounding_vienna<span class="op">$</span>pressure, sounding_vienna<span class="op">$</span>altitude, sounding_vienna<span class="op">$</span>temp, sounding_vienna<span class="op">$</span>dpt, sounding_vienna<span class="op">$</span>wd, sounding_vienna<span class="op">$</span>ws, <span class="dt">accuracy =</span> <span class="dv">1</span>))
-t2 =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.time">system.time</a></span>(<span class="kw"><a href="../reference/sounding_compute.html">sounding_compute</a></span>(sounding_vienna<span class="op">$</span>pressure, sounding_vienna<span class="op">$</span>altitude, sounding_vienna<span class="op">$</span>temp, sounding_vienna<span class="op">$</span>dpt, sounding_vienna<span class="op">$</span>wd, sounding_vienna<span class="op">$</span>ws, <span class="dt">accuracy =</span> <span class="dv">2</span>))
-t3 =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.time">system.time</a></span>(<span class="kw"><a href="../reference/sounding_compute.html">sounding_compute</a></span>(sounding_vienna<span class="op">$</span>pressure, sounding_vienna<span class="op">$</span>altitude, sounding_vienna<span class="op">$</span>temp, sounding_vienna<span class="op">$</span>dpt, sounding_vienna<span class="op">$</span>wd, sounding_vienna<span class="op">$</span>ws, <span class="dt">accuracy =</span> <span class="dv">3</span>))
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(t1)
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.007   0.000   0.007</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(t2)
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.019   0.000   0.019</span>
-<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(t3)
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    0.28    0.00    0.28</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(thunder)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"sounding_vienna"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>t1 <span class="ot">=</span> <span class="fu">system.time</span>(<span class="fu">sounding_compute</span>(sounding_vienna<span class="sc">$</span>pressure, sounding_vienna<span class="sc">$</span>altitude, sounding_vienna<span class="sc">$</span>temp, sounding_vienna<span class="sc">$</span>dpt, sounding_vienna<span class="sc">$</span>wd, sounding_vienna<span class="sc">$</span>ws, <span class="at">accuracy =</span> <span class="dv">1</span>))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>t2 <span class="ot">=</span> <span class="fu">system.time</span>(<span class="fu">sounding_compute</span>(sounding_vienna<span class="sc">$</span>pressure, sounding_vienna<span class="sc">$</span>altitude, sounding_vienna<span class="sc">$</span>temp, sounding_vienna<span class="sc">$</span>dpt, sounding_vienna<span class="sc">$</span>wd, sounding_vienna<span class="sc">$</span>ws, <span class="at">accuracy =</span> <span class="dv">2</span>))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>t3 <span class="ot">=</span> <span class="fu">system.time</span>(<span class="fu">sounding_compute</span>(sounding_vienna<span class="sc">$</span>pressure, sounding_vienna<span class="sc">$</span>altitude, sounding_vienna<span class="sc">$</span>temp, sounding_vienna<span class="sc">$</span>dpt, sounding_vienna<span class="sc">$</span>wd, sounding_vienna<span class="sc">$</span>ws, <span class="at">accuracy =</span> <span class="dv">3</span>))</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t1)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    user  system elapsed </span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   0.008   0.000   0.008</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t2)</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    user  system elapsed </span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   0.019   0.000   0.019</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t3)</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    user  system elapsed </span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    0.28    0.00    0.28</span></span></code></pre></div>
 </div>
 <div id="important-notes" class="section level3">
 <h3 class="hasAnchor">
