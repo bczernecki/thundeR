@@ -54,6 +54,8 @@ ws = sounding_vienna$ws # vector of wind speed [knots]
 sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC", pressure, altitude, temp, dpt, wd, ws)
 ```
 
+<img src="../inst/figures/Vienna.png" alt="Vienna" width="1000"/>
+
 ### Example 2
 
 Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file: 
@@ -62,6 +64,8 @@ Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png
 profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
 sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999 0000 UTC", profile$pressure, profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
 ```
+
+<img src="../inst/figures/NorthPlatte.png" alt="North Platte" width="1000"/>
 
 ### Example 3
 

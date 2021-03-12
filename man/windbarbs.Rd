@@ -22,15 +22,15 @@ A function to plot a wind barb. This is a modified version of `station.symbol` f
 Currently wind barbs are supported up to 190 knots.
 }
 \examples{
-plot(1, xaxt = 'n', yaxt = 'n')
-windbarbs(cx = 1, cy = 1, direction = 90, speed = 5)
+plot(1, xaxt = 'n', yaxt = 'n', xlab = "", ylab = "", frame = FALSE)
+windbarbs(cx = 1, cy = 1, direction = 90, speed = 1, cex = 5)
 
 # multiplot
 par(mfrow=c(5,4), mar = c(1,1,1,1))
-for (i in 21:40){
+for (i in 19:38){
   sc = 5
-  plot(0:2, xaxt = 'n', yaxt = 'n', type = "n")
-  text(1.4,1, i*sc, cex = 2)
+  plot(0:2, xaxt = 'n', yaxt = 'n', type = "n", xlab = "", ylab = "")
+  text(1.4,1, i*sc, cex = 1.5)
   windbarbs(cx = 2, cy = 1, direction = 60, speed = i*sc, cex = 3)
 }
 }
