@@ -138,7 +138,6 @@ Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
   <span class='no'>ws</span>,
   <span class='no'>wd</span>,
   <span class='no'>altitude</span>,
-  <span class='kw'>convert</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>ptop</span> <span class='kw'>=</span> <span class='fl'>100</span>,
   <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
   <span class='kw'>showaxis</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
@@ -166,16 +165,12 @@ Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
       <td><p>altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [m]</p></td>
     </tr>
     <tr>
-      <th>convert</th>
-      <td><p>- logical, whether to convert wind speed from knots to m/s (default TRUE)</p></td>
-    </tr>
-    <tr>
       <th>ptop</th>
       <td><p>Pressure top level to be used for plotting wind speed. Valid options should be &lt; 200 hPa (100 by default)</p></td>
     </tr>
     <tr>
       <th>interpolate</th>
-      <td><p>logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset</p></td>
+      <td><p>logical, draw wind barbs only at interpolated altitudes with 500 m interval (default = TRUE)  instead of all wind barbs for a given input dataset</p></td>
     </tr>
     <tr>
       <th>showaxis</th>
@@ -202,8 +197,8 @@ Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
 #&gt; <span class='message'>    altitude, dpt, pressure, temp, wd, ws</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from package:datasets:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    pressure</span></div><div class='input'>
-<span class='fu'>sounding_barbs</span>(<span class='kw'>pressure</span> <span class='kw'>=</span> <span class='no'>pressure</span>, <span class='kw'>ws</span> <span class='kw'>=</span> <span class='no'>ws</span>, <span class='kw'>wd</span> <span class='kw'>=</span> <span class='no'>wd</span>, <span class='kw'>altitude</span> <span class='kw'>=</span> <span class='no'>altitude</span>,
-               <span class='kw'>convert</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='kw'>showaxis</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='sounding_barbs-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='sounding_barbs-2.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='fu'>sounding_barbs</span>(<span class='kw'>pressure</span> <span class='kw'>=</span> <span class='no'>pressure</span>, <span class='kw'>ws</span> <span class='kw'>=</span> <span class='no'>ws</span>, <span class='kw'>wd</span> <span class='kw'>=</span> <span class='no'>wd</span>, <span class='kw'>altitude</span> <span class='kw'>=</span> <span class='no'>altitude</span>,
+                 <span class='kw'>interpolate</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>showaxis</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</div><div class='img'><img src='sounding_barbs-1.png' alt='' width='700' height='433' /></div><div class='img'><img src='sounding_barbs-2.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
