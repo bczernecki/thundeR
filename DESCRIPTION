@@ -25,7 +25,7 @@ Suggests:
 LinkingTo: Rcpp
 RoxygenNote: 7.1.1
 Encoding: UTF-8
-URL: https://github.com/bczernecki/thunder
-BugReports: https://github.com/bczernecki/thunder/issues
+URL: https://bczernecki.github.io/thundeR/
+BugReports: https://github.com/bczernecki/thunder/issues/
 VignetteBuilder: knitr
 Config/testthat/edition: 2
