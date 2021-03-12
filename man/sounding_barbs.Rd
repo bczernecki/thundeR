@@ -9,7 +9,6 @@ sounding_barbs(
   ws,
   wd,
   altitude,
-  convert = FALSE,
   ptop = 100,
   interpolate = TRUE,
   showaxis = FALSE,
@@ -26,11 +25,9 @@ sounding_barbs(
 
 \item{altitude}{altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [m]}
 
-\item{convert}{- logical, whether to convert wind speed from knots to m/s (default TRUE)}
-
 \item{ptop}{Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)}
 
-\item{interpolate}{logical, draw wind barbs only at interpolated altitudes with 1 km interval (default = TRUE)  instead of all wind barbs for a given input dataset}
+\item{interpolate}{logical, draw wind barbs only at interpolated altitudes with 500 m interval (default = TRUE)  instead of all wind barbs for a given input dataset}
 
 \item{showaxis}{logical, drawing bounding box with left axis for pressure heighs (default FALSE)}
 
@@ -47,7 +44,7 @@ Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
 data("sounding_vienna")
 attach(sounding_vienna)
 
-sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
-               convert = TRUE, interpolate = FALSE, showaxis = TRUE)
+  sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
+                 interpolate = TRUE, showaxis = TRUE)
 
 }

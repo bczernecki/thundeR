@@ -36,7 +36,6 @@ sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
   
   convert = FALSE
   ptop = 100 
-  interpolate = TRUE
   
   stopifnot(length(filename) < 4)
   

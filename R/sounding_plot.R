@@ -30,7 +30,6 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
 
    convert = FALSE
    ptop = 100 
-   interpolate = TRUE
   
    dev_size = dev.size("in")
 if(dev_size[1] < 10 | dev_size[2] < 7.5){
