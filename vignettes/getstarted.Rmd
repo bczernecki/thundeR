@@ -290,7 +290,7 @@ Below is the full list of parameters computed and exported with the `sounding_co
 
 [53] Cold_Pool_Strength – difference between surface temperature and temperature of the downdraft (derived from DCAPE) at the surface. Units are K.
 
-[54] Wind_Index – based on original formula from McCann (1994), doi:  10.1175/1520-0434(1994)009<0532:WNIFFM>2.0.CO;2. Units indicate estimated wind gust potential in knots. 
+[54] Wind_Index – based on original formula from McCann (1994), doi:  https://tinyurl.com/jub4fecj Units indicate estimated wind gust potential in knots. 
 
 [55] PRCP_WATER – precipitable water (entire column). Units are mm.
 
@@ -340,33 +340,33 @@ Below is the full list of parameters computed and exported with the `sounding_co
 
 [77] MW_13km – mean wind speed between 1 and 3 km AGL layer. Units are m/s.  
 
-[78] SRH_100m_RM – storm-relative helicity between surface and 100m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.  
+[78] SRH_100m_RM – storm-relative helicity between surface and 100m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m2/s2.  
 
-[79] SRH_500m_RM – storm-relative helicity between surface and 500m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   
+[79] SRH_500m_RM – storm-relative helicity between surface and 500m AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m2/s2.   
 
-[80] SRH_1km_RM – storm-relative helicity between surface and 1 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   	
+[80] SRH_1km_RM – storm-relative helicity between surface and 1 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m2/s2.   	
 
-[81] SRH_3km_RM – storm-relative helicity between surface and 3 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   	
+[81] SRH_3km_RM – storm-relative helicity between surface and 3 km AGL for right-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m2/s2.   	
 
-[82] SRH_100m_LM – storm-relative helicity between surface and 100m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.   
+[82] SRH_100m_LM – storm-relative helicity between surface and 100m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m2/s2.   
 
-[83] SRH_500m_LM – storm-relative helicity between surface and 500m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    
+[83] SRH_500m_LM – storm-relative helicity between surface and 500m AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m2/s2.    
 
-[84] SRH_1km_LM – storm-relative helicity between surface and 1 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    	
+[84] SRH_1km_LM – storm-relative helicity between surface and 1 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m2/s2.    	
 
-[85] SRH_3km_LM – storm-relative helicity between surface and 3 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m2/s2.    	
+[85] SRH_3km_LM – storm-relative helicity between surface and 3 km AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m2/s2.    	
 
-[86] Bunkers_RM_A – azimuth for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.   
+[86] Bunkers_RM_A – azimuth for right-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are °.   
 
-[87] Bunkers_RM_M – wind speed for right-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s. 
+[87] Bunkers_RM_M – wind speed for right-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m/s. 
 
-[88] Bunkers_LM_A  – azimuth for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.	
+[88] Bunkers_LM_A  – azimuth for left-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are °.	
 
-[89] Bunkers_LM_M – wind speed for left-moving supercell vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s.  	
+[89] Bunkers_LM_M – wind speed for left-moving supercell vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m/s.  	
 
-[90] Bunkers_MW_A  – azimuth for mean storm motion vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are °.	
+[90] Bunkers_MW_A  – azimuth for mean storm motion vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are °.	
 
-[91] Bunkers_MW_M – wind speed for mean storm motion vector. See Bunkers et al. (2002), doi: 10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2 for further details. Units are m/s.  	
+[91] Bunkers_MW_M – wind speed for mean storm motion vector. See Bunkers et al. (2002), doi: tinyurl.com/yuk4wvwk  for further details. Units are m/s.  	
 
 **Composite parameters:**
 
