@@ -23,12 +23,13 @@
 #' @importFrom grDevices svg
 #' 
 #' @examples
+#' \donttest{
 #' data("sounding_vienna")
 #' attach(sounding_vienna)
-#' sounding_save(filename = "myfile.png", 
+#' sounding_save(filename = "Vienna.png", 
 #'               pressure, altitude, temp, dpt, wd, ws, parcel = "MU", 
 #'               title = "Vienna - 23 August 2011, 12:00 UTC")
-#' 
+#' } 
 #'
 
 sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
