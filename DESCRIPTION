@@ -7,7 +7,7 @@ Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("
     person("Mateusz", "Taszarek", email = "mateusz.taszarek@noaa.gov", role = c("aut"), 
     comment = c(ORCID = "0000-0001-9578-5872")))
 Maintainer: Bartosz Czernecki <nwp@amu.edu.pl>
-Description: R tool for calculating over 100 atmospheric convection indices from rawinsonde profiles
+Description: R tool for calculating over 100 atmospheric convection indices from rawinsonde profiles.
 License: GPL (>= 2)
 Imports:
     Rcpp (>= 0.12.9.4),
