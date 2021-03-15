@@ -18,7 +18,7 @@ sounding_wind(pressure, ws, ptop = 100, yaxs = TRUE, ...)
 \item{...}{extra graphic arguments}
 }
 \value{
-no return value; used for customizing graphics
+vertical wind profile plot
 }
 \description{
 Function for plotting wind speed profile. 

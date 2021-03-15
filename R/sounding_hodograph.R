@@ -12,7 +12,7 @@
 #'
 #' @export
 #' 
-#' @return no return value; used for customizing graphics
+#' @return hodograph plot
 #' 
 #' @examples
 #' chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
@@ -40,6 +40,10 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
   #xlm = ifelse(xlm > 61, 61, xlm)
   xlm = max_speed
   xlm = c(-xlm, xlm)
+  
+  # restore old par settings on exit:
+  oldpar = par(no.readonly = TRUE) 
+  on.exit(par(oldpar))
   
   # plotting layout for hodograph:
   par(pty = "s")

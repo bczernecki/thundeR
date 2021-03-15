@@ -42,7 +42,7 @@ sounding_plot(
 \item{...}{extra graphic arguments}
 }
 \value{
-no return value; used for customizing graphics
+Skew-T, hodograph and table with convective indices drawn on a pre-defined single layout
 }
 \description{
 Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout

@@ -29,14 +29,14 @@ skewt_plot(
 
 \item{moist_adiabats_col}{color to be used for drawing moist adiabats. If set to NA or not provided drawing lines skipped}
 
-\item{deg45}{whether to preserve 45 degrees for diagonal isolines on Skew-T diagram regardless ploting window aspect ratio. [Logical, default: FALSE]}
+\item{deg45}{whether to preserve 45 degrees for diagonal isolines on Skew-T diagram regardless ploting window aspect ratio. [logical, default: FALSE]}
 
-\item{isotherm0}{whether to deliminate 0 degree Celsius isother[Logical, default: TRUE]}
+\item{isotherm0}{whether to deliminate 0 degree Celsius isother [logical, default: TRUE]}
 
 \item{...}{additional (mostly graphical) parameters to be passed}
 }
 \value{
-no return value; used for customizing graphics
+Draws a Skew-T log-p diagram
 }
 \description{
 Function for plotting a customized version of the Skew-T diagram. Please note that drawing Skew-T may require increasing size or modifying 
@@ -53,7 +53,7 @@ mtext('WMO ID: 11035, 2011-08-23 1200 UTC', padj = -0.5, col = "white")
 data("sounding_vienna")
 attach(sounding_vienna)
 
-output <- sounding_export(pressure, altitude, temp, dpt, wd, ws)
+output = sounding_export(pressure, altitude, temp, dpt, wd, ws)
 skewt_lines(output$dpt, output$pressure,type='l',col='forestgreen',lwd = 2.5)
 skewt_lines(output$temp,output$pressure,type='l',col='red', lwd = 2.5)
 skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)

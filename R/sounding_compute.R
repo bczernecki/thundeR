@@ -4,7 +4,7 @@
 #'
 #' @export
 #' 
-#' @return 
+#' @return Named vector of 100+ convective indices
 #' \enumerate{
 #'  \item MU_CAPE
 #'  \item MU_03km_CAPE

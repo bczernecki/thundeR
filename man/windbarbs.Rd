@@ -18,7 +18,7 @@ windbarbs(cx, cy, direction, speed = NA, cex = 1)
 \item{cex}{symbol size. Default 1}
 }
 \value{
-no return value; used for customizing graphics
+wind barb graphics
 }
 \description{
 A function to plot a wind barb. This is a modified version of `station.symbol` function from the RadioSonde package. 
@@ -29,6 +29,8 @@ plot(1, xaxt = 'n', yaxt = 'n', xlab = "", ylab = "", frame = FALSE)
 windbarbs(cx = 1, cy = 1, direction = 90, speed = 1, cex = 5)
 
 # multiplot
+oldpar = par(no.readonly = TRUE)
+
 par(mfrow=c(5,4), mar = c(1,1,1,1))
 for (i in 19:38){
   sc = 5
@@ -36,4 +38,6 @@ for (i in 19:38){
   text(1.4,1, i*sc, cex = 1.5)
   windbarbs(cx = 2, cy = 1, direction = 60, speed = i*sc, cex = 3)
 }
+
+par(oldpar) # restore drawing settings
 }

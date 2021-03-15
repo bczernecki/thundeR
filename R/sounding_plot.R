@@ -17,7 +17,7 @@
 #' @import aiRthermo
 #' @import grDevices
 #' 
-#' @return no return value; used for customizing graphics
+#' @return Skew-T, hodograph and table with convective indices drawn on a pre-defined single layout
 #' 
 #' @examples
 #' data("sounding_vienna")
@@ -39,7 +39,11 @@ if(dev_size[1] < 10 | dev_size[2] < 7.5){
   message(text)
 }
 
-####
+# restore old par settings on exit:
+oldpar = par(no.readonly = TRUE) 
+on.exit(par(oldpar))
+
+# new par settings:
 par(pty = "m")
 plot.new()
 par(fig = c(0.028, 0.51, 0.03, 0.95), 

@@ -22,7 +22,7 @@
 #' @importFrom grDevices png
 #' @importFrom grDevices svg
 #' 
-#' @return no return value; used for saving graphics
+#' @return graphics with Skew-T and hodograph layout
 #' 
 #' @examples
 #' \donttest{

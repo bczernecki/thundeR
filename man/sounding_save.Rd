@@ -39,7 +39,7 @@ sounding_save(
 \item{...}{other arguments that can be used with `sounding_plot` or other graphic arguments}
 }
 \value{
-no return value; used for saving graphics
+graphics with Skew-T and hodograph layout
 }
 \description{
 Auxiliary function to `sounding_plot` that plots a composite \

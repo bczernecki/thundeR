@@ -36,7 +36,7 @@ sounding_barbs(
 \item{...}{extra graphic arguments}
 }
 \value{
-no return value; used for customizing graphics
+wind barbs plot for a given vertical profile of atmosphere
 }
 \description{
 Function for plotting wind direction and wind speed profile with the use of wind barbs.

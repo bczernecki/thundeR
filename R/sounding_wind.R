@@ -15,7 +15,7 @@
 #' @param ... extra graphic arguments
 #' @export
 #' 
-#' @return no return value; used for customizing graphics
+#' @return vertical wind profile plot
 #' 
 #' @examples 
 #' # load examplary dataset:
@@ -25,8 +25,6 @@
 
 sounding_wind <- function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         
-        #sounding_vienna$pressure; ws = sounding_vienna$ws
-        #par(pty = "s") # draw diagram in "rectangle"
         if(ptop > 200) {
                 stop("\nptop argument needs to be set < 200 (hPa)!")
         }

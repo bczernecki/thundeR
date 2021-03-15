@@ -30,7 +30,7 @@ sounding_hodograph(
 \item{...}{other graphical parameters to be used with plot() function}
 }
 \value{
-no return value; used for customizing graphics
+hodograph plot
 }
 \description{
 Plot rawinsonde hodograph to show changes in wind speed and direction with height

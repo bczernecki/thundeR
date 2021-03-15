@@ -19,7 +19,7 @@
 #' @param ... extra graphic arguments
 #' @export
 #' 
-#' @return no return value; used for customizing graphics
+#' @return wind barbs plot for a given vertical profile of atmosphere
 #' 
 #' @examples 
 #' # load examplary dataset:
@@ -44,12 +44,12 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
   #   ws <- ws * 0.51444
   # }
   
-  # margins can be modified if needed
+  # margins can be manually modified if needed, e.g.:
   #c(bottom, left, top, right) 
   #par(mar = c(2, 1.5, 1 ,6))
   
   ymax = skewty(1050)
-  #ymin <- skewty(50)
+  #ymin = skewty(50)
   ymin = skewty(ptop)
   xmin = 0
   # moving drawing limits:
@@ -110,5 +110,3 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
   }
   
 }
-  
-

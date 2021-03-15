@@ -10,7 +10,7 @@
 #' @param ... other graphical parameters that can be passed to `lines()` function, such as `lwd`, `lty`, `col`, etc.
 #' @export
 #' 
-#' @return no return value; used for customizing graphics
+#' @return adds line on a pre-defined Skew-T plot
 #' 
 #' @examples 
 #' 
