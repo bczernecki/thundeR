@@ -19,6 +19,8 @@
 #' @param ... extra graphic arguments
 #' @export
 #' 
+#' @return no return value; used for customizing graphics
+#' 
 #' @examples 
 #' # load examplary dataset:
 #' data("sounding_vienna")

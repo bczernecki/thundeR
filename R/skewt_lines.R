@@ -10,6 +10,8 @@
 #' @param ... other graphical parameters that can be passed to `lines()` function, such as `lwd`, `lty`, `col`, etc.
 #' @export
 #' 
+#' @return no return value; used for customizing graphics
+#' 
 #' @examples 
 #' 
 #' # take a sample sounding profile:

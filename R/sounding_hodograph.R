@@ -11,6 +11,9 @@
 #' @param ... other graphical parameters to be used with plot() function
 #'
 #' @export
+#' 
+#' @return no return value; used for customizing graphics
+#' 
 #' @examples
 #' chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
 #' sounding_hodograph(ws = chanhassen$ws, wd = chanhassen$wd, 

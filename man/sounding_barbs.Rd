@@ -35,6 +35,9 @@ sounding_barbs(
 
 \item{...}{extra graphic arguments}
 }
+\value{
+no return value; used for customizing graphics
+}
 \description{
 Function for plotting wind direction and wind speed profile with the use of wind barbs.
 Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.

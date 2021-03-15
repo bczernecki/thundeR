@@ -35,6 +35,9 @@ skewt_plot(
 
 \item{...}{additional (mostly graphical) parameters to be passed}
 }
+\value{
+no return value; used for customizing graphics
+}
 \description{
 Function for plotting a customized version of the Skew-T diagram. Please note that drawing Skew-T may require increasing size or modifying 
 aspect ratio of plotting window in order to provide readable results.

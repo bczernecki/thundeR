@@ -13,6 +13,8 @@
 #' @param speed wind speed in knots
 #' @param cex symbol size. Default 1
 #' 
+#' @return no return value; used for customizing graphics
+#' 
 #' @examples 
 #' plot(1, xaxt = 'n', yaxt = 'n', xlab = "", ylab = "", frame = FALSE)
 #' windbarbs(cx = 1, cy = 1, direction = 90, speed = 1, cex = 5)

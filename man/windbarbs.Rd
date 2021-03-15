@@ -17,6 +17,9 @@ windbarbs(cx, cy, direction, speed = NA, cex = 1)
 
 \item{cex}{symbol size. Default 1}
 }
+\value{
+no return value; used for customizing graphics
+}
 \description{
 A function to plot a wind barb. This is a modified version of `station.symbol` function from the RadioSonde package. 
 Currently wind barbs are supported up to 190 knots.

@@ -13,6 +13,20 @@
 #' @importFrom climate sounding_wyoming
 #' @export
 #' 
+#' @return Data frame of computed values for visualizing parcel trajectories
+#'  \enumerate{
+#'   \item pressure - pressure [hPa]
+#'   \item altitude - altitude [m]
+#'   \item temp - temperature [degree Celsius]
+#'   \item tempV - virtual temperature [degree Celsius]
+#'   \item dpt - dew point temperature [degree Celsius]
+#'   \item wd - wind direction [azimuth in degrees]
+#'   \item ws - wind speed [knots]
+#'   \item MU - temperature for most unstable CAPE trajectory [degree Celsius]
+#'   \item SB - temperature for surface based CAPE trajectory [degree Celsius]
+#'   \item ML temperature for mixed layer CAPE trajectory [degree Celsius]
+#' }
+#' 
 #' @examples 
 #' data("sounding_vienna")
 #' attach(sounding_vienna)

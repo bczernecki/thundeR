@@ -17,6 +17,8 @@
 #' @import aiRthermo
 #' @import grDevices
 #' 
+#' @return no return value; used for customizing graphics
+#' 
 #' @examples
 #' data("sounding_vienna")
 #' sounding_vienna = na.omit(sounding_vienna)

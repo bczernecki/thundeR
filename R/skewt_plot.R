@@ -16,6 +16,8 @@
 #' @param ... additional (mostly graphical) parameters to be passed
 #' @export
 #' 
+#' @return no return value; used for customizing graphics
+#' 
 #' @examples 
 #' skewt_plot(ptop = 100)
 #' 

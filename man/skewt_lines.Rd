@@ -15,6 +15,9 @@ skewt_lines(temp, pressure, ptop = 100, ...)
 
 \item{...}{other graphical parameters that can be passed to `lines()` function, such as `lwd`, `lty`, `col`, etc.}
 }
+\value{
+no return value; used for customizing graphics
+}
 \description{
 Calculate X and Y coordinates for lines to be drawn on Skew-T diagram;
 Draw any line on Skew-T diagram using temperature and pressure as coordinates

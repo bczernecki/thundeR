@@ -38,6 +38,9 @@ sounding_save(
 
 \item{...}{other arguments that can be used with `sounding_plot` or other graphic arguments}
 }
+\value{
+no return value; used for saving graphics
+}
 \description{
 Auxiliary function to `sounding_plot` that plots a composite \
 of Skew-T, hodograph and selected convective parameters \

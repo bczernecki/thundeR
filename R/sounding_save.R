@@ -22,6 +22,8 @@
 #' @importFrom grDevices png
 #' @importFrom grDevices svg
 #' 
+#' @return no return value; used for saving graphics
+#' 
 #' @examples
 #' \donttest{
 #' data("sounding_vienna")
