@@ -23,9 +23,9 @@ sounding_hodograph(
 
 \item{max_hght}{maximum altitude [km] to be considered on the hodograph, 12 km used by default}
 
-\item{max_speed}{- displayed range of the drawn hodograph [m/s], 25 m/s used as default}
+\item{max_speed}{displayed range of the drawn hodograph [m/s], 25 m/s used as default}
 
-\item{lab_hghts}{- height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels}
+\item{lab_hghts}{height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels}
 
 \item{...}{other graphical parameters to be used with plot() function}
 }

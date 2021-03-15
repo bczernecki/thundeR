@@ -28,7 +28,7 @@ Online rawinsonde browser of `thundeR` package is available at www.rawinsonde.co
 - **`sounding_compute()`** - A core function for calculating convective parameters commonly used in the operational prediction of severe convective storms. Returns a vector of parameters.
  
 - **`sounding_plot()`** - Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
-- 
+
 - **`sounding_save()`**` - Auxiliary function to `sounding_plot` that plots a composite of Skew-T, hodograph and selected convective parameters on a single layout and exports graphical file.
 
 - **`get_sounding()`** - Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with `thundeR` package.
@@ -38,7 +38,7 @@ Online rawinsonde browser of `thundeR` package is available at www.rawinsonde.co
 
 Examples show aplication of selected `thundeR` package functions
 
-#### Example 1
+### Example 1
 
 Draw Skew-T, hodograph and convective parameters on a single layout and export to png file:
 
@@ -61,7 +61,8 @@ sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC
 Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file: 
 
 ```{r example2, eval = TRUE}
-profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
+profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 0)
+head(profile) # show first few rows of downloaded dataset
 sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999 0000 UTC", profile$pressure, profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
 ```
 
@@ -72,8 +73,6 @@ sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999
 Compute convective parameters based on a sample vertical profile data:
 
 ```{r example3, eval = TRUE, fig.width=8, fig.height=8, fig.fullwidth = TRUE}
-library("thunder")
-
 pressure = c(1000, 855, 700, 500, 300, 100, 10) # pressure [hPa]
 altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000) # altitude [meters]
 temp = c(25, 10, 0, -15, -30, -50, -92) # temperature [degree Celsius]
@@ -150,13 +149,13 @@ title("Chanhasses - 10 May 2001, 00:00 UTC")
 
 ### Example 5
 
-Download sounding and draw customized Skew-T plot (e.g. up to 150 hPa instead of default 100 hPa):
+Use the previously downloaded sounding and draw customized Skew-T plot (e.g. up to 150 hPa instead of default 100 hPa):
 
 ```{r example5, eval = TRUE, fig.width=7, fig.height=8, fig.fullwidth = TRUE}
-chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
-skewt_plot(ptop=150)
-skewt_lines(chanhassen$temp, chanhassen$pressure, ptop = 150, col="red")
-skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop = 150, col="blue")
+# chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+skewt_plot(ptop = 150, close_par = FALSE)
+skewt_lines(chanhassen$temp, chanhassen$pressure, ptop = 150, col = "red")
+skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop = 150, col = "blue")
 ```
 
 ### Example 6
@@ -164,19 +163,23 @@ skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop = 150, col="blue")
 Wind speed vertical profile with wind barbs:
 
 ```{r example6, eval = TRUE, fig.width=8, fig.height=6, fig.fullwidth = TRUE}
-chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+# chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+oldpar = par()
+
 par(fig = c(0.1, 0.75, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
 sounding_wind(pressure = chanhassen$pressure, ws = chanhassen$ws, yaxs = TRUE)
 title("Wind profile: Chanhassen - 10 May 2001 0000 UTC", outer = F)
 par(fig = c(0.65, 0.95, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
 sounding_barbs(chanhassen$pressure, chanhassen$ws, chanhassen$wd, chanhassen$altitude, interpolate = FALSE, barb_cex = 1)
+
+par(oldpar)
 ```
 
 
 
 ## Details:
 
-### 1. Parameters:
+### 1. Computed parameters:
 
 Below is the full list of parameters computed and exported with the `sounding_compute()` function:
 

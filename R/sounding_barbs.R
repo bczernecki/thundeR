@@ -8,9 +8,9 @@
 #' @importFrom dplyr left_join
 #' @importFrom grDevices colorRampPalette
 #'
-#' @param pressure - pressure [hPa] 
-#' @param ws - wind speed [knots]
-#' @param wd - wind direction [azimuth in degrees]
+#' @param pressure pressure [hPa] 
+#' @param ws wind speed [knots]
+#' @param wd wind direction [azimuth in degrees]
 #' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [m]
 #' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param interpolate logical, draw wind barbs only at interpolated altitudes with 500 m interval (default = TRUE)  instead of all wind barbs for a given input dataset
@@ -25,9 +25,8 @@
 #' # load examplary dataset:
 #' data("sounding_vienna")
 #' attach(sounding_vienna)
-#' 
-#'   sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
-#'                  interpolate = TRUE, showaxis = TRUE)
+#' sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
+#'               interpolate = TRUE, showaxis = TRUE)
 #'
 
 sounding_barbs <- function(pressure, ws, wd, altitude,
@@ -57,9 +56,11 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
   
   xc = c(xmin, xmin, xmax, xmax, xmin)
   yc = c(ymin, ymax, ymax, ymin, ymin)
-  plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 0.0)
-  
-  if(showaxis) plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 1)
+  if(isTRUE(showaxis)){
+    plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 1)
+  } else {
+    plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 0.0)
+  }
   
   #prs = pressure[which((altitude-altitude[1]) %in% seq(0,16000,500))]
   prs = c(1050, 1000, 850, 700, 500, 400, 300, seq(from = 200, to = ptop, by = -50))

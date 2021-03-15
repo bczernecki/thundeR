@@ -26,7 +26,7 @@ Currently wind barbs are supported up to 190 knots.
 }
 \examples{
 plot(1, xaxt = 'n', yaxt = 'n', xlab = "", ylab = "", frame = FALSE)
-windbarbs(cx = 1, cy = 1, direction = 90, speed = 1, cex = 5)
+windbarbs(cx = 1, cy = 1, direction = 120, speed = 99, cex = 5)
 
 # multiplot
 oldpar = par(no.readonly = TRUE)

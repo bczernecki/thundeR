@@ -13,6 +13,7 @@ skewt_plot(
   moist_adiabats_col = "#00FF0095",
   deg45 = FALSE,
   isotherm0 = TRUE,
+  close_par = TRUE,
   ...
 )
 }
@@ -33,6 +34,8 @@ skewt_plot(
 
 \item{isotherm0}{whether to deliminate 0 degree Celsius isother [logical, default: TRUE]}
 
+\item{close_par}{if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default. If you want to modify Skew-T plot in next step set it to FALSE}
+
 \item{...}{additional (mostly graphical) parameters to be passed}
 }
 \value{
@@ -45,9 +48,9 @@ aspect ratio of plotting window in order to provide readable results.
 \examples{
 skewt_plot(ptop = 100)
 
-skewt_plot(ptop = 150, temp_stripes = FALSE) # na color stripes for temperature
+skewt_plot(ptop = 150, temp_stripes = TRUE) # add color stripes for temperature
 
-skewt_plot(ptop = 100)
+skewt_plot(ptop = 100, close_par = FALSE)
 title("Your title")
 mtext('WMO ID: 11035, 2011-08-23 1200 UTC', padj = -0.5, col = "white")
 data("sounding_vienna")

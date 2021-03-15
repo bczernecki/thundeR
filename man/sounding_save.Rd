@@ -28,18 +28,18 @@ sounding_save(
 
 \item{wd}{wind direction in degrees [azimuth in degrees]}
 
-\item{ws}{- wind speed [knots]}
+\item{ws}{wind speed [knots]}
 
-\item{title}{- title to be added in the layout's header}
+\item{title}{title to be added in the layout's header}
 
-\item{parcel}{- parcel tracing on Skew-T for "MU", "ML" or "SB" parcel}
+\item{parcel}{parcel tracing on Skew-T for "MU", "ML" or "SB" parcel}
 
-\item{filename}{- output file name with extension indicating file format (e.g. "my_plot.png" or "my_plot.svg")}
+\item{filename}{output file name with extension indicating file format (e.g. "my_plot.png" or "my_plot.svg")}
 
 \item{...}{other arguments that can be used with `sounding_plot` or other graphic arguments}
 }
 \value{
-graphics with Skew-T and hodograph layout
+graphical file with Skew-T and hodograph layout
 }
 \description{
 Auxiliary function to `sounding_plot` that plots a composite \

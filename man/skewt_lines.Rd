@@ -29,7 +29,7 @@ data("sounding_vienna")
 attach(sounding_vienna)
 
 # draw empty Skew-T plot:
-skewt_plot(temp_stripes = TRUE)
+skewt_plot(temp_stripes = TRUE, close_par = FALSE)
 
 # draw line for dew-point temperature:
 skewt_lines(dpt, pressure, type = 'l', col = 'forestgreen', lwd = 2.5) 

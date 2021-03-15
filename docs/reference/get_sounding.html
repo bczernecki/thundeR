@@ -15,21 +15,29 @@
 <link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -37,12 +45,11 @@
 
 
 
+
 <meta property="og:title" content="Download rawinsonde measurement — get_sounding" />
-
 <meta property="og:description" content="Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package." />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -56,9 +63,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -80,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -100,11 +108,10 @@
   </ul>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/bczernecki/thunder">
-    <span class="fa fa-github fa-lg"></span>
+  <a href="https://github.com/bczernecki/thunder/">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -115,6 +122,7 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
@@ -126,13 +134,11 @@
     </div>
 
     <div class="ref-description">
-    
     <p>Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>get_sounding</span>(<span class='no'>wmo_id</span>, <span class='no'>yy</span>, <span class='no'>mm</span>, <span class='no'>dd</span>, <span class='no'>hh</span>, <span class='kw'>metadata</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>get_sounding</span><span class='op'>(</span><span class='va'>wmo_id</span>, <span class='va'>yy</span>, <span class='va'>mm</span>, <span class='va'>dd</span>, <span class='va'>hh</span>, metadata <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -161,11 +167,10 @@
       <td><p>- logical, whether to return metadata of downloaded sounding; default FALSE</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
 
     <p>http://weather.uwyo.edu/upperair/sounding.html</p>
-    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns two lists with values described at: weather.uwyo.edu ; The first list contains:</p><ol>
@@ -176,38 +181,34 @@
 <li><p>wd - wind direction [azimuth in degrees]</p></li>
 <li><p>ws - wind speed [knots]</p></li>
 </ol><p>If metadata = TRUE then retrieved data is wrapped to a list with the second element containing metadata</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># download rawinsonde profile from Leba station (WMO ID: 12120) for 20 August 2010 1200 UTC:</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'># download rawinsonde profile from Leba station (WMO ID: 12120) for 20 August 2010 1200 UTC:</span>
 
-  <span class='no'>profile</span> <span class='kw'>=</span> <span class='fu'>get_sounding</span>(<span class='kw'>wmo_id</span> <span class='kw'>=</span> <span class='fl'>12120</span>,
-                         <span class='kw'>yy</span> <span class='kw'>=</span> <span class='fl'>2010</span>,
-                         <span class='kw'>mm</span> <span class='kw'>=</span> <span class='fl'>8</span>,
-                         <span class='kw'>dd</span> <span class='kw'>=</span> <span class='fl'>20</span>,
-                         <span class='kw'>hh</span> <span class='kw'>=</span> <span class='fl'>12</span>)</div><div class='output co'>#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2010&amp;MONTH=08&amp;FROM=2012&amp;TO=2012&amp;STNM=12120"</div><div class='output co'>#&gt; <span class='message'>/tmp/Rtmp78q7J7/file33e7265936e4</span></div><div class='input'>  <span class='fu'><a href='https://www.rdocumentation.org/packages/utils/topics/head'>head</a></span>(<span class='no'>profile</span>)</div><div class='output co'>#&gt;   pressure altitude temp  dpt  wd ws
+  <span class='va'>profile</span> <span class='op'>=</span> <span class='fu'>get_sounding</span><span class='op'>(</span>wmo_id <span class='op'>=</span> <span class='fl'>12120</span>, 
+                         yy <span class='op'>=</span> <span class='fl'>2010</span>,
+                         mm <span class='op'>=</span> <span class='fl'>8</span>, 
+                         dd <span class='op'>=</span> <span class='fl'>20</span>, 
+                         hh <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2010&amp;MONTH=08&amp;FROM=2012&amp;TO=2012&amp;STNM=12120"</div><div class='output co'>#&gt; <span class='message'>/var/folders/lw/3fnnk87n4q1dkl35s2_p24h80000gn/T//RtmpHkS0Gi/filec921dd448ef</span></div><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>profile</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;   pressure altitude temp  dpt  wd ws
 #&gt; 1     1021        6 19.8 13.8 265 12
 #&gt; 2     1020       14 18.4 11.4 265 12
 #&gt; 3     1000      183 16.6 11.6 265 14
 #&gt; 4      962      512 13.6  9.2 265 16
 #&gt; 5      955      573 13.6  4.6 265 16
 #&gt; 6      925      841 11.2  3.2 265 17</div><div class='input'>  
+<span class='co'># }</span>
 </div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#source">Source</a></li>
-
-      <li><a href="#value">Value</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -215,13 +216,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

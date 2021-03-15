@@ -6,8 +6,8 @@
 #' @param ws wind speed [knots]
 #' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) altitude [m]
 #' @param max_hght maximum altitude [km] to be considered on the hodograph, 12 km used by default
-#' @param max_speed - displayed range of the drawn hodograph [m/s], 25 m/s used as default
-#' @param lab_hghts - height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels
+#' @param max_speed displayed range of the drawn hodograph [m/s], 25 m/s used as default
+#' @param lab_hghts height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels
 #' @param ... other graphical parameters to be used with plot() function
 #'
 #' @export

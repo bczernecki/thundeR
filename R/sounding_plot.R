@@ -2,16 +2,16 @@
 #' 
 #' Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
 #' 
-#' @param pressure - pressure [hPa]
+#' @param pressure pressure [hPa]
 #' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [meters]
-#' @param temp - temperature [degree Celsius]
-#' @param dpt - dew point temperature [degree Celsius]
-#' @param wd - wind direction [azimuth in degrees]
-#' @param ws - wind speed [knots]
-#' @param title - title to be added in the layout's header
-#' @param parcel - parcel tracing on Skew-T for "MU", "ML" or "SB" parcel
-#' @param max_speed - range of the hodograph to be drawn, 25 m/s used as default
-#' @param hazards - logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)
+#' @param temp temperature [degree Celsius]
+#' @param dpt dew point temperature [degree Celsius]
+#' @param wd wind direction [azimuth in degrees]
+#' @param ws wind speed [knots]
+#' @param title title to be added in the layout's header
+#' @param parcel parcel tracing on Skew-T for "MU", "ML" or "SB" parcel
+#' @param max_speed range of the hodograph to be drawn, 25 m/s used as default
+#' @param hazards logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)
 #' @param ... extra graphic arguments
 #' @export
 #' @import aiRthermo
@@ -74,7 +74,7 @@ THETAE = aiRthermo::equivalentPotentialTemperature(output$pressure*100, output$t
 
 ####
 
-skewt_plot()
+skewt_plot(close_par = FALSE)
 skewt_lines(output2$dpt,output2$pressure, col = t_col('forestgreen',10), lwd = 2, ptop = 100)
 skewt_lines(output$temp,output$pressure, col = t_col('red',10), lwd = 2, ptop = 100)
 skewt_lines(output$tempV,output$pressure, col = t_col("red3",0), lwd = 1, lty = 3, ptop = 100)

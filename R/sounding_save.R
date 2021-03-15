@@ -10,10 +10,10 @@
 #' @param temp temperature [degree Celsius]
 #' @param dpt dew point temperature [degree Celsius]
 #' @param wd wind direction in degrees [azimuth in degrees]
-#' @param ws - wind speed [knots]
-#' @param title - title to be added in the layout's header
-#' @param parcel - parcel tracing on Skew-T for "MU", "ML" or "SB" parcel
-#' @param filename - output file name with extension indicating file format (e.g. "my_plot.png" or "my_plot.svg")
+#' @param ws wind speed [knots]
+#' @param title title to be added in the layout's header
+#' @param parcel parcel tracing on Skew-T for "MU", "ML" or "SB" parcel
+#' @param filename output file name with extension indicating file format (e.g. "my_plot.png" or "my_plot.svg")
 #' @param ... other arguments that can be used with `sounding_plot` or other graphic arguments
 #' @export
 #' @import aiRthermo
@@ -22,7 +22,7 @@
 #' @importFrom grDevices png
 #' @importFrom grDevices svg
 #' 
-#' @return graphics with Skew-T and hodograph layout
+#' @return graphical file with Skew-T and hodograph layout
 #' 
 #' @examples
 #' \donttest{

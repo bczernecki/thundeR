@@ -19,25 +19,25 @@ sounding_plot(
 )
 }
 \arguments{
-\item{pressure}{- pressure [hPa]}
+\item{pressure}{pressure [hPa]}
 
 \item{altitude}{altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [meters]}
 
-\item{temp}{- temperature [degree Celsius]}
+\item{temp}{temperature [degree Celsius]}
 
-\item{dpt}{- dew point temperature [degree Celsius]}
+\item{dpt}{dew point temperature [degree Celsius]}
 
-\item{wd}{- wind direction [azimuth in degrees]}
+\item{wd}{wind direction [azimuth in degrees]}
 
-\item{ws}{- wind speed [knots]}
+\item{ws}{wind speed [knots]}
 
-\item{title}{- title to be added in the layout's header}
+\item{title}{title to be added in the layout's header}
 
-\item{parcel}{- parcel tracing on Skew-T for "MU", "ML" or "SB" parcel}
+\item{parcel}{parcel tracing on Skew-T for "MU", "ML" or "SB" parcel}
 
-\item{max_speed}{- range of the hodograph to be drawn, 25 m/s used as default}
+\item{max_speed}{range of the hodograph to be drawn, 25 m/s used as default}
 
-\item{hazards}{- logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)}
+\item{hazards}{logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)}
 
 \item{...}{extra graphic arguments}
 }
