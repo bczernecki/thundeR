@@ -15,6 +15,9 @@ skewt_lines(temp, pressure, ptop = 100, ...)
 
 \item{...}{other graphical parameters that can be passed to `lines()` function, such as `lwd`, `lty`, `col`, etc.}
 }
+\value{
+adds line on a pre-defined Skew-T plot
+}
 \description{
 Calculate X and Y coordinates for lines to be drawn on Skew-T diagram;
 Draw any line on Skew-T diagram using temperature and pressure as coordinates
@@ -26,7 +29,7 @@ data("sounding_vienna")
 attach(sounding_vienna)
 
 # draw empty Skew-T plot:
-skewt_plot(temp_stripes = TRUE)
+skewt_plot(temp_stripes = TRUE, close_par = FALSE)
 
 # draw line for dew-point temperature:
 skewt_lines(dpt, pressure, type = 'l', col = 'forestgreen', lwd = 2.5) 

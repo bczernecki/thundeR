@@ -17,11 +17,11 @@ sounding_barbs(
 )
 }
 \arguments{
-\item{pressure}{- pressure [hPa]}
+\item{pressure}{pressure [hPa]}
 
-\item{ws}{- wind speed [knots]}
+\item{ws}{wind speed [knots]}
 
-\item{wd}{- wind direction [azimuth in degrees]}
+\item{wd}{wind direction [azimuth in degrees]}
 
 \item{altitude}{altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [m]}
 
@@ -35,6 +35,9 @@ sounding_barbs(
 
 \item{...}{extra graphic arguments}
 }
+\value{
+wind barbs plot for a given vertical profile of atmosphere
+}
 \description{
 Function for plotting wind direction and wind speed profile with the use of wind barbs.
 Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
@@ -43,8 +46,7 @@ Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
 # load examplary dataset:
 data("sounding_vienna")
 attach(sounding_vienna)
-
-  sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
-                 interpolate = TRUE, showaxis = TRUE)
+sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
+              interpolate = TRUE, showaxis = TRUE)
 
 }

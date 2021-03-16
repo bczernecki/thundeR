@@ -4,7 +4,7 @@
 #'
 #' @export
 #' 
-#' @return 
+#' @return Named vector of 100+ convective indices
 #' \enumerate{
 #'  \item MU_CAPE
 #'  \item MU_03km_CAPE
@@ -115,13 +115,13 @@
 #'  \item ML_EFF_WMAXSHEAR
 #' }
 #'
-#' @param pressure  pressure [hPa]
+#' @param pressure pressure [hPa]
 #' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m)  altitude [metres]
-#' @param temp  temperature [degree Celsius]
-#' @param dpt  dew point temperature [degree Celsius]
-#' @param wd  wind direction [azimuth in degrees]
-#' @param ws  wind speed [knots]
-#' @param accuracy  accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
+#' @param temp temperature [degree Celsius]
+#' @param dpt dew point temperature [degree Celsius]
+#' @param wd wind direction [azimuth in degrees]
+#' @param ws wind speed [knots]
+#' @param accuracy accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
 #' @export 
 #' @examples
 #' pressure = c(1000, 855, 700, 500, 300, 100, 10)

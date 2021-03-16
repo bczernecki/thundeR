@@ -10,6 +10,8 @@
 #' @param ... other graphical parameters that can be passed to `lines()` function, such as `lwd`, `lty`, `col`, etc.
 #' @export
 #' 
+#' @return adds line on a pre-defined Skew-T plot
+#' 
 #' @examples 
 #' 
 #' # take a sample sounding profile:
@@ -17,7 +19,7 @@
 #' attach(sounding_vienna)
 #' 
 #' # draw empty Skew-T plot:
-#' skewt_plot(temp_stripes = TRUE)
+#' skewt_plot(temp_stripes = TRUE, close_par = FALSE)
 #' 
 #' # draw line for dew-point temperature:
 #' skewt_lines(dpt, pressure, type = 'l', col = 'forestgreen', lwd = 2.5) 

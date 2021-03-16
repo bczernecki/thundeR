@@ -22,6 +22,7 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 \item{accuracy}{accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)}
 }
 \value{
+Named vector of 100+ convective indices
 \enumerate{
  \item MU_CAPE
  \item MU_03km_CAPE

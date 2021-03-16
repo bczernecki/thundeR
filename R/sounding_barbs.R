@@ -8,9 +8,9 @@
 #' @importFrom dplyr left_join
 #' @importFrom grDevices colorRampPalette
 #'
-#' @param pressure - pressure [hPa] 
-#' @param ws - wind speed [knots]
-#' @param wd - wind direction [azimuth in degrees]
+#' @param pressure pressure [hPa] 
+#' @param ws wind speed [knots]
+#' @param wd wind direction [azimuth in degrees]
 #' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [m]
 #' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param interpolate logical, draw wind barbs only at interpolated altitudes with 500 m interval (default = TRUE)  instead of all wind barbs for a given input dataset
@@ -19,18 +19,21 @@
 #' @param ... extra graphic arguments
 #' @export
 #' 
+#' @return wind barbs plot for a given vertical profile of atmosphere
+#' 
 #' @examples 
 #' # load examplary dataset:
 #' data("sounding_vienna")
 #' attach(sounding_vienna)
-#' 
-#'   sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
-#'                  interpolate = TRUE, showaxis = TRUE)
+#' sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
+#'               interpolate = TRUE, showaxis = TRUE)
 #'
 
 sounding_barbs <- function(pressure, ws, wd, altitude,
                            ptop = 100, interpolate = TRUE, 
                            showaxis = FALSE, barb_cex = 0.3, ...){
+  
+  altitude = altitude - altitude[1]
   
   if(ptop > 200) {
     stop("\nptop argument needs to be set < 200 (hPa)!")
@@ -42,12 +45,12 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
   #   ws <- ws * 0.51444
   # }
   
-  # margins can be modified if needed
+  # margins can be manually modified if needed, e.g.:
   #c(bottom, left, top, right) 
   #par(mar = c(2, 1.5, 1 ,6))
   
   ymax = skewty(1050)
-  #ymin <- skewty(50)
+  #ymin = skewty(50)
   ymin = skewty(ptop)
   xmin = 0
   # moving drawing limits:
@@ -55,9 +58,11 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
   
   xc = c(xmin, xmin, xmax, xmax, xmin)
   yc = c(ymin, ymax, ymax, ymin, ymin)
-  plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 0.0)
-  
-  if(showaxis) plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 1)
+  if(isTRUE(showaxis)){
+    plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 1)
+  } else {
+    plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 0.0)
+  }
   
   #prs = pressure[which((altitude-altitude[1]) %in% seq(0,16000,500))]
   prs = c(1050, 1000, 850, 700, 500, 400, 300, seq(from = 200, to = ptop, by = -50))
@@ -108,5 +113,3 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
   }
   
 }
-  
-

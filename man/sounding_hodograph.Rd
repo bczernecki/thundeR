@@ -11,6 +11,7 @@ sounding_hodograph(
   max_hght = 12000,
   max_speed = 25,
   lab_hghts = c(0, 1, 3, 6, 9, 12),
+  close_par = TRUE,
   ...
 )
 }
@@ -23,11 +24,16 @@ sounding_hodograph(
 
 \item{max_hght}{maximum altitude [km] to be considered on the hodograph, 12 km used by default}
 
-\item{max_speed}{- displayed range of the drawn hodograph [m/s], 25 m/s used as default}
+\item{max_speed}{displayed range of the drawn hodograph [m/s], 25 m/s used as default}
 
-\item{lab_hghts}{- height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels}
+\item{lab_hghts}{height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels}
+
+\item{close_par}{if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default. If you want to modify Skew-T plot in next step set it to FALSE}
 
 \item{...}{other graphical parameters to be used with plot() function}
+}
+\value{
+hodograph plot
 }
 \description{
 Plot rawinsonde hodograph to show changes in wind speed and direction with height

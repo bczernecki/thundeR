@@ -17,6 +17,9 @@ sounding_wind(pressure, ws, ptop = 100, yaxs = TRUE, ...)
 
 \item{...}{extra graphic arguments}
 }
+\value{
+graphical representation of vertical wind speed profile
+}
 \description{
 Function for plotting wind speed profile. 
 Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
