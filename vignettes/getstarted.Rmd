@@ -149,13 +149,13 @@ title("Chanhasses - 10 May 2001, 00:00 UTC")
 
 ### Example 5
 
-Use the previously downloaded sounding and draw customized Skew-T plot (e.g. up to 150 hPa instead of default 100 hPa):
+Use the previously downloaded sounding and draw customized Skew-T plot (e.g. up to 150 hPa instead of default 100 hPa) with changed line width:
 
 ```{r example5, eval = TRUE, fig.width=7, fig.height=8, fig.fullwidth = TRUE}
 # chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
 skewt_plot(ptop = 150, close_par = FALSE)
-skewt_lines(chanhassen$temp, chanhassen$pressure, ptop = 150, col = "red")
-skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop = 150, col = "blue")
+skewt_lines(chanhassen$temp, chanhassen$pressure, ptop = 150, col = "red", lwd = 3)
+skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop = 150, col = "blue", lwd = 3)
 ```
 
 ### Example 6
