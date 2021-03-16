@@ -33,6 +33,8 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
                            ptop = 100, interpolate = TRUE, 
                            showaxis = FALSE, barb_cex = 0.3, ...){
   
+  altitude = altitude - altitude[1]
+  
   if(ptop > 200) {
     stop("\nptop argument needs to be set < 200 (hPa)!")
   }
