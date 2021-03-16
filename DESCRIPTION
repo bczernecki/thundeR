@@ -25,6 +25,7 @@ Suggests:
     knitr,
     rmarkdown,
     testthat (>= 2.0.0),
+    XML,
     covr
 LinkingTo: Rcpp
 RoxygenNote: 7.1.1
