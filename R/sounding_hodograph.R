@@ -8,6 +8,7 @@
 #' @param max_hght maximum altitude [km] to be considered on the hodograph, 12 km used by default
 #' @param max_speed displayed range of the drawn hodograph [m/s], 25 m/s used as default
 #' @param lab_hghts height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels
+#' @param close_par if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default. If you want to modify Skew-T plot in next step set it to FALSE
 #' @param ... other graphical parameters to be used with plot() function
 #'
 #' @export
@@ -22,7 +23,16 @@
 
 
 sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25,
-                     lab_hghts = c(0, 1, 3, 6, 9, 12), ...){
+                     lab_hghts = c(0, 1, 3, 6, 9, 12), 
+                     close_par = TRUE, ...){
+  
+  # restore old par settings on exit if hodograph won't be modified later
+  oldpar_hodo = par(no.readonly = TRUE) 
+  
+  if(close_par) {
+    on.exit(par(oldpar_hodo))
+  }
+  
   
   altitude = altitude - altitude[1]
   
@@ -40,10 +50,6 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
   #xlm = ifelse(xlm > 61, 61, xlm)
   xlm = max_speed
   xlm = c(-xlm, xlm)
-  
-  # restore old par settings on exit:
-  oldpar = par(no.readonly = TRUE) 
-  on.exit(par(oldpar))
   
   # plotting layout for hodograph:
   par(pty = "s")
