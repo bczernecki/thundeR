@@ -143,7 +143,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">profile</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_sounding.html">get_sounding</a></span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">72562</span>, yy <span class="op">=</span> <span class="fl">1999</span>, mm <span class="op">=</span> <span class="fl">7</span>, dd <span class="op">=</span> <span class="fl">3</span>, hh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 <span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=1999&amp;MONTH=07&amp;FROM=0300&amp;TO=0300&amp;STNM=72562"</span>
-<span class="co">#&gt; /var/folders/lw/3fnnk87n4q1dkl35s2_p24h80000gn/T//RtmpdbiL4p/file260c406b6509</span>
+<span class="co">#&gt; /var/folders/lw/3fnnk87n4q1dkl35s2_p24h80000gn/T//RtmpIZwFLw/file4b70639ea02e</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">profile</span><span class="op">)</span> <span class="co"># show first few rows of downloaded dataset</span>
 <span class="co">#&gt;   pressure altitude temp dpt  wd ws</span>
 <span class="co">#&gt; 3      906      849   32  26 110 14</span>
@@ -286,7 +286,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chanhassen</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_sounding.html">get_sounding</a></span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">72649</span>, yy <span class="op">=</span> <span class="fl">2001</span>, mm <span class="op">=</span> <span class="fl">5</span>, dd <span class="op">=</span> <span class="fl">10</span>, hh <span class="op">=</span> <span class="fl">00</span><span class="op">)</span>
 <span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2001&amp;MONTH=05&amp;FROM=1000&amp;TO=1000&amp;STNM=72649"</span>
-<span class="co">#&gt; /var/folders/lw/3fnnk87n4q1dkl35s2_p24h80000gn/T//RtmpdbiL4p/file260c30418a46</span>
+<span class="co">#&gt; /var/folders/lw/3fnnk87n4q1dkl35s2_p24h80000gn/T//RtmpIZwFLw/file4b70473858af</span>
 <span class="fu"><a href="../reference/sounding_hodograph.html">sounding_hodograph</a></span><span class="op">(</span>ws <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">ws</span>, wd <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">wd</span>, 
                    altitude <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">altitude</span>,max_speed <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span><span class="st">"Chanhasses - 10 May 2001, 00:00 UTC"</span><span class="op">)</span></code></pre></div>
@@ -505,10 +505,10 @@
 <span class="co">#&gt;      0.007      0.000      0.007</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">t2</span><span class="op">)</span>
 <span class="co">#&gt; użytkownik     system   upłynęło </span>
-<span class="co">#&gt;      0.013      0.000      0.013</span>
+<span class="co">#&gt;      0.014      0.001      0.015</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">t3</span><span class="op">)</span>
 <span class="co">#&gt; użytkownik     system   upłynęło </span>
-<span class="co">#&gt;      0.174      0.001      0.176</span></code></pre></div>
+<span class="co">#&gt;      0.183      0.001      0.184</span></code></pre></div>
 </div>
 <div id="important-notes" class="section level3">
 <h3 class="hasAnchor">
