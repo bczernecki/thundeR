@@ -176,7 +176,7 @@ sounding_barbs(chanhassen$pressure, chanhassen$ws, chanhassen$wd, chanhassen$alt
 
 ![](inst/figures/wind_profile.png)
 
-#### Perform sounding compuntations in python language:
+#### Perform sounding computations using python language:
 
 ``` py
 # install required python packages
@@ -199,7 +199,7 @@ profile = robjects.r['get_sounding'](wmo_id = 72562, yy = 1999, mm = 7, dd = 3,h
 # compute convective parameters
 parameters = robjects.r['sounding_compute'](profile['pressure'], profile['altitude'], profile['temp'], profile['dpt'], profile['wd'], profile['ws'], accuracy = 2)
 
-# print a numeric vector, e.g. Surface Based CAPE (element number 14) equals 9413 J/kg
+# print a numeric vector of all variables, e.g. Surface Based CAPE (element number 14) equals 9413 J/kg
 print(parameters)
 
 #  9.41328612e+03  2.33353072e+02  1.71374349e+03  0.00000000e+00
