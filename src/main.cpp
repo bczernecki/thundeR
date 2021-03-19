@@ -734,7 +734,7 @@ void Kinematics::prepareCorfidiVectors()
   
   CorfidiA = (v850 + v700 + v500 + v300) * 0.25;
   Corfidi_upwind = CorfidiA - llj;
-  Corfidi_downwind = CorfidiA + CorfidiP;
+  Corfidi_downwind = CorfidiA + Corfidi_upwind;
 }
 
 void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,double v)
@@ -3267,6 +3267,7 @@ double IndicesCollector::Corfidi_downwind_M(){
 double IndicesCollector::SB_coldcape_fraction(){
 	double cape = this->VSurfaceBasedCAPE(); 
 	double coldcape = S->th->surfaceBased->coldcape;
+	double fraction=0;
 	if(cape>0)fraction=coldcape/cape;
         if(cape==0)fraction=0;
 	return fraction;
@@ -3275,6 +3276,7 @@ double IndicesCollector::SB_coldcape_fraction(){
 double IndicesCollector::MU_coldcape_fraction(){
 	double cape = this->VMostUnstableCAPE(); 
 	double coldcape = S->th->mostUnstable->coldcape;
+	double fraction=0;
 	if(cape>0)fraction=coldcape/cape;
         if(cape==0)fraction=0;
 	return fraction;
@@ -3283,6 +3285,7 @@ double IndicesCollector::MU_coldcape_fraction(){
 double IndicesCollector::ML_coldcape_fraction(){
 	double cape = this->VMeanLayerCAPE(); 
 	double coldcape = S->th->meanLayer->coldcape;
+	double fraction=0;
 	if(cape>0)fraction=coldcape/cape;
         if(cape==0)fraction=0;
 	return fraction;
@@ -3311,7 +3314,7 @@ double IndicesCollector::HSI(){
   if(LR<5)LR=5;
   else if(LR>8)LR=8;
 
-  double HSI = ((sqrt(10*(CAPE-200)) * (BS06-5) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-4)*(LR-4))/10000000))
+  double HSI = ((sqrt(10*(CAPE-200)) * (BS06-5) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-4)*(LR-4))/10000000));
   return HSI;
 }
   
