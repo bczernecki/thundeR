@@ -176,6 +176,61 @@ sounding_barbs(chanhassen$pressure, chanhassen$ws, chanhassen$wd, chanhassen$alt
 
 ![](inst/figures/wind_profile.png)
 
+#### Perform sounding computations using python language:
+
+``` py
+# install required python packages
+pip install pandas  
+pip install rpy2  
+
+# load required packages
+import pandas as pd
+from rpy2.robjects.packages import importr
+from rpy2.robjects import r,pandas2ri
+import rpy2.robjects as robjects
+pandas2ri.activate()
+
+# load thunder package (previously installed in R)
+importr('thunder')
+
+# download North Platte sounding 
+profile = robjects.r['get_sounding'](wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
+
+# compute convective parameters
+parameters = robjects.r['sounding_compute'](profile['pressure'], profile['altitude'], profile['temp'], profile['dpt'], profile['wd'], profile['ws'], accuracy = 2)
+
+# print a numeric vector of all variables, e.g. Surface Based CAPE (element number 14) equals 9413 J/kg
+print(parameters)
+
+#  9.41328612e+03  2.33353072e+02  1.71374349e+03  0.00000000e+00
+#  7.75000000e+02  7.75000000e+02  1.55000000e+04 -1.65508748e+01
+#  1.37209957e+02 -6.66283237e+01  2.39783133e+01  2.39783133e+01
+#  2.33647136e+01  9.41328612e+03  2.33353072e+02  1.71374349e+03
+#  0.00000000e+00  7.75000000e+02  7.75000000e+02  1.55000000e+04
+# -1.65508748e+01  1.37209957e+02 -6.66283237e+01  2.39783133e+01
+#  2.39783133e+01  2.33647136e+01  7.80512973e+03  1.15218462e+02
+#  1.51581216e+03 -4.34518196e+00  9.50000000e+02  9.50000000e+02
+#  1.50000000e+04 -1.46615255e+01  1.24941024e+02 -6.84139508e+01
+#  2.24602410e+01  2.24602410e+01  2.11684444e+01 -9.56842105e+00
+# -6.67934783e+00 -8.80368731e+00 -8.68362720e+00 -9.05783921e+00
+# -7.69846031e+00  4.25000000e+03  3.50000000e+03  0.00000000e+00
+#  2.86600000e+03  5.05734164e+01  5.29324740e+01  1.38180722e+03
+#  3.08978391e+02  2.89996928e+01  3.75856055e+01  8.70308714e+01
+#  5.79532144e-01  3.96038339e-01  4.74523874e-01  8.85009470e+00
+#  1.12138499e+01  1.38753497e+01  2.02833049e+01  2.93264862e+01
+#  6.84091499e+00  2.17033431e+01  2.83220573e+01  2.83220573e+01
+#  2.71728023e+01  1.70580481e+01  1.25343105e+01  1.25343105e+01
+#  1.17350718e+01  7.08519353e+00  6.07991292e+00  7.76810532e+00
+#  7.68968584e+00  1.98900047e+01  6.20722333e+01  1.10063007e+02
+#  1.56478369e+02  6.24627594e+00  7.77240135e+00  4.26451855e+00
+# -4.27789713e+01  2.84670169e+02  5.64779186e+00  1.97598453e+02
+#  1.41876484e+01  2.18886063e+02  7.76810532e+00  3.15000000e+01
+# -1.21377601e+01  6.04000000e+01  6.77124337e+02  4.66991353e+00
+#  6.09845434e+00  2.94595132e+01  2.94595132e+01  3.86405495e+00
+#  1.23469454e+01  2.78307139e+03  2.78307139e+03  2.53421688e+03
+#  3.88606826e+03  3.88606826e+03  3.39499774e+03
+```
+
 
 #### Accuracy tables for `sounding_compute()` 
 
