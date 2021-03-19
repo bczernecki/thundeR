@@ -343,8 +343,8 @@ void Cache::initp(){
     this->pindex[i]=-1;
   }
   this->p[0]=1000;
-  this->p[1]=925;
-  this->p[2]=850;
+  this->p[1]=850;
+  this->p[2]=800;
   this->p[3]=700;
   this->p[4]=600;
   this->p[5]=500;
@@ -429,21 +429,26 @@ private:
   Vector llj;
   Vector mean06;
   Vector mean02;
+  Vector mean03;
   Vector mean13;
   double n13;
   double n2;
+  double n3;
   double n6;
   Vector mean01;
   double n1;
   Vector CorfidiA;
-  Vector CorfidiP;
-  Vector Corfidi2;
+  Vector Corfidi_upwind;
+  Vector Corfidi_downwind;
   Vector rm;
   Vector lm;
   double lasth;
 
   double srh100rm;
   double srh100lm;
+
+  double srh250rm;
+  double srh250lm;
   
   double srh500rm;
   double srh500lm;
@@ -495,6 +500,9 @@ public:
     srh100rm=0;
     srh100lm=0;
     
+    srh250rm=0;
+    srh250lm=0;
+
     srh500rm=0;
     srh500lm=0;
     
@@ -527,6 +535,7 @@ Kinematics::Kinematics(){
   this->mean01 = Vector(0, 0, 0);
   this->mean06 = Vector(0, 0, 0);
   this->mean02 = Vector(0,0,0);
+  this->mean03 = Vector(0,0,0);
   this->mean13 = Vector(0,0,0);
   this->mean0=Vector(0,0,0);
   this->mean6=Vector(0,0,0);
@@ -648,6 +657,13 @@ void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, d
     n2+=1;
     
   }
+
+  if (h-h0<=3000){
+    mean03+=v_;
+    n3+=1;
+    
+  }
+
   if (h-h0<=3000&&h-h0>=1000){
     mean13+=v_;
     n13+=1;
@@ -672,7 +688,7 @@ void Kinematics::putLLJ(int i, double p, double h, double t,double d,double a,do
 {
   double cabs = llj.abs();
   double vabs = v_.abs();
-  if (p >= 850 && vabs >= cabs) llj = v_;
+  if (h-h0 <= 1500 && vabs >= cabs) llj = v_;
 }
 
 void Kinematics::putSpecificLine(int i, double p, double h, double t, double d, double a, double v)
@@ -688,6 +704,7 @@ void Kinematics::putSpecificLine(int i, double p, double h, double t, double d, 
 Vector Kinematics::shear06(){
   return this->v6 - this->v0;
 }
+
 void Kinematics::prepareSupercellVectors()
 {
   Vector meanwind = this->mean06;
@@ -701,13 +718,13 @@ void Kinematics::prepareSupercellVectors()
   this->lm = meanwind + dev;
   
 }
+
 void Kinematics::prepareCorfidiVectors()
 {
-  int i850 = this->cache->getHeightIndex(850);
-  int i700 = this->cache->getHeightIndex(700);
-  int i500 = this->cache->getHeightIndex(500);
-  int i300 = this->cache->getHeightIndex(300);
-  
+  int i850 = this->cache->getPressureIndex(850);
+  int i700 = this->cache->getPressureIndex(700);
+  int i500 = this->cache->getPressureIndex(500);
+  int i300 = this->cache->getPressureIndex(300);
   
   Vector v850 = Get(this->vw, i850);
   Vector v700 = Get(this->vw, i700);
@@ -716,8 +733,8 @@ void Kinematics::prepareCorfidiVectors()
   
   
   CorfidiA = (v850 + v700 + v500 + v300) * 0.25;
-  CorfidiP = CorfidiA - llj;
-  Corfidi2 = CorfidiA + CorfidiP;
+  Corfidi_upwind = CorfidiA - llj;
+  Corfidi_downwind = CorfidiA + CorfidiP;
 }
 
 void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,double v)
@@ -754,6 +771,11 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
       srh100rm = srh03rm;
       srh100lm = srh03lm;
 	}
+
+    if(h-h0<250){
+      srh250rm = srh03rm;
+      srh250lm = srh03lm;
+	}
     
     if (h - h0 <= 1000)
     {
@@ -782,6 +804,8 @@ void Kinematics::finishMeanVectors()
   else mean13 = Vector(0, 0, 0);
   if (n2 != 0) mean02 *= 1.0 / n2;
   else mean02 = Vector(0, 0, 0);
+  if (n3 != 0) mean03 *= 1.0 / n3;
+  else mean03 = Vector(0, 0, 0);
   if(nsurf!=0)mean0/=nsurf;
   else mean0=Vector(0,0,0);
   if(nsix!=0)mean6/=nsix;
@@ -822,7 +846,8 @@ private:
   double tch;
   
   double middlecape;
-  
+  double coldcape;  
+
   bool isSet;
   bool dcape_;
   
@@ -866,6 +891,7 @@ void LapseRate::allocate(){
   virtualValues = new list<double>();
   cape = cin = to3cape = vcape = vcin = vto3cape = os = o = w = vos=vo=vw=0;
   middlecape=0;
+  coldcape=0;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
   startIndex=-1;
   isSet = false;
@@ -1039,6 +1065,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
         vcape += tcap;
         if (h - h0 < 3000) vto3cape = vcape;
 		if(t<=0&&t>=-20)middlecape+=tcap;
+			if(t<=-10)coldcape+=tcap;
       }
     }
     else
@@ -1102,6 +1129,9 @@ public:
   
   int mintenpos;
   double minten;
+
+  int min20pos;
+  double min20;
   
   double mr1000;
   
@@ -1140,6 +1170,9 @@ public:
   double meanhum25;
   double meand25;
   
+  double meanhum36;
+  double meand36;
+
   double meanhumMIDDLE;
   double meandMIDDLE;
 
@@ -1241,6 +1274,9 @@ Thermodynamics::Thermodynamics(){
   meanhum25=0;
   meand25=0;
   
+  meanhum36=0;
+  meand36=0;
+
   meanmxr2=0;
   meand2=0;
   
@@ -1285,6 +1321,9 @@ void Thermodynamics::startConditions(int i, double p, double h, double t, double
 
   meanhum25=ESAT(d)/ESAT(t);
   meand25=1;
+
+  meanhum36=ESAT(d)/ESAT(t);
+  meand36=1;
 
   meanhumMIDDLE=ESAT(d)/ESAT(t);
   meandMIDDLE=1;
@@ -1406,10 +1445,11 @@ void Thermodynamics::ZeroPosStartingConditions(int i, double p, double h, double
   wbzeropos = i;
   zeropos = i;
   mintenpos = i;
+  min20pos = i;
   zero = abs(t);
   wb0 = abs(wbt);
   minten = abs(t+10);
-  
+  min20 = abs(t+20);
 }
 void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, double a, double v, double wbt)
 {
@@ -1428,6 +1468,12 @@ void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, d
     mintenpos = i;
   }
 
+  double im20= abs(t+20);
+
+  if(im20<min20){
+    min20 = im20;
+    min20pos = i;
+  }
   
   if (t_wb0 < wb0)
   {
@@ -1474,6 +1520,11 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
                 if (abs(h - h0) >= 2000 && abs(h - h0) <= 5000){
 	                meanhum25+=ESAT(d)/ESAT(t);
 	                meand25+=1.0;
+                }
+
+                if (abs(h - h0) >= 3000 && abs(h - h0) <= 6000){
+	                meanhum36+=ESAT(d)/ESAT(t);
+	                meand36+=1.0;
                 }
 	  }
 
@@ -1529,6 +1580,7 @@ void Thermodynamics::finish(){
   
   meanhum2/=meand2b;
   meanhum25/=meand25; 
+  meanhum36/=meand36; 
   meanhumMIDDLE/=meandMIDDLE; 
   meanmxr2/=meand2;
 }
@@ -1671,10 +1723,12 @@ public:
   double MeanWind06();
   double MeanWind13();
   double SRH100RM();
+  double SRH250RM();
   double SRH500RM();
   double SRH01RM();
   double SRH03RM();
   double SRH100LM();
+  double SRH250LM();
   double SRH500LM();
   double SRH01LM();
   double SRH03LM();
@@ -1700,6 +1754,47 @@ public:
   double MU_EFF_WMAXSHEAR();
   double SB_EFF_WMAXSHEAR();
   double ML_EFF_WMAXSHEAR();
+
+  double RH36();
+  double BulkShearSfc20();
+  double BulkShearSfczero();
+  double BulkShear1kmzero();
+  double BulkShear1km20();
+  double BulkShear1kmTen();
+  double BS16();
+  double BulkShearMULFCzero();
+  double BulkShearMULFC20();
+
+  double BulkShear2kmzero();
+  double BulkShear2km20();
+  double BulkShear2kmTen();
+  double BS26();
+  double lapseRate600800();
+
+  double LR0500();
+  double LR02();
+  double LR04();
+  double LR06();
+  double MeanWind03();
+
+  double wind_3km();
+  double wind_2km();
+  double wind_1km();
+  double wind_500m();
+
+  double Corfidi_downwind_A();
+  double Corfidi_downwind_M();
+  double Corfidi_upwind_A();
+  double Corfidi_upwind_M();
+
+  double MUcoldcape_fraction();
+  double SBcoldcape_fraction();
+  double MLcoldcape_fraction();
+
+  double ML_coldcape_fraction();
+  double SB_coldcape_fraction();
+  double MU_coldcape_fraction();
+  double HSI();
 };
 
 void Sounding::alloc(){
@@ -2293,6 +2388,54 @@ double IndicesCollector::LR36(){
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
+double IndicesCollector::LR0500(){
+  int lower = 0;
+  int upper = cache->getHeightIndex(500);
+  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->t,lower);
+  double tup = Get(S->t,upper);
+  
+  return 1000*((tup-tlow)/(hup-hlow));
+}
+
+double IndicesCollector::LR02(){
+  int lower = 0;
+  int upper = cache->getHeightIndex(2000);
+  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->t,lower);
+  double tup = Get(S->t,upper);
+  
+  return 1000*((tup-tlow)/(hup-hlow));
+}
+
+double IndicesCollector::LR04(){
+  int lower = 0;
+  int upper = cache->getHeightIndex(4000);
+  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->t,lower);
+  double tup = Get(S->t,upper);
+  
+  return 1000*((tup-tlow)/(hup-hlow));
+}
+
+double IndicesCollector::LR06(){
+  int lower = 0;
+  int upper = cache->getHeightIndex(6000);
+  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->t,lower);
+  double tup = Get(S->t,upper);
+  
+  return 1000*((tup-tlow)/(hup-hlow));
+}
+
 double IndicesCollector::lapseRate500700(){
   int lower = cache->getPressureIndex(700);
   int upper = cache->getPressureIndex(500);
@@ -2305,6 +2448,7 @@ double IndicesCollector::lapseRate500700(){
   return 1000*((tup-tlow)/(hup-hlow));
   
 }
+
 double IndicesCollector::lapseRate500800(){
   int lower = cache->getPressureIndex(800);
   int upper = cache->getPressureIndex(500);
@@ -2316,6 +2460,20 @@ double IndicesCollector::lapseRate500800(){
   
   return 1000*((tup-tlow)/(hup-hlow));
 }
+
+double IndicesCollector::lapseRate600800(){
+  int lower = cache->getPressureIndex(800);
+  int upper = cache->getPressureIndex(600);
+  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->t,lower);
+  double tup = Get(S->t,upper);
+  
+  return 1000*((tup-tlow)/(hup-hlow));
+  
+}
+
 
 double IndicesCollector::ZeroHeight(){
   int zeroIndex = S->th->zeropos;
@@ -2458,6 +2616,27 @@ double IndicesCollector::BS18(){
   return result.abs();
 }
 
+double IndicesCollector::BS26(){
+  int tail=cache->getHeightIndex(2000);
+  int head = cache->getHeightIndex(6000);
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  
+  return result.abs();
+}
+
+double IndicesCollector::BS16(){
+  int tail=cache->getHeightIndex(1000);
+  int head = cache->getHeightIndex(6000);
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  
+  return result.abs();
+}
 
 double IndicesCollector::MeanWind06(){
   return S->ks->mean06.abs();
@@ -2471,6 +2650,10 @@ double IndicesCollector::MeanWind02(){
   return S->ks->mean02.abs();
 }
 
+double IndicesCollector::MeanWind03(){
+  return S->ks->mean03.abs();
+}
+
 double IndicesCollector::MeanWind13(){
   return S->ks->mean13.abs();
 }
@@ -2478,6 +2661,10 @@ double IndicesCollector::MeanWind13(){
 
 double IndicesCollector::SRH100RM(){
   return S->ks->srh100rm;
+}
+
+double IndicesCollector::SRH250RM(){
+  return S->ks->srh250rm;
 }
 
 double IndicesCollector::SRH500RM(){
@@ -2494,6 +2681,10 @@ double IndicesCollector::SRH03RM(){
 
 double IndicesCollector::SRH100LM(){
   return S->ks->srh100lm;
+}
+
+double IndicesCollector::SRH250LM(){
+  return S->ks->srh250lm;
 }
 
 double IndicesCollector::SRH500LM(){
@@ -2806,9 +2997,126 @@ double IndicesCollector::BulkShearSfcTen(){
   return result.abs();
 }
 
+double IndicesCollector::BulkShearSfc20(){
+  int tail=0;
+  int head = S->th->min20pos;
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+	
+  return result.abs();
+}
+
+double IndicesCollector::BulkShearSfczero(){
+  int tail=0;
+  int head = S->th->zeropos;
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+	
+  return result.abs();
+}
+
+double IndicesCollector::BulkShear1kmzero(){
+  int tail=cache->getHeightIndex(1000);
+  int head = S->th->zeropos;
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  
+  return result.abs();
+}
+
+double IndicesCollector::BulkShear1km20(){
+  int tail=cache->getHeightIndex(1000);
+  int head = S->th->min20pos;
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  
+  return result.abs();
+}
+
+double IndicesCollector::BulkShear1kmTen(){
+  int tail=cache->getHeightIndex(1000);
+  int head = S->th->mintenpos;
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  
+  return result.abs();
+}
+
+double IndicesCollector::BulkShear2kmzero(){
+  int tail=cache->getHeightIndex(2000);
+  int head = S->th->zeropos;
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  
+  return result.abs();
+}
+
+double IndicesCollector::BulkShear2km20(){
+  int tail=cache->getHeightIndex(2000);
+  int head = S->th->min20pos;
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  
+  return result.abs();
+}
+
+double IndicesCollector::BulkShear2kmTen(){
+  int tail=cache->getHeightIndex(2000);
+  int head = S->th->mintenpos;
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  
+  return result.abs();
+}
+
+
 double IndicesCollector::BulkShearMULFCTen(){
   int tail=S->th->mostUnstable->vLfcIndex;
   int head = S->th->mintenpos;
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  
+  double effSHR = result.abs();
+  double mucape = this->VMostUnstableCAPE();
+  if(mucape==0)effSHR=0;  
+  return effSHR;
+}
+
+double IndicesCollector::BulkShearMULFCzero(){
+  int tail=S->th->mostUnstable->vLfcIndex;
+  int head = S->th->zeropos;
+  
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  
+  double effSHR = result.abs();
+  double mucape = this->VMostUnstableCAPE();
+  if(mucape==0)effSHR=0;  
+  return effSHR;
+}
+
+double IndicesCollector::BulkShearMULFC20(){
+  int tail = S->th->mostUnstable->vLfcIndex;
+  int head = S->th->min20pos;
   
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
@@ -2861,6 +3169,10 @@ double IndicesCollector::RH25(){
 	return S->th->meanhum25;
 }
 
+double IndicesCollector::RH36(){
+	return S->th->meanhum36;
+}
+
 double IndicesCollector::RHMIDDLE(){
 	return S->th->meanhumMIDDLE;
 }
@@ -2907,11 +3219,106 @@ double IndicesCollector::Bunkers_MW_M(){
 	return magnitude;
 }
 
+double IndicesCollector::wind_3km(){
+  return Get(S->v,cache->getHeightIndex(3000));
+}
 
+double IndicesCollector::wind_2km(){
+  return Get(S->v,cache->getHeightIndex(2000));
+}
+
+double IndicesCollector::wind_1km(){
+  return Get(S->v,cache->getHeightIndex(1000));
+}
+
+double IndicesCollector::wind_500m(){
+  return Get(S->v,cache->getHeightIndex(500));
+}
+
+
+double IndicesCollector::Corfidi_upwind_A(){
+	double *tab = S->ks->Corfidi_upwind.toAV(); 
+	double angle = tab[0];
+	delete[] tab;
+	return angle;
+}
+
+double IndicesCollector::Corfidi_upwind_M(){
+	double *tab = S->ks->Corfidi_upwind.toAV(); 
+	double magnitude = tab[1]; 
+	delete[] tab;
+	return magnitude;
+}
+
+double IndicesCollector::Corfidi_downwind_A(){
+	double *tab = S->ks->Corfidi_downwind.toAV(); 
+	double angle = tab[0];
+	delete[] tab;
+	return angle;
+}
+
+double IndicesCollector::Corfidi_downwind_M(){
+	double *tab = S->ks->Corfidi_downwind.toAV(); 
+	double magnitude = tab[1]; 
+	delete[] tab;
+	return magnitude;
+}
+
+double IndicesCollector::SB_coldcape_fraction(){
+	double cape = this->VSurfaceBasedCAPE(); 
+	double coldcape = S->th->surfaceBased->coldcape;
+	if(cape>0)fraction=coldcape/cape;
+        if(cape==0)fraction=0;
+	return fraction;
+}
+
+double IndicesCollector::MU_coldcape_fraction(){
+	double cape = this->VMostUnstableCAPE(); 
+	double coldcape = S->th->mostUnstable->coldcape;
+	if(cape>0)fraction=coldcape/cape;
+        if(cape==0)fraction=0;
+	return fraction;
+}
+
+double IndicesCollector::ML_coldcape_fraction(){
+	double cape = this->VMeanLayerCAPE(); 
+	double coldcape = S->th->meanLayer->coldcape;
+	if(cape>0)fraction=coldcape/cape;
+        if(cape==0)fraction=0;
+	return fraction;
+}
+
+double IndicesCollector::HSI(){
+  double CAPE = this->VMostUnstableCAPE();
+  double BS06 = this->BS06();
+  double FL = this->ZeroHeight();
+  double LCL = this->VMostUnstableLCL();
+  double EL = this->VMostUnstableEL();
+  double LR = -(this->lapseRate500800());
+  
+  if(CAPE<201)CAPE=201;
+  else if(CAPE>4000)CAPE=4000;
+  
+  if(BS06<11)BS06=11;
+  else if(BS06>27)BS06=27;
+  
+  if(FL<500)FL=500;
+  else if(FL>4000)FL=4000;
+
+  if(LCL<500)LCL=500;
+  else if(LCL>1500)LCL=1500;
+
+  if(LR<5)LR=5;
+  else if(LR>8)LR=8;
+
+  double HSI = ((sqrt(10*(CAPE-200)) * (BS06-5) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-4)*(LR-4))/10000000))
+  return HSI;
+}
+  
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz);
-  double * vec = new double[107];
+  double * vec = new double[140];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->VLLMostUnstableCAPE();
   vec[2]=(*S)->getIndicesCollectorPointer()->MUmiddlecape();
@@ -3019,6 +3426,46 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[104]=(*S)->getIndicesCollectorPointer()->MU_EFF_WMAXSHEAR();
   vec[105]=(*S)->getIndicesCollectorPointer()->SB_EFF_WMAXSHEAR();
   vec[106]=(*S)->getIndicesCollectorPointer()->ML_EFF_WMAXSHEAR();
+
+  vec[107]=(*S)->getIndicesCollectorPointer()->RH36();
+  vec[108]=(*S)->getIndicesCollectorPointer()->BulkShearSfc20();
+  vec[109]=(*S)->getIndicesCollectorPointer()->BulkShearSfczero();
+  vec[110]=(*S)->getIndicesCollectorPointer()->BulkShear1kmzero();
+  vec[111]=(*S)->getIndicesCollectorPointer()->BulkShear1km20();
+  vec[112]=(*S)->getIndicesCollectorPointer()->BulkShear1kmTen();
+  vec[113]=(*S)->getIndicesCollectorPointer()->BS16();
+
+  vec[114]=(*S)->getIndicesCollectorPointer()->BulkShearMULFCzero();
+  vec[115]=(*S)->getIndicesCollectorPointer()->BulkShearMULFC20();
+
+  vec[116]=(*S)->getIndicesCollectorPointer()->BulkShear2kmzero();
+  vec[117]=(*S)->getIndicesCollectorPointer()->BulkShear2km20();
+  vec[118]=(*S)->getIndicesCollectorPointer()->BulkShear2kmTen();
+  vec[119]=(*S)->getIndicesCollectorPointer()->BS26();
+
+  vec[120]=(*S)->getIndicesCollectorPointer()->SRH250RM();
+  vec[121]=(*S)->getIndicesCollectorPointer()->SRH250LM();
+  vec[122]=(*S)->getIndicesCollectorPointer()->lapseRate600800();
+  vec[123]=(*S)->getIndicesCollectorPointer()->LR0500();
+  vec[124]=(*S)->getIndicesCollectorPointer()->LR02();
+  vec[125]=(*S)->getIndicesCollectorPointer()->LR04(); 
+  vec[126]=(*S)->getIndicesCollectorPointer()->LR06();
+  vec[127]=(*S)->getIndicesCollectorPointer()->MeanWind03();
+
+  vec[128]=(*S)->getIndicesCollectorPointer()->wind_3km();
+  vec[129]=(*S)->getIndicesCollectorPointer()->wind_2km();
+  vec[130]=(*S)->getIndicesCollectorPointer()->wind_1km();
+  vec[131]=(*S)->getIndicesCollectorPointer()->wind_500m();
+  vec[132]=(*S)->getIndicesCollectorPointer()->Corfidi_downwind_A();
+  vec[133]=(*S)->getIndicesCollectorPointer()->Corfidi_downwind_M();
+  vec[134]=(*S)->getIndicesCollectorPointer()->Corfidi_upwind_A();
+  vec[135]=(*S)->getIndicesCollectorPointer()->Corfidi_upwind_M();
+
+  vec[136]=(*S)->getIndicesCollectorPointer()->ML_coldcape_fraction();
+  vec[137]=(*S)->getIndicesCollectorPointer()->SB_coldcape_fraction();
+  vec[138]=(*S)->getIndicesCollectorPointer()->MU_coldcape_fraction();
+  vec[139]=(*S)->getIndicesCollectorPointer()->HSI();
+
   return vec;
 }
 
@@ -3479,7 +3926,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   int mulen, sblen,mllen,mustart;
 
   double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q);
-	int reslen= 107;
+	int reslen= 140;
 	int maxl=reslen;
 	if(export_profile[0]==1){
 	plen = sret->p->size();
