@@ -1,7 +1,7 @@
 Package: thunder
 Type: Package
 Title: Computation and Visualisation of Atmospheric Convective Parameters
-Version: 0.0.12
+Version: 0.0.13
 Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("aut", "cre"),comment = c(ORCID = "0000-0001-6496-1386")),
     person("Mateusz", "Taszarek", email = "mateusz.taszarek@noaa.gov", role = c("aut"),comment = c(ORCID = "0000-0001-9578-5872")),
     person("Piotr", "Szuster", email = "retsuz@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-7937-8046")),
