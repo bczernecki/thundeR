@@ -143,7 +143,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">profile</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_sounding.html">get_sounding</a></span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">72562</span>, yy <span class="op">=</span> <span class="fl">1999</span>, mm <span class="op">=</span> <span class="fl">7</span>, dd <span class="op">=</span> <span class="fl">3</span>, hh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 <span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=1999&amp;MONTH=07&amp;FROM=0300&amp;TO=0300&amp;STNM=72562"</span>
-<span class="co">#&gt; /tmp/RtmpHpmLlz/file69ed354b36a8</span>
+<span class="co">#&gt; /tmp/RtmpDuX2wA/file75cd10896d70</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">profile</span><span class="op">)</span> <span class="co"># show first few rows of downloaded dataset</span>
 <span class="co">#&gt;   pressure altitude temp dpt  wd ws</span>
 <span class="co">#&gt; 3      906      849   32  26 110 14</span>
@@ -234,7 +234,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chanhassen</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_sounding.html">get_sounding</a></span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">72649</span>, yy <span class="op">=</span> <span class="fl">2001</span>, mm <span class="op">=</span> <span class="fl">5</span>, dd <span class="op">=</span> <span class="fl">10</span>, hh <span class="op">=</span> <span class="fl">00</span><span class="op">)</span>
 <span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2001&amp;MONTH=05&amp;FROM=1000&amp;TO=1000&amp;STNM=72649"</span>
-<span class="co">#&gt; /tmp/RtmpHpmLlz/file69ed255a1224</span>
+<span class="co">#&gt; /tmp/RtmpDuX2wA/file75cd178796cf</span>
 <span class="fu"><a href="../reference/sounding_hodograph.html">sounding_hodograph</a></span><span class="op">(</span>ws <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">ws</span>, wd <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">wd</span>, 
                    altitude <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">altitude</span>,max_speed <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span><span class="st">"Chanhasses - 10 May 2001, 00:00 UTC"</span><span class="op">)</span></code></pre></div>
@@ -283,6 +283,38 @@
 <a href="#example-7---thunder-in-python" class="anchor"></a>Example 7 - thunder in Python</h3>
 <p>It is possible to launch <code>thunder</code> under Python via <code>rpy2</code> library. Below you can find the minimum reproducible example. Make sure that <code>pandas</code> and <code>rpy2</code> libraries are available for your Python environment. If not install required python packages with <code>pip install pandas</code> and <code>pip install rpy2</code></p>
 <p>Launch <code>thunder</code> under Python with <code>rpy2</code> and <code>numpy</code>:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">### load required packages</span>
+<span class="co">#&gt; from rpy2.robjects.packages import importr</span>
+<span class="co">#&gt; from rpy2.robjects import r,pandas2ri</span>
+<span class="co">#&gt; import rpy2.robjects as robjects</span>
+<span class="co">#&gt; pandas2ri.activate()</span>
+
+<span class="co">### load thunder package (make sure that it was installed in R before)</span>
+<span class="co">#&gt; importr('thunder')</span>
+
+<span class="co">### download North Platte sounding </span>
+<span class="co">#&gt; profile = robjects.r['get_sounding'](wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)</span>
+
+<span class="co">### compute convective parameters</span>
+<span class="co">#&gt; parameters = robjects.r['sounding_compute'](profile['pressure'], profile['altitude'], #&gt; profile['temp'], profile['dpt'], profile['wd'], profile['ws'], accuracy = 2)</span>
+
+
+<span class="co">### customize output and print all computed variables, e.g. Surface Based CAPE (14th element) equals 9413 J/kg</span>
+
+<span class="co">#&gt; print(list(map('{:.2f}'.format, parameters)))</span>
+<span class="co"># '9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00', '15500.00', '-16.55', </span>
+<span class="co"># '137.21', '-66.63', '23.98', '23.98', '23.36', '9413.29', '233.35', '1713.74', '0.00', </span>
+<span class="co"># '775.00', '775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98', '23.98', '23.36',</span>
+<span class="co"># '7805.13', '115.22', '1515.81', '-4.35', '950.00', '950.00', '15000.00', '-14.66', </span>
+<span class="co"># '124.94', '-68.41', '22.46', '22.46', '21.17', '-9.57', '-6.68', '-8.80', '-8.68', </span>
+<span class="co"># '-9.06', '-7.70', '4250.00', '3500.00', '0.00', '2866.00', '50.57', '52.93', '1381.81', </span>
+<span class="co"># '308.98', '29.00', '37.59', '87.03', '0.58', '0.40', '0.47', '8.85', '11.21', '13.88', </span>
+<span class="co"># '20.28', '29.33', '6.84', '21.70', '28.32', '28.32', '27.17', '17.06', '12.53', '12.53',</span>
+<span class="co"># '11.74', '7.09', '6.08', '7.77', '7.69', '19.89', '62.07', '110.06', '156.48', '6.25', </span>
+<span class="co"># '7.77', '4.26', '-42.78', '284.67', '5.65', '197.60', '14.19', '218.89', '7.77',</span>
+<span class="co"># '31.50', '-12.14', '60.40', '677.12', '4.67', '6.10', '29.46', '29.46', '3.86', '12.35',</span>
+<span class="co"># '2783.07', '2783.07', '2534.22', '3886.07', '3886.07', '3395.00']</span></code></pre></div>
 </div>
 </div>
 <div id="details" class="section level2">
@@ -448,7 +480,7 @@
 <div id="performance-comparison" class="section level3">
 <h3 class="hasAnchor">
 <a href="#performance-comparison" class="anchor"></a>Performance comparison:</h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bczernecki.github.io/thundeR/">thunder</a></span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span><span class="op">(</span><span class="st">"sounding_vienna"</span><span class="op">)</span>
 <span class="va">t1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/sounding_compute.html">sounding_compute</a></span><span class="op">(</span><span class="va">sounding_vienna</span><span class="op">$</span><span class="va">pressure</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">altitude</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">temp</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">dpt</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">wd</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">ws</span>, accuracy <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span>
@@ -456,13 +488,13 @@
 <span class="va">t3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/sounding_compute.html">sounding_compute</a></span><span class="op">(</span><span class="va">sounding_vienna</span><span class="op">$</span><span class="va">pressure</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">altitude</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">temp</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">dpt</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">wd</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">ws</span>, accuracy <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">t1</span><span class="op">)</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.007   0.000   0.007</span>
+<span class="co">#&gt;   0.008   0.000   0.007</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">t2</span><span class="op">)</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    0.02    0.00    0.02</span>
+<span class="co">#&gt;   0.034   0.000   0.034</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">t3</span><span class="op">)</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    0.29    0.00    0.29</span></code></pre></div>
+<span class="co">#&gt;     0.3     0.0     0.3</span></code></pre></div>
 </div>
 <div id="important-notes" class="section level3">
 <h3 class="hasAnchor">
