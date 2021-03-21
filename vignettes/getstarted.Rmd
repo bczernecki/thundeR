@@ -1,11 +1,14 @@
 ---
 title: "Introduction to the thundeR package"
 author: "Bartosz Czernecki, Mateusz Taszarek, Piotr Szuster"
-output: rmarkdown::html_vignette
+output: 
+  rmarkdown::html_vignette:
+    self_contained: false
 vignette: >
   %\VignetteIndexEntry{Introduction to the thundeR package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  self_contained: false
 ---
 
 ```{r, include = FALSE}
@@ -54,7 +57,7 @@ ws = sounding_vienna$ws # vector of wind speed [knots]
 sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC", pressure, altitude, temp, dpt, wd, ws)
 ```
 
-<img src="../inst/figures/Vienna.png" alt="Vienna" width="1000"/>
+<img src="https://github.com/bczernecki/thundeR/raw/master/inst/figures/Vienna.png" alt="Vienna" width="1000"/>
 
 ### Example 2
 
@@ -66,7 +69,7 @@ head(profile) # show first few rows of downloaded dataset
 sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999 0000 UTC", profile$pressure, profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
 ```
 
-<img src="../inst/figures/NorthPlatte.png" alt="North Platte" width="1000"/>
+<img src="https://github.com/bczernecki/thundeR/raw/master/inst/figures/NorthPlatte.png" alt="North Platte" width="1000"/>
 
 ### Example 3
 
@@ -82,58 +85,6 @@ ws = c(5, 10, 20, 30, 40, 5, 0) # wind speed [knots]
 accuracy = 2 # accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
 options(digits = 2) # change output formatting precision 
 sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
-
-
-#             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE              MU_CIN 
-#             2195.41              575.59             1568.01                0.00 
-#          MU_LCL_HGT          MU_LFC_HGT           MU_EL_HGT               MU_LI 
-#              730.00              730.00             8200.00               -9.63 
-#             MU_WMAX          MU_EL_TEMP         MU_LCL_TEMP         MU_LFC_TEMP 
-#               66.26              -28.20               17.70               17.70 
-#             MU_MIXR             SB_CAPE        SB_03km_CAPE         SB_HGL_CAPE 
-#               14.88             2195.41              575.59             1568.01 
-#              SB_CIN          SB_LCL_HGT          SB_LFC_HGT           SB_EL_HGT 
-#                0.00              730.00              730.00             8200.00 
-#               SB_LI             SB_WMAX          SB_EL_TEMP         SB_LCL_TEMP 
-#               -9.63               66.26              -28.20               17.70 
-#         SB_LFC_TEMP             SB_MIXR             ML_CAPE        ML_03km_CAPE 
-#               17.70               14.88             1559.41              416.88 
-#         ML_HGL_CAPE              ML_CIN          ML_LCL_HGT          ML_LFC_HGT 
-#             1187.96                0.00              975.00              975.00 
-#           ML_EL_HGT               ML_LI             ML_WMAX          ML_EL_TEMP 
-#             7800.00               -7.15               55.85              -25.80 
-#         ML_LCL_TEMP         ML_LFC_TEMP             ML_MIXR             LR_01km 
-#               15.25               15.25               13.02              -10.00 
-#             LR_03km             LR_24km             LR_36km        LR_500700hPa 
-#               -9.05               -5.77               -4.29               -4.29 
-#        LR_500800hPa            FRZG_HGT    FRZG_wetbulb_HGT HGT_max_thetae_03km 
-#               -6.67             2500.00             2300.00                0.00 
-# HGT_min_thetae_04km        Delta_thetae               DCAPE  Cold_Pool_Strength 
-#             3700.00               28.46              595.13               12.77 
-#        Wind_Index            PRCP_WATER  Moisture_Flux_02km             RH_02km 
-#               34.12               27.10               28.49                0.72 
-#             RH_25km              RH_HGL             BS_01km             BS_02km 
-#                0.58                0.46                3.83                8.78 
-#             BS_03km             BS_06km             BS_08km             BS_36km 
-#               12.66               18.01               17.41                9.37 
-#             BS_18km           BS_EFF_MU           BS_EFF_SB           BS_EFF_ML 
-#               20.28               14.14               14.14               13.82 
-#       BS_SFC_to_HGL    BS_MU_LFC_to_HGL    BS_SB_LFC_to_HGL    BS_ML_LFC_to_HGL 
-#               15.51               14.07               14.07               13.69 
-#             MW_01km             MW_02km             MW_06km             MW_13km 
-#                2.36                2.81                5.14                6.88 
-#         SRH_100m_RM         SRH_500m_RM          SRH_1km_RM          SRH_3km_RM 
-#                2.87               14.37               29.47              136.42 
-#         SRH_100m_LM         SRH_500m_LM          SRH_1km_LM          SRH_3km_LM 
-#                0.30                1.51                3.10              -30.53 
-#             K_Index     Showalter_Index   TotalTotals_Index         SWEAT_Index 
-#               24.35                3.90               44.35              106.42 
-#                 STP             STP_new                 SCP             SCP_new 
-#                0.26                0.14                5.39                4.23 
-#                SHIP                 DCP        MU_WMAXSHEAR        SB_WMAXSHEAR 
-#                0.61                0.73             1193.11             1193.11 
-#        ML_WMAXSHEAR    MU_EFF_WMAXSHEAR    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR 
-#             1005.54              936.94              936.94              771.71
 ```
 
 ### Example 4
@@ -175,6 +126,35 @@ sounding_barbs(chanhassen$pressure, chanhassen$ws, chanhassen$wd, chanhassen$alt
 par(oldpar)
 ```
 
+### Example 7 - thunder in Python
+
+It is possible to launch `thunder` under Python via `rpy2` library. Below you can find the minimum reproducible example.
+Make sure that `pandas` and `rpy2` libraries are available for your Python environment. If not install required python packages with `pip install pandas` and `pip install rpy2`
+
+Launch `thunder` under Python with `rpy2` and `numpy`:
+
+```{r example7, include=TRUE, echo = FALSE}
+## load required packages
+#>from rpy2.robjects.packages import importr
+#>from rpy2.robjects import r,pandas2ri
+#>import rpy2.robjects as robjects
+#>pandas2ri.activate()
+
+## load thunder package (make sure that it was installed in R before)
+#>importr('thunder')
+
+## download North Platte sounding 
+#> profile = robjects.r['get_sounding'](wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
+
+# compute convective parameters
+#>parameters = robjects.r['sounding_compute'](profile['pressure'], profile['altitude'], #>profile['temp'], profile['dpt'], profile['wd'], profile['ws'], accuracy = 2)
+
+
+# customize output and print all computed variables, e.g. Surface Based CAPE (14th element) equals 9413 J/kg
+
+#>print(list(map('{:.2f}'.format, parameters)))
+#'9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98', '23.98', '23.36', '9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98', '23.98', '23.36', '7805.13', '115.22', '1515.81', '-4.35', '950.00', '950.00', '15000.00', '-14.66', '124.94', '-68.41', '22.46', '22.46', '21.17', '-9.57', '-6.68', '-8.80', '-8.68', '-9.06', '-7.70', '4250.00', '3500.00', '0.00', '2866.00', '50.57', '52.93', '1381.81', '308.98', '29.00', '37.59', '87.03', '0.58', '0.40', '0.47', '8.85', '11.21', '13.88', '20.28', '29.33', '6.84', '21.70', '28.32', '28.32', '27.17', '17.06', '12.53', '12.53', '11.74', '7.09', '6.08', '7.77', '7.69', '19.89', '62.07', '110.06', '156.48', '6.25', '7.77', '4.26', '-42.78', '284.67', '5.65', '197.60', '14.19', '218.89', '7.77', '31.50', '-12.14', '60.40', '677.12', '4.67', '6.10', '29.46', '29.46', '3.86', '12.35', '2783.07', '2783.07', '2534.22', '3886.07', '3886.07', '3395.00']
+```
 
 
 ## Details:
@@ -425,7 +405,7 @@ c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170,
 
 ### Performance comparison:
 
-```{r performace, echo=TRUE}
+```{r performance, echo=TRUE}
 library(thunder)
 data("sounding_vienna")
 t1 = system.time(sounding_compute(sounding_vienna$pressure, sounding_vienna$altitude, sounding_vienna$temp, sounding_vienna$dpt, sounding_vienna$wd, sounding_vienna$ws, accuracy = 1))
@@ -442,3 +422,10 @@ print(t3)
 - Script will always consider first height level as the surface (h = 0), therefore input height data can be as above sea level (ASL) or above ground level (AGL). 
 - For efficiency purposes it is highly recommended to input data for a maximum of 16-18 km AGL or lower.
 - Values of parameters will be different for different accuracy settings. 
+
+
+```{r cleaning, message=FALSE, warning=FALSE, include=FALSE}
+# cleaning
+file.remove("Vienna.png")
+file.remove("NorthPlatte.png")
+```

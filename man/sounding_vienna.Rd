@@ -4,8 +4,7 @@
 \name{sounding_vienna}
 \alias{sounding_vienna}
 \title{Examplary sounding dataset - sample from Vienna (WMO ID: 11035) - 23 August 2011, 1200 UTC}
-\format{
-A data frame with 88 rows and 6 variables as described in `get_sounding()`
+\format{A data frame with 88 rows and 6 variables as described in `get_sounding()`
 
 
 
@@ -16,8 +15,7 @@ A data frame with 88 rows and 6 variables as described in `get_sounding()`
   \item{dpt}{dew point temperature [degree Celsius]}
   \item{wd}{wind direction [azimuth as degrees]}
   \item{ws}{wind speed [knots]}
-}
-}
+}}
 \source{
 http://weather.uwyo.edu/upperair/sounding.html
 }

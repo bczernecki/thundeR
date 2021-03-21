@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">thunder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.13</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@
 
       
 
-      </header><script src="getstarted_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="getstarted_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Introduction to the thundeR package</h1>
@@ -134,7 +134,7 @@
 <span class="co">#&gt; Your display device is 10 x 6 in. </span>
 <span class="co">#&gt; It is recommended to use at least 10 x 7.5 in. plotting window </span>
 <span class="co">#&gt; or consider saving the layout into file</span></code></pre></div>
-<p><img src="../inst/figures/Vienna.png" alt="Vienna" width="1000"></p>
+<p><img src="https://github.com/bczernecki/thundeR/raw/master/inst/figures/Vienna.png" alt="Vienna" width="1000"></p>
 </div>
 <div id="example-2" class="section level3">
 <h3 class="hasAnchor">
@@ -143,7 +143,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">profile</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_sounding.html">get_sounding</a></span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">72562</span>, yy <span class="op">=</span> <span class="fl">1999</span>, mm <span class="op">=</span> <span class="fl">7</span>, dd <span class="op">=</span> <span class="fl">3</span>, hh <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 <span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=1999&amp;MONTH=07&amp;FROM=0300&amp;TO=0300&amp;STNM=72562"</span>
-<span class="co">#&gt; /var/folders/lw/3fnnk87n4q1dkl35s2_p24h80000gn/T//RtmpIZwFLw/file4b70639ea02e</span>
+<span class="co">#&gt; /tmp/RtmpHpmLlz/file69ed354b36a8</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">profile</span><span class="op">)</span> <span class="co"># show first few rows of downloaded dataset</span>
 <span class="co">#&gt;   pressure altitude temp dpt  wd ws</span>
 <span class="co">#&gt; 3      906      849   32  26 110 14</span>
@@ -156,7 +156,7 @@
 <span class="co">#&gt; Your display device is 10 x 6 in. </span>
 <span class="co">#&gt; It is recommended to use at least 10 x 7.5 in. plotting window </span>
 <span class="co">#&gt; or consider saving the layout into file</span></code></pre></div>
-<p><img src="../inst/figures/NorthPlatte.png" alt="North Platte" width="1000"></p>
+<p><img src="https://github.com/bczernecki/thundeR/raw/master/inst/figures/NorthPlatte.png" alt="North Platte" width="1000"></p>
 </div>
 <div id="example-3" class="section level3">
 <h3 class="hasAnchor">
@@ -225,59 +225,7 @@
 <span class="co">#&gt;                 DCP        MU_WMAXSHEAR        SB_WMAXSHEAR        ML_WMAXSHEAR </span>
 <span class="co">#&gt;                1.08             1193.11             1193.11             1005.54 </span>
 <span class="co">#&gt;    MU_EFF_WMAXSHEAR    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR </span>
-<span class="co">#&gt;              936.94              936.94              771.71</span>
-
-
-<span class="co">#             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE              MU_CIN </span>
-<span class="co">#             2195.41              575.59             1568.01                0.00 </span>
-<span class="co">#          MU_LCL_HGT          MU_LFC_HGT           MU_EL_HGT               MU_LI </span>
-<span class="co">#              730.00              730.00             8200.00               -9.63 </span>
-<span class="co">#             MU_WMAX          MU_EL_TEMP         MU_LCL_TEMP         MU_LFC_TEMP </span>
-<span class="co">#               66.26              -28.20               17.70               17.70 </span>
-<span class="co">#             MU_MIXR             SB_CAPE        SB_03km_CAPE         SB_HGL_CAPE </span>
-<span class="co">#               14.88             2195.41              575.59             1568.01 </span>
-<span class="co">#              SB_CIN          SB_LCL_HGT          SB_LFC_HGT           SB_EL_HGT </span>
-<span class="co">#                0.00              730.00              730.00             8200.00 </span>
-<span class="co">#               SB_LI             SB_WMAX          SB_EL_TEMP         SB_LCL_TEMP </span>
-<span class="co">#               -9.63               66.26              -28.20               17.70 </span>
-<span class="co">#         SB_LFC_TEMP             SB_MIXR             ML_CAPE        ML_03km_CAPE </span>
-<span class="co">#               17.70               14.88             1559.41              416.88 </span>
-<span class="co">#         ML_HGL_CAPE              ML_CIN          ML_LCL_HGT          ML_LFC_HGT </span>
-<span class="co">#             1187.96                0.00              975.00              975.00 </span>
-<span class="co">#           ML_EL_HGT               ML_LI             ML_WMAX          ML_EL_TEMP </span>
-<span class="co">#             7800.00               -7.15               55.85              -25.80 </span>
-<span class="co">#         ML_LCL_TEMP         ML_LFC_TEMP             ML_MIXR             LR_01km </span>
-<span class="co">#               15.25               15.25               13.02              -10.00 </span>
-<span class="co">#             LR_03km             LR_24km             LR_36km        LR_500700hPa </span>
-<span class="co">#               -9.05               -5.77               -4.29               -4.29 </span>
-<span class="co">#        LR_500800hPa            FRZG_HGT    FRZG_wetbulb_HGT HGT_max_thetae_03km </span>
-<span class="co">#               -6.67             2500.00             2300.00                0.00 </span>
-<span class="co"># HGT_min_thetae_04km        Delta_thetae               DCAPE  Cold_Pool_Strength </span>
-<span class="co">#             3700.00               28.46              595.13               12.77 </span>
-<span class="co">#        Wind_Index            PRCP_WATER  Moisture_Flux_02km             RH_02km </span>
-<span class="co">#               34.12               27.10               28.49                0.72 </span>
-<span class="co">#             RH_25km              RH_HGL             BS_01km             BS_02km </span>
-<span class="co">#                0.58                0.46                3.83                8.78 </span>
-<span class="co">#             BS_03km             BS_06km             BS_08km             BS_36km </span>
-<span class="co">#               12.66               18.01               17.41                9.37 </span>
-<span class="co">#             BS_18km           BS_EFF_MU           BS_EFF_SB           BS_EFF_ML </span>
-<span class="co">#               20.28               14.14               14.14               13.82 </span>
-<span class="co">#       BS_SFC_to_HGL    BS_MU_LFC_to_HGL    BS_SB_LFC_to_HGL    BS_ML_LFC_to_HGL </span>
-<span class="co">#               15.51               14.07               14.07               13.69 </span>
-<span class="co">#             MW_01km             MW_02km             MW_06km             MW_13km </span>
-<span class="co">#                2.36                2.81                5.14                6.88 </span>
-<span class="co">#         SRH_100m_RM         SRH_500m_RM          SRH_1km_RM          SRH_3km_RM </span>
-<span class="co">#                2.87               14.37               29.47              136.42 </span>
-<span class="co">#         SRH_100m_LM         SRH_500m_LM          SRH_1km_LM          SRH_3km_LM </span>
-<span class="co">#                0.30                1.51                3.10              -30.53 </span>
-<span class="co">#             K_Index     Showalter_Index   TotalTotals_Index         SWEAT_Index </span>
-<span class="co">#               24.35                3.90               44.35              106.42 </span>
-<span class="co">#                 STP             STP_new                 SCP             SCP_new </span>
-<span class="co">#                0.26                0.14                5.39                4.23 </span>
-<span class="co">#                SHIP                 DCP        MU_WMAXSHEAR        SB_WMAXSHEAR </span>
-<span class="co">#                0.61                0.73             1193.11             1193.11 </span>
-<span class="co">#        ML_WMAXSHEAR    MU_EFF_WMAXSHEAR    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR </span>
-<span class="co">#             1005.54              936.94              936.94              771.71</span></code></pre></div>
+<span class="co">#&gt;              936.94              936.94              771.71</span></code></pre></div>
 </div>
 <div id="example-4" class="section level3">
 <h3 class="hasAnchor">
@@ -286,7 +234,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">chanhassen</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_sounding.html">get_sounding</a></span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">72649</span>, yy <span class="op">=</span> <span class="fl">2001</span>, mm <span class="op">=</span> <span class="fl">5</span>, dd <span class="op">=</span> <span class="fl">10</span>, hh <span class="op">=</span> <span class="fl">00</span><span class="op">)</span>
 <span class="co">#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2001&amp;MONTH=05&amp;FROM=1000&amp;TO=1000&amp;STNM=72649"</span>
-<span class="co">#&gt; /var/folders/lw/3fnnk87n4q1dkl35s2_p24h80000gn/T//RtmpIZwFLw/file4b70473858af</span>
+<span class="co">#&gt; /tmp/RtmpHpmLlz/file69ed255a1224</span>
 <span class="fu"><a href="../reference/sounding_hodograph.html">sounding_hodograph</a></span><span class="op">(</span>ws <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">ws</span>, wd <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">wd</span>, 
                    altitude <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">altitude</span>,max_speed <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span><span class="st">"Chanhasses - 10 May 2001, 00:00 UTC"</span><span class="op">)</span></code></pre></div>
@@ -313,7 +261,7 @@
 
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>fig <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.75</span>, <span class="fl">0.15</span>, <span class="fl">0.9</span><span class="op">)</span>, new <span class="op">=</span> <span class="cn">TRUE</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, oma <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span>
 <span class="co">#&gt; Warning in par(fig = c(0.1, 0.75, 0.15, 0.9), new = TRUE, mar = c(1, 1, :</span>
-<span class="co">#&gt; wywołanie 'par(new=TRUE)' bez wykresu</span>
+<span class="co">#&gt; calling par(new=TRUE) with no plot</span>
 <span class="fu"><a href="../reference/sounding_wind.html">sounding_wind</a></span><span class="op">(</span>pressure <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">pressure</span>, ws <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">ws</span>, yaxs <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 <span class="co">#&gt; Joining, by = "x1"</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/title.html">title</a></span><span class="op">(</span><span class="st">"Wind profile: Chanhassen - 10 May 2001 0000 UTC"</span>, outer <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
@@ -323,12 +271,18 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R">
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="va">oldpar</span><span class="op">)</span>
-<span class="co">#&gt; Warning in par(oldpar): parametr graficzny 'cin' nie może zostać ustawiony</span>
-<span class="co">#&gt; Warning in par(oldpar): parametr graficzny 'cra' nie może zostać ustawiony</span>
-<span class="co">#&gt; Warning in par(oldpar): parametr graficzny 'csi' nie może zostać ustawiony</span>
-<span class="co">#&gt; Warning in par(oldpar): parametr graficzny 'cxy' nie może zostać ustawiony</span>
-<span class="co">#&gt; Warning in par(oldpar): parametr graficzny 'din' nie może zostać ustawiony</span>
-<span class="co">#&gt; Warning in par(oldpar): parametr graficzny 'page' nie może zostać ustawiony</span></code></pre></div>
+<span class="co">#&gt; Warning in par(oldpar): graphical parameter "cin" cannot be set</span>
+<span class="co">#&gt; Warning in par(oldpar): graphical parameter "cra" cannot be set</span>
+<span class="co">#&gt; Warning in par(oldpar): graphical parameter "csi" cannot be set</span>
+<span class="co">#&gt; Warning in par(oldpar): graphical parameter "cxy" cannot be set</span>
+<span class="co">#&gt; Warning in par(oldpar): graphical parameter "din" cannot be set</span>
+<span class="co">#&gt; Warning in par(oldpar): graphical parameter "page" cannot be set</span></code></pre></div>
+</div>
+<div id="example-7---thunder-in-python" class="section level3">
+<h3 class="hasAnchor">
+<a href="#example-7---thunder-in-python" class="anchor"></a>Example 7 - thunder in Python</h3>
+<p>It is possible to launch <code>thunder</code> under Python via <code>rpy2</code> library. Below you can find the minimum reproducible example. Make sure that <code>pandas</code> and <code>rpy2</code> libraries are available for your Python environment. If not install required python packages with <code>pip install pandas</code> and <code>pip install rpy2</code></p>
+<p>Launch <code>thunder</code> under Python with <code>rpy2</code> and <code>numpy</code>:</p>
 </div>
 </div>
 <div id="details" class="section level2">
@@ -501,14 +455,14 @@
 <span class="va">t2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/sounding_compute.html">sounding_compute</a></span><span class="op">(</span><span class="va">sounding_vienna</span><span class="op">$</span><span class="va">pressure</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">altitude</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">temp</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">dpt</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">wd</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">ws</span>, accuracy <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="va">t3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/sounding_compute.html">sounding_compute</a></span><span class="op">(</span><span class="va">sounding_vienna</span><span class="op">$</span><span class="va">pressure</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">altitude</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">temp</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">dpt</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">wd</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">ws</span>, accuracy <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">t1</span><span class="op">)</span>
-<span class="co">#&gt; użytkownik     system   upłynęło </span>
-<span class="co">#&gt;      0.007      0.000      0.007</span>
+<span class="co">#&gt;    user  system elapsed </span>
+<span class="co">#&gt;   0.007   0.000   0.007</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">t2</span><span class="op">)</span>
-<span class="co">#&gt; użytkownik     system   upłynęło </span>
-<span class="co">#&gt;      0.014      0.001      0.015</span>
+<span class="co">#&gt;    user  system elapsed </span>
+<span class="co">#&gt;    0.02    0.00    0.02</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">t3</span><span class="op">)</span>
-<span class="co">#&gt; użytkownik     system   upłynęło </span>
-<span class="co">#&gt;      0.183      0.001      0.184</span></code></pre></div>
+<span class="co">#&gt;    user  system elapsed </span>
+<span class="co">#&gt;    0.29    0.00    0.29</span></code></pre></div>
 </div>
 <div id="important-notes" class="section level3">
 <h3 class="hasAnchor">
@@ -534,7 +488,7 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Bartosz Czernecki, Piotr Szuster, Mateusz Taszarek.</p>
+  <p>Developed by Bartosz Czernecki, Mateusz Taszarek, Piotr Szuster.</p>
 </div>
 
 <div class="pkgdown">
