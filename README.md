@@ -4,12 +4,11 @@
 
 <!-- badges: start --> 
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
-[![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/devel/graph/badge.svg?token=JGZPB7RUFI)](https://codecov.io/gh/bczernecki/thunder)
+[![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/devel/graph/badge.svg)](https://codecov.io/gh/bczernecki/thunder)
 [![CRAN status](https://www.r-pkg.org/badges/version/thunder)](https://cran.r-project.org/package=thunder)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/thunder)](https://cran.r-project.org/package=thunder)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/thunder?color=brightgreen)](https://cran.r-project.org/package=thunder)
 <!-- badges: end -->
-
-
 
 
 
@@ -176,21 +175,26 @@ sounding_barbs(chanhassen$pressure, chanhassen$ws, chanhassen$wd, chanhassen$alt
 
 ![](inst/figures/wind_profile.png)
 
-#### Perform sounding computations using python language:
+#### Perform sounding computations using Python with rpy2:
 
-``` py
-# install required python packages
+It is possible to launch `thunder` under Python via rpy2 library. Below you can find the minimum reproducible example:
+
+Make sure that pandas and rpy2 libraries are available for your Python environment. If not install required python packages:
+``` bash 
 pip install pandas  
 pip install rpy2  
+```
 
+Launch `thunder` under Python with `rpy2`:
+
+``` py
 # load required packages
-import pandas as pd
 from rpy2.robjects.packages import importr
 from rpy2.robjects import r,pandas2ri
 import rpy2.robjects as robjects
 pandas2ri.activate()
 
-# load thunder package (previously installed in R)
+# load thunder package (make sure that it was installed in R before)
 importr('thunder')
 
 # download North Platte sounding 
@@ -199,36 +203,11 @@ profile = robjects.r['get_sounding'](wmo_id = 72562, yy = 1999, mm = 7, dd = 3,h
 # compute convective parameters
 parameters = robjects.r['sounding_compute'](profile['pressure'], profile['altitude'], profile['temp'], profile['dpt'], profile['wd'], profile['ws'], accuracy = 2)
 
-# print a numeric vector of all variables, e.g. Surface Based CAPE (element number 14) equals 9413 J/kg
-print(parameters)
 
-#  9.41328612e+03  2.33353072e+02  1.71374349e+03  0.00000000e+00
-#  7.75000000e+02  7.75000000e+02  1.55000000e+04 -1.65508748e+01
-#  1.37209957e+02 -6.66283237e+01  2.39783133e+01  2.39783133e+01
-#  2.33647136e+01  9.41328612e+03  2.33353072e+02  1.71374349e+03
-#  0.00000000e+00  7.75000000e+02  7.75000000e+02  1.55000000e+04
-# -1.65508748e+01  1.37209957e+02 -6.66283237e+01  2.39783133e+01
-#  2.39783133e+01  2.33647136e+01  7.80512973e+03  1.15218462e+02
-#  1.51581216e+03 -4.34518196e+00  9.50000000e+02  9.50000000e+02
-#  1.50000000e+04 -1.46615255e+01  1.24941024e+02 -6.84139508e+01
-#  2.24602410e+01  2.24602410e+01  2.11684444e+01 -9.56842105e+00
-# -6.67934783e+00 -8.80368731e+00 -8.68362720e+00 -9.05783921e+00
-# -7.69846031e+00  4.25000000e+03  3.50000000e+03  0.00000000e+00
-#  2.86600000e+03  5.05734164e+01  5.29324740e+01  1.38180722e+03
-#  3.08978391e+02  2.89996928e+01  3.75856055e+01  8.70308714e+01
-#  5.79532144e-01  3.96038339e-01  4.74523874e-01  8.85009470e+00
-#  1.12138499e+01  1.38753497e+01  2.02833049e+01  2.93264862e+01
-#  6.84091499e+00  2.17033431e+01  2.83220573e+01  2.83220573e+01
-#  2.71728023e+01  1.70580481e+01  1.25343105e+01  1.25343105e+01
-#  1.17350718e+01  7.08519353e+00  6.07991292e+00  7.76810532e+00
-#  7.68968584e+00  1.98900047e+01  6.20722333e+01  1.10063007e+02
-#  1.56478369e+02  6.24627594e+00  7.77240135e+00  4.26451855e+00
-# -4.27789713e+01  2.84670169e+02  5.64779186e+00  1.97598453e+02
-#  1.41876484e+01  2.18886063e+02  7.76810532e+00  3.15000000e+01
-# -1.21377601e+01  6.04000000e+01  6.77124337e+02  4.66991353e+00
-#  6.09845434e+00  2.94595132e+01  2.94595132e+01  3.86405495e+00
-#  1.23469454e+01  2.78307139e+03  2.78307139e+03  2.53421688e+03
-#  3.88606826e+03  3.88606826e+03  3.39499774e+03
+# customize output and print all computed variables, e.g. Surface Based CAPE (14th element) equals 9413 J/kg
+
+print(list(map('{:.2f}'.format, parameters)))
+'9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98', '23.98', '23.36', '9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98', '23.98', '23.36', '7805.13', '115.22', '1515.81', '-4.35', '950.00', '950.00', '15000.00', '-14.66', '124.94', '-68.41', '22.46', '22.46', '21.17', '-9.57', '-6.68', '-8.80', '-8.68', '-9.06', '-7.70', '4250.00', '3500.00', '0.00', '2866.00', '50.57', '52.93', '1381.81', '308.98', '29.00', '37.59', '87.03', '0.58', '0.40', '0.47', '8.85', '11.21', '13.88', '20.28', '29.33', '6.84', '21.70', '28.32', '28.32', '27.17', '17.06', '12.53', '12.53', '11.74', '7.09', '6.08', '7.77', '7.69', '19.89', '62.07', '110.06', '156.48', '6.25', '7.77', '4.26', '-42.78', '284.67', '5.65', '197.60', '14.19', '218.89', '7.77', '31.50', '-12.14', '60.40', '677.12', '4.67', '6.10', '29.46', '29.46', '3.86', '12.35', '2783.07', '2783.07', '2534.22', '3886.07', '3886.07', '3395.00']
 ```
 
 

@@ -10,7 +10,7 @@ Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("
     person("Liangying", "Zhang", role = c("ctb")),
     person("Tim", "Hoar", role = c("ctb")))
 Maintainer: Bartosz Czernecki <nwp@amu.edu.pl>
-Description: A freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to derive thermodynamic and kinematic parameters from large numerical datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe storms and is constantly updated with new features.
+Description: A freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code implemented into R language via RCPP. This solution allows to derive thermodynamic and kinematic parameters from large numerical datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe storms.
 License: GPL (>= 2)
 Imports:
     Rcpp (>= 0.12.9.4),
@@ -18,13 +18,14 @@ Imports:
     dplyr,
     aiRthermo
 Depends:
-    R (>= 3.5.0)
+    R (>= 3.1.1)
 Suggests: 
     RadioSonde,
     knitr,
     rmarkdown,
     testthat (>= 2.0.0),
-    covr
+    covr, 
+    reticulate
 LinkingTo: Rcpp
 RoxygenNote: 7.1.1
 Encoding: UTF-8
