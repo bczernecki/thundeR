@@ -36,6 +36,7 @@ Returns two lists with values described at: weather.uwyo.edu ; The first list co
 }
 \description{
 Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package.
+In case of problems with downloading the chosen dataset the url is checked 5 times in 5-second intervals.
 }
 \examples{
 \donttest{
