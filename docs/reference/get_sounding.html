@@ -47,7 +47,8 @@
 
 
 <meta property="og:title" content="Download rawinsonde measurement — get_sounding" />
-<meta property="og:description" content="Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package." />
+<meta property="og:description" content="Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package.
+In case of problems with downloading the chosen dataset the url is checked 5 times in 5-second intervals." />
 <meta property="og:image" content="/logo.png" />
 
 
@@ -80,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">thunder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.14</span>
       </span>
     </div>
 
@@ -134,7 +135,8 @@
     </div>
 
     <div class="ref-description">
-    <p>Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package.</p>
+    <p>Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package.
+In case of problems with downloading the chosen dataset the url is checked 5 times in 5-second intervals.</p>
     </div>
 
     <pre class="usage"><span class='fu'>get_sounding</span><span class='op'>(</span><span class='va'>wmo_id</span>, <span class='va'>yy</span>, <span class='va'>mm</span>, <span class='va'>dd</span>, <span class='va'>hh</span>, metadata <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
@@ -191,7 +193,7 @@
                          mm <span class='op'>=</span> <span class='fl'>8</span>, 
                          dd <span class='op'>=</span> <span class='fl'>20</span>, 
                          hh <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2010&amp;MONTH=08&amp;FROM=2012&amp;TO=2012&amp;STNM=12120"</div><div class='output co'>#&gt; <span class='message'>/tmp/RtmpsqbpFz/file755142797fd5</span></div><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>profile</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "http://weather.uwyo.edu/cgi-bin/sounding?region=europe&amp;TYPE=TEXT%3ALIST&amp;YEAR=2010&amp;MONTH=08&amp;FROM=2012&amp;TO=2012&amp;STNM=12120"</div><div class='output co'>#&gt; <span class='message'>/var/folders/lw/3fnnk87n4q1dkl35s2_p24h80000gn/T//RtmpidOn6z/filee072fd64222</span></div><div class='input'>  <span class='fu'><a href='https://rdrr.io/r/utils/head.html'>head</a></span><span class='op'>(</span><span class='va'>profile</span><span class='op'>)</span>
 </div><div class='output co'>#&gt;   pressure altitude temp  dpt  wd ws
 #&gt; 1     1021        6 19.8 13.8 265 12
 #&gt; 2     1020       14 18.4 11.4 265 12

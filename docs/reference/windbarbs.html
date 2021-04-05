@@ -81,7 +81,7 @@ Currently wind barbs are supported up to 190 knots." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">thunder</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.13</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.14</span>
       </span>
     </div>
 
@@ -171,7 +171,7 @@ Currently wind barbs are supported up to 190 knots.</p>
     <p>wind barb graphics</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span><span class='op'>(</span><span class='fl'>1</span>, xaxt <span class='op'>=</span> <span class='st'>'n'</span>, yaxt <span class='op'>=</span> <span class='st'>'n'</span>, xlab <span class='op'>=</span> <span class='st'>""</span>, ylab <span class='op'>=</span> <span class='st'>""</span>, frame <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fl'>1</span>, xaxt <span class='op'>=</span> <span class='st'>'n'</span>, yaxt <span class='op'>=</span> <span class='st'>'n'</span>, xlab <span class='op'>=</span> <span class='st'>""</span>, ylab <span class='op'>=</span> <span class='st'>""</span>, frame <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span>
 </div><div class='input'><span class='fu'>windbarbs</span><span class='op'>(</span>cx <span class='op'>=</span> <span class='fl'>1</span>, cy <span class='op'>=</span> <span class='fl'>1</span>, direction <span class='op'>=</span> <span class='fl'>120</span>, speed <span class='op'>=</span> <span class='fl'>99</span>, cex <span class='op'>=</span> <span class='fl'>5</span><span class='op'>)</span>
 </div><div class='img'><img src='windbarbs-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># multiplot</span>
@@ -180,7 +180,7 @@ Currently wind barbs are supported up to 190 knots.</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>5</span>,<span class='fl'>4</span><span class='op'>)</span>, mar <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 <span class='kw'>for</span> <span class='op'>(</span><span class='va'>i</span> <span class='kw'>in</span> <span class='fl'>19</span><span class='op'>:</span><span class='fl'>38</span><span class='op'>)</span><span class='op'>{</span>
   <span class='va'>sc</span> <span class='op'>=</span> <span class='fl'>5</span>
-  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>2</span>, xaxt <span class='op'>=</span> <span class='st'>'n'</span>, yaxt <span class='op'>=</span> <span class='st'>'n'</span>, type <span class='op'>=</span> <span class='st'>"n"</span>, xlab <span class='op'>=</span> <span class='st'>""</span>, ylab <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
+  <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fl'>0</span><span class='op'>:</span><span class='fl'>2</span>, xaxt <span class='op'>=</span> <span class='st'>'n'</span>, yaxt <span class='op'>=</span> <span class='st'>'n'</span>, type <span class='op'>=</span> <span class='st'>"n"</span>, xlab <span class='op'>=</span> <span class='st'>""</span>, ylab <span class='op'>=</span> <span class='st'>""</span><span class='op'>)</span>
   <span class='fu'><a href='https://rdrr.io/r/graphics/text.html'>text</a></span><span class='op'>(</span><span class='fl'>1.4</span>,<span class='fl'>1</span>, <span class='va'>i</span><span class='op'>*</span><span class='va'>sc</span>, cex <span class='op'>=</span> <span class='fl'>1.5</span><span class='op'>)</span>
   <span class='fu'>windbarbs</span><span class='op'>(</span>cx <span class='op'>=</span> <span class='fl'>2</span>, cy <span class='op'>=</span> <span class='fl'>1</span>, direction <span class='op'>=</span> <span class='fl'>60</span>, speed <span class='op'>=</span> <span class='va'>i</span><span class='op'>*</span><span class='va'>sc</span>, cex <span class='op'>=</span> <span class='fl'>3</span><span class='op'>)</span>
 <span class='op'>}</span>
