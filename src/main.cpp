@@ -551,6 +551,7 @@ Kinematics::Kinematics(){
   this->vw = new list<Vector>();
   this->llj = Vector(0, 0, 0);
   n2=0;
+  n3=0;
   nsurf=0;
   nsix=0;
   n6=0;
