@@ -3266,21 +3266,20 @@ double IndicesCollector::Bunkers_MW_M(){
 }
 
 double IndicesCollector::wind_3km(){
-  return Get(S->ks->vw,cache->getHeightIndex(3000))* 0.514444;
+	return Get(S->ks->vw,cache->getHeightIndex(3000)).abs()* 0.514444;
 }
 
 double IndicesCollector::wind_2km(){
-  return Get(S->ks->vw,cache->getHeightIndex(2000))* 0.514444;
+	return Get(S->ks->vw,cache->getHeightIndex(2000)).abs()* 0.514444;
 }
 
 double IndicesCollector::wind_1km(){
-  return Get(S->ks->vw,cache->getHeightIndex(1000))* 0.514444;
+	return Get(S->ks->vw,cache->getHeightIndex(1000)).abs()* 0.514444;
 }
 
 double IndicesCollector::wind_500m(){
-  return Get(S->ks->vw,cache->getHeightIndex(500))* 0.514444;
+	return Get(S->ks->vw,cache->getHeightIndex(500)).abs()* 0.514444;
 }
-
 
 double IndicesCollector::Corfidi_upwind_A(){
 	double *tab = S->ks->Corfidi_upwind.toAV(); 
