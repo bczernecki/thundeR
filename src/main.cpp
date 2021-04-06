@@ -3266,19 +3266,19 @@ double IndicesCollector::Bunkers_MW_M(){
 }
 
 double IndicesCollector::wind_3km(){
-  return Get(S->ks->v,cache->getHeightIndex(3000))* 0.514444;
+  return Get(S->ks->vw,cache->getHeightIndex(3000))* 0.514444;
 }
 
 double IndicesCollector::wind_2km(){
-  return Get(S->ks->v,cache->getHeightIndex(2000))* 0.514444;
+  return Get(S->ks->vw,cache->getHeightIndex(2000))* 0.514444;
 }
 
 double IndicesCollector::wind_1km(){
-  return Get(S->ks->v,cache->getHeightIndex(1000))* 0.514444;
+  return Get(S->ks->vw,cache->getHeightIndex(1000))* 0.514444;
 }
 
 double IndicesCollector::wind_500m(){
-  return Get(S->ks->v,cache->getHeightIndex(500))* 0.514444;
+  return Get(S->ks->vw,cache->getHeightIndex(500))* 0.514444;
 }
 
 
