@@ -431,6 +431,10 @@ private:
   Vector mean02;
   Vector mean03;
   Vector mean13;
+  Vector mean26;
+  double n26;
+  Vector mean020;
+  double n020;
   double n13;
   double n2;
   double n3;
@@ -539,6 +543,10 @@ Kinematics::Kinematics(){
   this->mean13 = Vector(0,0,0);
   this->mean0=Vector(0,0,0);
   this->mean6=Vector(0,0,0);
+  
+  this->mean26 = Vector(0,0,0);
+  this->mean020 = Vector(0,0,0);
+  
   this->lasth = h0;
   this->vw = new list<Vector>();
   this->llj = Vector(0, 0, 0);
@@ -565,6 +573,8 @@ Kinematics::Kinematics(){
   
   srh03lmf = 0;
   srh03rmf = 0;
+  n26=0;
+  n020=0;
 }
 Kinematics::~Kinematics(){
   delete(this->vw);
@@ -648,6 +658,15 @@ void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, d
     n1 += 1;
     
   }
+  if(h-h0<=6000 &&h-h0>=2000){
+	  mean26+=v_;
+	  n26+=1;
+  }
+  if(t>=-20 && t<=0.0){
+	  mean020+=v_;
+	  n020+=1;
+  }
+  
   }
 	
   if((fmod(abs(h-h0),200.0)==0.0)||(h==h0)){
@@ -810,6 +829,9 @@ void Kinematics::finishMeanVectors()
   else mean0=Vector(0,0,0);
   if(nsix!=0)mean6/=nsix;
   else mean6=Vector(0,0,0);
+  mean26/=n26;
+  mean020/=n020;
+  
 }
 
 class LapseRate{
@@ -1121,6 +1143,7 @@ public:
   double minTHTE;
   int minTHTEpos;
   double maxOE;
+  double maxOE500;
   double mo;
   int zeropos;
   int wbzeropos;
@@ -1180,6 +1203,7 @@ public:
   double meand2;  
   
   LapseRate* mostUnstable;
+  LapseRate* mostU500;
   LapseRate* surfaceBased;
   LapseRate* meanLayer;
   LapseRate* downdraft;
@@ -1265,6 +1289,7 @@ Thermodynamics::Thermodynamics(){
   this->meanLayer = new LapseRate();
   this->downdraft = new LapseRate();
   this->showalter = new LapseRate();
+  this->mostU500= new LapseRate();
   meanhum2=0;
   meand2b=0;
 
@@ -1300,6 +1325,7 @@ Thermodynamics::~Thermodynamics(){
   delete(this->downdraft);
   delete(this->showalter);
   delete(this->virt);
+  delete(this->mostU500);
 }
 void Thermodynamics::startConditions(int i, double p, double h, double t, double d, double a, double v, double oe)
 {
@@ -1307,8 +1333,10 @@ void Thermodynamics::startConditions(int i, double p, double h, double t, double
   this->t10=t;
   this->surfaceBased->setInitialConditions(i, p, h, t, d, a, v, h0);
   this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
+  this->mostU500->setInitialConditions(i, p, h, t, d, a, v, h0);
   this->lastp = p;
   maxOE = oe;
+  maxOE500=-273.15;
   minTHTE = oe;
   minTHTEpos = i;
   this->lr01 = 0;
@@ -1337,6 +1365,10 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
   {
     maxOE = oe;
     this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
+  }
+  if(oe>maxOE500&&h-h0<=3000 && h-h0>=500){
+	  maxOE500=oe;
+	  this->mostU500->setInitialConditions(i, p, h, t, d, a, v, h0);
   }
 }
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
@@ -1538,7 +1570,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   
   surfaceBased->putLine(i, p, h, t, d, a, v);
   mostUnstable->putLine(i, p, h, t, d, a, v);
-
+  mostU500->putLine(i, p, h, t, d, a, v);
   lastp = p;
   lastt = t;
   lasth = h;
@@ -1572,6 +1604,7 @@ void Thermodynamics::putMeanLine(int i, double p, double h, double t, double d, 
 }
 void Thermodynamics::finish(){
   this->mostUnstable->finish();
+  this->mostU500->finish();
   this->surfaceBased->finish();
   this->meanLayer->finish();
   this->downdraft->finish();
@@ -1795,6 +1828,19 @@ public:
   double SB_coldcape_fraction();
   double MU_coldcape_fraction();
   double HSI();
+  
+  double MSR_MW();
+  double MSR_RM();
+  double MSR_LM();
+  double MSR_MW_HGL();
+  double MSR_RM_HGL();
+  double MSR_LM_HGL();
+  
+  double MU500_CAPE();
+  double MU500_CIN();
+  double MU500_LI();
+  
+  double pojebany_parametr();
 };
 
 void Sounding::alloc(){
@@ -3318,10 +3364,71 @@ double IndicesCollector::HSI(){
   return HSI;
 }
   
+double IndicesCollector::MSR_MW(){
+	Vector res = S->ks->mean02 - S->ks->mean06;
+	return res.abs();
+}
 
+double IndicesCollector::MSR_RM(){
+	Vector res = S->ks->mean02 - S->ks->rm;
+	return res.abs();
+	
+}
+double IndicesCollector::MSR_LM(){
+		Vector res = S->ks->mean02 - S->ks->lm;
+	return res.abs();
+}
+double IndicesCollector::MSR_MW_HGL(){
+		Vector res = S->ks->mean020 - S->ks->mean06;
+		return res.abs();
+}
+double IndicesCollector::MSR_RM_HGL(){
+	Vector res = S->ks->mean020 - S->ks->rm;
+	return res.abs();
+}
+double IndicesCollector::MSR_LM_HGL(){
+	Vector res = S->ks->mean020 - S->ks->lm;
+	return res.abs();
+}
+  
+  double IndicesCollector::MU500_CAPE(){
+	  S->th->mostU500->vcape;
+  }
+  double IndicesCollector::MU500_CIN(){
+	  S->th->mostU500->vcin;
+  }
+  double IndicesCollector::MU500_LI(){
+	   int lindex = cache->getPressureIndex(500);
+  
+		double lit = Get(S->t,lindex);
+  
+		int vindex = lindex - S->th->mostU500->startIndex;
+  
+  
+		double plit = Get(S->th->mostU500->virtualValues,vindex);
+	
+		double Showalter = lit - plit;
+		return Showalter;
+  }
+  
+  double IndicesCollector::pojebany_parametr(){
+	  
+		int m20i = S->th->min20pos;
+		int lfcpos = S->th->mostUnstable->vLfcIndex;
+		Vector lfc=Get(S->ks->vw,lfcpos);;
+		Vector m20=Get(S->ks->vw,m20i);
+		Vector shear = m20-lfc;
+	  
+		Vector storm = S->ks->mean06;
+		Vector mean = S->ks->mean020;
+		Vector sr = mean-storm;
+		double pojebnia=(sr.X()*shear.X() +sr.Y()*shear.Y())/(sr.abs()*shear.abs());
+		return pojebnia;
+  }
+  
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz);
-  double * vec = new double[140];
+  double * vec = new double[150];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->VLLMostUnstableCAPE();
   vec[2]=(*S)->getIndicesCollectorPointer()->MUmiddlecape();
@@ -3468,6 +3575,19 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[137]=(*S)->getIndicesCollectorPointer()->SB_coldcape_fraction();
   vec[138]=(*S)->getIndicesCollectorPointer()->MU_coldcape_fraction();
   vec[139]=(*S)->getIndicesCollectorPointer()->HSI();
+	
+  vec[140]=(*S)->getIndicesCollectorPointer()->MSR_MW();
+  vec[141]=(*S)->getIndicesCollectorPointer()->MSR_RM();
+  vec[142]=(*S)->getIndicesCollectorPointer()->MSR_LM();
+  vec[143]=(*S)->getIndicesCollectorPointer()->MSR_MW_HGL();
+  vec[144]=(*S)->getIndicesCollectorPointer()->MSR_RM_HGL();
+  vec[145]=(*S)->getIndicesCollectorPointer()->MSR_LM_HGL();
+  
+  vec[146]=(*S)->getIndicesCollectorPointer()->MU500_CAPE();
+  vec[147]=(*S)->getIndicesCollectorPointer()->MU500_CIN();
+  vec[148]=(*S)->getIndicesCollectorPointer()->MU500_LI();
+  
+  vec[149]=(*S)->getIndicesCollectorPointer()->pojebany_parametr();
 
   return vec;
 }
@@ -3929,7 +4049,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   int mulen, sblen,mllen,mustart;
 
   double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q);
-	int reslen= 140;
+	int reslen= 150;
 	int maxl=reslen;
 	if(export_profile[0]==1){
 	plen = sret->p->size();
