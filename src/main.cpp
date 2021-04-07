@@ -1811,10 +1811,6 @@ public:
   double LR06();
   double MeanWind03();
 
-
-1
-
-
   double wind_3km();
   double wind_2km();
   double wind_1km();
