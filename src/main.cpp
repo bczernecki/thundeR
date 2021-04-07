@@ -1811,6 +1811,10 @@ public:
   double LR06();
   double MeanWind03();
 
+
+1
+
+
   double wind_3km();
   double wind_2km();
   double wind_1km();
@@ -3576,9 +3580,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[144]=(*S)->getIndicesCollectorPointer()->MU_EFF_WMAXSHEAR();
   vec[145]=(*S)->getIndicesCollectorPointer()->SB_EFF_WMAXSHEAR();
   vec[146]=(*S)->getIndicesCollectorPointer()->ML_EFF_WMAXSHEAR();
-  vec[147]=(*S)->getIndicesCollectorPointer()->MU500_CAPE();
+  vec[147]=(*S)->getIndicesCollectorPointer()->MU500_LI();
   vec[148]=(*S)->getIndicesCollectorPointer()->MU500_CIN();
-  vec[149]=(*S)->getIndicesCollectorPointer()->MU500_LI();
+  vec[149]=(*S)->getIndicesCollectorPointer()->MU500_CAPE();
   return vec;
 }
 
