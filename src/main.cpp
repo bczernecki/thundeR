@@ -3392,10 +3392,10 @@ double IndicesCollector::MSR_LM_HGL(){
 }
   
   double IndicesCollector::MU500_CAPE(){
-	  S->th->mostU500->vcape;
+	  return S->th->mostU500->vcape;
   }
   double IndicesCollector::MU500_CIN(){
-	  S->th->mostU500->vcin;
+	  return S->th->mostU500->vcin;
   }
   double IndicesCollector::MU500_LI(){
 	   int lindex = cache->getPressureIndex(500);
@@ -3576,9 +3576,11 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[144]=(*S)->getIndicesCollectorPointer()->MU_EFF_WMAXSHEAR();
   vec[145]=(*S)->getIndicesCollectorPointer()->SB_EFF_WMAXSHEAR();
   vec[146]=(*S)->getIndicesCollectorPointer()->ML_EFF_WMAXSHEAR();
-  vec[147]=(*S)->getIndicesCollectorPointer()->MU500_LI();
+  vec[147]=(*S)->getIndicesCollectorPointer()->MU500_CAPE();
   vec[148]=(*S)->getIndicesCollectorPointer()->MU500_CIN();
-    cout <<(*S)->getIndicesCollectorPointer()->MU500_CAPE()<<endl;
+  vec[149]=(*S)->getIndicesCollectorPointer()->MU500_LI();
+
+
   return vec;
 }
 
