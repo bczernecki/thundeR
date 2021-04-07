@@ -2480,39 +2480,39 @@ double IndicesCollector::max_LR16_1km(){
   double tup = Get(S->t,upper);
   double LR12 = 1000*((tup-tlow)/(hup-hlow)); 
 
-  int lower = cache->getHeightIndex(2000);
-  int upper = cache->getHeightIndex(3000);
-  double hlow = Get(S->h,lower);
-  double hup = Get(S->h,upper);
-  double tlow = Get(S->t,lower);
-  double tup = Get(S->t,upper);
-  double LR23 = 1000*((tup-tlow)/(hup-hlow)); 
+  int lower2 = cache->getHeightIndex(2000);
+  int upper2 = cache->getHeightIndex(3000);
+  double hlow2 = Get(S->h,lower2);
+  double hup2 = Get(S->h,upper2);
+  double tlow2 = Get(S->t,lower2);
+  double tup2 = Get(S->t,upper2);
+  double LR23 = 1000*((tup2-tlow2)/(hup2-hlow2)); 
 
-  int lower = cache->getHeightIndex(3000);
-  int upper = cache->getHeightIndex(4000);
-  double hlow = Get(S->h,lower);
-  double hup = Get(S->h,upper);
-  double tlow = Get(S->t,lower);
-  double tup = Get(S->t,upper);
-  double LR34 = 1000*((tup-tlow)/(hup-hlow)); 
+  int lower3 = cache->getHeightIndex(3000);
+  int upper3 = cache->getHeightIndex(4000);
+  double hlow3 = Get(S->h,lower3);
+  double hup3 = Get(S->h,upper3);
+  double tlow3 = Get(S->t,lower3);
+  double tup3 = Get(S->t,upper3);
+  double LR34 = 1000*((tup3-tlow3)/(hup3-hlow3)); 
 
-  int lower = cache->getHeightIndex(4000);
-  int upper = cache->getHeightIndex(5000);
-  double hlow = Get(S->h,lower);
-  double hup = Get(S->h,upper);
-  double tlow = Get(S->t,lower);
-  double tup = Get(S->t,upper);
-  double LR45 = 1000*((tup-tlow)/(hup-hlow)); 
+  int lower4 = cache->getHeightIndex(4000);
+  int upper4 = cache->getHeightIndex(5000);
+  double hlow4 = Get(S->h,lower4);
+  double hup4 = Get(S->h,upper4);
+  double tlow4 = Get(S->t,lower4);
+  double tup4 = Get(S->t,upper4);
+  double LR45 = 1000*((tup4-tlow4)/(hup4-hlow4)); 
 
-  int lower = cache->getHeightIndex(5000);
-  int upper = cache->getHeightIndex(6000);
-  double hlow = Get(S->h,lower);
-  double hup = Get(S->h,upper);
-  double tlow = Get(S->t,lower);
-  double tup = Get(S->t,upper);
-  double LR56 = 1000*((tup-tlow)/(hup-hlow)); 
+  int lower5 = cache->getHeightIndex(5000);
+  int upper5 = cache->getHeightIndex(6000);
+  double hlow5 = Get(S->h,lower5);
+  double hup5 = Get(S->h,upper5);
+  double tlow5 = Get(S->t,lower5);
+  double tup5 = Get(S->t,upper5);
+  double LR56 = 1000*((tup5-tlow5)/(hup5-hlow5)); 
 
-  return = min(min(min(LR12,LR23),min(LR34,LR45)),LR56);
+  return min(min(min(LR12,LR23),min(LR34,LR45)),LR56);
 }
 
 double IndicesCollector::max_LR16_2km(){
@@ -2524,31 +2524,31 @@ double IndicesCollector::max_LR16_2km(){
   double tup = Get(S->t,upper);
   double LR12 = 1000*((tup-tlow)/(hup-hlow)); 
 
-  int lower = cache->getHeightIndex(2000);
-  int upper = cache->getHeightIndex(4000);
-  double hlow = Get(S->h,lower);
-  double hup = Get(S->h,upper);
-  double tlow = Get(S->t,lower);
-  double tup = Get(S->t,upper);
-  double LR23 = 1000*((tup-tlow)/(hup-hlow)); 
+  int lower2 = cache->getHeightIndex(2000);
+  int upper2 = cache->getHeightIndex(4000);
+  double hlow2 = Get(S->h,lower2);
+  double hup2 = Get(S->h,upper2);
+  double tlow2 = Get(S->t,lower2);
+  double tup2 = Get(S->t,upper2);
+  double LR23 = 1000*((tup2-tlow2)/(hup2-hlow2)); 
 
-  int lower = cache->getHeightIndex(3000);
-  int upper = cache->getHeightIndex(5000);
-  double hlow = Get(S->h,lower);
-  double hup = Get(S->h,upper);
-  double tlow = Get(S->t,lower);
-  double tup = Get(S->t,upper);
-  double LR34 = 1000*((tup-tlow)/(hup-hlow)); 
+  int lower3 = cache->getHeightIndex(3000);
+  int upper3 = cache->getHeightIndex(5000);
+  double hlow3 = Get(S->h,lower3);
+  double hup3 = Get(S->h,upper3);
+  double tlow3 = Get(S->t,lower3);
+  double tup3 = Get(S->t,upper3);
+  double LR34 = 1000*((tup3-tlow3)/(hup3-hlow3)); 
 
-  int lower = cache->getHeightIndex(4000);
-  int upper = cache->getHeightIndex(6000);
-  double hlow = Get(S->h,lower);
-  double hup = Get(S->h,upper);
-  double tlow = Get(S->t,lower);
-  double tup = Get(S->t,upper);
-  double LR45 = 1000*((tup-tlow)/(hup-hlow)); 
+  int lower4 = cache->getHeightIndex(4000);
+  int upper4 = cache->getHeightIndex(6000);
+  double hlow4 = Get(S->h,lower4);
+  double hup4 = Get(S->h,upper4);
+  double tlow4 = Get(S->t,lower4);
+  double tup4 = Get(S->t,upper4);
+  double LR45 = 1000*((tup4-tlow4)/(hup4-hlow4)); 
 
-  return = min(min(LR12,LR23),min(LR34,LR45));
+  return min(min(LR12,LR23),min(LR34,LR45));
 }
 
 double IndicesCollector::LR0500(){
