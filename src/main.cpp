@@ -3578,7 +3578,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[146]=(*S)->getIndicesCollectorPointer()->ML_EFF_WMAXSHEAR();
   vec[147]=(*S)->getIndicesCollectorPointer()->MU500_LI();
   vec[148]=(*S)->getIndicesCollectorPointer()->MU500_CIN();
-  vec[149]=(*S)->getIndicesCollectorPointer()->MU500_CAPE();
+    cout <<(*S)->getIndicesCollectorPointer()->MU500_CAPE()<<endl;
   return vec;
 }
 
