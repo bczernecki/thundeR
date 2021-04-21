@@ -332,11 +332,11 @@ Cache::Cache(){
   this->inith();
 }
 Cache::~Cache(){
-  delete(this->pindex);
-  delete(this->p);
+  delete[](this->pindex);
+  delete[](this->p);
   
-  delete(this->hindex);
-  delete(this->h);
+  delete[](this->hindex);
+  delete[](this->h);
 }
 void Cache::initp(){
   for(int i=0;i<10;i++){
@@ -3145,7 +3145,7 @@ int interpolate(double **pu, double **hu, double **tu, double **du, double **au,
         listToArray(va, na, u);
         listToArray(vv, nv, u);
        
-        delete(*pu);delete(*hu);delete(*tu);delete(*du);delete(*au);delete(*vu);
+        delete[](*pu);delete[](*hu);delete[](*tu);delete[](*du);delete[](*au);delete[](*vu);
        
         *pu=np;*hu=nh;*tu=nt;*du=nd;*au=na;*vu=nv;
        
