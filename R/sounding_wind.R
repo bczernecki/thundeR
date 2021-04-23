@@ -20,8 +20,7 @@
 #' @examples 
 #' # load examplary dataset:
 #' data("sounding_vienna")
-#' attach(sounding_vienna)
-#' sounding_wind(pressure = pressure, ws = ws, yaxs = TRUE)
+#' sounding_wind(pressure = sounding_vienna$pressure, ws = sounding_vienna$ws, yaxs = TRUE)
 
 sounding_wind = function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         
