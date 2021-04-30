@@ -10,7 +10,7 @@ Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("
     person("Liangying", "Zhang", role = c("ctb")),
     person("Tim", "Hoar", role = c("ctb")))
 Maintainer: Bartosz Czernecki <nwp@amu.edu.pl>
-Description: Collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized C++ code linked into R via Rcpp. Highly efficient engine allows to derive thermodynamic and kinematic parameters from large numerical datasets such as reanalyses or operational Numerical Weather Prediction models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe thunderstorms.
+Description: Collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized 'C++' code linked into R via 'Rcpp'. Highly efficient engine allows to derive thermodynamic and kinematic parameters from large numerical datasets such as reanalyses or operational Numerical Weather Prediction models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe thunderstorms.
 License: GPL (>= 2)
 Imports:
     Rcpp (>= 0.12.9.4),
