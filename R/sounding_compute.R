@@ -166,6 +166,9 @@
 #'  \item MU500_CAPE 
 #'  \item MU500_CIN 
 #'  \item MU500_LI 
+#'  \item MU_02km_CAPE 
+#'  \item SB_02km_CAPE 
+#'  \item ML_02km_CAPE 
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -353,7 +356,10 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "ML_EFF_WMAXSHEAR",
 "MU500_CAPE",
 "MU500_CIN",
-"MU500_LI")
+"MU500_LI",
+"MU_02km_CAPE", 
+"SB_02km_CAPE", 
+"ML_02km_CAPE")
        
   return(tmp)
 }
