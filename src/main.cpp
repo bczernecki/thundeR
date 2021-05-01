@@ -857,6 +857,7 @@ private:
   double vcape;
   double vcin;
   double vto3cape;
+  double vto2cape;
   
   double os;
   double o;
@@ -912,7 +913,7 @@ list<double> *getVirtualValues(){
 void LapseRate::allocate(){
   values = new list<double>();
   virtualValues = new list<double>();
-  cape = cin = to3cape = vcape = vcin = vto3cape = os = o = w = vos=vo=vw=0;
+  cape = cin = to3cape = to2cape = vcape = vcin = vto3cape = os = o = w = vos=vo=vw=0;
   middlecape=0;
   coldcape=0;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
@@ -1053,7 +1054,7 @@ void LapseRate::prepareForDCAPE(){
   this->free();
   values = new list<double>();
   virtualValues = new list<double>();
-  cape = cin = to3cape = vcape = vcin = vto3cape = 0;
+  cape = cin = to3cape = to2cape = vcape = vcin = vto3cape = 0;
   dcape = 0;
   dvcape = 0;
   startIndex = 0;
@@ -1087,6 +1088,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
         }
         vcape += tcap;
         if (h - h0 < 3000) vto3cape = vcape;
+	      if (h - h0 < 2000) vto2cape = vcape;
 		if(t<=0&&t>=-20)middlecape+=tcap;
 			if(t<=-10)coldcape+=tcap;
       }
@@ -1854,6 +1856,10 @@ public:
   double tilting_MW();
   double tilting_RM();
   double tilting_LM();
+	
+  double N02MUCAPE();
+  double N02SBCAPE();
+  double N02MLCAPE();
 };
 
 void Sounding::alloc(){
@@ -3628,9 +3634,34 @@ double IndicesCollector::MSR_LM_HGL(){
 		return pojebnia;
   }
 
+double IndicesCollector::N02MUCAPE()
+{
+  double result = 0;
+  result = S->th->mostUnstable->vto2cape;
+  
+  return result;
+}
+
+double IndicesCollector::N02SBCAPE()
+{
+  double result = 0;
+  result = S->th->surfaceBased->vto2cape;
+  
+  return result;
+}
+
+double IndicesCollector::N02MLCAPE()
+{
+  double result = 0;
+  result = S->th->meanLayer->vto2cape;
+  
+  return result;
+}
+
+
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz);
-  double * vec = new double[160];
+  double * vec = new double[163];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->MU_coldcape_fraction();
   vec[2]=(*S)->getIndicesCollectorPointer()->VLLMostUnstableCAPE();
@@ -3791,6 +3822,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[157]=(*S)->getIndicesCollectorPointer()->MU500_CAPE();
   vec[158]=(*S)->getIndicesCollectorPointer()->MU500_CIN();
   vec[159]=(*S)->getIndicesCollectorPointer()->MU500_LI();
+  vec[160]=(*S)->getIndicesCollectorPointer()->N02MUCAPE();
+  vec[161]=(*S)->getIndicesCollectorPointer()->N02SBCAPE();
+  vec[162]=(*S)->getIndicesCollectorPointer()->N02MLCAPE();
   return vec;
 }
 
@@ -4274,6 +4308,9 @@ double * sounding_default2(double* pressure,
 //'  \item MU500_CAPE 
 //'  \item MU500_CIN 
 //'  \item MU500_LI 
+//'  \item MU_02km_CAPE 
+//'  \item SB_02km_CAPE 
+//'  \item ML_02km_CAPE 
 //' }
 // [[Rcpp::export]]
 
@@ -4304,7 +4341,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   int mulen, sblen,mllen,mustart;
 
   double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q);
-	int reslen= 160;
+	int reslen= 163;
 	int maxl=reslen;
 	if(export_profile[0]==1){
 	plen = sret->p->size();
