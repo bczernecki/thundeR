@@ -2674,12 +2674,11 @@ double IndicesCollector::MinTHTEHeight(){
 }
 
 double IndicesCollector::DeltaThetaE(){
-  return Get(S->th->downdraft->virtualValues,0);
- // return Get(S->th->oe,0)-S->th->thetd;
+ return Get(S->th->oe,0)-S->th->thetd;
 }
 
 double IndicesCollector::VirtualColdPoolStrength(){
-  return tv(S->th->t0,Get(S->th->mixing,0));
+  return tv(S->th->t0,Get(S->th->mixing,0))-Get(S->th->downdraft->virtualValues,0);
 }
 
 double IndicesCollector::WindIndex(){
