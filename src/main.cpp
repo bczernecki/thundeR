@@ -2678,7 +2678,7 @@ double IndicesCollector::DeltaThetaE(){
 }
 
 double IndicesCollector::VirtualColdPoolStrength(){
-  return tv(S->th->t0,Get(S->th->mixing,0))-Get(S->th->downdraft->virtualValues,0);
+  return tv(S->th->t0,Get(S->th->mixing,1))-Get(S->th->downdraft->virtualValues,1);
 }
 
 double IndicesCollector::WindIndex(){
