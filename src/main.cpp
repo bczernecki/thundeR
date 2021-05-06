@@ -853,6 +853,7 @@ private:
   double cape;
   double cin;
   double to3cape;
+  double to2cape;
   
   double vcape;
   double vcin;
@@ -887,7 +888,7 @@ private:
   void free();
   
   void testSpecificLCL(int i,double p,double t,double tmr, double tda, int* lclInd_, int* lfcInd_, list<double>* curve_, double*os_);
-  void doRest(int i, double p,double h, double t, double TSA, int* lfcInd_, double* cape_, double* to3, double* cin_, int* elInd_, list<double>* curve_);
+  void doRest(int i, double p,double h, double t, double TSA, int* lfcInd_, double* cape_, double* to3, double* to2, double* cin_, int* elInd_, list<double>* curve_);
   void putClassicLine(int i, double p, double h, double t,double d, double a, double v);
   void putVirtualLine(int i, double p, double h, double t, double d, double a, double v);
   
@@ -913,7 +914,7 @@ list<double> *getVirtualValues(){
 void LapseRate::allocate(){
   values = new list<double>();
   virtualValues = new list<double>();
-  cape = cin = to3cape = to2cape = vcape = vcin = vto3cape = os = o = w = vos=vo=vw=0;
+  cape = cin = to3cape = to2cape = vcape = vcin = vto3cape = vto2cape = os = o = w = vos=vo=vw=0;
   middlecape=0;
   coldcape=0;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
@@ -971,7 +972,7 @@ void LapseRate::testSpecificLCL(int i,double p,double t,double tmr, double tda, 
     }
   }
 }
-void LapseRate::doRest(int i, double p,double h, double t, double TSA, int* lfcInd_, double* cape_, double* to3, double* cin_, int* elInd_, list<double>* curve_){
+void LapseRate::doRest(int i, double p,double h, double t, double TSA, int* lfcInd_, double* cape_, double* to3, double* to2, double* cin_, int* elInd_, list<double>* curve_){
   curve_->push_back(TSA);
   double dz = abs(h - lasth);
   double tcap = g * dz * (TSA - t) / (t + kel);
@@ -1022,7 +1023,7 @@ void LapseRate::putClassicLine(int i, double p, double h, double t,double d, dou
   if (lclIndex != -1)
   {
     double TSA_ = TSA(os, p);
-    this->doRest(i, p, h, t, TSA_, &lfcIndex, &cape, &to3cape, &cin, &elIndex, values);
+    this->doRest(i, p, h, t, TSA_, &lfcIndex, &cape, &to3cape, &to2cape, &cin, &elIndex, values);
   }    else
             {
 
@@ -1054,7 +1055,7 @@ void LapseRate::prepareForDCAPE(){
   this->free();
   values = new list<double>();
   virtualValues = new list<double>();
-  cape = cin = to3cape = to2cape = vcape = vcin = vto3cape = 0;
+  cape = cin = to3cape = to2cape = vcape = vcin = vto3cape = vto2cape = 0;
   dcape = 0;
   dvcape = 0;
   startIndex = 0;
