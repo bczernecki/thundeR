@@ -3087,7 +3087,7 @@ double IndicesCollector::SCPeff(){
   double cin = this->VMostUnstableCIN();
 
   if(cin>-40)cin=1;
-  else cin=-40/cin;
+  else cin=(-40)/cin;
 	
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
