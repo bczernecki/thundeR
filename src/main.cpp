@@ -3258,7 +3258,7 @@ int interpolate2(double **pu, double **hu, double **tu, double **du, double **au
         listToArray(va, na, u);
         listToArray(vv, nv, u);
        
-        delete(*pu);delete(*hu);delete(*tu);delete(*du);delete(*au);delete(*vu);
+        delete[](*pu);delete[](*hu);delete[](*tu);delete[](*du);delete[](*au);delete[](*vu);
        
         *pu=np;*hu=nh;*tu=nt;*du=nd;*au=na;*vu=nv;
        
