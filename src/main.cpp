@@ -838,8 +838,6 @@ void Kinematics::finishMeanVectors()
 class LapseRate{
   friend class IndicesCollector;
 private:
-  list<double> *values;
-  list<double> *virtualValues;
   
   int lclIndex;
   int vLclIndex;
@@ -894,6 +892,8 @@ private:
   
   
 public:
+  list<double> *values;
+  list<double> *virtualValues;
 	double lasth;
 list<double> *getVirtualValues(){
 	  return this->virtualValues;
@@ -2003,6 +2003,7 @@ void Sounding::finish(){
   ks->finish();
   
 }
+
 void Sounding::secondPhase(){
   list<double>::iterator ip;
   list<double>::iterator ih = this->h->begin();
@@ -2031,7 +2032,15 @@ void Sounding::secondPhase(){
   iv = this->v->begin();
   double h0=*ih;
   this->th->downdraft->lasth=h0;
+  
+  std::list<double> vals (*this->th->downdraft->values); 
+  std::list<double> virtvals (*this->th->downdraft->virtualValues); 
+  
+  this->th->downdraft->values->clear();
+  this->th->downdraft->virtualValues->clear();
+
   for(ip = this->p->begin(); ip!=this->p->end(); ++ip){
+
     double p_ = *ip;
     double h_ = *ih;
 	if(h_-h0>=4000)break;
@@ -2039,8 +2048,18 @@ void Sounding::secondPhase(){
     double d_ = *id;
     double a_ = *ia;
     double v_ = *iv;
+	
     this->th->downdraft->putLine(i, p_, h_, t_, d_, a_, v_);
     ++ih;++it;++id;++ia;++iv;++i;
+  }
+  
+  list<double>::iterator vv=vals.begin(); list<double>::iterator vvv=virtvals.begin();
+  while(vv!=vals.end()){
+  	double u = *vv;
+  	double w = *vvv;
+  	this->th->downdraft->values->push_back(u);
+  	this->th->downdraft->virtualValues->push_back(w);
+  	vv++;vvv++;
   }
   
 }
