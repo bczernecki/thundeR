@@ -3070,7 +3070,7 @@ double IndicesCollector::STPeff(){
   double sbcape = this->VMeanLayerCAPE()/1500;
   double sblcl = this->VMeanLayerLCL();
   double srh1 = this->SRH500RM()/75;
-  double bwd = this->emubs();
+  double bwd = this->emlbs();
   double cin = this->VMeanLayerCIN();	
   
   if(sblcl<1000)sblcl=1;
@@ -3678,10 +3678,21 @@ double IndicesCollector::N02MLCAPE()
   return result;
 }
 
+double IndicesCollector::EHI03(){
+  return (this->VSurfaceBasedCAPE()*this->SRH03RM())/160000;
+}
+
+double IndicesCollector::EHI01(){
+  return (this->VSurfaceBasedCAPE()*this->SRH01RM())/160000;
+}
+
+double IndicesCollector::EHI500(){
+  return (this->VSurfaceBasedCAPE()*this->SRH500RM())/160000;
+}
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz);
-  double * vec = new double[163];
+  double * vec = new double[166];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->MU_coldcape_fraction();
   vec[2]=(*S)->getIndicesCollectorPointer()->VLLMostUnstableCAPE();
@@ -3844,7 +3855,10 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[159]=(*S)->getIndicesCollectorPointer()->MU500_LI();
   vec[160]=(*S)->getIndicesCollectorPointer()->N02MUCAPE();
   vec[161]=(*S)->getIndicesCollectorPointer()->N02SBCAPE();
-  vec[162]=(*S)->getIndicesCollectorPointer()->N02MLCAPE();
+  vec[162]=(*S)->getIndicesCollectorPointer()->N02MLCAPE();		
+  vec[163]=(*S)->getIndicesCollectorPointer()->EHI03();
+  vec[164]=(*S)->getIndicesCollectorPointer()->EHI01();
+  vec[165]=(*S)->getIndicesCollectorPointer()->EHI500();
   return vec;
 }
 
@@ -4361,7 +4375,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   int mulen, sblen,mllen,mustart;
 
   double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q);
-	int reslen= 163;
+	int reslen= 166;
 	int maxl=reslen;
 	if(export_profile[0]==1){
 	plen = sret->p->size();
