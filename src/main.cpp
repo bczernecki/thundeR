@@ -4345,6 +4345,9 @@ double * sounding_default2(double* pressure,
 //'  \item MU_02km_CAPE 
 //'  \item SB_02km_CAPE 
 //'  \item ML_02km_CAPE 
+//'  \item EHI_03km 
+//'  \item EHI_01km 
+//'  \item EHI_500m 
 //' }
 // [[Rcpp::export]]
 
