@@ -169,6 +169,10 @@
 #'  \item MU_02km_CAPE 
 #'  \item SB_02km_CAPE 
 #'  \item ML_02km_CAPE 
+#'  \item EHI_03km 
+#'  \item EHI_01km 
+#'  \item EHI_500m 
+
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -359,7 +363,10 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "MU500_LI",
 "MU_02km_CAPE", 
 "SB_02km_CAPE", 
-"ML_02km_CAPE")
+"ML_02km_CAPE",
+"EHI_03km",
+"EHI_01km",
+"EHI_500m")
        
   return(tmp)
 }
