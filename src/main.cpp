@@ -1861,6 +1861,10 @@ public:
   double N02MUCAPE();
   double N02SBCAPE();
   double N02MLCAPE();
+	
+  double EHI03();
+  double EHI01();
+  double EHI500();
 };
 
 void Sounding::alloc(){
