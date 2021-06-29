@@ -68,7 +68,7 @@
 #'  \item HGT_max_thetae_03km 
 #'  \item HGT_min_thetae_04km 
 #'  \item Delta_thetae 
-#'  \item Delta_thetae_HGL 
+#'  \item Delta_thetae_min04km 
 #'  \item DCAPE 
 #'  \item Cold_Pool_Strength 
 #'  \item Wind_Index 
@@ -263,7 +263,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "HGT_max_thetae_03km",
 "HGT_min_thetae_04km",
 "Delta_thetae",
-"Delta_thetae_HGL",
+"Delta_thetae_min04km",
 "DCAPE",
 "Cold_Pool_Strength",
 "Wind_Index",
