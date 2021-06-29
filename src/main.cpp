@@ -1389,7 +1389,7 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
   }
   
   
-  if((abs(h - h0) <= 5000)&&(abs(h - h0) >= 3000)&&(fmod(abs(h-h0),200.0)==0.0)){
+  if((abs(h - h0) <= 5400)&&(abs(h - h0) >= 2600)&&(fmod(abs(h-h0),200.0)==0.0)){
 	downmr+=W(d,p);
 	downmrn+=1;
 	downo+=O(t,p);
@@ -1732,7 +1732,7 @@ public:
   double MUHeight();
   double MinTHTEHeight();
   double DeltaThetaE();
-  double DeltaThetaE_HGL();
+  double DeltaThetaE_min04km();
   double VDCAPE();	
   double VirtualColdPoolStrength();
   double WindIndex();
@@ -2700,6 +2700,10 @@ double IndicesCollector::DeltaThetaE(){
  return Get(S->th->oe,0)-S->th->thetd;
 }
 
+double IndicesCollector::DeltaThetaE_min04km(){
+ return Get(S->th->oe,0)-S->th->minTHTE;
+}
+
 double IndicesCollector::VirtualColdPoolStrength(){
   return tv(S->th->t0,Get(S->th->mixing,0))-Get(S->th->downdraft->virtualValues,0);
 }
@@ -3174,10 +3178,9 @@ double IndicesCollector::ML_EFF_WMAXSHEAR(){
   return this->VMeanLayerVmax()*this->emlbs();
 }
 
-
-double IndicesCollector::DeltaThetaE_HGL(){
-  return Get(S->th->oe,0)-S->th->mthet;
-}
+//double IndicesCollector::DeltaThetaE_HGL(){
+//  return Get(S->th->oe,0)-S->th->mthet;
+//}
 
 double IndicesCollector::BulkShearSfcTen(){
   int tail=0;
@@ -3759,7 +3762,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[59]=(*S)->getIndicesCollectorPointer()->MUHeight();
   vec[60]=(*S)->getIndicesCollectorPointer()->MinTHTEHeight();
   vec[61]=(*S)->getIndicesCollectorPointer()->DeltaThetaE();
-  vec[62]=(*S)->getIndicesCollectorPointer()->DeltaThetaE_HGL();
+  vec[62]=(*S)->getIndicesCollectorPointer()->DeltaThetaE_min04km();
   vec[63]=(*S)->getIndicesCollectorPointer()->VDCAPE(); 
   vec[64]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();
   vec[65]=(*S)->getIndicesCollectorPointer()->WindIndex();
@@ -4248,7 +4251,7 @@ double * sounding_default2(double* pressure,
 //'  \item HGT_max_thetae_03km 
 //'  \item HGT_min_thetae_04km 
 //'  \item Delta_thetae 
-//'  \item Delta_thetae_HGL 
+//'  \item Delta_thetae_min04km 
 //'  \item DCAPE 
 //'  \item Cold_Pool_Strength 
 //'  \item Wind_Index 
