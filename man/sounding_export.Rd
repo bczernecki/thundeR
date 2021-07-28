@@ -39,9 +39,10 @@ Internal package function for exporting interpolated profile with 5 m steps
 }
 \examples{
 data("sounding_vienna")
-attach(sounding_vienna)
 skewt_plot(close_par = FALSE)
-output = sounding_export(pressure, altitude, temp, dpt, wd, ws)
+output = sounding_export(pressure = sounding_vienna$pressure, altitude = sounding_vienna$altitude,
+                         temp = sounding_vienna$temp, dpt = sounding_vienna$dpt,  
+                         wd = sounding_vienna$wd, ws = sounding_vienna$ws)
 skewt_lines(output$dpt, output$pressure, col = 'forestgreen', lwd = 2.5)
 skewt_lines(output$temp,output$pressure, col = 'red', lwd = 2.5)
 skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)

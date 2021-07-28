@@ -28,9 +28,9 @@
 #' title("Your title")
 #' mtext('WMO ID: 11035, 2011-08-23 1200 UTC', padj = -0.5, col = "white")
 #' data("sounding_vienna")
-#' attach(sounding_vienna)
 #' 
-#' output = sounding_export(pressure, altitude, temp, dpt, wd, ws)
+#' output = sounding_export(sounding_vienna$pressure, sounding_vienna$altitude, 
+#'          sounding_vienna$temp, sounding_vienna$dpt, sounding_vienna$wd, sounding_vienna$ws)
 #' skewt_lines(output$dpt, output$pressure,type='l',col='forestgreen',lwd = 2.5)
 #' skewt_lines(output$temp,output$pressure,type='l',col='red', lwd = 2.5)
 #' skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)

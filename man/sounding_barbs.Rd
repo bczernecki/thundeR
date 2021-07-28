@@ -45,8 +45,8 @@ Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
 \examples{
 # load examplary dataset:
 data("sounding_vienna")
-attach(sounding_vienna)
-sounding_barbs(pressure = pressure, ws = ws, wd = wd, altitude = altitude,
-              interpolate = TRUE, showaxis = TRUE)
+sounding_barbs(pressure = sounding_vienna$pressure, ws = sounding_vienna$ws, 
+               wd = sounding_vienna$wd, altitude = sounding_vienna$altitude,
+               interpolate = TRUE, showaxis = TRUE)
 
 }

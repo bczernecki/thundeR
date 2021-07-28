@@ -49,9 +49,10 @@ on a single layout and saves as graphical file.
 \examples{
 \donttest{
 data("sounding_vienna")
-attach(sounding_vienna)
 sounding_save(filename = "Vienna.png", 
-              pressure, altitude, temp, dpt, wd, ws, parcel = "MU", 
+              sounding_vienna$pressure, sounding_vienna$altitude, sounding_vienna$temp, 
+              sounding_vienna$dpt, sounding_vienna$wd, sounding_vienna$ws, 
+              parcel = "MU", 
               title = "Vienna - 23 August 2011, 12:00 UTC")
 } 
 
