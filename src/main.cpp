@@ -3148,7 +3148,7 @@ int interpolate(double **pu, double **hu, double **tu, double **du, double **au,
         delete[](*pu);delete[](*hu);delete[](*tu);delete[](*du);delete[](*au);delete[](*vu);
        
         *pu=np;*hu=nh;*tu=nt;*du=nd;*au=na;*vu=nv;
-       
+        np=0;nh=0;nt=0;nd=0;na=0;nv=0;
         return u;
        
    
@@ -3261,7 +3261,7 @@ int interpolate2(double **pu, double **hu, double **tu, double **du, double **au
         delete[](*pu);delete[](*hu);delete[](*tu);delete[](*du);delete[](*au);delete[](*vu);
        
         *pu=np;*hu=nh;*tu=nt;*du=nd;*au=na;*vu=nv;
-       
+		np=0;nh=0;nt=0;nd=0;na=0;nv=0;
         return u;
        
    
