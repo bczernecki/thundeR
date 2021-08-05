@@ -3,7 +3,7 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: bczernecki/thunder:latest
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
