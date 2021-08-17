@@ -310,7 +310,7 @@ private:
   
 public:
   Cache();
-  ~Cache();
+  virtual ~Cache();
   int getPressureIndex(double pressure);
   int getHeightIndex(double height);
   double * getArray(int i, int* len);
@@ -332,11 +332,11 @@ Cache::Cache(){
   this->inith();
 }
 Cache::~Cache(){
-  delete(this->pindex);
-  delete(this->p);
+  delete[](this->pindex);
+  delete[](this->p);
   
-  delete(this->hindex);
-  delete(this->h);
+  delete[](this->hindex);
+  delete[](this->h);
 }
 void Cache::initp(){
   for(int i=0;i<10;i++){
@@ -864,7 +864,7 @@ list<double> *getVirtualValues(){
 void LapseRate::allocate(){
   values = new list<double>();
   virtualValues = new list<double>();
-  cape = cin = to3cape = vcape = vcin = vto3cape = os = o = w = vos=vo=vw=0;
+  cape = cin = to3cape = vcape = vcin = vto3cape = os = o = w = vos=vo=vw=0; dcape = dvcape = 0; i700index = 0;
   middlecape=0;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
   startIndex=-1;
@@ -1005,8 +1005,8 @@ void LapseRate::prepareForDCAPE(){
   values = new list<double>();
   virtualValues = new list<double>();
   cape = cin = to3cape = vcape = vcin = vto3cape = 0;
-  dcape = 0;
-  dvcape = 0;
+  // dcape = 0;
+  // dvcape = 0;
   startIndex = 0;
   dcape_ = true;
   lasth = h0;
@@ -3145,7 +3145,7 @@ int interpolate(double **pu, double **hu, double **tu, double **du, double **au,
         listToArray(va, na, u);
         listToArray(vv, nv, u);
        
-        delete(*pu);delete(*hu);delete(*tu);delete(*du);delete(*au);delete(*vu);
+        delete[](*pu);delete[](*hu);delete[](*tu);delete[](*du);delete[](*au);delete[](*vu);
        
         *pu=np;*hu=nh;*tu=nt;*du=nd;*au=na;*vu=nv;
        
@@ -3258,7 +3258,7 @@ int interpolate2(double **pu, double **hu, double **tu, double **du, double **au
         listToArray(va, na, u);
         listToArray(vv, nv, u);
        
-        delete(*pu);delete(*hu);delete(*tu);delete(*du);delete(*au);delete(*vu);
+        delete[](*pu);delete[](*hu);delete[](*tu);delete[](*du);delete[](*au);delete[](*vu);
        
         *pu=np;*hu=nh;*tu=nt;*du=nd;*au=na;*vu=nv;
        

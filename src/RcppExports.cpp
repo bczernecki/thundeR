@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // sounding_default
 Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure, Rcpp::NumericVector altitude, Rcpp::NumericVector temp, Rcpp::NumericVector dpt, Rcpp::NumericVector wd, Rcpp::NumericVector ws, Rcpp::NumericVector export_profile, Rcpp::NumericVector accuracy);
 RcppExport SEXP _thunder_sounding_default(SEXP pressureSEXP, SEXP altitudeSEXP, SEXP tempSEXP, SEXP dptSEXP, SEXP wdSEXP, SEXP wsSEXP, SEXP export_profileSEXP, SEXP accuracySEXP) {
