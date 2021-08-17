@@ -944,7 +944,7 @@ void LapseRate::doRest(int i, double p,double h, double t, double TSA, int* lfcI
   }
   else
   {
-    if (i <= i700index&& this->dcape_)
+    if (i <= i700index&&this->dcape_)
     {
       dcape += tcap;
     }
@@ -1005,8 +1005,8 @@ void LapseRate::prepareForDCAPE(){
   values = new list<double>();
   virtualValues = new list<double>();
   cape = cin = to3cape = vcape = vcin = vto3cape = 0;
-  dcape = 0;
-  dvcape = 0;
+  // dcape = 0;
+  // dvcape = 0;
   startIndex = 0;
   dcape_ = true;
   lasth = h0;
@@ -1587,7 +1587,7 @@ bool Sounding::checkarguments(double *p_, double *h_, double *t_, double *d_, do
 class IndicesCollector{
 private:
   Thermodynamics *th;
-  Cache *cache;
+  Cache* cache;
   Kinematics *ks;
   Sounding *S;
 public:
