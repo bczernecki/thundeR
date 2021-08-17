@@ -27,6 +27,5 @@ Can be launched as standalone function or coupled with pre-drawn Skew-T diagram.
 \examples{
 # load examplary dataset:
 data("sounding_vienna")
-attach(sounding_vienna)
-sounding_wind(pressure = pressure, ws = ws, yaxs = TRUE)
+sounding_wind(pressure = sounding_vienna$pressure, ws = sounding_vienna$ws, yaxs = TRUE)
 }
