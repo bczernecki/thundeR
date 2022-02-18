@@ -284,7 +284,7 @@ Below is the full list of parameters computed and exported with the `sounding_co
 
 [53] Cold_Pool_Strength – difference between surface temperature and temperature of the downdraft (derived from DCAPE) at the surface. Units are K.
 
-[54] Wind_Index – based on original formula from McCann (1994), doi:  https://tinyurl.com/jub4fecj Units indicate estimated wind gust potential in knots. 
+[54] Wind_Index – based on original formula from McCann (1994), doi: https://doi.org/10.1175/1520-0434(1994)009%3C0532:WNIFFM%3E2.0.CO;2 Units indicate estimated wind gust potential in knots. 
 
 [55] PRCP_WATER – precipitable water (entire column). Units are mm.
 
