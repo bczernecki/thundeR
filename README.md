@@ -4,7 +4,7 @@
 
 <!-- badges: start --> 
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
-[![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/devel/graph/badge.svg)](https://codecov.io/gh/bczernecki/thunder)
+[![Codecov test coverage](https://app.codecov.io/gh/bczernecki/thunder/branch/devel/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/thunder)
 [![CRAN status](https://www.r-pkg.org/badges/version/thunder)](https://cran.r-project.org/package=thunder)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/thunder)](https://cran.r-project.org/package=thunder)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/thunder?color=brightgreen)](https://cran.r-project.org/package=thunder)

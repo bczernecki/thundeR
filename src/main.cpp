@@ -167,8 +167,6 @@ public:
   
   double* toAV();
   
-  
-  
   double abs();
 };
 
@@ -242,6 +240,7 @@ Vector::Vector(){
   this->y=0;
   this->z=0;
 }
+
 double* Vector::toAV(){
   double *result = new double[2];
   result[1]=sqrt(this->x*this->x + this->y*this->y + this->z*this->z);
@@ -310,7 +309,7 @@ private:
   
 public:
   Cache();
-  ~Cache();
+  virtual ~Cache();
   int getPressureIndex(double pressure);
   int getHeightIndex(double height);
   double * getArray(int i, int* len);
@@ -332,11 +331,11 @@ Cache::Cache(){
   this->inith();
 }
 Cache::~Cache(){
-  delete(this->pindex);
-  delete(this->p);
+  delete[](this->pindex);
+  delete[](this->p);
   
-  delete(this->hindex);
-  delete(this->h);
+  delete[](this->hindex);
+  delete[](this->h);
 }
 void Cache::initp(){
   for(int i=0;i<10;i++){
@@ -864,7 +863,7 @@ list<double> *getVirtualValues(){
 void LapseRate::allocate(){
   values = new list<double>();
   virtualValues = new list<double>();
-  cape = cin = to3cape = vcape = vcin = vto3cape = os = o = w = vos=vo=vw=0;
+  cape = cin = to3cape = vcape = vcin = vto3cape = os = o = w = vos=vo=vw=0; dcape = dvcape = 0; i700index = 0;
   middlecape=0;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
   startIndex=-1;
@@ -1005,8 +1004,8 @@ void LapseRate::prepareForDCAPE(){
   values = new list<double>();
   virtualValues = new list<double>();
   cape = cin = to3cape = vcape = vcin = vto3cape = 0;
-  dcape = 0;
-  dvcape = 0;
+  // dcape = 0;
+  // dvcape = 0;
   startIndex = 0;
   dcape_ = true;
   lasth = h0;
@@ -1774,12 +1773,14 @@ void Sounding::insertSingleLine(double p,double h, double t,double d, Vector V){
   
   this->t->push_back(t);
   this->d->push_back(d);
-  double* av = V.toAV();
+
+  double* av = V.toAV(); 
   this->a->push_back(av[0]);
   this->v->push_back(av[1]/0.514444);
-  
+
   this->th->putLine(i+1, p, h, t, d, av[0], av[1]/0.514444);
   this->ks->putLine(i+1, p, h, t, d, av[0], av[1]/0.514444);
+  delete[] av;
 }
 void Sounding::insertLine(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int i, double dz){
   double tp = p_[i], th = h_[i], tt = t_[i], td = d_[i], ta = a_[i], tv = v_[i];
@@ -3111,7 +3112,7 @@ int interpolate(double **pu, double **hu, double **tu, double **du, double **au,
                 va.push_back(av[0]);
                 vv.push_back(av[1]);
                
-               
+                delete[] av;
             }
         }
         double h1 = h[i];
@@ -3145,8 +3146,8 @@ int interpolate(double **pu, double **hu, double **tu, double **du, double **au,
         listToArray(va, na, u);
         listToArray(vv, nv, u);
        
-        delete(*pu);delete(*hu);delete(*tu);delete(*du);delete(*au);delete(*vu);
-       
+        delete[](*pu);delete[](*hu);delete[](*tu);delete[](*du);delete[](*au);delete[](*vu);
+
         *pu=np;*hu=nh;*tu=nt;*du=nd;*au=na;*vu=nv;
        
         return u;
@@ -3226,6 +3227,7 @@ int interpolate2(double **pu, double **hu, double **tu, double **du, double **au
                
                 va.push_back(av[0]);
                 vv.push_back(av[1]);
+                delete[] av;
                
             }
            
@@ -3258,7 +3260,7 @@ int interpolate2(double **pu, double **hu, double **tu, double **du, double **au
         listToArray(va, na, u);
         listToArray(vv, nv, u);
        
-        delete(*pu);delete(*hu);delete(*tu);delete(*du);delete(*au);delete(*vu);
+        delete[](*pu);delete[](*hu);delete[](*tu);delete[](*du);delete[](*au);delete[](*vu);
        
         *pu=np;*hu=nh;*tu=nt;*du=nd;*au=na;*vu=nv;
        
@@ -3589,6 +3591,8 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
 		  }
 	delete sret;
 	delete[] result;
+	delete[] p; delete[] h;delete[] d; delete[] t; delete[] a; delete[] v;
+	
 	return out;
 	
 }
