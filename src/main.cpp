@@ -167,8 +167,6 @@ public:
   
   double* toAV();
   
-  
-  
   double abs();
 };
 
@@ -242,6 +240,7 @@ Vector::Vector(){
   this->y=0;
   this->z=0;
 }
+
 double* Vector::toAV(){
   double *result = new double[2];
   result[1]=sqrt(this->x*this->x + this->y*this->y + this->z*this->z);
@@ -1774,12 +1773,14 @@ void Sounding::insertSingleLine(double p,double h, double t,double d, Vector V){
   
   this->t->push_back(t);
   this->d->push_back(d);
-  double* av = V.toAV();
+
+  double* av = V.toAV(); 
   this->a->push_back(av[0]);
   this->v->push_back(av[1]/0.514444);
-  
+
   this->th->putLine(i+1, p, h, t, d, av[0], av[1]/0.514444);
   this->ks->putLine(i+1, p, h, t, d, av[0], av[1]/0.514444);
+  delete[] av;
 }
 void Sounding::insertLine(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int i, double dz){
   double tp = p_[i], th = h_[i], tt = t_[i], td = d_[i], ta = a_[i], tv = v_[i];
@@ -3111,7 +3112,7 @@ int interpolate(double **pu, double **hu, double **tu, double **du, double **au,
                 va.push_back(av[0]);
                 vv.push_back(av[1]);
                
-               
+                delete[] av;
             }
         }
         double h1 = h[i];
@@ -3146,7 +3147,7 @@ int interpolate(double **pu, double **hu, double **tu, double **du, double **au,
         listToArray(vv, nv, u);
        
         delete[](*pu);delete[](*hu);delete[](*tu);delete[](*du);delete[](*au);delete[](*vu);
-       
+
         *pu=np;*hu=nh;*tu=nt;*du=nd;*au=na;*vu=nv;
        
         return u;
@@ -3226,6 +3227,7 @@ int interpolate2(double **pu, double **hu, double **tu, double **du, double **au
                
                 va.push_back(av[0]);
                 vv.push_back(av[1]);
+                delete[] av;
                
             }
            
@@ -3589,6 +3591,8 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
 		  }
 	delete sret;
 	delete[] result;
+	delete[] p; delete[] h;delete[] d; delete[] t; delete[] a; delete[] v;
+	
 	return out;
 	
 }
