@@ -1,0 +1,15 @@
+cff-version: 1.1.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Czernecki
+    given-names: Bartosz
+    orcid: 0000-0001-6496-1386
+  - family-names: Taszarek
+    given-names: Mateusz
+    orcid: 0000-0001-9578-5872
+  - family-names: Szuster
+    given-names: Piotr
+    orcid: 0000-0001-7937-8046
+title: "thundeR - Computation and Visualisation of Atmospheric Convective Parameters"
+version: 0.3.0
+date-released: 2022-02-19
