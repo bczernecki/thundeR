@@ -9,3 +9,4 @@ pkgdown
 .Rhistory
 ^doc$
 ^Meta$
+CITATION.cff
