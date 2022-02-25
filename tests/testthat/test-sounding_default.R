@@ -11,7 +11,7 @@ test_that("sounding_default should compute below 0.5s", {
         options(scipen = 999) # change formatting
         t1 <- system.time(sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile = 0, accuracy = 2))
         t1 <- as.numeric(t1[3])
-        cat(paste("Computation time for a single sounding:", t1))
+        print(paste("Computation time for a single sounding:", t1, "s"))
         expect_lt(t1, 60.0)  # changed for valgrind compilator, which might be superslow in debugging mode
         
 })
