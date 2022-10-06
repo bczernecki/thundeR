@@ -1134,6 +1134,7 @@ void LapseRate::finish(){
 class Thermodynamics:public InfoCollector{
   friend class IndicesCollector;
 public:
+  Sounding* s;
   double meanLayerZHeight;
   double n;
   double mp;
@@ -1250,6 +1251,7 @@ void Thermodynamics::putMinTHTE(int i, double p, double h, double oe){
 void Thermodynamics::setMlIndex(int i, double p, double h, double t, double d, double a, double v){
   this->meanLayer->setInitialConditions(i, p, h, t,d, a, v,h0);
   this->meanLayer->setInitialW(mmr, mo);
+  this->meanLayer->lasth=this->meanLayer->lasth-(Get(this->s->h,1)-this->meanLayer->lasth);
 }
 void Thermodynamics::putMlLine(int i, double p, double h, double t, double d, double a, double v){
   this->meanLayer->putLine(i, p, h, t, d, a, v);
@@ -1876,6 +1878,7 @@ void Sounding::alloc(){
   this->v=new list<double>();
   this->cache = new Cache();
   this->th = new Thermodynamics();
+  this->th->s=this;
   th->setSoundingCache(cache);
   this->ks=new Kinematics();
   ks->setSoundingCache(cache);
