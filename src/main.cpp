@@ -895,6 +895,7 @@ public:
   list<double> *values;
   list<double> *virtualValues;
 	double lasth;
+	double h1;
 list<double> *getVirtualValues(){
 	  return this->virtualValues;
   }
@@ -1134,7 +1135,7 @@ void LapseRate::finish(){
 class Thermodynamics:public InfoCollector{
   friend class IndicesCollector;
 public:
-  Sounding* s;
+  //* s;
   double meanLayerZHeight;
   double n;
   double mp;
@@ -1251,7 +1252,7 @@ void Thermodynamics::putMinTHTE(int i, double p, double h, double oe){
 void Thermodynamics::setMlIndex(int i, double p, double h, double t, double d, double a, double v){
   this->meanLayer->setInitialConditions(i, p, h, t,d, a, v,h0);
   this->meanLayer->setInitialW(mmr, mo);
-  this->meanLayer->lasth=this->meanLayer->lasth-(Get(this->s->h,1)-this->meanLayer->lasth);
+  //this->meanLayer->lasth=this->meanLayer->lasth-(Get(this->s->h,1)-this->meanLayer->lasth);
 }
 void Thermodynamics::putMlLine(int i, double p, double h, double t, double d, double a, double v){
   this->meanLayer->putLine(i, p, h, t, d, a, v);
@@ -1598,6 +1599,7 @@ void Thermodynamics::prepareMeanLayer()
   
   meanLayer->setInitialConditions(0, mp, mh, mt, md, 0, 0, h0);
   meanLayer->setInitialW(mmr, mo);
+  meanLayer->lasth=meanLayer->lasth-(meanLayer->h1-meanLayer-lasth);
   downdraft->setInitialConditions(0, 0, 0, 0, 0, 0, 0, h0);
   downdraft->prepareForDCAPE();
   downdraft->setInitialW(downmr, downo);
@@ -1992,7 +1994,7 @@ Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, d
     }
     this->insertSingleLine(p_[length-1],h_[length-1],t_[length-1],d_[length-1],Vector(a_[length-1],v_[length-1]*0.514444));
     
-    
+    this->th->meanLayer->h1=Get(this->h,1);
     this->th->prepareMeanLayer();
     this->ks->finishPhase1();
     
