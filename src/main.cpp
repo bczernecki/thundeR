@@ -1599,7 +1599,7 @@ void Thermodynamics::prepareMeanLayer()
   
   meanLayer->setInitialConditions(0, mp, mh, mt, md, 0, 0, h0);
   meanLayer->setInitialW(mmr, mo);
-  meanLayer->lasth=meanLayer->lasth-(meanLayer->h1-meanLayer-lasth);
+  meanLayer->lasth=meanLayer->lasth-(meanLayer->h1-meanLayer->lasth);
   downdraft->setInitialConditions(0, 0, 0, 0, 0, 0, 0, h0);
   downdraft->prepareForDCAPE();
   downdraft->setInitialW(downmr, downo);
