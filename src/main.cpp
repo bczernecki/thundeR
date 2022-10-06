@@ -1880,7 +1880,7 @@ void Sounding::alloc(){
   this->v=new list<double>();
   this->cache = new Cache();
   this->th = new Thermodynamics();
-  this->th->s=this;
+  
   th->setSoundingCache(cache);
   this->ks=new Kinematics();
   ks->setSoundingCache(cache);
