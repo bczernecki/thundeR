@@ -1041,7 +1041,7 @@ void LapseRate::putClassicLine(int i, double p, double h, double t,double d, dou
                     {
                         cin += tcap;
                     }
-                    if (vt_parcel < t)
+                    if (vt_parcel < t_)
                     {
                         vcin += tvcap;
                     }
