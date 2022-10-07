@@ -1380,7 +1380,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
 }
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
 {
-    if((h-h0) == 0 || (h-h0) ==100 || (h-h0)==200 || (h-h0)==300 || (h-h0)==400 || (h-h0) == 500)
+    if ((abs(h - h0) <= meanLayerZHeight)  && ((fmod(abs(h-h0),100.0)==0.0)  || (h==h[0])) )
   {
     mh += h;
     mp += p;
