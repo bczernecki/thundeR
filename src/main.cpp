@@ -646,6 +646,11 @@ void Kinematics::putMandatoryVectors(int i, double p, double h, double t, double
 
 void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, double a, double v, Vector v_)
 {
+	cout << h0;
+	cout << " STOP1 ";
+	cout << h;
+	cout << " STOP1 ";
+	
   if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
 
 	if(h-h0<=500){
