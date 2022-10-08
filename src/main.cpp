@@ -1379,9 +1379,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
   }
 }
 
-std::cout << h0;
-std::cout << h;
-std::cout << h-h0;
+printf("%f",h0);
 
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
 {
