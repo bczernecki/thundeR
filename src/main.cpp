@@ -1041,7 +1041,7 @@ void LapseRate::putClassicLine(int i, double p, double h, double t,double d, dou
                     {
                         cin += tcap;
                     }
-                    if (vt_parcel < t)
+                    if (vt_parcel < t_)
                     {
                         vcin += tvcap;
                     }
@@ -1377,7 +1377,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
 }
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
 {
-  if (   ((abs(h - h0) < meanLayerZHeight)&&(fmod(abs(h-h0),100.0)==0.0))  ||(h==h0) )
+	if ((abs(h - h0) <= meanLayerZHeight)  && ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)))
   {
     mh += h;
     mp += p;
@@ -1534,7 +1534,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   
     startConditions(i, p, h, t, d, a, v, oe);
     ZeroPosStartingConditions(i, p, h, t, d, a, v, wbt);
-	
+    putMeanLayerParameters(i, p, h, t, d, a, v, mr);	
     
   }
   else
