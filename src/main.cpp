@@ -646,10 +646,6 @@ void Kinematics::putMandatoryVectors(int i, double p, double h, double t, double
 
 void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, double a, double v, Vector v_)
 {
-	cout << h0;
-	cout << " STOP1 ";
-	cout << h;
-	cout << " STOP1 ";
 	
   if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
 
@@ -1391,7 +1387,8 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
 	cout << h;
 	cout << " STOP ";
 
-if (h-h0 == 1 || h-h0 == 100 || h-h0 == 200 || h-h0 == 300 || h-h0 == 400 || h-h0 == 500)
+if ((abs(h - h0) <= meanLayerZHeight)  && ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)))
+	
   {
     mh += h;
     mp += p;
