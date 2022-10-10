@@ -168,7 +168,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     y_lfc = skewty(output$pressure[ind_lfc])
     x_lfc = skewtx(output$ML[ind_lfc],skewty(output$pressure[ind_lfc]))
     y_lcl = skewty(output$pressure[ind_lcl])
-    x_lcl = skewtx(output$ML[ind_lcl],skewty(output$pressure[ind_lcl]))  
+    x_lcl = skewtx(ifelse(output$ML[ind_lcl]>output$tempV[ind_lcl],output$ML[ind_lcl],output$tempV[ind_lcl]),skewty(output$pressure[ind_lcl]))  
     
     skewt_lines(output$ML,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
     
@@ -213,7 +213,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     y_lfc = skewty(output$pressure[ind_lfc])
     x_lfc = skewtx(output$MU[ind_lfc],skewty(output$pressure[ind_lfc]))
     y_lcl = skewty(output$pressure[ind_lcl])
-    x_lcl = skewtx(output$MU[ind_lcl],skewty(output$pressure[ind_lcl]))
+    x_lcl = skewtx(ifelse(output$MU[ind_lcl]>output$tempV[ind_lcl],output$MU[ind_lcl],output$tempV[ind_lcl]),skewty(output$pressure[ind_lcl]))
     y_muhgt = skewty(output$pressure[ind_muhgt])
     x_muhgt = skewtx(output$MU[ind_muhgt],skewty(output$pressure[ind_muhgt]))
 
@@ -258,7 +258,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     y_lfc = skewty(output$pressure[ind_lfc])
     x_lfc = skewtx(output$SB[ind_lfc],skewty(output$pressure[ind_lfc]))
     y_lcl = skewty(output$pressure[ind_lcl])
-    x_lcl = skewtx(output$SB[ind_lcl],skewty(output$pressure[ind_lcl]))    
+    x_lcl = skewtx(ifelse(output$SB[ind_lcl]>output$tempV[ind_lcl],output$SB[ind_lcl],output$tempV[ind_lcl]),skewty(output$pressure[ind_lcl]))    
     
     skewt_lines(output$SB,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
     
