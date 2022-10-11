@@ -19,8 +19,7 @@ Imports:
     aiRthermo
 Depends:
     R (>= 3.5.0)
-Suggests: 
-    RadioSonde,
+Suggests:
     knitr,
     rmarkdown,
     testthat (>= 2.0.0),
