@@ -54,7 +54,8 @@ temp = sounding_vienna$temp  # vector of temperature [degree Celsius]
 dpt = sounding_vienna$dpt # vector of dew point temperature [degree Celsius]
 wd = sounding_vienna$wd # vector of wind direction [azimuth in degrees]
 ws = sounding_vienna$ws # vector of wind speed [knots]
-sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC", pressure, altitude, temp, dpt, wd, ws)
+sounding_save(pressure, altitude, temp, dpt, wd, ws, parcel = "MU",
+              filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC")
 ```
 
 <img src="https://github.com/bczernecki/thundeR/raw/master/inst/figures/Vienna.png" alt="Vienna" width="1000"/>

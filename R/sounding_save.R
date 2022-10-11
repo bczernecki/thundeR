@@ -41,7 +41,6 @@ sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
   ptop = 100 
   
   stopifnot(length(filename) < 4)
-  
   if(tools::file_ext(filename) == "png"){
     grDevices::png(filename = filename, width = 2000, height = 1200, res = 200)
     sounding_plot(pressure, altitude, temp, 

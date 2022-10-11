@@ -469,7 +469,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
   text(0.12, 12.35, sprintf("%.1f", (round(parametry[which(names(parametry[1:LP]) == "BS_08km")], digits = 1))), cex = FONTSIZE, adj = c(0, 0))
 
   text(0.11, 8.95, "Sfc - HGL:", cex = FONTSIZE, adj = c(1, 0))
-  text(0.12, 8.95, sprintf("%.1f", (round(parametry[which(names(parametry[1:LP]) == "BS_SFC_to_HGL")], digits = 1))), cex = FONTSIZE, adj = c(0, 0))
+  text(0.12, 8.95, sprintf("%.1f", (round(parametry[which(names(parametry[1:LP]) == "BS_SFC_to_M10")], digits = 1))), cex = FONTSIZE, adj = c(0, 0))
 
   text(0.11, 5.55, "Effec. (SB):", cex = FONTSIZE, adj = c(1, 0))
   text(0.12, 5.55, sprintf("%.1f", (round(parametry[which(names(parametry[1:LP]) == "BS_EFF_SB")], digits = 1))), cex = FONTSIZE, adj = c(0, 0))
