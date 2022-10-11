@@ -6,3 +6,7 @@ LICENSE.md
 _pkgdown.yml
 docs
 pkgdown
+.Rhistory
+^doc$
+^Meta$
+CITATION.cff

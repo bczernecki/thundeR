@@ -4,16 +4,15 @@
 
 <!-- badges: start --> 
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
-[![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/devel/graph/badge.svg?token=JGZPB7RUFI)](https://codecov.io/gh/bczernecki/thunder)
+[![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/thunder?branch=master)
 [![CRAN status](https://www.r-pkg.org/badges/version/thunder)](https://cran.r-project.org/package=thunder)
 [![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/thunder)](https://cran.r-project.org/package=thunder)
+[![](http://cranlogs.r-pkg.org/badges/grand-total/thunder?color=brightgreen)](https://cran.r-project.org/package=thunder)
 <!-- badges: end -->
 
 
 
-
-
-**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational forecasting of severe convective storms. Core algorithm is based on C++ code implemented into R language via RCPP. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features.
+**`thundeR`** is a freeware R package and collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational forecasting of severe convective storms. Core algorithm is based on C++ code implemented into R language via `Rcpp`. This solution allows to compute over 100 thermodynamic and kinematic parameters in less than 0.02s per profile and process large datasets such as reanalyses or operational NWP models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe convective storms and is constantly updated with new features.
 
 
 ### Online browser
@@ -175,6 +174,50 @@ sounding_barbs(chanhassen$pressure, chanhassen$ws, chanhassen$wd, chanhassen$alt
 ```
 
 ![](inst/figures/wind_profile.png)
+
+#### Perform sounding computations using Python with rpy2:
+
+It is possible to launch `thunder` under Python via rpy2 library. Below you can find the minimum reproducible example:
+
+Make sure that pandas and rpy2 libraries are available for your Python environment. If not install required python packages:
+``` bash 
+pip install pandas  
+pip install rpy2  
+```
+
+Launch `thunder` under Python with `rpy2`:
+
+``` py
+# load required packages
+from rpy2.robjects.packages import importr
+from rpy2.robjects import r,pandas2ri
+import rpy2.robjects as robjects
+pandas2ri.activate()
+
+# load thunder package (make sure that it was installed in R before)
+importr('thunder')
+
+# download North Platte sounding 
+profile = robjects.r['get_sounding'](wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
+
+# compute convective parameters
+parameters = robjects.r['sounding_compute'](profile['pressure'], profile['altitude'], profile['temp'], profile['dpt'], profile['wd'], profile['ws'], accuracy = 2)
+
+
+# customize output and print all computed variables, e.g. Surface Based CAPE (14th element) equals 9413 J/kg
+
+print(list(map('{:.2f}'.format, parameters)))
+['9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98',
+'23.98', '23.36', '9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00', '15500.00', '-16.55', '137.21', 
+'-66.63', '23.98', '23.98', '23.36', '7805.13', '115.22', '1515.81', '-4.35', '950.00', '950.00', '15000.00', 
+'-14.66', '124.94', '-68.41', '22.46', '22.46', '21.17', '-9.57', '-6.68', '-8.80', '-8.68', '-9.06', '-7.70', 
+'4250.00', '3500.00', '0.00', '2866.00', '50.57', '52.93', '1381.81', '308.98', '29.00', '37.59', '87.03', '0.58', 
+'0.40', '0.47', '8.85', '11.21', '13.88', '20.28', '29.33', '6.84', '21.70', '28.32', '28.32', '27.17', '17.06', 
+'12.53', '12.53', '11.74', '7.09', '6.08', '7.77', '7.69', '19.89', '62.07', '110.06', '156.48', '6.25', '7.77', 
+'4.26', '-42.78', '284.67', '5.65', '197.60', '14.19', '218.89', '7.77', '31.50', '-12.14', '60.40', '677.12', 
+'4.67', '6.10', '29.46', '29.46', '3.86', '12.35', '2783.07', '2783.07', '2534.22', '3886.07', '3886.07', '3395.00']
+```
+
 
 
 #### Accuracy tables for `sounding_compute()` 

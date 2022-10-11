@@ -10,3 +10,6 @@ inst/doc
 .DS_Store
 thunder.Rproj
 tests/testthat/Rplots.pdf
+docs/
+doc
+Meta

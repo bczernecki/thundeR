@@ -25,8 +25,6 @@
 
 sounding_wind = function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         
-        altitude = altitude - altitude[1]
-        
         if(ptop > 200) {
                 stop("\nptop argument needs to be set < 200 (hPa)!")
         }
@@ -93,7 +91,7 @@ sounding_wind = function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         
         data$x1 = round(data$x)
         
-        data = dplyr::left_join(data, cols)
+        data = suppressMessages(dplyr::left_join(data, cols))
         
         # clipping data beyond the ptop
         data = data[data$y < ymin, ]

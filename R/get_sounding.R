@@ -1,6 +1,7 @@
 #' Download rawinsonde measurement
 #' 
 #' Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package.
+#' In case of problems with downloading the chosen dataset the url is checked 5 times in 5-second intervals.
 #' 
 #' @param wmo_id international WMO station code (e.g. 11035 for Vienna)
 #' @param yy year - single number (e.g. 2010)
@@ -39,22 +40,28 @@
 
 get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE){
 
-  # clipping to define max_hght
   sounding_data = climate::sounding_wyoming(wmo_id, yy, mm, dd, hh)
   
-  colnames(sounding_data[[1]]) = c("pressure", "altitude", "temp", "dpt",
-                                   "rh", "mixr", "wd", "ws", "thta", "thte", "thtv")
+  # take another attempt if object empty
+  i = 1
+  while(is.null(sounding_data) & i < 5){
+    message("\nProblems with downloading. Re-trying in 5 seconds...")
+    Sys.sleep(5)
+    sounding_data = climate::sounding_wyoming(wmo_id, yy, mm, dd, hh)
+    i = i + 1
+  }
   
-  sounding_data[[1]] = sounding_data[[1]][,c("pressure", "altitude", "temp", "dpt","wd", "ws")]
-                                            
-  sounding_data[[1]] = na.omit(sounding_data[[1]])
-                                            
-  if(!metadata){
-    sounding_data = sounding_data[[1]]    
+  if((!is.null(sounding_data)) & (ncol(sounding_data[[1]]) > 0)){
+  
+    colnames(sounding_data[[1]]) = c("pressure", "altitude", "temp", "dpt",
+                                     "rh", "mixr", "wd", "ws", "thta", "thte", "thtv")
+    sounding_data[[1]] = sounding_data[[1]][,c("pressure", "altitude", "temp", "dpt","wd", "ws")]
+                                              
+    sounding_data[[1]] = na.omit(sounding_data[[1]])
+                                              
+    if(!metadata){
+      sounding_data = sounding_data[[1]]    
+    }
   }
   return(sounding_data)
 }
-
-
-
-        
