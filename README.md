@@ -204,7 +204,7 @@ profile = robjects.r['get_sounding'](wmo_id = 72562, yy = 1999, mm = 7, dd = 3,h
 parameters = robjects.r['sounding_compute'](profile['pressure'], profile['altitude'], profile['temp'], profile['dpt'], profile['wd'], profile['ws'], accuracy = 2)
 
 
-# customize output and print all computed variables, e.g. Surface Based CAPE (14th element) equals 9413 J/kg
+# customize output and print all computed variables, e.g. most-unstable CAPE (first element) equals 9413 J/kg
 
 print(list(map('{:.2f}'.format, parameters)))
 ['9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98',
