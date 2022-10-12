@@ -198,9 +198,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "MU_LCL_TEMP",
 "MU_LFC_TEMP",
 "MU_MIXR",
-"MU_CAPE_500" 
-"MU_CIN_500" 
-"MU_LI_500" 
+"MU_CAPE_500", 
+"MU_CIN_500", 
+"MU_LI_500", 
 "SB_CAPE",
 "SB_CAPE_M10_fraction",
 "SB_02km_CAPE",
@@ -237,7 +237,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "LR_04km ",
 "LR_06km",
 "LR_16km",
-"LR_26km" 
+"LR_26km", 
 "LR_24km",
 "LR_36km",
 "LR_26km_MAX",
