@@ -230,11 +230,6 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
  }
 
   ###
-  altitude_to_pressure = function(altitude){
-    skewty(output$pressure[which(output$altitude-output$altitude[1] == altitude)])
-  }
-
-  ###
   if (parcel == "SB") {
     if (parametry[which(names(parametry[1:LP]) == "SB_CAPE")] > 0) {
       # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
@@ -265,6 +260,13 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     }
   }
 }
+
+    ###
+  altitude_to_pressure = function(altitude){
+    skewty(output$pressure[which(output$altitude-output$altitude[1] == altitude)])
+  }
+
+  
   ### draw labels for km:
   text(-29, altitude_to_pressure(0), paste0("--- Sfc (", round(output$altitude[1]), " m) ---"), pos = 4, cex = 0.65, col = "black")
 
