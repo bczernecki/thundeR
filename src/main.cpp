@@ -792,44 +792,35 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
       srh03lmf += tmps2;
     else srh03rmf -= tmps2;
     
-    if( (h-h0<6000) && (h-h0>3000) ){
+    if( h-h0>=3000 ){
       srh36rm = srh03rm;
       srh36lm = srh03lm;
 	}
 
-    if(h-h0<3000){
-      srh03rm = srh03rm;
-      srh03lm = srh03lm;
-	}
-
-    if(h-h0<500){
+    if(h-h0<=500){
       srh500rm = srh03rm;
       srh500lm = srh03lm;
 	}
 
-    if(h-h0<100){
+    if(h-h0<=100){
       srh100rm = srh03rm;
       srh100lm = srh03lm;
 	}
 
-    if(h-h0<250){
+    if(h-h0<=250){
       srh250rm = srh03rm;
       srh250lm = srh03lm;
 	}
     
-    if (h - h0 <= 1000)
+    if (h-h0<=1000)
     {
       srh01rm = srh03rm;
       srh01lm = srh03lm;
-      srh01rmf = srh03rmf;
-      srh01lmf = srh03lmf;
     }
-    if (h-h0>=1000.0)
-    {
-      srh13rm = srh03rm- srh01rm;
-      srh13lm = srh03lm- srh01lm;
-      srh13rmf = srh03rmf- srh01rmf;
-      srh13lmf = srh03lmf-srh01lmf;
+	  
+    if(h-h0<=3000){
+      srh03rm = srh03rm;
+      srh03lm = srh03lm;
     }
   }
 }
