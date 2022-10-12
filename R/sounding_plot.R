@@ -9,9 +9,9 @@
 #' @param wd wind direction [azimuth in degrees]
 #' @param ws wind speed [knots]
 #' @param title title to be added in the layout's header
-#' @param parcel parcel tracing on Skew-T for "MU", "ML" or "SB" parcel
+#' @param parcel parcel tracing on Skew-T for "MU", "ML" or "SB" parcel, "none" for no parcel line.
 #' @param max_speed range of the hodograph to be drawn, 25 m/s used as default
-#' @param hazards logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)
+#' @param buoyancy_polygon logical, plotting area of parcel's positive (yellow) or negative (red) buoyancy (default  = TRUE)
 #' @param ... extra graphic arguments
 #' @export
 #' @import aiRthermo
@@ -28,7 +28,7 @@
 #'   parcel = "MU", title = "Vienna - 23 August 2011, 12:00 UTC"
 #' )
 sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
-                          title = "", parcel = "MU", max_speed = 25, hazards = FALSE, ...) {
+                          title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE, ...) {
   convert <- FALSE
   ptop <- 100
 
@@ -88,89 +88,8 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
 
   ###
 
-  if (hazards) {
-    rect(10.75, 37.5, 26.1, 44, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
-    text(11.5, 43.25, "Possible storm hazards:", col = "black", cex = 0.65, adj = c(0, 1))
-
-    WIND <- NA
-    HAIL <- NA
-    TORN <- NA
-
-    ###
-    if ((parametry[which(names(parametry[1:LP]) == "DCAPE")] > 700 |
-      parametry[which(names(parametry[1:LP]) == "Delta_thetae")] > 20 |
-      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")] > 450 |
-      parametry[which(names(parametry[1:LP]) == "MW_13km")] > 15 |
-      parametry[which(names(parametry[1:LP]) == "SCP_new")] > 1) &
-      parametry[which(names(parametry[1:LP]) == "MU_CAPE")] > 150) {
-      WIND <- 1
-    }
-
-    if ((parametry[which(names(parametry[1:LP]) == "DCAPE")] > 1100 |
-      parametry[which(names(parametry[1:LP]) == "Delta_thetae")] > 35 |
-      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")] > 1000 |
-      parametry[which(names(parametry[1:LP]) == "MW_13km")] > 25 |
-      parametry[which(names(parametry[1:LP]) == "SCP_new")] > 10) &
-      parametry[which(names(parametry[1:LP]) == "MU_CAPE")] > 150) {
-      WIND <- 2
-    }
-
-    if (is.na(WIND)) {
-      WIND <- 0
-    }
-    if (WIND == 1) {
-      text(11.5, 41.75, "- 25m/s+ severe wind", font = 1, col = "blue", cex = 0.67, adj = c(0, 1))
-    }
-    if (WIND == 2) {
-      text(11.5, 41.75, "- 32m/s+ severe wind", font = 1, col = "blue", cex = 0.67, adj = c(0, 1))
-    }
-
-    ###
-    if (parametry[which(names(parametry[1:LP]) == "SHIP")] > 0.5 |
-      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")] > 450) {
-      HAIL <- 1
-    }
-
-    if (parametry[which(names(parametry[1:LP]) == "SHIP")] > 1 |
-      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")] > 1000) {
-      HAIL <- 2
-    }
-
-    if (is.na(HAIL)) {
-      HAIL <- 0
-    }
-    if (HAIL == 1) {
-      text(11.5, 40.25, "- 2cm+ large hail", font = 1, col = "forestgreen", cex = 0.67, adj = c(0, 1))
-    }
-    if (HAIL == 2) {
-      text(11.5, 40.25, "- 5cm+ large hail", font = 1, col = "forestgreen", cex = 0.67, adj = c(0, 1))
-    }
-
-    ###
-    if (parametry[which(names(parametry[1:LP]) == "STP")] > 0.3 |
-      parametry[which(names(parametry[1:LP]) == "STP_new")] > 0.3 |
-      parametry[which(names(parametry[1:LP]) == "MU_EFF_WMAXSHEAR")] > 1000) {
-      TORN <- 1
-    }
-
-    if (parametry[which(names(parametry[1:LP]) == "STP")] > 0.75 |
-      parametry[which(names(parametry[1:LP]) == "STP_new")] > 0.75) {
-      TORN <- 2
-    }
-
-    if (is.na(TORN)) {
-      TORN <- 0
-    }
-    if (TORN == 1) {
-      text(11.5, 38.75, "- F0+ tornado", font = 1, col = "red", cex = 0.67, adj = c(0, 1))
-    }
-    if (TORN == 2) {
-      text(11.5, 38.75, "- F2+ tornado", font = 1, col = "red", cex = 0.67, adj = c(0, 1))
-    }
-  }
-
-  ###
-
+  if (parcel!="none"){
+    
   if(parcel=="ML"){
     vsb_lcl = parametry[which(names(parametry[1:LP]) == "ML_LCL_HGT")] + output$altitude[1]
     vsb_lfc = parametry[which(names(parametry[1:LP]) == "ML_LFC_HGT")] + output$altitude[1]
@@ -200,6 +119,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     end_pol <- cumsum(inte$lengths)
     start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
     
+    if(buoyancy_polygon==T){
     for(i in 1:length(end_pol)){
       if(inte$values[i]==1){
         if(parametry[which(names(parametry[1:LP]) == "ML_CIN")]<0){
@@ -213,7 +133,8 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
       }
     }
   }
-
+}
+    
   if(parcel=="MU"){
     vsb_lcl = parametry[which(names(parametry[1:LP]) == "MU_LCL_HGT")] + output$altitude[1]
     vsb_lfc = parametry[which(names(parametry[1:LP]) == "MU_LFC_HGT")] + output$altitude[1]
@@ -247,6 +168,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     end_pol <- cumsum(inte$lengths)
     start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
     
+    if(buoyancy_polygon=T){
     for(i in 1:length(end_pol)){
       if(inte$values[i]==1){
         if(parametry[which(names(parametry[1:LP]) == "MU_CIN")]<0){
@@ -260,7 +182,8 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
       }
     }
   }
-
+}
+    
   if(parcel=="SB"){
     vsb_lcl = parametry[which(names(parametry[1:LP]) == "SB_LCL_HGT")] + output$altitude[1]
     vsb_lfc = parametry[which(names(parametry[1:LP]) == "SB_LFC_HGT")] + output$altitude[1]
@@ -290,6 +213,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     end_pol <- cumsum(inte$lengths)
     start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
     
+    if(buoyancy_polygon==T){
     for(i in 1:length(end_pol)){
       if(inte$values[i]==1){
         if(parametry[which(names(parametry[1:LP]) == "SB_CIN")]<0){
@@ -302,7 +226,8 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
         }
       }
     }
-  }
+   }
+ }
 
   ###
   altitude_to_pressure = function(altitude){
@@ -339,7 +264,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
       text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")
     }
   }
-
+}
   ### draw labels for km:
   text(-29, altitude_to_pressure(0), paste0("--- Sfc (", round(output$altitude[1]), " m) ---"), pos = 4, cex = 0.65, col = "black")
 
