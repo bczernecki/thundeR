@@ -783,45 +783,45 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     double tmps1 = (v1.X() - rm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - rm.Y()) * (v2.X() - v1.X());
     double tmps2 = (v1.X() - lm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - lm.Y()) * (v2.X() - v1.X());
     
-    srh03rm += tmps1;
-    srh03lm += tmps2;
+    srh13rm += tmps1;
+    srh13lm += tmps2;
     if (tmps1>0)
-      srh03rmf += tmps1;
-    else srh03lmf -= tmps1;
+      srh13rmf += tmps1;
+    else srh13lmf -= tmps1;
     if (tmps2>0) 
-      srh03lmf += tmps2;
-    else srh03rmf -= tmps2;
+      srh13lmf += tmps2;
+    else srh13rmf -= tmps2;
     
-    if( h-h0>=3000 ){
-      srh36rm = srh03rm;
-      srh36lm = srh03lm;
+    if(h-h0 >= 3000){
+      srh36rm = srh13rm;
+      srh36lm = srh13lm;
 	}
+	  
+    if(h-h0 <= 3000){
+      srh03rm = srh13rm;
+      srh03lm = srh13lm;
+    }
 
+    if (h-h0<=1000)
+    {
+      srh01rm = srh13rm;
+      srh01lm = srh13lm;
+    }	  
+	  
     if(h-h0<=500){
-      srh500rm = srh03rm;
-      srh500lm = srh03lm;
-	}
-
-    if(h-h0<=100){
-      srh100rm = srh03rm;
-      srh100lm = srh03lm;
+      srh500rm = srh13rm;
+      srh500lm = srh13lm;
 	}
 
     if(h-h0<=250){
-      srh250rm = srh03rm;
-      srh250lm = srh03lm;
+      srh250rm = srh13rm;
+      srh250lm = srh13lm;
 	}
-    
-    if (h-h0<=1000)
-    {
-      srh01rm = srh03rm;
-      srh01lm = srh03lm;
-    }
-	  
-    if(h-h0<=3000){
-      srh03rm = srh03rm;
-      srh03lm = srh03lm;
-    }
+
+    if(h-h0<=100){
+      srh100rm = srh13rm;
+      srh100lm = srh13lm;
+	}
   }
 }
 
