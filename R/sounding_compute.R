@@ -8,6 +8,7 @@
 #' \enumerate{
 #'  \item MU_CAPE 
 #'  \item MU_CAPE_M10_fraction 
+#'  \item MU_02km_CAPE 
 #'  \item MU_03km_CAPE 
 #'  \item MU_HGL_CAPE 
 #'  \item MU_CIN 
@@ -20,8 +21,12 @@
 #'  \item MU_LCL_TEMP 
 #'  \item MU_LFC_TEMP 
 #'  \item MU_MIXR 
+#'  \item MU_CAPE_500
+#'  \item MU_CIN_500
+#'  \item MU_LI_500
 #'  \item SB_CAPE 
 #'  \item SB_CAPE_M10_fraction 
+#'  \item SB_02km_CAPE 
 #'  \item SB_03km_CAPE 
 #'  \item SB_HGL_CAPE 
 #'  \item SB_CIN 
@@ -54,12 +59,11 @@
 #'  \item LR_03km 
 #'  \item LR_04km  
 #'  \item LR_06km 
-#'  \item LR_24km 
-#'  \item LR_36km 
 #'  \item LR_16km 
 #'  \item LR_26km
-#'  \item LR_16km_max1km 
-#'  \item LR_16km_max2km
+#'  \item LR_24km 
+#'  \item LR_36km 
+#'  \item LR_26km_MAX 
 #'  \item LR_500700hPa 
 #'  \item LR_500800hPa 
 #'  \item LR_600800hPa 
@@ -75,13 +79,10 @@
 #'  \item PRCP_WATER 
 #'  \item Moisture_Flux_02km 
 #'  \item RH_02km 
+#'  \item RH_14km 
 #'  \item RH_25km 
 #'  \item RH_36km 
 #'  \item RH_HGL 
-#'  \item Wind_500m 
-#'  \item Wind_1km 
-#'  \item Wind_2km 
-#'  \item Wind_3km 
 #'  \item BS_01km 
 #'  \item BS_02km 
 #'  \item BS_03km 
@@ -94,33 +95,18 @@
 #'  \item BS_EFF_MU 
 #'  \item BS_EFF_SB 
 #'  \item BS_EFF_ML 
-#'  \item BS_SFC_to_0 
 #'  \item BS_SFC_to_M10 
-#'  \item BS_SFC_to_M20 
-#'  \item BS_1km_to_0 
 #'  \item BS_1km_to_M10 
-#'  \item BS_1km_to_M20 
-#'  \item BS_2km_to_0 
 #'  \item BS_2km_to_M10 
-#'  \item BS_2km_to_M20 
-#'  \item BS_MU_LFC_to_0 
 #'  \item BS_MU_LFC_to_M10 
-#'  \item BS_MU_LFC_to_M20 
-#'  \item BS_SB_LFC_to_0 
 #'  \item BS_SB_LFC_to_M10 
-#'  \item BS_SB_LFC_to_M20 
-#'  \item BS_ML_LFC_to_0
 #'  \item BS_ML_LFC_to_M10
-#'  \item BS_ML_LFC_to_M20
-#'  \item BS_MW02_to_MW06 
+#'  \item BS_MW02_to_SM 
 #'  \item BS_MW02_to_RM 
 #'  \item BS_MW02_to_LM 
-#'  \item BS_HGL_to_MW06 
+#'  \item BS_HGL_to_SM 
 #'  \item BS_HGL_to_RM 
 #'  \item BS_HGL_to_LM 
-#'  \item Updraft_tilting_MW06
-#'  \item Updraft_tilting_RW
-#'  \item Updraft_tilting_LW
 #'  \item MW_01km 
 #'  \item MW_02km 
 #'  \item MW_03km 
@@ -131,11 +117,13 @@
 #'  \item SRH_500m_RM 
 #'  \item SRH_1km_RM 
 #'  \item SRH_3km_RM 
+#'  \item SRH_36km_RM 
 #'  \item SRH_100m_LM 
 #'  \item SRH_250m_LM 
 #'  \item SRH_500m_LM 
 #'  \item SRH_1km_LM 
 #'  \item SRH_3km_LM 
+#'  \item SRH_36km_LM 
 #'  \item Bunkers_RM_A 
 #'  \item Bunkers_RM_M 
 #'  \item Bunkers_LM_A 
@@ -150,9 +138,9 @@
 #'  \item Showalter_Index 
 #'  \item TotalTotals_Index 
 #'  \item SWEAT_Index 
-#'  \item STP 
+#'  \item STP_fix 
 #'  \item STP_new 
-#'  \item SCP 
+#'  \item SCP_fix 
 #'  \item SCP_new 
 #'  \item SHIP 
 #'  \item HSI 
@@ -163,15 +151,9 @@
 #'  \item MU_EFF_WMAXSHEAR 
 #'  \item SB_EFF_WMAXSHEAR 
 #'  \item ML_EFF_WMAXSHEAR 
-#'  \item MU500_CAPE 
-#'  \item MU500_CIN 
-#'  \item MU500_LI 
-#'  \item MU_02km_CAPE 
-#'  \item SB_02km_CAPE 
-#'  \item ML_02km_CAPE 
-#'  \item EHI_03km 
-#'  \item EHI_01km 
 #'  \item EHI_500m 
+#'  \item EHI_01km 
+#'  \item EHI_03km
 
 #' }
 #'
@@ -201,172 +183,154 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
   tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy)
   
   names(tmp) = c(
-"MU_CAPE",
-"MU_CAPE_M10_fraction",
-"MU_03km_CAPE",
-"MU_HGL_CAPE",
-"MU_CIN",
-"MU_LCL_HGT",
-"MU_LFC_HGT",
-"MU_EL_HGT",
-"MU_LI",
-"MU_WMAX",
-"MU_EL_TEMP",
-"MU_LCL_TEMP",
-"MU_LFC_TEMP",
-"MU_MIXR",
-"SB_CAPE",
-"SB_CAPE_M10_fraction",
-"SB_03km_CAPE",
-"SB_HGL_CAPE",
-"SB_CIN",
-"SB_LCL_HGT",
-"SB_LFC_HGT",
-"SB_EL_HGT",
-"SB_LI",
-"SB_WMAX",
-"SB_EL_TEMP",
-"SB_LCL_TEMP",
-"SB_LFC_TEMP",
-"SB_MIXR",
-"ML_CAPE",
-"ML_CAPE_M10_fraction",
-"ML_03km_CAPE",
-"ML_HGL_CAPE",
-"ML_CIN",
-"ML_LCL_HGT",
-"ML_LFC_HGT",
-"ML_EL_HGT",
-"ML_LI",
-"ML_WMAX",
-"ML_EL_TEMP",
-"ML_LCL_TEMP",
-"ML_LFC_TEMP",
-"ML_MIXR",
-"LR_0500m",
-"LR_01km",
-"LR_02km",
-"LR_03km",
-"LR_04km",
-"LR_06km",
-"LR_24km",
-"LR_36km",
-"LR_16km",
-"LR_26km",
-"LR_16km_max1km",
-"LR_16km_max2km",
-"LR_500700hPa",
-"LR_500800hPa",
-"LR_600800hPa",
-"FRZG_HGT",
-"FRZG_wetbulb_HGT",
-"HGT_max_thetae_03km",
-"HGT_min_thetae_04km",
-"Delta_thetae",
-"Delta_thetae_min04km",
-"DCAPE",
-"Cold_Pool_Strength",
-"Wind_Index",
-"PRCP_WATER",
-"Moisture_Flux_02km",
-"RH_02km",
-"RH_25km",
-"RH_36km",
-"RH_HGL",
-"Wind_500m",
-"Wind_1km",
-"Wind_2km",
-"Wind_3km",
-"BS_01km",
-"BS_02km",
-"BS_03km",
-"BS_06km",
-"BS_08km",
-"BS_36km",
-"BS_26km",
-"BS_16km",
-"BS_18km",
-"BS_EFF_MU",
-"BS_EFF_SB",
-"BS_EFF_ML",
-"BS_SFC_to_0",
-"BS_SFC_to_M10",
-"BS_SFC_to_M20",
-"BS_1km_to_0",
-"BS_1km_to_M10",
-"BS_1km_to_M20",
-"BS_2km_to_0",
-"BS_2km_to_M10",
-"BS_2km_to_M20",
-"BS_MU_LFC_to_0",
-"BS_MU_LFC_to_M10",
-"BS_MU_LFC_to_M20",
-"BS_SB_LFC_to_0",
-"BS_SB_LFC_to_M10",
-"BS_SB_LFC_to_M20",
-"BS_ML_LFC_to_0",
-"BS_ML_LFC_to_M10",
-"BS_ML_LFC_to_M20",
-"BS_MW02_to_MW06",
-"BS_MW02_to_RM",
-"BS_MW02_to_LM",
-"BS_HGL_to_MW06",
-"BS_HGL_to_RM",
-"BS_HGL_to_LM",
-"Updraft_tilting_MW06",
-"Updraft_tilting_RW",
-"Updraft_tilting_LW",
-"MW_01km",
-"MW_02km",
-"MW_03km",
-"MW_06km",
-"MW_13km",
-"SRH_100m_RM",
-"SRH_250m_RM",
-"SRH_500m_RM",
-"SRH_1km_RM",
-"SRH_3km_RM",
-"SRH_100m_LM",
-"SRH_250m_LM",
-"SRH_500m_LM",
-"SRH_1km_LM",
-"SRH_3km_LM",
-"Bunkers_RM_A",
-"Bunkers_RM_M",
-"Bunkers_LM_A",
-"Bunkers_LM_M",
-"Bunkers_MW_A",
-"Bunkers_MW_M",
-"Corfidi_downwind_A",
-"Corfidi_downwind_M",
-"Corfidi_upwind_A",
-"Corfidi_upwind_M",
-"K_Index",
-"Showalter_Index",
-"TotalTotals_Index",
-"SWEAT_Index",
-"STP",
-"STP_new",
-"SCP",
-"SCP_new",
-"SHIP",
-"HSI",
-"DCP",
-"MU_WMAXSHEAR",
-"SB_WMAXSHEAR",
-"ML_WMAXSHEAR",
-"MU_EFF_WMAXSHEAR",
-"SB_EFF_WMAXSHEAR",
-"ML_EFF_WMAXSHEAR",
-"MU500_CAPE",
-"MU500_CIN",
-"MU500_LI",
-"MU_02km_CAPE", 
-"SB_02km_CAPE", 
-"ML_02km_CAPE",
-"EHI_03km",
-"EHI_01km",
-"EHI_500m")
+"MU_CAPE"
+"MU_CAPE_M10_fraction"
+"MU_02km_CAPE"
+"MU_03km_CAPE"
+"MU_HGL_CAPE"
+"MU_CIN"
+"MU_LCL_HGT"
+"MU_LFC_HGT"
+"MU_EL_HGT"
+"MU_LI"
+"MU_WMAX"
+"MU_EL_TEMP"
+"MU_LCL_TEMP"
+"MU_LFC_TEMP"
+"MU_MIXR"
+"MU_CAPE_500" 
+"MU_CIN_500" 
+"MU_LI_500" 
+"SB_CAPE"
+"SB_CAPE_M10_fraction"
+"SB_02km_CAPE"
+"SB_03km_CAPE"
+"SB_HGL_CAPE"
+"SB_CIN"
+"SB_LCL_HGT"
+"SB_LFC_HGT"
+"SB_EL_HGT"
+"SB_LI"
+"SB_WMAX"
+"SB_EL_TEMP"
+"SB_LCL_TEMP"
+"SB_LFC_TEMP"
+"SB_MIXR"
+"ML_CAPE"
+"ML_CAPE_M10_fraction"
+"ML_03km_CAPE"
+"ML_HGL_CAPE"
+"ML_CIN"
+"ML_LCL_HGT"
+"ML_LFC_HGT"
+"ML_EL_HGT"
+"ML_LI"
+"ML_WMAX"
+"ML_EL_TEMP"
+"ML_LCL_TEMP"
+"ML_LFC_TEMP"
+"ML_MIXR"
+"LR_0500m"
+"LR_01km"
+"LR_02km"
+"LR_03km"
+"LR_04km "
+"LR_06km"
+"LR_16km"
+"LR_26km" 
+"LR_24km"
+"LR_36km"
+"LR_26km_MAX"
+"LR_500700hPa"
+"LR_500800hPa"
+"LR_600800hPa"
+"FRZG_HGT"
+"FRZG_wetbulb_HGT"
+"HGT_max_thetae_03km"
+"HGT_min_thetae_04km"
+"Delta_thetae"
+"Delta_thetae_min04km"
+"DCAPE"
+"Cold_Pool_Strength"
+"Wind_Index"
+"PRCP_WATER"
+"Moisture_Flux_02km"
+"RH_02km"
+"RH_14km"
+"RH_25km"
+"RH_36km"
+"RH_HGL"
+"BS_01km"
+"BS_02km"
+"BS_03km"
+"BS_06km"
+"BS_08km"
+"BS_36km"
+"BS_26km"
+"BS_16km"
+"BS_18km"
+"BS_EFF_MU"
+"BS_EFF_SB"
+"BS_EFF_ML"
+"BS_SFC_to_M10"
+"BS_1km_to_M10"
+"BS_2km_to_M10"
+"BS_MU_LFC_to_M10"
+"BS_SB_LFC_to_M10"
+"BS_ML_LFC_to_M10" 
+"BS_MW02_to_SM"
+"BS_MW02_to_RM"
+"BS_MW02_to_LM"
+"BS_HGL_to_SM"
+"BS_HGL_to_RM"
+"BS_HGL_to_LM"
+"MW_01km"
+"MW_02km"
+"MW_03km"
+"MW_06km"
+"MW_13km"
+"SRH_100m_RM"
+"SRH_250m_RM"
+"SRH_500m_RM"
+"SRH_1km_RM"
+"SRH_3km_RM"
+"SRH_36km_RM"
+"SRH_100m_LM"
+"SRH_250m_LM"
+"SRH_500m_LM"
+"SRH_1km_LM"
+"SRH_3km_LM"
+"SRH_36km_LM"
+"Bunkers_RM_A"
+"Bunkers_RM_M"
+"Bunkers_LM_A"
+"Bunkers_LM_M"
+"Bunkers_MW_A"
+"Bunkers_MW_M"
+"Corfidi_downwind_A"
+"Corfidi_downwind_M"
+"Corfidi_upwind_A"
+"Corfidi_upwind_M"
+"K_Index"
+"Showalter_Index"
+"TotalTotals_Index"
+"SWEAT_Index"
+"STP_fix"
+"STP_new"
+"SCP_fix"
+"SCP_new"
+"SHIP"
+"HSI"
+"DCP"
+"MU_WMAXSHEAR"
+"SB_WMAXSHEAR"
+"ML_WMAXSHEAR"
+"MU_EFF_WMAXSHEAR"
+"SB_EFF_WMAXSHEAR"
+"ML_EFF_WMAXSHEAR"
+"EHI_500m"
+"EHI_01km"
+"EHI_03km")
        
   return(tmp)
 }
