@@ -277,7 +277,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "BS_2km_to_M10",
 "BS_MU_LFC_to_M10",
 "BS_SB_LFC_to_M10",
-"BS_ML_LFC_to_M10" 
+"BS_ML_LFC_to_M10", 
 "BS_MW02_to_SM",
 "BS_MW02_to_RM",
 "BS_MW02_to_LM",
