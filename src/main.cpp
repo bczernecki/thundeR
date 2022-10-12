@@ -1857,8 +1857,7 @@ public:
 	
   double LR16();
   double LR26();
-  double max_LR16_1km();
-  double max_LR16_2km();
+  double max_LR26_2km();
 	
   double MeanWind03();
 
