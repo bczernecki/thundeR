@@ -41,6 +41,7 @@
 #'  \item SB_MIXR 
 #'  \item ML_CAPE 
 #'  \item ML_CAPE_M10_fraction 
+#'  \item ML_02km_CAPE
 #'  \item ML_03km_CAPE 
 #'  \item ML_HGL_CAPE 
 #'  \item ML_CIN 
@@ -218,6 +219,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "SB_MIXR",
 "ML_CAPE",
 "ML_CAPE_M10_fraction",
+"ML_02km_CAPE",
 "ML_03km_CAPE",
 "ML_HGL_CAPE",
 "ML_CIN",
