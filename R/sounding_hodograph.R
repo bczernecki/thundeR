@@ -45,6 +45,8 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
   altitude = altitude[ind]
   u = u[ind]
   v = v[ind]
+  ws = ws[ind]
+  wd = wd[ind]
   
   # setting plot limits:
   #xlm = max(abs(range(c(u,v), na.rm = TRUE)))+1
