@@ -12,6 +12,7 @@
 #' @param parcel parcel tracing on Skew-T for "MU", "ML" or "SB" parcel, "none" for no parcel line.
 #' @param max_speed range of the hodograph to be drawn, 25 m/s used as default
 #' @param buoyancy_polygon logical, plotting area of parcel's positive (yellow) or negative (red) buoyancy (default  = TRUE)
+#' @param SRH_polygon draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default
 #' @param ... extra graphic arguments
 #' @export
 #' @import aiRthermo
@@ -28,7 +29,7 @@
 #'   parcel = "MU", title = "Vienna - 23 August 2011, 12:00 UTC"
 #' )
 sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
-                          title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE, ...) {
+                          title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE, SRH_polygon = "03km", ...) {
   convert <- FALSE
   ptop <- 100
 
@@ -565,7 +566,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0)
   )
 
-  sounding_hodograph(output$ws, output$wd, output$altitude - output$altitude[1], max_speed = max_speed, frame = FALSE, close_par = FALSE, ...)
+  sounding_hodograph(output$ws, output$wd, output$altitude - output$altitude[1], max_speed = max_speed, frame = FALSE, close_par = FALSE, SRH_polygon, ...)
 
   up <- round(max_speed * -1.55 * cos(135 * pi / 180), 2)
   vp <- round(max_speed * 1.35 * sin(135 * pi / 180), 2)
