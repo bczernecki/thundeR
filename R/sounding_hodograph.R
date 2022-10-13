@@ -65,26 +65,8 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
        asp = 1, 
        xaxt = "n", yaxt = "n", frame.plot = FALSE)
   #...)
-    #abline(h = -20:20*5, lty = 2, col = "gray60")
-  #abline(v = -20:20*5, lty = 2, col = "gray60")
-  abline(h = 0, col = "black")
-  abline(v = 0, col = "black")
   
-  # draw circles on hodograph:
-  draw_circle = function(speed = 5){ # current solution work for every 5 m/s
-    up = round(speed * cos(0:359 * pi/180), 2)
-    vp = round(speed * sin(0:359 * pi/180), 2)
-    lty = ifelse( ((speed/5) %% 2 == 0), 1, 3)
-    lines(up, vp, lty = lty, col = "black")
-    if(lty == 1 & (speed/5) > 1) {
-      points(up[135], vp[135], pch = 19, col = "white", cex = 3)
-      #text(up[135], vp[135], labels = speed, col = "gray20", cex = 0.7)
-    }
-  }
-
-  sapply(seq(from = 0, to = max(xlm + 20), by = 5), draw_circle)
-  
-  if(SRH_polygon == "03km"){    
+    if(SRH_polygon == "03km"){    
     parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws,accuracy = 3)
     parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws)
     RM_y = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)
@@ -148,9 +130,10 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
     up = round(speed * cos(0:359 * pi/180), 2)
     vp = round(speed * sin(0:359 * pi/180), 2)
     lty = ifelse( ((speed/5) %% 2 == 0), 1, 3)
-    #lines(up, vp, lty = lty, col = rgb(153, 153, 153, maxColorValue = 255, alpha = 125))
+    lines(up, vp, lty = lty, col = rgb(153, 153, 153, maxColorValue = 255, alpha = 125))
     if(lty == 1 & (speed/5) > 1) {
       #points(up[135], vp[135], pch = 19, col = "white", cex = 3)
+      text(up[135], vp[135], labels = speed, col = "white", cex = 0.9)
       text(up[135], vp[135], labels = speed, col = "gray20", cex = 0.7)
     }
   }
