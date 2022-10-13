@@ -114,7 +114,7 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
     }  
   }
   
-  rect(min(xlm-100),min(xlm-100),max(xlm+100),max(xlm+100), col= rgb(1,1,1,alpha=0.75),border=F)
+  rect(min(xlm-100),min(xlm-100),max(xlm+100),max(xlm+100), col= rgb(1,1,1,alpha=0.85),border=F)
   
   #abline(h = -20:20*5, lty = 2, col = "gray60")
   #abline(v = -20:20*5, lty = 2, col = "gray60")
