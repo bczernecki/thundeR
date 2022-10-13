@@ -566,7 +566,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0)
   )
 
-  sounding_hodograph(output$ws, output$wd, output$altitude - output$altitude[1], max_speed = max_speed, frame = FALSE, close_par = FALSE, SRH_polygon, ...)
+  sounding_hodograph(output$ws, output$wd, output$altitude - output$altitude[1], max_speed = max_speed, frame = FALSE, close_par = FALSE, SRH_polygon = SRH_polygon, ...)
 
   up <- round(max_speed * -1.55 * cos(135 * pi / 180), 2)
   vp <- round(max_speed * 1.35 * sin(135 * pi / 180), 2)
