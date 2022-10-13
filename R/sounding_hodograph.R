@@ -65,14 +65,33 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
        asp = 1, 
        xaxt = "n", yaxt = "n", frame.plot = FALSE)
   #...)
+    #abline(h = -20:20*5, lty = 2, col = "gray60")
+  #abline(v = -20:20*5, lty = 2, col = "gray60")
+  abline(h = 0, col = "black")
+  abline(v = 0, col = "black")
   
-    if(SRH_polygon == "03km"){    
+  # draw circles on hodograph:
+  draw_circle = function(speed = 5){ # current solution work for every 5 m/s
+    up = round(speed * cos(0:359 * pi/180), 2)
+    vp = round(speed * sin(0:359 * pi/180), 2)
+    lty = ifelse( ((speed/5) %% 2 == 0), 1, 3)
+    lines(up, vp, lty = lty, col = "black")
+    if(lty == 1 & (speed/5) > 1) {
+      points(up[135], vp[135], pch = 19, col = "white", cex = 3)
+      #text(up[135], vp[135], labels = speed, col = "gray20", cex = 0.7)
+    }
+  }
+
+  sapply(seq(from = 0, to = max(xlm + 20), by = 5), draw_circle)
+  
+  if(SRH_polygon == "03km"){    
     parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws,accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws)
     RM_y = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)
     RM_x = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
-    uSRH = c(round(-ws * 0.514444 * sin(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=3000])
-    vSRH = c(round(-ws * 0.514444 * cos(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=3000])
-    for(i in 1:length(uSRH)){
+    uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=3000])
+    vSRH = c(round(-parametry3$ws * 0.514444 * cos(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=3000])
+    for(i in 1:(1+length(uSRH))){
       polygon(c(RM_x,uSRH[i:(i+1)]),
               c(RM_y,vSRH[i:(i+1)]), col="red",border=NA)
     }
@@ -80,41 +99,44 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
   
   if(SRH_polygon == "01km"){    
     parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws,accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws)
     RM_y = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)
     RM_x = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
-    uSRH = c(round(-ws * 0.514444 * sin(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=1000])
-    vSRH = c(round(-ws * 0.514444 * cos(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=1000])
+    uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=1000])
+    vSRH = c(round(-parametry3$ws * 0.514444 * cos(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=1000])
     for(i in 1:length(uSRH)){
       polygon(c(RM_x,uSRH[i:(i+1)]),
               c(RM_y,vSRH[i:(i+1)]), col="red",border=NA)
     }
   }
-
+  
   if(SRH_polygon == "0500m"){    
     parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws,accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws)    
     RM_y = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)
     RM_x = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
-    uSRH = c(round(-ws * 0.514444 * sin(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=500])
-    vSRH = c(round(-ws * 0.514444 * cos(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=500])
-    for(i in 1:length(uSRH)){
-      polygon(c(RM_x,uSRH[i:(i+1)]),
-              c(RM_y,vSRH[i:(i+1)]), col="red",border=NA)
-    }  
-  }
-
-  if(SRH_polygon == "36km"){    
-    parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws,accuracy = 3)
-    RM_y = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)
-    RM_x = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
-    uSRH = c(round(-ws * 0.514444 * sin(wd * pi/180), 2)[(altitude-altitude[1])>=3000 & (altitude-altitude[1])<=6000])
-    vSRH = c(round(-ws * 0.514444 * cos(wd * pi/180), 2)[(altitude-altitude[1])>=3000 & (altitude-altitude[1])<=6000])
+    uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=500])
+    vSRH = c(round(-parametry3$ws * 0.514444 * cos(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=500])
     for(i in 1:length(uSRH)){
       polygon(c(RM_x,uSRH[i:(i+1)]),
               c(RM_y,vSRH[i:(i+1)]), col="red",border=NA)
     }  
   }
   
-  rect(min(xlm-100),min(xlm-100),max(xlm+100),max(xlm+100), col= rgb(1,1,1,alpha=0.85),border=F)
+  if(SRH_polygon == "36km"){    
+    parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws,accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws)
+    RM_y = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)
+    RM_x = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
+    uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=3000 & (parametry3$altitude-parametry3$altitude[1])<=6000])
+    vSRH = c(round(-parametry3$ws * 0.514444 * cos(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=3000 & (parametry3$altitude-parametry3$altitude[1])<=6000])
+    for(i in 1:length(uSRH)){
+      polygon(c(RM_x,uSRH[i:(i+1)]),
+              c(RM_y,vSRH[i:(i+1)]), col="red",border=NA)
+    }  
+  }
+  
+  rect(min(xlm-100),min(xlm-100),max(xlm+100),max(xlm+100), col= rgb(1,1,1,alpha=0.75),border=F)
   
   #abline(h = -20:20*5, lty = 2, col = "gray60")
   #abline(v = -20:20*5, lty = 2, col = "gray60")
@@ -126,14 +148,15 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
     up = round(speed * cos(0:359 * pi/180), 2)
     vp = round(speed * sin(0:359 * pi/180), 2)
     lty = ifelse( ((speed/5) %% 2 == 0), 1, 3)
-    lines(up, vp, lty = lty, col = rgb(153, 153, 153, maxColorValue = 255, alpha = 125))
+    #lines(up, vp, lty = lty, col = rgb(153, 153, 153, maxColorValue = 255, alpha = 125))
     if(lty == 1 & (speed/5) > 1) {
-      points(up[135], vp[135], pch = 19, col = "white", cex = 3)
+      #points(up[135], vp[135], pch = 19, col = "white", cex = 3)
       text(up[135], vp[135], labels = speed, col = "gray20", cex = 0.7)
     }
   }
   
   sapply(seq(from = 0, to = max(xlm + 20), by = 5), draw_circle)
+  
   
   # finally adding lines to hodograph:
   
