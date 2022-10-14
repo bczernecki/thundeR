@@ -121,7 +121,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     end_pol <- cumsum(inte$lengths)
     start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
     
-    if(buoyancy_polygon==T){
+    if(buoyancy_polygon==T  & ind_lfc!=ind_el){
     for(i in 1:length(end_pol)){
       if(inte$values[i]==1){
         if(parametry[which(names(parametry[1:LP]) == "ML_CIN")]<0){
@@ -170,7 +170,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     end_pol <- cumsum(inte$lengths)
     start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
     
-    if(buoyancy_polygon==T){
+    if(buoyancy_polygon==T  & ind_lfc!=ind_el){
     for(i in 1:length(end_pol)){
       if(inte$values[i]==1){
         if(parametry[which(names(parametry[1:LP]) == "MU_CIN")]<0){
@@ -215,7 +215,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     end_pol <- cumsum(inte$lengths)
     start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
     
-    if(buoyancy_polygon==T){
+    if(buoyancy_polygon==T  & ind_lfc!=ind_el){
     for(i in 1:length(end_pol)){
       if(inte$values[i]==1){
         if(parametry[which(names(parametry[1:LP]) == "SB_CIN")]<0){
