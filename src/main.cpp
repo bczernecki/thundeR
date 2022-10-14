@@ -1416,6 +1416,7 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
 	downon+=1;
 	
 	thetd+=OE(t,d,p);
+	thetd=thetd+((pow(1100-p,2.5))/pow(4.18,12))-0.0035;
 	thetn+=1;
   }
   
