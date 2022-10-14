@@ -119,7 +119,8 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     
     inte <- rle(diff)
     end_pol <- cumsum(inte$lengths)
-    start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
+    if(length(end_pol)==1){start_pol==1} else {
+    start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]}
     
     if(buoyancy_polygon==T  & ind_lfc!=ind_el){
     for(i in 1:length(end_pol)){
@@ -168,7 +169,8 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     
     inte <- rle(diff)
     end_pol <- cumsum(inte$lengths)
-    start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
+    if(length(end_pol)==1){start_pol==1} else {
+    start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]}
     
     if(buoyancy_polygon==T  & ind_lfc!=ind_el){
     for(i in 1:length(end_pol)){
@@ -213,7 +215,8 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     
     inte <- rle(diff)
     end_pol <- cumsum(inte$lengths)
-    start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
+    if(length(end_pol)==1){start_pol==1} else {
+    start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]}
     
     if(buoyancy_polygon==T  & ind_lfc!=ind_el){
     for(i in 1:length(end_pol)){
@@ -273,10 +276,11 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
   diff = subset(diff, v < 44)
   inte <- rle(diff)
   end_pol <- cumsum(inte$lengths)
-  start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
+  if(length(end_pol)==1){start_pol==1} else {
+  start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]}
   for(i in 1:length(end_pol)){
     if(inte$values[i]==1){
-      polygon(c(skewtx(output$tempV[1:ind_top], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$DN[1:ind_top], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = t_col('blue',80), border = NA) 
+      polygon(c(skewtx(output$tempV[1:ind_top], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$DN[1:ind_top], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = t_col('blue',85), border = NA) 
     }  
   }  
 }
