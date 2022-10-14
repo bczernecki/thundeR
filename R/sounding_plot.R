@@ -119,7 +119,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     
     inte <- rle(diff)
     end_pol <- cumsum(inte$lengths)
-    if(length(end_pol)==1){start_pol==1} else {
+    if(length(end_pol)==1){start_pol=1} else {
     start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]}
     
     if(buoyancy_polygon==T  & ind_lfc!=ind_el){
@@ -169,7 +169,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     
     inte <- rle(diff)
     end_pol <- cumsum(inte$lengths)
-    if(length(end_pol)==1){start_pol==1} else {
+    if(length(end_pol)==1){start_pol=1} else {
     start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]}
     
     if(buoyancy_polygon==T  & ind_lfc!=ind_el){
@@ -215,7 +215,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     
     inte <- rle(diff)
     end_pol <- cumsum(inte$lengths)
-    if(length(end_pol)==1){start_pol==1} else {
+    if(length(end_pol)==1){start_pol=1} else {
     start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]}
     
     if(buoyancy_polygon==T  & ind_lfc!=ind_el){
@@ -276,7 +276,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
   diff = subset(diff, v < 44)
   inte <- rle(diff)
   end_pol <- cumsum(inte$lengths)
-  if(length(end_pol)==1){start_pol==1} else {
+  if(length(end_pol)==1){start_pol=1} else {
   start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]}
   for(i in 1:length(end_pol)){
     if(inte$values[i]==1){
