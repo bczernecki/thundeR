@@ -4103,7 +4103,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   }
   int q= accuracy[0];
   int plen,hlen,tlen,dlen,alen,vlen,tvlen;
-  int mulen, sblen,mllen,mustart;
+  int mulen,sblen,mllen,dnlen,mustart;
 
   double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q);
 	int reslen= 149;
@@ -4120,8 +4120,9 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   	mulen = sret->th->mostUnstable->getVirtualValues()->size();
   	sblen = sret->th->surfaceBased->getVirtualValues()->size();
   	mllen = sret->th->meanLayer->getVirtualValues()->size();
+        dnlen = sret->th->downdraft->getVirtualValues()->size();
   	mustart= sret->th->mostUnstable->startIndex;
-	maxl+=2+mulen+1+sblen+1+mllen+plen+1+hlen+1+tlen+1+dlen+1+alen+1+vlen+1+tvlen+1+10;
+	maxl+=2+mulen+1+sblen+1+mllen+plen+1+hlen+1+tlen+1+dlen+1+alen+1+vlen+1+tvlen+1+dnlen+10;
   	}
   	
   	Rcpp::NumericVector out(maxl);
@@ -4205,6 +4206,15 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
 		  }
 		  
 		  out[i]=tvlen;i++;
+		  
+		  for (std::list<double>::iterator it = sret->th->downdraft->getVirtualValues()->begin(); it != sret->th->downdraft->getVirtualValues()->end(); ++it){
+          	double temp = 0;
+			temp= *it;
+    		out[i]=temp;
+    		i++;
+		  }
+                  out[i]=dnlen;i++;
+
 		  for (std::list<double>::iterator it = sret->th->virt->begin(); it != sret->th->virt->end(); ++it){
           	double temp = 0;
 			temp= *it;
