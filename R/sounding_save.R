@@ -15,6 +15,7 @@
 #' @param parcel parcel tracing on Skew-T for "MU", "ML" or "SB" parcel, "none" for no parcel line.
 #' @param buoyancy_polygon logical, plotting area of parcel's positive (yellow) or negative (red) buoyancy (default  = TRUE)
 #' @param SRH_polygon draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default
+#' @param DCAPE draws downdraft parcel and polygon of downdraft's negative buoyancy (default = FALSE) 
 #' @param filename output file name with extension indicating file format (e.g. "my_plot.png" or "my_plot.svg")
 #' @param ... other arguments that can be used with `sounding_plot` or other graphic arguments
 #' @export
@@ -37,7 +38,7 @@
 #'
 
 sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
-                         title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE, SRH_polygon = "03km", filename, ...){
+                         title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE, SRH_polygon = "03km", DCAPE = FALSE, filename, ...){
   
   convert = FALSE
   ptop = 100 
@@ -47,7 +48,7 @@ sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
   if(tools::file_ext(filename) == "png"){
     grDevices::png(filename = filename, width = 2000, height = 1200, res = 200)
     sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
-                  title, parcel, max_speed, buoyancy_polygon, SRH_polygon, ...)
+                  title, parcel, max_speed, buoyancy_polygon, SRH_polygon, DCAPE, ...)
     grDevices::dev.off()
   }
   
@@ -55,7 +56,7 @@ sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
   if(tools::file_ext(filename) == "svg"){
     grDevices::svg(filename = filename, width = 20, height = 12, pointsize=24)
     sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
-                  title, parcel, max_speed, buoyancy_polygon, SRH_polygon, ...)
+                  title, parcel, max_speed, buoyancy_polygon, SRH_polygon, DCAPE, ...)
     grDevices::dev.off()
   }
   
