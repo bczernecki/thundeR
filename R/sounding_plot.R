@@ -230,23 +230,6 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     }
    }
  }
-
-  if(DCAPE==T){
-  skewt_lines(output$DN,output$pressure, col = t_col('blue',30), lwd = 1, ptop = 100)
-  ind_top = which(output$altitude-output$altitude[1]==4000)-1
-  v = skewty(c(output$pressure[1:ind_top])) # extra checks for NA coded as -99
-  diff <- ifelse((skewtx(output$tempV[1:ind_top], v)-skewtx(output$DN[1:ind_top], v))>0,1,0)
-  v = subset(v, v < 44)
-  diff = subset(diff, v < 44)
-  inte <- rle(diff)
-  end_pol <- cumsum(inte$lengths)
-  start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
-  for(i in 1:length(end_pol)){
-    if(inte$values[i]==1){
-      polygon(c(skewtx(output$tempV[1:ind_top], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$DN[1:ind_top], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = t_col('blue',80), border = NA) 
-    }  
-  }  
-}
     
   ###
   if (parcel == "SB") {
@@ -280,6 +263,24 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
   }
 }
 
+  
+ if(DCAPE==T){
+  skewt_lines(output$DN,output$pressure, col = t_col('blue',30), lwd = 1, ptop = 100)
+  ind_top = which(output$altitude-output$altitude[1]==4000)-1
+  v = skewty(c(output$pressure[1:ind_top])) # extra checks for NA coded as -99
+  diff <- ifelse((skewtx(output$tempV[1:ind_top], v)-skewtx(output$DN[1:ind_top], v))>0,1,0)
+  v = subset(v, v < 44)
+  diff = subset(diff, v < 44)
+  inte <- rle(diff)
+  end_pol <- cumsum(inte$lengths)
+  start_pol <- c(1,cumsum(inte$lengths)+1)[-length(end_pol)]
+  for(i in 1:length(end_pol)){
+    if(inte$values[i]==1){
+      polygon(c(skewtx(output$tempV[1:ind_top], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$DN[1:ind_top], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = t_col('blue',80), border = NA) 
+    }  
+  }  
+}
+  
     ###
   altitude_to_pressure = function(altitude){
     skewty(output$pressure[which(output$altitude-output$altitude[1] == altitude)])
