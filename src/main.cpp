@@ -3601,27 +3601,27 @@ double IndicesCollector::EHI500(){
 }
 
 double IndicesCollector::SW500_RM(){
-  return S->ks->sw500rm;
+  return S->ks->sw500rm / 500;
 }
 
 double IndicesCollector::SW01_RM(){
-  return S->ks->sw01rm;
+  return S->ks->sw01rm / 1000;
 }
 
 double IndicesCollector::SW03_RM(){
-  return S->ks->sw03rm;
+  return S->ks->sw03rm / 3000;
 }
 
 double IndicesCollector::SW500_LM(){
-  return S->ks->sw500lm;
+  return S->ks->sw500lm / 500;
 }
 
 double IndicesCollector::SW01_LM(){
-  return S->ks->sw01lm;
+  return S->ks->sw01lm / 1000;
 }
 
 double IndicesCollector::SW03_LM(){
-  return S->ks->sw03lm;
+  return S->ks->sw03lm / 3000;
 }
 
 double IndicesCollector::MeanSR500_RM(){
