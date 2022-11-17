@@ -820,14 +820,14 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     double tmps1 = (v1.X() - rm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - rm.Y()) * (v2.X() - v1.X());
     double tmps2 = (v1.X() - lm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - lm.Y()) * (v2.X() - v1.X());
 
-    double SR_U_rm = ( (v1.X()+v2.X() ) / 2 ) - rm.X();
-    double SR_V_rm = ( (v1.Y()+v2.Y() ) / 2 ) - rm.Y();
-	    
-    double SR_U_lm = ( (v1.X()+v2.X() ) / 2 ) - lm.X();
-    double SR_V_lm = ( (v1.Y()+v2.Y() ) / 2 ) - lm.Y();
+    double SR_U_rm = ( (v1.Y()+v2.Y() ) / 2 ) - rm.Y();
+    double SR_V_rm = ( (v1.X()+v2.X() ) / 2 ) - rm.X();
+	   
+    double SR_U_lm = ( (v1.Y()+v2.Y() ) / 2 ) - lm.Y();
+    double SR_V_lm = ( (v1.X()+v2.X() ) / 2 ) - lm.X();
 
-    double VORT_U = -(v2.X()-v1.X()); // (h-lasth);
-    double VORT_V = (v2.Y()-v1.Y()); // (h-lasth);	  
+    double VORT_U = -(v2.Y()-v1.Y()); // (h-lasth);
+    double VORT_V = (v2.X()-v1.X()); // (h-lasth);	  
 	    
     double OMEGA_rm = (SR_U_rm*VORT_U+SR_V_rm*VORT_V) / (sqrt( (SR_U_rm*SR_U_rm) + (SR_V_rm*SR_V_rm) ) );
     double OMEGA_lm = (SR_U_lm*VORT_U+SR_V_lm*VORT_V) / (sqrt( (SR_U_lm*SR_U_lm) + (SR_V_lm*SR_V_lm) ) );
@@ -2790,13 +2790,13 @@ double IndicesCollector::DeltaThetaE(){
 
 double IndicesCollector::thetae01(){
   double result = 0;
-  result = S->th->thet01d;  
+  result = S->th->thet01 + 273.15d;  
   return result;
 }
 
 double IndicesCollector::thetae02(){
   double result = 0;
-  result = S->th->thet02d;  
+  result = S->th->thet02d + 273.15d;  
   return result;
 }
 
