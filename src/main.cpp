@@ -3418,7 +3418,7 @@ double IndicesCollector::ML_coldcape(){
 }
 
 double IndicesCollector::MU500_coldcape(){
-	double coldcape = S->th->mostu500->coldcape;
+	double coldcape = S->th->mostU500->coldcape;
 	return coldcape;
 }
 
