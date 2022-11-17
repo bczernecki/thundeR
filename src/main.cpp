@@ -2790,13 +2790,13 @@ double IndicesCollector::DeltaThetaE(){
 
 double IndicesCollector::thetae01(){
   double result = 0;
-  result = S->th->thet01 + 273.15d;  
+  result = S->th->thet01d + 273.15;  
   return result;
 }
 
 double IndicesCollector::thetae02(){
   double result = 0;
-  result = S->th->thet02d + 273.15d;  
+  result = S->th->thet02d + 273.15;  
   return result;
 }
 
