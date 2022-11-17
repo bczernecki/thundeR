@@ -826,8 +826,8 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     double SR_U_lm = ( (v1.X()+v2.X() ) / 2 ) - lm.X();
     double SR_V_lm = ( (v1.Y()+v2.Y() ) / 2 ) - lm.Y();
 
-    double VORT_U = -(v2.X()-v1.X()) / (h-lasth);
-    double VORT_V = (v2.Y()-v1.Y()) / (h-lasth);	  
+    double VORT_U = -(v2.X()-v1.X()); // (h-lasth);
+    double VORT_V = (v2.Y()-v1.Y()); // (h-lasth);	  
 	    
     double OMEGA_rm = (SR_U_rm*VORT_U+SR_V_rm*VORT_V) / (sqrt( (SR_U_rm*SR_U_rm) + (SR_V_rm*SR_V_rm) ) );
     double OMEGA_lm = (SR_U_lm*VORT_U+SR_V_lm*VORT_V) / (sqrt( (SR_U_lm*SR_U_lm) + (SR_V_lm*SR_V_lm) ) );
@@ -2789,11 +2789,11 @@ double IndicesCollector::DeltaThetaE(){
 }
 
 double IndicesCollector::thetae01(){
- return Get(S->th->oe,0)-S->th->thet01d;
+ return = S->th->thet01d;
 }
 
 double IndicesCollector::thetae02(){
- return Get(S->th->oe,0)-S->th->thet01d;
+ return = S->th->thet02d;
 }
 
 double IndicesCollector::DeltaThetaE_min04km(){
