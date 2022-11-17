@@ -7,7 +7,7 @@
 #' @return Named vector of 100+ convective indices
 #' \enumerate{
 #'  \item MU_CAPE 
-#'  \item MU_CAPE_M10_fraction 
+#'  \item MU_CAPE_M10
 #'  \item MU_02km_CAPE 
 #'  \item MU_03km_CAPE 
 #'  \item MU_HGL_CAPE 
@@ -22,10 +22,11 @@
 #'  \item MU_LFC_TEMP 
 #'  \item MU_MIXR 
 #'  \item MU_CAPE_500
+#'  \item MU_CAPE_500_M10
 #'  \item MU_CIN_500
 #'  \item MU_LI_500
 #'  \item SB_CAPE 
-#'  \item SB_CAPE_M10_fraction 
+#'  \item SB_CAPE_M10
 #'  \item SB_02km_CAPE 
 #'  \item SB_03km_CAPE 
 #'  \item SB_HGL_CAPE 
@@ -40,7 +41,7 @@
 #'  \item SB_LFC_TEMP 
 #'  \item SB_MIXR 
 #'  \item ML_CAPE 
-#'  \item ML_CAPE_M10_fraction 
+#'  \item ML_CAPE_M10 
 #'  \item ML_02km_CAPE
 #'  \item ML_03km_CAPE 
 #'  \item ML_HGL_CAPE 
@@ -74,16 +75,20 @@
 #'  \item HGT_min_thetae_04km 
 #'  \item Delta_thetae 
 #'  \item Delta_thetae_min04km 
+#'  \item Thetae_01km 
+#'  \item Thetae_02km 
 #'  \item DCAPE 
 #'  \item Cold_Pool_Strength 
 #'  \item Wind_Index 
 #'  \item PRCP_WATER 
 #'  \item Moisture_Flux_02km 
+#'  \item RH_01km 
 #'  \item RH_02km 
 #'  \item RH_14km 
 #'  \item RH_25km 
 #'  \item RH_36km 
 #'  \item RH_HGL 
+#'  \item BS_0500m
 #'  \item BS_01km 
 #'  \item BS_02km 
 #'  \item BS_03km 
@@ -108,6 +113,7 @@
 #'  \item BS_HGL_to_SM 
 #'  \item BS_HGL_to_RM 
 #'  \item BS_HGL_to_LM 
+#'  \item MW_0500m
 #'  \item MW_01km 
 #'  \item MW_02km 
 #'  \item MW_03km 
@@ -124,7 +130,19 @@
 #'  \item SRH_500m_LM 
 #'  \item SRH_1km_LM 
 #'  \item SRH_3km_LM 
-#'  \item SRH_36km_LM 
+#'  \item SRH_36km_LM
+#'  \item SV_500m_RM();
+#'  \item SV_01km_RM();
+#'  \item SV_03km_RM();
+#'  \item SV_500m_LM();
+#'  \item SV_01km_LM();
+#'  \item SV_03km_LM();
+#'  \item MW_SR_500m_RM();
+#'  \item MW_SR_01km_RM();
+#'  \item MW_SR_03km_RM();
+#'  \item MW_SR_500m_LM();
+#'  \item MW_SR_01km_LM();
+#'  \item MW_SR_03km_LM();
 #'  \item Bunkers_RM_A 
 #'  \item Bunkers_RM_M 
 #'  \item Bunkers_LM_A 
@@ -185,7 +203,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
   
   names(tmp) = c(
 "MU_CAPE",
-"MU_CAPE_M10_fraction",
+"MU_CAPE_M10",
 "MU_02km_CAPE",
 "MU_03km_CAPE",
 "MU_HGL_CAPE",
@@ -199,11 +217,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "MU_LCL_TEMP",
 "MU_LFC_TEMP",
 "MU_MIXR",
-"MU_CAPE_500", 
-"MU_CIN_500", 
-"MU_LI_500", 
+"MU_CAPE_500",
+"MU_CAPE_500_M10",
+"MU_CIN_500",
+"MU_LI_500",
 "SB_CAPE",
-"SB_CAPE_M10_fraction",
+"SB_CAPE_M10",
 "SB_02km_CAPE",
 "SB_03km_CAPE",
 "SB_HGL_CAPE",
@@ -218,7 +237,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "SB_LFC_TEMP",
 "SB_MIXR",
 "ML_CAPE",
-"ML_CAPE_M10_fraction",
+"ML_CAPE_M10",
 "ML_02km_CAPE",
 "ML_03km_CAPE",
 "ML_HGL_CAPE",
@@ -236,10 +255,10 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "LR_01km",
 "LR_02km",
 "LR_03km",
-"LR_04km ",
+"LR_04km",
 "LR_06km",
 "LR_16km",
-"LR_26km", 
+"LR_26km",
 "LR_24km",
 "LR_36km",
 "LR_26km_MAX",
@@ -252,16 +271,20 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "HGT_min_thetae_04km",
 "Delta_thetae",
 "Delta_thetae_min04km",
+"Thetae_01km",
+"Thetae_02km",
 "DCAPE",
 "Cold_Pool_Strength",
 "Wind_Index",
 "PRCP_WATER",
 "Moisture_Flux_02km",
+"RH_01km",
 "RH_02km",
 "RH_14km",
 "RH_25km",
 "RH_36km",
 "RH_HGL",
+"BS_0500m",
 "BS_01km",
 "BS_02km",
 "BS_03km",
@@ -279,13 +302,14 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "BS_2km_to_M10",
 "BS_MU_LFC_to_M10",
 "BS_SB_LFC_to_M10",
-"BS_ML_LFC_to_M10", 
+"BS_ML_LFC_to_M10",
 "BS_MW02_to_SM",
 "BS_MW02_to_RM",
 "BS_MW02_to_LM",
 "BS_HGL_to_SM",
 "BS_HGL_to_RM",
 "BS_HGL_to_LM",
+"MW_0500m",
 "MW_01km",
 "MW_02km",
 "MW_03km",
@@ -303,6 +327,18 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "SRH_1km_LM",
 "SRH_3km_LM",
 "SRH_36km_LM",
+"SV_500m_RM();",
+"SV_01km_RM();",
+"SV_03km_RM();",
+"SV_500m_LM();",
+"SV_01km_LM();",
+"SV_03km_LM();",
+"MW_SR_500m_RM();",
+"MW_SR_01km_RM();",
+"MW_SR_03km_RM();",
+"MW_SR_500m_LM();",
+"MW_SR_01km_LM();",
+"MW_SR_03km_LM();",
 "Bunkers_RM_A",
 "Bunkers_RM_M",
 "Bunkers_LM_A",
