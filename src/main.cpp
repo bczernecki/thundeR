@@ -2789,11 +2789,15 @@ double IndicesCollector::DeltaThetaE(){
 }
 
 double IndicesCollector::thetae01(){
- return = S->th->thet01d;
+  double result = 0;
+  result = S->th->thet01d;  
+  return result;
 }
 
 double IndicesCollector::thetae02(){
- return = S->th->thet02d;
+  double result = 0;
+  result = S->th->thet02d;  
+  return result;
 }
 
 double IndicesCollector::DeltaThetaE_min04km(){
