@@ -139,24 +139,24 @@
 #'  \item SRH_1km_LM 
 #'  \item SRH_3km_LM 
 #'  \item SRH_36km_LM
-#'  \item SV_500m_RM();
-#'  \item SV_01km_RM();
-#'  \item SV_03km_RM();
-#'  \item SV_500m_LM();
-#'  \item SV_01km_LM();
-#'  \item SV_03km_LM();
-#'  \item MW_SR_500m_RM();
-#'  \item MW_SR_01km_RM();
-#'  \item MW_SR_03km_RM();
-#'  \item MW_SR_500m_LM();
-#'  \item MW_SR_01km_LM();
-#'  \item MW_SR_03km_LM();
-#'  \item MW_SR_VM_500m_RM();
-#'  \item MW_SR_VM_01km_RM();
-#'  \item MW_SR_VM_03km_RM();
-#'  \item MW_SR_VM_500m_LM();
-#'  \item MW_SR_VM_01km_LM();
-#'  \item MW_SR_VM_03km_LM();
+#'  \item SV_500m_RM
+#'  \item SV_01km_RM
+#'  \item SV_03km_RM
+#'  \item SV_500m_LM
+#'  \item SV_01km_LM
+#'  \item SV_03km_LM
+#'  \item MW_SR_500m_RM
+#'  \item MW_SR_01km_RM
+#'  \item MW_SR_03km_RM
+#'  \item MW_SR_500m_LM
+#'  \item MW_SR_01km_LM
+#'  \item MW_SR_03km_LM
+#'  \item MW_SR_VM_500m_RM
+#'  \item MW_SR_VM_01km_RM
+#'  \item MW_SR_VM_03km_RM
+#'  \item MW_SR_VM_500m_LM
+#'  \item MW_SR_VM_01km_LM
+#'  \item MW_SR_VM_03km_LM
 #'  \item Bunkers_RM_A 
 #'  \item Bunkers_RM_M 
 #'  \item Bunkers_LM_A 
@@ -356,24 +356,24 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "SRH_1km_LM",
 "SRH_3km_LM",
 "SRH_36km_LM",
-"SV_500m_RM();",
-"SV_01km_RM();",
-"SV_03km_RM();",
-"SV_500m_LM();",
-"SV_01km_LM();",
-"SV_03km_LM();",
-"MW_SR_500m_RM();",
-"MW_SR_01km_RM();",
-"MW_SR_03km_RM();",
-"MW_SR_500m_LM();",
-"MW_SR_01km_LM();",
-"MW_SR_03km_LM();",
-"MW_SR_VM_500m_RM();",
-"MW_SR_VM_01km_RM();",
-"MW_SR_VM_03km_RM();",
-"MW_SR_VM_500m_LM();",
-"MW_SR_VM_01km_LM();",
-"MW_SR_VM_03km_LM();",
+"SV_500m_RM",
+"SV_01km_RM",
+"SV_03km_RM",
+"SV_500m_LM",
+"SV_01km_LM",
+"SV_03km_LM",
+"MW_SR_500m_RM",
+"MW_SR_01km_RM",
+"MW_SR_03km_RM",
+"MW_SR_500m_LM",
+"MW_SR_01km_LM",
+"MW_SR_03km_LM",
+"MW_SR_VM_500m_RM",
+"MW_SR_VM_01km_RM",
+"MW_SR_VM_03km_RM",
+"MW_SR_VM_500m_LM",
+"MW_SR_VM_01km_LM",
+"MW_SR_VM_03km_LM",
 "Bunkers_RM_A",
 "Bunkers_RM_M",
 "Bunkers_LM_A",
