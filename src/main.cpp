@@ -841,11 +841,11 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     double SR_U_lm = ( (v1.Y()+v2.Y() ) / 2 ) - lm.Y();
     double SR_V_lm = ( (v1.X()+v2.X() ) / 2 ) - lm.X();
 	  
-    Vector SR_V_lm = Vector(SR_U_lm, SR_V_lm,0);
-    Vector SR_V_rm = Vector(SR_U_rm, SR_V_rm,0);
+    Vector SR_vec_lm = Vector(SR_U_lm, SR_V_lm,0);
+    Vector SR_vec_rm = Vector(SR_U_rm, SR_V_rm,0);
     
-    double SR_M_lm = SR_V_lm.abs(); 
-    double SR_M_rm = SR_V_rm_.abs();
+    double SR_M_lm = SR_vec_lm.abs(); 
+    double SR_M_rm = SR_vec_rm.abs();
 	    
     double VORT_U = -(v2.Y()-v1.Y()); // (h-lasth);
     double VORT_V = (v2.X()-v1.X()); // (h-lasth);	  
