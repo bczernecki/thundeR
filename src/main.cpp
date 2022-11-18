@@ -846,6 +846,9 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     
     double SR_M_lm = SR_vec_lm.abs(); 
     double SR_M_rm = SR_vec_rm.abs();
+	  
+    cout << SR_M_rm;
+    cout << " SR_M ";
 	    
     double VORT_U = -(v2.Y()-v1.Y()); // (h-lasth);
     double VORT_V = (v2.X()-v1.X()); // (h-lasth);	  
@@ -878,6 +881,10 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
 		SR_500_RM+=SR_M_rm;
 		SR_500_LM+=SR_M_lm;
 		n500+=1;
+		
+    cout << SR_500_RM;
+    cout << " acum SR500 ";
+
 	}
 	    	if(h-h0<=1000){
 		SR_1000_RM+=SR_M_rm;
