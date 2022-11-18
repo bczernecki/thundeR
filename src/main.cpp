@@ -4006,27 +4006,27 @@ double IndicesCollector::MeanVMSR03_LM(){
 }
 
 double IndicesCollector::SV_500_RM_FRA(){
-	return S->ks->SV_500_RM_FRA / S->ks->n500;
+	return S->ks->SV_500m_RM_FRA / S->ks->n500;
 }
 
 double IndicesCollector::SV_1000_RM_FRA(){
-	return S->ks->SV_1000_RM_FRA / S->ks->n1000;
+	return S->ks->SV_01km_RM_FRA / S->ks->n1000;
 }
 
 double IndicesCollector::SV_3000_RM_FRA(){
-	return S->ks->SV_3000_RM_FRA / S->ks->n3000;
+	return S->ks->SV_03km_RM_FRA / S->ks->n3000;
 }
 
 double IndicesCollector::SV_500_LM_FRA(){
-	return S->ks->SV_500_LM_FRA / S->ks->n500;
+	return S->ks->SV_500m_LM_FRA / S->ks->n500;
 }
 
 double IndicesCollector::SV_1000_LM_FRA(){
-	return S->ks->SV_1000_LM_FRA / S->ks->n1000;
+	return S->ks->SV_01km_LM_FRA / S->ks->n1000;
 }
 
 double IndicesCollector::SV_3000_LM_FRA(){
-	return S->ks->SV_3000_LM_FRA / S->ks->n3000;
+	return S->ks->SV_03km_LM_FRA / S->ks->n3000;
 }
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
