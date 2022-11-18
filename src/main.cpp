@@ -2096,12 +2096,12 @@ public:
   double MeanVMSR03_LM();
 	
   double SV_500_RM_FRA();
-  double SV_01_RM_FRA();
-  double SV_03_RM_FRA();
+  double SV_1000_RM_FRA();
+  double SV_3000_RM_FRA();
 	
   double SV_500_LM_FRA();
-  double SV_01_LM_FRA();
-  double SV_03_LM_FRA();
+  double SV_1000_LM_FRA();
+  double SV_3000_LM_FRA();
 	
   double VSurfaceBasedLI_M10();
   double VMeanLayerLI_M10();
