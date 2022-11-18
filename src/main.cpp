@@ -862,10 +862,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     
     double SR_M_lm = SR_vec_lm.abs(); 
     double SR_M_rm = SR_vec_rm.abs();
-	  
-    cout << SR_M_rm;
-    cout << " SR_M ";
-	    
+	  	    
     double VORT_U = -(v2.Y()-v1.Y()); // (h-lasth);
     double VORT_V = (v2.X()-v1.X()); // (h-lasth);	  
 	    
@@ -897,9 +894,6 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
 		SR_500_RM+=SR_M_rm;
 		SR_500_LM+=SR_M_lm;
 		n500+=1;
-		
-    cout << SR_500_RM;
-    cout << " acum SR500 ";
 
 	}
 	    	if(h-h0<=1000){
@@ -976,7 +970,16 @@ void Kinematics::finishMeanVectors()
   mean26/=n26;
   mean020/=n020;
 	
+  cout << SR_500_RM 
+  cout << " SR przed dzieleniem"
+  cout << n500 
+  cout << " n500 przed dzieleniem"	  
   SR_500_RM/=n500;
+  cout << SR_500_RM 
+  cout << " SR po"
+  cout << n500 
+  cout << " n500 po"	  
+
   SR_1000_RM/=n1000;
   SR_3000_RM/=n3000;
   SR_500_LM/=n500;
