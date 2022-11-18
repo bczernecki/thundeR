@@ -193,6 +193,7 @@
 #'  \item SHERBE_v2
 #'  \item DEI
 #'  \item DEI_eff
+#'  \item TIP
 
 #' }
 #'
@@ -408,7 +409,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "SHERBS3_v2",
 "SHERBE_v2",
 "DEI",
-"DEI_eff")
+"DEI_eff",
+"TIP")
        
   return(tmp)
 }
