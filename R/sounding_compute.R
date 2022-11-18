@@ -157,12 +157,12 @@
 #'  \item MW_SR_VM_500m_LM
 #'  \item MW_SR_VM_01km_LM
 #'  \item MW_SR_VM_03km_LM
-#'  \item SR_FRA_500m_RM
-#'  \item SR_FRA_01km_RM
-#'  \item SR_FRA_03km_RM
-#'  \item SR_FRA_500m_LM
-#'  \item SR_FRA_01km_LM
-#'  \item SR_FRA_03km_LM
+#'  \item SV_FRA_500m_RM
+#'  \item SV_FRA_01km_RM
+#'  \item SV_FRA_03km_RM
+#'  \item SV_FRA_500m_LM
+#'  \item SV_FRA_01km_LM
+#'  \item SV_FRA_03km_LM
 #'  \item Bunkers_RM_A
 #'  \item Bunkers_RM_M
 #'  \item Bunkers_LM_A
@@ -387,12 +387,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "MW_SR_VM_500m_LM",
 "MW_SR_VM_01km_LM",
 "MW_SR_VM_03km_LM",
-"SR_FRA_500m_RM",
-"SR_FRA_01km_RM",
-"SR_FRA_03km_RM",
-"SR_FRA_500m_LM",
-"SR_FRA_01km_LM",
-"SR_FRA_03km_LM",
+"SV_FRA_500m_RM",
+"SV_FRA_01km_RM",
+"SV_FRA_03km_RM",
+"SV_FRA_500m_LM",
+"SV_FRA_01km_LM",
+"SV_FRA_03km_LM",
 "Bunkers_RM_A",
 "Bunkers_RM_M",
 "Bunkers_LM_A",
