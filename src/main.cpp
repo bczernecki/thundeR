@@ -440,14 +440,6 @@ private:
   double SR_1000_LM;
   double SR_3000_LM;
 	
-  double SV_500m_RM_FRA;
-  double SV_01km_RM_FRA;
-  double SV_03km_RM_FRA;
-	
-  double SV_500m_LM_FRA;
-  double SV_01km_LM_FRA;
-  double SV_03km_LM_FRA;
-
   double n500;
   double n1000;
   double n3000;
@@ -506,11 +498,17 @@ private:
   double sw03rm;
   double sw03lm;
 	
+  double shear500m;
+  double shear1000m; 
+  double shear3000m;
+	
   double sw13rm;
   double sw13lm;
 	
   double sw13rmf;
   double sw13lmf;
+  double shear_l;
+
   
   void putMandatoryVectors(int i, double p, double h, double t, double d, double a, double v, Vector v_);
   void putMeanVectors(int i, double p, double h, double t, double d, double a, double v, Vector v_);
@@ -577,11 +575,16 @@ public:
     sw03rm = 0;
     sw03lm = 0;
 	  
+    shear500m = 0;
+    shear1000m = 0;
+    shear3000m = 0;
+	  
     sw13rm = 0;
     sw13lm = 0;
 	  
     sw13lmf=0;
-    sw13rmf=0;    
+    sw13rmf=0;  
+    shear_l=0;
 	  
     SR_500_RM=0;
     SR_1000_RM=0;
@@ -639,6 +642,7 @@ Kinematics::Kinematics(){
 	
   sw13lmf = 0;
   sw13rmf = 0;
+  shear_l = 0;
   
   srh03lm = 0;
   srh03rm = 0;
@@ -648,9 +652,6 @@ Kinematics::Kinematics(){
 	
   srh36lm = 0;
   srh36rm = 0;
-	
-  sw13lmf=0;
-  sw13rmf=0;
 	
   SR_500_RM=0;
   SR_1000_RM=0;
@@ -876,9 +877,10 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
 	    
     double OMEGA_rm = (SR_U_rm*VORT_U+SR_V_rm*VORT_V) / (sqrt( (SR_U_rm*SR_U_rm) + (SR_V_rm*SR_V_rm) ) );
     double OMEGA_lm = (SR_U_lm*VORT_U+SR_V_lm*VORT_V) / (sqrt( (SR_U_lm*SR_U_lm) + (SR_V_lm*SR_V_lm) ) );
-    
-    double SV_FRA_RM = OMEGA_rm / SR_M_rm;
-    double SV_FRA_LM = OMEGA_lm / SR_M_lm;
+
+    double shear_layer = sqrt(((v2.X - v1.X) * (v2.X - v1.X)) + ((v2.Y - v1.Y) * (v2.Y - v1.Y)));
+	  
+    shear_l += shear_layer;
 	  
     sw13rm += OMEGA_rm;
     sw13lm += OMEGA_lm;
@@ -886,33 +888,29 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     srh13rm += tmps1;
     srh13lm += tmps2;
 	  
-    if (tmps1>0)
-      srh13rmf += tmps1;
-    else srh13lmf -= tmps1;
-    if (tmps2>0) 
-      srh13lmf += tmps2;
-    else srh13rmf -= tmps2;
-	  
-    if (OMEGA_rm>0)
-      sw13rmf += OMEGA_rm;
-    else sw13lmf -= OMEGA_rm;
-    if (OMEGA_lm>0) 
-      sw13lmf += OMEGA_lm;
-    else sw13rmf -= OMEGA_lm;
+//    if (tmps1>0)
+//      srh13rmf += tmps1;
+//    else srh13lmf -= tmps1;
+//    if (tmps2>0) 
+//      srh13lmf += tmps2;
+//    else srh13rmf -= tmps2;
+//	  
+//    if (OMEGA_rm>0)
+//      sw13rmf += OMEGA_rm;
+//    else sw13lmf -= OMEGA_rm;
+//    if (OMEGA_lm>0) 
+//      sw13lmf += OMEGA_lm;
+//    else sw13rmf -= OMEGA_lm;
 	  
     if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
 	if(h-h0<=500){
 		SR_500_RM+=SR_M_rm;
 		SR_500_LM+=SR_M_lm;
-		SV_500m_RM_FRA+=SV_FRA_RM;
-                SV_500m_LM_FRA+=SV_FRA_LM;
 		n500+=1;
 	}
 	    	if(h-h0<=1000){
 		SR_1000_RM+=SR_M_rm;
 		SR_1000_LM+=SR_M_lm;
-		SV_01km_RM_FRA+=SV_FRA_RM;
-                SV_01km_LM_FRA+=SV_FRA_LM;
 		n1000+=1;
 	}
 
@@ -922,8 +920,6 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
 	if(h-h0<=3000){
 		SR_3000_RM+=SR_M_rm;
 		SR_3000_LM+=SR_M_lm;
-		SV_03km_RM_FRA+=SV_FRA_RM;
-                SV_03km_LM_FRA+=SV_FRA_LM;
 		n3000+=1;
 	}
    }
@@ -938,6 +934,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
       srh03lm = srh13lm;
       sw03rm = sw13rm;
       sw03lm = sw13lm;
+      shear3000m = shear_l;
     }
 
     if (h-h0<=1000)
@@ -946,6 +943,8 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
       srh01lm = srh13lm;
       sw01rm = sw13rm;
       sw01lm = sw13lm;
+      shear1000m = shear_l;
+
     }	  
 	  
     if(h-h0<=500){
@@ -953,6 +952,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
       srh500lm = srh13lm;
       sw500rm = sw13rm;
       sw500lm = sw13lm;
+      shear500m = shear_l;
 	}
 
     if(h-h0<=250){
@@ -4006,27 +4006,27 @@ double IndicesCollector::MeanVMSR03_LM(){
 }
 
 double IndicesCollector::SV_500_RM_FRA(){
-	return S->ks->SV_500m_RM_FRA / S->ks->n500;
+	return S->ks->sw500rm / S->ks->shear500m;
 }
 
 double IndicesCollector::SV_1000_RM_FRA(){
-	return S->ks->SV_01km_RM_FRA / S->ks->n1000;
+	return S->ks->sw01rm / S->ks->shear1000m;
 }
 
 double IndicesCollector::SV_3000_RM_FRA(){
-	return S->ks->SV_03km_RM_FRA / S->ks->n3000;
+	return S->ks->sw03rm / S->ks->shear3000m;
 }
 
 double IndicesCollector::SV_500_LM_FRA(){
-	return S->ks->SV_500m_LM_FRA / S->ks->n500;
+	return S->ks->sw500lm / S->ks->shear500m;
 }
 
 double IndicesCollector::SV_1000_LM_FRA(){
-	return S->ks->SV_01km_LM_FRA / S->ks->n1000;
+	return S->ks->sw01lm / S->ks->shear1000m;
 }
 
 double IndicesCollector::SV_3000_LM_FRA(){
-	return S->ks->SV_03km_LM_FRA / S->ks->n3000;
+	return S->ks->sw03lm / S->ks->shear3000m;
 }
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
