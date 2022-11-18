@@ -889,28 +889,27 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
       sw13lmf += OMEGA_lm;
     else sw13rmf -= OMEGA_lm;
 	  
-    if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
+//    if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
 	if(h-h0<=500){
 		SR_500_RM+=SR_M_rm;
 		SR_500_LM+=SR_M_lm;
-		n500+=1;
-
+//		n500+=1;
 	}
 	    	if(h-h0<=1000){
 		SR_1000_RM+=SR_M_rm;
 		SR_1000_LM+=SR_M_lm;
-		n1000+=1;
+//		n1000+=1;
 	}
 
-    }
+//    }
 	  
-    if((fmod(abs(h-h0),200.0)==0.0)||(h==h0)){
+//   if((fmod(abs(h-h0),200.0)==0.0)||(h==h0)){
 	if(h-h0<=3000){
 		SR_3000_RM+=SR_M_rm;
 		SR_3000_LM+=SR_M_lm;
-		n3000+=1;
+//		n3000+=1;
 	}
-    }
+//   }
 	  
     if(h-h0 >= 3000){
       srh36rm = srh13rm;
@@ -3867,27 +3866,27 @@ double IndicesCollector::MeanSR03_LM(){
 }
 
 double IndicesCollector::MeanVMSR500_RM(){
-	return S->ks->SR_500_RM / S->ks->n500;
+	return S->ks->SR_500_RM // / S->ks->n500;
 }
 
 double IndicesCollector::MeanVMSR01_RM(){
-	return S->ks->SR_1000_RM / S->ks->n1000;
+	return S->ks->SR_1000_RM // / S->ks->n1000;
 }
 
 double IndicesCollector::MeanVMSR03_RM(){
-	return S->ks->SR_3000_RM / S->ks->n3000;
+	return S->ks->SR_3000_RM // / S->ks->n3000;
 }
 
 double IndicesCollector::MeanVMSR500_LM(){
-	return S->ks->SR_500_LM / S->ks->n500;
+	return S->ks->SR_500_LM // / S->ks->n500;
 }
 
 double IndicesCollector::MeanVMSR01_LM(){
-	return S->ks->SR_1000_LM / S->ks->n1000;
+	return S->ks->SR_1000_LM // / S->ks->n1000;
 }
 
 double IndicesCollector::MeanVMSR03_LM(){
-	return S->ks->SR_3000_LM / S->ks->n3000;
+	return S->ks->SR_3000_LM // / S->ks->n3000;
 }
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
