@@ -439,6 +439,14 @@ private:
   double SR_500_LM;
   double SR_1000_LM;
   double SR_3000_LM;
+	
+  double SV_500m_RM_FRA;
+  double SV_01km_RM_FRA;
+  double SV_03km_RM_FRA;
+	
+  double SV_500m_LM_FRA;
+  double SV_01km_LM_FRA;
+  double SV_03km_LM_FRA;
 
   double n500;
   double n1000;
@@ -868,7 +876,10 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
 	    
     double OMEGA_rm = (SR_U_rm*VORT_U+SR_V_rm*VORT_V) / (sqrt( (SR_U_rm*SR_U_rm) + (SR_V_rm*SR_V_rm) ) );
     double OMEGA_lm = (SR_U_lm*VORT_U+SR_V_lm*VORT_V) / (sqrt( (SR_U_lm*SR_U_lm) + (SR_V_lm*SR_V_lm) ) );
-
+    
+    double SV_FRA_RM = OMEGA_rm / SR_M_rm;
+    double SV_FRA_LM = OMEGA_lm / SR_M_lm;
+	  
     sw13rm += OMEGA_rm;
     sw13lm += OMEGA_lm;
 	  
@@ -893,11 +904,15 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
 	if(h-h0<=500){
 		SR_500_RM+=SR_M_rm;
 		SR_500_LM+=SR_M_lm;
+		SV_500m_RM_FRA+=SV_FRA_RM;
+                SV_500m_LM_FRA+=SV_FRA_LM;
 		n500+=1;
 	}
 	    	if(h-h0<=1000){
 		SR_1000_RM+=SR_M_rm;
 		SR_1000_LM+=SR_M_lm;
+		SV_01km_RM_FRA+=SV_FRA_RM;
+                SV_01km_LM_FRA+=SV_FRA_LM;
 		n1000+=1;
 	}
 
@@ -907,6 +922,8 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
 	if(h-h0<=3000){
 		SR_3000_RM+=SR_M_rm;
 		SR_3000_LM+=SR_M_lm;
+		SV_03km_RM_FRA+=SV_FRA_RM;
+                SV_03km_LM_FRA+=SV_FRA_LM;
 		n3000+=1;
 	}
    }
@@ -2079,6 +2096,14 @@ public:
   double SW01_LM();
   double SW03_LM();
 	
+  double SV_500_RM_FRA;
+  double SV_1000_RM_FRA;
+  double SV_3000_RM_FRA;
+	
+  double SV_500_LM_FRA;
+  double SV_1000_LM_FRA;
+  double SV_3000_LM_FRA;
+	
   double MeanSR500_RM();
   double MeanSR01_RM();
   double MeanSR03_RM();
@@ -2094,15 +2119,7 @@ public:
   double MeanVMSR500_LM();
   double MeanVMSR01_LM();
   double MeanVMSR03_LM();
-	
-  double SV_500_RM_FRA();
-  double SV_1000_RM_FRA();
-  double SV_3000_RM_FRA();
-	
-  double SV_500_LM_FRA();
-  double SV_1000_LM_FRA();
-  double SV_3000_LM_FRA();
-	
+		
   double VSurfaceBasedLI_M10();
   double VMeanLayerLI_M10();
   double VMostUnstableLI_M10();
@@ -3989,27 +4006,27 @@ double IndicesCollector::MeanVMSR03_LM(){
 }
 
 double IndicesCollector::SV_500_RM_FRA(){
-	return this->SW500_RM() / (this->MeanVMSR500_RM() / 500);
+	return S->ks->SV_500_RM_FRA / S->ks->n500;
 }
 
 double IndicesCollector::SV_1000_RM_FRA(){
-	return this->SW01_RM() / (this->MeanVMSR01_RM() / 1000);
+	return S->ks->SV_1000_RM_FRA / S->ks->n1000;
 }
 
 double IndicesCollector::SV_3000_RM_FRA(){
-	return this->SW03_RM() / (this->MeanVMSR03_RM() / 3000);
+	return S->ks->SV_3000_RM_FRA / S->ks->n3000;
 }
 
 double IndicesCollector::SV_500_LM_FRA(){
-	return this->SW500_LM() / (this->MeanVMSR500_LM() / 500);
+	return S->ks->SV_500_LM_FRA / S->ks->n500;
 }
 
 double IndicesCollector::SV_1000_LM_FRA(){
-	return this->SW01_LM() / (this->MeanVMSR01_LM() / 1000);
+	return S->ks->SV_1000_LM_FRA / S->ks->n1000;
 }
 
 double IndicesCollector::SV_3000_LM_FRA(){
-	return this->SW03_LM() / (this->MeanVMSR03_LM() / 3000);
+	return S->ks->SV_3000_LM_FRA / S->ks->n3000;
 }
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
