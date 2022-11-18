@@ -2096,13 +2096,13 @@ public:
   double SW01_LM();
   double SW03_LM();
 	
-  double SV_500_RM_FRA;
-  double SV_1000_RM_FRA;
-  double SV_3000_RM_FRA;
+  double SV_500_RM_FRA();
+  double SV_1000_RM_FRA();
+  double SV_3000_RM_FRA();
 	
-  double SV_500_LM_FRA;
-  double SV_1000_LM_FRA;
-  double SV_3000_LM_FRA;
+  double SV_500_LM_FRA();
+  double SV_1000_LM_FRA();
+  double SV_3000_LM_FRA();
 	
   double MeanSR500_RM();
   double MeanSR01_RM();
