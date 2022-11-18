@@ -970,15 +970,15 @@ void Kinematics::finishMeanVectors()
   mean26/=n26;
   mean020/=n020;
 	
-  cout << SR_500_RM 
-  cout << " SR przed dzieleniem"
-  cout << n500 
-  cout << " n500 przed dzieleniem"	  
+  cout << SR_500_RM; 
+  cout << " SR przed dzieleniem ";
+  cout << n500; 
+  cout << " n500 przed dzieleniem ";	  
   SR_500_RM/=n500;
-  cout << SR_500_RM 
-  cout << " SR po"
-  cout << n500 
-  cout << " n500 po"	  
+  cout << SR_500_RM; 
+  cout << " SR po ";
+  cout << n500;
+  cout << " n500 po ";	  
 
   SR_1000_RM/=n1000;
   SR_3000_RM/=n3000;
