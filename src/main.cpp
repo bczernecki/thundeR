@@ -969,22 +969,6 @@ void Kinematics::finishMeanVectors()
   else mean6=Vector(0,0,0);
   mean26/=n26;
   mean020/=n020;
-	
-  cout << SR_500_RM; 
-  cout << " SR przed dzieleniem ";
-  cout << n500; 
-  cout << " n500 przed dzieleniem ";	  
-  SR_500_RM/=n500;
-  cout << SR_500_RM; 
-  cout << " SR po ";
-  cout << n500;
-  cout << " n500 po ";	  
-
-  SR_1000_RM/=n1000;
-  SR_3000_RM/=n3000;
-  SR_500_LM/=n500;
-  SR_1000_LM/=n1000;
-  SR_3000_LM/=n3000;
 }
 
 class LapseRate{
@@ -3883,27 +3867,27 @@ double IndicesCollector::MeanSR03_LM(){
 }
 
 double IndicesCollector::MeanVMSR500_RM(){
-	return S->ks->SR_500_RM;
+	return S->ks->SR_500_RM / S->ks->n500;
 }
 
 double IndicesCollector::MeanVMSR01_RM(){
-	return S->ks->SR_1000_RM;
+	return S->ks->SR_1000_RM / S->ks->n1000;
 }
 
 double IndicesCollector::MeanVMSR03_RM(){
-	return S->ks->SR_3000_RM;
+	return S->ks->SR_3000_RM / S->ks->n3000;
 }
 
 double IndicesCollector::MeanVMSR500_LM(){
-	return S->ks->SR_500_LM;
+	return S->ks->SR_500_LM / S->ks->n500;
 }
 
 double IndicesCollector::MeanVMSR01_LM(){
-	return S->ks->SR_1000_LM;
+	return S->ks->SR_1000_LM / S->ks->n1000;
 }
 
 double IndicesCollector::MeanVMSR03_LM(){
-	return S->ks->SR_3000_LM;
+	return S->ks->SR_3000_LM / S->ks->n3000;
 }
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
