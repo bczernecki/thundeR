@@ -573,7 +573,15 @@ public:
     sw13lm = 0;
 	  
     sw13lmf=0;
-    sw13rmf=0;
+    sw13rmf=0;    
+	  
+    SR_500_RM=0;
+    SR_1000_RM=0;
+    SR_3000_RM=0;
+
+    SR_500_LM=0;
+    SR_1000_LM=0;
+    SR_3000_LM=0;
 
   }
   
@@ -635,6 +643,14 @@ Kinematics::Kinematics(){
 	
   sw13lmf=0;
   sw13rmf=0;
+	
+  SR_500_RM=0;
+  SR_1000_RM=0;
+  SR_3000_RM=0;
+
+  SR_500_LM=0;
+  SR_1000_LM=0;
+  SR_3000_LM=0;
 
   n26=0;
   n020=0;
@@ -1982,8 +1998,9 @@ public:
   double SHERBE();
   double SHERBS3_v2();
   double SHERBE_v2();
-  double DEI();	  
-  double DEI_eff();	
+  double DEI();	 	
+  double DEI_eff();
+  double TIP();	 
   double SHP();
   double DCP();
   double MU_WMAXSHEAR();
@@ -3385,6 +3402,15 @@ double IndicesCollector::DEI(){
   return DEI;
 }
 
+double IndicesCollector::TIP(){
+  double Term1 = this->VMostUnstableCAPE();
+  double Term2 = this->BS06();
+  double Term3 = this->PWATER();
+  double Term4 = this->SRH03RM();
+  if(Term2<9)Term2=9;
+  return (sqrt(Term1)/32) * (Term2/18) * (Term3/25) * (1 + Term4/300);
+}
+
 double IndicesCollector::DEI_eff(){
   double CPS = this->VirtualColdPoolStrength();
   double WXS = this->MU_EFF_WMAXSHEAR();
@@ -3879,7 +3905,7 @@ double IndicesCollector::MeanVMSR03_LM(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz);
-  double * vec = new double[187];
+  double * vec = new double[188];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->MU_coldcape();	
   vec[2]=(*S)->getIndicesCollectorPointer()->MU_coldcapeTV();	
@@ -4066,7 +4092,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[183]=(*S)->getIndicesCollectorPointer()->SHERBS3_v2();
   vec[184]=(*S)->getIndicesCollectorPointer()->SHERBE_v2();	
   vec[185]=(*S)->getIndicesCollectorPointer()->DEI();
-  vec[186]=(*S)->getIndicesCollectorPointer()->DEI_eff();	
+  vec[186]=(*S)->getIndicesCollectorPointer()->DEI_eff();
+  vec[187]=(*S)->getIndicesCollectorPointer()->TIP();
   return vec;
 }
 
@@ -4578,6 +4605,7 @@ double * sounding_default2(double* pressure,
 //'  \item SHERBE_v2
 //'  \item DEI
 //'  \item DEI_eff
+//'  \item TIP
 //' }
 // [[Rcpp::export]]
 
@@ -4608,7 +4636,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   int mulen,sblen,mllen,dnlen,mustart;
 
   double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q);
-	int reslen= 187;
+	int reslen= 188;
 	int maxl=reslen;
 	if(export_profile[0]==1){
 	plen = sret->p->size();
