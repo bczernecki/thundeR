@@ -66,59 +66,56 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
        xaxt = "n", yaxt = "n", frame.plot = FALSE)
   #...)
   
-    plot_srh = function(){
-    new_x = NULL
-    new_y = NULL
-    for (i in 1:length(uSRH)) {
-      new_x = c(new_x, uSRH[i], RM_x)
-      new_y = c(new_y, vSRH[i], RM_y)
-    }
-    
-    d = c(RM_x, RM_y)
-    
-    for (i in seq(1, length(new_x) - 2, 2)) {
-      a = c(new_x[i], new_y[i])
-      b = c(new_x[i + 2], new_y[i + 2])
-      kolor = ifelse( ((b[1] - a[1])*(d[2] - a[2]) - (b[2] - a[2])*(d[1] - a[1]) > 0 ), 
-                      "blue","red")
-      polygon(x = new_x[i:(i + 2)], y = new_y[i:(i + 2)], col = kolor, border = NA)
-    }
-  }
-  
-    if (SRH_polygon == "03km") {
+    if(SRH_polygon == "03km"){    
     parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws,accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws)
     RM_y = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)
     RM_x = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
-    uSRH = c(round(-ws * 0.514444 * sin(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=3000])
-    vSRH = c(round(-ws * 0.514444 * cos(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=3000])
-    plot_srh()
+    uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=3000])
+    vSRH = c(round(-parametry3$ws * 0.514444 * cos(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=3000])
+    for(i in 1:(1+length(uSRH))){
+      polygon(c(RM_x,uSRH[i:(i+1)]),
+              c(RM_y,vSRH[i:(i+1)]), col="red",border=NA)
+    }
   }
   
   if(SRH_polygon == "01km"){    
     parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws,accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws)
     RM_y = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)
     RM_x = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
-    uSRH = c(round(-ws * 0.514444 * sin(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=1000])
-    vSRH = c(round(-ws * 0.514444 * cos(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=1000])
-    plot_srh()
+    uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=1000])
+    vSRH = c(round(-parametry3$ws * 0.514444 * cos(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=1000])
+    for(i in 1:length(uSRH)){
+      polygon(c(RM_x,uSRH[i:(i+1)]),
+              c(RM_y,vSRH[i:(i+1)]), col="red",border=NA)
+    }
   }
-
+  
   if(SRH_polygon == "0500m"){    
     parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws,accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws)    
     RM_y = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)
     RM_x = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
-    uSRH = c(round(-ws * 0.514444 * sin(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=500])
-    vSRH = c(round(-ws * 0.514444 * cos(wd * pi/180), 2)[(altitude-altitude[1])>=0 & (altitude-altitude[1])<=500])
-    plot_srh()
+    uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=500])
+    vSRH = c(round(-parametry3$ws * 0.514444 * cos(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=500])
+    for(i in 1:length(uSRH)){
+      polygon(c(RM_x,uSRH[i:(i+1)]),
+              c(RM_y,vSRH[i:(i+1)]), col="red",border=NA)
+    }  
   }
-
+  
   if(SRH_polygon == "36km"){    
     parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws,accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws)
     RM_y = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)
     RM_x = round(-parametry2[which(names(parametry2) == "Bunkers_RM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_RM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
-    uSRH = c(round(-ws * 0.514444 * sin(wd * pi/180), 2)[(altitude-altitude[1])>=3000 & (altitude-altitude[1])<=6000])
-    vSRH = c(round(-ws * 0.514444 * cos(wd * pi/180), 2)[(altitude-altitude[1])>=3000 & (altitude-altitude[1])<=6000])
-    plot_srh()
+    uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=3000 & (parametry3$altitude-parametry3$altitude[1])<=6000])
+    vSRH = c(round(-parametry3$ws * 0.514444 * cos(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=3000 & (parametry3$altitude-parametry3$altitude[1])<=6000])
+    for(i in 1:length(uSRH)){
+      polygon(c(RM_x,uSRH[i:(i+1)]),
+              c(RM_y,vSRH[i:(i+1)]), col="red",border=NA)
+    }  
   }
   
   rect(min(xlm-100),min(xlm-100),max(xlm+100),max(xlm+100), col= rgb(1,1,1,alpha=0.75),border=F)
