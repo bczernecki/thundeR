@@ -8,6 +8,7 @@
 #' \enumerate{
 #'  \item MU_CAPE 
 #'  \item MU_CAPE_M10
+#'  \item MU_CAPE_M10_PT
 #'  \item MU_02km_CAPE 
 #'  \item MU_03km_CAPE 
 #'  \item MU_HGL_CAPE 
@@ -16,6 +17,7 @@
 #'  \item MU_LFC_HGT 
 #'  \item MU_EL_HGT 
 #'  \item MU_LI 
+#'  \item MU_LI_M10 
 #'  \item MU_WMAX 
 #'  \item MU_EL_TEMP 
 #'  \item MU_LCL_TEMP 
@@ -23,10 +25,13 @@
 #'  \item MU_MIXR 
 #'  \item MU_CAPE_500
 #'  \item MU_CAPE_500_M10
+#'  \item MU_CAPE_500_M10_PT
 #'  \item MU_CIN_500
 #'  \item MU_LI_500
+#'  \item MU_LI_500_M10
 #'  \item SB_CAPE 
 #'  \item SB_CAPE_M10
+#'  \item SB_CAPE_M10_PT
 #'  \item SB_02km_CAPE 
 #'  \item SB_03km_CAPE 
 #'  \item SB_HGL_CAPE 
@@ -35,6 +40,7 @@
 #'  \item SB_LFC_HGT 
 #'  \item SB_EL_HGT 
 #'  \item SB_LI 
+#'  \item SB_LI_M10 
 #'  \item SB_WMAX 
 #'  \item SB_EL_TEMP 
 #'  \item SB_LCL_TEMP 
@@ -42,6 +48,7 @@
 #'  \item SB_MIXR 
 #'  \item ML_CAPE 
 #'  \item ML_CAPE_M10 
+#'  \item ML_CAPE_M10_PT 
 #'  \item ML_02km_CAPE
 #'  \item ML_03km_CAPE 
 #'  \item ML_HGL_CAPE 
@@ -50,6 +57,7 @@
 #'  \item ML_LFC_HGT 
 #'  \item ML_EL_HGT 
 #'  \item ML_LI 
+#'  \item ML_LI_M10
 #'  \item ML_WMAX 
 #'  \item ML_EL_TEMP 
 #'  \item ML_LCL_TEMP 
@@ -143,6 +151,12 @@
 #'  \item MW_SR_500m_LM();
 #'  \item MW_SR_01km_LM();
 #'  \item MW_SR_03km_LM();
+#'  \item MW_SR_VM_500m_RM();
+#'  \item MW_SR_VM_01km_RM();
+#'  \item MW_SR_VM_03km_RM();
+#'  \item MW_SR_VM_500m_LM();
+#'  \item MW_SR_VM_01km_LM();
+#'  \item MW_SR_VM_03km_LM();
 #'  \item Bunkers_RM_A 
 #'  \item Bunkers_RM_M 
 #'  \item Bunkers_LM_A 
@@ -173,6 +187,12 @@
 #'  \item EHI_500m 
 #'  \item EHI_01km 
 #'  \item EHI_03km
+#'  \item SHERBS3
+#'  \item SHERBE
+#'  \item SHERBS3_v2
+#'  \item SHERBE_v2
+#'  \item DEI
+#'  \item DEI_eff
 
 #' }
 #'
@@ -204,6 +224,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
   names(tmp) = c(
 "MU_CAPE",
 "MU_CAPE_M10",
+"MU_CAPE_M10_PT",
 "MU_02km_CAPE",
 "MU_03km_CAPE",
 "MU_HGL_CAPE",
@@ -212,6 +233,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "MU_LFC_HGT",
 "MU_EL_HGT",
 "MU_LI",
+"MU_LI_M10",
 "MU_WMAX",
 "MU_EL_TEMP",
 "MU_LCL_TEMP",
@@ -219,10 +241,13 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "MU_MIXR",
 "MU_CAPE_500",
 "MU_CAPE_500_M10",
+"MU_CAPE_500_M10_PT",
 "MU_CIN_500",
 "MU_LI_500",
+"MU_LI_500_M10",
 "SB_CAPE",
 "SB_CAPE_M10",
+"SB_CAPE_M10_PT",
 "SB_02km_CAPE",
 "SB_03km_CAPE",
 "SB_HGL_CAPE",
@@ -231,6 +256,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "SB_LFC_HGT",
 "SB_EL_HGT",
 "SB_LI",
+"SB_LI_M10",
 "SB_WMAX",
 "SB_EL_TEMP",
 "SB_LCL_TEMP",
@@ -238,6 +264,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "SB_MIXR",
 "ML_CAPE",
 "ML_CAPE_M10",
+"ML_CAPE_M10_PT",
 "ML_02km_CAPE",
 "ML_03km_CAPE",
 "ML_HGL_CAPE",
@@ -246,6 +273,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "ML_LFC_HGT",
 "ML_EL_HGT",
 "ML_LI",
+"ML_LI_M10",
 "ML_WMAX",
 "ML_EL_TEMP",
 "ML_LCL_TEMP",
@@ -339,6 +367,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "MW_SR_500m_LM();",
 "MW_SR_01km_LM();",
 "MW_SR_03km_LM();",
+"MW_SR_VM_500m_RM();",
+"MW_SR_VM_01km_RM();",
+"MW_SR_VM_03km_RM();",
+"MW_SR_VM_500m_LM();",
+"MW_SR_VM_01km_LM();",
+"MW_SR_VM_03km_LM();",
 "Bunkers_RM_A",
 "Bunkers_RM_M",
 "Bunkers_LM_A",
@@ -368,7 +402,13 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 "ML_EFF_WMAXSHEAR",
 "EHI_500m",
 "EHI_01km",
-"EHI_03km")
+"EHI_03km",
+"SHERBS3",
+"SHERBE",
+"SHERBS3_v2",
+"SHERBE_v2",
+"DEI",
+"DEI_eff")
        
   return(tmp)
 }
