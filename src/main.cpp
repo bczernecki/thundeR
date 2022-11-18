@@ -3866,27 +3866,27 @@ double IndicesCollector::MeanSR03_LM(){
 }
 
 double IndicesCollector::MeanVMSR500_RM(){
-	return S->ks->SR_500_RM // / S->ks->n500;
+	return S->ks->SR_500_RM; // / S->ks->n500;
 }
 
 double IndicesCollector::MeanVMSR01_RM(){
-	return S->ks->SR_1000_RM // / S->ks->n1000;
+	return S->ks->SR_1000_RM; // / S->ks->n1000;
 }
 
 double IndicesCollector::MeanVMSR03_RM(){
-	return S->ks->SR_3000_RM // / S->ks->n3000;
+	return S->ks->SR_3000_RM; // / S->ks->n3000;
 }
 
 double IndicesCollector::MeanVMSR500_LM(){
-	return S->ks->SR_500_LM // / S->ks->n500;
+	return S->ks->SR_500_LM; // / S->ks->n500;
 }
 
 double IndicesCollector::MeanVMSR01_LM(){
-	return S->ks->SR_1000_LM // / S->ks->n1000;
+	return S->ks->SR_1000_LM; // / S->ks->n1000;
 }
 
 double IndicesCollector::MeanVMSR03_LM(){
-	return S->ks->SR_3000_LM // / S->ks->n3000;
+	return S->ks->SR_3000_LM; // / S->ks->n3000;
 }
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
