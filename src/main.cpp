@@ -4487,10 +4487,10 @@ double * sounding_default2(double* pressure,
                           double* dew,
                           double* angle,
                           double* velocity,
-                         
                           int size,
-						  Sounding **sret,
-						  int custom_vec=1
+			  Sounding **sret,
+			  int custom_vec=1,
+			  int interpolate_step=5
                           )
 {
  
@@ -4514,13 +4514,14 @@ double * sounding_default2(double* pressure,
 	  ch=hlen;
   }else if(custom_vec==3){
 	  
-	  double *tmp = new double[4000];
+	  int liczba_poziomow = interpolate_step/20000;
+	  double *tmp = new double[liczba_poziomow];
 	  tmp[0]=0;
-	  for(int g=1;g<4000;g++){
-		  tmp[g]=tmp[g-1]+5;
+	  for(int g=1;g<liczba_poziomow;g++){
+		  tmp[g]=tmp[g-1]+interpolate_step;
 	  }
 	  hh=tmp;
-	  ch=4000;
+	  ch=liczba_poziomow;
   }
   u = interpolate2(&p, &h,&t, &d, &a, &v, u,pp, hh, 0, ch);
   if(custom_vec==3)delete[] hh;
@@ -4544,6 +4545,7 @@ double * sounding_default2(double* pressure,
 //' @param ws wind speed [knots]
 //' @param export_profile possibility to export interpolated profile on the levels defined in accuracy configuration
 //' @param accuracy accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
+//' @param interpolate_step interpolate_step when accuracy is set to 3 (5m is default)
 //' @examples 
 //' pressure = c(1000, 855, 700, 500, 300, 100, 10) 
 //' altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000)
@@ -4551,7 +4553,7 @@ double * sounding_default2(double* pressure,
 //' dpt = c(20, 5, -5, -30, -55, -80, -99)
 //' wd = c(0, 90, 135, 180, 270, 350, 0)
 //' ws = c(5, 10, 20, 30, 40, 5, 0)
-//' sounding_default(pressure, altitude, temp, dpt, wd, ws, accuracy = 1, export_profile = 0)
+//' sounding_default(pressure, altitude, temp, dpt, wd, ws, accuracy = 1, export_profile = 0, interpolate_step = 5)
 //' @useDynLib thunder
 //' @importFrom Rcpp evalCpp
 //' @export
@@ -4768,8 +4770,8 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
                           Rcpp::NumericVector wd,
                           Rcpp::NumericVector ws,
 		          Rcpp::NumericVector export_profile,
-			  Rcpp::NumericVector accuracy
-						  )
+			  Rcpp::NumericVector accuracy,
+			  int interpolate_step)
 {
   Sounding *sret;
   int size = pressure.size();
@@ -4783,11 +4785,11 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
     a[i]=wd[i];
     v[i]=ws[i];
   }
-  int q= accuracy[0];
+  int q = accuracy[0];
   int plen,hlen,tlen,dlen,alen,vlen,tvlen;
   int mulen,sblen,mllen,dnlen,mustart;
 
-  double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q);
+  double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step);
 	int reslen= 201;
 	int maxl=reslen;
 	if(export_profile[0]==1){
