@@ -217,6 +217,7 @@
 #' @param wd wind direction [azimuth in degrees]
 #' @param ws wind speed [knots]
 #' @param accuracy accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
+#' @param interpolate_step when accuracy is set to 3 (default is 5m)
 #' @export 
 #' @examples
 #' pressure = c(1000, 855, 700, 500, 300, 100, 10)
@@ -229,11 +230,11 @@
 #' options(digits = 2) #change output formatting precision 
 #' sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
-sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2){
+sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2, interpolate_step = 5){
   
   export_profile = 0 
   
-  tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy)
+  tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step)
   
   names(tmp) = c(
 "MU_CAPE",
