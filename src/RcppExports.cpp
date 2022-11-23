@@ -11,8 +11,8 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // sounding_default
-Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure, Rcpp::NumericVector altitude, Rcpp::NumericVector temp, Rcpp::NumericVector dpt, Rcpp::NumericVector wd, Rcpp::NumericVector ws, Rcpp::NumericVector export_profile, Rcpp::NumericVector accuracy);
-RcppExport SEXP _thunder_sounding_default(SEXP pressureSEXP, SEXP altitudeSEXP, SEXP tempSEXP, SEXP dptSEXP, SEXP wdSEXP, SEXP wsSEXP, SEXP export_profileSEXP, SEXP accuracySEXP) {
+Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure, Rcpp::NumericVector altitude, Rcpp::NumericVector temp, Rcpp::NumericVector dpt, Rcpp::NumericVector wd, Rcpp::NumericVector ws, Rcpp::NumericVector export_profile, Rcpp::NumericVector accuracy, int interpolate_step);
+RcppExport SEXP _thunder_sounding_default(SEXP pressureSEXP, SEXP altitudeSEXP, SEXP tempSEXP, SEXP dptSEXP, SEXP wdSEXP, SEXP wsSEXP, SEXP export_profileSEXP, SEXP accuracySEXP, SEXP interpolate_stepSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -24,13 +24,14 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type ws(wsSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type export_profile(export_profileSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type accuracy(accuracySEXP);
-    rcpp_result_gen = Rcpp::wrap(sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy));
+    Rcpp::traits::input_parameter< int >::type interpolate_step(interpolate_stepSEXP);
+    rcpp_result_gen = Rcpp::wrap(sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_thunder_sounding_default", (DL_FUNC) &_thunder_sounding_default, 8},
+    {"_thunder_sounding_default", (DL_FUNC) &_thunder_sounding_default, 9},
     {NULL, NULL, 0}
 };
 

@@ -13,6 +13,7 @@
 #' @param ws wind speed [knots]
 #' @param export_profile possibility to export interpolated profile on the levels defined in accuracy configuration
 #' @param accuracy accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
+#' @param interpolate_step interpolate_step when accuracy is set to 3 (5m is default)
 #' @examples 
 #' pressure = c(1000, 855, 700, 500, 300, 100, 10) 
 #' altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000)
@@ -20,14 +21,15 @@
 #' dpt = c(20, 5, -5, -30, -55, -80, -99)
 #' wd = c(0, 90, 135, 180, 270, 350, 0)
 #' ws = c(5, 10, 20, 30, 40, 5, 0)
-#' sounding_default(pressure, altitude, temp, dpt, wd, ws, accuracy = 1, export_profile = 0)
+#' sounding_default(pressure, altitude, temp, dpt, wd, ws, accuracy = 1, export_profile = 0, interpolate_step = 5)
 #' @useDynLib thunder
 #' @importFrom Rcpp evalCpp
 #' @export
 #' @return 
 #' \enumerate{
 #'  \item MU_CAPE 
-#'  \item MU_CAPE_M10_fraction 
+#'  \item MU_CAPE_M10
+#'  \item MU_CAPE_M10_PT
 #'  \item MU_02km_CAPE 
 #'  \item MU_03km_CAPE 
 #'  \item MU_HGL_CAPE 
@@ -36,16 +38,21 @@
 #'  \item MU_LFC_HGT 
 #'  \item MU_EL_HGT 
 #'  \item MU_LI 
+#'  \item MU_LI_M10 
 #'  \item MU_WMAX 
 #'  \item MU_EL_TEMP 
 #'  \item MU_LCL_TEMP 
 #'  \item MU_LFC_TEMP 
 #'  \item MU_MIXR 
 #'  \item MU_CAPE_500
+#'  \item MU_CAPE_500_M10
+#'  \item MU_CAPE_500_M10_PT
 #'  \item MU_CIN_500
 #'  \item MU_LI_500
+#'  \item MU_LI_500_M10
 #'  \item SB_CAPE 
-#'  \item SB_CAPE_M10_fraction 
+#'  \item SB_CAPE_M10
+#'  \item SB_CAPE_M10_PT
 #'  \item SB_02km_CAPE 
 #'  \item SB_03km_CAPE 
 #'  \item SB_HGL_CAPE 
@@ -54,13 +61,16 @@
 #'  \item SB_LFC_HGT 
 #'  \item SB_EL_HGT 
 #'  \item SB_LI 
+#'  \item SB_LI_M10 
 #'  \item SB_WMAX 
 #'  \item SB_EL_TEMP 
 #'  \item SB_LCL_TEMP 
 #'  \item SB_LFC_TEMP 
 #'  \item SB_MIXR 
 #'  \item ML_CAPE 
-#'  \item ML_CAPE_M10_fraction 
+#'  \item ML_CAPE_M10 
+#'  \item ML_CAPE_M10_PT 
+#'  \item ML_02km_CAPE
 #'  \item ML_03km_CAPE 
 #'  \item ML_HGL_CAPE 
 #'  \item ML_CIN 
@@ -68,6 +78,7 @@
 #'  \item ML_LFC_HGT 
 #'  \item ML_EL_HGT 
 #'  \item ML_LI 
+#'  \item ML_LI_M10
 #'  \item ML_WMAX 
 #'  \item ML_EL_TEMP 
 #'  \item ML_LCL_TEMP 
@@ -93,16 +104,20 @@
 #'  \item HGT_min_thetae_04km 
 #'  \item Delta_thetae 
 #'  \item Delta_thetae_min04km 
+#'  \item Thetae_01km 
+#'  \item Thetae_02km 
 #'  \item DCAPE 
 #'  \item Cold_Pool_Strength 
 #'  \item Wind_Index 
 #'  \item PRCP_WATER 
 #'  \item Moisture_Flux_02km 
+#'  \item RH_01km 
 #'  \item RH_02km 
 #'  \item RH_14km 
 #'  \item RH_25km 
 #'  \item RH_36km 
 #'  \item RH_HGL 
+#'  \item BS_0500m
 #'  \item BS_01km 
 #'  \item BS_02km 
 #'  \item BS_03km 
@@ -127,6 +142,7 @@
 #'  \item BS_HGL_to_SM 
 #'  \item BS_HGL_to_RM 
 #'  \item BS_HGL_to_LM 
+#'  \item MW_0500m
 #'  \item MW_01km 
 #'  \item MW_02km 
 #'  \item MW_03km 
@@ -143,7 +159,31 @@
 #'  \item SRH_500m_LM 
 #'  \item SRH_1km_LM 
 #'  \item SRH_3km_LM 
-#'  \item SRH_36km_LM 
+#'  \item SRH_36km_LM
+#'  \item SV_500m_RM
+#'  \item SV_01km_RM
+#'  \item SV_03km_RM
+#'  \item SV_500m_LM
+#'  \item SV_01km_LM
+#'  \item SV_03km_LM
+#'  \item MW_SR_500m_RM
+#'  \item MW_SR_01km_RM
+#'  \item MW_SR_03km_RM
+#'  \item MW_SR_500m_LM
+#'  \item MW_SR_01km_LM
+#'  \item MW_SR_03km_LM
+#'  \item MW_SR_VM_500m_RM
+#'  \item MW_SR_VM_01km_RM
+#'  \item MW_SR_VM_03km_RM
+#'  \item MW_SR_VM_500m_LM
+#'  \item MW_SR_VM_01km_LM
+#'  \item MW_SR_VM_03km_LM
+#'  \item SV_FRA_500m_RM
+#'  \item SV_FRA_01km_RM
+#'  \item SV_FRA_03km_RM
+#'  \item SV_FRA_500m_LM
+#'  \item SV_FRA_01km_LM
+#'  \item SV_FRA_03km_LM
 #'  \item Bunkers_RM_A 
 #'  \item Bunkers_RM_M 
 #'  \item Bunkers_LM_A 
@@ -160,8 +200,12 @@
 #'  \item SWEAT_Index 
 #'  \item STP_fix 
 #'  \item STP_new 
+#'  \item STP_fix_LM 
+#'  \item STP_new_LM 
 #'  \item SCP_fix 
 #'  \item SCP_new 
+#'  \item SCP_fix_LM 
+#'  \item SCP_new_LM 
 #'  \item SHIP 
 #'  \item HSI 
 #'  \item DCP 
@@ -174,8 +218,18 @@
 #'  \item EHI_500m 
 #'  \item EHI_01km 
 #'  \item EHI_03km
+#'  \item EHI_500m_LM 
+#'  \item EHI_01km_LM
+#'  \item EHI_03km_LM
+#'  \item SHERBS3
+#'  \item SHERBE
+#'  \item SHERBS3_v2
+#'  \item SHERBE_v2
+#'  \item DEI
+#'  \item DEI_eff
+#'  \item TIP
 #' }
-sounding_default <- function(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy) {
-    .Call('_thunder_sounding_default', PACKAGE = 'thunder', pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy)
+sounding_default <- function(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step) {
+    .Call('_thunder_sounding_default', PACKAGE = 'thunder', pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step)
 }
 
