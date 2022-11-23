@@ -14,7 +14,9 @@ sounding_plot(
   title = "",
   parcel = "MU",
   max_speed = 25,
-  hazards = FALSE,
+  buoyancy_polygon = TRUE,
+  SRH_polygon = "03km",
+  DCAPE = FALSE,
   ...
 )
 }
@@ -33,11 +35,15 @@ sounding_plot(
 
 \item{title}{title to be added in the layout's header}
 
-\item{parcel}{parcel tracing on Skew-T for "MU", "ML" or "SB" parcel}
+\item{parcel}{parcel tracing on Skew-T for "MU", "ML" or "SB" parcel, "none" for no parcel line.}
 
 \item{max_speed}{range of the hodograph to be drawn, 25 m/s used as default}
 
-\item{hazards}{logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)}
+\item{buoyancy_polygon}{logical, plotting area of parcel's positive (yellow) or negative (red) buoyancy (default  = TRUE)}
+
+\item{SRH_polygon}{draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default}
+
+\item{DCAPE}{draws downdraft parcel and polygon of downdraft's negative buoyancy (default = FALSE)}
 
 \item{...}{extra graphic arguments}
 }

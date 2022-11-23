@@ -4,7 +4,16 @@
 \alias{sounding_compute}
 \title{Calculate convective parameters}
 \usage{
-sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
+sounding_compute(
+  pressure,
+  altitude,
+  temp,
+  dpt,
+  wd,
+  ws,
+  accuracy = 2,
+  interpolate_step = 5
+)
 }
 \arguments{
 \item{pressure}{pressure [hPa]}
@@ -20,11 +29,16 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 2)
 \item{ws}{wind speed [knots]}
 
 \item{accuracy}{accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)}
+
+\item{interpolate_step}{when accuracy is set to 3 (default is 5m)}
 }
 \value{
 Named vector of 100+ convective indices
 \enumerate{
  \item MU_CAPE
+ \item MU_CAPE_M10
+ \item MU_CAPE_M10_PT
+ \item MU_02km_CAPE
  \item MU_03km_CAPE
  \item MU_HGL_CAPE
  \item MU_CIN
@@ -32,12 +46,22 @@ Named vector of 100+ convective indices
  \item MU_LFC_HGT
  \item MU_EL_HGT
  \item MU_LI
+ \item MU_LI_M10
  \item MU_WMAX
  \item MU_EL_TEMP
  \item MU_LCL_TEMP
  \item MU_LFC_TEMP
  \item MU_MIXR
+ \item MU_CAPE_500
+ \item MU_CAPE_500_M10
+ \item MU_CAPE_500_M10_PT
+ \item MU_CIN_500
+ \item MU_LI_500
+ \item MU_LI_500_M10
  \item SB_CAPE
+ \item SB_CAPE_M10
+ \item SB_CAPE_M10_PT
+ \item SB_02km_CAPE
  \item SB_03km_CAPE
  \item SB_HGL_CAPE
  \item SB_CIN
@@ -45,12 +69,16 @@ Named vector of 100+ convective indices
  \item SB_LFC_HGT
  \item SB_EL_HGT
  \item SB_LI
+ \item SB_LI_M10
  \item SB_WMAX
  \item SB_EL_TEMP
  \item SB_LCL_TEMP
  \item SB_LFC_TEMP
  \item SB_MIXR
  \item ML_CAPE
+ \item ML_CAPE_M10
+ \item ML_CAPE_M10_PT
+ \item ML_02km_CAPE
  \item ML_03km_CAPE
  \item ML_HGL_CAPE
  \item ML_CIN
@@ -58,72 +86,136 @@ Named vector of 100+ convective indices
  \item ML_LFC_HGT
  \item ML_EL_HGT
  \item ML_LI
+ \item ML_LI_M10
  \item ML_WMAX
  \item ML_EL_TEMP
  \item ML_LCL_TEMP
  \item ML_LFC_TEMP
  \item ML_MIXR
+ \item LR_0500m
  \item LR_01km
+ \item LR_02km
  \item LR_03km
+ \item LR_04km
+ \item LR_06km
+ \item LR_16km
+ \item LR_26km
  \item LR_24km
  \item LR_36km
+ \item LR_26km_MAX
  \item LR_500700hPa
  \item LR_500800hPa
+ \item LR_600800hPa
  \item FRZG_HGT
  \item FRZG_wetbulb_HGT
  \item HGT_max_thetae_03km
  \item HGT_min_thetae_04km
  \item Delta_thetae
- \item Delta_thetae_HGL
+ \item Delta_thetae_min04km
+ \item Thetae_01km
+ \item Thetae_02km
  \item DCAPE
  \item Cold_Pool_Strength
- \item Wind_Index  
+ \item Wind_Index
  \item PRCP_WATER
  \item Moisture_Flux_02km
+ \item RH_01km
  \item RH_02km
+ \item RH_14km
  \item RH_25km
+ \item RH_36km
  \item RH_HGL
+ \item BS_0500m
  \item BS_01km
  \item BS_02km
  \item BS_03km
  \item BS_06km
  \item BS_08km
  \item BS_36km
+ \item BS_26km
+ \item BS_16km
  \item BS_18km
  \item BS_EFF_MU
  \item BS_EFF_SB
  \item BS_EFF_ML
- \item BS_SFC_to_HGL
- \item BS_MU_LFC_to_HGL
- \item BS_SB_LFC_to_HGL
- \item BS_ML_LFC_to_HGL
+ \item BS_SFC_to_M10
+ \item BS_1km_to_M10
+ \item BS_2km_to_M10
+ \item BS_MU_LFC_to_M10
+ \item BS_SB_LFC_to_M10
+ \item BS_ML_LFC_to_M10
+ \item BS_MW02_to_SM
+ \item BS_MW02_to_RM
+ \item BS_MW02_to_LM
+ \item BS_HGL_to_SM
+ \item BS_HGL_to_RM
+ \item BS_HGL_to_LM
+ \item MW_0500m
  \item MW_01km
  \item MW_02km
+ \item MW_03km
  \item MW_06km
  \item MW_13km
  \item SRH_100m_RM
+ \item SRH_250m_RM
  \item SRH_500m_RM
  \item SRH_1km_RM
  \item SRH_3km_RM
+ \item SRH_36km_RM
  \item SRH_100m_LM
+ \item SRH_250m_LM
  \item SRH_500m_LM
  \item SRH_1km_LM
  \item SRH_3km_LM
+ \item SRH_36km_LM
+ \item SV_500m_RM
+ \item SV_01km_RM
+ \item SV_03km_RM
+ \item SV_500m_LM
+ \item SV_01km_LM
+ \item SV_03km_LM
+ \item MW_SR_500m_RM
+ \item MW_SR_01km_RM
+ \item MW_SR_03km_RM
+ \item MW_SR_500m_LM
+ \item MW_SR_01km_LM
+ \item MW_SR_03km_LM
+ \item MW_SR_VM_500m_RM
+ \item MW_SR_VM_01km_RM
+ \item MW_SR_VM_03km_RM
+ \item MW_SR_VM_500m_LM
+ \item MW_SR_VM_01km_LM
+ \item MW_SR_VM_03km_LM
+ \item SV_FRA_500m_RM
+ \item SV_FRA_01km_RM
+ \item SV_FRA_03km_RM
+ \item SV_FRA_500m_LM
+ \item SV_FRA_01km_LM
+ \item SV_FRA_03km_LM
  \item Bunkers_RM_A
  \item Bunkers_RM_M
  \item Bunkers_LM_A
  \item Bunkers_LM_M
  \item Bunkers_MW_A
  \item Bunkers_MW_M
+ \item Corfidi_downwind_A
+ \item Corfidi_downwind_M
+ \item Corfidi_upwind_A
+ \item Corfidi_upwind_M
  \item K_Index
  \item Showalter_Index
  \item TotalTotals_Index
  \item SWEAT_Index
- \item STP
+ \item STP_fix
  \item STP_new
- \item SCP
+ \item STP_fix_LM
+ \item STP_new_LM
+ \item SCP_fix
  \item SCP_new
+ \item SCP_fix_LM
+ \item SCP_new_LM
  \item SHIP
+ \item HSI
  \item DCP
  \item MU_WMAXSHEAR
  \item SB_WMAXSHEAR
@@ -131,6 +223,19 @@ Named vector of 100+ convective indices
  \item MU_EFF_WMAXSHEAR
  \item SB_EFF_WMAXSHEAR
  \item ML_EFF_WMAXSHEAR
+ \item EHI_500m
+ \item EHI_01km
+ \item EHI_03km
+ \item EHI_500m_LM
+ \item EHI_01km_LM
+ \item EHI_03km_LM
+ \item SHERBS3
+ \item SHERBE
+ \item SHERBS3_v2
+ \item SHERBE_v2
+ \item DEI
+ \item DEI_eff
+ \item TIP
 }
 }
 \description{

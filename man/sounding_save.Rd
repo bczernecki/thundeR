@@ -13,6 +13,10 @@ sounding_save(
   ws,
   title = "",
   parcel = "MU",
+  max_speed = 25,
+  buoyancy_polygon = TRUE,
+  SRH_polygon = "03km",
+  DCAPE = FALSE,
   filename,
   ...
 )
@@ -32,7 +36,13 @@ sounding_save(
 
 \item{title}{title to be added in the layout's header}
 
-\item{parcel}{parcel tracing on Skew-T for "MU", "ML" or "SB" parcel}
+\item{parcel}{parcel tracing on Skew-T for "MU", "ML" or "SB" parcel, "none" for no parcel line.}
+
+\item{buoyancy_polygon}{logical, plotting area of parcel's positive (yellow) or negative (red) buoyancy (default  = TRUE)}
+
+\item{SRH_polygon}{draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default}
+
+\item{DCAPE}{draws downdraft parcel and polygon of downdraft's negative buoyancy (default = FALSE)}
 
 \item{filename}{output file name with extension indicating file format (e.g. "my_plot.png" or "my_plot.svg")}
 

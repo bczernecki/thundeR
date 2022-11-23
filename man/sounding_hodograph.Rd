@@ -12,6 +12,7 @@ sounding_hodograph(
   max_speed = 25,
   lab_hghts = c(0, 1, 3, 6, 9, 12),
   close_par = TRUE,
+  SRH_polygon = "03km",
   ...
 )
 }
@@ -29,6 +30,8 @@ sounding_hodograph(
 \item{lab_hghts}{height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels}
 
 \item{close_par}{if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default. If you want to modify Skew-T plot in next step set it to FALSE}
+
+\item{SRH_polygon}{draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default}
 
 \item{...}{other graphical parameters to be used with plot() function}
 }

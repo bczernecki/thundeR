@@ -4,7 +4,16 @@
 \alias{sounding_export}
 \title{Sounding export}
 \usage{
-sounding_export(pressure, altitude, temp, dpt, wd, ws)
+sounding_export(
+  pressure,
+  altitude,
+  temp,
+  dpt,
+  wd,
+  ws,
+  accuracy = 3,
+  interpolate_step = 5
+)
 }
 \arguments{
 \item{pressure}{pressure [hPa]}
