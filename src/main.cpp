@@ -4514,7 +4514,7 @@ double * sounding_default2(double* pressure,
 	  ch=hlen;
   }else if(custom_vec==3){
 	  
-	  int liczba_poziomow = interpolate_step/20000;
+	  int liczba_poziomow = 20000/interpolate_step;
 	  double *tmp = new double[liczba_poziomow];
 	  tmp[0]=0;
 	  for(int g=1;g<liczba_poziomow;g++){
