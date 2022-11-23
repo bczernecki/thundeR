@@ -37,11 +37,12 @@
 #' skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)
 #' skewt_lines(output$tempV,output$pressure, col = "red3", lty = 3, lwd = 1.5)
 
-sounding_export = function(pressure, altitude, temp, dpt, wd, ws, accuracy, interpolate_step = 5){
+
+sounding_export = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 3, interpolate_step = 5){
 
   parametry = sounding_default(pressure = pressure, altitude = altitude, 
                                temp = temp, dpt = dpt, wd = wd, ws = ws, 
-                               export_profile = 1, accuracy = 3, interpolate_step = interpolate_step)
+                               export_profile = 1, accuracy = accuracy, interpolate_step = interpolate_step)
   
   LP = length(sounding_default(pressure = pressure, altitude = altitude, 
                                temp = temp, dpt = dpt, wd = wd, ws = ws, 
@@ -82,5 +83,3 @@ res$DN[res$altitude-res$altitude[1] >= 4000] <- NA
 return(res)
   
 }
-
-
