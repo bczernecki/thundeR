@@ -2268,8 +2268,8 @@ Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, d
     this->th->prepareMeanLayer();
     this->ks->finishPhase1();
     this->th->meanLayer->startIndex = mlb_index; 
-    if(storm_motion.Z() != -999) this->ks->rm = storm_motion;
-    if(storm_motion.Z() != -999) this->ks->lm = storm_motion;
+    if(storm_motion.Z() != 999) this->ks->rm = storm_motion;
+    if(storm_motion.Z() != 999) this->ks->lm = storm_motion;
     this->secondPhase();
     this->finish();
   }
@@ -4508,7 +4508,7 @@ double * sounding_default2(double* pressure,
 			  int custom_vec=1,
 			  int interpolate_step=5,
 			  double* meanlayer_bottom_top = NULL,
-			  Vector storm_motion = Vector(-999,-999,-999))
+			  Vector storm_motion = Vector(999,999,999))
 {
  
  
