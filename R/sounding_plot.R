@@ -30,7 +30,8 @@
 #'   parcel = "MU", title = "Vienna - 23 August 2011, 12:00 UTC"
 #' )
 sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
-                          title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE, SRH_polygon = "03km", DCAPE = FALSE, ...) {
+                          title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE, SRH_polygon = "03km", DCAPE = FALSE, 
+                          meanlayer_bottom_top = c(0,500), storm_motion = c(999,999,999), ...) {
   convert <- FALSE
   ptop <- 100
 
@@ -67,8 +68,8 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
   }
 
   ####
-  output <- sounding_export(pressure, altitude, temp, dpt, wd, ws)
-  output2 <- sounding_export(pressure, altitude, temp, ifelse(dpt == -273, NA, dpt), wd, ws)
+  output <- sounding_export(pressure, altitude, temp, dpt, wd, ws, meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = storm_motion)
+  output2 <- sounding_export(pressure, altitude, temp, ifelse(dpt == -273, NA, dpt), wd, ws, meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = storm_motion)
   RH <- aiRthermo::dewpointdepression2rh(output$pressure * 100, output$temp + 273.15, output$temp - output$dpt, consts = export_constants())
   SH <- aiRthermo::rh2shum(output$pressure * 100, output$temp + 273.15, RH, consts = export_constants())
   E <- aiRthermo::q2e(output$pressure * 100, SH, consts = export_constants())
@@ -85,7 +86,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
   text(20, 28, "Hail Growth\nLayer (HGL)", col = "#8470FF90", cex = 0.65, srt = 56)
 
   ####
-  parametry <- sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3)
+  parametry <- sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3, meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = storm_motion)
   LP <- max(which(!is.na(names(parametry))))
 
   ###
