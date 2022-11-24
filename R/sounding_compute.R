@@ -230,11 +230,11 @@
 #' options(digits = 2) #change output formatting precision 
 #' sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
-sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2, interpolate_step = 5){
+sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2, interpolate_step = 5, meanlayer_bottom_top = c(0,500), storm_motion = NULL){
   
   export_profile = 0 
   
-  tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step)
+  tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step, meanlayer_bottom_top = c(0,500), storm_motion = NULL)
   
   names(tmp) = c(
 "MU_CAPE",
