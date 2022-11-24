@@ -4497,7 +4497,7 @@ double * sounding_default2(double* pressure,
 			  int custom_vec=1,
 			  int interpolate_step=5,
 			  double* meanlayer_bottom_top = NULL,
-			  Vector storm_motion = NULL)
+			  Vector storm_motion = Vector(0,0,0))
 {
  
  
