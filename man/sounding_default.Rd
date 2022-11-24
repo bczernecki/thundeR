@@ -14,7 +14,9 @@ sounding_default(
   ws,
   export_profile,
   accuracy,
-  interpolate_step
+  interpolate_step,
+  meanlayer_bottom_top,
+  storm_motion
 )
 }
 \arguments{

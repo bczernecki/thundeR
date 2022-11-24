@@ -12,7 +12,9 @@ sounding_compute(
   wd,
   ws,
   accuracy = 2,
-  interpolate_step = 5
+  interpolate_step = 5,
+  meanlayer_bottom_top,
+  storm_motion
 )
 }
 \arguments{

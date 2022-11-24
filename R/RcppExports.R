@@ -229,7 +229,7 @@
 #'  \item DEI_eff
 #'  \item TIP
 #' }
-sounding_default <- function(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step) {
-    .Call('_thunder_sounding_default', PACKAGE = 'thunder', pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step)
+sounding_default <- function(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step, meanlayer_bottom_top, storm_motion) {
+    .Call('_thunder_sounding_default', PACKAGE = 'thunder', pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step, meanlayer_bottom_top, storm_motion)
 }
 
