@@ -4810,7 +4810,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   }
   int q = accuracy[0];
   int plen,hlen,tlen,dlen,alen,vlen,tvlen;
-  int mulen,sblen,mllen,dnlen,mustart;
+  int mulen,sblen,mllen,dnlen,mustart,mlstart;
 
   double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
 	int reslen= 201;
@@ -4829,7 +4829,8 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   	mllen = sret->th->meanLayer->getVirtualValues()->size();
         dnlen = sret->th->downdraft->getVirtualValues()->size();
   	mustart= sret->th->mostUnstable->startIndex;
-	maxl+=2+mulen+1+sblen+1+mllen+plen+1+hlen+1+tlen+1+dlen+1+alen+1+vlen+1+tvlen+1+dnlen+10;
+        mlstart= sret->th->meanLayer->startIndex;
+	maxl+=2+mulen+1+sblen+2+mllen+plen+1+hlen+1+tlen+1+dlen+1+alen+1+vlen+1+tvlen+1+dnlen+10;
   	}
   	
   	Rcpp::NumericVector out(maxl);
@@ -4859,6 +4860,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
 		  }
 		  
 		  out[i]=mllen; i++;
+		  out[i] = mlstart;i++;
 		  
 		  for (std::list<double>::iterator it = sret->th->meanLayer->getVirtualValues()->begin(); it != sret->th->meanLayer->getVirtualValues()->end(); ++it){
           	double temp = 0;
