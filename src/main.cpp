@@ -1290,6 +1290,8 @@ class Thermodynamics:public InfoCollector{
   friend class IndicesCollector;
 public:
   double meanLayerZHeight;
+  double meanLayerBottom;
+  double meanLayerTop;
   double n;
   double mp;
   double mh;
@@ -1561,7 +1563,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
 }
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
 {
-	if ((abs(h - h0) <= meanLayerZHeight)  && ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)))
+	if ((abs(h - h0) >= meanLayerBottom && abs(h - h0) <= meanLayerTop)  && ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)))
   {
     mh += h;
     mp += p;
@@ -1852,7 +1854,7 @@ public:  Thermodynamics *th;
   list<double>* a;
   list<double>* v;
   IndicesCollector *ic;
-  Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz=10);
+  Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz=10, double* meanlayer_bottom_top, Vector storm_motion);
   ~Sounding();
   IndicesCollector * getIndicesCollectorPointer(){
     return this->ic;
@@ -2238,11 +2240,12 @@ void Sounding::insertLine(double *p_, double *h_, double *t_, double *d_, double
   }
   
 }
-Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz){
+Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, double* meanlayer_bottom_top, Vector storm_motion){
   this->alloc();
   bool valid = this->checkarguments(p_,h_,t_,d_,a_,v_);
   if(valid){
-    
+    this->th->meanLayerBottom = meanlayer_bottom_top[0];
+    this->th->meanLayerTop = meanlayer_bottom_top[1];
     int i=0;
     this->cache->setH0(h_[0]);
     for (i=0; i<length-1; i++){
@@ -2254,6 +2257,8 @@ Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, d
     this->th->prepareMeanLayer();
     this->ks->finishPhase1();
     
+    this->ks->rm = storm_motion;   
+	  
     this->secondPhase();
     this->finish();
   }
@@ -4029,8 +4034,8 @@ double IndicesCollector::SV_3000_LM_FRA(){
 	return S->ks->sw03lm / S->ks->shear3000m;
 }
 
-double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S){
-  *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz);
+double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
+  *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
   double * vec = new double[201];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->MU_coldcape();	
@@ -4490,8 +4495,9 @@ double * sounding_default2(double* pressure,
                           int size,
 			  Sounding **sret,
 			  int custom_vec=1,
-			  int interpolate_step=5
-                          )
+			  int interpolate_step=5,
+			  double* meanlayer_bottom_top,
+			  Vector storm_motion)
 {
  
  
@@ -4526,7 +4532,7 @@ double * sounding_default2(double* pressure,
   u = interpolate2(&p, &h,&t, &d, &a, &v, u,pp, hh, 0, ch);
   if(custom_vec==3)delete[] hh;
   
-  double *result = processSounding(p,h,t,d,a,v,u,step,sret);
+  double *result = processSounding(p,h,t,d,a,v,u,step,sret,meanlayer_bottom_top,storm_motion);
 
   delete[]p;delete[]h;delete[]t;delete[]d;delete[]a;delete[]v;
   return result;
@@ -4764,17 +4770,23 @@ double * sounding_default2(double* pressure,
 // [[Rcpp::export]]
 
 Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
-                          Rcpp::NumericVector altitude,
-                          Rcpp::NumericVector temp,
-                          Rcpp::NumericVector dpt,
-                          Rcpp::NumericVector wd,
-                          Rcpp::NumericVector ws,
-		          Rcpp::NumericVector export_profile,
-			  Rcpp::NumericVector accuracy,
-			  int interpolate_step)
+                                     Rcpp::NumericVector altitude,
+                                     Rcpp::NumericVector temp,
+                                     Rcpp::NumericVector dpt,
+                                     Rcpp::NumericVector wd,
+                                     Rcpp::NumericVector ws,
+		                     Rcpp::NumericVector export_profile,
+			             Rcpp::NumericVector accuracy,
+			             int interpolate_step,
+			             Rcpp::NumericVector meanlayer_bottom_top,
+			             Rcpp::NumericVector storm_motion)
 {
   Sounding *sret;
   int size = pressure.size();
+  double * mlp = new double [2];
+	mlp[0] = meanlayer_bottom_top[0];
+	mlp[1] = meanlayer_bottom_top[1];
+  Vector sm = Vector(storm_motion[0],storm_motion[1],0);
   
   double *p = new double[size], *h=new double[size], *d=new double[size],*t=new double[size], *a= new double[size], *v=new double[size];
   for(int i=0; i<size;i++){
@@ -4789,7 +4801,7 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
   int plen,hlen,tlen,dlen,alen,vlen,tvlen;
   int mulen,sblen,mllen,dnlen,mustart;
 
-  double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step);
+  double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
 	int reslen= 201;
 	int maxl=reslen;
 	if(export_profile[0]==1){
@@ -4911,6 +4923,8 @@ Rcpp::NumericVector sounding_default(Rcpp::NumericVector pressure,
 	delete sret;
 	delete[] result;
 	delete[] p; delete[] h;delete[] d; delete[] t; delete[] a; delete[] v;
+	
+	delete[] mlp;
 	
 	return out;
 	
