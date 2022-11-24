@@ -455,8 +455,6 @@ private:
   Vector CorfidiA;
   Vector Corfidi_upwind;
   Vector Corfidi_downwind;
-  Vector rm;
-  Vector lm;
   double lasth;
 
   double srh100rm;
@@ -522,6 +520,8 @@ private:
   
 public:
   Kinematics();
+  Vector rm;
+  Vector lm;
   virtual ~Kinematics();
   void putSecondPhaseLine(int i, double p, double h, double t, double d, double a, double v)
   {
@@ -1854,7 +1854,7 @@ public:  Thermodynamics *th;
   list<double>* a;
   list<double>* v;
   IndicesCollector *ic;
-  Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz=10, double* meanlayer_bottom_top, Vector storm_motion);
+  Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, double* meanlayer_bottom_top, Vector storm_motion);
   ~Sounding();
   IndicesCollector * getIndicesCollectorPointer(){
     return this->ic;
@@ -4496,8 +4496,8 @@ double * sounding_default2(double* pressure,
 			  Sounding **sret,
 			  int custom_vec=1,
 			  int interpolate_step=5,
-			  double* meanlayer_bottom_top,
-			  Vector storm_motion)
+			  double* meanlayer_bottom_top = NULL,
+			  Vector storm_motion = NULL)
 {
  
  
