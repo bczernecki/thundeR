@@ -1420,6 +1420,7 @@ void Thermodynamics::setMlIndex(int i, double p, double h, double t, double d, d
   this->meanLayer->setInitialConditions(i, p, h, t,d, a, v,h0);
   this->meanLayer->setInitialW(mmr, mo);
 }
+
 void Thermodynamics::putMlLine(int i, double p, double h, double t, double d, double a, double v){
   this->meanLayer->putLine(i, p, h, t, d, a, v);
 }
@@ -2248,7 +2249,17 @@ Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, d
     this->th->meanLayerTop = meanlayer_bottom_top[1];
     int i=0;
     this->cache->setH0(h_[0]);
-    for (i=0; i<length-1; i++){
+	  
+    double diff_mlb = this->th->meanLayerBottom;
+	  int mlb_index = 0; 
+	  double temp_value = 0;
+	  
+    for (i=0; i<length-1; i++){ 
+      temp_value = abs(h_[i]-h_[0]-this->th->meanLayerBottom);
+      if(temp_value < diff_mlb){
+	      temp_value = diff_mlb;
+	      mlb_index = i;
+      }
       this->insertLine(p_,h_,t_,d_,a_,v_,i,dz);
     }
     this->insertSingleLine(p_[length-1],h_[length-1],t_[length-1],d_[length-1],Vector(a_[length-1],v_[length-1]*0.514444));
@@ -2256,9 +2267,9 @@ Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, d
     
     this->th->prepareMeanLayer();
     this->ks->finishPhase1();
-    
-    this->ks->rm = storm_motion;   
-	  
+    this->th->meanLayer->startIndex = mlb_index; 
+    if(storm_motion.Z != -999) this->ks->rm = storm_motion;
+    if(storm_motion.Z != -999) this->ks->lm = storm_motion;
     this->secondPhase();
     this->finish();
   }
@@ -4497,7 +4508,7 @@ double * sounding_default2(double* pressure,
 			  int custom_vec=1,
 			  int interpolate_step=5,
 			  double* meanlayer_bottom_top = NULL,
-			  Vector storm_motion = Vector(0,0,0))
+			  Vector storm_motion = Vector(-999,-999,-999))
 {
  
  
