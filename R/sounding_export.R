@@ -38,15 +38,18 @@
 #' skewt_lines(output$tempV,output$pressure, col = "red3", lty = 3, lwd = 1.5)
 
 
-sounding_export = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 3, interpolate_step = 5){
+sounding_export = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 3, interpolate_step = 5,
+                          meanlayer_bottom_top = c(0,500), storm_motion = c(999,999,999)){
 
   parametry = sounding_default(pressure = pressure, altitude = altitude, 
                                temp = temp, dpt = dpt, wd = wd, ws = ws, 
-                               export_profile = 1, accuracy = accuracy, interpolate_step = interpolate_step)
+                               export_profile = 1, accuracy = accuracy, interpolate_step = interpolate_step,
+                              meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = storm_motion)
   
   LP = length(sounding_default(pressure = pressure, altitude = altitude, 
                                temp = temp, dpt = dpt, wd = wd, ws = ws, 
-                               export_profile = 0, accuracy = 1, interpolate_step = interpolate_step)) # no. of parameters 
+                               export_profile = 0, accuracy = 1, interpolate_step = interpolate_step,
+                              meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = storm_motion)) # no. of parameters 
 ###
 pozMU = parametry[LP+1]
 MUs = parametry[LP+2]
