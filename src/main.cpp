@@ -63,18 +63,40 @@ double TDA(double O, double p)
   return O * pow(p / 1000.0, 0.288) - kel;
 }
 
+double WOBF(double temp)
+{
+  double x = temp - 20;
+    if(x <= 0){
+        double pol = 1.+x*(-0.0088416604999999992+x*(0.00014714143000000001+x*(-9.6719890000000006e-07+x*(-3.2607217000000002e-08+x*(3.8598072999999999e-10)))));
+        double wbts = 15.130000000000001/pow(pol,4);
+    } else {
+        double pol = 1.+x*(0.0036182989000000001+x*(-1.3603273e-05+x*(4.9618921999999997e-07+x*(-6.1059364999999998e-09+x*(3.9401550999999998e-11+x*(-1.2588129e-13+x*(1.668828e-16)))))));
+        double wbts = 29.93/pow(pol,4)+0.95999999999999996*x-14.800000000000001;
+    }
+    return wbts;
+}
+
 double TSA(double OS, double p)
 {
-double w = OS*100;
-double c1 = 0.0498646455;
-double c2 = 2.4082965;
-double c3 = 7.07475;
-double c4 = 38.9114;
-double c5 = 0.0915;
-double c6 = 1.2035;
-double x = log10((w * (p))/(622. + w));
-double tmrk = pow(10,(c1 * x + c2)) - c3 + c4 * (pow((pow(10,(c5 * x)) - c6), 2));
-return tmrk - kel;
+   double cta = 273.14999999999998;
+   double thw = OS-cta;
+   double akap = 0.28541;
+   double pwrp = pow(p,akap);
+   double tone = (thw + cta) * pwrp - cta;
+   double eone = wobf(tone) - wobf(thw);
+   double rate = 1;
+   double dlt = 1;
+   while(abs(dlt) > 0.10000000000000001) {
+       double ttwo = tone - eone * rate;
+       double pt = (ttwo + cta)/pwrp - cta;
+       double etwo = pt + wobf(ttwo) - wobf(pt) - thw;
+       dlt = etwo * rate;
+       rate = (ttwo - tone)/(etwo - eone);
+       tone = ttwo;
+       eone = etwo;
+}
+double result = ttwo - dlt;
+return result;
 }
 
 double TW(double t, double d, double p,  double *OW)
