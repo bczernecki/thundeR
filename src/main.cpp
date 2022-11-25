@@ -65,14 +65,14 @@ double TDA(double O, double p)
 
 double TSA(double OS, double p)
 {
-double w = OS;
+double w = OS*100;
 double c1 = 0.0498646455;
 double c2 = 2.4082965;
 double c3 = 7.07475;
 double c4 = 38.9114;
 double c5 = 0.0915;
 double c6 = 1.2035;
-double x = log10((w * (p/100))/(622. + w));
+double x = log10((w * (p))/(622. + w));
 double tmrk = pow(10,(c1 * x + c2)) - c3 + c4 * (pow((pow(10,(c5 * x)) - c6), 2));
 return tmrk - kel;
 }
