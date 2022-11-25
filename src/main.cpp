@@ -65,7 +65,7 @@ double TDA(double O, double p)
 
 double wobf(double temp)
 {
-  double x = temp - 20 + kel;
+  double x = temp - 20;
   double pol = 0;
   double wbts = 0;
     if(x <= 0){
