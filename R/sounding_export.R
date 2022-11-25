@@ -87,6 +87,6 @@ res <- data.frame(pressure = Pw,
   
 res$DN[res$altitude-res$altitude[1] >= 4000] <- NA
 
-return(parametry)
+return(res)
   
 }
