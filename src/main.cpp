@@ -60,7 +60,7 @@ double TMR(double W, double p)
 
 double TDA(double O, double p)
 {
-  return O * pow(p / 1000.0, 0.288) - kel + ((pow(1100-p,2.5))/pow(4.18,12))-0.0035;
+  return O * pow(p / 1000.0, 0.288) - kel;
 }
 
 double TSA(double OS, double p)
@@ -77,8 +77,10 @@ double TSA(double OS, double p)
       Tw -= 120 / pow(2.0, (double)i);
     
   }
-  return Tw - kel;
+  return Tw - kel +  ((pow(1100-p,2.5))/pow(4.18,12))-0.0035;
 }
+
+double combined = 
 
 double TW(double t, double d, double p,  double *OW)
 {
