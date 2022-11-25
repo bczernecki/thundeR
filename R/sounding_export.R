@@ -45,8 +45,40 @@ sounding_export = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 3, 
                                temp = temp, dpt = dpt, wd = wd, ws = ws, 
                                export_profile = 1, accuracy = accuracy, interpolate_step = interpolate_step,
                               meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = storm_motion)
-  
 
+###
+pozMU = parametry[LP+1]
+MUs = parametry[LP+2]
+MUw = parametry[(LP+3):(LP+2+pozMU)]
+###
+pozALL = parametry[LP+pozMU+3]
+SBw = parametry[(LP+pozMU+4):(LP+pozMU+pozALL+3)]
+pozML = parametry[(LP+pozMU+pozALL+4)]
+MLs = parametry[(LP+pozMU+pozALL+5)]
+MLw = parametry[(LP+pozMU+pozALL+6):(LP+pozMU+pozALL+pozML+5)]
+Pw = parametry[(LP+pozMU+pozML+(pozALL)+7):(LP+pozMU+pozML+(2*pozALL)+6)]
+Hw <- parametry[(LP+pozMU+pozML+(2*pozALL)+8):(LP+pozMU+pozML+(3*pozALL)+7)]
+Tw <- parametry[(LP+pozMU+pozML+(3*pozALL)+9):(LP+pozMU+pozML+(4*pozALL)+8)]
+TDw <- parametry[(LP+pozMU+pozML+(4*pozALL)+10):(LP+pozMU+pozML+(5*pozALL)+9)]
+WDw <- parametry[(LP+pozMU+pozML+(5*pozALL)+11):(LP+pozMU+pozML+(6*pozALL)+10)]
+WSw <- parametry[(LP+pozMU+pozML+(6*pozALL)+12):(LP+pozMU+pozML+(7*pozALL)+11)]
+DNw <- parametry[(LP+pozMU+pozML+(7*pozALL)+13):(LP+pozMU+pozML+(8*pozALL)+12)]
+TVw <- parametry[(LP+pozMU+pozML+(8*pozALL)+14):(LP+pozMU+pozML+(9*pozALL)+13)]
+MUw <- c(rep(NA,pozALL-pozMU),MUw) # correction for elevated MU
+MLw <- c(rep(NA,pozALL-pozML),MLw) # correction for elevated ML
+
+###
+res <- data.frame(pressure = Pw,
+                  altitude = Hw,
+                  temp = Tw, 
+                  tempV = TVw, 
+                  dpt = TDw,
+                  wd = WDw,
+                  ws = WSw,
+                  MU = MUw,
+                  SB = SBw,
+                  ML = MLw,
+                  DN = DNw)
 
 return(parametry)
   
