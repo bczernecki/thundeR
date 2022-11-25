@@ -72,8 +72,8 @@ double c3 = 7.07475;
 double c4 = 38.9114;
 double c5 = 0.0915;
 double c6 = 1.2035;
-double x = log10((w * p)/(622. + w));
-double tmrk = pow(10, c1 * x + c2) - c3 + c4 * (pow(pow(10, c5 * x) - c6, 2));
+double x = log10((w * (p/100))/(622. + w));
+double tmrk = pow(10,(c1 * x + c2)) - c3 + c4 * (pow((pow(10,(c5 * x)) - c6), 2));
 return tmrk - kel;
 }
 
