@@ -83,7 +83,7 @@ double TSA(double OS, double p)
    double cta = 273.14999999999998;
    double thw = OS-cta;
    double akap = 0.28541;
-   double pwrp = pow(p,akap);
+   double pwrp = pow(p/100000,akap);
    double tone = (thw + cta) * pwrp - cta;
    double eone = wobf(tone) - wobf(thw);
    double rate = 1;
