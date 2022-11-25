@@ -78,12 +78,10 @@ double wobf(double temp)
     return wbts;
 }
 
-cout << wobf(10);
-
 double TSA(double OS, double p)
 {
    double cta = 273.14999999999998;
-   double thw = OS-cta;
+   double thw = OS;
    double akap = 0.28541;
    double pwrp = pow(p/100000,akap);
    double tone = (thw + cta) * pwrp - cta;
@@ -105,8 +103,6 @@ double TSA(double OS, double p)
 double result = ttwo - dlt;
 return result;
 }
-
-cout << TSA(273,1000);
 
 double TW(double t, double d, double p,  double *OW)
 {
