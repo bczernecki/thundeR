@@ -81,7 +81,7 @@ double wobf(double temp)
 double TSA(double OS, double p)
 {
    double cta = 273.14999999999998;
-   double thw = OS-cta;
+   double thw = OS;
    double akap = 0.28541;
    double pwrp = pow(p/100000,akap);
    double tone = (thw + cta) * pwrp - cta;
