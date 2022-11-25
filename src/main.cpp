@@ -65,19 +65,16 @@ double TDA(double O, double p)
 
 double TSA(double OS, double p)
 {
-  double a = OS;
-  double b = -2.6518986;
-  double Tw = 253.16;
-  for (int i = 1; i < 12; i++)
-  {
-    
-    if ((a * exp(b * W(Tw - kel, p) / Tw) - Tw * pow(1000.0 / p, 0.288)) > 0)
-      Tw += 120.0 / pow(2.0, (double)i);
-    else
-      Tw -= 120 / pow(2.0, (double)i);
-    
-  }
-  return Tw - kel +  ((pow(1100-p,2.5))/pow(4.18,12))-0.0035;
+double w = OS;
+double c1 = 0.0498646455;
+double c2 = 2.4082965;
+double c3 = 7.07475;
+double c4 = 38.9114;
+double c5 = 0.0915;
+double c6 = 1.2035;
+double x = log10((w * p)/(622. + w));
+double tmrk = pow(10, c1 * x + c2) - c3 + c4 * (pow(pow(10, c5 * x) - c6, 2));
+return tmrk - kel;
 }
 
 double TW(double t, double d, double p,  double *OW)
