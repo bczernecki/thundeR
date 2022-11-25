@@ -78,6 +78,8 @@ double wobf(double temp)
     return wbts;
 }
 
+cout << wobf(10);
+
 double TSA(double OS, double p)
 {
    double cta = 273.14999999999998;
@@ -103,6 +105,8 @@ double TSA(double OS, double p)
 double result = ttwo - dlt;
 return result;
 }
+
+cout << TSA(273,1000);
 
 double TW(double t, double d, double p,  double *OW)
 {
