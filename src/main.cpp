@@ -80,8 +80,6 @@ double TSA(double OS, double p)
   return Tw - kel +  ((pow(1100-p,2.5))/pow(4.18,12))-0.0035;
 }
 
-double combined = 
-
 double TW(double t, double d, double p,  double *OW)
 {
   double w = W(d, p);
