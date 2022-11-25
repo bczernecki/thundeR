@@ -55,12 +55,12 @@ double TMR(double W, double p)
     double zmienna = log10(W * p / (622 + W));
     return pow(10, 0.0498646455 * zmienna + 2.4082965) - 280.23475 + 38.9114 * (pow(pow(10, 0.0915 * zmienna) - 1.2035, 2));
   }
-  else return -kel;
+  else return -kel ;
 }
 
 double TDA(double O, double p)
 {
-  return O * pow(p / 1000.0, 0.288) - kel;
+  return O * pow(p / 1000.0, 0.288) - (kel + ((pow(1100-p,2.5))/pow(4.18,12))-0.0035);
 }
 
 double TSA(double OS, double p)
@@ -77,7 +77,7 @@ double TSA(double OS, double p)
       Tw -= 120 / pow(2.0, (double)i);
     
   }
-  return Tw - kel;
+  return Tw - kel + ((pow(1100-p,2.5))/pow(4.18,12))-0.0035;
 }
 
 double TW(double t, double d, double p,  double *OW)
