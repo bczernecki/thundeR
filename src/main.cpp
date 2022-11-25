@@ -2257,7 +2257,7 @@ Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, d
     for (i=0; i<length-1; i++){ 
       temp_value = abs(h_[i]-h_[0]-this->th->meanLayerBottom);
       if(temp_value < diff_mlb){
-	      temp_value = diff_mlb;
+	      diff_mlb=temp_value;
 	      mlb_index = i;
       }
       this->insertLine(p_,h_,t_,d_,a_,v_,i,dz);
