@@ -28,9 +28,11 @@ double SIGN(double x, double y){
   else return abs(x);
 }
 
-double ESAT(double t){
-  double temp = t + kel;
-  return (pow(10, 23.832241 - 5.02808 * log10(temp) - 0.00000013816 * pow(10, 11.344 - 0.0303998 * temp) + 0.0081328 * pow(10, 3.49149 - 1302.8844 / temp) - 2949.076 / temp));
+// dane wejsciowe to Cel
+double ESAT <- function(t){
+  double TC = t;
+  ESAT = 6.1078 * exp((17.2693882 * TC) / (TC + 237.3))
+  return(ESAT)
 }
 
 double W(double t, double p)
@@ -88,7 +90,7 @@ double TSA(double OS, double p)
   double TDS = 0;
   while(I<13){
     D = D/2;
-    X = A * exp(-2.6518986*W(TQ,p)/TQ)-TQ*(pow((1000/p),0.286));
+    X = A * exp(-2.6518986*W(TQ-273.15,p)/TQ)-TQ*(pow((1000/p),0.286));
     if(abs(X)<0.01)
     {
       TQ = TQ;
@@ -100,7 +102,7 @@ double TSA(double OS, double p)
     }
     I=I+1;
   }
-  return TQ;
+  return TQ + kel;
 }
 
 double TW(double t, double d, double p,  double *OW)
