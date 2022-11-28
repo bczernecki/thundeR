@@ -28,11 +28,11 @@ double SIGN(double x, double y){
   else return abs(x);
 }
 
-// dane wejsciowe to Cel
-double ESAT <- function(t){
+double ESAT(double t)
+{
   double TC = t;
-  ESAT = 6.1078 * exp((17.2693882 * TC) / (TC + 237.3))
-  return(ESAT)
+  ESAT = 6.1078 * exp((17.2693882 * TC) / (TC + 237.3));
+  return ESAT;
 }
 
 double W(double t, double p)
