@@ -45,6 +45,10 @@ double O(double t, double p)
   return (t + kel) * pow(1000.0 / p, 0.286);
 }
 
+double WBPT(double x){
+ return 1.8199427E+01+x*(2.1640800E-01+x*(3.0716310E-04+x*(-3.8953660E-06+x*(1.9618200E-08+x*(5.2935570E-11+x*(7.3995950E-14+x*(-4.1983500E-17)))))));
+}
+
 double OS(double t, double p)
 {
   double thd = ((t+273.15)* pow(1000 / p, 0.286))-273.15;
@@ -65,10 +69,6 @@ double TMR(double W, double p)
 double TDA(double O, double p)
 {
   return O * pow(p / 1000.0, 0.286) - kel;
-}
-
-double WBPT(double x){
- return 1.8199427E+01+x*(2.1640800E-01+x*(3.0716310E-04+x*(-3.8953660E-06+x*(1.9618200E-08+x*(5.2935570E-11+x*(7.3995950E-14+x*(-4.1983500E-17)))))));
 }
 
 double wobf(double temp)
