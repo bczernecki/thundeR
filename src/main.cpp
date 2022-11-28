@@ -1188,7 +1188,7 @@ void LapseRate::putClassicLine(int i, double p, double h, double t,double d, dou
                 double t_parcel = tda;
                 double tch_ = W(t_parcel, p);
                 double tw = W(d, p);
-                double vt_parcel = tv(t_parcel, tch_) + ((pow(1100-p,2.5))/pow(4.18,12))-0.0035;
+                double vt_parcel = tv(t_parcel, tch_) + ((pow(1100-p,2.5))/pow(4.14,12))-0.0035;
                 double t_ = tv(t, tw);
                 double tvcap = g * dz * (vt_parcel - t_) / (t_ + kel);
                 if (vLclIndex == -1)
