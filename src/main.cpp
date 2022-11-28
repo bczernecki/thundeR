@@ -84,6 +84,9 @@ double TSA(double OS, double p)
   double TQ = 253.16;
   double D  = 120;
   double I = 1;
+  double X = 0;
+  double TDS = 0;
+  double TQ = 0;
   while(I<13){
     D = D/2;
     X = A * exp(-2.6518986*W(TQ,P)/TQ)-TQ*(pow((1000/P),0.286));
@@ -91,9 +94,9 @@ double TSA(double OS, double p)
     {
       TSA=TQ;
     } else {
-      TQ = TQ + sign(X);
-      if(X<0){D = -abs(D)};
-      if(X>0){D =  abs(D)};
+      TQ = TQ + ((X > 0) - (X < 0));
+      if(X<0){D = -abs(D);}
+      if(X>0){D =  abs(D);}
       TQ = TQ + D;
     }
     I=I+1;
