@@ -30,10 +30,10 @@ double SIGN(double x, double y){
 
 double ESAT(double t)
 {
-  double TC = t;
-  ESAT = 6.1078 * exp((17.2693882 * TC) / (TC + 237.3));
-  return ESAT;
+    double temp = t + kel;
+    return (pow(10, 23.832241 - 5.02808 * log10(temp) - 0.00000013816 * pow(10, 11.344 - 0.0303998 * temp) + 0.0081328 * pow(10, 3.49149 - 1302.8844 / temp) - 2949.076 / temp));
 }
+
 
 double W(double t, double p)
 {
