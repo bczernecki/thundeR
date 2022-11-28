@@ -65,44 +65,21 @@ double TDA(double O, double p)
   return O * pow(p / 1000.0, 0.286) - kel;
 }
 
-double wobf(double temp)
-{
-  double x = temp - 20;
-  double pol = 0;
-  double wbts = 0;
-    if(x <= 0){
-        pol = 1.+x*(-0.0088416604999999992+x*(0.00014714143000000001+x*(-9.6719890000000006e-07+x*(-3.2607217000000002e-08+x*(3.8598072999999999e-10)))));
-        wbts = 15.130000000000001/pow(pol,4);
-    } else {
-        pol = 1.+x*(0.0036182989000000001+x*(-1.3603273e-05+x*(4.9618921999999997e-07+x*(-6.1059364999999998e-09+x*(3.9401550999999998e-11+x*(-1.2588129e-13+x*(1.668828e-16)))))));
-        wbts = 29.93/pow(pol,4)+0.95999999999999996*x-14.800000000000001;
-    }
-    return wbts;
-}
-
 double TSA(double OS, double p)
 {
-  double A  = OS;
-  double TQ = 253.16;
-  double D  = 120;
-  double I = 1;
-  double X = 0;
-  double TDS = 0;
-  while(I<13){
-    D = D/2;
-    X = A * exp(-2.6518986*W(TQ-273.15,p)/TQ)-TQ*(pow((1000/p),0.286));
-    if(abs(X)<0.01)
-    {
-      TQ = TQ;
-    } else {
-      TQ = TQ + ((X > 0) - (X < 0));
-      if(X<0){D = -abs(D);}
-      if(X>0){D =  abs(D);}
-      TQ = TQ + D;
-    }
-    I=I+1;
+  double a = OS;
+  double b = -2.6518986;
+  double Tw = 253.16;
+  for (int i = 1; i < 12; i++)
+  {
+    
+    if ((a * exp(b * W(Tw - kel, p) / Tw) - Tw * pow(1000.0 / p, 0.286)) > 0)
+      Tw += 120.0 / pow(2.0, (double)i);
+    else
+      Tw -= 120 / pow(2.0, (double)i);
+    
   }
-  return TQ - kel;
+  return Tw - kel;
 }
 
 double TW(double t, double d, double p,  double *OW)
