@@ -40,7 +40,7 @@ double W(double t, double p)
 
 double O(double t, double p)
 {
-  return (t + kel) * pow(1000.0 / p, 0.288);
+  return (t + kel) * pow(1000.0 / p, 0.286);
 }
 
 double OS(double t, double p)
@@ -60,7 +60,7 @@ double TMR(double W, double p)
 
 double TDA(double O, double p)
 {
-  return O * pow(p / 1000.0, 0.288) - kel;
+  return O * pow(p / 1000.0, 0.286) - kel;
 }
 
 double wobf(double temp)
@@ -80,28 +80,19 @@ double wobf(double temp)
 
 double TSA(double OS, double p)
 {
-   double cta = 273.14999999999998;
-   double thw = OS;
-   double akap = 0.28541;
-   double pwrp = pow(p/100000,akap);
-   double tone = (thw + cta) * pwrp - cta;
-   double eone = wobf(tone) - wobf(thw);
-   double rate = 1;
-   double dlt = 1;
-   double ttwo = 0;
-   double pt = 0;
-   double etwo = 0;
-   while(abs(dlt) > 0.10000000000000001) {
-       ttwo = tone - eone * rate;
-       pt = (ttwo + cta)/pwrp - cta;
-       etwo = pt + wobf(ttwo) - wobf(pt) - thw;
-       dlt = etwo * rate;
-       rate = (ttwo - tone)/(etwo - eone);
-       tone = ttwo;
-       eone = etwo;
-}
-double result = (ttwo - dlt) + kel;
-return result;
+  double a = OS;
+  double b = -2.6518986;
+  double Tw = 253.16;
+  for (int i = 1; i < 12; i++)
+  {
+    
+    if ((a * exp(b * W(Tw - kel, p) / Tw) - Tw * pow(1000.0 / p, 0.286)) > 0)
+      Tw += 120.0 / pow(2.0, (double)i);
+    else
+      Tw -= 120 / pow(2.0, (double)i);
+    
+  }
+  return Tw - kel + ((pow(1100-p,2.5))/pow(4.18,12))-0.0035;
 }
 
 double TW(double t, double d, double p,  double *OW)
