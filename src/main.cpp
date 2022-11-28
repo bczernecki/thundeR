@@ -92,7 +92,7 @@ double TSA(double OS, double p)
       Tw -= 120 / pow(2.0, (double)i);
     
   }
-  return Tw - kel + ((pow(1100-p,2.5))/pow(4.18,12))-0.0035;
+  return Tw - kel;
 }
 
 double TW(double t, double d, double p,  double *OW)
