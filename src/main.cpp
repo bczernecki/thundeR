@@ -1188,7 +1188,7 @@ void LapseRate::putClassicLine(int i, double p, double h, double t,double d, dou
                 double t_parcel = tda;
                 double tch_ = W(t_parcel, p);
                 double tw = W(d, p);
-                double vt_parcel = tv(t_parcel, tch_) + ((pow(1100-p,2.5))/pow(4,12))-0.0035;
+                double vt_parcel = tv(t_parcel, tch_) + ((pow(1100-p,2.5))/pow(3.95,12))-0.0035;
                 double t_ = tv(t, tw);
                 double tvcap = g * dz * (vt_parcel - t_) / (t_ + kel);
                 if (vLclIndex == -1)
@@ -1225,7 +1225,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   if(this->vLclIndex!=-1)tch=W(t_parcel,p);
   
   double tw = W(d, p);
-  double vt_parcel = tv(t_parcel, tch) + ((pow(1100-p,2.5))/pow(4,12))-0.0035;
+  double vt_parcel = tv(t_parcel, tch) + ((pow(1100-p,2.5))/pow(3.95,12))-0.0035;
   this->virtualValues->push_back(vt_parcel);
   double t_ = tv(t, tw);
   double dz = abs(h - lasth);
