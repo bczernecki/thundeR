@@ -102,7 +102,7 @@ double TSA(double OS, double p)
     }
     I=I+1;
   }
-  return TQ + kel;
+  return TQ - kel;
 }
 
 double TW(double t, double d, double p,  double *OW)
