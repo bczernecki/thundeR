@@ -80,19 +80,25 @@ double wobf(double temp)
 
 double TSA(double OS, double p)
 {
-  double a = OS;
-  double b = -2.6518986;
-  double Tw = 253.16;
-  for (int i = 1; i < 12; i++)
-  {
-    
-    if ((a * exp(b * W(Tw - kel, p) / Tw) - Tw * pow(1000.0 / p, 0.286)) > 0)
-      Tw += 120.0 / pow(2.0, (double)i);
-    else
-      Tw -= 120 / pow(2.0, (double)i);
-    
+  double A  = OS;
+  double TQ = 253.16;
+  double D  = 120;
+  double I = 1;
+  while(I<13){
+    D = D/2;
+    X = A * exp(-2.6518986*W(TQ,P)/TQ)-TQ*(pow((1000/P),0.286));
+    if(abs(X)<0.01)
+    {
+      TSA=TQ;
+    } else {
+      TQ = TQ + sign(X);
+      if(X<0){D = -abs(D)};
+      if(X>0){D =  abs(D)};
+      TQ = TQ + D;
+    }
+    I=I+1;
   }
-  return Tw - kel;
+  return TQ;
 }
 
 double TW(double t, double d, double p,  double *OW)
