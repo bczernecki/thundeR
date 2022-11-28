@@ -86,13 +86,12 @@ double TSA(double OS, double p)
   double I = 1;
   double X = 0;
   double TDS = 0;
-  double TQ = 0;
   while(I<13){
     D = D/2;
-    X = A * exp(-2.6518986*W(TQ,P)/TQ)-TQ*(pow((1000/P),0.286));
+    X = A * exp(-2.6518986*W(TQ,p)/TQ)-TQ*(pow((1000/p),0.286));
     if(abs(X)<0.01)
     {
-      TSA=TQ;
+      TQ = TQ;
     } else {
       TQ = TQ + ((X > 0) - (X < 0));
       if(X<0){D = -abs(D);}
