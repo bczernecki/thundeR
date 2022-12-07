@@ -24,7 +24,7 @@
 
 sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25,
                               lab_hghts = c(0, 1, 3, 6, 9, 12), 
-                              close_par = TRUE, SRH_polygon = "03km", ...){
+                              close_par = TRUE, SRH_polygon = "03km", storm_motion = c(999,999), ...){
   
   # restore old par settings on exit if hodograph won't be modified later
   oldpar_hodo = par(no.readonly = TRUE) 
