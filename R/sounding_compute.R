@@ -241,7 +241,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2,
   storm_motion[2] = round(-ws2 * 0.514444 * cos(wd2 * pi/180), 2)
   }  
   
-  tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step, meanlayer_bottom_top, c(storm_motion[1],storm_motion[2],999))
+  tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step, meanlayer_bottom_top, storm_motion = c(storm_motion[1],storm_motion[2],999))
   
   names(tmp) = c(
 "MU_CAPE",
