@@ -45,15 +45,27 @@ double O(double t, double p)
   return (t + kel) * pow(1000.0 / p, 0.286);
 }
 
-double WBPT(double x){
- return 1.8199427E+01+x*(2.1640800E-01+x*(3.0716310E-04+x*(-3.8953660E-06+x*(1.9618200E-08+x*(5.2935570E-11+x*(7.3995950E-14+x*(-4.1983500E-17)))))));
+double wobf(double temp)
+{
+  double x = temp - 20;
+  double pol = 0;
+  double wbts = 0;
+    if(x <= 0){
+        pol = 1. + x * (-0.0088416604999999992 + x * (0.00014714143000000001 + x * (-9.6719890000000006e-07 + x * (-3.2607217000000002e-08 + x * (-3.8598072999999999e-10)))));
+        wbts = 15.130000000000001/(pow(pol,4));
+    } else {
+        pol = 1. + x * (0.0036182989000000001 + x * (-1.3603273e-05 + x * (4.9618921999999997e-07 + x * (-6.1059364999999998e-09 + x * (3.9401550999999998e-11 + x * (-1.2588129e-13 + x * (1.668828e-16)))))));
+        wbts = 29.93/(pow(pol,4)) + 0.95999999999999996 * x - 14.800000000000001;
+    }
+    return wbts;
 }
 
 double OS(double t, double p)
 {
-  double thd = ((t+273.15)* pow(1000 / p, 0.286))-273.15;
-  double thm = thd+6.071*(exp(t/WBPT(t))-exp(thd/WBPT(thd)));
-  return thm;
+  double cta = 273.15;
+  double akap = 0.28541;
+  double pt = pow((t+cta)*(1000./p),akap)-cta;
+  return pt-wobf(pt)+wobf(t);
 }
 
 double TMR(double W, double p)
@@ -69,21 +81,6 @@ double TMR(double W, double p)
 double TDA(double O, double p)
 {
   return O * pow(p / 1000.0, 0.286) - kel;
-}
-
-double wobf(double temp)
-{
-  double x = temp - 20;
-  double pol = 0;
-  double wbts = 0;
-    if(x <= 0){
-        pol = 1. + x * (-0.0088416604999999992 + x * (0.00014714143000000001 + x * (-9.6719890000000006e-07 + x * (-3.2607217000000002e-08 + x * (-3.8598072999999999e-10)))));
-        wbts = 15.130000000000001/(pow(pol,4));
-    } else {
-        pol = 1. + x * (0.0036182989000000001 + x * (-1.3603273e-05 + x * (4.9618921999999997e-07 + x * (-6.1059364999999998e-09 + x * (3.9401550999999998e-11 + x * (-1.2588129e-13 + x * (1.668828e-16)))))));
-        wbts = 29.93/(pow(pol,4)) + 0.95999999999999996 * x - 14.800000000000001;
-    }
-    return wbts;
 }
 
 double TSA(double OS, double p)
