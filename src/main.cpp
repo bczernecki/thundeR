@@ -1204,7 +1204,6 @@ void LapseRate::putClassicLine(int i, double p, double h, double t,double d, dou
   if (lclIndex != -1)
   {
     double TSA_ = TSA(os, p);
-    cout << os << " WYNIK ";
     this->doRest(i, p, h, t, TSA_, &lfcIndex, &cape, &to3cape, &to2cape, &cin, &elIndex, values);
   }    else
             {
