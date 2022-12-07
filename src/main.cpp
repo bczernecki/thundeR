@@ -63,7 +63,7 @@ double wobf(double temp)
 double OS(double t, double p)
 {
   double akap = 0.28541;
-  double pt = (t+kel)*pow((1000/p),akap)-cta;
+  double pt = (t+kel)*pow((1000/p),akap)-kel;
   return pt-wobf(pt)+wobf(t);
 }
 
@@ -84,11 +84,10 @@ double TDA(double O, double p)
 
 double TSA(double OS, double p)
 {
-   double cta = 273.14999999999998;
    double thw = OS;
    double akap = 0.28541;
    double pwrp = pow(p/1000,akap);
-   double tone = (thw + cta) * pwrp - cta;
+   double tone = (thw + kel) * pwrp - kel;
    double eone = wobf(tone) - wobf(thw);
    double rate = 1;
    double dlt = 1;
@@ -97,7 +96,7 @@ double TSA(double OS, double p)
    double etwo = 0;
    while(abs(dlt) > 0.10000000000000001) {
        ttwo = tone - eone * rate;
-       pt = (ttwo + cta)/pwrp - cta;
+       pt = (ttwo + kel)/pwrp - kel;
        etwo = pt + wobf(ttwo) - wobf(pt) - thw;
        dlt = etwo * rate;
        rate = (ttwo - tone)/(etwo - eone);
