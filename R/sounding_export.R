@@ -39,7 +39,7 @@
 
 
 sounding_export = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 3, interpolate_step = 5,
-                          meanlayer_bottom_top = c(0,500), storm_motion = c(999,999,999)){
+                          meanlayer_bottom_top = c(0,500), storm_motion = c(999,999)){
 
   parametry = sounding_default(pressure = pressure, altitude = altitude, 
                                temp = temp, dpt = dpt, wd = wd, ws = ws, 
