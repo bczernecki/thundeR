@@ -42,7 +42,7 @@ double W(double t, double p)
 
 double O(double t, double p)
 {
-  return (t + kel) * pow(1000.0 / p, 0.286);
+  return (t + kel) * pow(1000.0 / p, 0.28541);
 }
 
 double wobf(double temp)
@@ -62,9 +62,8 @@ double wobf(double temp)
 
 double OS(double t, double p)
 {
-  double cta = 273.15;
   double akap = 0.28541;
-  double pt = pow((t+cta)*(1000./p),akap)-cta;
+  double pt = (t+kel)*pow((1000/p),akap)-cta;
   return pt-wobf(pt)+wobf(t);
 }
 
@@ -80,7 +79,7 @@ double TMR(double W, double p)
 
 double TDA(double O, double p)
 {
-  return O * pow(p / 1000.0, 0.286) - kel;
+  return O * pow(p / 1000.0, 0.28541) - kel;
 }
 
 double TSA(double OS, double p)
