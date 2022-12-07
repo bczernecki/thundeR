@@ -237,11 +237,11 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2,
   if(sum(storm_motion==c(999,999)) != 2){
   ws = storm_motion[1]
   wd = storm_motion[2]
-  storm_motion[1] = round(-ws * 0.514444 * sin(wd * pi/180), 2)
+  storm_motion[1] = round(ws * 0.514444 * sin(wd * pi/180), 2)
   storm_motion[2] = round(-ws * 0.514444 * cos(wd * pi/180), 2)
   }  
   
-  tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step, meanlayer_bottom_top, c(storm_motion[1],storm_motion[2],0))
+  tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws, export_profile, accuracy, interpolate_step, meanlayer_bottom_top, c(storm_motion[1],storm_motion[2],999))
   
   names(tmp) = c(
 "MU_CAPE",
