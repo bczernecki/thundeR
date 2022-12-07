@@ -238,7 +238,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2,
     ws2 = storm_motion[1]
     wd2 = storm_motion[2]
     storm_motion[2] = round(-ws2 * sin(wd2 * pi/180), 2)
-    storm_motion[1] = round(-ws2 * cos(wd2 * pi/180), 2)
+    storm_motion[1] = round(ws2 * cos(wd2 * pi/180), 2)
     storm_motion[3] = 0
   } else {
     storm_motion[3] = 999
