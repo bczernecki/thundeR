@@ -117,8 +117,8 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
   }
   
     if(SRH_polygon == "03km_LM"){    
-    parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, stoLM_motion = stoLM_motion, accuracy = 3)
-    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)), wd,ws, stoLM_motion = stoLM_motion)
+    parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, storm_motion = storm_motion, accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)), wd,ws, storm_motion = storm_motion)
     LM_y = round(-parametry2[which(names(parametry2) == "Bunkers_LM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_LM_A")] * pi/180), 2)
     LM_x = round(-parametry2[which(names(parametry2) == "Bunkers_LM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_LM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
     uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=3000])
@@ -130,8 +130,8 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
   }
   
   if(SRH_polygon == "01km_LM"){    
-    parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, stoLM_motion = stoLM_motion, accuracy = 3)
-    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, stoLM_motion = stoLM_motion)
+    parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, storm_motion = storm_motion, accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, storm_motion = storm_motion)
     LM_y = round(-parametry2[which(names(parametry2) == "Bunkers_LM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_LM_A")] * pi/180), 2)
     LM_x = round(-parametry2[which(names(parametry2) == "Bunkers_LM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_LM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
     uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=1000])
@@ -143,8 +143,8 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
   }
   
   if(SRH_polygon == "0500m_LM"){    
-    parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, stoLM_motion = stoLM_motion, accuracy = 3)
-    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, stoLM_motion = stoLM_motion)    
+    parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, storm_motion = storm_motion, accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, storm_motion = storm_motion)    
     LM_y = round(-parametry2[which(names(parametry2) == "Bunkers_LM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_LM_A")] * pi/180), 2)
     LM_x = round(-parametry2[which(names(parametry2) == "Bunkers_LM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_LM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
     uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=0 & (parametry3$altitude-parametry3$altitude[1])<=500])
@@ -156,8 +156,8 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
   }
   
   if(SRH_polygon == "36km_LM"){    
-    parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, stoLM_motion = stoLM_motion, accuracy = 3)
-    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, stoLM_motion = stoLM_motion)
+    parametry2 = sounding_compute(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, storm_motion = storm_motion, accuracy = 3)
+    parametry3 = sounding_export(seq(1000,100,length.out=length(wd)), altitude, seq(30,-60,length.out=length(wd)),seq(20,-40,length.out=length(wd)),wd,ws, storm_motion = storm_motion)
     LM_y = round(-parametry2[which(names(parametry2) == "Bunkers_LM_M")] * cos(parametry2[which(names(parametry2) == "Bunkers_LM_A")] * pi/180), 2)
     LM_x = round(-parametry2[which(names(parametry2) == "Bunkers_LM_M")] * sin(parametry2[which(names(parametry2) == "Bunkers_LM_A")] * pi/180), 2)  # LM_x = m_x1 - 7.5 * (sqrt( 1 / (1+slope2*slope2)))
     uSRH = c(round(-parametry3$ws * 0.514444 * sin(parametry3$wd * pi/180), 2)[(parametry3$altitude-parametry3$altitude[1])>=3000 & (parametry3$altitude-parametry3$altitude[1])<=6000])
