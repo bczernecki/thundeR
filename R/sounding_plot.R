@@ -93,6 +93,44 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
   
   ###
   
+  rect(8.25, 41, 26.1, 44, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
+  text(9, 43.35, substitute(paste(bold('Parcel:'))), col = "black", cex = 0.55, adj = c(0, 1))
+  text(9, 42.25, substitute(paste(bold('Storm-motion:'))), col = "black", cex = 0.55, adj = c(0, 1))
+  
+  if(parcel == "ML"){
+    if(sum(meanlayer_bottom_top == c(0,500))==2){
+      text(13, 43.35, "mixed-layer (0-500m)", col = "black", cex = 0.55, adj = c(0, 1))
+    } else {
+      if(meanlayer_bottom_top[1] == meanlayer_bottom_top[2]){
+        text(13, 43.35, paste0("manual-lift (",meanlayer_bottom_top[1],"m)"), col = "black", cex = 0.55, adj = c(0, 1))
+      } else {
+        if(meanlayer_bottom_top[1] != meanlayer_bottom_top[2]){
+          text(13, 43.35, paste0("mixed-layer (",meanlayer_bottom_top[1],"-",meanlayer_bottom_top[2],"m)"), col = "black", cex = 0.55, adj = c(0, 1))
+        }
+      }
+    }
+  } 
+  if(parcel == "MU"){
+    text(13, 43.35, "most-unstable (0-3000m)", col = "black", cex = 0.55, adj = c(0, 1))
+  }
+  
+  if(parcel == "SB"){
+    text(13, 43.35, "surface-based", col = "black", cex = 0.55, adj = c(0, 1))
+  }
+  
+  if(parcel == "none"){
+    text(13, 43.35, "none", col = "black", cex = 0.55, adj = c(0, 1))
+  }
+  
+  
+  if(sum(storm_motion == c(999,999))==2){
+    text(16.85, 42.25, "Bunkers ID", col = "black", cex = 0.55, adj = c(0, 1))
+  } else {
+    text(16.85, 42.25, "user-defined", col = "black", cex = 0.55, adj = c(0, 1))
+  }
+  
+  ###
+  
   if (parcel!="none"){
   
     if(parcel=="ML"){
