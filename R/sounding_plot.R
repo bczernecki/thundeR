@@ -34,6 +34,14 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
                           title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE, SRH_polygon = "03km_RM", DCAPE = FALSE, 
                           meanlayer_bottom_top = c(0,500), storm_motion = c(999,999), ...) {
   
+  if(sum(meanlayer_bottom_top == c(0,500)) != 2){ 
+    parcel = "ML"
+  }
+  
+  if(sum(storm_motion == c(999,999)) > 0){
+    storm_motion = c(999,999)
+  }
+  
   convert <- FALSE
   ptop <- 100
   
