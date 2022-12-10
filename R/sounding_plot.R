@@ -144,10 +144,12 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     if(parcel=="ML"){
       vsb_lcl = parametry[which(names(parametry[1:LP]) == "ML_LCL_HGT")] + output$altitude[1]
       vsb_lfc = parametry[which(names(parametry[1:LP]) == "ML_LFC_HGT")] + output$altitude[1]
+      vsb_muhgt = meanlayer_bottom_top[1] + output$altitude[1]
       vsb_el = parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")] + output$altitude[1]
       vsb_eff = (parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")]/2) + output$altitude[1]
       ind_lcl = which.min(abs(output$altitude - vsb_lcl))
       ind_lfc = which.min(abs(output$altitude - vsb_lfc))
+      ind_muhgt = which.min(abs(output$altitude - vsb_muhgt))
       ind_el = which.min(abs(output$altitude - vsb_el))
       ind_eff = which.min(abs(output$altitude - vsb_eff))
       y_eff = skewty(output$pressure[ind_eff])
@@ -158,14 +160,15 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
       x_lfc = skewtx(output$ML[ind_lfc],skewty(output$pressure[ind_lfc]))
       y_lcl = skewty(output$pressure[ind_lcl])
       x_lcl = skewtx(ifelse(output$ML[ind_lcl]>output$tempV[ind_lcl],output$ML[ind_lcl],output$tempV[ind_lcl]),skewty(output$pressure[ind_lcl]))  
+      y_muhgt = skewty(output$pressure[ind_muhgt])
+      x_muhgt = skewtx(output$ML[ind_muhgt],skewty(output$pressure[ind_muhgt]))
       
       skewt_lines(output$ML,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
       
-      v = skewty(c(output$pressure[1:ind_el])) # extra checks for NA coded as -99
-      diff <- ifelse((skewtx(output$tempV[1:ind_el], v)-skewtx(output$ML[1:ind_el], v))>0,1,0)
+      v = skewty(c(output$pressure[ind_muhgt:ind_el])) # extra checks for NA coded as -99
+      diff <- ifelse((skewtx(output$tempV[ind_muhgt:ind_el], v)-skewtx(output$ML[ind_muhgt:ind_el], v))>0,1,0)
       v = subset(v, v < 44)
       diff = subset(diff, v < 44)
-      diff = diff[!is.na(diff)]
       
       inte <- rle(diff)
       end_pol <- cumsum(inte$lengths)
@@ -176,12 +179,12 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
         for(i in 1:length(end_pol)){
           if(inte$values[i]==1){
             if(parametry[which(names(parametry[1:LP]) == "ML_CIN")]<0){
-              polygon(c(skewtx(output$tempV[1:ind_el], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$ML[1:ind_el], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = "#FF000035", border = NA) 
+              polygon(c(skewtx(output$tempV[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$ML[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = "#FF000035", border = NA) 
             } 
           }
           if(inte$values[i]==0){
             if(parametry[which(names(parametry[1:LP]) == "ML_CAPE")]>0){
-              polygon(c(skewtx(output$tempV[1:ind_el], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$ML[1:ind_el], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = "#FFA50025", border = NA) 
+              polygon(c(skewtx(output$tempV[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$ML[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = "#FFA50025", border = NA) 
             }
           }
         }
