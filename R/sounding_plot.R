@@ -696,7 +696,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
     points(RM_x, RM_y, cex = 1.75, pch = 1, col = vectors_color)
     points(RM_x, RM_y, cex = 0.75, pch = 1, col = "black")
     arrows(0, 0, RM_x, RM_y, lty = 1, length = 0.11, angle = 22, code = 2, col = rgb(75, 75, 75, maxColorValue = 255, alpha = 100), lwd = 2.75)
-    text(RM_x, RM_y, font = 2, "MSM", col = vectors_color, adj = c(0.5, 2.5), cex = 0.5)
+    text(RM_x, RM_y, font = 2, "", col = vectors_color, adj = c(0.5, 2.5), cex = 0.5)
   }
   
   ####
