@@ -157,6 +157,7 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
       diff <- ifelse((skewtx(output$tempV[1:ind_el], v)-skewtx(output$ML[1:ind_el], v))>0,1,0)
       v = subset(v, v < 44)
       diff = subset(diff, v < 44)
+      diff = diff[!is.na(diff)]
       
       inte <- rle(diff)
       end_pol <- cumsum(inte$lengths)
