@@ -310,9 +310,9 @@ sounding_plot <- function(pressure, altitude, temp, dpt, wd, ws,
         if (parametry[which(names(parametry[1:LP]) == "ML_CAPE")] > 0) {
           # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
           if (output$pressure[which(output$altitude - output$altitude[1] == (parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")]))] > 100 & which(names(parametry[1:LP]) == "ML_EL_HGT") != 0) {
-            text(x_el, y_el, paste0("---- UD EL"), pos = 4, cex = 0.62, col = "black")
+            text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black")
           }
-          text(x_lcl, y_lcl, paste0("---- UD LCL"), pos = 4, cex = 0.62, col = "black")
+          text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")
         }
       }
     }
