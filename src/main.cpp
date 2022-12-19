@@ -3502,7 +3502,7 @@ double IndicesCollector::SHERBE_v2(){
 double IndicesCollector::DEI(){
   double CPS = this->VirtualColdPoolStrength();
   double WXS = this->MU_WMAXSHEAR();
-  double DEI = (1560-(CPS-13)+13*WXS)/10000;
+  double DEI = (1560*(CPS-13)+13*WXS)/10000;
   if(DEI<(-2))DEI=(-2);
   if(WXS==0)DEI=(-2);
   return DEI;
@@ -3520,7 +3520,7 @@ double IndicesCollector::TIP(){
 double IndicesCollector::DEI_eff(){
   double CPS = this->VirtualColdPoolStrength();
   double WXS = this->MU_EFF_WMAXSHEAR();
-  double DEI = (1560-(CPS-13)+13*WXS)/10000;
+  double DEI = (1560*(CPS-13)+13*WXS)/10000;
   if(DEI<(-2))DEI=(-2);
   if(WXS==0)DEI=(-2);
   return DEI;
