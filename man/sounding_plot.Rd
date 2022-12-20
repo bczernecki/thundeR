@@ -15,8 +15,10 @@ sounding_plot(
   parcel = "MU",
   max_speed = 25,
   buoyancy_polygon = TRUE,
-  SRH_polygon = "03km",
+  SRH_polygon = "03km_RM",
   DCAPE = FALSE,
+  meanlayer_bottom_top = c(0, 500),
+  storm_motion = c(999, 999),
   ...
 )
 }
@@ -45,17 +47,17 @@ sounding_plot(
 
 \item{DCAPE}{draws downdraft parcel and polygon of downdraft's negative buoyancy (default = FALSE)}
 
-\item{...}{extra graphic arguments}
+\item{...}{extra graphical arguments to be added}
 }
 \value{
-Skew-T, hodograph and table with convective indices drawn on a pre-defined single layout
+panel of Skew-T, hodograph and table with convective indices drawn on a pre-defined single layout
 }
 \description{
-Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
+Function to plot a composite graphics with Skew-T, hodograph and selected convective parameters on a single layout
 }
 \examples{
 data("sounding_vienna")
-sounding_vienna <- na.omit(sounding_vienna)
+sounding_vienna = na.omit(sounding_vienna)
 sounding_plot(sounding_vienna$pressure, sounding_vienna$altitude,
   sounding_vienna$temp, sounding_vienna$dpt,
   sounding_vienna$wd, sounding_vienna$ws,

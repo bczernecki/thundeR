@@ -13,8 +13,8 @@ sounding_compute(
   ws,
   accuracy = 2,
   interpolate_step = 5,
-  meanlayer_bottom_top,
-  storm_motion
+  meanlayer_bottom_top = c(0, 500),
+  storm_motion = c(999, 999)
 )
 }
 \arguments{
@@ -36,6 +36,12 @@ sounding_compute(
 }
 \value{
 Named vector of 100+ convective indices
+}
+\description{
+A core function for calculating convective parameters commonly used in the operational
+prediction of severe convective storms. Returns a vector of parameters.
+}
+\details{
 \enumerate{
  \item MU_CAPE
  \item MU_CAPE_M10
@@ -239,9 +245,6 @@ Named vector of 100+ convective indices
  \item DEI_eff
  \item TIP
 }
-}
-\description{
-A core function for calculating convective parameters commonly used in the operational prediction of severe convective storms. Returns a vector of parameters.
 }
 \examples{
 pressure = c(1000, 855, 700, 500, 300, 100, 10)

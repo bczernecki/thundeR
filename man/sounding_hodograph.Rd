@@ -12,7 +12,8 @@ sounding_hodograph(
   max_speed = 25,
   lab_hghts = c(0, 1, 3, 6, 9, 12),
   close_par = TRUE,
-  SRH_polygon = "03km",
+  SRH_polygon = "03km_RM",
+  storm_motion = c(999, 999),
   ...
 )
 }
@@ -39,11 +40,13 @@ sounding_hodograph(
 hodograph plot
 }
 \description{
-Plot rawinsonde hodograph to show changes in wind speed and direction with height
+Plot hodograph to show changes in wind speed and wind direction with height
 }
 \examples{
 chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
-sounding_hodograph(ws = chanhassen$ws, wd = chanhassen$wd, 
-                   altitude = chanhassen$altitude,max_speed = 40)
+sounding_hodograph(
+  ws = chanhassen$ws, wd = chanhassen$wd,
+  altitude = chanhassen$altitude, max_speed = 40
+)
 title("Chanhasses - 10 May 2001, 00:00 UTC")
 }

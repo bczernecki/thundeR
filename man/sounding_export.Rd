@@ -12,7 +12,9 @@ sounding_export(
   wd,
   ws,
   accuracy = 3,
-  interpolate_step = 5
+  interpolate_step = 5,
+  meanlayer_bottom_top = c(0, 500),
+  storm_motion = c(999, 999)
 )
 }
 \arguments{
@@ -44,15 +46,15 @@ Data frame of computed values for visualizing parcel trajectories
 }
 }
 \description{
-Internal package function for exporting interpolated profile with 5 m steps
+Internal package function for exporting interpolated profile with 5 m (or user-defined) steps
 }
 \examples{
 data("sounding_vienna")
 attach(sounding_vienna)
 skewt_plot(close_par = FALSE)
 output = sounding_export(pressure, altitude, temp, dpt, wd, ws)
-skewt_lines(output$dpt, output$pressure, col = 'forestgreen', lwd = 2.5)
-skewt_lines(output$temp,output$pressure, col = 'red', lwd = 2.5)
-skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)
-skewt_lines(output$tempV,output$pressure, col = "red3", lty = 3, lwd = 1.5)
+skewt_lines(output$dpt, output$pressure, col = "forestgreen", lwd = 2.5)
+skewt_lines(output$temp, output$pressure, col = "red", lwd = 2.5)
+skewt_lines(output$MU, output$pressure, col = "orange", lty = 1, lwd = 2)
+skewt_lines(output$tempV, output$pressure, col = "red3", lty = 3, lwd = 1.5)
 }
