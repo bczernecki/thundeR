@@ -4580,7 +4580,7 @@ double * sounding_default2(double* pressure,
 //' Generic function for calculating thermo- and kinematic indices derived from atmospheric profiling.
 //' Further details given in the sounding_compute() function
 //' 
-//'
+//' @noRd
 //' @param pressure pressure [hPa]
 //' @param altitude altitude [meters]
 //' @param temp temperature [degree Celsius]

@@ -13,7 +13,7 @@ test_that("sounding_default should compute below 0.5s", {
                                            export_profile = 0,
                                            accuracy = 2,
                                            interpolate_step = 1000,
-                                           meanlayer_bottom_top = c(0,500),
+                                           meanlayer_bottom_top = c(0, 500),
                                            storm_motion = c(999, 999)))
         t1 <- as.numeric(t1[3])
         print(paste("Computation time for a single sounding:", t1, "s"))
