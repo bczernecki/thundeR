@@ -38,27 +38,26 @@
 #'
 
 sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
-                         title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE, SRH_polygon = "03km", DCAPE = FALSE, filename, ...){
+                         title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE,
+                         SRH_polygon = "03km", DCAPE = FALSE, filename, ...) {
   
   convert = FALSE
   ptop = 100 
   
   stopifnot(length(filename) < 4)
   
-  if(tools::file_ext(filename) == "png"){
+  if (tools::file_ext(filename) == "png") {
     grDevices::png(filename = filename, width = 2000, height = 1200, res = 200)
     sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
                   title, parcel, max_speed, buoyancy_polygon, SRH_polygon, DCAPE, ...)
     grDevices::dev.off()
   }
-  
-  
-  if(tools::file_ext(filename) == "svg"){
+
+  if (tools::file_ext(filename) == "svg") {
     grDevices::svg(filename = filename, width = 20, height = 12, pointsize=24)
     sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
                   title, parcel, max_speed, buoyancy_polygon, SRH_polygon, DCAPE, ...)
     grDevices::dev.off()
   }
-  
-  
+   
 }

@@ -799,4 +799,3 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   title(title, outer = T, line = -1.5)
 }
-
