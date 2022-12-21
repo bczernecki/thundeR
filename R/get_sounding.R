@@ -38,28 +38,27 @@
 #'   
 #' }
 
-get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE){
+get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE) {
 
   sounding_data = climate::sounding_wyoming(wmo_id, yy, mm, dd, hh)
   
   # take another attempt if object empty
   i = 1
-  while(is.null(sounding_data) & i < 5){
+  while (is.null(sounding_data) & i < 5) {
     message("\nProblems with downloading. Re-trying in 5 seconds...")
     Sys.sleep(5)
     sounding_data = climate::sounding_wyoming(wmo_id, yy, mm, dd, hh)
     i = i + 1
   }
   
-  if((!is.null(sounding_data)) & (ncol(sounding_data[[1]]) > 0)){
+  if ((!is.null(sounding_data)) & (ncol(sounding_data[[1]]) > 0)) {
   
     colnames(sounding_data[[1]]) = c("pressure", "altitude", "temp", "dpt",
                                      "rh", "mixr", "wd", "ws", "thta", "thte", "thtv")
     sounding_data[[1]] = sounding_data[[1]][,c("pressure", "altitude", "temp", "dpt","wd", "ws")]
-                                              
     sounding_data[[1]] = na.omit(sounding_data[[1]])
                                               
-    if(!metadata){
+    if (!metadata) {
       sounding_data = sounding_data[[1]]    
     }
   }
