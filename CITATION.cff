@@ -11,5 +11,5 @@ authors:
     given-names: Piotr
     orcid: 0000-0001-7937-8046
 title: "thundeR - Computation and Visualisation of Atmospheric Convective Parameters"
-version: 0.3.0
-date-released: 2022-02-19
+version: 1.1.0
+date-released: 2022-12-22
