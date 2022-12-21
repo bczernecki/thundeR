@@ -1,0 +1,43 @@
+on:
+  push:
+    branches:
+      - main
+      - master
+      - devel
+      - dev
+  pull_request:
+    branches:
+      - main
+      - master
+      - devel
+      - dev
+
+name: valgrind
+
+jobs:
+  valgrind-check:
+
+    runs-on: ubuntu-latest
+
+    name: valgrind-check
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check with valgrind
+        run: bash inst/tools/valgrind-check.sh
+
+      - name: Detect valgrind issues
+        working-directory: valgrind-check
+        run: |
+          if grep -iv "ERROR SUMMARY: 0 errors" valgrind-summary; then
+            echo "::error ::Found valgrind errors"
+            exit 1
+          fi
+
+      - name: Upload valgrind results
+        if: always()
+        uses: actions/upload-artifact@main
+        with:
+          name: valgrind-results
+          path: valgrind-check
