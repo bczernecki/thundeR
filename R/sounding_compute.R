@@ -215,8 +215,11 @@
 #' @param wd wind direction [azimuth in degrees]
 #' @param ws wind speed [knots]
 #' @param accuracy accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
-#' @param interpolate_step when accuracy is set to 3 (default is 5m)
-#' @return Named vector of 100+ convective indices
+#' @param interpolate_step interpolation step to be used for vertical interpolation. Valid only if `accuracy` is set to 3 (default is 5 m)
+#' @param meanlayer_bottom_top (optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500
+#' @param storm_motion (optional) for moving storms only - one can define 
+#' wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters
+#' @return Named vector of 200+ convective indices
 #' @export 
 #' @examples
 #' pressure = c(1000, 855, 700, 500, 300, 100, 10)
@@ -229,8 +232,10 @@
 #' options(digits = 2) #change output formatting precision 
 #' sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
-sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2,
-                            interpolate_step = 5, meanlayer_bottom_top = c(0,500),
+sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
+                            accuracy = 2,
+                            interpolate_step = 5,
+                            meanlayer_bottom_top = c(0, 500),
                             storm_motion = c(999, 999)) {
   
   export_profile = 0 
@@ -245,9 +250,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 2,
     storm_motion[3] = 999
   }
   
-  tmp = sounding_default(pressure, altitude, temp, dpt, wd, ws,
-                         export_profile, accuracy, interpolate_step,
-                         meanlayer_bottom_top, storm_motion)
+  tmp = thunder::sounding_default(pressure, altitude, temp, dpt, wd, ws,
+                                  export_profile, accuracy, interpolate_step,
+                                  meanlayer_bottom_top, storm_motion)
   
   names(tmp) = c(
     "MU_CAPE",

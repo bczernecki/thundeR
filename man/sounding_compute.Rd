@@ -32,10 +32,15 @@ sounding_compute(
 
 \item{accuracy}{accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)}
 
-\item{interpolate_step}{when accuracy is set to 3 (default is 5m)}
+\item{interpolate_step}{interpolation step to be used for vertical interpolation. Valid only if `accuracy` is set to 3 (default is 5 m)}
+
+\item{meanlayer_bottom_top}{(optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500}
+
+\item{storm_motion}{(optional) for moving storms only - one can define 
+wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters}
 }
 \value{
-Named vector of 100+ convective indices
+Named vector of 200+ convective indices
 }
 \description{
 A core function for calculating convective parameters commonly used in the operational
