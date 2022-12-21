@@ -1,9 +1,3 @@
----
-editor_options: 
-  markdown: 
-    wrap: 72
----
-
 # thundeR <img src="man/figures/logo.png" align="right" width="150"/>
 
 **Rapid computation and visualisation of convective parameters from
@@ -65,7 +59,9 @@ temp = sounding_vienna$temp  # vector of temperature [degree Celsius]
 dpt = sounding_vienna$dpt # vector of dew point temperature [degree Celsius]
 wd = sounding_vienna$wd # vector of wind direction [azimuth in degrees]
 ws = sounding_vienna$ws # vector of wind speed [knots]
-sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC", pressure, altitude, temp, dpt, wd, ws)
+sounding_save(filename = "Vienna.png",
+              title = "Vienna - 23 August 2011 1200 UTC",
+              pressure, altitude, temp, dpt, wd, ws)
 ```
 
 ![](inst/figures/Vienna.png)
@@ -74,7 +70,8 @@ sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC
 
 ``` r
 profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
-sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999 0000 UTC", profile$pressure, profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
+sounding_save(filename = "NorthPlatte.png",
+              title = "North Platte - 03 July 1999 0000 UTC", profile$pressure,                             profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
 ```
 
 ![](inst/figures/NorthPlatte.png)
@@ -154,8 +151,9 @@ Download sounding and draw hodograph:
 ``` r
 chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
 sounding_hodograph(ws = chanhassen$ws, wd = chanhassen$wd, 
-                   altitude = chanhassen$altitude,max_speed = 40)
-title("Chanhasses - 10 May 2001, 00:00 UTC")
+                   altitude = chanhassen$altitude,
+                   max_speed = 40)
+title("Chanhassen - 10 May 2001, 00:00 UTC")
 ```
 
 ![](inst/figures/hodograph.png)
