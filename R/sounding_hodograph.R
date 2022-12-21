@@ -65,7 +65,6 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
     asp = 1,
     xaxt = "n", yaxt = "n", frame.plot = FALSE
   )
-  # ...)
 
   if (SRH_polygon == "03km_RM") {
     parametry2 = sounding_compute(seq(1000, 100, length.out = length(wd)),
@@ -262,7 +261,9 @@ sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25
     ux = approx(x = altitude, y = u, xout = c(lab_hghts * 1000))
     uy = approx(x = altitude, y = v, xout = c(lab_hghts * 1000))
     # points(ux$y, uy$y, cex = 0.5, pch = 19, col='black')
-    points(ux$y, uy$y, cex = 1.15, pch = 21, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 125), bg = rgb(255, 255, 255, maxColorValue = 255, alpha = 125))
+    points(ux$y, uy$y, cex = 1.15, pch = 21,
+           col = rgb(255, 255, 255, maxColorValue = 255, alpha = 125),
+           bg = rgb(255, 255, 255, maxColorValue = 255, alpha = 125))
     text(font = 2, ux$y, uy$y, labels = floor(lab_hghts), col = "black", cex = 0.65)
   }
   box()

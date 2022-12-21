@@ -31,15 +31,21 @@
 #' )
 
 sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
-                         title = "", parcel = "MU", max_speed = 25, buoyancy_polygon = TRUE, SRH_polygon = "03km_RM", DCAPE = FALSE, 
-                         meanlayer_bottom_top = c(0,500), storm_motion = c(999,999), ...) {
+                         title = "",
+                         parcel = "MU",
+                         max_speed = 25,
+                         buoyancy_polygon = TRUE,
+                         SRH_polygon = "03km_RM",
+                         DCAPE = FALSE, 
+                         meanlayer_bottom_top = c(0, 500),
+                         storm_motion = c(999, 999), ...) {
   
   if (sum(meanlayer_bottom_top == c(0, 500)) != 2) { 
     parcel = "ML"
   }
   
-  if (sum(storm_motion == c(999,999)) > 0) {
-    storm_motion = c(999,999)
+  if (sum(storm_motion == c(999, 999), na.rm = TRUE) > 0) {
+    storm_motion = c(999, 999)
   }
   
   convert = FALSE
@@ -78,14 +84,24 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   }
   
   ####
-  output = sounding_export(pressure, altitude, temp, dpt, wd, ws, meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = storm_motion)
-  output2 = sounding_export(pressure, altitude, temp, ifelse(dpt == -273, NA, dpt), wd, ws, meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = storm_motion)
-  RH = aiRthermo::dewpointdepression2rh(output$pressure * 100, output$temp + 273.15, output$temp - output$dpt, consts = export_constants())
+  output = sounding_export(pressure, altitude, temp, dpt, wd, ws,
+                           meanlayer_bottom_top = meanlayer_bottom_top,
+                           storm_motion = storm_motion)
+  output2 = sounding_export(pressure, altitude, temp,
+                            ifelse(dpt == -273, NA, dpt),
+                            wd,
+                            ws,
+                            meanlayer_bottom_top = meanlayer_bottom_top,
+                            storm_motion = storm_motion)
+  RH = aiRthermo::dewpointdepression2rh(output$pressure * 100, output$temp + 273.15,
+                                        output$temp - output$dpt, consts = export_constants())
   SH = aiRthermo::rh2shum(output$pressure * 100, output$temp + 273.15, RH, consts = export_constants())
   E = aiRthermo::q2e(output$pressure * 100, SH, consts = export_constants())
   W = aiRthermo::e2w(E, output$pressure * 100, consts = export_constants())
   TLCL = aiRthermo::boltonTLCL(output$temp + 273.15, RH, consts = export_constants())
-  THETAE = aiRthermo::equivalentPotentialTemperature(output$pressure * 100, output$temp + 273.15, W, TLCL, consts = export_constants())
+  THETAE = aiRthermo::equivalentPotentialTemperature(output$pressure * 100,
+                                                     output$temp + 273.15,
+                                                     W, TLCL, consts = export_constants())
   ####
   
   skewt_plot(close_par = FALSE)
@@ -96,7 +112,9 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(20, 28, "Hail Growth\nLayer (HGL)", col = "#8470FF90", cex = 0.65, srt = 56)
   
   ####
-  parametry = sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3, meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = storm_motion)
+  parametry = sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3,
+                               meanlayer_bottom_top = meanlayer_bottom_top,
+                               storm_motion = storm_motion)
   LP = max(which(!is.na(names(parametry))))
   
   ###
@@ -106,14 +124,17 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(9, 42.25, substitute(paste(bold('Storm-motion:'))), col = "black", cex = 0.55, adj = c(0, 1))
   
   if (parcel == "ML") {
-    if (sum(meanlayer_bottom_top == c(0,500)) ==2) {
+    if (sum(meanlayer_bottom_top == c(0, 500)) == 2) {
       text(13, 43.35, "mixed-layer (0-500m)", col = "black", cex = 0.55, adj = c(0, 1))
     } else {
       if (meanlayer_bottom_top[1] == meanlayer_bottom_top[2]) {
-        text(13, 43.35, paste0("manual-lift (",meanlayer_bottom_top[1],"m)"), col = "black", cex = 0.55, adj = c(0, 1))
+        text(13, 43.35, paste0("manual-lift (",meanlayer_bottom_top[1],"m)"),
+             col = "black", cex = 0.55, adj = c(0, 1))
       } else {
         if (meanlayer_bottom_top[1] != meanlayer_bottom_top[2]) {
-          text(13, 43.35, paste0("mixed-layer (",meanlayer_bottom_top[1],"-",meanlayer_bottom_top[2],"m)"), col = "black", cex = 0.55, adj = c(0, 1))
+          text(13, 43.35, paste0("mixed-layer (",meanlayer_bottom_top[1],"-",
+                                 meanlayer_bottom_top[2],"m)"),
+               col = "black", cex = 0.55, adj = c(0, 1))
         }
       }
     }
@@ -160,7 +181,10 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       y_lfc = skewty(output$pressure[ind_lfc])
       x_lfc = skewtx(output$ML[ind_lfc],skewty(output$pressure[ind_lfc]))
       y_lcl = skewty(output$pressure[ind_lcl])
-      x_lcl = skewtx(ifelse(output$ML[ind_lcl]>output$tempV[ind_lcl],output$ML[ind_lcl],output$tempV[ind_lcl]),skewty(output$pressure[ind_lcl]))  
+      x_lcl = skewtx(ifelse(output$ML[ind_lcl] > output$tempV[ind_lcl],
+                            output$ML[ind_lcl],
+                            output$tempV[ind_lcl]),
+                     skewty(output$pressure[ind_lcl]))
       y_muhgt = skewty(output$pressure[ind_muhgt])
       x_muhgt = skewtx(output$ML[ind_muhgt],skewty(output$pressure[ind_muhgt]))
       
@@ -200,7 +224,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       vsb_lfc = parametry[which(names(parametry[1:LP]) == "MU_LFC_HGT")] + output$altitude[1]
       vsb_muhgt = parametry[which(names(parametry[1:LP]) == "HGT_max_thetae_03km")] + output$altitude[1]
       vsb_el = parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")] + output$altitude[1]
-      vsb_eff = ((parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")]-parametry[which(names(parametry[1:LP]) == "HGT_max_thetae_03km")])/2) + output$altitude[1]
+      vsb_eff = ((parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")] - parametry[which(names(parametry[1:LP]) == "HGT_max_thetae_03km")])/2) + output$altitude[1]
       ind_lcl = which.min(abs(output$altitude - vsb_lcl))
       ind_lfc = which.min(abs(output$altitude - vsb_lfc))
       ind_muhgt = which.min(abs(output$altitude - vsb_muhgt)) 
@@ -213,9 +237,12 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       y_lfc = skewty(output$pressure[ind_lfc])
       x_lfc = skewtx(output$MU[ind_lfc],skewty(output$pressure[ind_lfc]))
       y_lcl = skewty(output$pressure[ind_lcl])
-      x_lcl = skewtx(ifelse(output$MU[ind_lcl]>output$tempV[ind_lcl],output$MU[ind_lcl],output$tempV[ind_lcl]),skewty(output$pressure[ind_lcl]))
+      x_lcl = skewtx(ifelse(output$MU[ind_lcl] > output$tempV[ind_lcl],
+                            output$MU[ind_lcl],
+                            output$tempV[ind_lcl]),
+                     skewty(output$pressure[ind_lcl]))
       y_muhgt = skewty(output$pressure[ind_muhgt])
-      x_muhgt = skewtx(output$MU[ind_muhgt],skewty(output$pressure[ind_muhgt]))
+      x_muhgt = skewtx(output$MU[ind_muhgt], skewty(output$pressure[ind_muhgt]))
       
       skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
       
@@ -232,16 +259,18 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
         start_pol = c(1, cumsum(inte$lengths) + 1)[-length(end_pol) - 1]
         }
       
-      if (buoyancy_polygon ==TRUE & ind_lfc!=ind_el) {
+      if (buoyancy_polygon == TRUE & ind_lfc != ind_el) {
         for (i in 1:length(end_pol)) {
           if (inte$values[i] == 1) {
             if (parametry[which(names(parametry[1:LP]) == "MU_CIN")] < 0) {
-              polygon(c(skewtx(output$tempV[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$MU[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = "#FF000035", border = NA) 
+              polygon(c(skewtx(output$tempV[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]],
+                        rev(skewtx(output$MU[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = "#FF000035", border = NA) 
             } 
           }
           if (inte$values[i] == 0) {
             if (parametry[which(names(parametry[1:LP]) == "MU_CAPE")] > 0) {
-              polygon(c(skewtx(output$tempV[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$MU[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = "#FFA50025", border = NA) 
+              polygon(c(skewtx(output$tempV[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$MU[ind_muhgt:ind_el], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]],
+                                                                                                                                                                     rev(v[start_pol[i]:end_pol[i]])), col = "#FFA50025", border = NA) 
             }
           }
         }
@@ -264,7 +293,10 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       y_lfc = skewty(output$pressure[ind_lfc])
       x_lfc = skewtx(output$SB[ind_lfc],skewty(output$pressure[ind_lfc]))
       y_lcl = skewty(output$pressure[ind_lcl])
-      x_lcl = skewtx(ifelse(output$SB[ind_lcl] > output$tempV[ind_lcl], output$SB[ind_lcl], output$tempV[ind_lcl]), skewty(output$pressure[ind_lcl]))
+      x_lcl = skewtx(ifelse(output$SB[ind_lcl] > output$tempV[ind_lcl],
+                            output$SB[ind_lcl],
+                            output$tempV[ind_lcl]),
+                     skewty(output$pressure[ind_lcl]))
       
       skewt_lines(output$SB,output$pressure, col = "orange", lty = 1, lwd = 1, ptop = 100)
       
@@ -281,14 +313,17 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
         start_pol = c(1, cumsum(inte$lengths) + 1)[-length(end_pol) - 1]
         }
       
-      if (buoyancy_polygon == TRUE  & ind_lfc != ind_el){
-        for(i in 1:length(end_pol)){
-          if(inte$values[i]==1){
-            if(parametry[which(names(parametry[1:LP]) == "SB_CIN")] < 0){
-              polygon(c(skewtx(output$tempV[1:ind_el], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$SB[1:ind_el], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = "#FF000035", border = NA) 
+      if (buoyancy_polygon == TRUE  & ind_lfc != ind_el) {
+        for (i in 1:length(end_pol)) {
+          if (inte$values[i] == 1) {
+            if (parametry[which(names(parametry[1:LP]) == "SB_CIN")] < 0) {
+              polygon(c(skewtx(output$tempV[1:ind_el], v)[start_pol[i]:end_pol[i]],
+                        rev(skewtx(output$SB[1:ind_el], v)[start_pol[i]:end_pol[i]])),
+                      c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])),
+                      col = "#FF000035", border = NA) 
             } 
           }
-          if (inte$values[i]==0) {
+          if (inte$values[i] == 0) {
             if (parametry[which(names(parametry[1:LP]) == "SB_CAPE")] > 0) {
               polygon(c(skewtx(output$tempV[1:ind_el], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$SB[1:ind_el], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = "#FFA50025", border = NA) 
             }
@@ -319,7 +354,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     }
     
     if (parcel == "ML") {
-      if(meanlayer_bottom_top[1]==0){
+      if (meanlayer_bottom_top[1] == 0) {
         if (parametry[which(names(parametry[1:LP]) == "ML_CAPE")] > 0) {
           # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
           if (output$pressure[which(output$altitude - output$altitude[1] == (parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")]))] > 100 & which(names(parametry[1:LP]) == "ML_EL_HGT") != 0) {
@@ -341,31 +376,40 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   }  
   
   if (DCAPE == TRUE) {
-    skewt_lines(output$DN,output$pressure, col = t_col('blue',30), lwd = 1, ptop = 100)
-    ind_top = which(output$altitude-output$altitude[1]==4000)-1
+    skewt_lines(output$DN,output$pressure, col = t_col("blue",30), lwd = 1, ptop = 100)
+    ind_top = which(output$altitude - output$altitude[1] == 4000) - 1
     v = skewty(c(output$pressure[1:ind_top])) # extra checks for NA coded as -99
-    diff = ifelse((skewtx(output$tempV[1:ind_top], v)-skewtx(output$DN[1:ind_top], v))>0,1,0)
+    diff = ifelse((skewtx(output$tempV[1:ind_top], v) - skewtx(output$DN[1:ind_top], v)) > 0, 1, 0)
     v = subset(v, v < 44)
     diff = subset(diff, v < 44)
     inte = rle(diff)
     end_pol = cumsum(inte$lengths)
-    if(length(end_pol)==1){start_pol=1} else {
-      start_pol = c(1,cumsum(inte$lengths)+1)[-length(end_pol)-1]}
-    for(i in 1:length(end_pol)){
-      if(inte$values[i]==1){
-        polygon(c(skewtx(output$tempV[1:ind_top], v)[start_pol[i]:end_pol[i]], rev(skewtx(output$DN[1:ind_top], v)[start_pol[i]:end_pol[i]])), c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])), col = t_col('blue',85), border = NA) 
+    if (length(end_pol) == 1) {
+      start_pol = 1
+      } else {
+      start_pol = c(1, cumsum(inte$lengths) + 1)[-length(end_pol) - 1]
+      }
+    for (i in 1:length(end_pol)) {
+      if (inte$values[i] == 1) {
+        polygon(c(skewtx(output$tempV[1:ind_top], v)[start_pol[i]:end_pol[i]],
+                  rev(skewtx(output$DN[1:ind_top], v)[start_pol[i]:end_pol[i]])),
+                c(v[start_pol[i]:end_pol[i]], rev(v[start_pol[i]:end_pol[i]])),
+                col = t_col('blue',85), border = NA) 
       }  
     }  
   }
   
   ###
   altitude_to_pressure = function(altitude){
-    skewty(output$pressure[which(output$altitude-output$altitude[1] == altitude)])
+    skewty(output$pressure[which(output$altitude - output$altitude[1] == altitude)])
   }
   
   
   ### draw labels for km:
-  text(-29, altitude_to_pressure(0), paste0("--- Sfc (", round(output$altitude[1]), " m) ---"), pos = 4, cex = 0.65, col = "black")
+  text(-29,
+       altitude_to_pressure(0),
+       paste0("--- Sfc (", round(output$altitude[1]), " m) ---"),
+       pos = 4, cex = 0.65, col = "black")
   
   lab_hgt_km = function(m = 1000) {
     if (max(output$altitude - output$altitude[1]) > m) {
@@ -507,7 +551,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   ###
   
-  if (sum(storm_motion==c(999,999)) == 2) {
+  if (sum(storm_motion == c(999, 999)) == 2) {
   text(0.4375, 27.55, "SRH RM", cex = FONTSIZE, adj = c(1, 0))
   text(0.4375, 25.55, "[m2/s2]", cex = FONTSIZE - 0.075, adj = c(1, 0))
   
@@ -694,7 +738,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   vectors_color = rgb(128, 128, 128, maxColorValue = 255, alpha = 150)
   circle_color = rgb(255, 255, 255, maxColorValue = 255, alpha = 150)
   
-  if (sum(storm_motion == c(999,999)) == 2) {
+  if (sum(storm_motion == c(999, 999)) == 2) {
   points(LM_x, LM_y, cex = 1.75, pch = 1, col = vectors_color)
   points(LM_x, LM_y, cex = 0.75, pch = 1, col = "black")
   points(RM_x, RM_y, cex = 1.75, pch = 1, col = vectors_color)
