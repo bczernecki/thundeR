@@ -8,6 +8,11 @@
 #' @param dpt dew point temperature [degree Celsius]
 #' @param wd wind direction [azimuth in degrees]
 #' @param ws wind speed [knots]
+#' @param accuracy accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
+#' @param interpolate_step interpolation step to be used for vertical interpolation. Valid only if `accuracy` is set to 3 (default is 5 m)
+#' @param meanlayer_bottom_top (optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500
+#' @param storm_motion (optional) for moving storms only - one can define 
+#' wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters
 #'
 #' @importFrom climate sounding_wyoming
 #' @export

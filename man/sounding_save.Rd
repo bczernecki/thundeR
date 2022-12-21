@@ -38,6 +38,8 @@ sounding_save(
 
 \item{parcel}{parcel tracing on Skew-T for "MU", "ML" or "SB" parcel, "none" for no parcel line.}
 
+\item{max_speed}{range of the hodograph to be drawn, 25 m/s used as default}
+
 \item{buoyancy_polygon}{logical, plotting area of parcel's positive (yellow) or negative (red) buoyancy (default  = TRUE)}
 
 \item{SRH_polygon}{draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default}

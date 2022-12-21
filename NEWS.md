@@ -17,4 +17,4 @@
 
 # thundeR 0.0.12
 
-* Public release on CRAN.
+* Public release on CRAN

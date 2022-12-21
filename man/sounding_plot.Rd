@@ -47,6 +47,11 @@ sounding_plot(
 
 \item{DCAPE}{draws downdraft parcel and polygon of downdraft's negative buoyancy (default = FALSE)}
 
+\item{meanlayer_bottom_top}{(optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500}
+
+\item{storm_motion}{(optional) for moving storms only - one can define 
+wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters}
+
 \item{...}{extra graphical arguments to be added}
 }
 \value{

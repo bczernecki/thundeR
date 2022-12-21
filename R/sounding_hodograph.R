@@ -10,6 +10,8 @@
 #' @param lab_hghts height labels [km] to be drawn on the hodograph, 0, 1, 3, 6, 9, 12 used by default; NULL for skipping labels
 #' @param close_par if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default. If you want to modify Skew-T plot in next step set it to FALSE
 #' @param SRH_polygon draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default
+#' @param storm_motion (optional) for moving storms only - one can define 
+#' wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters
 #' @param ... other graphical parameters to be used with plot() function
 #'
 #' @export

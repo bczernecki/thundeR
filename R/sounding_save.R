@@ -17,6 +17,7 @@
 #' @param SRH_polygon draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default
 #' @param DCAPE draws downdraft parcel and polygon of downdraft's negative buoyancy (default = FALSE) 
 #' @param filename output file name with extension indicating file format (e.g. "my_plot.png" or "my_plot.svg")
+#' @param max_speed range of the hodograph to be drawn, 25 m/s used as default
 #' @param ... other arguments that can be used with `sounding_plot` or other graphic arguments
 #' @export
 #' @import aiRthermo

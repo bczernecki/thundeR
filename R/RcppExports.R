@@ -13,7 +13,10 @@
 #' @param ws wind speed [knots]
 #' @param export_profile possibility to export interpolated profile on the levels defined in accuracy configuration
 #' @param accuracy accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
-#' @param interpolate_step interpolate_step when accuracy is set to 3 (5m is default)
+#' @param interpolate_step interpolation step to be used for vertical interpolation. Valid only if `accuracy` is set to 3 (default is 5 m)
+#' @param meanlayer_bottom_top (optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500
+#' @param storm_motion (optional) for moving storms only - one can define 
+#' wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters
 #' @examples 
 #' pressure = c(1000, 855, 700, 500, 300, 100, 10) 
 #' altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000)
@@ -21,7 +24,12 @@
 #' dpt = c(20, 5, -5, -30, -55, -80, -99)
 #' wd = c(0, 90, 135, 180, 270, 350, 0)
 #' ws = c(5, 10, 20, 30, 40, 5, 0)
-#' sounding_default(pressure, altitude, temp, dpt, wd, ws, accuracy = 1, export_profile = 0, interpolate_step = 5)
+#' sounding_default(pressure, altitude, temp, dpt, wd, ws,
+#'                  accuracy = 3,
+#'                  export_profile = 0,
+#'                  interpolate_step = 5,
+#'                  storm_motion = c(999, 999),
+#'                  meanlayer_bottom_top = c(0, 500))
 #' @useDynLib thunder
 #' @importFrom Rcpp evalCpp
 #' @export

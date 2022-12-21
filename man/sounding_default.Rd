@@ -35,7 +35,12 @@ sounding_default(
 
 \item{accuracy}{accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)}
 
-\item{interpolate_step}{interpolate_step when accuracy is set to 3 (5m is default)}
+\item{interpolate_step}{interpolation step to be used for vertical interpolation. Valid only if `accuracy` is set to 3 (default is 5 m)}
+
+\item{meanlayer_bottom_top}{(optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500}
+
+\item{storm_motion}{(optional) for moving storms only - one can define 
+wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters}
 }
 \value{
 \enumerate{
@@ -252,5 +257,10 @@ temp = c(25, 10, 0, -15, -30, -50, -92)
 dpt = c(20, 5, -5, -30, -55, -80, -99)
 wd = c(0, 90, 135, 180, 270, 350, 0)
 ws = c(5, 10, 20, 30, 40, 5, 0)
-sounding_default(pressure, altitude, temp, dpt, wd, ws, accuracy = 1, export_profile = 0, interpolate_step = 5)
+sounding_default(pressure, altitude, temp, dpt, wd, ws,
+                 accuracy = 3,
+                 export_profile = 0,
+                 interpolate_step = 5,
+                 storm_motion = c(999, 999),
+                 meanlayer_bottom_top = c(0, 500))
 }

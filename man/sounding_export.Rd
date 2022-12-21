@@ -29,6 +29,15 @@ sounding_export(
 \item{wd}{wind direction [azimuth in degrees]}
 
 \item{ws}{wind speed [knots]}
+
+\item{accuracy}{accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)}
+
+\item{interpolate_step}{interpolation step to be used for vertical interpolation. Valid only if `accuracy` is set to 3 (default is 5 m)}
+
+\item{meanlayer_bottom_top}{(optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500}
+
+\item{storm_motion}{(optional) for moving storms only - one can define 
+wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters}
 }
 \value{
 Data frame of computed values for visualizing parcel trajectories
