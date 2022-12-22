@@ -1,0 +1,28 @@
+on:
+  push:
+    branches:
+      - main
+      - master
+      - devel
+      - dev
+  pull_request:
+    branches:
+      - main
+      - master
+      - devel
+      - dev
+
+name: my-valgrind
+
+jobs:
+  my-valgrind-check:
+
+    runs-on: ubuntu-latest
+
+    name: valgrind-check
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check with valgrind
+        run: bash inst/tools/my-valgrind-check.sh
