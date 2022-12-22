@@ -14,9 +14,9 @@ docker run --rm -v $(pwd):/thunder wch1/r-debug bash -c ' \
   RDvalgrind -e "install.packages(\"remotes\")" \
   RDvalgrind -e "remotes::install_github(\"bczernecki/climate\", dependencies = TRUE)" \
   RDvalgrind -e "remotes::install_deps(\"thunder\", dependencies = TRUE)" \
-  RDvalgrind CMD build /thunder \
-  mkdir valgrind-check-lib \
-  RDvalgrind -d "valgrind --track-origins=yes" CMD check \
+  && RDvalgrind CMD build /thunder \
+  && mkdir valgrind-check-lib \
+  && RDvalgrind -d "valgrind --track-origins=yes" CMD check \
     -o /thunder/valgrind-check \
     -l valgrind-check-lib \
     --install-args="--clean" \
@@ -25,6 +25,5 @@ docker run --rm -v $(pwd):/thunder wch1/r-debug bash -c ' \
   '
 
 # Collect valgrind "ERROR SUMMARY" lines from all log files
-ls -alh valgrind-check/thunder.Rcheck
 grep -ri "ERROR SUMMARY" valgrind-check/thunder.Rcheck --exclude-dir=*pkg_src > valgrind-check/valgrind-summary
 cat valgrind-check/valgrind-summary
