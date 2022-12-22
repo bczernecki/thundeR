@@ -1,3 +1,4 @@
-getstarted.R
-getstarted.html
+*.R
+*.html
 getstarted_files
+convective-parameters-and-technical-details_files
