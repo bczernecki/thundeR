@@ -10,7 +10,7 @@ mkdir -p valgrind-check
 # Note that we use -l and --install-args="--clean" in order to not have in the
 # valgrind-check directory (uploaded as artifact in GH actions) some large
 # directories and files produced as part of R CMD check
-docker run --rm -v $(pwd):/thunder bczernecki/thunder3 -c ' \
+docker run --rm -v $(pwd):/thunder bczernecki/thunder3 bash -c ' \
   R -e "install.packages(\"remotes\")" \
   R -e "remotes::install_github(\"bczernecki/climate\", dependencies = TRUE)" \
   R -e "remotes::install_deps(\"thunder\", dependencies = TRUE)" \
