@@ -23,13 +23,10 @@ jobs:
         with:
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-r-dependencies@v2
+      - name: Install climate
         run: |
-          R -e 'install.packages("remotes")'
+          R -e 'install.packages(c("remotes", "pkgdown", "Rcpp", "aiRthermo", "dplyr"))'
           R -e 'remotes::install_github("bczernecki/climate", dependencies = TRUE)'
-        with:
-          extra-packages: pkgdown
-          needs: website
 
       - name: Deploy package
         run: |
