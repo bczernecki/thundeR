@@ -1,0 +1,11 @@
+pandoc: 2.19.2
+pkgdown: 2.0.7
+pkgdown_sha: ~
+articles:
+  convective-parameters-and-technical-details: convective-parameters-and-technical-details.html
+  getstarted: getstarted.html
+last_built: 2023-03-03T14:32Z
+urls:
+  reference: https://bczernecki.github.io/thunder/reference
+  article: https://bczernecki.github.io/thunder/articles
+
