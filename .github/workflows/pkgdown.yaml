@@ -25,8 +25,11 @@ jobs:
 
       - name: Install climate
         run: |
+          pwd
+          ls -alh
           R -e 'install.packages(c("remotes", "pkgdown", "Rcpp", "aiRthermo", "dplyr"))'
           R -e 'remotes::install_github("bczernecki/climate", dependencies = TRUE)'
+          R -e 'remotes::install_local(".", dependencies = TRUE)'
 
       - name: Deploy package
         run: |
