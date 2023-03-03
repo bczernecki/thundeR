@@ -10,3 +10,4 @@ pkgdown
 ^doc$
 ^Meta$
 CITATION.cff
+^\.github$
