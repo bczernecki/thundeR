@@ -12,6 +12,8 @@ sounding_hodograph(
   max_speed = 25,
   lab_hghts = c(0, 1, 3, 6, 9, 12),
   close_par = TRUE,
+  SRH_polygon = "03km_RM",
+  storm_motion = c(999, 999),
   ...
 )
 }
@@ -30,17 +32,24 @@ sounding_hodograph(
 
 \item{close_par}{if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default. If you want to modify Skew-T plot in next step set it to FALSE}
 
+\item{SRH_polygon}{draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default}
+
+\item{storm_motion}{(optional) for moving storms only - one can define 
+wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters}
+
 \item{...}{other graphical parameters to be used with plot() function}
 }
 \value{
 hodograph plot
 }
 \description{
-Plot rawinsonde hodograph to show changes in wind speed and direction with height
+Plot hodograph to show changes in wind speed and wind direction with height
 }
 \examples{
 chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
-sounding_hodograph(ws = chanhassen$ws, wd = chanhassen$wd, 
-                   altitude = chanhassen$altitude,max_speed = 40)
+sounding_hodograph(
+  ws = chanhassen$ws, wd = chanhassen$wd,
+  altitude = chanhassen$altitude, max_speed = 40
+)
 title("Chanhasses - 10 May 2001, 00:00 UTC")
 }

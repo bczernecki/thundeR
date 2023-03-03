@@ -1,4 +1,4 @@
-test_that ("Downloading sounding profile", {
+test_that("Downloading sounding profile", {
   
   profile = get_sounding(wmo_id = 12120, 
                          yy = 2010,

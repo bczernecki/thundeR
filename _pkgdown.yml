@@ -1,0 +1,5 @@
+title: thundeR
+url: https://bczernecki.github.io/thunder
+template:
+  params:
+    bootswatch: flatly

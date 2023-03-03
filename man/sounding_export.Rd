@@ -4,7 +4,18 @@
 \alias{sounding_export}
 \title{Sounding export}
 \usage{
-sounding_export(pressure, altitude, temp, dpt, wd, ws)
+sounding_export(
+  pressure,
+  altitude,
+  temp,
+  dpt,
+  wd,
+  ws,
+  accuracy = 3,
+  interpolate_step = 5,
+  meanlayer_bottom_top = c(0, 500),
+  storm_motion = c(999, 999)
+)
 }
 \arguments{
 \item{pressure}{pressure [hPa]}
@@ -18,6 +29,15 @@ sounding_export(pressure, altitude, temp, dpt, wd, ws)
 \item{wd}{wind direction [azimuth in degrees]}
 
 \item{ws}{wind speed [knots]}
+
+\item{accuracy}{accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)}
+
+\item{interpolate_step}{interpolation step to be used for vertical interpolation. Valid only if `accuracy` is set to 3 (default is 5 m)}
+
+\item{meanlayer_bottom_top}{(optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500}
+
+\item{storm_motion}{(optional) for moving storms only - one can define 
+wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters}
 }
 \value{
 Data frame of computed values for visualizing parcel trajectories
@@ -35,15 +55,15 @@ Data frame of computed values for visualizing parcel trajectories
 }
 }
 \description{
-Internal package function for exporting interpolated profile with 5 m steps
+Internal package function for exporting interpolated profile with 5 m (or user-defined) steps
 }
 \examples{
 data("sounding_vienna")
 attach(sounding_vienna)
 skewt_plot(close_par = FALSE)
 output = sounding_export(pressure, altitude, temp, dpt, wd, ws)
-skewt_lines(output$dpt, output$pressure, col = 'forestgreen', lwd = 2.5)
-skewt_lines(output$temp,output$pressure, col = 'red', lwd = 2.5)
-skewt_lines(output$MU,output$pressure, col = "orange", lty = 1, lwd = 2)
-skewt_lines(output$tempV,output$pressure, col = "red3", lty = 3, lwd = 1.5)
+skewt_lines(output$dpt, output$pressure, col = "forestgreen", lwd = 2.5)
+skewt_lines(output$temp, output$pressure, col = "red", lwd = 2.5)
+skewt_lines(output$MU, output$pressure, col = "orange", lty = 1, lwd = 2)
+skewt_lines(output$tempV, output$pressure, col = "red3", lty = 3, lwd = 1.5)
 }

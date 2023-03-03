@@ -14,7 +14,11 @@ sounding_plot(
   title = "",
   parcel = "MU",
   max_speed = 25,
-  hazards = FALSE,
+  buoyancy_polygon = TRUE,
+  SRH_polygon = "03km_RM",
+  DCAPE = FALSE,
+  meanlayer_bottom_top = c(0, 500),
+  storm_motion = c(999, 999),
   ...
 )
 }
@@ -33,23 +37,32 @@ sounding_plot(
 
 \item{title}{title to be added in the layout's header}
 
-\item{parcel}{parcel tracing on Skew-T for "MU", "ML" or "SB" parcel}
+\item{parcel}{parcel tracing on Skew-T for "MU", "ML" or "SB" parcel, "none" for no parcel line.}
 
 \item{max_speed}{range of the hodograph to be drawn, 25 m/s used as default}
 
-\item{hazards}{logical, whether to add extra information about possibility of convective hazards given convective initiation (default  = FALSE)}
+\item{buoyancy_polygon}{logical, plotting area of parcel's positive (yellow) or negative (red) buoyancy (default  = TRUE)}
 
-\item{...}{extra graphic arguments}
+\item{SRH_polygon}{draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default}
+
+\item{DCAPE}{draws downdraft parcel and polygon of downdraft's negative buoyancy (default = FALSE)}
+
+\item{meanlayer_bottom_top}{(optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500}
+
+\item{storm_motion}{(optional) for moving storms only - one can define 
+wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters}
+
+\item{...}{extra graphical arguments to be added}
 }
 \value{
-Skew-T, hodograph and table with convective indices drawn on a pre-defined single layout
+panel of Skew-T, hodograph and table with convective indices drawn on a pre-defined single layout
 }
 \description{
-Function to plot a composite of Skew-T, hodograph and selected convective parameters on a single layout
+Function to plot a composite graphics with Skew-T, hodograph and selected convective parameters on a single layout
 }
 \examples{
 data("sounding_vienna")
-sounding_vienna <- na.omit(sounding_vienna)
+sounding_vienna = na.omit(sounding_vienna)
 sounding_plot(sounding_vienna$pressure, sounding_vienna$altitude,
   sounding_vienna$temp, sounding_vienna$dpt,
   sounding_vienna$wd, sounding_vienna$ws,
