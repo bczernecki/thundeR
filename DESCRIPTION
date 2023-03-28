@@ -1,7 +1,7 @@
 Package: thunder
 Type: Package
 Title: Computation and Visualisation of Atmospheric Convective Parameters
-Version: 1.1.0
+Version: 1.1.0.9000
 Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6496-1386")),
     person("Mateusz", "Taszarek", email = "mateusz.taszarek@noaa.gov", role = c("aut"), comment = c(ORCID = "0000-0001-9578-5872")),
     person("Piotr", "Szuster", email = "retsuz@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-7937-8046")),
@@ -13,17 +13,19 @@ Maintainer: Bartosz Czernecki <nwp@amu.edu.pl>
 Description: Collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized 'C++' code linked into 'R' via 'Rcpp'. Highly efficient engine allows to derive thermodynamic and kinematic parameters from large numerical datasets such as reanalyses or operational Numerical Weather Prediction models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe thunderstorms.
 License: GPL (>= 2)
 Imports:
-    Rcpp (>= 0.12.9.4),
-    climate,
+    aiRthermo,
+    curl,
     dplyr,
-    aiRthermo
+    httr,
+    Rcpp (>= 0.12.9.4)
 Depends:
     R (>= 3.5.0)
 Suggests:
+    climate,
+    covr,
     knitr,
     rmarkdown,
-    testthat (>= 2.0.0),
-    covr
+    testthat (>= 2.0.0)
 LinkingTo: Rcpp
 RoxygenNote: 7.2.2
 Encoding: UTF-8

@@ -10,7 +10,6 @@
 #' @param hh hour - single number (e.g. 0)
 #' @param metadata - logical, whether to return metadata of downloaded sounding; default FALSE
 #' 
-#' @importFrom climate sounding_wyoming
 #' @return Returns two lists with values described at: weather.uwyo.edu ; The first list contains:
 #' \enumerate{
 #'  \item pressure - pressure [hPa]
@@ -39,15 +38,14 @@
 #' }
 
 get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE) {
-
-  sounding_data = climate::sounding_wyoming(wmo_id, yy, mm, dd, hh)
+  sounding_data = sounding_wyoming(wmo_id, yy, mm, dd, hh)
   
   # take another attempt if object empty
   i = 1
   while (is.null(sounding_data) & i < 5) {
     message("\nProblems with downloading. Re-trying in 5 seconds...")
     Sys.sleep(5)
-    sounding_data = climate::sounding_wyoming(wmo_id, yy, mm, dd, hh)
+    sounding_data = sounding_wyoming(wmo_id, yy, mm, dd, hh)
     i = i + 1
   }
   

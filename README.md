@@ -1,4 +1,4 @@
-# thundeR <img src="man/figures/logo.png" align="right" width="150"/>
+# thundeR <img src="https://github.com/bczernecki/thundeR/raw/master/man/figures/logo.png" style="float:right" width="150"/>
 
 **Rapid computation and visualisation of convective parameters from
 rawinsonde and NWP data**
@@ -64,7 +64,7 @@ sounding_save(filename = "Vienna.png",
               pressure, altitude, temp, dpt, wd, ws)
 ```
 
-![](inst/figures/Vienna.png)
+![](https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/Vienna.png)
 
 #### Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file
 
@@ -73,8 +73,7 @@ profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
 sounding_save(filename = "NorthPlatte.png",
               title = "North Platte - 03 July 1999 0000 UTC", profile$pressure,                             profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
 ```
-
-![](inst/figures/NorthPlatte.png)
+![](https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/NorthPlatte.png)
 
 #### Compute convective parameters based on a sample vertical profile data:
 
@@ -92,56 +91,108 @@ options(digits = 2) # change output formatting precision
 sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
 
-#             MU_CAPE        MU_03km_CAPE         MU_HGL_CAPE              MU_CIN 
-#             2195.41              575.59             1568.01                0.00 
-#          MU_LCL_HGT          MU_LFC_HGT           MU_EL_HGT               MU_LI 
-#              730.00              730.00             8200.00               -9.63 
-#             MU_WMAX          MU_EL_TEMP         MU_LCL_TEMP         MU_LFC_TEMP 
-#               66.26              -28.20               17.70               17.70 
-#             MU_MIXR             SB_CAPE        SB_03km_CAPE         SB_HGL_CAPE 
-#               14.88             2195.41              575.59             1568.01 
-#              SB_CIN          SB_LCL_HGT          SB_LFC_HGT           SB_EL_HGT 
-#                0.00              730.00              730.00             8200.00 
-#               SB_LI             SB_WMAX          SB_EL_TEMP         SB_LCL_TEMP 
-#               -9.63               66.26              -28.20               17.70 
-#         SB_LFC_TEMP             SB_MIXR             ML_CAPE        ML_03km_CAPE 
-#               17.70               14.88             1559.41              416.88 
-#         ML_HGL_CAPE              ML_CIN          ML_LCL_HGT          ML_LFC_HGT 
-#             1187.96                0.00              975.00              975.00 
-#           ML_EL_HGT               ML_LI             ML_WMAX          ML_EL_TEMP 
-#             7800.00               -7.15               55.85              -25.80 
-#         ML_LCL_TEMP         ML_LFC_TEMP             ML_MIXR             LR_01km 
-#               15.25               15.25               13.02              -10.00 
-#             LR_03km             LR_24km             LR_36km        LR_500700hPa 
-#               -9.05               -5.77               -4.29               -4.29 
-#        LR_500800hPa            FRZG_HGT    FRZG_wetbulb_HGT HGT_max_thetae_03km 
-#               -6.67             2500.00             2300.00                0.00 
-# HGT_min_thetae_04km        Delta_thetae               DCAPE  Cold_Pool_Strength 
-#             3700.00               28.46              595.13               12.77 
-#        Wind_Index            PRCP_WATER  Moisture_Flux_02km             RH_02km 
-#               34.12               27.10               28.49                0.72 
-#             RH_25km              RH_HGL             BS_01km             BS_02km 
-#                0.58                0.46                3.83                8.78 
-#             BS_03km             BS_06km             BS_08km             BS_36km 
-#               12.66               18.01               17.41                9.37 
-#             BS_18km           BS_EFF_MU           BS_EFF_SB           BS_EFF_ML 
-#               20.28               14.14               14.14               13.82 
-#       BS_SFC_to_HGL    BS_MU_LFC_to_HGL    BS_SB_LFC_to_HGL    BS_ML_LFC_to_HGL 
-#               15.51               14.07               14.07               13.69 
-#             MW_01km             MW_02km             MW_06km             MW_13km 
-#                2.36                2.81                5.14                6.88 
-#         SRH_100m_RM         SRH_500m_RM          SRH_1km_RM          SRH_3km_RM 
-#                2.87               14.37               29.47              136.42 
-#         SRH_100m_LM         SRH_500m_LM          SRH_1km_LM          SRH_3km_LM 
-#                0.30                1.51                3.10              -30.53 
-#             K_Index     Showalter_Index   TotalTotals_Index         SWEAT_Index 
-#               24.35                3.90               44.35              106.42 
-#                 STP             STP_new                 SCP             SCP_new 
-#                0.26                0.14                5.39                4.23 
-#                SHIP                 DCP        MU_WMAXSHEAR        SB_WMAXSHEAR 
-#                0.61                0.73             1193.11             1193.11 
-#        ML_WMAXSHEAR    MU_EFF_WMAXSHEAR    SB_EFF_WMAXSHEAR    ML_EFF_WMAXSHEAR 
-#             1005.54              936.94              936.94              771.71
+#              MU_CAPE          MU_CAPE_M10       MU_CAPE_M10_PT         MU_02km_CAPE 
+#            2269.9257             998.1443             313.0747             247.9794 
+#         MU_03km_CAPE          MU_HGL_CAPE               MU_CIN           MU_LCL_HGT 
+#             575.6293            1616.5384               0.0000             730.0000 
+#           MU_LFC_HGT            MU_EL_HGT                MU_LI            MU_LI_M10 
+#             730.0000            8300.0000             -10.1119             -10.8539 
+#              MU_WMAX           MU_EL_TEMP          MU_LCL_TEMP          MU_LFC_TEMP 
+#              67.3784             -28.8000              17.7000              17.7000 
+#              MU_MIXR          MU_CAPE_500      MU_CAPE_500_M10   MU_CAPE_500_M10_PT 
+#              14.8759            1076.0322             389.3651             137.0814 
+#           MU_CIN_500            MU_LI_500        MU_LI_500_M10              SB_CAPE 
+#               0.0000              -5.0417              -6.2346            2269.9257 
+#          SB_CAPE_M10       SB_CAPE_M10_PT         SB_02km_CAPE         SB_03km_CAPE 
+#             998.1443             313.0747             247.9794             575.6293 
+#          SB_HGL_CAPE               SB_CIN           SB_LCL_HGT           SB_LFC_HGT 
+#            1616.5384               0.0000             730.0000             730.0000 
+#            SB_EL_HGT                SB_LI            SB_LI_M10              SB_WMAX 
+#            8300.0000             -10.1119             -10.8539              67.3784 
+#           SB_EL_TEMP          SB_LCL_TEMP          SB_LFC_TEMP              SB_MIXR 
+#             -28.8000              17.7000              17.7000              14.8759 
+#              ML_CAPE          ML_CAPE_M10       ML_CAPE_M10_PT         ML_02km_CAPE 
+#            1646.0639             670.1001             225.2816             164.0798 
+#         ML_03km_CAPE          ML_HGL_CAPE               ML_CIN           ML_LCL_HGT 
+#             422.4290            1250.0221               0.0000             975.0000 
+#           ML_LFC_HGT            ML_EL_HGT                ML_LI            ML_LI_M10 
+#             975.0000            7900.0000              -7.6203              -8.5845 
+#              ML_WMAX           ML_EL_TEMP          ML_LCL_TEMP          ML_LFC_TEMP 
+#              57.3771             -26.4000              15.2500              15.2500 
+#              ML_MIXR             LR_0500m              LR_01km              LR_02km 
+#              13.0487             -10.0000             -10.0000             -10.0000 
+#              LR_03km              LR_04km              LR_06km              LR_16km 
+#              -9.0476              -7.8571              -6.6667              -6.0000 
+#              LR_26km              LR_24km              LR_36km          LR_26km_MAX 
+#              -5.0000              -5.7672              -4.2857              -5.7143 
+#         LR_500700hPa         LR_500800hPa         LR_600800hPa             FRZG_HGT 
+#              -4.2857              -5.1807              -5.8333            2500.0000 
+#     FRZG_wetbulb_HGT  HGT_max_thetae_03km  HGT_min_thetae_04km         Delta_thetae 
+#            2275.0000               0.0000            3750.0000              28.0698 
+# Delta_thetae_min04km          Thetae_01km          Thetae_02km                DCAPE 
+#              28.8346             330.5323             323.6191             598.3100 
+#   Cold_Pool_Strength           Wind_Index           PRCP_WATER   Moisture_Flux_02km 
+#              12.6322              33.9064              27.1046              30.4255 
+#              RH_01km              RH_02km              RH_14km              RH_25km 
+#               0.7291               0.7197               0.6452               0.5550 
+#              RH_36km               RH_HGL             BS_0500m              BS_01km 
+#               0.4436               0.4603               1.9172               3.8344 
+#              BS_02km              BS_03km              BS_06km              BS_08km 
+#               8.7821              12.6560              18.0055              17.4077 
+#              BS_36km              BS_26km              BS_16km              BS_18km 
+#               9.3693              13.3304              16.6478              20.2791 
+#            BS_EFF_MU            BS_EFF_SB            BS_EFF_ML        BS_SFC_to_M10 
+#              14.2232              14.2232              13.8968              15.5104 
+#        BS_1km_to_M10        BS_2km_to_M10     BS_MU_LFC_to_M10     BS_SB_LFC_to_M10 
+#              13.6499               9.8830              14.0737              14.0737 
+#     BS_ML_LFC_to_M10        BS_MW02_to_SM        BS_MW02_to_RM        BS_MW02_to_LM 
+#              13.6864               7.3040              10.1410              10.7870 
+#         BS_HGL_to_SM         BS_HGL_to_RM         BS_HGL_to_LM             MW_0500m 
+#               4.8934               7.7860               9.9885               2.3086 
+#              MW_01km              MW_02km              MW_03km              MW_06km 
+#               2.4251               3.3476               4.8003               7.8107 
+#              MW_13km          SRH_100m_RM          SRH_250m_RM          SRH_500m_RM 
+#               6.8389               4.2535              10.0537              19.7206 
+#           SRH_1km_RM           SRH_3km_RM          SRH_36km_RM          SRH_100m_LM 
+#              39.6346             152.5219             236.5901               1.5027 
+#          SRH_250m_LM          SRH_500m_LM           SRH_1km_LM           SRH_3km_LM 
+#               3.5518               6.9670              14.0023             -13.1308 
+#          SRH_36km_LM           SV_500m_RM           SV_01km_RM           SV_03km_RM 
+#             -24.3790               0.0039               0.0039               0.0048 
+#           SV_500m_LM           SV_01km_LM           SV_03km_LM        MW_SR_500m_RM 
+#               0.0010               0.0011              -0.0014              10.0863 
+#        MW_SR_01km_RM        MW_SR_03km_RM        MW_SR_500m_LM        MW_SR_01km_LM 
+#              10.1501               9.5359              13.7821              12.8585 
+#        MW_SR_03km_LM     MW_SR_VM_500m_RM     MW_SR_VM_01km_RM     MW_SR_VM_03km_RM 
+#               8.4579              10.1078              10.2253              10.5358 
+#     MW_SR_VM_500m_LM     MW_SR_VM_01km_LM     MW_SR_VM_03km_LM       SV_FRA_500m_RM 
+#              13.7647              12.8371               8.8342               0.9982 
+#       SV_FRA_01km_RM       SV_FRA_03km_RM       SV_FRA_500m_LM       SV_FRA_01km_LM 
+#               0.9871               0.9560               0.2592               0.2800 
+#       SV_FRA_03km_LM         Bunkers_RM_A         Bunkers_RM_M         Bunkers_LM_A 
+#              -0.2862             209.4046               7.7933             122.0585 
+#         Bunkers_LM_M         Bunkers_MW_A         Bunkers_MW_M   Corfidi_downwind_A 
+#              13.1825             151.9494               7.8107             218.6955 
+#   Corfidi_downwind_M     Corfidi_upwind_A     Corfidi_upwind_M              K_Index 
+#              14.6982             231.3283               9.1794              24.3548 
+#      Showalter_Index    TotalTotals_Index          SWEAT_Index              STP_fix 
+#               3.7501              44.3548             106.4168               0.3600 
+#              STP_new           STP_fix_LM           STP_new_LM              SCP_fix 
+#               0.2005               0.1272               0.0708               6.2338 
+#              SCP_new           SCP_fix_LM           SCP_new_LM                 SHIP 
+#               4.9243              -0.5367              -0.4239               0.6287 
+#                  HSI                  DCP         MU_WMAXSHEAR         SB_WMAXSHEAR 
+#               1.7159               1.1507            1213.1848            1213.1848 
+#         ML_WMAXSHEAR     MU_EFF_WMAXSHEAR     SB_EFF_WMAXSHEAR     ML_EFF_WMAXSHEAR 
+#            1033.1051             958.3359             958.3359             797.3548 
+#             EHI_500m             EHI_01km             EHI_03km          EHI_500m_LM 
+#               0.2798               0.5623               2.1638               0.0988 
+#          EHI_01km_LM          EHI_03km_LM              SHERBS3               SHERBE 
+#               0.1987              -0.1863               0.6482               0.7015 
+#           SHERBS3_v2            SHERBE_v2                  DEI              DEI_eff 
+#               0.8642               0.9353               1.5198               1.1885 
+#                  TIP 
+#               2.4356 
 ```
 
 #### Hodograph example:

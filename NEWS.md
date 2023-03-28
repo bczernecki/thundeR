@@ -1,7 +1,10 @@
 # thundeR 1.1.0
 
+- 29/03/2023
+
 * Improvements in C++ algorithm responsible for more accurate computations of parcel trajectories and related thermodynamic indices
-* Removing dependency to the `climate` package
+* Fixing code leaks in C++ module
+* Removing dependency to the `climate` package by including internal functions responsible for downloading soundings from Wyoming database
 * Improving graphical layout:
   * Adding parcel trajectories shading for positive area
   * shading SRH area for left- and right movers on sounding hodographs
@@ -17,4 +20,4 @@
 
 # thundeR 0.0.12
 
-* Public release on CRAN
+* First public release on CRAN

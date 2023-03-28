@@ -7,11 +7,8 @@
 #' demo_dataset = get_sounding(wmo_id = 11035, yy = 2011, mm = 8, dd = 23, hh = 12)        
 #'
 #' @importFrom utils data
-#' @importFrom climate sounding_wyoming
 #' 
 #' @format A data frame with 88 rows and 6 variables as described in `get_sounding()`
-#'
-#'
 #'
 #' \describe{
 #'   \item{pressure}{pressure [hPa]}

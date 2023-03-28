@@ -7,8 +7,6 @@
 \format{
 A data frame with 88 rows and 6 variables as described in `get_sounding()`
 
-
-
 \describe{
   \item{pressure}{pressure [hPa]}
   \item{altitude}{altitude [m]}

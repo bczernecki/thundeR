@@ -14,7 +14,6 @@
 #' @param storm_motion (optional) for moving storms only - one can define 
 #' wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters
 #'
-#' @importFrom climate sounding_wyoming
 #' @export
 #'
 #' @return Data frame of computed values for visualizing parcel trajectories
