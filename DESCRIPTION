@@ -21,7 +21,6 @@ Imports:
 Depends:
     R (>= 3.5.0)
 Suggests:
-    climate,
     covr,
     knitr,
     rmarkdown,
