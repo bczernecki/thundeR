@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">thundeR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
@@ -134,7 +134,7 @@ wind speed and wind directions (TODO: units!!!) that will be used to compute adj
     <h2>Examples</h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">chanhassen</span> <span class="op">=</span> <span class="fu"><a href="get_sounding.html">get_sounding</a></span><span class="op">(</span>wmo_id <span class="op">=</span> <span class="fl">72649</span>, yy <span class="op">=</span> <span class="fl">2001</span>, mm <span class="op">=</span> <span class="fl">5</span>, dd <span class="op">=</span> <span class="fl">10</span>, hh <span class="op">=</span> <span class="fl">00</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "http://weather.uwyo.edu/cgi-bin/sounding?TYPE=TEXT%3ALIST&amp;YEAR=2001&amp;MONTH=05&amp;FROM=1000&amp;TO=1000&amp;STNM=72649"</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpgXQ4oC/file19b4ac24c02</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> /tmp/RtmpFv7pzU/file19bf117d21c3</span>
 <span class="r-in"><span><span class="fu">sounding_hodograph</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  ws <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">ws</span>, wd <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">wd</span>,</span></span>
 <span class="r-in"><span>  altitude <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">altitude</span>, max_speed <span class="op">=</span> <span class="fl">40</span></span></span>
