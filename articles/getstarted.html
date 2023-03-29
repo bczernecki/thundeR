@@ -177,8 +177,8 @@ and export to png file:</p>
 export to png file:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 0)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"chanhassen"</span><span class="op">)</span> <span class="co"># instead of downloading one may use pre-defined dataset</span></span>
-<span><span class="va">profile</span> <span class="op">=</span> <span class="va">chanhassen</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"northplatte"</span><span class="op">)</span> <span class="co"># instead of downloading one may use pre-defined dataset</span></span>
+<span><span class="va">profile</span> <span class="op">=</span> <span class="va">northplatte</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">profile</span><span class="op">)</span> <span class="co"># show first few rows of downloaded dataset</span></span>
 <span><span class="co">#&gt;   pressure altitude temp dpt  wd ws</span></span>
 <span><span class="co">#&gt; 2      972      287   24  13 130 12</span></span>
@@ -348,11 +348,11 @@ data:</p>
 </h4>
 <p>Download sounding and draw hodograph:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"chanhassen"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/sounding_hodograph.html">sounding_hodograph</a></span><span class="op">(</span>ws <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">ws</span>, wd <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">wd</span>, </span>
-<span>                   altitude <span class="op">=</span> <span class="va">chanhassen</span><span class="op">$</span><span class="va">altitude</span>,max_speed <span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"Chanhasses - 10 May 2001, 00:00 UTC"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#northplatte = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 00)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"northplatte"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/sounding_hodograph.html">sounding_hodograph</a></span><span class="op">(</span>ws <span class="op">=</span> <span class="va">northplatte</span><span class="op">$</span><span class="va">ws</span>, wd <span class="op">=</span> <span class="va">northplatte</span><span class="op">$</span><span class="va">wd</span>, </span>
+<span>                   altitude <span class="op">=</span> <span class="va">northplatte</span><span class="op">$</span><span class="va">altitude</span>, max_speed <span class="op">=</span> <span class="fl">40</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"North Platte - 03 July 1999, 00:00 UTC"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="getstarted_files/figure-html/example4-1.png" width="576"></p>
 </div>
 <div class="section level4">
