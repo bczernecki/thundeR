@@ -1,7 +1,5 @@
 # thundeR 1.1.0
 
-- 29/03/2023
-
 * Improvements in C++ algorithm responsible for more accurate computations of parcel trajectories and related thermodynamic indices
 * Fixing code leaks in C++ module
 * Removing dependency to the `climate` package by including internal functions responsible for downloading soundings from Wyoming database

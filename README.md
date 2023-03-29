@@ -69,7 +69,13 @@ sounding_save(filename = "Vienna.png",
 #### Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file
 
 ``` r
-profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
+
+data(chanhassen) # instead of downloading with get_sounding one may use the pre-defined object
+profile = chanhassen
+
+# or by downloading it manually:
+# profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
+
 sounding_save(filename = "NorthPlatte.png",
               title = "North Platte - 03 July 1999 0000 UTC", profile$pressure,                             profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
 ```
@@ -207,38 +213,8 @@ sounding_hodograph(ws = chanhassen$ws, wd = chanhassen$wd,
 title("Chanhassen - 10 May 2001, 00:00 UTC")
 ```
 
-![](inst/figures/hodograph.png)
+![](https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/hodograph.png)
 
-#### Customized Skew-T plot:
-
-Download sounding and draw customized Skew-T plot (e.g. up to 150 hPa
-instead of default 100 hPa):
-
-``` r
-chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
-skewt_plot(ptop = 150, deg45 = TRUE, temp_stripes = TRUE)
-skewt_lines(chanhassen$temp, chanhassen$pressure, ptop = 150, col="red", lwd = 3)
-skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop = 150, col="blue", lwd = 3)
-```
-
-![](inst/figures/skewt_customized.png)
-
-#### Wind speed profile:
-
-Download sounding and draw vertical wind speed profile with accompanying
-wind barbs:
-
-``` r
-dev.off()
-chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
-par(fig = c(0.1, 0.75, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
-sounding_wind(pressure = chanhassen$pressure, ws = chanhassen$ws, yaxs = TRUE)
-title("Wind profile: Chanhassen - 10 May 2001 0000 UTC", outer = F)
-par(fig = c(0.65, 0.95, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
-sounding_barbs(chanhassen$pressure, chanhassen$ws, chanhassen$wd, chanhassen$altitude, interpolate = FALSE, barb_cex = 1)
-```
-
-![](inst/figures/wind_profile.png)
 
 #### Perform sounding computations using Python with rpy2:
 

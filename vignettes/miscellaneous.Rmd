@@ -1,0 +1,51 @@
+---
+title: "Miscellaneous"
+author: "Bartosz Czernecki, Mateusz Taszarek, Piotr Szuster"
+output: 
+  rmarkdown::html_vignette:
+    self_contained: false
+vignette: >
+  %\VignetteIndexEntry{Miscellaneous}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+  self_contained: false
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(scipen = 999)
+```
+
+
+
+### Customized Skew-T plot:
+
+Download sounding and draw customized Skew-T plot (e.g. up to 150 hPa instead of default 100 hPa) with changed line width and color stripes for temperature:
+
+```{r example5, eval = TRUE, fig.width=7, fig.height=8}
+library(thunder)
+data("chanhassen")
+#chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+skewt_plot(ptop = 150, close_par = FALSE, temp_stripes = TRUE, deg45 = TRUE, mixing_ratio_col = "pink")
+skewt_lines(chanhassen$temp, chanhassen$pressure, ptop = 150, col = "red", lwd = 3)
+skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop = 150, col = "blue", lwd = 3)
+title("Skew-T customized")
+```
+
+### Wind speed vertical profile with wind barbs:
+
+```{r example6, eval = TRUE, fig.width=8, fig.height=6, fig.fullwidth = TRUE}
+# chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+oldpar = par()
+par(fig = c(0.1, 0.75, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
+sounding_wind(pressure = chanhassen$pressure, ws = chanhassen$ws, yaxs = TRUE)
+title("Wind profile: Chanhassen - 10 May 2001 0000 UTC", outer = F)
+par(fig = c(0.65, 0.95, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
+sounding_barbs(chanhassen$pressure, chanhassen$ws, chanhassen$wd, chanhassen$altitude, interpolate = FALSE, barb_cex = 1)
+```

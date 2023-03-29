@@ -32,3 +32,4 @@ URL: https://bczernecki.github.io/thundeR/
 BugReports: https://github.com/bczernecki/thunder/issues/
 VignetteBuilder: knitr
 Config/testthat/edition: 2
+LazyData: true

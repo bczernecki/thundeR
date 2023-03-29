@@ -671,7 +671,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   ###
   par(fig = c(0.54, 0.99, 0, 0.06), new = TRUE, mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))
-  mtext(expression(paste(bold("thundeR"), " - rawinsonde processing tool for R v1.1 (2022)")),
+  mtext(expression(paste(bold("thundeR"), " - rawinsonde processing tool for R v1.1.1 (2023)")),
         line = -1.2, cex = 0.7
   )
   # mtext("www.rawinsonde.com",line = -1.8, cex=0.7)
