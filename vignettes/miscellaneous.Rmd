@@ -45,7 +45,7 @@ title("Skew-T customized")
 oldpar = par()
 par(fig = c(0.1, 0.75, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
 sounding_wind(pressure = northplatte$pressure, ws = northplatte$ws, yaxs = TRUE)
-title("northplatte - 10 May 2001 0000 UTC", outer = FALSE)
+title("Northplatte - 10 May 2001 0000 UTC", outer = FALSE)
 par(fig = c(0.65, 0.95, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
 sounding_barbs(northplatte$pressure, northplatte$ws, northplatte$wd, northplatte$altitude, interpolate = FALSE, barb_cex = 1)
 ```
@@ -54,7 +54,7 @@ sounding_barbs(northplatte$pressure, northplatte$ws, northplatte$wd, northplatte
 
 It is possible to define its own `storm_motion` parameters in order to visualise and/or compute parameters for cells moving with pre-defined direction and speed. The below example shows customized hodograph for thunderstorm cell moving with the speed of 15 m/s and 180 degree direction.
 
-```r
+```{r hodo_customized, eval = TRUE, fig.width=6, fig.height=6, fig.fullwidth = TRUE}
 data("northplatte")
 sounding_hodograph(ws = northplatte$ws,
                    wd = northplatte$wd, 
