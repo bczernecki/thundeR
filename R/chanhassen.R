@@ -22,7 +22,7 @@
 #' @source http://weather.uwyo.edu/upperair/sounding.html
 #' @docType data
 #' @keywords datasets thunder
-#' @usage data("schanhassen")
+#' @usage data("chanhassen")
 #' @examples
 #' data(chanhassen)
 #' head(chanhassen)

@@ -20,7 +20,7 @@ A data frame with 71 rows and 6 variables as described in `get_sounding()`
 http://weather.uwyo.edu/upperair/sounding.html
 }
 \usage{
-data("schanhassen")
+data("chanhassen")
 }
 \description{
 The object contains pre-downloaded sounding dataset from University of Wyoming sounding database.
