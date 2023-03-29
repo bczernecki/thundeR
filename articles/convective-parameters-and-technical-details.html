@@ -62,6 +62,9 @@
     <li>
       <a href="../articles/getstarted.html">Introduction to the thundeR package</a>
     </li>
+    <li>
+      <a href="../articles/miscellaneous.html">Miscellaneous</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -103,413 +106,547 @@ Czernecki, Mateusz Taszarek, Piotr Szuster</h4>
     
 <div class="section level2">
 <h2 id="thunder">thundeR
-<img src="reference/figures/logo.png" align="right" width="150"><a class="anchor" aria-label="anchor" href="#thunder"></a>
+<img src="https://github.com/bczernecki/thundeR/raw/master/man/figures/logo.png" style="float:right" width="150"><a class="anchor" aria-label="anchor" href="#thunder"></a>
 </h2>
+<p>All CAPE parameters are calculated by integrating parcel’s positive
+buoyancy between level of free convection (LFC) and equilibrium level
+(EL). All CIN parameters are calculated by integrating parcel negative
+buoyancy between parcel initialization height and level of free
+convection (LFC). Most-unstable (MU) parcel is defined based on the
+highest theta-e between surface and 3 km above ground level (AGL). A
+default mixed-layer (ML) parcel is calculated by averaging theta and
+mixing ratio over 0–500 m AGL layer and initializing from surface. If
+other user-defined parcel lifting options are choosen, all parameters
+that use mixed-layer (ML) parcel (e.g. STP_new) will now use a
+user-defined manual-lift (ML) parcel.</p>
 <div class="section level3">
 <h3 id="computed-parameters">Computed parameters:<a class="anchor" aria-label="anchor" href="#computed-parameters"></a>
 </h3>
 <p>Below is the full list of parameters computed and exported with the
 <code><a href="../reference/sounding_compute.html">sounding_compute()</a></code> function:</p>
-<p><strong>Parcel parameters:</strong></p>
-<p>All CAPE parameters are calculated by integrating parcel positive
-buoyancy between level of free convection (LFC) and equilibrium level
-(EL). All CIN parameters are calculated by integrating parcel negative
-buoyancy between parcel initialization height and level of free
-convection (LFC). Most-unstable (MU) parcel is defined based on the
-highest theta-e between surface and 3 km above ground level (AGL).
-Mixed-layer (ML) parcel is calculated by averaging theta and mixing
-ratio over 0–500 m AGL layer and initializing from surface.</p>
+<p><strong>Parcel parameters</strong></p>
 <p>[1] MU_CAPE – convective available potential energy, derived from the
 most-unstable parcel. Units are J/kg.</p>
-<p>[2] MU_CAPE_M10_fraction – fraction of the convective available
-potential energy in the temperature below -10°C, derived from the
-most-unstable parcel.</p>
-<p>[3] MU_02km_CAPE – convective available potential energy between
+<p>[2] MU_CAPE_M10 – convective available potential energy in the
+temperature below -10°C, derived from the most-unstable parcel. Units
+are J/kg.</p>
+<p>[3] MU_CAPE_M10_PT – convective available potential energy in the
+parcel temperature below - 10°C, derived from the most-unstable parcel.
+Units are J/kg.</p>
+<p>[4] MU_02km_CAPE – convective available potential energy between
 surface and 2 km AGL, derived from the most-unstable parcel. Units are
 J/kg.</p>
-<p>[4] MU_03km_CAPE – convective available potential energy between
+<p>[5] MU_03km_CAPE – convective available potential energy between
 surface and 3 km AGL, derived from the most-unstable parcel. Units are
 J/kg.</p>
-<p>[5] MU_HGL_CAPE – convective available potential energy in a hail
+<p>[6] MU_HGL_CAPE – convective available potential energy in a hail
 growth layer (between 0°C and −20°C), derived from the most-unstable
 parcel. Units are J/kg.</p>
-<p>[6] MU_CIN – convective inhibition, derived from the most-unstable
+<p>[7] MU_CIN – convective inhibition, derived from the most-unstable
 parcel. Units are J/kg.</p>
-<p>[7] MU_LCL_HGT – height of the lifted condensation level, derived
+<p>[8] MU_LCL_HGT – height of the lifted condensation level, derived
 from the most-unstable parcel. Units are m AGL.</p>
-<p>[8] MU_LFC_HGT – height of the level of free convection, derived from
+<p>[9] MU_LFC_HGT – height of the level of free convection, derived from
 the most-unstable parcel. Units are m AGL.</p>
-<p>[9] MU_EL_HGT – height of the equilibrium level, derived from the
+<p>[10] MU_EL_HGT – height of the equilibrium level, derived from the
 most-unstable parcel. Units are m AGL.</p>
-<p>[10] MU_LI – lifted index (500 hPa), derived from the most-unstable
-parcel. Units are K.</p>
-<p>[11] MU_WMAX – estimated updraft speed (a square root of two times
+<p>[11] MU_LI – lifted index (at 500 hPa), derived from the
+most-unstable parcel. Units are K.</p>
+<p>[12] MU_LI_M10 – lifted index (at -10°C), derived from the
+most-unstable parcel. Units are K.</p>
+<p>[13] MU_WMAX – estimated updraft speed (a square root of two times
 CAPE), derived from the most-unstable parcel. Units are m/s.</p>
-<p>[12] MU_EL_TEMP – temperature of the equilibrium level, derived from
+<p>[14] MU_EL_TEMP – temperature of the equilibrium level, derived from
 the most-unstable parcel. Units are °C.</p>
-<p>[13] MU_LCL_TEMP – temperature of the lifted condensation level,
-derived from the most-unstable parcel. Units are °C.</p>
-<p>[14] MU_LFC_TEMP – temperature of the level of free convection,
-derived from the most-unstable parcel. Units are °C.</p>
-<p>[15] MU_MIXR – mixing ratio at the height of the most-unstable
+<p>[15] MU_LCL_TEMP – temperature of the lifted condensation level,
+derived from the most- unstable parcel. Units are °C.</p>
+<p>[16] MU_LFC_TEMP – temperature of the level of free convection,
+derived from the most- unstable parcel. Units are °C.</p>
+<p>[17] MU_MIXR – mixing ratio at the height of the most-unstable
 parcel. Units are g/kg.</p>
-<p>[16] MU_CAPE_500 – convective available potential energy, derived
+<p>[18] MU_CAPE_500 – convective available potential energy, derived
 from the most-unstable parcel excluding lowest 500 m AGL. Units are
 J/kg.</p>
-<p>[17] MU_CIN_500 – convective inhibition, derived from the
+<p>[19] MU_CAPE_500_M10 – convective available potential energy in the
+temperature below - 10°C, derived from the most-unstable parcel
+excluding lowest 500 m AGL. Units are J/kg.</p>
+<p>[20] MU_CAPE_500_M10_PT – convective available potential energy in
+the parcel temperature below -10°C, derived from the most-unstable
+parcel excluding lowest 500 m AGL. Units are J/kg.</p>
+<p>[21] MU_CIN_500 – convective inhibition, derived from the
 most-unstable parcel excluding lowest 500 m AGL. Units are J/kg.</p>
-<p>[18] MU_LI_500 – lifted index (500 hPa), derived from the
+<p>[22] MU_LI_500 – lifted index (500 hPa), derived from the
 most-unstable parcel excluding lowest 500 m AGL. Units are K.</p>
-<p>[19] SB_CAPE – convective available potential energy, derived from
+<p>[23] MU_LI_500_M10 – lifted index (at -10°C), derived from the
+most-unstable parcel excluding lowest 500 m AGL. Units are K.</p>
+<p>[24] SB_CAPE – convective available potential energy, derived from
 the surface-based parcel. Units are J/kg.</p>
-<p>[20] SB_CAPE_COLD – fraction of the convective available potential
-energy in the temperature below -10°C, derived from the surface-based
-parcel. Units are J/kg.</p>
-<p>[21] SB_02km_CAPE – convective available potential energy between
+<p>[25] SB_CAPE_M10 – convective available potential energy in the
+temperature below -10°C, derived from the surface-based parcel. Units
+are J/kg.</p>
+<p>[26] SB_CAPE_M10_PT – convective available potential energy in the
+parcel temperature below - 10°C, derived from the surface-based parcel.
+Units are J/kg.</p>
+<p>[27] SB_02km_CAPE – convective available potential energy between
 surface and 2 km AGL, derived from the surface-based parcel. Units are
 J/kg.</p>
-<p>[22] SB_03km_CAPE – convective available potential energy between
+<p>[28] SB_03km_CAPE – convective available potential energy between
 surface and 3 km AGL, derived from the surface-based parcel. Units are
 J/kg.</p>
-<p>[23] SB_HGL_CAPE – convective available potential energy in a hail
+<p>[29] SB_HGL_CAPE – convective available potential energy in a hail
 growth layer (between 0°C and −20°C), derived from the surface-based
 parcel. Units are J/kg.</p>
-<p>[24] SB_CIN – convective inhibition, derived from the surface-based
+<p>[30] SB_CIN – convective inhibition, derived from the surface-based
 parcel. Units are J/kg.</p>
-<p>[25] SB_LCL_HGT – height of the lifted condensation level, derived
+<p>[31] SB_LCL_HGT – height of the lifted condensation level, derived
 from the surface-based parcel. Units are m AGL.</p>
-<p>[26] SB_LFC_HGT – height of the level of free convection, derived
+<p>[32] SB_LFC_HGT – height of the level of free convection, derived
 from the surface-based parcel. Units are m AGL.</p>
-<p>[27] SB_EL_HGT – height of the equilibrium level, derived from the
+<p>[33] SB_EL_HGT – height of the equilibrium level, derived from the
 surface-based parcel. Units are m AGL.</p>
-<p>[28] SB_LI – lifted index (500 hPa), derived from the surface-based
+<p>[34] SB_LI – lifted index (500 hPa), derived from the surface-based
 parcel. Units are K.</p>
-<p>[29] SB_WMAX – estimated updraft speed (a square root of two times
+<p>[35] SB_LI_M10 – lifted index (at -10°C), derived from the
+surface-unstable parcel. Units are K.</p>
+<p>[36] SB_WMAX – estimated updraft speed (a square root of two times
 CAPE), derived from the surface-based parcel. Units are m/s.</p>
-<p>[30] SB_EL_TEMP – temperature of the equilibrium level, derived from
+<p>[37] SB_EL_TEMP – temperature of the equilibrium level, derived from
 the surface-based parcel. Units are °C.</p>
-<p>[31] SB_LCL_TEMP – temperature of the lifted condensation level,
+<p>[38] SB_LCL_TEMP – temperature of the lifted condensation level,
+derived from the surface- based parcel. Units are °C.</p>
+<p>[39] SB_LFC_TEMP – temperature of the level of free convection,
 derived from the surface-based parcel. Units are °C.</p>
-<p>[32] SB_LFC_TEMP – temperature of the level of free convection,
-derived from the surface-based parcel. Units are °C.</p>
-<p>[33] SB_MIXR – mixing ratio at the height of the surface-based
+<p>[40] SB_MIXR – mixing ratio at the height of the surface-based
 parcel. Units are g/kg.</p>
-<p>[34] ML_CAPE – convective available potential energy, derived from
+<p>[41] ML_CAPE – convective available potential energy, derived from
 the mixed-layer parcel. Units are J/kg.</p>
-<p>[35] ML_CAPE_COLD – fraction of the convective available potential
-energy in the temperature below -10°C, derived from the mixed-layer
-parcel. Units are J/kg.</p>
-<p>[36] ML_02km_CAPE – convective available potential energy between
+<p>[42] ML_CAPE_M10 – convective available potential energy in the
+temperature below -10°C, derived from the mixed-layer parcel. Units are
+J/kg.</p>
+<p>[43] ML_CAPE_M10_PT – convective available potential energy in the
+parcel temperature below -10°C, derived from the mixed-layer parcel.
+Units are J/kg.</p>
+<p>[44] ML_02km_CAPE – convective available potential energy between
 surface and 2 km AGL, derived from the mixed-layer parcel. Units are
 J/kg.</p>
-<p>[37] ML_03km_CAPE – convective available potential energy between
+<p>[45] ML_03km_CAPE – convective available potential energy between
 surface and 3 km AGL, derived from the mixed-layer parcel. Units are
 J/kg.</p>
-<p>[38] ML_HGL_CAPE – convective available potential energy in a hail
+<p>[46] ML_HGL_CAPE – convective available potential energy in a hail
 growth layer (between 0°C and −20°C), derived from the mixed-layer
 parcel. Units are J/kg.</p>
-<p>[39] ML_CIN – convective inhibition, derived from the mixed-layer
+<p>[47] ML_CIN – convective inhibition, derived from the mixed-layer
 parcel. Units are J/kg.</p>
-<p>[40] ML_LCL_HGT – height of the lifted condensation level, derived
+<p>[48] ML_LCL_HGT – height of the lifted condensation level, derived
 from the mixed-layer parcel. Units are m AGL.</p>
-<p>[41] ML_LFC_HGT – height of the level of free convection, derived
+<p>[49] ML_LFC_HGT – height of the level of free convection, derived
 from the mixed-layer parcel. Units are m AGL.</p>
-<p>[42] ML_EL_HGT – height of the equilibrium level, derived from the
+<p>[50] ML_EL_HGT – height of the equilibrium level, derived from the
 mixed-layer parcel. Units are m AGL.</p>
-<p>[43] ML_LI – lifted index, derived from the mixed-layer parcel. Units
+<p>[51] ML_LI – lifted index, derived from the mixed-layer parcel. Units
 are K.</p>
-<p>[44] ML_WMAX – estimated updraft speed (a square root of two times
+<p>[52] ML_LI_M10 – lifted index (at -10°C), derived from the
+mixed-layer parcel. Units are K.</p>
+<p>[53] ML_WMAX – estimated updraft speed (a square root of two times
 CAPE), derived from the mixed-layer parcel. Units are m/s.</p>
-<p>[45] ML_EL_TEMP – temperature of the equilibrium level, derived from
+<p>[54] ML_EL_TEMP – temperature of the equilibrium level, derived from
 the mixed-layer parcel. Units are °C.</p>
-<p>[46] ML_LCL_TEMP – temperature of the lifted condensation level,
+<p>[55] ML_LCL_TEMP – temperature of the lifted condensation level,
 derived from the mixed-layer parcel. Units are °C.</p>
-<p>[47] ML_LFC_TEMP – temperature of the level of free convection,
+<p>[56] ML_LFC_TEMP – temperature of the level of free convection,
 derived from the mixed-layer parcel. Units are °C.</p>
-<p>[48] ML_MIXR – mixing ratio at the height of the surface-based
+<p>[57] ML_MIXR – mixing ratio at the height of the surface-based
 parcel. Units are g/kg.</p>
 <p><strong>Temperature and moisture parameters:</strong></p>
-<p>[49] LR_0500m – temperature lapse rate between surface and 500 m AGL.
+<p>[58] LR_0500m – temperature lapse rate between surface and 500 m AGL.
 Units are K/km.</p>
-<p>[50] LR_01km – temperature lapse rate between surface and 1 km AGL.
+<p>[59] LR_01km – temperature lapse rate between surface and 1 km AGL.
 Units are K/km.</p>
-<p>[51] LR_02km – temperature lapse rate between surface and 2 km AGL.
+<p>[60] LR_02km – temperature lapse rate between surface and 2 km AGL.
 Units are K/km.</p>
-<p>[52] LR_03km – temperature lapse rate between surface and 3 km AGL.
+<p>[61] LR_03km – temperature lapse rate between surface and 3 km AGL.
 Units are K/km.</p>
-<p>[53] LR_04km – temperature lapse rate between surface and 4 km AGL.
+<p>[62] LR_04km – temperature lapse rate between surface and 4 km AGL.
 Units are K/km.</p>
-<p>[54] LR_06km – temperature lapse rate between surface and 6 km AGL.
+<p>[63] LR_06km – temperature lapse rate between surface and 6 km AGL.
 Units are K/km.</p>
-<p>[55] LR_16km – temperature lapse rate between 1 and 6 km AGL. Units
+<p>[64] LR_16km – temperature lapse rate between 1 and 6 km AGL. Units
 are K/km.</p>
-<p>[56] LR_26km – temperature lapse rate between 2 and 6 km AGL. Units
+<p>[65] LR_26km – temperature lapse rate between 2 and 6 km AGL. Units
 are K/km.</p>
-<p>[57] LR_24km – temperature lapse rate between 2 and 4 km AGL. Units
+<p>[66] LR_24km – temperature lapse rate between 2 and 4 km AGL. Units
 are K/km.</p>
-<p>[58] LR_36km – temperature lapse rate between 3 and 6 km AGL. Units
+<p>[67] LR_36km – temperature lapse rate between 3 and 6 km AGL. Units
 are K/km.</p>
-<p>[59] LR_26km_MAX – maximum temperature lapse rate between 2 and 6 km
+<p>[68] LR_26km_MAX – maximum temperature lapse rate between 2 and 6 km
 AGL (2 km steps). Units are K/km.</p>
-<p>[60] LR_500700hPa – temperature lapse rate between 500 and 700 hPa
+<p>[69] LR_500700hPa – temperature lapse rate between 500 and 700 hPa
 (if below ground level, the lowest available level is considered). Units
 are K/km.</p>
-<p>[61] LR_500800hPa – temperature lapse rate between 500 and 800 hPa
+<p>[70] LR_500800hPa – temperature lapse rate between 500 and 800 hPa
 (if below ground level, the lowest available level is considered). Units
 are K/km.</p>
-<p>[62] LR_600800hPa – temperature lapse rate between 600 and 800 hPa
+<p>[71] LR_600800hPa – temperature lapse rate between 600 and 800 hPa
 (if below ground level, the lowest available level is considered). Units
 are K/km.</p>
-<p>[63] FRZG_HGT – height of freezing level (0°C), as a first available
+<p>[72] FRZG_HGT – height of freezing level (0°C), as a first available
 level counting from the surface. Units are m AGL.</p>
-<p>[64] FRZG_wetbulb_HGT – height of wet-bulb freezing level (0°C) as a
+<p>[73] FRZG_wetbulb_HGT – height of wet-bulb freezing level (0°C) as a
 first available level counting from the surface. Units are m AGL.</p>
-<p>[65] HGT_max_thetae_03km – height of the highest theta-e between
+<p>[74] HGT_max_thetae_03km – height of the highest theta-e between
 surface and 3 km AGL (defined as most-unstable parcel). Units are m
 AGL.</p>
-<p>[66] HGT_min_thetae_04km – height of the lowest theta-e between
+<p>[75] HGT_min_thetae_04km – height of the lowest theta-e between
 surface and 4 km AGL. Units are m AGL.</p>
-<p>[67] Delta_thetae – difference in theta-e between the mean in 3–5 km
+<p>[76] Delta_thetae – difference in theta-e between the mean in 3–5 km
 AGL layer and surface. Units are K.</p>
-<p>[68] Delta_thetae_04km – difference in theta-e between lowest value
+<p>[77] Delta_thetae_04km – difference in theta-e between lowest value
 in 0–4 km AGL and surface. Units are K.</p>
-<p>[69] DCAPE – downdraft convective available potential energy,
+<p>[78] Thetae_01km – mean theta-e between surface and 1 km AGL. Units
+are K.</p>
+<p>[79] Thetae_02km – mean theta-e between surface and 2 km AGL. Units
+are K.</p>
+<p>[80] DCAPE – downdraft convective available potential energy,
 initialized from 4 km AGL with a mean theta-e in 3–5 km AGL layer. Units
 are J/kg.</p>
-<p>[70] Cold_Pool_Strength – difference between surface temperature and
+<p>[81] Cold_Pool_Strength – difference between surface temperature and
 temperature of the downdraft (derived from DCAPE procedure) at the
 surface. Units are K.</p>
-<p>[71] Wind_Index – based on original formula from McCann (1994), doi:
-<a href="https://doi.org/10.1175/1520-0434(1994)009" class="external-link uri">https://doi.org/10.1175/1520-0434(1994)009</a>&lt;0532:WNIFFM&gt;2.0.CO;2.
+<p>[82] Wind_Index – based on original formula from McCann (1994), doi:
+<a href="https://doi.org/10.1175/1520-0434(1994)009%3C0532:WNIFFM%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(1994)009&lt;0532:WNIFFM&gt;2.0.CO;2</a>
 Units indicate estimated wind gust in knots.</p>
-<p>[72] PRCP_WATER – precipitable water (entire column). Units are
+<p>[83] PRCP_WATER – precipitable water (entire column). Units are
 mm.</p>
-<p>[73] Moisture_Flux_02km – mean wind speed multiplied by mean mixing
+<p>[84] Moisture_Flux_02km – mean wind speed multiplied by mean mixing
 ratio in the layer between surface and 2 km AGL (both). Units are
 g/s/m2.</p>
-<p>[74] RH_02km – mean relative humidity between surface and 2 km AGL
+<p>[85] RH_01km – mean relative humidity between surface and 1 km AGL
 layer. Units are %.</p>
-<p>[75] RH_14km – mean relative humidity between 1 and 4 km AGL layer.
+<p>[86] RH_02km – mean relative humidity between surface and 2 km AGL
+layer. Units are %.</p>
+<p>[87] RH_14km – mean relative humidity between 1 and 4 km AGL layer.
 Units are %.</p>
-<p>[76] RH_25km – mean relative humidity between 2 and 5 km AGL layer.
+<p>[88] RH_25km – mean relative humidity between 2 and 5 km AGL layer.
 Units are %.</p>
-<p>[77] RH_36km – mean relative humidity between 3 and 6 km AGL layer.
+<p>[89] RH_36km – mean relative humidity between 3 and 6 km AGL layer.
 Units are %.</p>
-<p>[78] RH_HGL – mean relative humidity in a hail growth layer (between
+<p>[90] RH_HGL – mean relative humidity in a hail growth layer (between
 0°C and −20°C). Units are %.</p>
 <p><strong>Kinematic parameters:</strong></p>
-<p>[79] BS_01km – bulk wind shear between surface and 1 km AGL. Units
+<p>If user-defined manual storm motion is choosen, all parameters that
+use RM and LM Bunkers storm-motion vectors will now use a user-defined
+manual storm motion vector.</p>
+<p>[91] BS_0500m – bulk wind shear between surface and 500 m AGL. Units
 are m/s.</p>
-<p>[80] BS_02km – bulk wind shear between surface and 2 km AGL. Units
+<p>[92] BS_01km – bulk wind shear between surface and 1 km AGL. Units
 are m/s.</p>
-<p>[81] BS_03km – bulk wind shear between surface and 3 km AGL. Units
+<p>[93] BS_02km – bulk wind shear between surface and 2 km AGL. Units
 are m/s.</p>
-<p>[82] BS_06km – bulk wind shear between surface and 6 km AGL. Units
+<p>[94] BS_03km – bulk wind shear between surface and 3 km AGL. Units
 are m/s.</p>
-<p>[83] BS_08km – bulk wind shear between surface and 8 km AGL. Units
+<p>[95] BS_06km – bulk wind shear between surface and 6 km AGL. Units
 are m/s.</p>
-<p>[84] BS_36km – bulk wind shear between 3 and 6 km AGL. Units are
+<p>[96] BS_08km – bulk wind shear between surface and 8 km AGL. Units
+are m/s.</p>
+<p>[97] BS_36km – bulk wind shear between 3 and 6 km AGL. Units are
 m/s.</p>
-<p>[85] BS_26km – bulk wind shear between 2 and 6 km AGL. Units are
+<p>[98] BS_26km – bulk wind shear between 2 and 6 km AGL. Units are
 m/s.</p>
-<p>[86] BS_16km – bulk wind shear between 1 and 6 km AGL. Units are
+<p>[99] BS_16km – bulk wind shear between 1 and 6 km AGL. Units are
 m/s.</p>
-<p>[87] BS_18km – bulk wind shear between 1 and 8 km AGL. Units are
+<p>[100] BS_18km – bulk wind shear between 1 and 8 km AGL. Units are
 m/s.</p>
-<p>[88] BS_EFF_MU – effective shear between parcel initialization height
-and half of the distance to equilibrium level height, based on the
-most-unstable parcel. Units are m/s.</p>
-<p>[89] BS_EFF_SB – effective shear between parcel initialization height
-and half of the distance to equilibrium level height, based on the
-surface-based parcel. Units are m/s.</p>
-<p>[90] BS_EFF_ML – effective shear between parcel initialization height
-and half of the distance to equilibrium level height, based on the
-mixed-layer parcel. Units are m/s.</p>
-<p>[91] BS_SFC_to_M10 – bulk wind shear between surface and −10°C. Units
-are m/s.</p>
-<p>[92] BS_1km_to_M10 – bulk wind shear between 1 km AGL and −10°C.
+<p>[101] BS_EFF_MU – effective shear between parcel initialization
+height and half of the distance to equilibrium level height, based on
+the most-unstable parcel. Units are m/s.</p>
+<p>[102] BS_EFF_SB – effective shear between parcel initialization
+height and half of the distance to equilibrium level height, based on
+the surface-based parcel. Units are m/s.</p>
+<p>[103] BS_EFF_ML – effective shear between parcel initialization
+height and half of the distance to equilibrium level height, based on
+the mixed-layer parcel. Units are m/s.</p>
+<p>[104] BS_SFC_to_M10 – bulk wind shear between surface and −10°C.
 Units are m/s.</p>
-<p>[93] BS_2km_to_M10 – bulk wind shear between 2 km AGL and −10°C.
+<p>[105] BS_1km_to_M10 – bulk wind shear between 1 km AGL and −10°C.
 Units are m/s.</p>
-<p>[94] BS_MU_LFC_to_M10 – bulk wind shear between most-unstable level
+<p>[106] BS_2km_to_M10 – bulk wind shear between 2 km AGL and −10°C.
+Units are m/s.</p>
+<p>[107] BS_MU_LFC_to_M10 – bulk wind shear between most-unstable level
 of free convection and −10°C. Units are m/s.</p>
-<p>[95] BS_SB_LFC_to_M10 – bulk wind shear between surface-based level
+<p>[108] BS_SB_LFC_to_M10 – bulk wind shear between surface-based level
 of free convection and −10°C. Units are m/s.</p>
-<p>[96] BS_ML_LFC_to_M10 – bulk wind shear between mixed-layer level of
+<p>[109] BS_ML_LFC_to_M10 – bulk wind shear between mixed-layer level of
 free convection and −10°C. Units are m/s.</p>
-<p>[97] BS_MW02_SM – bulk wind shear between 0–2 km mean wind and mean
-storm motion vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/15200434(2000)015" class="external-link uri">https://doi.org/10.1175/15200434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m/s.</p>
-<p>[98] BS_MW02_RM – bulk wind shear between 0–2 km mean wind and
-right-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/15200434(2000)015" class="external-link uri">https://doi.org/10.1175/15200434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m/s.</p>
-<p>[99] BS_MW02_LM – bulk wind shear between 0–2 km mean wind and
-left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/15200434(2000)015" class="external-link uri">https://doi.org/10.1175/15200434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m/s.</p>
-<p>[100] BS_HGL_SM – bulk wind shear between a hail growth layer
-(between 0°C and −20°C) and mean storm motion vector. See Bunkers et
-al. (2002), doi: <a href="https://doi.org/10.1175/15200434(2000)015" class="external-link uri">https://doi.org/10.1175/15200434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m/s.</p>
-<p>[101] BS_HGL_RM – bulk wind shear between a hail growth layer
-(between 0°C and −20°C) and right-moving supercell vector. See Bunkers
-et al. (2002), doi: <a href="https://doi.org/10.1175/15200434(2000)015" class="external-link uri">https://doi.org/10.1175/15200434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m/s.</p>
-<p>[102] BS_HGL_LM – bulk wind shear between a hail growth layer
-(between 0°C and −20°C) and left-moving supercell vector. See Bunkers et
-al. (2002), doi: <a href="https://doi.org/10.1175/15200434(2000)015" class="external-link uri">https://doi.org/10.1175/15200434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m/s.</p>
-<p>[103] MW_01km – mean wind speed between surface and 1 km AGL layer.
+<p>[110] BS_MW02_SM – bulk wind shear between 0–2 km mean wind and mean
+storm motion vector. Units are m/s.</p>
+<p>[111] BS_MW02_RM – bulk wind shear between 0–2 km mean wind and
+right-moving supercell vector. Units are m/s.</p>
+<p>[112] BS_MW02_LM – bulk wind shear between 0–2 km mean wind and
+left-moving supercell vector. Units are m/s.</p>
+<p>[113] BS_HGL_SM – bulk wind shear between a hail growth layer
+(between 0°C and −20°C) and mean storm motion vector. Units are m/s.</p>
+<p>[114] BS_HGL_RM – bulk wind shear between a hail growth layer
+(between 0°C and −20°C) and right-moving supercell vector. Units are
+m/s.</p>
+<p>[115] BS_HGL_LM – bulk wind shear between a hail growth layer
+(between 0°C and −20°C) and left-moving supercell vector. Units are
+m/s.</p>
+<p>[116] MW_0500m – mean wind speed between surface and 500 m AGL layer.
 Units are m/s.</p>
-<p>[104] MW_02km – mean wind speed between surface and 2 km AGL layer.
+<p>[117] MW_01km – mean wind speed between surface and 1 km AGL layer.
 Units are m/s.</p>
-<p>[105] MW_03km – mean wind speed between surface and 3 km AGL layer.
+<p>[118] MW_02km – mean wind speed between surface and 2 km AGL layer.
 Units are m/s.</p>
-<p>[106] MW_06km – mean wind speed between surface and 6 km AGL layer.
+<p>[119] MW_03km – mean wind speed between surface and 3 km AGL layer.
 Units are m/s.</p>
-<p>[107] MW_13km – mean wind speed between 1 and 3 km AGL layer. Units
+<p>[120] MW_06km – mean wind speed between surface and 6 km AGL layer.
+Units are m/s.</p>
+<p>[121] MW_13km – mean wind speed between 1 and 3 km AGL layer. Units
 are m/s.</p>
-<p>[108] SRH_100m_RM – storm-relative helicity between surface and 100m
-AGL for right-moving supercell vector. See Bunkers et al. (2002), doi:
-<a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[109] SRH_250m_RM – storm-relative helicity between surface and 250m
-AGL for right-moving supercell vector. See Bunkers et al. (2002), doi:
-<a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[110] SRH_500m_RM – storm-relative helicity between surface and 500m
-AGL for right-moving supercell vector. See Bunkers et al. (2002), doi:
-<a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[111] SRH_1km_RM – storm-relative helicity between surface and 1 km
-AGL for right-moving supercell vector. See Bunkers et al. (2002), doi:
-<a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[112] SRH_3km_RM – storm-relative helicity between surface and 3 km
-AGL for right-moving supercell vector. See Bunkers et al. (2002), doi:
-<a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[113] SRH_36km_RM – storm-relative helicity between 3 and 6 km AGL
-for right-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[114] SRH_100m_LM – storm-relative helicity between surface and 100m
-AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[115] SRH_250m_LM – storm-relative helicity between surface and 250m
-AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[116] SRH_500m_LM – storm-relative helicity between surface and 500m
-AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[117] SRH_1km_LM – storm-relative helicity between surface and 1 km
-AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[118] SRH_3km_LM – storm-relative helicity between surface and 3 km
-AGL for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[119] SRH_36km_LM – storm-relative helicity between 3 and 6 km AGL
-for left-moving supercell vector. See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
-for further details. Units are m2/s2.</p>
-<p>[120] Bunkers_RM_A – azimuth for right-moving supercell vector. See
-Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
+<p>[122] SRH_100m_RM – storm-relative helicity between surface and 100m
+AGL for right-moving supercell vector. Units are m2/s2.</p>
+<p>[123] SRH_250m_RM – storm-relative helicity between surface and 250m
+AGL for right-moving supercell vector. Units are m2/s2.</p>
+<p>[124] SRH_500m_RM – storm-relative helicity between surface and 500m
+AGL for right-moving supercell vector. Units are m2/s2.</p>
+<p>[125] SRH_1km_RM – storm-relative helicity between surface and 1 km
+AGL for right-moving supercell vector. Units are m2/s2.</p>
+<p>[126] SRH_3km_RM – storm-relative helicity between surface and 3 km
+AGL for right-moving supercell vector. Units are m2/s2.</p>
+<p>[127] SRH_36km_RM – storm-relative helicity between 3 and 6 km AGL
+for right-moving supercell vector. Units are m2/s2.</p>
+<p>[128] SRH_100m_LM – storm-relative helicity between surface and 100m
+AGL for left-moving supercell vector. Units are m2/s2.</p>
+<p>[129] SRH_250m_LM – storm-relative helicity between surface and 250m
+AGL for left-moving supercell vector. Units are m2/s2.</p>
+<p>[130] SRH_500m_LM – storm-relative helicity between surface and 500m
+AGL for left-moving supercell vector. Units are m2/s2.</p>
+<p>[131] SRH_1km_LM – storm-relative helicity between surface and 1 km
+AGL for left-moving supercell vector. Units are m2/s2.</p>
+<p>[132] SRH_3km_LM – storm-relative helicity between surface and 3 km
+AGL for left-moving supercell vector. Units are m2/s2.</p>
+<p>[133] SRH_36km_LM – storm-relative helicity between 3 and 6 km AGL
+for left-moving supercell vector. Units are m2/s2.</p>
+<p>[134] SV_500m_RM – streamwise vorticity between surface and 500 m AGL
+for right-moving supercell vector. Units are 1/s.</p>
+<p>[135] SV_01km_RM – streamwise vorticity between surface and 1 km AGL
+for right-moving supercell vector. Units are 1/s.</p>
+<p>[136] SV_03km_RM – streamwise vorticity between surface and 3 km AGL
+for right-moving supercell vector. Units are 1/s.</p>
+<p>[137] SV_500m_LM – streamwise vorticity between surface and 500 m AGL
+for left-moving supercell vector. Units are 1/s.</p>
+<p>[138] SV_01km_LM – streamwise vorticity between surface and 1 km AGL
+for left-moving supercell vector. Units are 1/s.</p>
+<p>[139] SV_03km_LM – streamwise vorticity between surface and 3 km AGL
+for left-moving supercell vector. Units are 1/s.</p>
+<p>[140] MW_SR_500m_RM – storm-relative mean wind between surface and
+500 m AGL for right- moving supercell vector. Units are m/s.</p>
+<p>[141] MW_SR_01km_RM – storm-relative mean wind between surface and
+500 m AGL for right- moving supercell vector. Units are m/s.</p>
+<p>[142] MW_SR_03km_RM – storm-relative mean wind between surface and 3
+km AGL for right- moving supercell vector. Units are m/s.</p>
+<p>[143] MW_SR_500m_LM – storm-relative mean wind between surface and
+500 m AGL for left- moving supercell vector. Units are m/s.</p>
+<p>[144] MW_SR_01km_LM – storm-relative mean wind between surface and
+500 m AGL for left- moving supercell vector. Units are m/s.</p>
+<p>[145] MW_SR_03km_LM – storm-relative mean wind between surface and 3
+km AGL for left- moving supercell vector. Units are m/s.</p>
+<p>[146] MW_SR_VM_500m_RM – storm-relative mean wind (using a mean of
+vector magnitude) between surface and 500 m AGL for right-moving
+supercell vector. Units are m/s.</p>
+<p>[147] MW_SR_VM_01km_RM – storm-relative mean wind (using a mean of
+vector magnitude) between surface and 500 m AGL for right-moving
+supercell vector. Units are m/s.</p>
+<p>[148] MW_SR_VM_03km_RM – storm-relative mean wind (using a mean of
+vector magnitude) between surface and 3 km AGL for right-moving
+supercell vector. Units are m/s.</p>
+<p>[149] MW_SR_VM_500m_LM – storm-relative mean wind (using a mean of
+vector magnitude) between surface and 500 m AGL for left-moving
+supercell vector. Units are m/s.</p>
+<p>[150] MW_SR_VM_01km_LM – storm-relative mean wind (using a mean of
+vector magnitude) between surface and 500 m AGL for left-moving
+supercell vector. Units are m/s.</p>
+<p>[151] MW_SR_VM_03km_LM – storm-relative mean wind (using a mean of
+vector magnitude) between surface and 3 km AGL for left-moving supercell
+vector. Units are m/s.</p>
+<p>[152] SV_FRA_500m_RM – streamwise vorticity between surface and 500 m
+AGL for right- moving supercell vector. Units are 1/s.</p>
+<p>[153] SV_FRA_01km_RM – streamwise vorticity fraction between surface
+and 1 km AGL for right-moving supercell vector. Units are 1/s.</p>
+<p>[154] SV_FRA_03km_RM – streamwise vorticity fraction between surface
+and 3 km AGL for right-moving supercell vector. Units are 1/s.</p>
+<p>[155] SV_FRA_500m_LM – streamwise vorticity fraction between surface
+and 500 m AGL for left-moving supercell vector. Units are 1/s.</p>
+<p>[156] SV_FRA_01km_LM – streamwise vorticity fraction between surface
+and 1 km AGL for left- moving supercell vector. Units are 1/s.</p>
+<p>[157] SV_FRA_03km_LM – streamwise vorticity fraction between surface
+and 3 km AGL for left- moving supercell vector. Units are 1/s.</p>
+<p>[158] Bunkers_RM_A – azimuth for right-moving supercell vector. See
+Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2</a>
 for further details. Units are °.</p>
-<p>[121] Bunkers_RM_M – wind speed for right-moving supercell vector.
-See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
+<p>[159] Bunkers_RM_M – wind speed for right-moving supercell vector.
+See Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2</a>
 for further details. Units are m/s.</p>
-<p>[122] Bunkers_LM_A – azimuth for left-moving supercell vector. See
-Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
+<p>[160] Bunkers_LM_A – azimuth for left-moving supercell vector. See
+Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2</a>
 for further details. Units are °.</p>
-<p>[123] Bunkers_LM_M – wind speed for left-moving supercell vector. See
-Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
+<p>[161] Bunkers_LM_M – wind speed for left-moving supercell vector. See
+Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2</a>
 for further details. Units are m/s.</p>
-<p>[124] Bunkers_MW_A – azimuth for mean storm motion vector. See
-Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
+<p>[162] Bunkers_MW_A – azimuth for mean storm motion vector. See
+Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2</a>
 for further details. Units are °.</p>
-<p>[125] Bunkers_MW_M – wind speed for mean storm motion vector. See
-Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015" class="external-link uri">https://doi.org/10.1175/1520-0434(2000)015</a>&lt;0061:PSMUAN&gt;2.0.CO;2
+<p>[163] Bunkers_MW_M – wind speed for mean storm motion vector. See
+Bunkers et al. (2002), doi: <a href="https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(2000)015&lt;0061:PSMUAN&gt;2.0.CO;2</a>
 for further details. Units are m/s.</p>
-<p>[126] Corfidi_downwind_A – azimuth for Corfidi downwind vector. See
-Corfidi (2003) doi: <a href="https://doi.org/10.1175/1520-0434(2003)018" class="external-link uri">https://doi.org/10.1175/1520-0434(2003)018</a>&lt;0997:CPAMPF&gt;2.0.CO;2
+<p>[164] Corfidi_downwind_A – azimuth for Corfidi downwind vector. See
+Corfidi (2003) doi: <a href="https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(2003)018&lt;0997:CPAMPF&gt;2.0.CO;2</a>
 for further details. Units are °.</p>
-<p>[127] Corfidi_downwind_M – wind speed for Corfidi downwind vector.
-See Corfidi (2003) doi: <a href="https://doi.org/10.1175/1520-0434(2003)018" class="external-link uri">https://doi.org/10.1175/1520-0434(2003)018</a>&lt;0997:CPAMPF&gt;2.0.CO;2
+<p>[165] Corfidi_downwind_M – wind speed for Corfidi downwind vector.
+See Corfidi (2003) doi: <a href="https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(2003)018&lt;0997:CPAMPF&gt;2.0.CO;2</a>
 for further details. Units are m/s.</p>
-<p>[128] Corfidi_upwind_A – azimuth for Corfidi upwind vector. See
-Corfidi (2003) doi: <a href="https://doi.org/10.1175/1520-0434(2003)018" class="external-link uri">https://doi.org/10.1175/1520-0434(2003)018</a>&lt;0997:CPAMPF&gt;2.0.CO;2
+<p>[166] Corfidi_upwind_A – azimuth for Corfidi upwind vector. See
+Corfidi (2003) doi: <a href="https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(2003)018&lt;0997:CPAMPF&gt;2.0.CO;2</a>
 for further details. Units are °.</p>
-<p>[129] Corfidi_upwind_M – wind speed for Corfidi upwind vector. See
-Corfidi (2003) doi: <a href="https://doi.org/10.1175/1520-0434(2003)018" class="external-link uri">https://doi.org/10.1175/1520-0434(2003)018</a>&lt;0997:CPAMPF&gt;2.0.CO;2
+<p>[167] Corfidi_upwind_M – wind speed for Corfidi upwind vector. See
+Corfidi (2003) doi: <a href="https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2" class="external-link">https://doi.org/10.1175/1520-0434(2003)018&lt;0997:CPAMPF&gt;2.0.CO;2</a>
 for further details. Units are m/s.</p>
 <p><strong>Composite parameters:</strong></p>
-<p>[130] K_Index – based on original formula from George (1960):
+<p>[168] K_Index – based on original formula from George (1960):
 “Weather Forecasting for Aeronautics” Academic Press, London, 1960,
 p. 673. Units are K.</p>
-<p>[131] Showalter_Index – based on original formula from Showalter
+<p>[169] Showalter_Index – based on original formula from Showalter
 (1953), doi: <a href="https://doi.org/10.1175/1520-0477-34.6.250" class="external-link uri">https://doi.org/10.1175/1520-0477-34.6.250</a>. Units are
 K.</p>
-<p>[132] TotalTotals_Index – based on original formula from Miller
+<p>[170] TotalTotals_Index – based on original formula from Miller
 (1972): “Notes on analysis and severe-storm forecasting procedures of
 the Air Force Global Weather Central”, AWS Tech. Rpt. 200(rev), Air
 Weather Service, Scott AFB, IL. Units are K.</p>
-<p>[133] SWEAT_Index – based on original formula from Bidner (1970):
+<p>[171] SWEAT_Index – based on original formula from Bidner (1970):
 “The Air Force Global Weather Central severe weather threat (SWEAT)
 index—A preliminary report”. Air Weather Service Aerospace Sciences
 Review, AWS RP 105-2, No. 70-3, 2-5. Parameter is dimensionless.</p>
-<p>[134] STP_fix – (significant tornado parameter fixed-layer) based on
+<p>[172] STP_fix – (significant tornado parameter fixed-layer) based on
 the fixed layer formula using surface-based CAPE and CIN. Parameter is
 dimensionless.</p>
-<p>[135] STP_new – (significant tornado parameter) based on the formula
+<p>[173] STP_new – (significant tornado parameter) based on the formula
 from Coffer et al. (2019), doi: <a href="https://doi.org/10.1175/WAF-D-19-0115.1" class="external-link uri">https://doi.org/10.1175/WAF-D-19-0115.1</a>. Parameter is
 dimensionless.</p>
-<p>[136] SCP_fix – (supercell composite parameter fixed-layer) based on
+<p>[174] STP_fix_LM – (significant tornado parameter fixed-layer) based
+on the fixed layer formula using surface-based CAPE and CIN. This
+version uses left-moving supercell vector for SRH calculation and is
+dedicated for Southern Hemisphere. Parameter is dimensionless.</p>
+<p>[175] STP_new_LM – (significant tornado parameter) based on the
+formula from Coffer et al. (2019), doi: <a href="https://doi.org/10.1175/WAF-D-19-0115.1" class="external-link uri">https://doi.org/10.1175/WAF-D-19-0115.1</a>. This version
+uses left-moving supercell vector for SRH calculation and is dedicated
+for Southern Hemisphere. Parameter is dimensionless.</p>
+<p>[176] SCP_fix – (supercell composite parameter fixed-layer) based on
 Thompson et al. (2007), “An update to the supercell composite and
 significant tornado parameters”. Preprints, 22nd Conf. on Severe Local
 Storms, Hyannis, MA, Amer. Meteor. Soc. P (Vol. 8), but with effective
 SRH replaced with surface to 3 km AGL SRH and effective bulk wind shear
 replaced with surface to 6 km AGL bulk wind shear. Based on
 most-unstable CAPE. Parameter is dimensionless.</p>
-<p>[137] SCP_new – (supercell composite parameter) based on formula from
+<p>[177] SCP_new – (supercell composite parameter) based on formula from
 Gropp and Davenport (2018), doi: <a href="https://doi.org/10.1175/WAF-D-17-0150.1" class="external-link uri">https://doi.org/10.1175/WAF-D-17-0150.1</a>, but with
 effective SRH replaced with surface to 3 km AGL SRH. This version uses
 effective shear and CIN term. Based on most-unstable parcel. Parameter
 is dimensionless.</p>
-<p>[138] SHIP – (significant hail parameter), based on formula currently
+<p>[178] SCP_fix_LM – (supercell composite parameter fixed-layer) based
+on Thompson et al. (2007), “An update to the supercell composite and
+significant tornado parameters”. Preprints, 22nd Conf. on Severe Local
+Storms, Hyannis, MA, Amer. Meteor. Soc. P (Vol. 8), but with effective
+SRH replaced with surface to 3 km AGL SRH and effective bulk wind shear
+replaced with surface to 6 km AGL bulk wind shear. Based on
+most-unstable CAPE. This version uses left-moving supercell vector for
+SRH calculation and is dedicated for Southern Hemisphere. Parameter is
+dimensionless.</p>
+<p>[179] SCP_new_LM – (supercell composite parameter) based on formula
+from Gropp and Davenport (2018), doi: <a href="https://doi.org/10.1175/WAF-D-17-0150.1" class="external-link uri">https://doi.org/10.1175/WAF-D-17-0150.1</a>, but with
+effective SRH replaced with surface to 3 km AGL SRH. This version uses
+effective shear and CIN term. Based on most- unstable parcel. This
+version uses left-moving supercell vector for SRH calculation and is
+dedicated for Southern Hemisphere. Parameter is dimensionless.</p>
+<p>[180] SHIP – (significant hail parameter), based on formula currently
 used on the Storm Prediction Center mesoanalysis (<a href="https://www.spc.noaa.gov/exper/mesoanalysis/" class="external-link uri">https://www.spc.noaa.gov/exper/mesoanalysis/</a>) as of 1
 March 2021. Parameter is dimensionless.</p>
-<p>[139] HSI – (hail size index), based on formula from Czernecki et
-al. (2019), doi: <a href="https://doi.org/10.1016/j.atmosres.2019.05.010" class="external-link uri">https://doi.org/10.1016/j.atmosres.2019.05.010</a>. Units
+<p>[181] HSI – (hail size index), based on formula from Czernecki et al.
+(2019), doi: <a href="https://doi.org/10.1016/j.atmosres.2019.05.010" class="external-link uri">https://doi.org/10.1016/j.atmosres.2019.05.010</a>. Units
 are cm.</p>
-<p>[140] DCP – based on formula currently used on the Storm Prediction
+<p>[182] DCP – based on formula currently used on the Storm Prediction
 Center mesoanalysis (<a href="https://www.spc.noaa.gov/exper/mesoanalysis/" class="external-link uri">https://www.spc.noaa.gov/exper/mesoanalysis/</a>) as of 1
 March 2021. Parameter is dimensionless.</p>
-<p>[141] MU_WMAXSHEAR – most-unstable WMAX multiplied by surface to 6 km
+<p>[183] MU_WMAXSHEAR – most-unstable WMAX multiplied by surface to 6 km
 AGL bulk wind shear. See Taszarek et al. (2020), doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="external-link uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further
 details on WMAXSHEAR. Units are m2/s2.</p>
-<p>[142] SB_WMAXSHEAR – surface-based WMAX multiplied by surface to 6 km
+<p>[184] SB_WMAXSHEAR – surface-based WMAX multiplied by surface to 6 km
 AGL bulk wind shear. See Taszarek et al. (2020), doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="external-link uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further
 details on WMAXSHEAR. Units are m2/s2.</p>
-<p>[143] ML_WMAXSHEAR – mixed-layer WMAX multiplied by surface to 6 km
+<p>[185] ML_WMAXSHEAR – mixed-layer WMAX multiplied by surface to 6 km
 AGL bulk wind shear. See Taszarek et al. (2020), doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="external-link uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further
 details on WMAXSHEAR. Units are m2/s2.</p>
-<p>[144] MU_EFF_WMAXSHEAR – most-unstable WMAX multiplied by
+<p>[186] MU_EFF_WMAXSHEAR – most-unstable WMAX multiplied by
 most-unstable effective bulk wind shear. See Taszarek et al. (2020),
 doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="external-link uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further
 details on WMAXSHEAR. Units are m2/s2.</p>
-<p>[145] SB_EFF_WMAXSHEAR – surface-based WMAX multiplied by
+<p>[187] SB_EFF_WMAXSHEAR – surface-based WMAX multiplied by
 surface-based effective bulk wind shear. See Taszarek et al. (2020),
 doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="external-link uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further
 details on WMAXSHEAR. Units are m2/s2.</p>
-<p>[146] ML_EFF_WMAXSHEAR – mixed-layer WMAX multiplied by mixed-layer
+<p>[188] ML_EFF_WMAXSHEAR – mixed-layer WMAX multiplied by mixed-layer
 effective bulk wind shear. See Taszarek et al. (2020), doi: <a href="https://doi.org/10.1175/JCLI-D-20-0346.1" class="external-link uri">https://doi.org/10.1175/JCLI-D-20-0346.1</a> for further
 details on WMAXSHEAR. Units are m2/s2.</p>
-<p>[147] EHI_500m – (energy helicity index), surface-based CAPE
-multiplied by 0–500 m storm-relative helicity for right-moving
+<p>[189] EHI_500m – (energy helicity index), surface-based CAPE
+multiplied by 0–500 m storm- relative helicity for right-moving
 supercells and divided by 160000. Units are m2/s2.</p>
-<p>[148] EHI_01km – (energy helicity index), surface-based CAPE
-multiplied by 0–1 km storm-relative helicity for right-moving supercells
-and divided by 160000. Units are m2/s2.</p>
-<p>[149] EHI_03km – (energy helicity index), surface-based CAPE
-multiplied by 0–3 km storm-relative helicity for right-moving supercells
-and divided by 160000. Units are m2/s2.</p>
+<p>[190] EHI_01km – (energy helicity index), surface-based CAPE
+multiplied by 0–1 km storm- relative helicity for right-moving
+supercells and divided by 160000. Units are m2/s2.</p>
+<p>[191] EHI_03km – (energy helicity index), surface-based CAPE
+multiplied by 0–3 km storm- relative helicity for right-moving
+supercells and divided by 160000. Units are m2/s2.</p>
+<p>[192] EHI_500m_LM – (energy helicity index), surface-based CAPE
+multiplied by 0–500 m storm-relative helicity for right-moving
+supercells and divided by 160000. This version uses left- moving
+supercell vector for SRH calculation and is dedicated for Southern
+Hemisphere. Units are m2/s2.</p>
+<p>[193] EHI_01km_LM – (energy helicity index), surface-based CAPE
+multiplied by 0–1 km storm- relative helicity for right-moving
+supercells and divided by 160000. This version uses left-moving
+supercell vector for SRH calculation and is dedicated for Southern
+Hemisphere. Units are m2/s2.</p>
+<p>[194] EHI_03km_LM – (energy helicity index), surface-based CAPE
+multiplied by 0–3 km storm- relative helicity for right-moving
+supercells and divided by 160000. This version uses left-moving
+supercell vector for SRH calculation and is dedicated for Southern
+Hemisphere. Units are m2/s2.</p>
+<p>[195] SHERBS3 – based on the formula available in Sherburn and Parker
+(2014), doi: <a href="https://doi.org/10.1175/WAF-D-13-00041.1" class="external-link uri">https://doi.org/10.1175/WAF-D-13-00041.1</a>. This version
+uses 0–3 km bulk wind shear term. Parameter is dimensionless.</p>
+<p>[196] SHERBE – based on the formula available in Sherburn and Parker
+(2014), doi: <a href="https://doi.org/10.1175/WAF-D-13-00041.1" class="external-link uri">https://doi.org/10.1175/WAF-D-13-00041.1</a>. This version
+uses effective bulk wind shear term. Parameter is dimensionless.</p>
+<p>[197] SHERBS3_v2 – based on the formula available in Sherburn and
+Parker (2014), doi: <a href="https://doi.org/10.1175/WAF-D-13-00041.1" class="external-link uri">https://doi.org/10.1175/WAF-D-13-00041.1</a>, but with
+700-500 hPa lapse rate replaced with maximum 2 km lapse rate between 2
+and 6 km AGL. This version uses 0–3 km bulk wind shear term. Parameter
+is dimensionless.</p>
+<p>[198] SHERBE_v2 – based on the formula available in Sherburn and
+Parker (2014), doi: <a href="https://doi.org/10.1175/WAF-D-13-00041.1" class="external-link uri">https://doi.org/10.1175/WAF-D-13-00041.1</a>, but with
+700-500 hPa lapse rate replaced with maximum 2 km lapse rate between 2
+and 6 km AGL. This version uses effective bulk wind shear term.
+Parameter is dimensionless.</p>
+<p>[199] DEI – (downburst environment index), a composite product of
+WMAXSHEAR and Cold Pool Strengths, based on the formula available in
+Romanic et al. (2022), doi: <a href="https://doi.org/10.1016/j.wace.2022.100474" class="external-link uri">https://doi.org/10.1016/j.wace.2022.100474</a>. Parameter is
+dimensionless.</p>
+<p>[200] DEI_eff – (downburst environment index), a composite product of
+WMAXSHEAR and Cold Pool Strengths but using an effective bulk wind shear
+layer, based on the formula available in Romanic et al. (2022), doi: <a href="https://doi.org/10.1016/j.wace.2022.100474" class="external-link uri">https://doi.org/10.1016/j.wace.2022.100474</a>. Parameter is
+dimensionless.</p>
+<p>[201] TIP – (thunderstorm intensity parameter), an experimental
+composite product of CAPE, bulk wind shear, precipitable water and
+storm-relative helicity. Parameter is dimensionless</p>
 </div>
 <div class="section level3">
 <h3 id="accuracy-tables-for-sounding_compute">Accuracy tables for <code>sounding_compute()</code><a class="anchor" aria-label="anchor" href="#accuracy-tables-for-sounding_compute"></a>
@@ -577,13 +714,13 @@ performed with 5 m vertical resolution step up to 20 km AGL (i.e.:
 <span><span class="va">t3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="../reference/sounding_compute.html">sounding_compute</a></span><span class="op">(</span><span class="va">sounding_vienna</span><span class="op">$</span><span class="va">pressure</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">altitude</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">temp</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">dpt</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">wd</span>, <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">ws</span>, accuracy <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t1</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.000   0.003   0.003</span></span>
+<span><span class="co">#&gt;   0.003   0.000   0.003</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t2</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.007   0.000   0.008</span></span>
+<span><span class="co">#&gt;   0.008   0.000   0.008</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t3</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;    0.12    0.00    0.12</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.113   0.000   0.113</span></span></code></pre></div>
 </div>
 </div>
   </div>
