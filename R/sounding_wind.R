@@ -31,7 +31,6 @@ sounding_wind = function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         
         # convert wind speed from knots to m/s
         ws = ws * 0.51444
-
         
         # define plotting area limits:
         ymax = skewty(1050)
@@ -47,7 +46,7 @@ sounding_wind = function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 1)
         axis(1, at = ws_units, labels = ws_units, pos = ymax)
         axis(3, at = ws_units, labels = NA, pos = ymin)
-        mtext(side = 1, line = 1.2, paste("Wind speed (m/s)"), cex=0.8)
+        mtext(side = 1, line = 1.2, paste("Wind speed (m/s)"), cex = 0.8)
         
         segments(x0 = ws_units, y0 = ymax, x1 = ws_units, y1 = ymin, lwd = 0.5, col = "black", lty = 3)
         prs = c(1050, 1000, 850, 700, 500, 400, 300, seq(from = 200, to = ptop, by = -50))
@@ -58,7 +57,7 @@ sounding_wind = function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         if(yaxs){
                 axis(2, at = ypos, labels = prs[2:Npressure], pos = xmin, padj = 1)
                 # commented label for X-axis
-                mtext(side = 2, line = 1.5, "pressure (hPa)", padj = 2, cex=0.8)
+                mtext(side = 2, line = 1.5, "pressure (hPa)", padj = 2, cex = 0.8)
                 
         } else {
                 axis(2, at = ypos, labels = NA, pos = xmin, padj = 1)

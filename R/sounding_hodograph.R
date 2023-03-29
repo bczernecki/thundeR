@@ -19,13 +19,13 @@
 #' @return hodograph plot
 #'
 #' @examples
-#' #chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
-#' data("chanhassen") 
+#' #northplatte = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 0)
+#' data("northplatte") 
 #' sounding_hodograph(
-#'   ws = chanhassen$ws, wd = chanhassen$wd,
-#'   altitude = chanhassen$altitude, max_speed = 40
+#'   ws = northplatte$ws, wd = northplatte$wd,
+#'   altitude = northplatte$altitude, max_speed = 40
 #' )
-#' title("Chanhasses - 10 May 2001, 00:00 UTC")
+#' title("North Platte - 3 July 1999, 00:00 UTC")
 sounding_hodograph = function(ws, wd, altitude, max_hght = 12000, max_speed = 25,
                               lab_hghts = c(0, 1, 3, 6, 9, 12),
                               close_par = TRUE, SRH_polygon = "03km_RM",
