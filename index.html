@@ -127,9 +127,7 @@
 <span><span class="va">dpt</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">dpt</span> <span class="co"># vector of dew point temperature [degree Celsius]</span></span>
 <span><span class="va">wd</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">wd</span> <span class="co"># vector of wind direction [azimuth in degrees]</span></span>
 <span><span class="va">ws</span> <span class="op">=</span> <span class="va">sounding_vienna</span><span class="op">$</span><span class="va">ws</span> <span class="co"># vector of wind speed [knots]</span></span>
-<span><span class="fu"><a href="reference/sounding_save.html">sounding_save</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Vienna.png"</span>,</span>
-<span>              title <span class="op">=</span> <span class="st">"Vienna - 23 August 2011 1200 UTC"</span>,</span>
-<span>              <span class="va">pressure</span>, <span class="va">altitude</span>, <span class="va">temp</span>, <span class="va">dpt</span>, <span class="va">wd</span>, <span class="va">ws</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/sounding_save.html">sounding_save</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"Vienna.png"</span>, title <span class="op">=</span> <span class="st">"Vienna - 23 August 2011 1200 UTC"</span>, <span class="va">pressure</span>, <span class="va">altitude</span>, <span class="va">temp</span>, <span class="va">dpt</span>, <span class="va">wd</span>, <span class="va">ws</span><span class="op">)</span></span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/Vienna.png"></p>
 </div>
 <div class="section level4">
@@ -141,10 +139,9 @@
 <span><span class="va">profile</span> <span class="op">=</span> <span class="va">northplatte</span></span>
 <span></span>
 <span><span class="co"># or by downloading it manually:</span></span>
-<span><span class="co"># profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)</span></span>
+<span><span class="co"># profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 0)</span></span>
 <span></span>
-<span><span class="fu"><a href="reference/sounding_save.html">sounding_save</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"NorthPlatte.png"</span>,</span>
-<span>              title <span class="op">=</span> <span class="st">"North Platte - 03 July 1999 0000 UTC"</span>, <span class="va">profile</span><span class="op">$</span><span class="va">pressure</span>,                             <span class="va">profile</span><span class="op">$</span><span class="va">altitude</span>, <span class="va">profile</span><span class="op">$</span><span class="va">temp</span>, <span class="va">profile</span><span class="op">$</span><span class="va">dpt</span>, <span class="va">profile</span><span class="op">$</span><span class="va">wd</span>, <span class="va">profile</span><span class="op">$</span><span class="va">ws</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/sounding_save.html">sounding_save</a></span><span class="op">(</span>filename <span class="op">=</span> <span class="st">"NorthPlatte.png"</span>, title <span class="op">=</span> <span class="st">"North Platte - 03 July 1999 0000 UTC"</span>, <span class="va">profile</span><span class="op">$</span><span class="va">pressure</span>, <span class="va">profile</span><span class="op">$</span><span class="va">altitude</span>, <span class="va">profile</span><span class="op">$</span><span class="va">temp</span>, <span class="va">profile</span><span class="op">$</span><span class="va">dpt</span>, <span class="va">profile</span><span class="op">$</span><span class="va">wd</span>, <span class="va">profile</span><span class="op">$</span><span class="va">ws</span><span class="op">)</span></span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/NorthPlatte.png"></p>
 </div>
 <div class="section level4">
@@ -274,10 +271,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#northplatte = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 00)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"northplatte"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="reference/sounding_hodograph.html">sounding_hodograph</a></span><span class="op">(</span>ws <span class="op">=</span> <span class="va">northplatte</span><span class="op">$</span><span class="va">ws</span>,</span>
-<span>                   wd <span class="op">=</span> <span class="va">northplatte</span><span class="op">$</span><span class="va">wd</span>, </span>
-<span>                   altitude <span class="op">=</span> <span class="va">northplatte</span><span class="op">$</span><span class="va">altitude</span>,</span>
-<span>                   max_speed <span class="op">=</span> <span class="fl">38</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/sounding_hodograph.html">sounding_hodograph</a></span><span class="op">(</span>ws <span class="op">=</span> <span class="va">northplatte</span><span class="op">$</span><span class="va">ws</span>, wd <span class="op">=</span> <span class="va">northplatte</span><span class="op">$</span><span class="va">wd</span>, altitude <span class="op">=</span> <span class="va">northplatte</span><span class="op">$</span><span class="va">altitude</span>, max_speed <span class="op">=</span> <span class="fl">38</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"North Platte - 03 July 1999, 00:00 UTC"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/hodograph.png"></p>
 </div>
@@ -309,11 +303,11 @@
 <span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>, parameters)))</span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>[<span class="st">'9413.29'</span>, <span class="st">'233.35'</span>, <span class="st">'1713.74'</span>, <span class="st">'0.00'</span>, <span class="st">'775.00'</span>, <span class="st">'775.00'</span>,</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="st">'15500.00'</span>, <span class="st">'-16.55'</span>, <span class="st">'137.21'</span>, <span class="st">'-66.63'</span>, <span class="st">'23.98'</span>,</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="st">'23.98'</span>, <span class="st">'23.36'</span>, <span class="st">'9413.29'</span>, <span class="st">'233.35'</span>, <span class="st">'1713.74'</span>, <span class="st">'0.00'</span>, <span class="st">'775.00'</span>,</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="st">'775.00'</span>, <span class="st">'15500.00'</span>, <span class="st">'-16.55'</span>, <span class="st">'137.21'</span>, <span class="st">'-66.63'</span>, <span class="st">'23.98'</span>, <span class="st">'23.98'</span>, <span class="st">'23.36'</span>, </span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="st">'7805.13'</span>, <span class="st">'115.22'</span>, <span class="st">'1515.81'</span>, <span class="st">'-4.35'</span>, <span class="st">'950.00'</span>, <span class="st">'950.00'</span>, <span class="st">'15000.00'</span>, </span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>...]</span></code></pre></div>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="st">'15500.00'</span>, <span class="st">'-16.55'</span>, <span class="st">'137.21'</span>, <span class="st">'-66.63'</span>, <span class="st">'23.98'</span>, <span class="st">'23.98'</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="st">'23.36'</span>, <span class="st">'9413.29'</span>, <span class="st">'233.35'</span>, <span class="st">'1713.74'</span>, <span class="st">'0.00'</span>, <span class="st">'775.00'</span>,</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="st">'775.00'</span>, <span class="st">'15500.00'</span>, <span class="st">'-16.55'</span>, <span class="st">'137.21'</span>, <span class="st">'-66.63'</span>, <span class="st">'23.98'</span>, </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="st">'23.98'</span>, <span class="st">'23.36'</span>, <span class="st">'7805.13'</span>, <span class="st">'115.22'</span>, <span class="st">'1515.81'</span>, <span class="st">'-4.35'</span>, </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="st">'950.00'</span>, <span class="st">'950.00'</span>, <span class="st">'15000.00'</span>, ...]</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="accuracy-tables-for-sounding_compute">Accuracy tables for <code>sounding_compute()</code>
