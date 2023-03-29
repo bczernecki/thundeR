@@ -68,8 +68,8 @@ Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png
 
 ```{r example2, eval = TRUE}
 #profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 0)
-data("chanhassen") # instead of downloading one may use pre-defined dataset
-profile = chanhassen
+data("northplatte") # instead of downloading one may use pre-defined dataset
+profile = northplatte
 head(profile) # show first few rows of downloaded dataset
 sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999 0000 UTC", profile$pressure, profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
 ```
@@ -97,11 +97,11 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 Download sounding and draw hodograph:
 
 ```{r example4, eval = TRUE, fig.width=6, fig.height=6, fig.fullwidth = TRUE}
-#chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
-data("chanhassen")
-sounding_hodograph(ws = chanhassen$ws, wd = chanhassen$wd, 
-                   altitude = chanhassen$altitude,max_speed = 40)
-title("Chanhasses - 10 May 2001, 00:00 UTC")
+#northplatte = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 00)
+data("northplatte")
+sounding_hodograph(ws = northplatte$ws, wd = northplatte$wd, 
+                   altitude = northplatte$altitude, max_speed = 40)
+title("North Platte - 03 July 1999, 00:00 UTC")
 ```
 
 ### Example 5 - thunder in Python

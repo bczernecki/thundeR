@@ -66,12 +66,12 @@ sounding_save(filename = "Vienna.png",
 
 ![](https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/Vienna.png)
 
-#### Download North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file
+#### Download LBF North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file
 
 ``` r
 
-data(chanhassen) # instead of downloading with get_sounding one may use the pre-defined object
-profile = chanhassen
+data(northplatte) # instead of downloading with get_sounding one may use the pre-defined object
+profile = northplatte
 
 # or by downloading it manually:
 # profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
@@ -206,11 +206,13 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 Download sounding and draw hodograph:
 
 ``` r
-chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
-sounding_hodograph(ws = chanhassen$ws, wd = chanhassen$wd, 
-                   altitude = chanhassen$altitude,
-                   max_speed = 40)
-title("Chanhassen - 10 May 2001, 00:00 UTC")
+#northplatte = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 00)
+data("northplatte")
+sounding_hodograph(ws = northplatte$ws,
+                   wd = northplatte$wd, 
+                   altitude = northplatte$altitude,
+                   max_speed = 38)
+title("North Platte - 03.07.1999, 00:00 UTC")
 ```
 
 ![](https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/hodograph.png)
@@ -251,15 +253,12 @@ parameters = robjects.r['sounding_compute'](profile['pressure'], profile['altitu
 # customize output and print all computed variables, e.g. most-unstable CAPE (first element) equals 9413 J/kg
 
 print(list(map('{:.2f}'.format, parameters)))
-['9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98',
-'23.98', '23.36', '9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00', '15500.00', '-16.55', '137.21', 
-'-66.63', '23.98', '23.98', '23.36', '7805.13', '115.22', '1515.81', '-4.35', '950.00', '950.00', '15000.00', 
-'-14.66', '124.94', '-68.41', '22.46', '22.46', '21.17', '-9.57', '-6.68', '-8.80', '-8.68', '-9.06', '-7.70', 
-'4250.00', '3500.00', '0.00', '2866.00', '50.57', '52.93', '1381.81', '308.98', '29.00', '37.59', '87.03', '0.58', 
-'0.40', '0.47', '8.85', '11.21', '13.88', '20.28', '29.33', '6.84', '21.70', '28.32', '28.32', '27.17', '17.06', 
-'12.53', '12.53', '11.74', '7.09', '6.08', '7.77', '7.69', '19.89', '62.07', '110.06', '156.48', '6.25', '7.77', 
-'4.26', '-42.78', '284.67', '5.65', '197.60', '14.19', '218.89', '7.77', '31.50', '-12.14', '60.40', '677.12', 
-'4.67', '6.10', '29.46', '29.46', '3.86', '12.35', '2783.07', '2783.07', '2534.22', '3886.07', '3886.07', '3395.00']
+['9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00',
+'15500.00', '-16.55', '137.21', '-66.63', '23.98',
+'23.98', '23.36', '9413.29', '233.35', '1713.74', '0.00', '775.00',
+'775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98', '23.98', '23.36', 
+'7805.13', '115.22', '1515.81', '-4.35', '950.00', '950.00', '15000.00', 
+...]
 ```
 
 #### Accuracy tables for `sounding_compute()`

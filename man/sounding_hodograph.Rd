@@ -46,7 +46,8 @@ hodograph plot
 Plot hodograph to show changes in wind speed and wind direction with height
 }
 \examples{
-chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+#chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+data("chanhassen") 
 sounding_hodograph(
   ws = chanhassen$ws, wd = chanhassen$wd,
   altitude = chanhassen$altitude, max_speed = 40

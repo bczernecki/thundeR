@@ -30,22 +30,38 @@ Download sounding and draw customized Skew-T plot (e.g. up to 150 hPa instead of
 
 ```{r example5, eval = TRUE, fig.width=7, fig.height=8}
 library(thunder)
-data("chanhassen")
-#chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+data("northplatte")
+#northplatte = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
 skewt_plot(ptop = 150, close_par = FALSE, temp_stripes = TRUE, deg45 = TRUE, mixing_ratio_col = "pink")
-skewt_lines(chanhassen$temp, chanhassen$pressure, ptop = 150, col = "red", lwd = 3)
-skewt_lines(chanhassen$dpt, chanhassen$pressure, ptop = 150, col = "blue", lwd = 3)
+skewt_lines(northplatte$temp, northplatte$pressure, ptop = 150, col = "red", lwd = 3)
+skewt_lines(northplatte$dpt, northplatte$pressure, ptop = 150, col = "blue", lwd = 3)
 title("Skew-T customized")
 ```
 
 ### Wind speed vertical profile with wind barbs:
 
 ```{r example6, eval = TRUE, fig.width=8, fig.height=6, fig.fullwidth = TRUE}
-# chanhassen = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+# northplatte = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
 oldpar = par()
 par(fig = c(0.1, 0.75, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
-sounding_wind(pressure = chanhassen$pressure, ws = chanhassen$ws, yaxs = TRUE)
-title("Wind profile: Chanhassen - 10 May 2001 0000 UTC", outer = F)
+sounding_wind(pressure = northplatte$pressure, ws = northplatte$ws, yaxs = TRUE)
+title("northplatte - 10 May 2001 0000 UTC", outer = FALSE)
 par(fig = c(0.65, 0.95, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
-sounding_barbs(chanhassen$pressure, chanhassen$ws, chanhassen$wd, chanhassen$altitude, interpolate = FALSE, barb_cex = 1)
+sounding_barbs(northplatte$pressure, northplatte$ws, northplatte$wd, northplatte$altitude, interpolate = FALSE, barb_cex = 1)
+```
+
+### Hodograph with storm motion
+
+# TODO:
+
+- please update units for storm motion
+
+```r
+data("northplatte")
+sounding_hodograph(ws = northplatte$ws,
+                   wd = northplatte$wd, 
+                   altitude = northplatte$altitude,
+                   max_speed = 38,
+                   )
+title("North Platte - 10 May 2001, 00:00 UTC")
 ```
