@@ -212,7 +212,7 @@ sounding_hodograph(ws = northplatte$ws,
                    wd = northplatte$wd, 
                    altitude = northplatte$altitude,
                    max_speed = 38)
-title("North Platte - 03.07.1999, 00:00 UTC")
+title("North Platte - 03 July 1999, 00:00 UTC")
 ```
 
 ![](https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/hodograph.png)
