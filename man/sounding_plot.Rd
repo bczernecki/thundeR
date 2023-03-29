@@ -49,8 +49,8 @@ sounding_plot(
 
 \item{meanlayer_bottom_top}{(optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500}
 
-\item{storm_motion}{(optional) for moving storms only - one can define 
-wind speed and wind directions (TODO: units!!!) that will be used to compute adjusted SRH parameters}
+\item{storm_motion}{(optional) for moving storms only - one can define vector of length two with
+wind speed (m/s) and wind directions (degrees) that will be used to compute adjusted SRH parameters}
 
 \item{...}{extra graphical arguments to be added}
 }

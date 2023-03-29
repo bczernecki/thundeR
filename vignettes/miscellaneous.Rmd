@@ -52,9 +52,7 @@ sounding_barbs(northplatte$pressure, northplatte$ws, northplatte$wd, northplatte
 
 ### Hodograph with storm motion
 
-# TODO:
-
-- please update units for storm motion
+It is possible to define its own `storm_motion` parameters in order to visualise and/or compute parameters for cells moving with pre-defined direction and speed. The below example shows customized hodograph for thunderstorm cell moving with the speed of 15 m/s and 180 degree direction.
 
 ```r
 data("northplatte")
@@ -62,6 +60,8 @@ sounding_hodograph(ws = northplatte$ws,
                    wd = northplatte$wd, 
                    altitude = northplatte$altitude,
                    max_speed = 38,
-                   )
+                   SRH_polygon = "03km_RM",
+                   storm_motion = c(15, 180)
+)
 title("North Platte - 10 May 2001, 00:00 UTC")
 ```

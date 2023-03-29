@@ -59,9 +59,7 @@ temp = sounding_vienna$temp  # vector of temperature [degree Celsius]
 dpt = sounding_vienna$dpt # vector of dew point temperature [degree Celsius]
 wd = sounding_vienna$wd # vector of wind direction [azimuth in degrees]
 ws = sounding_vienna$ws # vector of wind speed [knots]
-sounding_save(filename = "Vienna.png",
-              title = "Vienna - 23 August 2011 1200 UTC",
-              pressure, altitude, temp, dpt, wd, ws)
+sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC", pressure, altitude, temp, dpt, wd, ws)
 ```
 
 ![](https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/Vienna.png)
@@ -74,10 +72,9 @@ data(northplatte) # instead of downloading with get_sounding one may use the pre
 profile = northplatte
 
 # or by downloading it manually:
-# profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3,hh = 0)
+# profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 0)
 
-sounding_save(filename = "NorthPlatte.png",
-              title = "North Platte - 03 July 1999 0000 UTC", profile$pressure,                             profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
+sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999 0000 UTC", profile$pressure, profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
 ```
 ![](https://raw.githubusercontent.com/bczernecki/thundeR/master/inst/figures/NorthPlatte.png)
 
@@ -208,10 +205,7 @@ Download sounding and draw hodograph:
 ``` r
 #northplatte = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 00)
 data("northplatte")
-sounding_hodograph(ws = northplatte$ws,
-                   wd = northplatte$wd, 
-                   altitude = northplatte$altitude,
-                   max_speed = 38)
+sounding_hodograph(ws = northplatte$ws, wd = northplatte$wd, altitude = northplatte$altitude, max_speed = 38)
 title("North Platte - 03 July 1999, 00:00 UTC")
 ```
 
@@ -254,11 +248,11 @@ parameters = robjects.r['sounding_compute'](profile['pressure'], profile['altitu
 
 print(list(map('{:.2f}'.format, parameters)))
 ['9413.29', '233.35', '1713.74', '0.00', '775.00', '775.00',
-'15500.00', '-16.55', '137.21', '-66.63', '23.98',
-'23.98', '23.36', '9413.29', '233.35', '1713.74', '0.00', '775.00',
-'775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98', '23.98', '23.36', 
-'7805.13', '115.22', '1515.81', '-4.35', '950.00', '950.00', '15000.00', 
-...]
+'15500.00', '-16.55', '137.21', '-66.63', '23.98', '23.98',
+'23.36', '9413.29', '233.35', '1713.74', '0.00', '775.00',
+'775.00', '15500.00', '-16.55', '137.21', '-66.63', '23.98', 
+'23.98', '23.36', '7805.13', '115.22', '1515.81', '-4.35', 
+'950.00', '950.00', '15000.00', ...]
 ```
 
 #### Accuracy tables for `sounding_compute()`
