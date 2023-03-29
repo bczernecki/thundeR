@@ -3,11 +3,11 @@
 #' @noRd
 #' 
 
-skewtx <- function (temp, ycoord) {
+skewtx = function(temp, ycoord) {
         0.54 * temp + 0.90692 * ycoord
 }
 
-skewty <- function (pres) {
+skewty = function(pres) {
         132.182 - 44.061 * log10(pres)
 }
 
@@ -19,7 +19,7 @@ skewty <- function (pres) {
 #' @noRd
 #' 
 
-satlft <- function (thw, p) {
+satlft = function(thw, p) {
         cta <- 273.15
         akap <- 0.28541
         pwrp <- (p/1000)^akap
@@ -45,7 +45,7 @@ satlft <- function (thw, p) {
 #' @noRd
 #' 
 
-tda <- function(o, p) {
+tda = function(o, p) {
         ok <- o + 273.15
         tdak <- ok * ((p * 0.001)^0.286)
         tdak - 273.15
