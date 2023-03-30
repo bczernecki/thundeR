@@ -11,3 +11,12 @@ pkgdown
 ^Meta$
 CITATION.cff
 ^\.github$
+inst/tools/*
+^.DS_Store
+^inst/.DS_Store
+^.DS_Store
+^tests/.DS_Store
+^docs/.DS_Store
+^.git/*
+^inst/.DS_Store
+^.Rproj.user/*
