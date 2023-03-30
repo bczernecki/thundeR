@@ -1,7 +1,12 @@
-# thundeR 1.1.0
+# thundeR 1.1.1
 
 * Improvements in C++ algorithm responsible for more accurate computations of parcel trajectories and related thermodynamic indices
+  * Minor bug fixes in CIN calculation procedure
+  * Minor bug fixes in mixed-layer calculation procedure
+  * Minor bug fixes in DCAPE calculation procedure
 * Fixing code leaks in C++ module
+* New parameters added. Currently the list of computed parameters contains over 200 indices
+* Documentation and pkgdown site updates
 * Removing dependency to the `climate` package by including internal functions responsible for downloading soundings from Wyoming database
 * Improving graphical layout:
   * Adding parcel trajectories shading for positive area
