@@ -35,7 +35,7 @@ sounding_hodograph(
 \item{SRH_polygon}{draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default}
 
 \item{storm_motion}{(optional) for moving storms only - one can define 
-wind speed (m/s) and wind directions (degrees) that will be used to compute adjusted SRH parameters}
+wind speed [m/s] and wind directions [degrees] that will be used to compute adjusted SRH parameters}
 
 \item{...}{other graphical parameters to be used with plot() function}
 }

@@ -51,11 +51,11 @@ skewt_plot = function(ptop = 100,
   # restore old par settings on exit if Skew-T won't be modified later
   oldpar = par(no.readonly = TRUE) 
   
-  if(close_par) {
+  if (close_par) {
     on.exit(par(oldpar))
   }
   
-  if(deg45) {
+  if (deg45) {
     par(pty = "s") # preserve correct aspect ratio
   }
   
@@ -80,8 +80,8 @@ skewt_plot = function(ptop = 100,
   # abline(v = c(-29.82, 23.66))
   ypos = skewty(1050)
   degc = seq(-50, 50, by = 10)
-  axis(1, at = skewtx(degc, ypos), labels = seq(-50, 50, by = 10), pos = ymax, cex.axis=0.65, padj=-0.15, tck=-0.01)
-  mtext(side = 1, line = 0, expression(paste("Temperature [\u00b0C]")), cex=0.65)
+  axis(1, at = skewtx(degc, ypos), labels = seq(-50, 50, by = 10), pos = ymax, cex.axis = 0.65, padj = -0.15, tck = -0.01)
+  mtext(side = 1, line = 0, expression(paste("Temperature [\u00b0C]")), cex = 0.65)
   
   pres = c(1050, 1000, 850, 700, 500, 300, 200, 100)
   NPRES = length(pres)
@@ -90,7 +90,7 @@ skewt_plot = function(ptop = 100,
   
   #abline(h = y)
   ypos = skewty(pres[2:NPRES])
-  axis(2, las = 1, at = ypos, labels = pres[2:NPRES], pos = xmin, cex.axis = 0.65, lwd=0)
+  axis(2, las = 1, at = ypos, labels = pres[2:NPRES], pos = xmin, cex.axis = 0.65, lwd = 0)
   mtext(side = 2, line = 1.3, "Pressure [hPa]", padj = 2, cex = 0.65)
   # end of drawing diagram in square
   
@@ -120,17 +120,17 @@ skewt_plot = function(ptop = 100,
   
   segments(xl, yl, xr, yr, col = isoterms_col, lwd = 0.8)
   
-  if(temp_stripes){
+  if (temp_stripes) {
     strt = ifelse(ptop == 150, 1, 2)
-    for (i in seq(strt, length(xl), by = 2)){
-      polygon(x = c(xl[i], xr[i], xr[i+1], xl[i+1]), 
-              y = c(yl[i], yr[i], yr[i+1], yl[i+1]), 
+    for (i in seq(strt, length(xl), by = 2)) {
+      polygon(x = c(xl[i], xr[i], xr[i + 1], xl[i + 1]), 
+              y = c(yl[i], yr[i], yr[i + 1], yl[i + 1]), 
               border = NA,
               col = "#f0e8f475")
     }
   }
   
-  if(isotherm0){
+  if (isotherm0) {
     inds = which(temp == 0)
     segments(xl[inds], yl[inds], xr[inds], yr[inds], col = "blue3", lwd = 1, lty = 3)
     inds = which(temp == -20)
@@ -148,15 +148,15 @@ skewt_plot = function(ptop = 100,
   #end of drawing isotherms
   
   # mixing ratio
-  temp1050 = c(256.65, 265.25, 274.45, 284.40, 295.1)-273.15
-  temp600 = c(250.15, 258.25, 266.90, 276.25, 286.25)-273.15
+  temp1050 = c(256.65, 265.25, 274.45, 284.40, 295.1) - 273.15
+  temp600 = c(250.15, 258.25, 266.90, 276.25, 286.25) - 273.15
   
   yl = skewty((rep(600, times = length(temp600))))
   xr = skewtx(temp1050, skewty(rep(1050, times = length(temp1050))))
   yr = skewty((rep(1050, times = length(temp1050))))
   xl = skewtx(temp600, skewty(rep(600, times = length(temp600))))
   
-  if(!is.na(mixing_ratio_col) || mixing_ratio_col != ""){
+  if (!is.na(mixing_ratio_col) || mixing_ratio_col != "") {
     segments(xl, yl, xr, yr, col = mixing_ratio_col, lwd = 0.8, lty = 1)
     text(xl, yl + 0.75, labels = c(1, 2, 4, 8, 16), col = "#8470FF90", adj = 0.5, cex = 0.6)
   }
@@ -168,7 +168,7 @@ skewt_plot = function(ptop = 100,
   lendth[1:8] = c(950, 690, 500, 360, 250, 170, 110, 60)
   
   # correction for ptop
-  if((!is.na(dry_adiabats_col) || dry_adiabats_col != "")){
+  if ((!is.na(dry_adiabats_col) || dry_adiabats_col != "")) {
     lendth[lendth < ptop] = ptop
     rendth = rep(1050, times = NTHETA)
     for (itheta in 1:NTHETA) {
@@ -177,8 +177,8 @@ skewt_plot = function(ptop = 100,
       dry = tda(theta[itheta], p)
       sx = skewtx(dry, sy)
       sx = sx[sx <= xmax]
-      if(length(sx)){
-        sy=sy[1:length(sx)]
+      if (length(sx)) {
+        sy = sy[1:length(sx)]
         lines(sx, sy, lty = 1, col = dry_adiabats_col, lwd = 0.7)
       }
     }
@@ -187,7 +187,7 @@ skewt_plot = function(ptop = 100,
   
   
   # beginning of moist adiabats:
-  if(!is.na(moist_adiabats_col) || moist_adiabats_col != ""){
+  if (!is.na(moist_adiabats_col) || moist_adiabats_col != "") {
     p = seq(from = 1050, to = ptop, by = -2)
     npts = length(p)
     sy = skewty(p)

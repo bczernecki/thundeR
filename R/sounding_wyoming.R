@@ -85,11 +85,10 @@ sounding_wyoming_bp = function(wmo_id,
       # and convert m/s to knots to stay in alignment with the default format used:
       df$SKNT = round(df$SKNT * 1.9438, 1)
     }
-    
     df = list(df, df2)
     
   } else { # end of checking file size / problems with internet connection
-    cat(paste0("Service not working or wmo_id or date not correct. Check url:\n", url)) 
+    message(paste0("Service not working or wmo_id or date not correct. Check url:\n", url)) 
   }
   
   unlink(temp)

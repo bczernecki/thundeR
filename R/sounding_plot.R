@@ -16,7 +16,7 @@
 #' @param DCAPE draws downdraft parcel and polygon of downdraft's negative buoyancy (default = FALSE) 
 #' @param meanlayer_bottom_top (optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500
 #' @param storm_motion (optional) for moving storms only - one can define vector of length two with
-#' wind speed (m/s) and wind directions (degrees) that will be used to compute adjusted SRH parameters
+#' wind speed [m/s] and wind directions [degrees] that will be used to compute adjusted SRH parameters
 #' @param ... extra graphical arguments to be added
 #' @export
 #' @import aiRthermo

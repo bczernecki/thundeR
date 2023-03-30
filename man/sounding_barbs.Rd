@@ -25,7 +25,7 @@ sounding_barbs(
 
 \item{altitude}{altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [m]}
 
-\item{ptop}{Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)}
+\item{ptop}{Pressure top level [hPa] to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)}
 
 \item{interpolate}{logical, draw wind barbs only at interpolated altitudes with 500 m interval (default = TRUE)  instead of all wind barbs for a given input dataset}
 

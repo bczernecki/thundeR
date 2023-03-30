@@ -11,7 +11,7 @@
 #' @param close_par if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default. If you want to modify Skew-T plot in next step set it to FALSE
 #' @param SRH_polygon draws polygon for storm-relative helicity, available options are "0500m", "01km", "03km", "36km", "none", "03km" used as default
 #' @param storm_motion (optional) for moving storms only - one can define 
-#' wind speed (m/s) and wind directions (degrees) that will be used to compute adjusted SRH parameters
+#' wind speed [m/s] and wind directions [degrees] that will be used to compute adjusted SRH parameters
 #' @param ... other graphical parameters to be used with plot() function
 #'
 #' @export

@@ -205,7 +205,6 @@
 #'  \item DEI
 #'  \item DEI_eff
 #'  \item TIP
-
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -228,8 +227,7 @@
 #' dpt = c(20, 5, -5, -30, -55, -80, -99)
 #' wd = c(0, 90, 135, 180, 270, 350, 0)
 #' ws = c(5, 10, 20, 30, 40, 5, 0)
-#' accuracy = 2 
-#' options(digits = 2) #change output formatting precision 
+#' accuracy = 2
 #' sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
 sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,

@@ -13,6 +13,9 @@ test_url(link, output, quiet = FALSE)
 
 \item{quiet}{logical vector (TRUE or FALSE) to be passed to curl_download function. FALSE by default}
 }
+\value{
+No return value, called for side effects to check for internet connection
+}
 \description{
 Function for downloading & testing url/internet connection according to CRAN policy
 Example solution strongly based on https://community.rstudio.com/t/internet-resources-should-fail-gracefully/49199/12

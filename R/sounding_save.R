@@ -32,9 +32,9 @@
 #' \donttest{
 #' data("sounding_vienna")
 #' attach(sounding_vienna)
-#' # sounding_save(filename = "Vienna.png", 
-#' #              pressure, altitude, temp, dpt, wd, ws, parcel = "MU", 
-#' #              title = "Vienna - 23 August 2011, 12:00 UTC")
+#' sounding_save(filename = "Vienna.png", 
+#'              pressure, altitude, temp, dpt, wd, ws, parcel = "MU", 
+#'              title = "Vienna - 23 August 2011, 12:00 UTC")
 #' } 
 #'
 
@@ -55,7 +55,7 @@ sounding_save = function(pressure, altitude, temp, dpt, wd, ws,
   }
 
   if (tools::file_ext(filename) == "svg") {
-    grDevices::svg(filename = filename, width = 20, height = 12, pointsize=24)
+    grDevices::svg(filename = filename, width = 20, height = 12, pointsize = 24)
     sounding_plot(pressure, altitude, temp, dpt, wd, ws, 
                   title, parcel, max_speed, buoyancy_polygon, SRH_polygon, DCAPE, ...)
     grDevices::dev.off()

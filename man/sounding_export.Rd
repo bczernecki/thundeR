@@ -32,12 +32,12 @@ sounding_export(
 
 \item{accuracy}{accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)}
 
-\item{interpolate_step}{interpolation step to be used for vertical interpolation. Valid only if `accuracy` is set to 3 (default is 5 m)}
+\item{interpolate_step}{interpolation step to be used for vertical interpolation. Valid only if `accuracy` is set to 3 (default is set to 5 m)}
 
 \item{meanlayer_bottom_top}{(optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500}
 
 \item{storm_motion}{(optional) for moving storms only - one can define vector of length two with
-wind speed (m/s) and wind directions (degrees) that will be used to compute adjusted SRH parameters}
+wind speed [m/s] and wind directions [degrees] that will be used to compute adjusted SRH parameters}
 }
 \value{
 Data frame of computed values for visualizing parcel trajectories
