@@ -1,7 +1,7 @@
 # thundeR <img src="https://github.com/bczernecki/thundeR/raw/master/man/figures/logo.png" style="float:right" width="150"/>
 
 **Rapid computation and visualisation of convective parameters from
-rawinsonde and NWP data**
+rawinsonde and numerical weather prediction data**
 
 <!-- badges: start -->
 
@@ -16,7 +16,7 @@ downloads](http://cranlogs.r-pkg.org/badges/thunder)](https://cran.r-project.org
 
 <!-- badges: end -->
 
-**`thundeR`** is a freeware R package and collection of functions for
+**`thundeR`** is a freeware R package for
 rapid computation and visualisation of convective parameters commonly
 used in the operational forecasting of severe convective storms. Core
 algorithm is based on C++ code implemented into R language via `Rcpp`.
@@ -67,12 +67,7 @@ sounding_save(filename = "Vienna.png", title = "Vienna - 23 August 2011 1200 UTC
 #### Download LBF North Platte rawinsonde profile for 03 Jul 1999 00UTC and export to png file
 
 ``` r
-
-data(northplatte) # instead of downloading with get_sounding one may use the pre-defined object
-profile = northplatte
-
-# or by downloading it manually:
-# profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 0)
+profile = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 0)
 
 sounding_save(filename = "NorthPlatte.png", title = "North Platte - 03 July 1999 0000 UTC", profile$pressure, profile$altitude, profile$temp, profile$dpt, profile$wd, profile$ws)
 ```
@@ -90,7 +85,6 @@ dpt = c(20, 5, -5, -30, -55, -80, -99) # dew point temperature [degree Celsius]
 wd = c(0, 90, 135, 180, 270, 350, 0) # wind direction [azimuth in degress]
 ws = c(5, 10, 20, 30, 40, 5, 0) # wind speed [knots]
 accuracy = 2 # accuracy of computations where 3 = high (slow), 2 = medium (recommended), 1 = low (fast)
-options(digits = 2) # change output formatting precision 
 sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 
 
@@ -203,7 +197,6 @@ sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
 Download sounding and draw hodograph:
 
 ``` r
-#northplatte = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 00)
 data("northplatte")
 sounding_hodograph(ws = northplatte$ws, wd = northplatte$wd, altitude = northplatte$altitude, max_speed = 38)
 title("North Platte - 03 July 1999, 00:00 UTC")
@@ -301,10 +294,13 @@ AGL)
 ### Developers
 
 **thundeR** package has been developed by atmospheric scientists, each
-having an equal contribution (listed in alphabetical order): - Bartosz
-Czernecki (Adam Mickiewicz University in Poznań, Poland) - Piotr Szuster
-(Cracow University of Technology, Poland) - Mateusz Taszarek (CIMMS/NSSL
-in Norman, Oklahoma, United States)
+having an equal contribution (listed in alphabetical order): 
+
+- Bartosz Czernecki (Adam Mickiewicz University in Poznań, Poland) 
+
+- Piotr Szuster (Cracow University of Technology, Poland) 
+
+- Mateusz Taszarek (CIMMS/NSSL in Norman, Oklahoma, United States)
 
 ### Contributions
 

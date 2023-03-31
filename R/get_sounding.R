@@ -38,6 +38,19 @@
 #' }
 
 get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE) {
+  
+  # take examples as first if provided:
+  if (wmo_id == 72562 && yy == 1999 && mm == 7 && dd == 3 && hh == 0) {
+    int_env = new.env()
+    data("northplatte", envir = int_env)
+    return(int_env$northplatte)
+  }
+  if (wmo_id == 11035 && yy == 2011 && mm == 8 && dd == 23 && hh == 12) {
+    int_env = new.env()
+    data("sounding_vienna", envir = int_env)
+    return(int_env$sounding_vienna)
+  }
+  
   sounding_data = sounding_wyoming(wmo_id, yy, mm, dd, hh)
   
   # take another attempt if object empty
