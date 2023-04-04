@@ -34,7 +34,7 @@ Description: Allow to compute and visualise convective parameters commonly
   Czernecki et al. (2019) <doi:10.1016/j.atmosres.2019.05.010>,
   Taszarek et al. (2020) <doi:10.1175/JCLI-D-20-0346.1>,
   Sherburn and Parker (2014) <doi:10.1175/WAF-D-13-00041.1>,
-  Romanic et al. (2022) <doi:10.1016/j.wace.2022.100474>
+  Romanic et al. (2022) <doi:10.1016/j.wace.2022.100474>.
 License: GPL (>= 2)
 Imports:
     aiRthermo,
