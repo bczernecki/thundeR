@@ -2,15 +2,39 @@ Package: thunder
 Type: Package
 Title: Computation and Visualisation of Atmospheric Convective Parameters
 Version: 1.1.1
-Authors@R: c(person("Bartosz", "Czernecki", email = "nwp@amu.edu.pl", role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6496-1386")),
-    person("Mateusz", "Taszarek", email = "mateusz.taszarek@noaa.gov", role = c("aut"), comment = c(ORCID = "0000-0001-9578-5872")),
-    person("Piotr", "Szuster", email = "retsuz@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-7937-8046")),
-    person("Doug", "Nychka", role = c("ctb")),
-    person("Eric", "Gilleland", role = c("ctb")),
-    person("Liangying", "Zhang", role = c("ctb")),
-    person("Tim", "Hoar", role = c("ctb")))
+Authors@R: c(person("Bartosz", "Czernecki",
+             email = "nwp@amu.edu.pl",
+             role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6496-1386")),
+             person("Mateusz", "Taszarek",
+             email = "mateusz.taszarek@noaa.gov",
+             role = c("aut"), comment = c(ORCID = "0000-0001-9578-5872")),
+             person("Piotr", "Szuster",
+             email = "retsuz@gmail.com",
+             role = c("aut"), comment = c(ORCID = "0000-0001-7937-8046")),
+             person("Doug", "Nychka", role = c("ctb")),
+             person("Eric", "Gilleland", role = c("ctb")),
+             person("Liangying", "Zhang", role = c("ctb")),
+             person("Tim", "Hoar", role = c("ctb")))
 Maintainer: Bartosz Czernecki <nwp@amu.edu.pl>
-Description: Collection of functions for rapid computation and visualisation of convective parameters commonly used in the operational prediction of severe convective storms. Core algorithm is based on a highly optimized 'C++' code linked into 'R' via 'Rcpp'. Highly efficient engine allows to derive thermodynamic and kinematic parameters from large numerical datasets such as reanalyses or operational Numerical Weather Prediction models in a reasonable amount of time. Package has been developed since 2017 by research meteorologists specializing in severe thunderstorms.
+Description: Allow to compute and visualise convective parameters commonly
+  used in the operational prediction of severe convective storms. Core algorithm
+  is based on a highly optimized 'C++' code linked into 'R' via 'Rcpp'. Highly
+  efficient engine allows to derive thermodynamic and kinematic parameters from
+  large numerical datasets such as reanalyses or operational Numerical Weather 
+  Prediction models in a reasonable amount of time. Package has been developed
+  since 2017 by research meteorologists specializing in severe thunderstorms.
+  The most relevant methods used in the package based on the following publications
+  Stipanuk (1973) <https://apps.dtic.mil/sti/pdfs/AD0769739.pdf>,
+  McCann et al. (1994) <doi:10.1175/1520-0434(1994)009<0532:WNIFFM>2.0.CO;2>,
+  Bunkers et al. (2000) <doi:10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2>,
+  Corfidi et al. (2003) <doi:10.1175/1520-0434(2003)018<0997:CPAMPF>2.0.CO;2>,
+  Showalter (1953) <doi:10.1175/1520-0477-34.6.250>,
+  Coffer et al. (2019) <doi:10.1175/WAF-D-19-0115.1>,
+  Gropp and Davenport (2019) <doi:10.1175/WAF-D-17-0150.1>,
+  Czernecki et al. (2019) <doi:10.1016/j.atmosres.2019.05.010>,
+  Taszarek et al. (2020) <doi:10.1175/JCLI-D-20-0346.1>,
+  Sherburn and Parker (2014) <doi:10.1175/WAF-D-13-00041.1>,
+  Romanic et al. (2022) <doi:10.1016/j.wace.2022.100474>.
 License: GPL (>= 2)
 Imports:
     aiRthermo,
@@ -26,7 +50,7 @@ Suggests:
     rmarkdown,
     testthat (>= 2.0.0)
 LinkingTo: Rcpp
-RoxygenNote: 7.2.2
+RoxygenNote: 7.2.3
 Encoding: UTF-8
 URL: https://bczernecki.github.io/thundeR/
 BugReports: https://github.com/bczernecki/thunder/issues/

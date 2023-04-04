@@ -27,10 +27,10 @@
 #' skewt_lines(temp, pressure, type = 'l', col='red', lwd = 2.5) 
 #' 
 
-skewt_lines = function (temp, pressure, ptop = 100, ...) {
+skewt_lines = function(temp, pressure, ptop = 100, ...) {
   ind = pressure >= ptop
   v = skewty(pressure[ind]) # extra checks for NA coded as -99
   u = skewtx(temp[ind], v)
-  u[u<(-27.75) | u>(26.25)] <- NA # to avoid going above plotting area (works smoothly when data every 5m is provided)
+  u[ u < (-27.75) | u > (26.25)] <- NA # to avoid going above plotting area (works smoothly when data every 5m is provided)
   graphics::lines(u, v,  ...)
 }

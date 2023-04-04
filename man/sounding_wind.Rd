@@ -11,7 +11,7 @@ sounding_wind(pressure, ws, ptop = 100, yaxs = TRUE, ...)
 
 \item{ws}{wind speed [knots]}
 
-\item{ptop}{pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)}
+\item{ptop}{pressure top level [hPa] to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)}
 
 \item{yaxs}{logic. Whether to add labels to heights on Y lab}
 

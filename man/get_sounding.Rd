@@ -32,7 +32,7 @@ Returns two lists with values described at: weather.uwyo.edu ; The first list co
  \item wd - wind direction [azimuth in degrees]
  \item ws - wind speed [knots]
  }
- If metadata = TRUE then retrieved data is wrapped to a list with the second element containing metadata
+ If metadata = TRUE then retrieved data is wrapped into a second list containing available metadata
 }
 \description{
 Download rawinsonde measurement from sounding database of the University of Wyoming in a form convenient to use with thundeR package.

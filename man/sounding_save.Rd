@@ -51,7 +51,7 @@ sounding_save(
 \item{...}{other arguments that can be used with `sounding_plot` or other graphic arguments}
 }
 \value{
-graphical file with Skew-T and hodograph layout
+graphical file with Skew-T and hodograph on a single layout
 }
 \description{
 Auxiliary function to `sounding_plot` that plots a composite \
@@ -62,9 +62,9 @@ on a single layout and saves as graphical file.
 \donttest{
 data("sounding_vienna")
 attach(sounding_vienna)
-# sounding_save(filename = "Vienna.png", 
-#              pressure, altitude, temp, dpt, wd, ws, parcel = "MU", 
-#              title = "Vienna - 23 August 2011, 12:00 UTC")
+sounding_save(filename = tempfile(), 
+             pressure, altitude, temp, dpt, wd, ws, parcel = "MU", 
+             title = "Vienna - 23 August 2011, 12:00 UTC")
 } 
 
 }

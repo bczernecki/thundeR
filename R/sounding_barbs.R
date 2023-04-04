@@ -12,7 +12,7 @@
 #' @param ws wind speed [knots]
 #' @param wd wind direction [azimuth in degrees]
 #' @param altitude altitude [m] (can be above sea level or above ground level as function always consider first level as surface, i.e h = 0 m) - altitude [m]
-#' @param ptop Pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
+#' @param ptop Pressure top level [hPa] to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param interpolate logical, draw wind barbs only at interpolated altitudes with 500 m interval (default = TRUE)  instead of all wind barbs for a given input dataset
 #' @param showaxis logical, drawing bounding box with left axis for pressure heighs (default FALSE)
 #' @param barb_cex size of wind barbs (default = 0.3)
@@ -35,7 +35,7 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
   
   altitude = altitude - altitude[1]
   
-  if(ptop > 200) {
+  if (ptop > 200) {
     stop("\nptop argument needs to be set < 200 (hPa)!")
   }
   
@@ -58,7 +58,7 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
   
   xc = c(xmin, xmin, xmax, xmax, xmin)
   yc = c(ymin, ymax, ymax, ymin, ymin)
-  if(isTRUE(showaxis)){
+  if (isTRUE(showaxis)) {
     plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 1)
   } else {
     plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 0.0)
@@ -70,10 +70,10 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
   
   ypos = skewty(prs[2:NPRES])
   
-  if(showaxis){
+  if (showaxis) {
     axis(2, at = ypos, labels = NA, pos = xmin, padj = 1)
     # commented label for X-axis
-    mtext(side = 2, line = 1.5, "Pressure (hPa)", padj = 2, cex=0.6)
+    mtext(side = 2, line = 1.5, "Pressure (hPa)", padj = 2, cex = 0.6)
   }
   
   # end of drawing diagram in square
@@ -84,11 +84,11 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
   x = rep(xmin, length(y))
   
   #segments(x0 = 0.5, y0 = y, x1 = ws, y1 = y, col = data$cols, lwd = 5)
-  if(!interpolate){
-    windbarbs(cx = x[ind]+0.5, cy = y[ind], direction = wd[ind], speed = ws[ind], cex = barb_cex)
+  if (!interpolate) {
+    windbarbs(cx = x[ind] + 0.5, cy = y[ind], direction = wd[ind], speed = ws[ind], cex = barb_cex)
   }
   
-  if(interpolate){
+  if (interpolate) {
     u = round(-ws * sin(wd * pi/180), 2)
     v = round(-ws * cos(wd * pi/180), 2)
     
@@ -108,7 +108,7 @@ sounding_barbs <- function(pressure, ws, wd, altitude,
     
     # clip to max visible range:
     data = data[data$y < ymin,]
-    windbarbs(cx = rep(x = (xmin+xmax)/2, times = length(data$y)),
+    windbarbs(cx = rep(x = (xmin + xmax)/2, times = length(data$y)),
               cy = data$y, direction = data$wd, speed = data$ws, cex = barb_cex)
   }
   

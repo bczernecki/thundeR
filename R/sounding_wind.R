@@ -10,7 +10,7 @@
 #'
 #' @param pressure pressure [hPa] 
 #' @param ws wind speed [knots]
-#' @param ptop pressure top level to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
+#' @param ptop pressure top level [hPa] to be used for plotting wind speed. Valid options should be < 200 hPa (100 by default)
 #' @param yaxs logic. Whether to add labels to heights on Y lab
 #' @param ... extra graphic arguments
 #' @export
@@ -25,7 +25,7 @@
 
 sounding_wind = function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         
-        if(ptop > 200) {
+        if (ptop > 200) {
                 stop("\nptop argument needs to be set < 200 (hPa)!")
         }
         
@@ -54,7 +54,7 @@ sounding_wind = function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         
         ypos = skewty(prs[2:Npressure])
         
-        if(yaxs){
+        if (yaxs) {
                 axis(2, at = ypos, labels = prs[2:Npressure], pos = xmin, padj = 1)
                 # commented label for X-axis
                 mtext(side = 2, line = 1.5, "pressure (hPa)", padj = 2, cex = 0.8)
@@ -122,8 +122,8 @@ sounding_wind = function(pressure, ws, ptop = 100, yaxs = TRUE, ...){
         lines(x = ws[ind], y = y[ind],  cex = 1, pch = 19, col = "black")
         
         # approach no. 2 for checking purposes
-        for (i in 1:nrow(cols)){
-                polygon(x = c(cols$x1[i]-1, cols$x1[i], cols$x1[i], cols$x1[i]-1),
+        for (i in 1:nrow(cols)) {
+                polygon(x = c(cols$x1[i] - 1, cols$x1[i], cols$x1[i], cols$x1[i] - 1),
                         y = c(ymax, ymax, ymin, ymin), 
                         col = cols$cols[i], border = NA)
         }

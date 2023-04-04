@@ -19,7 +19,7 @@
 #'  \item wd - wind direction [azimuth in degrees]
 #'  \item ws - wind speed [knots]
 #'  }
-#'  If metadata = TRUE then retrieved data is wrapped to a list with the second element containing metadata 
+#'  If metadata = TRUE then retrieved data is wrapped into a second list containing available metadata 
 #'
 #' @source http://weather.uwyo.edu/upperair/sounding.html
 #' @export
@@ -38,11 +38,23 @@
 #' }
 
 get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE) {
+  # take examples as first if provided:
+  if (wmo_id == 72562 && yy == 1999 && mm == 7 && dd == 3 && hh == 0) {
+    int_env = new.env()
+    data("northplatte", envir = int_env)
+    return(int_env$northplatte)
+  }
+  if (wmo_id == 11035 && yy == 2011 && mm == 8 && dd == 23 && hh == 12) {
+    int_env = new.env()
+    data("sounding_vienna", envir = int_env)
+    return(int_env$sounding_vienna)
+  }
+  
   sounding_data = sounding_wyoming(wmo_id, yy, mm, dd, hh)
   
   # take another attempt if object empty
   i = 1
-  while (is.null(sounding_data) & i < 5) {
+  while (is.null(sounding_data) && i < 5) {
     message("\nProblems with downloading. Re-trying in 5 seconds...")
     Sys.sleep(5)
     sounding_data = sounding_wyoming(wmo_id, yy, mm, dd, hh)
@@ -53,7 +65,7 @@ get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE) {
   
     colnames(sounding_data[[1]]) = c("pressure", "altitude", "temp", "dpt",
                                      "rh", "mixr", "wd", "ws", "thta", "thte", "thtv")
-    sounding_data[[1]] = sounding_data[[1]][,c("pressure", "altitude", "temp", "dpt","wd", "ws")]
+    sounding_data[[1]] = sounding_data[[1]][, c("pressure", "altitude", "temp", "dpt","wd", "ws")]
     sounding_data[[1]] = na.omit(sounding_data[[1]])
                                               
     if (!metadata) {

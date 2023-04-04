@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-options(scipen = 999)
+old_options = options(scipen = 999)
 ```
 
 
@@ -28,10 +28,9 @@ options(scipen = 999)
 
 Download sounding and draw customized Skew-T plot (e.g. up to 150 hPa instead of default 100 hPa) with changed line width and color stripes for temperature:
 
-```{r example5, eval = TRUE, fig.width=7, fig.height=8}
+```{r skewt_customized, eval=TRUE, fig.width=7, fig.height=8}
 library(thunder)
-data("northplatte")
-#northplatte = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+northplatte = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 00)
 skewt_plot(ptop = 150, close_par = FALSE, temp_stripes = TRUE, deg45 = TRUE, mixing_ratio_col = "pink")
 skewt_lines(northplatte$temp, northplatte$pressure, ptop = 150, col = "red", lwd = 3)
 skewt_lines(northplatte$dpt, northplatte$pressure, ptop = 150, col = "blue", lwd = 3)
@@ -40,16 +39,22 @@ title("Skew-T customized")
 
 ### Wind speed vertical profile with wind barbs:
 
-```{r example6, eval = TRUE, fig.width=8, fig.height=6, fig.fullwidth = TRUE}
-# northplatte = get_sounding(wmo_id = 72649, yy = 2001, mm = 5, dd = 10, hh = 00)
+```{r change_par_wind_speed_profile, message=FALSE, warning=FALSE, include=FALSE}
 oldpar = par()
+```
+
+```{r wind_speed_vertical_profile, eval=TRUE, fig.fullwidth=TRUE, fig.height=6, fig.width=8, warning=FALSE}
+northplatte = get_sounding(wmo_id = 72562, yy = 1999, mm = 7, dd = 3, hh = 00)
 par(fig = c(0.1, 0.75, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
 sounding_wind(pressure = northplatte$pressure, ws = northplatte$ws, yaxs = TRUE)
-title("Northplatte - 10 May 2001 0000 UTC", outer = FALSE)
+title("North Platte - 3 July 1999 0000 UTC", outer = FALSE)
 par(fig = c(0.65, 0.95, 0.15, 0.9), new = TRUE, mar = c(1, 1, 1, 1), oma = c(0, 0, 0, 0))
 sounding_barbs(northplatte$pressure, northplatte$ws, northplatte$wd, northplatte$altitude, interpolate = FALSE, barb_cex = 1)
 ```
 
+```{r change_par_wind_speed_profile2, message=FALSE, warning=FALSE, include=FALSE}
+par(oldpar)
+```
 ### Hodograph with storm motion
 
 It is possible to define its own `storm_motion` parameters in order to visualise and/or compute parameters for cells moving with pre-defined direction and speed. The below example shows customized hodograph for thunderstorm cell moving with the speed of 15 m/s and 180 degree direction.
@@ -64,4 +69,8 @@ sounding_hodograph(ws = northplatte$ws,
                    storm_motion = c(15, 180)
 )
 title("North Platte - 10 May 2001, 00:00 UTC")
+```
+
+```{r options_restore, message=FALSE, warning=FALSE, include=FALSE}
+options(old_options)
 ```
