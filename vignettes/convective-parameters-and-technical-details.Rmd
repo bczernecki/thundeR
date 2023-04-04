@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-options(scipen = 999)
 ```
 
 # thundeR <img src="https://github.com/bczernecki/thundeR/raw/master/man/figures/logo.png" style="float:right" width="150"/>
@@ -819,3 +818,4 @@ print(t1)
 print(t2)
 print(t3)
 ```
+

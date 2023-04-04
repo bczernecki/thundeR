@@ -34,7 +34,8 @@ skewt_plot(
 
 \item{isotherm0}{whether to deliminate 0 degree Celsius isother [logical, default: TRUE]}
 
-\item{close_par}{if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default. If you want to modify Skew-T plot in next step set it to FALSE}
+\item{close_par}{if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default.
+If you want to modify Skew-T plot in next step set it to FALSE}
 
 \item{...}{additional (mostly graphical) parameters to be passed}
 }

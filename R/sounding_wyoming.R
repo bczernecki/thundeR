@@ -10,7 +10,7 @@ sounding_wyoming = function(wmo_id,
     tryCatch(sounding_wyoming_bp(wmo_id, 
                                  yy, mm, dd, hh, min, 
                                  bufr = bufr), 
-             error = function(e){
+             error = function(e) {
                message(paste("Problems with downloading data.",
                              "Run function with argument allow_failure = FALSE",
                              "to see more details"))})
@@ -68,8 +68,8 @@ sounding_wyoming_bp = function(wmo_id,
     df = read.fwf(file = temp, skip = sects[1] + 4, widths = rep(7, 11),
                   n = (sects[2] - (sects[1] + 5)))
     
-    colnames(df) = c("PRES", "HGHT", "TEMP", "DWPT", "RELH",
-                     "MIXR", "DRCT", "SKNT", "THTA", "THTE", "THTV")
+    colnames(df) = c("PRES", "HGHT", "TEMP", "DWPT", "RELH", "MIXR",
+                     "DRCT", "SKNT", "THTA", "THTE", "THTV")
     
     if (bufr == FALSE) {
       # the section below is not valid for BUFR decoded data:

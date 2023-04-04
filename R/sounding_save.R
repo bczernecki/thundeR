@@ -26,7 +26,7 @@
 #' @importFrom grDevices png
 #' @importFrom grDevices svg
 #' 
-#' @return graphical file with Skew-T and hodograph layout
+#' @return graphical file with Skew-T and hodograph on a single layout
 #' 
 #' @examples
 #' \donttest{

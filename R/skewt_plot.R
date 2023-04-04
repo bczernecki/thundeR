@@ -13,7 +13,8 @@
 #' @param moist_adiabats_col color to be used for drawing moist adiabats. If set to NA or not provided drawing lines skipped
 #' @param deg45 whether to preserve 45 degrees for diagonal isolines on Skew-T diagram regardless ploting window aspect ratio. [logical, default: FALSE]
 #' @param isotherm0 whether to deliminate 0 degree Celsius isother [logical, default: TRUE]
-#' @param close_par if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default. If you want to modify Skew-T plot in next step set it to FALSE
+#' @param close_par if plot will be modified in next steps storing par settings is needed. This logical argument is turned on by default.
+#' If you want to modify Skew-T plot in next step set it to FALSE
 #' @param ... additional (mostly graphical) parameters to be passed
 #' @export
 #' 
@@ -46,7 +47,7 @@ skewt_plot = function(ptop = 100,
                       deg45 = FALSE,
                       isotherm0 = TRUE,
                       close_par = TRUE,
-                          ...){
+                      ...) {
   
   # restore old par settings on exit if Skew-T won't be modified later
   oldpar = par(no.readonly = TRUE) 
@@ -59,10 +60,6 @@ skewt_plot = function(ptop = 100,
     par(pty = "s") # preserve correct aspect ratio
   }
   
-  #par(pty = "s")
-  # margins in layout:
-  #c(bottom, left, top, right) 
-  #par(mar = c(2, 1.5, 1 ,6))
   ymax = skewty(1050)
   #ymin = skewty(50)
   ymin = skewty(ptop)
@@ -75,9 +72,6 @@ skewt_plot = function(ptop = 100,
   
   plot(xc, yc, type = "l", axes = FALSE, xlab = "", ylab = "", lwd = 1) 
   
-  # par("usr")
-  # [1] -29.828975  23.667431  -2.424056  37.790678
-  # abline(v = c(-29.82, 23.66))
   ypos = skewty(1050)
   degc = seq(-50, 50, by = 10)
   axis(1, at = skewtx(degc, ypos), labels = seq(-50, 50, by = 10), pos = ymax, cex.axis = 0.65, padj = -0.15, tck = -0.01)
@@ -217,14 +211,7 @@ skewt_plot = function(ptop = 100,
       #     col = moist_adiabats_col, adj = 0.5, cex = 0.75)
     }
   } # end of moist adiabats
-  
-  # pp = recordPlot()
-  # devtools::use_data(pp)
-  # #saveRDS(object = pp, file = "data/pp.rds") # opcjonalne zapisanie do wykorzystania potem
-  # rm(pp)
-  # 
-  # print(pp)
-  
+
   # draw pressure heights:
   y = skewty(pres)
   segments(-27.85, y, 26, y, col = "black", lwd = 0.25, lty = 1)

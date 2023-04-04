@@ -252,6 +252,7 @@ prediction of severe convective storms. Returns a vector of parameters.
 }
 }
 \examples{
+old_options = options(scipen = 99) 
 pressure = c(1000, 855, 700, 500, 300, 100, 10)
 altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000)
 temp = c(25, 10, 0, -15, -30, -50, -92)
@@ -260,4 +261,5 @@ wd = c(0, 90, 135, 180, 270, 350, 0)
 ws = c(5, 10, 20, 30, 40, 5, 0)
 accuracy = 2
 sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy)
+options(old_options) 
 }

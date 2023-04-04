@@ -51,7 +51,7 @@ sounding_save(
 \item{...}{other arguments that can be used with `sounding_plot` or other graphic arguments}
 }
 \value{
-graphical file with Skew-T and hodograph layout
+graphical file with Skew-T and hodograph on a single layout
 }
 \description{
 Auxiliary function to `sounding_plot` that plots a composite \
