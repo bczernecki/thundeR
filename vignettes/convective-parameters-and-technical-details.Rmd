@@ -310,7 +310,7 @@ temperature of the downdraft (derived from DCAPE procedure) at the
 surface. Units are K.
 
 [82] Wind_Index -- based on original formula from McCann (1994), doi:
-[https://doi.org/10.1175/1520-0434(1994)009<0532:WNIFFM>2.0.CO;2](https://doi.org/10.1175/1520-0434(1994)009<0532:WNIFFM>2.0.CO;2)
+[https://doi.org/10.1175/1520-0434(1994)009%3C0532:WNIFFM%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(1994)009%3C0532:WNIFFM%3E2.0.CO;2)
 Units indicate estimated wind gust in knots.
 
 [83] PRCP_WATER -- precipitable water (entire column). Units are mm.
@@ -551,48 +551,48 @@ and 3 km AGL for left- moving supercell vector. Units are 1/s.
 
 [158] Bunkers_RM_A -- azimuth for right-moving supercell vector. See
 Bunkers et al. (2002), doi:
-[https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2)
+[https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2)
 for further details. Units are °.
 
 [159] Bunkers_RM_M -- wind speed for right-moving supercell vector. See
 Bunkers et al. (2002), doi:
-[https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2) for further details. Units are m/s.
+[https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2) for further details. Units are m/s.
 
 [160] Bunkers_LM_A -- azimuth for left-moving supercell vector. See
 Bunkers et al. (2002), doi:
-[https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2) for further details. Units are °.
+[https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2) for further details. Units are °.
 
 [161] Bunkers_LM_M -- wind speed for left-moving supercell vector. See
 Bunkers et al. (2002), doi:
-[https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2)
+[https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2)
 for further details. Units are m/s.
 
 [162] Bunkers_MW_A -- azimuth for mean storm motion vector. See Bunkers
 et al. (2002), doi:
-[https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2)
+[https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2)
 for further details. Units are °.
 
 [163] Bunkers_MW_M -- wind speed for mean storm motion vector. See
 Bunkers et al. (2002), doi:
-[https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015<0061:PSMUAN>2.0.CO;2)
+[https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(2000)015%3C0061:PSMUAN%3E2.0.CO;2)
 for further details. Units are m/s.
 
 [164] Corfidi_downwind_A -- azimuth for Corfidi downwind vector. See
 Corfidi (2003) doi:
-[https://doi.org/10.1175/1520-0434(2003)018<0997:CPAMPF>2.0.CO;2](https://doi.org/10.1175/1520-0434(2003)018<0997:CPAMPF>2.0.CO;2)
+[https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2)
 for further details. Units are °.
 
 [165] Corfidi_downwind_M -- wind speed for Corfidi downwind vector. See
 Corfidi (2003) doi:
-[https://doi.org/10.1175/1520-0434(2003)018<0997:CPAMPF>2.0.CO;2](https://doi.org/10.1175/1520-0434(2003)018<0997:CPAMPF>2.0.CO;2) for further details. Units are m/s.
+[https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2) for further details. Units are m/s.
 
 [166] Corfidi_upwind_A -- azimuth for Corfidi upwind vector. See Corfidi
 (2003) doi:
-[https://doi.org/10.1175/1520-0434(2003)018<0997:CPAMPF>2.0.CO;2](https://doi.org/10.1175/1520-0434(2003)018<0997:CPAMPF>2.0.CO;2)
+[https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2)
 for further details. Units are °.
 
 [167] Corfidi_upwind_M -- wind speed for Corfidi upwind vector. See
-Corfidi (2003) doi: [https://doi.org/10.1175/1520-0434(2003)018<0997:CPAMPF>2.0.CO;2](https://doi.org/10.1175/1520-0434(2003)018<0997:CPAMPF>2.0.CO;2)
+Corfidi (2003) doi: [https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2](https://doi.org/10.1175/1520-0434(2003)018%3C0997:CPAMPF%3E2.0.CO;2)
 for further details. Units are m/s.
 
 **Composite parameters:**
