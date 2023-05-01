@@ -231,28 +231,31 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   ###
   
   if(ECAPE == TRUE){
-  rect(12.25, 40.5, 26.1, 30.5, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
-  text(13, 40, "SB ECAPE:", col = "black", cex = 0.55, adj = c(0, 1))
-  text(13, 39, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
-  text(13, 38, "Entra. rate:", col = "black", cex = 0.55, adj = c(0, 1))
-  text(13, 36.75, "MU ECAPE:", col = "black", cex = 0.55, adj = c(0, 1))
-  text(13, 35.75, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
-  text(13, 34.75, "Entra. rate:", col = "black", cex = 0.55, adj = c(0, 1))
-  text(13, 33.5, "ML ECAPE:", col = "black", cex = 0.55, adj = c(0, 1))
-  text(13, 32.5, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
-  text(13, 31.5, "Entra. rate:", col = "black", cex = 0.55, adj = c(0, 1))
+  rect(12.25, 40.5, 26.1, 29.5, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
+  text(13, 40, "SR inflow:", col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 39, "SB ECAPE:", col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 38, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 37, "Entra. rate:", col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 35.75, "MU ECAPE:", col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 34.75, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 33.75, "Entra. rate:", col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 32.5, "ML ECAPE:", col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 31.5, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 30.5, "Entra. rate:", col = "black", cex = 0.55, adj = c(0, 1))
+
+  text(19.5, 40, ECAPE_inflow, col = "black", cex = 0.55, adj = c(0, 1))
+
+  text(19.5, 39, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE")], digits = 0)," J/kg"), cex = 0.55, adj = c(0, 1))
+  text(19.5, 38, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE_upd_radius")], digits = 0)," m"), cex = 0.55, adj = c(0, 1))
+  text(19.5, 37, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE_ent_rate")], digits = 6)*1000," km-1"), cex = 0.55, adj = c(0, 1))
   
-  text(19.5, 40, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE")], digits = 0)," J/kg"), cex = 0.55, adj = c(0, 1))
-  text(19.5, 39, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE_upd_radius")], digits = 0)," m"), cex = 0.55, adj = c(0, 1))
-  text(19.5, 38, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE_ent_rate")], digits = 6)*1000," km-1"), cex = 0.55, adj = c(0, 1))
+  text(19.5, 35.75, paste0(round(parametry[which(names(parametry[1:LP]) == "MU_ECAPE")], digits = 0)," J/kg"), cex = 0.55, adj = c(0, 1))
+  text(19.5, 34.75, paste0(round(parametry[which(names(parametry[1:LP]) == "MU_ECAPE_upd_radius")], digits = 0)," m"), cex = 0.55, adj = c(0, 1))
+  text(19.5, 33.75, paste0(round(parametry[which(names(parametry[1:LP]) == "MU_ECAPE_ent_rate")], digits = 6)*1000," km-1"), cex = 0.55, adj = c(0, 1))
   
-  text(19.5, 36.75, paste0(round(parametry[which(names(parametry[1:LP]) == "MU_ECAPE")], digits = 0)," J/kg"), cex = 0.55, adj = c(0, 1))
-  text(19.5, 35.75, paste0(round(parametry[which(names(parametry[1:LP]) == "MU_ECAPE_upd_radius")], digits = 0)," m"), cex = 0.55, adj = c(0, 1))
-  text(19.5, 34.75, paste0(round(parametry[which(names(parametry[1:LP]) == "MU_ECAPE_ent_rate")], digits = 6)*1000," km-1"), cex = 0.55, adj = c(0, 1))
-  
-  text(19.5, 33.5, paste0(round(parametry[which(names(parametry[1:LP]) == "ML_ECAPE")], digits = 0)," J/kg"), cex = 0.55, adj = c(0, 1))
-  text(19.5, 32.5, paste0(round(parametry[which(names(parametry[1:LP]) == "ML_ECAPE_upd_radius")], digits = 0)," m"), cex = 0.55, adj = c(0, 1))
-  text(19.5, 31.5, paste0(round(parametry[which(names(parametry[1:LP]) == "ML_ECAPE_ent_rate")], digits = 6)*1000," km-1"), cex = 0.55, adj = c(0, 1))
+  text(19.5, 32.5, paste0(round(parametry[which(names(parametry[1:LP]) == "ML_ECAPE")], digits = 0)," J/kg"), cex = 0.55, adj = c(0, 1))
+  text(19.5, 31.5, paste0(round(parametry[which(names(parametry[1:LP]) == "ML_ECAPE_upd_radius")], digits = 0)," m"), cex = 0.55, adj = c(0, 1))
+  text(19.5, 30.5, paste0(round(parametry[which(names(parametry[1:LP]) == "ML_ECAPE_ent_rate")], digits = 6)*1000," km-1"), cex = 0.55, adj = c(0, 1))
   }
   
   if (parcel != "none") {
