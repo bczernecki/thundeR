@@ -246,8 +246,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                             accuracy = 2,
                             interpolate_step = 5,
                             meanlayer_bottom_top = c(0, 500),
-                            storm_motion = c(999, 999),
-                            ECAPE_inflow) {
+                            ECAPE_inflow,
+                            storm_motion = c(999, 999)) {
   
   export_profile = 0 
   
