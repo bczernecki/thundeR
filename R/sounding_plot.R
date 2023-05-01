@@ -128,6 +128,30 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                ECAPE_inflow = ECAPE_inflow)
   
   LP = max(which(!is.na(names(parametry))))
+  
+  if(ECAPE_inflow=="01km_RM"){
+    INFLOW="MW_SR_VM_01km_RM"
+  }
+  
+  if(ECAPE_inflow=="03km_RM"){
+    INFLOW="MW_SR_VM_03km_RM"
+  }
+  
+  if(ECAPE_inflow=="0500m_RM"){
+    INFLOW="MW_SR_VM_500m_RM"
+  }
+  
+  if(ECAPE_inflow=="01km_LM"){
+    INFLOW="MW_SR_VM_01km_LM"
+  }
+  
+  if(ECAPE_inflow=="03km_LM"){
+    INFLOW="MW_SR_VM_03km_LM"
+  }
+  
+  if(ECAPE_inflow=="0500m_LM"){
+    INFLOW="MW_SR_VM_500m_LM"
+  }
 
   output$MU_ECAPE <- ECAPE_parcel(output$pressure*100, 
                                    output$altitude-output$altitude[1], 
