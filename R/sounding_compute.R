@@ -227,6 +227,7 @@
 #' @param meanlayer_bottom_top (optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500
 #' @param storm_motion (optional) for moving storms only - one can define vector of length two with
 #' wind speed (m/s) and wind directions (degrees) that will be used to compute adjusted SRH parameters
+#' @param ECAPE_inflow (optional) user-defined storm inflow for entrainment CAPE (ECAPE) calculation, 01km_RM as default.
 #' @return Named vector of 200+ convective indices
 #' @export 
 #' @examples
@@ -245,7 +246,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                             accuracy = 2,
                             interpolate_step = 5,
                             meanlayer_bottom_top = c(0, 500),
-                            storm_motion = c(999, 999)) {
+                            storm_motion = c(999, 999),
+                            ECAPE_inflow = "01km_RM") {
   
   export_profile = 0 
   
@@ -470,6 +472,30 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 #' section for ECAPE #
 #'
   
+  if(ECAPE_inflow=="01km_RM"){
+    INFLOW="MW_SR_VM_01km_RM"
+  }
+  
+  if(ECAPE_inflow=="03km_RM"){
+    INFLOW="MW_SR_VM_03km_RM"
+  }
+  
+  if(ECAPE_inflow=="0500m_RM"){
+    INFLOW="MW_SR_VM_500m_RM"
+  }
+  
+  if(ECAPE_inflow=="01km_LM"){
+    INFLOW="MW_SR_VM_01km_LM"
+  }
+  
+  if(ECAPE_inflow=="03km_LM"){
+    INFLOW="MW_SR_VM_03km_LM"
+  }
+  
+  if(ECAPE_inflow=="0500m_LM"){
+    INFLOW="MW_SR_VM_500m_LM"
+  }
+  
   # ECAPE for MU parcel
   tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
                                                      z0 = altitude-altitude[1],
@@ -478,7 +504,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                      LFC = as.numeric(tmp[which(names(tmp)=="MU_LFC_HGT")]),
                                                      EL = as.numeric(tmp[which(names(tmp)=="MU_EL_HGT")]),
                                                      CAPE = as.numeric(tmp[which(names(tmp)=="MU_CAPE")]),
-                                                     V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_VM_01km_RM")]))
+                                                     V_SR = as.numeric(tmp[which(names(tmp)==INFLOW)]))
   
 
   # ECAPE for SB parcel
@@ -489,7 +515,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          LFC = as.numeric(tmp[which(names(tmp)=="SB_LFC_HGT")]),
                                                          EL = as.numeric(tmp[which(names(tmp)=="SB_EL_HGT")]),
                                                          CAPE = as.numeric(tmp[which(names(tmp)=="SB_CAPE")]),
-                                                         V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_VM_01km_RM")]))
+                                                         V_SR = as.numeric(tmp[which(names(tmp)==INFLOW)]))
   
   # ECAPE for ML parcel
   tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
@@ -499,7 +525,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          LFC = as.numeric(tmp[which(names(tmp)=="ML_LFC_HGT")]),
                                                          EL = as.numeric(tmp[which(names(tmp)=="ML_EL_HGT")]),
                                                          CAPE = as.numeric(tmp[which(names(tmp)=="ML_CAPE")]),
-                                                         V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_VM_01km_RM")]))
+                                                         V_SR = as.numeric(tmp[which(names(tmp)==INFLOW)]))
 
     
   names(tmp)[(length(tmp)-8):length(tmp)] = c(
