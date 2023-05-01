@@ -231,8 +231,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   ###
   
   if(ECAPE == TRUE){
-  rect(12.25, 40.5, 26.1, 29.5, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
-  text(13, 40, "SR inflow:", col = "black", cex = 0.55, adj = c(0, 1))
+  rect(12.25, 40.75, 26.1, 29.5, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
+  text(13, 40.25, substitute(paste(bold('SR inflow:'))), col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 39, "SB ECAPE:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 38, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 37, "Entra. rate:", col = "black", cex = 0.55, adj = c(0, 1))
@@ -315,7 +315,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
         }
       }
       if(ECAPE == TRUE){
-        skewt_lines(output$ML_ECAPE,output$pressure, col = "magenta", lty = 1, lwd = 1, ptop = 100)
+        skewt_lines(output$ML_ECAPE,output$pressure, col = "magenta", lty = 1, lwd = 1.25, ptop = 100)
       }
     }
     
@@ -376,7 +376,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
         }
       }
       if(ECAPE == TRUE){
-        skewt_lines(output$MU_ECAPE,output$pressure, col = "magenta", lty = 1, lwd = 1, ptop = 100)
+        skewt_lines(output$MU_ECAPE,output$pressure, col = "magenta", lty = 1, lwd = 1.25, ptop = 100)
       }
     }
     
@@ -434,7 +434,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
         }
       }
       if(ECAPE == TRUE){
-        skewt_lines(output$SB_ECAPE,output$pressure, col = "magenta", lty = 1, lwd = 1, ptop = 100)
+        skewt_lines(output$SB_ECAPE,output$pressure, col = "magenta", lty = 1, lwd = 1.25, ptop = 100)
       }
     }
     
