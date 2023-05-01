@@ -18,6 +18,7 @@
 #' @param storm_motion (optional) for moving storms only - one can define vector of length two with
 #' wind speed [m/s] and wind directions [degrees] that will be used to compute adjusted SRH parameters
 #' @param ECAPE (optional) draws entrainment CAPE (ECAPE) parcel and related parameters 
+#' @param ECAPE_inflow (optional) user-defined storm inflow for entrainment CAPE (ECAPE) calculation 
 #' @param ... extra graphical arguments to be added
 #' @export
 #' @import aiRthermo
@@ -43,7 +44,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                          DCAPE = FALSE, 
                          meanlayer_bottom_top = c(0, 500),
                          storm_motion = c(999, 999), 
-                         ECAPE  = FALSE, ...) {
+                         ECAPE  = FALSE, 
+                         ECAPE_inflow = "01km_RM", ...) {
   
   if (sum(meanlayer_bottom_top == c(0, 500)) != 2) { 
     parcel = "ML"
@@ -119,9 +121,36 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(20, 28, "Hail Growth\nLayer (HGL)", col = "#8470FF90", cex = 0.65, srt = 56)
   
   ####
+  
+  if(ECAPE_inflow=="01km_RM"){
+    INFLOW="MW_SR_VM_01km_RM"
+  }
+  
+  if(ECAPE_inflow=="03km_RM"){
+    INFLOW="MW_SR_VM_03km_RM"
+  }
+  
+  if(ECAPE_inflow=="0500m_RM"){
+    INFLOW="MW_SR_VM_500m_RM"
+  }
+  
+  if(ECAPE_inflow=="01km_LM"){
+    INFLOW="MW_SR_VM_01km_LM"
+  }
+  
+  if(ECAPE_inflow=="03km_LM"){
+    INFLOW="MW_SR_VM_03km_LM"
+  }
+  
+  if(ECAPE_inflow=="0500m_LM"){
+    INFLOW="MW_SR_VM_500m_LM"
+  }
+  
   parametry = sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3,
                                meanlayer_bottom_top = meanlayer_bottom_top,
-                               storm_motion = storm_motion)
+                               storm_motion = storm_motion,
+                               ECAPE_inflow = INFLOW)
+  
   LP = max(which(!is.na(names(parametry))))
 
   output$MU_ECAPE <- ECAPE_parcel(output$pressure*100, 
@@ -131,7 +160,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    parametry[which(names(parametry)=="MU_LFC_HGT")],
                                    parametry[which(names(parametry)=="MU_EL_HGT")],
                                    parametry[which(names(parametry)=="MU_CAPE")],
-                                   parametry[which(names(parametry)=="MW_SR_VM_01km_RM")],
+                                   parametry[which(names(parametry)==INFLOW)],
                                    output$tempV+273.15,
                                    output$MU+273.15)
 
@@ -142,7 +171,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    parametry[which(names(parametry)=="SB_LFC_HGT")],
                                    parametry[which(names(parametry)=="SB_EL_HGT")],
                                    parametry[which(names(parametry)=="SB_CAPE")],
-                                   parametry[which(names(parametry)=="MW_SR_VM_01km_RM")],
+                                   parametry[which(names(parametry)==INFLOW)],
                                    output$tempV+273.15,
                                    output$MU+273.15)
   
@@ -153,7 +182,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    parametry[which(names(parametry)=="ML_LFC_HGT")],
                                    parametry[which(names(parametry)=="ML_EL_HGT")],
                                    parametry[which(names(parametry)=="ML_CAPE")],
-                                   parametry[which(names(parametry)=="MW_SR_VM_01km_RM")],
+                                   parametry[which(names(parametry)==INFLOW)],
                                    output$tempV+273.15,
                                    output$MU+273.15)
   
