@@ -205,6 +205,15 @@
 #'  \item DEI
 #'  \item DEI_eff
 #'  \item TIP
+#'  \item MU_ECAPE
+#'  \item MU_ECAPE_ent_rate
+#'  \item MU_ECAPE_upd_radius
+#'  \item SB_ECAPE
+#'  \item SB_ECAPE_ent_rate
+#'  \item SB_ECAPE_upd_radius
+#'  \item ML_ECAPE
+#'  \item ML_ECAPE_ent_rate
+#'  \item ML_ECAPE_upd_radius
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -249,7 +258,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
   } else {
     storm_motion[3] = 999
   }
-  
+
   tmp = thunder::sounding_default(pressure, altitude, temp, dpt, wd, ws,
                                   export_profile, accuracy, interpolate_step,
                                   meanlayer_bottom_top, storm_motion)
@@ -456,6 +465,61 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "DEI",
     "DEI_eff",
     "TIP")
-       
+  
+#'
+#' section for ECAPE #
+#'
+  
+  # ECAPE for MU parcel
+  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+                                                     z0 = altitude-altitude[1],
+                                                     q0 = dpt2w(pressure,temp,dpt),
+                                                     t0 = temp+273.15,
+                                                     LFC = as.numeric(tmp[which(names(tmp)=="MU_LFC_HGT")]),
+                                                     EL = as.numeric(tmp[which(names(tmp)=="MU_EL_HGT")]),
+                                                     CAPE = as.numeric(tmp[which(names(tmp)=="MU_CAPE")]),
+                                                     V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_VM_01km_RM")]))
+  
+
+  # ECAPE for SB parcel
+  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+                                                         z0 = altitude-altitude[1],
+                                                         q0 = dpt2w(pressure,temp,dpt),
+                                                         t0 = temp+273.15,
+                                                         LFC = as.numeric(tmp[which(names(tmp)=="SB_LFC_HGT")]),
+                                                         EL = as.numeric(tmp[which(names(tmp)=="SB_EL_HGT")]),
+                                                         CAPE = as.numeric(tmp[which(names(tmp)=="SB_CAPE")]),
+                                                         V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_VM_01km_RM")]))
+  
+  # ECAPE for ML parcel
+  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+                                                         z0 = altitude-altitude[1],
+                                                         q0 = dpt2w(pressure,temp,dpt),
+                                                         t0 = temp+273.15,
+                                                         LFC = as.numeric(tmp[which(names(tmp)=="ML_LFC_HGT")]),
+                                                         EL = as.numeric(tmp[which(names(tmp)=="ML_EL_HGT")]),
+                                                         CAPE = as.numeric(tmp[which(names(tmp)=="ML_CAPE")]),
+                                                         V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_VM_01km_RM")]))
+
+    
+  names(tmp)[(length(tmp)-8):length(tmp)] = c(
+    "MU_ECAPE",
+    "MU_ECAPE_ent_rate",
+    "MU_ECAPE_upd_radius",
+    "SB_ECAPE",
+    "SB_ECAPE_ent_rate",
+    "SB_ECAPE_upd_radius",
+    "ML_ECAPE",
+    "ML_ECAPE_ent_rate",
+    "ML_ECAPE_upd_radius")
+              
+  tmp[which(names(tmp)=="MU_ECAPE")] <- tmp[which(names(tmp)=="MU_ECAPE")]*tmp[which(names(tmp)=="MU_CAPE")]      
+  tmp[which(names(tmp)=="SB_ECAPE")] <- tmp[which(names(tmp)=="SB_ECAPE")]*tmp[which(names(tmp)=="SB_CAPE")]      
+  tmp[which(names(tmp)=="ML_ECAPE")] <- tmp[which(names(tmp)=="ML_ECAPE")]*tmp[which(names(tmp)=="ML_CAPE")]      
+  
+#'
+#' end of section for ECAPE #
+#'
+  
   return(tmp)
 }
