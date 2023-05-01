@@ -35,7 +35,16 @@ heaviside <- function(x, a = 0){
   return(result)
 }
 
-compute_rsat <- function(T,p,iceflag,T1,T2){
+dpt2w <- function(p,t,dpt){
+  RH = aiRthermo::dewpointdepression2rh(p*100, t+273.15, t-dpt, consts = export_constants())
+  RH = ifelse(RH>100,100,RH)
+  RH = ifelse(RH<0,0,RH)
+  W = aiRthermo::rh2w(p*100, t+273.15, RH, consts = export_constants())
+  return(W)
+}
+
+
+compute_rsat <- function(T,p,iceflag){
   omeg = ((T - T1)/(T2-T1))*heaviside((T - T1)/(T2-T1))*heaviside((1 - (T - T1)/(T2-T1))) + heaviside(-(1 - (T - T1)/(T2-T1)))
   if(iceflag==0){
     term1=(cpv-cpl)/Rv
@@ -69,7 +78,7 @@ MSE0_F <- function(t0,q0,z0){
 }
 
 MSE0_star_F <- function(t0,p0,z0){
-  rsat = compute_rsat(t0,p0,0,T1,T2)
+  rsat = compute_rsat(t0,p0,0)
   qsat = (1 - rsat) * rsat
   MSE0_star = cp * t0 + xlv * qsat + g * z0
   return(MSE0_star)
