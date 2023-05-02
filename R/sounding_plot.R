@@ -189,8 +189,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   ###
   
   rect(8.25, 41, 26.1, 44, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
-  text(9, 43.25, substitute(paste(bold('Parcel:'))), col = "black", cex = 0.55, adj = c(0, 1))
-  text(9, 42.25, substitute(paste(bold('Storm-motion:'))), col = "black", cex = 0.55, adj = c(0, 1))
+  text(9, 43.3, substitute(paste(bold('Parcel:'))), col = "black", cex = 0.55, adj = c(0, 1))
+  text(9, 42.3, substitute(paste(bold('Storm-motion:'))), col = "black", cex = 0.55, adj = c(0, 1))
   
   if (parcel == "ML") {
     if (sum(meanlayer_bottom_top == c(0, 500)) == 2) {
@@ -243,7 +243,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(13, 31.5, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 30.5, "Entra. rate:", col = "black", cex = 0.55, adj = c(0, 1))
 
-  text(19.5, 40.25, ECAPE_inflow, col = "black", cex = 0.55, adj = c(0, 1))
+  text(19.5, 40.2, ECAPE_inflow, col = "black", cex = 0.55, adj = c(0, 1))
 
   text(19.5, 39, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE")], digits = 0)," J/kg"), cex = 0.55, adj = c(0, 1))
   text(19.5, 38, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE_upd_radius")], digits = 0)," m"), cex = 0.55, adj = c(0, 1))
