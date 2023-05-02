@@ -189,8 +189,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   ###
   
   rect(8.25, 41, 26.1, 44, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
-  text(9, 43.4, substitute(paste(bold('Parcel:'))), col = "black", cex = 0.55, adj = c(0, 1))
-  text(9, 42.3, substitute(paste(bold('Storm-motion:'))), col = "black", cex = 0.55, adj = c(0, 1))
+  text(9, 43.25, substitute(paste(bold('Parcel:'))), col = "black", cex = 0.55, adj = c(0, 1))
+  text(9, 42.25, substitute(paste(bold('Storm-motion:'))), col = "black", cex = 0.55, adj = c(0, 1))
   
   if (parcel == "ML") {
     if (sum(meanlayer_bottom_top == c(0, 500)) == 2) {
@@ -223,16 +223,16 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   
   if (sum(storm_motion == c(999, 999)) == 2) {
-    text(16.85, 42.25, "Bunkers ID", col = "black", cex = 0.55, adj = c(0, 1))
+    text(16.85, 42.35, "Bunkers ID", col = "black", cex = 0.55, adj = c(0, 1))
   } else {
-    text(16.85, 42.25, "user-defined", col = "black", cex = 0.55, adj = c(0, 1))
+    text(16.85, 42.35, "user-defined", col = "black", cex = 0.55, adj = c(0, 1))
   }
   
   ###
   
   if(ECAPE == TRUE){
   rect(12.25, 40.75, 26.1, 29.5, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
-  text(13, 40.25, substitute(paste(bold('SR inflow:'))), col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 40.15, substitute(paste(bold('SR inflow:'))), col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 39, "SB ECAPE:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 38, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 37, "Entra. rate:", col = "black", cex = 0.55, adj = c(0, 1))
@@ -243,7 +243,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(13, 31.5, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 30.5, "Entra. rate:", col = "black", cex = 0.55, adj = c(0, 1))
 
-  text(19.5, 40, ECAPE_inflow, col = "black", cex = 0.55, adj = c(0, 1))
+  text(19.5, 40.25, ECAPE_inflow, col = "black", cex = 0.55, adj = c(0, 1))
 
   text(19.5, 39, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE")], digits = 0)," J/kg"), cex = 0.55, adj = c(0, 1))
   text(19.5, 38, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE_upd_radius")], digits = 0)," m"), cex = 0.55, adj = c(0, 1))
