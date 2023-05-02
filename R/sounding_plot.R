@@ -173,7 +173,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    parametry[which(names(parametry)=="SB_CAPE")],
                                    parametry[which(names(parametry)==INFLOW)],
                                    output$tempV+273.15,
-                                   output$MU+273.15)
+                                   output$SB+273.15)
   
   output$ML_ECAPE <- ECAPE_parcel(output$pressure*100, 
                                    output$altitude-output2$altitude[1], 
@@ -184,7 +184,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    parametry[which(names(parametry)=="ML_CAPE")],
                                    parametry[which(names(parametry)==INFLOW)],
                                    output$tempV+273.15,
-                                   output$MU+273.15)
+                                   output$ML+273.15)
   
   ###
   
