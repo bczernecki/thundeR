@@ -86,8 +86,9 @@ MSE0_star_F <- function(t0,p0,z0){
 
 MSE0_bar_F <- function(MSE0){
   MSE0_bar=rep(0,length(MSE0))
-  for(iz in 1:length(MSE0_bar)){
-    MSE0_bar[iz]=mean(MSE0[1:iz])
+  MSE0_bar[1]=MSE0[1]
+  for(iz in 2:length(MSE0_bar)){
+    MSE0_bar[iz] = 0.5*( sum( (MSE0[1:iz-1] + MSE0[2:iz]) * (z0[2:iz]-z0[1:iz-1])) ) / (z0[iz]-z0[1])
   }
   return(MSE0_bar)
 }
