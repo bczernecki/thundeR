@@ -84,7 +84,7 @@ MSE0_star_F <- function(t0,p0,z0){
   return(MSE0_star)
 }
 
-MSE0_bar_F <- function(MSE0){
+MSE0_bar_F <- function(MSE0,z0){
   MSE0_bar=rep(0,length(MSE0))
   MSE0_bar[1]=MSE0[1]
   for(iz in 2:length(MSE0_bar)){
@@ -96,7 +96,7 @@ MSE0_bar_F <- function(MSE0){
 compute_NCAPE <- function(p0,z0,t0,q0,LFC,EL){
   MSE0 = MSE0_F(t0,q0,z0)
   MSE0_star = MSE0_star_F(t0,p0,z0)
-  MSE0_bar = MSE0_bar_F(MSE0)
+  MSE0_bar = MSE0_bar_F(MSE0,z0)
   int_arg = - ( g/(cp*t0) )*( MSE0_bar - MSE0_star)
   if((LFC + EL) > 0){
   ind_LFC = which(abs(z0 - LFC) == min(abs(z0 - LFC)))
@@ -126,7 +126,7 @@ compute_ETILDE <- function(p0,z0,q0,t0,LFC,EL,CAPE,V_SR){
 ECAPE_parcel <- function(p0,z0,t0,q0,LFC,EL,CAPE,V_SR,Tv,Tp){
   MSE0 = MSE0_F(t0,q0,z0)
   MSE0_star <- MSE0_star_F(t0,p0,z0)
-  MSE0_bar <- MSE0_bar_F(MSE0)
+  MSE0_bar <- MSE0_bar_F(MSE0,z0)
   NCAPE <- compute_NCAPE(p0,z0,t0,q0,LFC,EL)
   E_tilde <- compute_ETILDE(p0,z0,q0,t0,LFC,EL,CAPE,V_SR)[1]
   Buoy_UD <- -g*(Tv-Tp)/(Tp)
