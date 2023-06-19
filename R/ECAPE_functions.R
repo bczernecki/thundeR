@@ -143,7 +143,7 @@ ECAPE_value <- function(p0,z0,t0,q0,LFC,EL,CAPE,V_SR){
 }
 
 ENTRAINMENT_rate <- function(p0,z0,t0,q0,LFC,EL,CAPE,V_SR){
-  ENTRAINMENT = compute_ETILDE(p0,z0,q0,t0,LFC,EL,CAPE,V_SR)[2]
+  ENTRAINMENT = compute_ETILDE(p0,z0,q0,t0,LFC,EL,CAPE,V_SR)[1]
   return(ENTRAINMENT)
 }
 
