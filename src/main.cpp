@@ -4109,8 +4109,6 @@ double IndicesCollector::SV_3000_LM_FRA(){
   return S->ks->sw03lm / S->ks->shear3000m;
 }
 
-########
-
 double IndicesCollector::MeanSR01_LM_eff(){
   Vector res = S->ks->mean01eff - S->ks->lm;
   return res.abs();
