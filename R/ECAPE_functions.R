@@ -106,7 +106,6 @@ compute_NCAPE <- function(p0,z0,t0,q0,LFC,EL){
   } else {
     NCAPE = 0
   }
-  print(NCAPE)
   return (NCAPE)
 }
 
