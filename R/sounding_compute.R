@@ -149,6 +149,12 @@
 #'  \item MW_SR_500m_LM
 #'  \item MW_SR_01km_LM
 #'  \item MW_SR_03km_LM
+#'  \item MW_SR_500m_SM
+#'  \item MW_SR_01km_SM
+#'  \item MW_SR_03km_SM
+#'  \item MW_SR_01km_eff_RM
+#'  \item MW_SR_01km_eff_LM
+#'  \item MW_SR_01km_eff_SM
 #'  \item MW_SR_VM_500m_RM
 #'  \item MW_SR_VM_01km_RM
 #'  \item MW_SR_VM_03km_RM
@@ -411,6 +417,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "MW_SR_500m_LM",
     "MW_SR_01km_LM",
     "MW_SR_03km_LM",
+    "MW_SR_500m_SM",
+    "MW_SR_01km_SM",
+    "MW_SR_03km_SM",
+    "MW_SR_01km_eff_RM",
+    "MW_SR_01km_eff_LM",
+    "MW_SR_01km_eff_SM",
     "MW_SR_VM_500m_RM",
     "MW_SR_VM_01km_RM",
     "MW_SR_VM_03km_RM",
@@ -473,27 +485,48 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 #'
   
   if(ECAPE_inflow=="01km_RM"){
-    INFLOW="MW_SR_VM_01km_RM"
+    INFLOW="MW_SR_01km_RM"
+    INFLOW_MU="MW_SR_01km_eff_RM"
   }
   
   if(ECAPE_inflow=="03km_RM"){
-    INFLOW="MW_SR_VM_03km_RM"
+    INFLOW="MW_SR_03km_RM"
+    INFLOW_MU="MW_SR_01km_eff_RM"
   }
   
   if(ECAPE_inflow=="0500m_RM"){
-    INFLOW="MW_SR_VM_500m_RM"
+    INFLOW="MW_SR_500m_RM"
+    INFLOW_MU="MW_SR_01km_eff_RM"
   }
   
   if(ECAPE_inflow=="01km_LM"){
-    INFLOW="MW_SR_VM_01km_LM"
+    INFLOW="MW_SR_01km_LM"
+    INFLOW_MU="MW_SR_01km_eff_LM"
   }
   
   if(ECAPE_inflow=="03km_LM"){
-    INFLOW="MW_SR_VM_03km_LM"
+    INFLOW="MW_SR_03km_LM"
+    INFLOW_MU="MW_SR_01km_eff_LM"
   }
   
   if(ECAPE_inflow=="0500m_LM"){
-    INFLOW="MW_SR_VM_500m_LM"
+    INFLOW="MW_SR_500m_LM"
+    INFLOW_MU="MW_SR_01km_eff_LM"
+  }
+
+    if(ECAPE_inflow=="01km_MW"){
+    INFLOW="MW_SR_01km_SM"
+    INFLOW_MU="MW_SR_01km_eff_SM"
+  }
+  
+  if(ECAPE_inflow=="03km_MW"){
+    INFLOW="MW_SR_03km_SM"
+    INFLOW_MU="MW_SR_01km_eff_SM"
+  }
+  
+  if(ECAPE_inflow=="0500m_MW"){
+    INFLOW="MW_SR_500m_SM"
+    INFLOW_MU="MW_SR_01km_eff_SM"
   }
   
   # ECAPE for MU parcel
@@ -504,7 +537,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                      LFC = as.numeric(tmp[which(names(tmp)=="MU_LFC_HGT")]),
                                                      EL = as.numeric(tmp[which(names(tmp)=="MU_EL_HGT")]),
                                                      CAPE = as.numeric(tmp[which(names(tmp)=="MU_CAPE")]),
-                                                     V_SR = as.numeric(tmp[which(names(tmp)==INFLOW)]))
+                                                     V_SR = as.numeric(tmp[which(names(tmp)==INFLOW_MU)]))
   
 
   # ECAPE for SB parcel
