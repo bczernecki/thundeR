@@ -119,7 +119,7 @@ compute_ETILDE <- function(p0,z0,q0,t0,LFC,EL,CAPE,V_SR){
   eps = 2*ksq*L/(EL*Pr)
   varepsilon = 0.65*eps*(alpha**2)*(3.14159265359**2)*E_tilde/(4*(sigma**2)*EL*(vsr_tilde**2 ) ) #THIS IS THE FRACTIONAL ENTRAINMENT RATE
   Radius = sqrt(2*ksq*L/(Pr*varepsilon)) # UPDRAFT RADIUS
-  return(c(E_tilde,varepsilon,Radius))
+  return(c(E_tilde,E_tilde,Radius)) # double E_tilde for purpose
 }
 
 ECAPE_parcel <- function(p0,z0,t0,q0,LFC,EL,CAPE,V_SR,Tv,Tp){
