@@ -548,6 +548,7 @@ private:
   Vector shear06();
   
 public:
+  Sounding *S;
   Kinematics();
   Vector rm;
   Vector lm;
@@ -2192,6 +2193,7 @@ void Sounding::alloc(){
   this->ks=new Kinematics();
   ks->setSoundingCache(cache);
   this->ic=new IndicesCollector(this->th,this->cache,this->ks, this);
+  ks->S=this;
 }
 void Sounding::free(){
   delete(this->p);
