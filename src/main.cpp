@@ -885,18 +885,7 @@ void Kinematics::prepareCorfidiVectors()
 
 void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,double v)
 {	
-
-    if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
-    
-    double h_MU = Get(S->h,S->th->mostUnstable->startIndex)
-    
-    if (h-h_MU >= 0 && h-h_MU >= 1000)
-    {
-      mean01eff += v_;
-      n1eff += 1;
-    }
-  }
-  
+ 
   if ((size_t)i < vw->size()-1&&h-h0<=6000)
   {
     std::list<Vector>::iterator it = vw->begin();
