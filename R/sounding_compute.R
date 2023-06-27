@@ -547,7 +547,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
   
 
   # ECAPE for SB parcel
-  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+  tmp[(length(tmp)+4):(length(tmp)+6)] <- compute_ETILDE(p0 = pressure*100,
                                                          z0 = altitude-altitude[1],
                                                          q0 = dpt2w(pressure,temp,dpt),
                                                          t0 = temp+273.15,
@@ -557,7 +557,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          V_SR = as.numeric(tmp[which(names(tmp)==INFLOW)]))
   
   # ECAPE for ML parcel
-  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+  tmp[(length(tmp)+7):(length(tmp)+9)] <- compute_ETILDE(p0 = pressure*100,
                                                          z0 = altitude-altitude[1],
                                                          q0 = dpt2w(pressure,temp,dpt),
                                                          t0 = temp+273.15,
@@ -567,7 +567,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          V_SR = as.numeric(tmp[which(names(tmp)==INFLOW)]))
 
  # ECAPE for MU parcel with mean-storm motion
-  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+  tmp[length(tmp)+10] <- compute_ETILDE(p0 = pressure*100,
                                                      z0 = altitude-altitude[1],
                                                      q0 = dpt2w(pressure,temp,dpt),
                                                      t0 = temp+273.15,
@@ -578,7 +578,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
   
 
   # ECAPE for SB parcel with mean-storm motion
-  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+  tmp[length(tmp)+11] <- compute_ETILDE(p0 = pressure*100,
                                                          z0 = altitude-altitude[1],
                                                          q0 = dpt2w(pressure,temp,dpt),
                                                          t0 = temp+273.15,
@@ -588,7 +588,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_01km_SM")]))[1]
   
   # ECAPE for ML parcel with mean-storm motion
-  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+  tmp[length(tmp)+12] <- compute_ETILDE(p0 = pressure*100,
                                                          z0 = altitude-altitude[1],
                                                          q0 = dpt2w(pressure,temp,dpt),
                                                          t0 = temp+273.15,
@@ -598,7 +598,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_01km_SM")]))[1]
 
   # ECAPE for MU parcel with fixed inflow
-  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+  tmp[length(tmp)+13] <- compute_ETILDE(p0 = pressure*100,
                                                      z0 = altitude-altitude[1],
                                                      q0 = dpt2w(pressure,temp,dpt),
                                                      t0 = temp+273.15,
@@ -609,7 +609,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
   
 
   # ECAPE for SB parcel with fixed inflow
-  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+  tmp[length(tmp)+14] <- compute_ETILDE(p0 = pressure*100,
                                                          z0 = altitude-altitude[1],
                                                          q0 = dpt2w(pressure,temp,dpt),
                                                          t0 = temp+273.15,
@@ -619,7 +619,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          V_SR = 8)[1]
   
   # ECAPE for ML parcel with fixed inflow
-  tmp[(length(tmp)+1):(length(tmp)+3)] <- compute_ETILDE(p0 = pressure*100,
+  tmp[length(tmp)+15] <- compute_ETILDE(p0 = pressure*100,
                                                          z0 = altitude-altitude[1],
                                                          q0 = dpt2w(pressure,temp,dpt),
                                                          t0 = temp+273.15,
