@@ -556,7 +556,7 @@ public:
   virtual ~Kinematics();
   void putSecondPhaseLine(int i, double p, double h, double t, double d, double a, double v)
   {
-    this->ks->muheight = Get(this->h,this->th->mostUnstable->startIndex);
+    
     doSRH(i, p, h, t, d, a, v);
     lasth = h;
   }
@@ -883,7 +883,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
   
   if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
     
-    double H_MU = this->ks->muheight;
+    double H_MU = this->muheight;
     
     if (h-h_MU >= 0 && h-h_MU >= 1000)
     {
@@ -2343,6 +2343,7 @@ void Sounding::finish(){
 }
 
 void Sounding::secondPhase(){
+  this->ks->muheight = Get(this->h,this->th->mostUnstable->startIndex);
   list<double>::iterator ip;
   list<double>::iterator ih = this->h->begin();
   list<double>::iterator it = this->t->begin();
