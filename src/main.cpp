@@ -885,7 +885,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     double h_MU = this->muheight;
     Vector v_ = Get(this->vw, i);
     
-    if (h-h_MU >= 0 && h-h_MU >= 1000)
+    if (h-h_MU >= 0 && h-h_MU <= 1000)
     {
       mean01eff += v_;
       n1eff += 1;
