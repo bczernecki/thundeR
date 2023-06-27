@@ -556,7 +556,6 @@ public:
   virtual ~Kinematics();
   void putSecondPhaseLine(int i, double p, double h, double t, double d, double a, double v)
   {
-    
     doSRH(i, p, h, t, d, a, v);
     lasth = h;
   }
@@ -887,7 +886,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     
     if (h-h_MU >= 0 && h-h_MU >= 1000)
     {
-      mean01eff += v_;
+      mean01eff += v;
       n1eff += 1;
     }
   }
