@@ -556,7 +556,6 @@ public:
   virtual ~Kinematics();
   void putSecondPhaseLine(int i, double p, double h, double t, double d, double a, double v)
   {
-    this->ks->muheight = Get(this->h,this->th->mostUnstable->startIndex);
     doSRH(i, p, h, t, d, a, v);
     lasth = h;
   }
@@ -1893,6 +1892,7 @@ private:
   inline void prepareElementaryCache(double lval, double rval, double * rarr, int rindex, list<double>* vlist, void(*pointer)(int, int, Cache*), Cache* C);
   void finish();
   void secondPhase();
+  this->ks->muheight = Get(this->h,this->th->mostUnstable->startIndex);
   public:  Thermodynamics *th;
     Cache* cache;
     Kinematics *ks;
