@@ -547,6 +547,7 @@ private:
   void finishMeanVectors();
   Vector shear06();
   
+
 public:
   double muheight;
   Sounding *S;
@@ -559,7 +560,11 @@ public:
     doSRH(i, p, h, t, d, a, v);
     lasth = h;
   }
-  
+  void effvec(){
+      if (n1eff != 0) mean01eff *= 1.0 / n1eff;
+      else mean01eff = Vector(0, 0, 0);
+  }
+
   void finishPhase1()
   {
     finishMeanVectors();
@@ -1019,8 +1024,7 @@ void Kinematics::finishMeanVectors()
   else mean06 = Vector(0, 0, 0);
   if (n1 != 0) mean01 *= 1.0 / n1;
   else mean01 = Vector(0, 0, 0);
-  if (n1eff != 0) mean01eff *= 1.0 / n1eff;
-  else mean01eff = Vector(0, 0, 0);
+
   if (n13 != 0) mean13 *= 1.0 / n13;
   else mean13 = Vector(0, 0, 0);
   if (n2 != 0) mean02 *= 1.0 / n2;
@@ -2400,7 +2404,7 @@ void Sounding::secondPhase(){
     this->th->downdraft->virtualValues->push_back(w);
     vv++;vvv++;
   }
-  
+  this->ks->effvec();
 }
 
 IndicesCollector::IndicesCollector(Thermodynamics *t, Cache *c, Kinematics *k,Sounding *Snd){
