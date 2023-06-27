@@ -883,7 +883,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
   
   if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
     
-    double H_MU = this->muheight;
+    double h_MU = this->muheight;
     
     if (h-h_MU >= 0 && h-h_MU >= 1000)
     {
