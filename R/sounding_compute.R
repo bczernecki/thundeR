@@ -605,7 +605,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                      LFC = as.numeric(tmp[which(names(tmp)=="MU_LFC_HGT")]),
                                                      EL = as.numeric(tmp[which(names(tmp)=="MU_EL_HGT")]),
                                                      CAPE = as.numeric(tmp[which(names(tmp)=="MU_CAPE")]),
-                                                     V_SR = 8)[1]
+                                                     V_SR = 10)[1]
   
 
   # ECAPE for SB parcel with fixed inflow
@@ -616,7 +616,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          LFC = as.numeric(tmp[which(names(tmp)=="SB_LFC_HGT")]),
                                                          EL = as.numeric(tmp[which(names(tmp)=="SB_EL_HGT")]),
                                                          CAPE = as.numeric(tmp[which(names(tmp)=="SB_CAPE")]),
-                                                         V_SR = 8)[1]
+                                                         V_SR = 10)[1]
   
   # ECAPE for ML parcel with fixed inflow
   tmp[length(tmp)+1] <- compute_ETILDE(p0 = pressure*100,
@@ -626,7 +626,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          LFC = as.numeric(tmp[which(names(tmp)=="ML_LFC_HGT")]),
                                                          EL = as.numeric(tmp[which(names(tmp)=="ML_EL_HGT")]),
                                                          CAPE = as.numeric(tmp[which(names(tmp)=="ML_CAPE")]),
-                                                         V_SR = 8)[1]
+                                                         V_SR = 10)[1]
 
     
   names(tmp)[(length(tmp)-14):length(tmp)] = c(
