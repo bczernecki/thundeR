@@ -627,7 +627,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          V_SR = 10)[1]
 
     
-  names(tmp)[(length(tmp)-9):length(tmp)] = c(
+  names(tmp)[(length(tmp)-12):length(tmp)] = c(
     "MU_ECAPE",
     "MU_ECAPE_ent_rate",
     "MU_ECAPE_upd_radius",
