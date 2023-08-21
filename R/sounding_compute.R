@@ -221,10 +221,8 @@
 #'  \item ML_ECAPE_ent_rate
 #'  \item ML_ECAPE_upd_radius
 #'  \item MU_ECAPE_SM
-#'  \item SB_ECAPE_SM
 #'  \item ML_ECAPE_SM
 #'  \item MU_ECAPE_FIX_inflow
-#'  \item SB_ECAPE_FIX_inflow
 #'  \item ML_ECAPE_FIX_inflow
 #' }
 #'
@@ -577,15 +575,15 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                      V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_01km_eff_SM")]))[1]
   
 
-  # ECAPE for SB parcel with mean-storm motion
-  tmp[length(tmp)+1] <- compute_ETILDE(p0 = pressure*100,
-                                                         z0 = altitude-altitude[1],
-                                                         q0 = dpt2w(pressure,temp,dpt),
-                                                         t0 = temp+273.15,
-                                                         LFC = as.numeric(tmp[which(names(tmp)=="SB_LFC_HGT")]),
-                                                         EL = as.numeric(tmp[which(names(tmp)=="SB_EL_HGT")]),
-                                                         CAPE = as.numeric(tmp[which(names(tmp)=="SB_CAPE")]),
-                                                         V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_01km_SM")]))[1]
+#  ECAPE for SB parcel with mean-storm motion
+#  tmp[length(tmp)+1] <- compute_ETILDE(p0 = pressure*100,
+#                                                         z0 = altitude-altitude[1],
+#                                                         q0 = dpt2w(pressure,temp,dpt),
+#                                                         t0 = temp+273.15,
+#                                                         LFC = as.numeric(tmp[which(names(tmp)=="SB_LFC_HGT")]),
+#                                                         EL = as.numeric(tmp[which(names(tmp)=="SB_EL_HGT")]),
+#                                                         CAPE = as.numeric(tmp[which(names(tmp)=="SB_CAPE")]),
+#                                                         V_SR = as.numeric(tmp[which(names(tmp)=="MW_SR_01km_SM")]))[1]
   
   # ECAPE for ML parcel with mean-storm motion
   tmp[length(tmp)+1] <- compute_ETILDE(p0 = pressure*100,
@@ -608,15 +606,15 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                      V_SR = 10)[1]
   
 
-  # ECAPE for SB parcel with fixed inflow
-  tmp[length(tmp)+1] <- compute_ETILDE(p0 = pressure*100,
-                                                         z0 = altitude-altitude[1],
-                                                         q0 = dpt2w(pressure,temp,dpt),
-                                                         t0 = temp+273.15,
-                                                         LFC = as.numeric(tmp[which(names(tmp)=="SB_LFC_HGT")]),
-                                                         EL = as.numeric(tmp[which(names(tmp)=="SB_EL_HGT")]),
-                                                         CAPE = as.numeric(tmp[which(names(tmp)=="SB_CAPE")]),
-                                                         V_SR = 10)[1]
+#  ECAPE for SB parcel with fixed inflow
+#  tmp[length(tmp)+1] <- compute_ETILDE(p0 = pressure*100,
+#                                                         z0 = altitude-altitude[1],
+#                                                         q0 = dpt2w(pressure,temp,dpt),
+#                                                         t0 = temp+273.15,
+#                                                         LFC = as.numeric(tmp[which(names(tmp)=="SB_LFC_HGT")]),
+#                                                         EL = as.numeric(tmp[which(names(tmp)=="SB_EL_HGT")]),
+#                                                         CAPE = as.numeric(tmp[which(names(tmp)=="SB_CAPE")]),
+#                                                         V_SR = 10)[1]
   
   # ECAPE for ML parcel with fixed inflow
   tmp[length(tmp)+1] <- compute_ETILDE(p0 = pressure*100,
@@ -629,7 +627,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
                                                          V_SR = 10)[1]
 
     
-  names(tmp)[(length(tmp)-14):length(tmp)] = c(
+  names(tmp)[(length(tmp)-9):length(tmp)] = c(
     "MU_ECAPE",
     "MU_ECAPE_ent_rate",
     "MU_ECAPE_upd_radius",
@@ -640,10 +638,10 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "ML_ECAPE_ent_rate",
     "ML_ECAPE_upd_radius",
     "MU_ECAPE_SM",
-    "SB_ECAPE_SM",
+#    "SB_ECAPE_SM",
     "ML_ECAPE_SM",
     "MU_ECAPE_FIX_inflow",
-    "SB_ECAPE_FIX_inflow",
+#    "SB_ECAPE_FIX_inflow",
     "ML_ECAPE_FIX_inflow")
               
   tmp[which(names(tmp)=="MU_ECAPE")] <- tmp[which(names(tmp)=="MU_ECAPE")]*tmp[which(names(tmp)=="MU_CAPE")]      
@@ -651,10 +649,10 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
   tmp[which(names(tmp)=="ML_ECAPE")] <- tmp[which(names(tmp)=="ML_ECAPE")]*tmp[which(names(tmp)=="ML_CAPE")]      
 
   tmp[which(names(tmp)=="MU_ECAPE_SM")] <- tmp[which(names(tmp)=="MU_ECAPE_SM")]*tmp[which(names(tmp)=="MU_CAPE")]      
-  tmp[which(names(tmp)=="SB_ECAPE_SM")] <- tmp[which(names(tmp)=="SB_ECAPE_SM")]*tmp[which(names(tmp)=="SB_CAPE")]      
+#  tmp[which(names(tmp)=="SB_ECAPE_SM")] <- tmp[which(names(tmp)=="SB_ECAPE_SM")]*tmp[which(names(tmp)=="SB_CAPE")]      
   tmp[which(names(tmp)=="ML_ECAPE_SM")] <- tmp[which(names(tmp)=="ML_ECAPE_SM")]*tmp[which(names(tmp)=="ML_CAPE")]      
   tmp[which(names(tmp)=="MU_ECAPE_FIX_inflow")] <- tmp[which(names(tmp)=="MU_ECAPE_FIX_inflow")]*tmp[which(names(tmp)=="MU_CAPE")]      
-  tmp[which(names(tmp)=="SB_ECAPE_FIX_inflow")] <- tmp[which(names(tmp)=="SB_ECAPE_FIX_inflow")]*tmp[which(names(tmp)=="SB_CAPE")]      
+#  tmp[which(names(tmp)=="SB_ECAPE_FIX_inflow")] <- tmp[which(names(tmp)=="SB_ECAPE_FIX_inflow")]*tmp[which(names(tmp)=="SB_CAPE")]      
   tmp[which(names(tmp)=="ML_ECAPE_FIX_inflow")] <- tmp[which(names(tmp)=="ML_ECAPE_FIX_inflow")]*tmp[which(names(tmp)=="ML_CAPE")]      
 
 #'
