@@ -6,7 +6,7 @@ test_that("Downloading sounding profile", {
                          dd = 20, 
                          hh = 12)
   
-  expect_equal(nrow(profile), 72)
+  expect_equal(nrow(profile), 73)
   expect_true(is.data.frame(profile))
 })
 
