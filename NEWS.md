@@ -1,3 +1,7 @@
+# thundeR 1.1.2
+
+* Allowing to keep NA values in `get_sounding()` which might be not harmful if missing data occur on higher altitudes
+
 # thundeR 1.1.1
 
 * Improvements in C++ algorithm responsible for more accurate computations of parcel trajectories and related thermodynamic indices
