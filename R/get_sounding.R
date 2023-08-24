@@ -66,7 +66,9 @@ get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE) {
     colnames(sounding_data[[1]]) = c("pressure", "altitude", "temp", "dpt",
                                      "rh", "mixr", "wd", "ws", "thta", "thte", "thtv")
     sounding_data[[1]] = sounding_data[[1]][, c("pressure", "altitude", "temp", "dpt","wd", "ws")]
-                                              
+    sounding_data[[1]]$dpt[is.na(sounding_data[[1]]$dpt) & !is.na(sounding_data[[1]]$temp)] <- -273
+    sounding_data[[1]] <- na.omit(sounding_data[[1]]$dpt)
+    
     if (!metadata) {
       sounding_data = sounding_data[[1]]    
     }
