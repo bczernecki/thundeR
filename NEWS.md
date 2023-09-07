@@ -1,6 +1,6 @@
 # thundeR 1.1.2
 
-* Allowing to keep NA values in `get_sounding()` which might be not harmful if missing data occur on higher altitudes
+* Allowing to keep NA values in `get_sounding()` which might be not harmful if missing data occur on higher altitudes for dew point temperatures
 
 # thundeR 1.1.1
 
