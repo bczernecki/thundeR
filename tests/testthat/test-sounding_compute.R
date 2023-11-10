@@ -12,6 +12,5 @@ test_that("sounding_compute", {
         res = sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 1)
         nams = length(unique(names(res)))
         no_of_elements = length(res)
-        expect_equal(nams, no_of_elements) # the no. of parametrs should be > 100
-        
+        expect_equal(nams, no_of_elements) # the no. of named parametrs should be > 200
 })

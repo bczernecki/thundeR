@@ -1,3 +1,7 @@
+# thundeR 1.1.3
+
+* Adding new tests for thermodynamic indices failing with metPy 1.5, but working smoothly with thundeR and sharppy
+
 # thundeR 1.1.2
 
 * Allowing to keep NA values in `get_sounding()` which might be not harmful if missing data occur on higher altitudes for dew point temperatures
