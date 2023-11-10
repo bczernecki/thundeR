@@ -1,5 +1,5 @@
 test_that("Downloading sounding profile", {
-  
+  skip_on_cran() # skip on CRAN due to frequently being recognized as DDOS attack
   profile = get_sounding(wmo_id = 12120, 
                          yy = 2010,
                          mm = 8, 
@@ -11,12 +11,12 @@ test_that("Downloading sounding profile", {
 })
 
 test_that("Sounding profile error", {
-  
+  skip_on_cran() # skip on CRAN due to frequently being recognized as DDOS attack
   expect_error(get_sounding(wmo_id = 99999, 
-                         yy = 2010,
-                         mm = 8, 
-                         dd = 20, 
-                         hh = 12)
+                            yy = 2010,
+                            mm = 8, 
+                            dd = 20, 
+                            hh = 12)
                )
-  
+
 })
