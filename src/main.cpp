@@ -573,7 +573,6 @@ public:
   Kinematics();
   Vector rm;
   Vector lm;
-  Vector sm2;
   virtual ~Kinematics();
   void putSecondPhaseLine(int i, double p, double h, double t, double d, double a, double v)
   {
@@ -917,7 +916,6 @@ void Kinematics::prepareSupercellVectors()
   dev *= 1.0 / tshear.abs();
   this->rm = meanwind - dev;
   this->lm = meanwind + dev;
-  this->sm2 = meanwind;
   
 }
 
@@ -967,7 +965,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     
     double tmps1 = (v1.X() - rm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - rm.Y()) * (v2.X() - v1.X());
     double tmps2 = (v1.X() - lm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - lm.Y()) * (v2.X() - v1.X());
-    double tmps3 = (v1.X() - sm2.X()) * (v2.Y() - v1.Y()) - (v1.Y() - sm2.Y()) * (v2.X() - v1.X());
+    double tmps3 = (v1.X() - meanwind.X()) * (v2.Y() - v1.Y()) - (v1.Y() - meanwind.Y()) * (v2.X() - v1.X());
     
     double SR_U_rm = ( (v1.Y()+v2.Y() ) / 2 ) - rm.Y();
     double SR_V_rm = ( (v1.X()+v2.X() ) / 2 ) - rm.X();
@@ -975,8 +973,8 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     double SR_U_lm = ( (v1.Y()+v2.Y() ) / 2 ) - lm.Y();
     double SR_V_lm = ( (v1.X()+v2.X() ) / 2 ) - lm.X();
 
-    double SR_U_sm = ( (v1.Y()+v2.Y() ) / 2 ) - sm2.Y();
-    double SR_V_sm = ( (v1.X()+v2.X() ) / 2 ) - sm2.X();
+    double SR_U_sm = ( (v1.Y()+v2.Y() ) / 2 ) - meanwind.Y();
+    double SR_V_sm = ( (v1.X()+v2.X() ) / 2 ) - meanwind.X();
 
     Vector SR_vec_lm = Vector(SR_U_lm, SR_V_lm,0);
     Vector SR_vec_rm = Vector(SR_U_rm, SR_V_rm,0);
