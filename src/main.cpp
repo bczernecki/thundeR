@@ -573,6 +573,7 @@ public:
   Kinematics();
   Vector rm;
   Vector lm;
+  Vector sm;
   virtual ~Kinematics();
   void putSecondPhaseLine(int i, double p, double h, double t, double d, double a, double v)
   {
