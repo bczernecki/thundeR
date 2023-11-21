@@ -3358,6 +3358,10 @@ double IndicesCollector::SRH03LM(){
   return S->ks->srh03lm;
 }
 
+double IndicesCollector::SRH36LM(){
+  return S->ks->srh36lm;
+}
+
 double IndicesCollector::SRH01SM(){
   return S->ks->srh01sm;
 }
