@@ -137,6 +137,15 @@
 #'  \item SRH_1km_LM
 #'  \item SRH_3km_LM
 #'  \item SRH_36km_LM
+#'  \item SRH01SM
+#'  \item SRH03SM
+#'  \item SRH36SM
+#'  \item SRH01RM_eff
+#'  \item SRH01LM_eff
+#'  \item SRH01SM_eff
+#'  \item SRH03RM_eff
+#'  \item SRH03LM_eff
+#'  \item SRH03SM_eff
 #'  \item SV_500m_RM
 #'  \item SV_01km_RM
 #'  \item SV_03km_RM
@@ -409,6 +418,15 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "SRH_1km_LM",
     "SRH_3km_LM",
     "SRH_36km_LM",
+    "SRH01SM",
+    "SRH03SM",
+    "SRH36SM",
+    "SRH01RM_eff",
+    "SRH01LM_eff",
+    "SRH01SM_eff",
+    "SRH03RM_eff",
+    "SRH03LM_eff",
+    "SRH03SM_eff",
     "SV_500m_RM",
     "SV_01km_RM",
     "SV_03km_RM",
