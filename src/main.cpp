@@ -939,6 +939,7 @@ void Kinematics::prepareCorfidiVectors()
 
 void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,double v)
 {	
+  Vector meanwind = this->mean06;
   
   if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
     
