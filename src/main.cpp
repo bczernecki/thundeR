@@ -4960,8 +4960,8 @@ double * sounding_default2(double* pressure,
 //'  \item SRH_3km_LM 
 //'  \item SRH_36km_LM
 //'  \item SRH_1km_SM
-//'  \item SRH_1km_SM
-//'  \item SRH_1km_SM
+//'  \item SRH_3km_SM
+//'  \item SRH_36km_SM
 //'  \item SRH_1km_RM_eff
 //'  \item SRH_1km_LM_eff
 //'  \item SRH_1km_SM_eff
