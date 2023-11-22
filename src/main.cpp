@@ -3454,7 +3454,7 @@ double IndicesCollector::Peters_vector_A(){
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind + dev;
     
-  double *tab = Peters_SM; 
+  double *tab = Peters_SM.toAV(); 
   double angle = tab[0];
   delete[] tab;
   return angle;
@@ -3476,7 +3476,7 @@ double IndicesCollector::Peters_vector_M(){
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind + dev;
     
-  double *tab = Peters_SM; 
+  double *tab = Peters_SM.toAV(); 
   double magnitude = tab[0];
   delete[] tab;
   return magnitude;
