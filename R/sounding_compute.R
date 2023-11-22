@@ -186,6 +186,8 @@
 #'  \item Corfidi_downwind_M
 #'  \item Corfidi_upwind_A
 #'  \item Corfidi_upwind_M
+#'  \item Peters_SR_inflow
+#'  \item Peters_SR_inflow_eff 
 #'  \item K_Index
 #'  \item Showalter_Index
 #'  \item TotalTotals_Index
@@ -467,6 +469,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "Corfidi_downwind_M",
     "Corfidi_upwind_A",
     "Corfidi_upwind_M",
+    "Peters_SR_inflow",
+    "Peters_SR_inflow_eff",
     "K_Index",
     "Showalter_Index",
     "TotalTotals_Index",
