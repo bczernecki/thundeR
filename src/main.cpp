@@ -3407,10 +3407,7 @@ double IndicesCollector::Peters_SR_inflow(){
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind - dev;
-
-  cout << "Peters_SR_inflow"; 
-  cout << propfac;
-    
+   
   Vector res = S->ks->mean01 - Peters_SM;
   return res.abs();
 }
@@ -3430,9 +3427,6 @@ double IndicesCollector::Peters_SR_inflow_eff(){
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind - dev;
-
-  cout << "Peters_SR_inflow";
-  cout << propfac;
 
   Vector res = S->ks->mean01eff - Peters_SM;
   return res.abs();
