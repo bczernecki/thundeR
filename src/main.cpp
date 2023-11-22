@@ -3434,13 +3434,6 @@ double IndicesCollector::Peters_SR_inflow_eff(){
   Vector res = S->ks->mean01eff - Peters_SM;
   return res.abs();
 }
-
-double IndicesCollector::Bunkers_LM_A(){
-  double *tab = S->ks->lm.toAV(); 
-  double angle = tab[0];
-  delete[] tab;
-  return angle;
-}
      
 double IndicesCollector::SRH03LM_eff(){
   return S->ks->srh03lm_eff;
