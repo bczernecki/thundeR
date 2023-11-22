@@ -3396,10 +3396,10 @@ double IndicesCollector::Peters_SR_inflow(){
   double fact = 1;
   double propfac = sign_SRH*min(abs(SRH_mean)/150,fact);
 
-  Vector meanwind = this->mean06;
+  Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
   Vector dev = Vector(0, 0, 0);
-  Vector tshear = this->mean6-this->mean0;
+  Vector tshear = S->ks->mean6 - S->ks->mean0;
   dev = Vector::vec(tshear,tv);
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
@@ -3419,10 +3419,10 @@ double IndicesCollector::Peters_SR_inflow_eff(){
   double fact = 1;
   double propfac = sign_SRH*min(abs(SRH_mean)/150,fact);
 
-  Vector meanwind = this->mean06;
+  Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
   Vector dev = Vector(0, 0, 0);
-  Vector tshear = this->mean6-this->mean0;
+  Vector tshear = S->ks->mean6 - S->ks->mean0;
   dev = Vector::vec(tshear,tv);
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
