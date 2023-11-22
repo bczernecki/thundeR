@@ -2279,7 +2279,10 @@ public:
   double MeanVMSR500_LM();
   double MeanVMSR01_LM();
   double MeanVMSR03_LM();
-  
+
+  double Peters_SR_inflow();
+  double Peters_SR_inflow_eff();
+
   double VSurfaceBasedLI_M10();
   double VMeanLayerLI_M10();
   double VMostUnstableLI_M10();
