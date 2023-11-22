@@ -3393,7 +3393,7 @@ double IndicesCollector::Peters_SR_inflow(){
   
   double SRH_mean = S->ks->srh01sm;
   double sign_SRH = SRH_mean/abs(SRH_mean);
-  double propfac = sign_SRH*min(abs(SRH_mean)/150,1)
+  double propfac = sign_SRH*min(abs(SRH_mean)/150,1);
 
   Vector meanwind = this->mean06;
   Vector tv = Vector(0, 0, 1);
@@ -3405,7 +3405,7 @@ double IndicesCollector::Peters_SR_inflow(){
   Vector Peters_SM = meanwind + dev;
 
   cout << "Peters_SR_inflow"; 
-  cout << propfact;
+  cout << propfac;
     
   Vector res = S->ks->mean01 - Peters_SM;
   return res.abs();
@@ -3415,7 +3415,7 @@ double IndicesCollector::Peters_SR_inflow_eff(){
   
   double SRH_mean = S->ks->srh01sm_eff;
   double sign_SRH = SRH_mean/abs(SRH_mean);
-  double propfac = sign_SRH*min(abs(SRH_mean)/150,1)
+  double propfac = sign_SRH*min(abs(SRH_mean)/150,1);
 
   Vector meanwind = this->mean06;
   Vector tv = Vector(0, 0, 1);
@@ -3427,7 +3427,7 @@ double IndicesCollector::Peters_SR_inflow_eff(){
   Vector Peters_SM = meanwind + dev;
 
   cout << "Peters_SR_inflow";
-  cout << propfact;
+  cout << propfac;
 
   Vector res = S->ks->mean01eff - Peters_SM;
   return res.abs();
