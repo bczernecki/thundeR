@@ -3406,7 +3406,7 @@ double IndicesCollector::Peters_SR_inflow(){
   dev = Vector::vec(tshear,tv);
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
-  Vector Peters_SM = meanwind + dev;
+  Vector Peters_SM = meanwind - dev;
 
   cout << "Peters_SR_inflow"; 
   cout << propfac;
@@ -3425,11 +3425,11 @@ double IndicesCollector::Peters_SR_inflow_eff(){
   Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
   Vector dev = Vector(0, 0, 0);
-  Vector tshear = S->ks->mean6 - S->ks->mean0;
+  Vector tshear = S->ks->mean6 - S->ks->mean01eff;
   dev = Vector::vec(tshear,tv);
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
-  Vector Peters_SM = meanwind + dev;
+  Vector Peters_SM = meanwind - dev;
 
   cout << "Peters_SR_inflow";
   cout << propfac;
@@ -3452,7 +3452,7 @@ double IndicesCollector::Peters_vector_A(){
   dev = Vector::vec(tshear,tv);
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
-  Vector Peters_SM = meanwind + dev;
+  Vector Peters_SM = meanwind - dev;
     
   double *tab = Peters_SM.toAV(); 
   double angle = tab[0];
@@ -3474,10 +3474,10 @@ double IndicesCollector::Peters_vector_M(){
   dev = Vector::vec(tshear,tv);
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
-  Vector Peters_SM = meanwind + dev;
+  Vector Peters_SM = meanwind - dev;
     
   double *tab = Peters_SM.toAV(); 
-  double magnitude = tab[0];
+  double magnitude = tab[1];
   delete[] tab;
   return magnitude;
 }
