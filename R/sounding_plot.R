@@ -18,7 +18,6 @@
 #' @param storm_motion (optional) for moving storms only - one can define vector of length two with
 #' wind speed [m/s] and wind directions [degrees] that will be used to compute adjusted SRH parameters
 #' @param ECAPE (optional) draws entrainment CAPE (ECAPE) parcel and related parameters 
-#' @param ECAPE_inflow (optional) user-defined storm inflow for entrainment CAPE (ECAPE) calculation 
 #' @param ... extra graphical arguments to be added
 #' @export
 #' @import aiRthermo
@@ -44,8 +43,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                          DCAPE = FALSE, 
                          meanlayer_bottom_top = c(0, 500),
                          storm_motion = c(999, 999), 
-                         ECAPE  = FALSE, 
-                         ECAPE_inflow = "01km_RM", ...) {
+                         ECAPE  = FALSE, ...) {
   
   if (sum(meanlayer_bottom_top == c(0, 500)) != 2) { 
     parcel = "ML"
@@ -124,35 +122,10 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   parametry = sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3,
                                meanlayer_bottom_top = meanlayer_bottom_top,
-                               storm_motion = storm_motion,
-                               ECAPE_inflow = ECAPE_inflow)
+                               storm_motion = storm_motion)
   
   LP = max(which(!is.na(names(parametry))))
   
-  if(ECAPE_inflow=="01km_RM"){
-    INFLOW="MW_SR_VM_01km_RM"
-  }
-  
-  if(ECAPE_inflow=="03km_RM"){
-    INFLOW="MW_SR_VM_03km_RM"
-  }
-  
-  if(ECAPE_inflow=="0500m_RM"){
-    INFLOW="MW_SR_VM_500m_RM"
-  }
-  
-  if(ECAPE_inflow=="01km_LM"){
-    INFLOW="MW_SR_VM_01km_LM"
-  }
-  
-  if(ECAPE_inflow=="03km_LM"){
-    INFLOW="MW_SR_VM_03km_LM"
-  }
-  
-  if(ECAPE_inflow=="0500m_LM"){
-    INFLOW="MW_SR_VM_500m_LM"
-  }
-
   output$MU_ECAPE <- ECAPE_parcel(output$pressure*100, 
                                    output$altitude-output$altitude[1], 
                                    output$temp+273.15, 
@@ -160,7 +133,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    parametry[which(names(parametry)=="MU_LFC_HGT")],
                                    parametry[which(names(parametry)=="MU_EL_HGT")],
                                    parametry[which(names(parametry)=="MU_CAPE")],
-                                   parametry[which(names(parametry)==INFLOW)],
+                                   parametry[which(names(parametry)=="Peters_SR_inflow_eff")],
                                    output$tempV+273.15,
                                    output$MU+273.15)
 
@@ -171,7 +144,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    parametry[which(names(parametry)=="SB_LFC_HGT")],
                                    parametry[which(names(parametry)=="SB_EL_HGT")],
                                    parametry[which(names(parametry)=="SB_CAPE")],
-                                   parametry[which(names(parametry)==INFLOW)],
+                                   parametry[which(names(parametry)=="Peters_SR_inflow")],
                                    output$tempV+273.15,
                                    output$SB+273.15)
   
@@ -182,7 +155,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    parametry[which(names(parametry)=="ML_LFC_HGT")],
                                    parametry[which(names(parametry)=="ML_EL_HGT")],
                                    parametry[which(names(parametry)=="ML_CAPE")],
-                                   parametry[which(names(parametry)==INFLOW)],
+                                   parametry[which(names(parametry)=="Peters_SR_inflow")],
                                    output$tempV+273.15,
                                    output$ML+273.15)
   
@@ -232,7 +205,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   if(ECAPE == TRUE){
   rect(12.25, 40.75, 26.1, 29.5, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
-  text(13, 40.15, substitute(paste(bold('SR inflow:'))), col = "black", cex = 0.55, adj = c(0, 1))
+  # text(13, 40.15, substitute(paste(bold('SR inflow:'))), col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 39, "SB ECAPE:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 38, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 37, "Entrainment:", col = "black", cex = 0.55, adj = c(0, 1))
@@ -243,7 +216,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(13, 31.5, "Updr. width:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 30.5, "Entrainment:", col = "black", cex = 0.55, adj = c(0, 1))
 
-  text(19.5, 40.19, ECAPE_inflow, col = "black", cex = 0.55, adj = c(0, 1))
+  #text(19.5, 40.19, ECAPE_inflow, col = "black", cex = 0.55, adj = c(0, 1))
 
   text(19.5, 39, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE")], digits = 0)," J/kg"), cex = 0.55, adj = c(0, 1))
   text(19.5, 38, paste0(round(parametry[which(names(parametry[1:LP]) == "SB_ECAPE_upd_radius")], digits = 0)," m"), cex = 0.55, adj = c(0, 1))
