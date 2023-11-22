@@ -3422,7 +3422,7 @@ double IndicesCollector::Peters_SR_inflow_eff(){
   Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
   Vector dev = Vector(0, 0, 0);
-  Vector tshear = S->ks->mean6 - S->ks->mean01eff;
+  Vector tshear = S->ks->mean6 - S->ks->mean0;
   dev = Vector::vec(tshear,tv);
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
