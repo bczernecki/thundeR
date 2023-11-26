@@ -3397,7 +3397,7 @@ double IndicesCollector::Peters_SR_inflow(){
   double SRH_mean = S->ks->srh03sm;
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
-  double propfac = sign_SRH*min(abs(SRH_mean)/150,fact);
+  double propfac = sign_SRH*min(abs(SRH_mean)/100,fact);
 
   Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
@@ -3417,7 +3417,7 @@ double IndicesCollector::Peters_SR_inflow_eff(){
   double SRH_mean = S->ks->srh03sm_eff;
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
-  double propfac = sign_SRH*min(abs(SRH_mean)/150,fact);
+  double propfac = sign_SRH*min(abs(SRH_mean)/100,fact);
 
   Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
@@ -3437,7 +3437,7 @@ double IndicesCollector::Peters_vector_A(){
   double SRH_mean = S->ks->srh03sm;
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
-  double propfac = sign_SRH*min(abs(SRH_mean)/150,fact);
+  double propfac = sign_SRH*min(abs(SRH_mean)/100,fact);
 
   Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
@@ -3459,7 +3459,7 @@ double IndicesCollector::Peters_vector_M(){
   double SRH_mean = S->ks->srh03sm;
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
-  double propfac = sign_SRH*min(abs(SRH_mean)/150,fact);
+  double propfac = sign_SRH*min(abs(SRH_mean)/100,fact);
 
   Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
