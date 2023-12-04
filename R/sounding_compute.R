@@ -101,7 +101,7 @@
 #'  \item BS_06km
 #'  \item BS_08km
 #'  \item BS_36km
-#'  \item BS_26km
+#'  \item BS_13km
 #'  \item BS_16km
 #'  \item BS_18km
 #'  \item BS_EFF_MU
@@ -384,7 +384,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "BS_06km",
     "BS_08km",
     "BS_36km",
-    "BS_26km",
+    "BS_13km",
     "BS_16km",
     "BS_18km",
     "BS_EFF_MU",
