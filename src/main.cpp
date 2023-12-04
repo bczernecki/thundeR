@@ -2187,7 +2187,7 @@ public:
   double BulkShear2kmzero();
   double BulkShear2km20();
   double BulkShear2kmTen();
-  double BS26();
+  double BS13();
   double lapseRate600800();
   
   double LR0500();
@@ -3274,9 +3274,9 @@ double IndicesCollector::BS18(){
   return result.abs();
 }
 
-double IndicesCollector::BS26(){
-  int tail=cache->getHeightIndex(2000);
-  int head = cache->getHeightIndex(6000);
+double IndicesCollector::BS13(){
+  int tail=cache->getHeightIndex(1000);
+  int head = cache->getHeightIndex(3000);
   
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
@@ -4460,7 +4460,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[94]=(*S)->getIndicesCollectorPointer()->BS06();
   vec[95]=(*S)->getIndicesCollectorPointer()->BS08();
   vec[96]=(*S)->getIndicesCollectorPointer()->BS36();
-  vec[97]=(*S)->getIndicesCollectorPointer()->BS26();
+  vec[97]=(*S)->getIndicesCollectorPointer()->BS13();
   vec[98]=(*S)->getIndicesCollectorPointer()->BS16();
   vec[99]=(*S)->getIndicesCollectorPointer()->BS18();
   vec[100]=(*S)->getIndicesCollectorPointer()->emubs();
@@ -4496,7 +4496,6 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[130]=(*S)->getIndicesCollectorPointer()->SRH01LM();
   vec[131]=(*S)->getIndicesCollectorPointer()->SRH03LM();
   vec[132]=(*S)->getIndicesCollectorPointer()->SRH36LM();
-
   vec[133]=(*S)->getIndicesCollectorPointer()->SRH01SM();
   vec[134]=(*S)->getIndicesCollectorPointer()->SRH03SM();
   vec[135]=(*S)->getIndicesCollectorPointer()->SRH36SM();
@@ -4506,7 +4505,6 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[139]=(*S)->getIndicesCollectorPointer()->SRH03RM_eff();
   vec[140]=(*S)->getIndicesCollectorPointer()->SRH03LM_eff();
   vec[141]=(*S)->getIndicesCollectorPointer()->SRH03SM_eff();
-
   vec[142]=(*S)->getIndicesCollectorPointer()->SW500_RM();
   vec[143]=(*S)->getIndicesCollectorPointer()->SW01_RM();
   vec[144]=(*S)->getIndicesCollectorPointer()->SW03_RM();
@@ -5017,7 +5015,7 @@ double * sounding_default2(double* pressure,
 //'  \item BS_06km 
 //'  \item BS_08km 
 //'  \item BS_36km 
-//'  \item BS_26km 
+//'  \item BS_13km 
 //'  \item BS_16km 
 //'  \item BS_18km 
 //'  \item BS_EFF_MU 
