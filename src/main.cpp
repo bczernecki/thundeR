@@ -4376,7 +4376,7 @@ double IndicesCollector::MU_buoyancy(){
 }
 
 double IndicesCollector::ML_buoyancy(){
-  double diff = S->th->mixedLayer->peakB;
+  double diff = S->th->meanLayer->peakB;
   return diff;
 }
 
