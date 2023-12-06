@@ -2290,6 +2290,10 @@ public:
   double VMeanLayerLI_M10();
   double VMostUnstableLI_M10();
   double VMostU500LI_M10();	
+
+  double MU_buoyancy();
+  double ML_buoyancy();
+  double SB_buoyancy();
 };
 
 void Sounding::alloc(){
@@ -4360,9 +4364,30 @@ double IndicesCollector::MeanSR01_MW_eff(){
   return res.abs();
 }
 
+double IndicesCollector::MU_buoyancy(){
+  double t = S->t;
+  double tv = S->th->mostUnstable->virtualValues;
+  double diff = min(t-tv);
+  return diff;
+}
+
+double IndicesCollector::ML_buoyancy(){
+  double t = S->t;
+  double tv = S->th->meanLayer->virtualValues;
+  double diff = min(t-tv);
+  return diff;
+}
+
+double IndicesCollector::SB_buoyancy(){
+  double t = S->t;
+  double tv = S->th->surfaceBased->virtualValues;
+  double diff = min(t-tv);
+  return diff;
+}
+
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[220];
+  double * vec = new double[223];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->MU_coldcape();	
   vec[2]=(*S)->getIndicesCollectorPointer()->MU_coldcapeTV();	
@@ -4583,6 +4608,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[217]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[218]=(*S)->getIndicesCollectorPointer()->DEI_eff();
   vec[219]=(*S)->getIndicesCollectorPointer()->TIP();
+  vec[220]=(*S)->getIndicesCollectorPointer()->MU_buoyancy();
+  vec[221]=(*S)->getIndicesCollectorPointer()->SB_buoyancy();
+  vec[222]=(*S)->getIndicesCollectorPointer()->ML_buoyancy();
   return vec;
 }
 
@@ -5138,6 +5166,9 @@ double * sounding_default2(double* pressure,
 //'  \item DEI
 //'  \item DEI_eff
 //'  \item TIP
+//'  \item MU_buoyancy
+//'  \item SB_buoyancy
+//'  \item ML_buoyancy
 //' }
  // [[Rcpp::export]]
  
@@ -5174,7 +5205,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 220;
+   int reslen= 223;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
