@@ -224,6 +224,9 @@
 #'  \item DEI
 #'  \item DEI_eff
 #'  \item TIP
+#'  \item MU_buoyancy
+#'  \item SB_buoyancy
+#'  \item ML_buoyancy
 #'  \item MU_ECAPE
 #'  \item MU_ECAPE_ent_rate
 #'  \item MU_ECAPE_upd_radius
@@ -506,7 +509,10 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "SHERBE_v2",
     "DEI",
     "DEI_eff",
-    "TIP")
+    "TIP",
+    "MU_buoyancy",
+    "SB_buoyancy",
+    "ML_buoyancy")
   
 #'
 #' section for ECAPE #
