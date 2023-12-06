@@ -1186,6 +1186,7 @@ public:
   list<double> *values;
   list<double> *virtualValues;
   double lasth;
+  double peakB = 9999;
   list<double> *getVirtualValues(){
     return this->virtualValues;
   }
@@ -1365,6 +1366,11 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   this->virtualValues->push_back(vt_parcel);
   double t_ = tv(t, tw);
   double dz = abs(h - lasth);
+
+  double ttt = t_ - vt_parcel;
+  if(ttt<this->peakB) {
+    peakB = ttt;
+  }
   
   double tcap = g * dz * (vt_parcel - t_) / (t_ + kel);
   
@@ -4365,23 +4371,17 @@ double IndicesCollector::MeanSR01_MW_eff(){
 }
 
 double IndicesCollector::MU_buoyancy(){
-  double t = S->t;
-  double tv = S->th->mostUnstable->virtualValues;
-  double diff = min(t-tv);
+  double diff = S->th->mostUnstable->peakB;
   return diff;
 }
 
 double IndicesCollector::ML_buoyancy(){
-  double t = S->t;
-  double tv = S->th->meanLayer->virtualValues;
-  double diff = min(t-tv);
+  double diff = S->th->mixedLayer->peakB;
   return diff;
 }
 
 double IndicesCollector::SB_buoyancy(){
-  double t = S->t;
-  double tv = S->th->surfaceBased->virtualValues;
-  double diff = min(t-tv);
+  double diff = S->th->surfaceBased->peakB;
   return diff;
 }
 
