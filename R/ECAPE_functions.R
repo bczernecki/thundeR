@@ -117,7 +117,8 @@ compute_ETILDE <- function(p0,z0,q0,t0,LFC,EL,CAPE,V_SR){
   N_tilde = NCAPE/CAPE
   E_tilde = vsr_tilde**2 + ( -1 - pitchfork - (pitchfork/(vsr_tilde**2 ))*N_tilde + sqrt((1 + pitchfork + (pitchfork/(vsr_tilde**2 ))*N_tilde)**2 + (4*(pitchfork/(vsr_tilde**2 ))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde**2) )
   eps = 2*ksq*L/(EL*Pr) 
-  varepsilon = 2*((1 - E_tilde) / (E_tilde + N_tilde))/(EL)
+  E_tilde_ = E_tilde - vsr_tilde**2
+  varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL)
   Radius = sqrt(2*ksq*L/(Pr*varepsilon)) # UPDRAFT RADIUS
   return(c(E_tilde,E_tilde,Radius)) # double E_tilde for purpose
 }
@@ -132,7 +133,8 @@ ECAPE_parcel <- function(p0,z0,t0,q0,LFC,EL,CAPE,V_SR,Tv,Tp){
   eps = 2*ksq*L/(EL*Pr)
   vsr_tilde = V_SR/sqrt(2*CAPE) 
   N_tilde = NCAPE/CAPE
-  varepsilon = 2*((1 - E_tilde) / (E_tilde + N_tilde))/(EL)
+  E_tilde_ = E_tilde - vsr_tilde**2
+  varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL)
   B_ent = Buoy_UD*exp(-varepsilon*z0) + (g/(cp*t0))*(1 - exp(-varepsilon*z0) )*(MSE0_bar-MSE0_star) 
   Te = -(g*Tv)/(B_ent-g)
   return(Te-273.15)
