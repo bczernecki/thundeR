@@ -1161,6 +1161,8 @@ private:
   double middlecape;
   double coldcape; 
   double coldcapeTV; 
+  double peakB;
+  double peakB_M10;
   
   bool isSet;
   bool dcape_;
@@ -1186,7 +1188,6 @@ public:
   list<double> *values;
   list<double> *virtualValues;
   double lasth;
-  double peakB = 9999;
   list<double> *getVirtualValues(){
     return this->virtualValues;
   }
@@ -1210,6 +1211,8 @@ void LapseRate::allocate(){
   middlecape=0;
   coldcape=0;
   coldcapeTV=0;
+  peakB=999;
+  peakB_M10=999;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
   startIndex=-1;
   isSet = false;
@@ -1367,9 +1370,18 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   double t_ = tv(t, tw);
   double dz = abs(h - lasth);
 
+  if (vLclIndex != -1) {  
   double ttt = t_ - vt_parcel;
   if(ttt<this->peakB) {
     peakB = ttt;
+  }
+
+  if (t <= -10) {
+  double ttt2 = t_ - vt_parcel;
+  if(ttt2<this->peakB_M10) {
+    peakB_M10 = ttt2;
+     }
+   }
   }
   
   double tcap = g * dz * (vt_parcel - t_) / (t_ + kel);
@@ -2300,6 +2312,9 @@ public:
   double MU_buoyancy();
   double ML_buoyancy();
   double SB_buoyancy();
+  double MU_buoyancy_M10();
+  double ML_buoyancy_M10();
+  double SB_buoyancy_M10();
 };
 
 void Sounding::alloc(){
@@ -4385,9 +4400,24 @@ double IndicesCollector::SB_buoyancy(){
   return diff;
 }
 
+double IndicesCollector::MU_buoyancy_M10(){
+  double diff = S->th->mostUnstable->peakB_M10;
+  return diff;
+}
+
+double IndicesCollector::ML_buoyancy_M10(){
+  double diff = S->th->meanLayer->peakB_M10;
+  return diff;
+}
+
+double IndicesCollector::SB_buoyancy_M10(){
+  double diff = S->th->surfaceBased->peakB_M10;
+  return diff;
+}
+
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[223];
+  double * vec = new double[226];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->MU_coldcape();	
   vec[2]=(*S)->getIndicesCollectorPointer()->MU_coldcapeTV();	
@@ -4611,6 +4641,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[220]=(*S)->getIndicesCollectorPointer()->MU_buoyancy();
   vec[221]=(*S)->getIndicesCollectorPointer()->SB_buoyancy();
   vec[222]=(*S)->getIndicesCollectorPointer()->ML_buoyancy();
+  vec[223]=(*S)->getIndicesCollectorPointer()->MU_buoyancy_M10();
+  vec[224]=(*S)->getIndicesCollectorPointer()->SB_buoyancy_M10();
+  vec[225]=(*S)->getIndicesCollectorPointer()->ML_buoyancy_M10();
   return vec;
 }
 
@@ -5169,6 +5202,9 @@ double * sounding_default2(double* pressure,
 //'  \item MU_buoyancy
 //'  \item SB_buoyancy
 //'  \item ML_buoyancy
+//'  \item MU_buoyancy_M10
+//'  \item SB_buoyancy_M10
+//'  \item ML_buoyancy_M10
 //' }
  // [[Rcpp::export]]
  
@@ -5205,7 +5241,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 223;
+   int reslen= 226;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
