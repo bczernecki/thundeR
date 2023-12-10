@@ -518,7 +518,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "ML_buoyancy",
     "MU_buoyancy_M10",
     "SB_buoyancy_M10",
-    "ML_buoyancy_M10)
+    "ML_buoyancy_M10")
   
 #'
 #' section for ECAPE #
