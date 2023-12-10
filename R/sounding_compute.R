@@ -227,6 +227,9 @@
 #'  \item MU_buoyancy
 #'  \item SB_buoyancy
 #'  \item ML_buoyancy
+#'  \item MU_buoyancy_M10
+#'  \item SB_buoyancy_M10
+#'  \item ML_buoyancy_M10
 #'  \item MU_ECAPE
 #'  \item MU_ECAPE_ent_rate
 #'  \item MU_ECAPE_upd_radius
@@ -512,7 +515,10 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "TIP",
     "MU_buoyancy",
     "SB_buoyancy",
-    "ML_buoyancy")
+    "ML_buoyancy",
+    "MU_buoyancy_M10",
+    "SB_buoyancy_M10",
+    "ML_buoyancy_M10)
   
 #'
 #' section for ECAPE #
