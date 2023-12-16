@@ -1376,7 +1376,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
     peakB = ttt;
   }
 
-  if (t <= -20) {
+  if (t <= -30) {
   double ttt2 = t_ - vt_parcel;
   if(ttt2<this->peakB_M10) {
     peakB_M10 = ttt2;
@@ -1400,9 +1400,9 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
         vcape += tcap;
         if (h - h0 < 3000) vto3cape = vcape;
         if (h - h0 < 2000) vto2cape = vcape;
-        if(t<=0&&t>=-30)middlecape+=tcap;
-        if(t<= -20)coldcape+=tcap;
-        if(vt_parcel<= -20)coldcapeTV+=tcap;
+        if(t<=-10&&t>=-40)middlecape+=tcap;
+        if(t<= -30)coldcape+=tcap;
+        if(vt_parcel<= -30)coldcapeTV+=tcap;
       }
     }
     else
@@ -1751,7 +1751,7 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
     thetn+=1;
   }
   
-  if(t>=-30.0&&t<=0.0){
+  if(t>=-40.0&&t<=-10.0){
     mthet+=OE(t,d,p);
     mthetn+=1;
   }
@@ -1926,7 +1926,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
       }
     }
     
-    if (t<=0&&t>=-30){
+    if (t<=-10&&t>=-40){
       meanhumMIDDLE+=ESAT(d)/ESAT(t);
       meandMIDDLE+=1;
     }
