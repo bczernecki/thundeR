@@ -1376,7 +1376,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
     peakB = ttt;
   }
 
-  if (t <= 0) {
+  if (t <= -20) {
   double ttt2 = t_ - vt_parcel;
   if(ttt2<this->peakB_M10) {
     peakB_M10 = ttt2;
@@ -1401,8 +1401,8 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
         if (h - h0 < 3000) vto3cape = vcape;
         if (h - h0 < 2000) vto2cape = vcape;
         if(t<=0&&t>=-30)middlecape+=tcap;
-        if(t<=0)coldcape+=tcap;
-        if(vt_parcel<=0)coldcapeTV+=tcap;
+        if(t<= -20)coldcape+=tcap;
+        if(vt_parcel<= -20)coldcapeTV+=tcap;
       }
     }
     else
