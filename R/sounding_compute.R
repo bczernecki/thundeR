@@ -655,6 +655,10 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 #' end of section for ECAPE #
 #'
 
+#'
+#' New HSI working on ECAPE value
+#'
+  
 HSI <- function(CAPE,BS06,FL,LCL,LR,EL){
   CAPE <- ifelse(CAPE<201,201,ifelse(CAPE>3000,3000,CAPE))
   BS06 <- ifelse(BS06<2,2,ifelse(BS06>16,16,BS06))
@@ -665,12 +669,17 @@ HSI <- function(CAPE,BS06,FL,LCL,LR,EL){
   return(HSI)
 }
 
- tmp$HSIv2 <- HSI(tmp[which(names(tmp)=="MU_ECAPE")],
+ tmp[length(tmp)+1] <- HSI(tmp[which(names(tmp)=="MU_ECAPE")],
                   tmp[which(names(tmp)=="BS_MW02_to_SM")],
                   tmp[which(names(tmp)=="FRZG_HGT")],
                   tmp[which(names(tmp)=="MU_LCL_HGT")],
                   tmp[which(names(tmp)=="LR_26km")]*-1,
                   tmp[which(names(tmp)=="MU_EL_HGT")])
-  
+  names(tmp)[length(tmp)+1] = "HSI_v2"
+
+#'
+#' end of section for HSI_v2
+#'
+
   return(tmp)
 }
