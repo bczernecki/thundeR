@@ -675,7 +675,7 @@ HSI <- function(CAPE,BS06,FL,LCL,LR,EL){
                   tmp[which(names(tmp)=="MU_LCL_HGT")],
                   tmp[which(names(tmp)=="LR_26km")]*-1,
                   tmp[which(names(tmp)=="MU_EL_HGT")])
-  names(tmp)[length(tmp)+1] = "HSI_v2"
+  names(tmp)[length(tmp)] = "HSI_v2"
 
 #'
 #' end of section for HSI_v2
