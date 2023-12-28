@@ -843,7 +843,7 @@ void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, d
       mean26+=v_;
       n26+=1;
     }
-    if(t>=-30 && t<=0.0){
+    if(t>=-40 && t<=-10){
       mean020+=v_;
       n020+=1;
     }
@@ -1376,7 +1376,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
     peakB = ttt;
   }
 
-  if (t <= -30) {
+  if (t <= -10) {
   double ttt2 = t_ - vt_parcel;
   if(ttt2<this->peakB_M10) {
     peakB_M10 = ttt2;
@@ -1401,8 +1401,8 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
         if (h - h0 < 3000) vto3cape = vcape;
         if (h - h0 < 2000) vto2cape = vcape;
         if(t<=-10&&t>=-40)middlecape+=tcap;
-        if(t<= -30)coldcape+=tcap;
-        if(vt_parcel<= -30)coldcapeTV+=tcap;
+        if(t<= -10)coldcape+=tcap;
+        if(vt_parcel<= -10)coldcapeTV+=tcap;
       }
     }
     else
@@ -2310,9 +2310,11 @@ public:
   double VMostU500LI_M10();	
 
   double MU_buoyancy();
+  double MU500_buoyancy();
   double ML_buoyancy();
   double SB_buoyancy();
   double MU_buoyancy_M10();
+  double MU500_buoyancy_M10();
   double ML_buoyancy_M10();
   double SB_buoyancy_M10();
 };
@@ -4390,6 +4392,11 @@ double IndicesCollector::MU_buoyancy(){
   return diff;
 }
 
+double IndicesCollector::MU500_buoyancy(){
+  double diff = S->th->mostU500->peakB;
+  return diff;
+}
+
 double IndicesCollector::ML_buoyancy(){
   double diff = S->th->meanLayer->peakB;
   return diff;
@@ -4402,6 +4409,11 @@ double IndicesCollector::SB_buoyancy(){
 
 double IndicesCollector::MU_buoyancy_M10(){
   double diff = S->th->mostUnstable->peakB_M10;
+  return diff;
+}
+
+double IndicesCollector::MU500_buoyancy_M10(){
+  double diff = S->th->mostU500->peakB_M10;
   return diff;
 }
 
@@ -4644,6 +4656,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[223]=(*S)->getIndicesCollectorPointer()->MU_buoyancy_M10();
   vec[224]=(*S)->getIndicesCollectorPointer()->SB_buoyancy_M10();
   vec[225]=(*S)->getIndicesCollectorPointer()->ML_buoyancy_M10();
+  vec[226]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy();
+  vec[227]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy_M10();
   return vec;
 }
 
@@ -5205,6 +5219,8 @@ double * sounding_default2(double* pressure,
 //'  \item MU_buoyancy_M10
 //'  \item SB_buoyancy_M10
 //'  \item ML_buoyancy_M10
+//'  \item MU500_buoyancy
+//'  \item MU500_buoyancy_M10
 //' }
  // [[Rcpp::export]]
  
