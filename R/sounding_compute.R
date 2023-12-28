@@ -243,6 +243,9 @@
 #'  \item ML_ECAPE_SM
 #'  \item MU_ECAPE_FIX_inflow
 #'  \item ML_ECAPE_FIX_inflow
+#'  \item MU500_buoyancy
+#'  \item MU500_buoyancy_M10
+
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -518,8 +521,10 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "ML_buoyancy",
     "MU_buoyancy_M10",
     "SB_buoyancy_M10",
-    "ML_buoyancy_M10")
-  
+    "ML_buoyancy_M10",
+    "MU500_buoyancy",
+    "MU500_buoyancy_M10")
+
 #'
 #' section for ECAPE #
 #'
@@ -649,6 +654,23 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 #'
 #' end of section for ECAPE #
 #'
+
+HSI <- function(CAPE,BS06,FL,LCL,LR,EL){
+  CAPE <- ifelse(CAPE<201,201,ifelse(CAPE>3000,3000,CAPE))
+  BS06 <- ifelse(BS06<2,2,ifelse(BS06>16,16,BS06))
+  FL <- ifelse(FL<500,500,ifelse(FL>4000,4000,FL))
+  LCL <- ifelse(LCL<500,500,ifelse(LCL>1500,1500,LCL))
+  LR <- ifelse(LR<5,5,ifelse(LR>8,8,LR))
+  HSI = ((sqrt(50*(CAPE-200)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000))
+  return(HSI)
+}
+
+ tmp$HSIv2 <- HSI(tmp[which(names(tmp)=="MU_ECAPE")],
+                  tmp[which(names(tmp)=="BS_MW02_to_SM")],
+                  tmp[which(names(tmp)=="FRZG_HGT")],
+                  tmp[which(names(tmp)=="MU_LCL_HGT")],
+                  tmp[which(names(tmp)=="LR_26km")]*-1,
+                  tmp[which(names(tmp)=="MU_EL_HGT")])
   
   return(tmp)
 }
