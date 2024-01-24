@@ -1448,12 +1448,42 @@ public:
   double meanLayerZHeight;
   double meanLayerBottom;
   double meanLayerTop;
+  double meanmostUnstableOE;
+  double meanmostUnstableUP;
+  double meanmostUnstableDOWN;
+  double meanmostUnstableN;
+  double meanmostUnstableLAST;
+  double meanmostUnstableOEMAX;
   double n;
   double mp;
   double mh;
   double mt;
   double md;
   double mmr;
+
+  double mp2;
+  double mh2;
+  double mt2;
+  double md2;
+  double mmr2;
+  double mo2;
+
+  double mp2LAST;
+  double mh2LAST;
+  double mt2LAST;
+  double md2LAST;
+  double mmr2LAST;
+  double mo2LAST;
+
+  double mp2MAX;
+  double mh2MAX;
+  double mt2MAX;
+  double md2MAX;
+  double mmr2MAX;
+  double mo2MAX;
+
+  double MLMU_index;
+
   double t0;
   double pwater;
   double lastp;
@@ -1537,10 +1567,11 @@ public:
   LapseRate* meanLayer;
   LapseRate* downdraft;
   LapseRate* showalter;
+  LapseRate* meanmostUnstable;
   
   void putMinTHTE(int i, double p, double h, double oe);
   void startConditions(int i, double p, double h, double t, double d, double a, double v, double oe);
-  void putMaxTHTE(int i, double p, double h, double t, double d, double a, double v, double oe);
+  void putMaxTHTE(int i, double p, double h, double t, double d, double a, double v, double oe, double mr);
   void putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr);
   void determineDowndraft700(int i, double p, double h, double t, double d, double a, double v);
   void determineDowndraftByMinTHTE(int i, double p, double h, double t, double d, double a, double v);
@@ -1572,6 +1603,8 @@ void Thermodynamics::putMinTHTE(int i, double p, double h, double oe){
     minTHTEpos = i;
   }
 }
+
+// Sekcja ML nie wykorzystywana
 void Thermodynamics::setMlIndex(int i, double p, double h, double t, double d, double a, double v){
   this->meanLayer->setInitialConditions(i, p, h, t,d, a, v,h0);
   this->meanLayer->setInitialW(mmr, mo);
@@ -1590,6 +1623,30 @@ Thermodynamics::Thermodynamics(){
   md=0;
   mo=0;
   mmr=0;
+
+  mp2=0;
+  mh2=0;
+  mt2=0;
+  md2=0;
+  mmr2=0;
+  mo2=0;
+
+  mp2LAST=0;
+  mh2LAST=0;
+  mt2LAST=0;
+  md2LAST0=0;
+  mmr2LAST=0;
+  mo2LAST=0;
+
+  mp2MAX=0;
+  mh2MAX=0;
+  mt2MAX0=0;
+  md2MAX=0;
+  mmr2MAX=0;
+  mo2MAX=0;
+
+  MLMU_index=-1;
+
   t0=0;
   t10=0;
   p10=0;
@@ -1610,6 +1667,13 @@ Thermodynamics::Thermodynamics(){
   _700=0;
   lastt=0;
   lasth=0;
+  meanmostUnstableOE=0;
+  meanmostUnstableUP=500;
+  meanmostUnstableDOWN=0;
+  meanmostUnstableN=0;
+  meanmostUnstableLAST=-1;
+  meanmostUnstableOEMAX=0;
+  
   this->wbt = new list<double>();
   this->oe = new list<double>();
   this->mixing = new list<double>();
@@ -1620,6 +1684,7 @@ Thermodynamics::Thermodynamics(){
   this->downdraft = new LapseRate();
   this->showalter = new LapseRate();
   this->mostU500= new LapseRate();
+  this->meanmostUnstable = new LapseRate();
   
   meanhum1=0;
   meand1b=0;
@@ -1667,6 +1732,7 @@ Thermodynamics::~Thermodynamics(){
   delete(this->showalter);
   delete(this->virt);
   delete(this->mostU500);
+  delete(this->meanmostUnstable);
 }
 void Thermodynamics::startConditions(int i, double p, double h, double t, double d, double a, double v, double oe)
 {
@@ -1706,17 +1772,81 @@ void Thermodynamics::startConditions(int i, double p, double h, double t, double
   meanmxr2=W(d, p);
   meand2=1;
 }
-void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, double a, double v, double oe)
+
+void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, double a, double v, double oe, double mr)
 {
-  if (oe > maxOE && h-h0 <= 3000)
-  {
+  if (oe > maxOE && h-h0 <= 3000){
     maxOE = oe;
     this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
   }
+
+  if (h-h0 <= 3000){
+  if( ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)) && (meanmostUnstableUP <= 3000)) {
+
+    if(meanmostUnstableLAST == -1 || (h-h0==meanmostUnstableUP-100)){
+      
+      meanmostUnstableLAST = oe;
+      MLMU_index = i;
+      mh2LAST = h;
+      mp2LAST = p;
+      mt2LAST = t;
+      md2LAST = d;
+      mmr2LAST = mr;
+      mo2LAST = O(t,p);
+    }
+    
+    meanmostUnstableOE += oe;
+    mh2 += h;
+    mp2 += p;
+    mt2 += t;
+    md2 += d;
+    mmr2 += mr;
+    mo2 += O(t,p);
+    meanmostUnstableN += 1;
+    
+      if( h-h0 >= meanmostUnstableUP) {
+        if( h-h0 > meanmostUnstableUP) {
+        meanmostUnstableOE -= meanmostUnstableLAST;        
+        mh2 -= mh2LAST;
+        mp2 -= mp2LAST;
+        mt2 -= mt2LAST;
+        md2 -= md2LAST;
+        mmr2 -= mmrLAST;
+        mo2 -= mo2LAST;
+        meanmostUnstableUP += 100;
+        meanmostUnstableDOWN += 100;
+        meanmostUnstableN -= 1;
+        }
+        
+       double meanOE = meanmostUnstableOE / meanmostUnstableN;
+       double meanH = mh2 / meanmostUnstableN;
+       double meanP = mp2 / meanmostUnstableN;
+       double meanT = mt2 / meanmostUnstableN;
+       double meanD = md2 / meanmostUnstableN;
+       double meanMR = mmr2 / meanmostUnstableN;
+       double meanMO = mo2 / meanmostUnstableN;
+
+       if( meanOE > meanMostUnstableOEMAX){
+         meanmostUnstableOEMAX = meanOE;
+         mh2MAX = meanH;
+         mp2MAX = meanP;
+         mt2MAX = meanT;
+         md2MAX = meanD;
+         mmr2MAX = meanMR;
+         mo2MAX = meanMO;
+         start_parceli = MLMU_index;
+        this->meanmostUnstable->setInitialConditions(start_parceli, mp2LAST, mh2LAST, mt2LAST, md2LAST, 0, 0, h0);
+        this->meanmostUnstable->setInitialW(mmr2MAX, mo2_MAX);
+      }
+    }
+  }
+  }
+}
   if(oe>maxOE500&&h-h0<=3000 && h-h0>=500){
     maxOE500=oe;
     this->mostU500->setInitialConditions(i, p, h, t, d, a, v, h0);
-  }
+  }  
+  
 }
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
 {
@@ -1892,7 +2022,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   else
   {
     putMinTHTE(i, p, h, oe);
-    putMaxTHTE(i, p, h, t, d, a, v, oe);
+    putMaxTHTE(i, p, h, t, d, a, v, oe, mr);
     putMeanLayerParameters(i, p, h, t, d, a, v, mr);
     putPWATER(i, p, h, t, d, a, v);
     putLowLapseRates(i, p, h, t, d, a, v);
@@ -1936,6 +2066,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   
   surfaceBased->putLine(i, p, h, t, d, a, v);
   mostUnstable->putLine(i, p, h, t, d, a, v);
+  if(h-h0 > 500)meanmostUnstable->putLine(i, p, h, t, d, a, v);
   mostU500->putLine(i, p, h, t, d, a, v);
   lastp = p;
   lastt = t;
@@ -2693,7 +2824,7 @@ double IndicesCollector::VMostUnstableLI(){
 
 double IndicesCollector::VMostUnstableVmax(){
   return sqrt(this->VMostUnstableCAPE()*2);
-  
+
 }
 
 double IndicesCollector::MUELTemperature(){
@@ -2712,7 +2843,7 @@ double IndicesCollector::VSurfaceBasedCAPE()
 {
   
   double result = 0;
-  result = S->th->surfaceBased->vcape;
+  result = S->th->meanmostUnstable->vcape;
   
   return result;
   
@@ -2722,7 +2853,7 @@ double IndicesCollector::VLLSurfaceBasedCAPE()
 {
   
   double result = 0;
-  result = S->th->surfaceBased->vto3cape;
+  result = S->th->meanmostUnstable->vto3cape;
   
   return result;
   
@@ -2732,7 +2863,7 @@ double IndicesCollector::VSurfaceBasedCIN()
 {
   
   double result = 0;
-  result = S->th->surfaceBased->vcin;
+  result = S->th->meanmostUnstable->vcin;
   
   return result;
   
@@ -2742,7 +2873,7 @@ double IndicesCollector::VSurfaceBasedLCL()
 {
   
   double result = 0;
-  int index = S->th->surfaceBased->vLclIndex;
+  int index = S->th->meanmostUnstable->vLclIndex;
   
   
   result = Get(S->h,index)- S->th->h0;
@@ -2755,7 +2886,7 @@ double IndicesCollector::VSurfaceBasedLFC()
 {
   
   double result = 0;
-  int index = S->th->surfaceBased->vLfcIndex;
+  int index = S->th->meanmostUnstable->vLfcIndex;
   
   
   result = Get(S->h,index)- S->th->h0;
@@ -2768,7 +2899,7 @@ double IndicesCollector::VSurfaceBasedEL()
 {
   
   double result = 0;
-  int index = S->th->surfaceBased->vElIndex;
+  int index = S->th->meanmostUnstable->vElIndex;
   
   
   result = Get(S->h,index)- S->th->h0;
@@ -2782,10 +2913,10 @@ double IndicesCollector::VSurfaceBasedLI(){
   
   double lit = Get(S->t,lindex);
   
-  int vindex = lindex - S->th->surfaceBased->startIndex;
+  int vindex = lindex - S->th->meanmostUnstable->startIndex;
   
   
-  double plit = Get(S->th->surfaceBased->virtualValues,vindex);
+  double plit = Get(S->th->meanmostUnstable->virtualValues,vindex);
   
   double Showalter = lit - plit;
   return Showalter;
@@ -2797,15 +2928,15 @@ double IndicesCollector::VSurfaceBasedVmax(){
 }
 
 double IndicesCollector::SBELTemperature(){
-  return Get(S->t,S->th->surfaceBased->vElIndex);
+  return Get(S->t,S->th->meanmostUnstable->vElIndex);
 }
 
 double IndicesCollector::SBLCLTemperature(){
-  return Get(S->t,S->th->surfaceBased->vLclIndex);
+  return Get(S->t,S->th->meanmostUnstable->vLclIndex);
 }
 
 double IndicesCollector::SBLFCTemperature(){
-  return Get(S->t,S->th->surfaceBased->vLfcIndex);
+  return Get(S->t,S->th->meanmostUnstable->vLfcIndex);
 }
 
 double IndicesCollector::VMeanLayerCAPE()
@@ -2893,13 +3024,13 @@ double IndicesCollector::VMeanLayerLI(){
 
 double IndicesCollector::VSurfaceBasedLI_M10(){
   int minten = S->th->mintenpos;
-  int mintencheck = S->th->surfaceBased->startIndex;
+  int mintencheck = S->th->meanmostUnstable->startIndex;
   if(minten<mintencheck){
     minten = mintencheck;
   }
-  int vindex = minten - S->th->surfaceBased->startIndex;
+  int vindex = minten - S->th->meanmostUnstable->startIndex;
   double lit = Get(S->t,minten);
-  double plit = Get(S->th->surfaceBased->virtualValues,vindex);
+  double plit = Get(S->th->meanmostUnstable->virtualValues,vindex);
   return lit - plit;
 }
 
@@ -3210,7 +3341,7 @@ double IndicesCollector::MUMRatio(){
 }
 
 double IndicesCollector::SBMRatio(){
-  return Get(S->th->mixing,S->th->surfaceBased->startIndex);
+  return Get(S->th->mixing,S->th->meanmostUnstable->startIndex);
 }
 
 double IndicesCollector::BS500(){
@@ -3563,10 +3694,10 @@ double IndicesCollector::emubs(){
 }
 
 double IndicesCollector::esbbs(){
-  Vector gVector = Get(S->ks->vw,S->th->surfaceBased->startIndex);
-  int index=S->th->surfaceBased->startIndex+((S->th->surfaceBased->vElIndex-S->th->surfaceBased->startIndex)/2);
-  double h0 = Get(S->h,S->th->surfaceBased->startIndex);
-  double hn = Get(S->h,S->th->surfaceBased->vElIndex);
+  Vector gVector = Get(S->ks->vw,S->th->meanmostUnstable->startIndex);
+  int index=S->th->meanmostUnstable->startIndex+((S->th->meanmostUnstable->vElIndex-S->th->meanmostUnstable->startIndex)/2);
+  double h0 = Get(S->h,S->th->meanmostUnstable->startIndex);
+  double hn = Get(S->h,S->th->meanmostUnstable->vElIndex);
   
   double middle = h0+((hn-h0)/2.0);
   double hindex = Get(S->h,index);
@@ -3661,7 +3792,7 @@ double IndicesCollector::MUmiddlecape(){
 }
 
 double IndicesCollector::SBmiddlecape(){
-  return S->th->surfaceBased->middlecape;
+  return S->th->meanmostUnstable->middlecape;
 }
 
 double IndicesCollector::MLmiddlecape(){
@@ -3981,7 +4112,7 @@ double IndicesCollector::BulkShearMLLFCTen(){
 }
 
 double IndicesCollector::BulkShearSBLFCTen(){
-  int tail=S->th->surfaceBased->vLfcIndex;
+  int tail=S->th->meanmostUnstable->vLfcIndex;
   int head = S->th->mintenpos;
   
   Vector vtail = Get(S->ks->vw,tail);
@@ -4094,7 +4225,7 @@ double IndicesCollector::Corfidi_downwind_M(){
 }
 
 double IndicesCollector::SB_coldcape(){
-  double coldcape = S->th->surfaceBased->coldcape;
+  double coldcape = S->th->meanmostUnstable->coldcape;
   return coldcape;
 }
 
@@ -4114,7 +4245,7 @@ double IndicesCollector::MU500_coldcape(){
 }
 
 double IndicesCollector::SB_coldcapeTV(){
-  double coldcape = S->th->surfaceBased->coldcapeTV;
+  double coldcape = S->th->meanmostUnstable->coldcapeTV;
   return coldcape;
 }
 
@@ -4218,7 +4349,7 @@ double IndicesCollector::N02MUCAPE()
 double IndicesCollector::N02SBCAPE()
 {
   double result = 0;
-  result = S->th->surfaceBased->vto2cape;
+  result = S->th->meanmostUnstable->vto2cape;
   
   return result;
 }
@@ -4403,7 +4534,7 @@ double IndicesCollector::ML_buoyancy(){
 }
 
 double IndicesCollector::SB_buoyancy(){
-  double diff = S->th->surfaceBased->peakB;
+  double diff = S->th->meanmostUnstable->peakB;
   return diff;
 }
 
@@ -4423,7 +4554,7 @@ double IndicesCollector::ML_buoyancy_M10(){
 }
 
 double IndicesCollector::SB_buoyancy_M10(){
-  double diff = S->th->surfaceBased->peakB_M10;
+  double diff = S->th->meanmostUnstable->peakB_M10;
   return diff;
 }
 
@@ -5269,7 +5400,7 @@ double * sounding_default2(double* pressure,
      tvlen = sret->th->virt->size();
      
      mulen = sret->th->mostUnstable->getVirtualValues()->size();
-     sblen = sret->th->surfaceBased->getVirtualValues()->size();
+     sblen = sret->th->meanmostUnstable->getVirtualValues()->size();
      mllen = sret->th->meanLayer->getVirtualValues()->size();
      dnlen = sret->th->downdraft->getVirtualValues()->size();
      mustart= sret->th->mostUnstable->startIndex;
@@ -5296,7 +5427,7 @@ double * sounding_default2(double* pressure,
      }
      out[i]=sblen;i++;
      
-     for (std::list<double>::iterator it = sret->th->surfaceBased->getVirtualValues()->begin(); it != sret->th->surfaceBased->getVirtualValues()->end(); ++it){
+     for (std::list<double>::iterator it = sret->th->meanmostUnstable->getVirtualValues()->begin(); it != sret->th->meanmostUnstable->getVirtualValues()->end(); ++it){
        double temp = 0;
        temp= *it;
        out[i]=temp;
