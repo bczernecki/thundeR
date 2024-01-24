@@ -1879,68 +1879,68 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
     
    if(wys == 0 || wys == 600 || wys == 1200 || wys == 1800 || wys == 2400 || wys == 3000){
       mumli1 = i;
-      oe1 += oe;
-      mh1 += h;
-      mp1 += p;
-      mt1 += t;
-      md1 += d;
-      mmr1 += mr;
-      mo1 += O(t,p);
+      oe1 = oe;
+      mh1 = h;
+      mp1 = p;
+      mt1 = t;
+      md1 = d;
+      mmr1 = mr;
+      mo1 = O(t,p);
     }
 
    if(wys == 100 || wys == 700 || wys == 1300 || wys == 1900 || wys == 2500){
       mumli2 = i;
-      oe2 += oe;
-      mh2 += h;
-      mp2 += p;
-      mt2 += t;
-      md2 += d;
-      mmr2 += mr;
-      mo2 += O(t,p);
+      oe2 = oe;
+      mh2 = h;
+      mp2 = p;
+      mt2 = t;
+      md2 = d;
+      mmr2 = mr;
+      mo2 = O(t,p);
     }
 
    if(wys == 200 || wys == 800 || wys == 1400 || wys == 2000 || wys == 2600){
       mumli3 = i;
-      oe3 += oe;
-      mh3 += h;
-      mp3 += p;
-      mt3 += t;
-      md3 += d;
-      mmr3 += mr;
-      mo3 += O(t,p);
+      oe3 = oe;
+      mh3 = h;
+      mp3 = p;
+      mt3 = t;
+      md3 = d;
+      mmr3 = mr;
+      mo3 = O(t,p);
     }
 
    if(wys == 300 || wys == 900 || wys == 1500 || wys == 2100 || wys == 2700){
       mumli4 = i;
-      oe4 += oe;
-      mh4 += h;
-      mp4 += p;
-      mt4 += t;
-      md4 += d;
-      mmr4 += mr;
-      mo4 += O(t,p);
+      oe4 = oe;
+      mh4 = h;
+      mp4 = p;
+      mt4 = t;
+      md4 = d;
+      mmr4 = mr;
+      mo4 = O(t,p);
     }
 
    if(wys == 400 || wys == 1000 || wys == 1600 || wys == 2200 || wys == 2800){
       mumli5 = i;
-      oe5 += oe;
-      mh5 += h;
-      mp5 += p;
-      mt5 += t;
-      md5 += d;
-      mmr5 += mr;
-      mo5 += O(t,p);
+      oe5 = oe;
+      mh5 = h;
+      mp5 = p;
+      mt5 = t;
+      md5 = d;
+      mmr5 = mr;
+      mo5 = O(t,p);
     }
 
   if(wys == 500 || wys == 1100 || wys == 1700 || wys == 2300 || wys == 2900){
       mumli6 = i;
-      oe6 += oe;
-      mh6 += h;
-      mp6 += p;
-      mt6 += t;
-      md6 += d;
-      mmr6 += mr;
-      mo6 += O(t,p);
+      oe6 = oe;
+      mh6 = h;
+      mp6 = p;
+      mt6 = t;
+      md6 = d;
+      mmr6 = mr;
+      mo6 = O(t,p);
     }
 
     if(wys == meanmostUnstableUP){
