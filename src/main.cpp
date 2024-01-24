@@ -1857,7 +1857,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
         cout<<"MU_MO: "<<mo2MAX<<" ";
         cout<<"MU_N: "<<meanmostUnstableN<<" ";
 
-        this->meanmostUnstable->setInitialConditions(start_parceli, mp2LAST, mh2LAST, mt2LAST, md2LAST, 0, 0, h0);
+        this->meanmostUnstable->setInitialConditions(start_parceli, mp2MAX, mh2MAX, mt2MAX, md2MAX, 0, 0, h0);
         this->meanmostUnstable->setInitialW(mmr2MAX, mo2MAX);
       }    
     }
