@@ -1448,12 +1448,7 @@ public:
   double meanLayerZHeight;
   double meanLayerBottom;
   double meanLayerTop;
-  double meanmostUnstableOE;
-  double meanmostUnstableUP;
-  double meanmostUnstableDOWN;
-  double meanmostUnstableN;
-  double meanmostUnstableLAST;
-  double meanmostUnstableOEMAX;
+
   double n;
   double mp;
   double mh;
@@ -1461,6 +1456,19 @@ public:
   double md;
   double mmr;
 
+  double meanmostUnstableUP;
+
+  double mumli1;
+  double oe1;
+  double mp1;
+  double mh1;
+  double mt1;
+  double md1;
+  double mmr1;
+  double mo1;
+
+  double mumli2;
+  double oe2;
   double mp2;
   double mh2;
   double mt2;
@@ -1468,28 +1476,59 @@ public:
   double mmr2;
   double mo2;
 
-  double mp2LAST;
-  double mh2LAST;
-  double mt2LAST;
-  double md2LAST;
-  double mmr2LAST;
-  double mo2LAST;
+  double mumli3;
+  double oe3;
+  double mp3;
+  double mh3;
+  double mt3;
+  double md3;
+  double mmr3;
+  double mo3;
 
-  double mp2MAX;
-  double mh2MAX;
-  double mt2MAX;
-  double md2MAX;
-  double mmr2MAX;
-  double mo2MAX;
+  double mumli4;
+  double oe4;
+  double mp4;
+  double mh4;
+  double mt4;
+  double md4;
+  double mmr4;
+  double mo4;
 
-  double mp2_fixed;
-  double mh2_fixed;
-  double mt2_fixed;
-  double md2_fixed;
-  double mmr2_fixed;
-  double mo2_fixed;
+  double mumli5;
+  double oe5;
+  double mp5;
+  double mh5;
+  double mt5;
+  double md5;
+  double mmr5;
+  double mo5;
 
-  double MLMU_index;
+  double mumli6;
+  double oe6;
+  double mp6;
+  double mh6;
+  double mt6;
+  double md6;
+  double mmr6;
+  double mo6;
+
+  double mumliLAST;
+  double oeLAST;
+  double mpLAST;
+  double mhLAST;
+  double mtLAST;
+  double mdLAST;
+  double mmrLAST;
+  double moLAST;
+
+  double mumliMAX;
+  double oeMAX;
+  double mpMAX;
+  double mhMAX;
+  double mtMAX;
+  double mdMAX;
+  double mmrMAX;
+  double moMAX;
 
   double t0;
   double pwater;
@@ -1631,6 +1670,19 @@ Thermodynamics::Thermodynamics(){
   mo=0;
   mmr=0;
 
+  meanmostUnstableUP=500;
+
+  mumli1=0;
+  oe1=0;
+  mp1=0;
+  mh1=0;
+  mt1=0;
+  md1=0;
+  mmr1=0;
+  mo1=0;
+
+  mumli2=0;
+  oe2=0;
   mp2=0;
   mh2=0;
   mt2=0;
@@ -1638,29 +1690,60 @@ Thermodynamics::Thermodynamics(){
   mmr2=0;
   mo2=0;
 
-  mp2_fixed=0;
-  mh2_fixed=0;
-  mt2_fixed=0;
-  md2_fixed=0;
-  mmr2_fixed=0;
-  mo2_fixed=0;
+  mumli3=0;
+  oe3=0;
+  mp3=0;
+  mh3=0;
+  mt3=0;
+  md3=0;
+  mmr3=0;
+  mo3=0;
+  
+  mumli4=0;
+  oe4=0;
+  mp4=0;
+  mh4=0;
+  mt4=0;
+  md4=0;
+  mmr4=0;
+  mo4=0;
+  
+  mumli5=0;
+  oe5=0;
+  mp5=0;
+  mh5=0;
+  mt5=0;
+  md5=0;
+  mmr5=0;
+  mo5=0;
+  
+  mumli6=0;
+  oe6=0;
+  mp6=0;
+  mh6=0;
+  mt6=0;
+  md6=0;
+  mmr6=0;
+  mo6=0;
 
-  mp2LAST=0;
-  mh2LAST=0;
-  mt2LAST=0;
-  md2LAST=0;
-  mmr2LAST=0;
-  mo2LAST=0;
-
-  mp2MAX=0;
-  mh2MAX=0;
-  mt2MAX=0;
-  md2MAX=0;
-  mmr2MAX=0;
-  mo2MAX=0;
-
-  MLMU_index=-1;
-
+  mumliLAST=0;
+  oeLAST=0;
+  mpLAST=0;
+  mhLAST=0;
+  mtLAST=0;
+  mdLAST=0;
+  mmrLAST=0;
+  moLAST=0;
+  
+  mumliMAX=0;
+  oeMAX=0;
+  mpMAX=0;
+  mhMAX=0;
+  mtMAX=0;
+  mdMAX=0;
+  mmrMAX=0;
+  moMAX=0;
+  
   t0=0;
   t10=0;
   p10=0;
@@ -1681,12 +1764,6 @@ Thermodynamics::Thermodynamics(){
   _700=0;
   lastt=0;
   lasth=0;
-  meanmostUnstableOE=0;
-  meanmostUnstableUP=500;
-  meanmostUnstableDOWN=0;
-  meanmostUnstableN=0;
-  meanmostUnstableLAST=-1;
-  meanmostUnstableOEMAX=0;
   
   this->wbt = new list<double>();
   this->oe = new list<double>();
@@ -1773,7 +1850,7 @@ void Thermodynamics::startConditions(int i, double p, double h, double t, double
   
   meanhum25=ESAT(d)/ESAT(t);
   meand25=1;
-  
+   
   meanhum36=ESAT(d)/ESAT(t);
   meand36=1;
   
@@ -1794,80 +1871,107 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
     this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
   }
 
-  if (h-h0 <= 3000){
-  if( ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)) && (meanmostUnstableUP <= 3000)) {
+  if( ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)) && (meanmostUnstableUP <= 3000) ) {
 
-    if(meanmostUnstableLAST == -1 || (h-h0==meanmostUnstableUP+100)){
-      meanmostUnstableLAST = oe;
-      MLMU_index = i;
-      mh2LAST = h;
-      mp2LAST = p;
-      mt2LAST = t;
-      md2LAST = d;
-      mmr2LAST = mr;
-      mo2LAST = O(t,p);
+    double wys = h-h0;
+    
+   if(wys == 0 || wys == 600 || wys == 1200 || wys == 1800 || wys == 2400 || wys == 3000){
+      mumli1 = i;
+      oe1 += oe;
+      mh1 += h;
+      mp1 += p;
+      mt1 += t;
+      md1 += d;
+      mmr1 += mr;
+      mo1 += O(t,p);
+    }
+
+   if(wys == 100 || wys == 700 || wys == 1300 || wys == 1900 || wys == 2500){
+      mumli2 = i;
+      oe2 += oe;
+      mh2 += h;
+      mp2 += p;
+      mt2 += t;
+      md2 += d;
+      mmr2 += mr;
+      mo2 += O(t,p);
+    }
+
+   if(wys == 200 || wys == 800 || wys == 1400 || wys == 2000 || wys == 2600){
+      mumli3 = i;
+      oe3 += oe;
+      mh3 += h;
+      mp3 += p;
+      mt3 += t;
+      md3 += d;
+      mmr3 += mr;
+      mo3 += O(t,p);
+    }
+
+   if(wys == 300 || wys == 900 || wys == 1500 || wys == 2100 || wys == 2700){
+      mumli4 = i;
+      oe4 += oe;
+      mh4 += h;
+      mp4 += p;
+      mt4 += t;
+      md4 += d;
+      mmr4 += mr;
+      mo4 += O(t,p);
+    }
+
+   if(wys == 400 || wys == 1000 || wys == 1600 || wys == 2200 || wys == 2800){
+      mumli5 = i;
+      oe5 += oe;
+      mh5 += h;
+      mp5 += p;
+      mt5 += t;
+      md5 += d;
+      mmr5 += mr;
+      mo5 += O(t,p);
+    }
+
+  if(wys == 500 || wys == 1100 || wys == 1700 || wys == 2300 || wys == 2900){
+      mumli6 = i;
+      oe6 += oe;
+      mh6 += h;
+      mp6 += p;
+      mt6 += t;
+      md6 += d;
+      mmr6 += mr;
+      mo6 += O(t,p);
+    }
+
+    if(h-h0 == meanmostUnstableUP){
+      oeLAST = (oe1+oe2+oe3+oe4+oe5+oe6)/6;
+      mhLAST = min(mh1,mh2,mh3,mh4,mh5,mh6);
+      mpLAST = max(mp1,mp2,mp3,mp4,mp5,mp6);
+      mtLAST = (mt1+mt2+mt3+mt4+mt5+mt6)/6;
+      mdLAST = (md1+md2+md3+md4+md5+md6)/6;
+      mmrLAST = (mmr1+mmr2+mmr3+mmr4+mmr5+mmr6)/6;
+      moLAST = (mo1+mo2+mo3+mo4+mo5+mo6)/6;
+      mumliLAST = min(mumli1,mumli2,mumli3,mumli4,mumli5,mumli6); 
+      meanmostUnstableUP += 100;
     }
     
-    meanmostUnstableOE += oe;
-    mh2 += h;
-    mp2 += p;
-    mt2 += t;
-    md2 += d;
-    mmr2 += mr;
-    mo2 += O(t,p);
-    meanmostUnstableN += 1;
-    
-        if( h-h0 > meanmostUnstableUP) {
-        meanmostUnstableOE -= meanmostUnstableLAST;        
-        mh2 -= mh2LAST;
-        mp2 -= mp2LAST;
-        mt2 -= mt2LAST;
-        md2 -= md2LAST;
-        mmr2 -= mmr2LAST;
-        mo2 -= mo2LAST;
-        meanmostUnstableUP += 100;
-        meanmostUnstableDOWN += 100;
-        meanmostUnstableN -= 1;
-                
-       double meanOE = meanmostUnstableOE / meanmostUnstableN;
-       double meanH = mh2 / meanmostUnstableN;
-       double meanP = mp2 / meanmostUnstableN;
-       double meanT = mt2 / meanmostUnstableN;
-       double meanD = md2 / meanmostUnstableN;
-       double meanMR = mmr2 / meanmostUnstableN;
-       double meanMO = mo2 / meanmostUnstableN;
-
-       if( meanOE > meanmostUnstableOEMAX){
-         meanmostUnstableOEMAX = meanOE;
-         mh2MAX = meanH;
-         mp2MAX = meanP;
-         mt2MAX = meanT;
-         md2MAX = meanD;
-         mmr2MAX = meanMR;
-         mo2MAX = meanMO;
-         double start_parceli = MLMU_index;
-
-        cout<<"Wysokosc h0: "<<h0<<" ";
-        cout<<"MU_start: "<<start_parceli<<" ";
-        cout<<"MU_H: "<<mh2MAX<<" ";
-        cout<<"MU_P: "<<mp2MAX<<" ";
-        cout<<"MU_T: "<<mt2MAX<<" ";
-        cout<<"MU_D: "<<md2MAX<<" ";
-        cout<<"MU_MR: "<<mmr2MAX<<" ";
-        cout<<"MU_MO: "<<mo2MAX<<" ";
-        cout<<"MU_N: "<<meanmostUnstableN<<" ";
-
-        this->meanmostUnstable->setInitialConditions(start_parceli, mp2MAX, mh2MAX, mt2MAX, md2MAX, 0, 0, h0);
-        this->meanmostUnstable->setInitialW(mmr2MAX, mo2MAX);
-      }    
+    if(oeLAST > oeMAX){
+         oeMAX = oeLAST;
+         mhMAX = mhLAST;
+         mpMAX = mpLAST;
+         mtMAX = mtLAST;
+         mdMAX = mdLAST;
+         mmrMAX = mmrLAST;
+         moMAX = moLAST;
+         mumliMAX = mumliLAST;
+         this->meanmostUnstable->setInitialConditions(mumliMAX, mpMAX, mhMAX, mtMAX, mdMAX, 0, 0, h0);
+         this->meanmostUnstable->setInitialW(mmrMAX, moMAX);
     }
-  }
-  }
+   }   
     if(oe>maxOE500&&h-h0<=3000 && h-h0>=500){
     maxOE500=oe;
     this->mostU500->setInitialConditions(i, p, h, t, d, a, v, h0);
   }  
 }
+
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
 {
   if ((abs(h - h0) >= meanLayerBottom && abs(h - h0) <= meanLayerTop)  && ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)))
