@@ -1634,13 +1634,13 @@ Thermodynamics::Thermodynamics(){
   mp2LAST=0;
   mh2LAST=0;
   mt2LAST=0;
-  md2LAST0=0;
+  md2LAST=0;
   mmr2LAST=0;
   mo2LAST=0;
 
   mp2MAX=0;
   mh2MAX=0;
-  mt2MAX0=0;
+  mt2MAX=0;
   md2MAX=0;
   mmr2MAX=0;
   mo2MAX=0;
@@ -1811,7 +1811,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
         mp2 -= mp2LAST;
         mt2 -= mt2LAST;
         md2 -= md2LAST;
-        mmr2 -= mmrLAST;
+        mmr2 -= mmr2LAST;
         mo2 -= mo2LAST;
         meanmostUnstableUP += 100;
         meanmostUnstableDOWN += 100;
@@ -1826,7 +1826,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
        double meanMR = mmr2 / meanmostUnstableN;
        double meanMO = mo2 / meanmostUnstableN;
 
-       if( meanOE > meanMostUnstableOEMAX){
+       if( meanOE > meanmostUnstableOEMAX){
          meanmostUnstableOEMAX = meanOE;
          mh2MAX = meanH;
          mp2MAX = meanP;
@@ -1834,19 +1834,17 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
          md2MAX = meanD;
          mmr2MAX = meanMR;
          mo2MAX = meanMO;
-         start_parceli = MLMU_index;
+         double start_parceli = MLMU_index;
         this->meanmostUnstable->setInitialConditions(start_parceli, mp2LAST, mh2LAST, mt2LAST, md2LAST, 0, 0, h0);
-        this->meanmostUnstable->setInitialW(mmr2MAX, mo2_MAX);
+        this->meanmostUnstable->setInitialW(mmr2MAX, mo2MAX);
       }
     }
   }
   }
-}
-  if(oe>maxOE500&&h-h0<=3000 && h-h0>=500){
+    if(oe>maxOE500&&h-h0<=3000 && h-h0>=500){
     maxOE500=oe;
     this->mostU500->setInitialConditions(i, p, h, t, d, a, v, h0);
   }  
-  
 }
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
 {
