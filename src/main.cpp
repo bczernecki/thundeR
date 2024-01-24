@@ -1797,7 +1797,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
   if (h-h0 <= 3000){
   if( ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)) && (meanmostUnstableUP <= 3000)) {
 
-    if(meanmostUnstableLAST == -1 || (h-h0==meanmostUnstableUP)){
+    if(meanmostUnstableLAST == -1 || (h-h0==meanmostUnstableUP+100)){
       meanmostUnstableLAST = oe;
       MLMU_index = i;
       mh2LAST = h;
@@ -1848,7 +1848,15 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
          mo2MAX = meanMO;
          double start_parceli = MLMU_index;
         
-        cout<<" "<<mh2LAST<<" ";
+        cout<<"MU_start: "<<start_parceli<<" ";
+        cout<<"MU_H: "<<mh2LAST<<" ";
+        cout<<"MU_P: "<<mp2LAST<<" ";
+        cout<<"MU_T: "<<mt2LAST<<" ";
+        cout<<"MU_D: "<<md2LAST<<" ";
+        cout<<"MU_MR: "<<mmr2MAX<<" ";
+        cout<<"MU_MO: "<<mo2MAX<<" ";
+        cout<<"MU_N: "<<meanmostUnstableN<<" ";
+
         this->meanmostUnstable->setInitialConditions(start_parceli, mp2LAST, mh2LAST, mt2LAST, md2LAST, 0, 0, h0);
         this->meanmostUnstable->setInitialW(mmr2MAX, mo2MAX);
       }    
@@ -2098,6 +2106,13 @@ void Thermodynamics::prepareMeanLayer()
   thet01d/=thet01n;
   thet02d/=thet02n;
   mthet/=mthetn;
+
+        cout<<"ML_H: "<<mh<<" ";
+        cout<<"ML_P: "<<mp<<" ";
+        cout<<"ML_T: "<<mt<<" ";
+        cout<<"ML_D: "<<md<<" ";
+        cout<<"ML_MR: "<<mmr<<" ";
+        cout<<"ML_MO: "<<mo<<" ";
   
   meanLayer->setInitialConditions(0, mp, mh, mt, md, 0, 0, h0);
   meanLayer->setInitialW(mmr, mo);
