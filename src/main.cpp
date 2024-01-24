@@ -1943,13 +1943,13 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
 
     if(h-h0 == meanmostUnstableUP){
       oeLAST = (oe1+oe2+oe3+oe4+oe5+oe6)/6;
-      mhLAST = min(mh1,mh2,mh3,mh4,mh5,mh6);
-      mpLAST = max(mp1,mp2,mp3,mp4,mp5,mp6);
+      mhLAST = min(min(min(min(min(mh1,mh2),mh3),mh4),mh5),mh6);
+      mpLAST = max(max(max(max(max(mp1,mp2),mp3),mp4),mp5),mp6);
       mtLAST = (mt1+mt2+mt3+mt4+mt5+mt6)/6;
       mdLAST = (md1+md2+md3+md4+md5+md6)/6;
       mmrLAST = (mmr1+mmr2+mmr3+mmr4+mmr5+mmr6)/6;
       moLAST = (mo1+mo2+mo3+mo4+mo5+mo6)/6;
-      mumliLAST = min(mumli1,mumli2,mumli3,mumli4,mumli5,mumli6); 
+      mumliLAST = min(min(min(min(min(mumli1,mumli2),mumli3),mumli4),mumli5),mumli6); 
       meanmostUnstableUP += 100;
     }
     
