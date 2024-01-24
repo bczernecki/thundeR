@@ -1797,7 +1797,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
   if (h-h0 <= 3000){
   if( ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)) && (meanmostUnstableUP <= 3000)) {
 
-    if(meanmostUnstableLAST == -1 || (h-h0==meanmostUnstableUP+100)){
+    if(meanmostUnstableLAST == -1 || (h-h0==meanmostUnstableUP-400)){
       meanmostUnstableLAST = oe;
       MLMU_index = i;
       mh2LAST = h;
