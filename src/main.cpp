@@ -1482,6 +1482,13 @@ public:
   double mmr2MAX;
   double mo2MAX;
 
+  double mp2_fixed;
+  double mh2_fixed;
+  double mt2_fixed;
+  double md2_fixed;
+  double mmr2_fixed;
+  double mo2_fixed;
+
   double MLMU_index;
 
   double t0;
@@ -1630,6 +1637,13 @@ Thermodynamics::Thermodynamics(){
   md2=0;
   mmr2=0;
   mo2=0;
+
+  mp2_fixed=0;
+  mh2_fixed=0;
+  mt2_fixed=0;
+  md2_fixed=0;
+  mmr2_fixed=0;
+  mo2_fixed=0;
 
   mp2LAST=0;
   mh2LAST=0;
@@ -1783,8 +1797,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
   if (h-h0 <= 3000){
   if( ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)) && (meanmostUnstableUP <= 3000)) {
 
-    if(meanmostUnstableLAST == -1 || (h-h0==meanmostUnstableUP-100)){
-      
+    if(meanmostUnstableLAST == -1 || (h-h0==meanmostUnstableUP-400)){
       meanmostUnstableLAST = oe;
       MLMU_index = i;
       mh2LAST = h;
@@ -1804,7 +1817,6 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
     mo2 += O(t,p);
     meanmostUnstableN += 1;
     
-      if( h-h0 >= meanmostUnstableUP) {
         if( h-h0 > meanmostUnstableUP) {
         meanmostUnstableOE -= meanmostUnstableLAST;        
         mh2 -= mh2LAST;
@@ -1839,8 +1851,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
         cout<<" "<<mh2LAST<<" ";
         this->meanmostUnstable->setInitialConditions(start_parceli, mp2LAST, mh2LAST, mt2LAST, md2LAST, 0, 0, h0);
         this->meanmostUnstable->setInitialW(mmr2MAX, mo2MAX);
-      }
-    }
+      }    
   }
   }
     if(oe>maxOE500&&h-h0<=3000 && h-h0>=500){
