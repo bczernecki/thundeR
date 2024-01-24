@@ -1848,7 +1848,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
          double start_parceli = MLMU_index;
 
         cout<<"Wysokosc h0: "<<h0<<" ";
-        cout<<"MU_start: "<<h[start_parceli]<<" ";
+        cout<<"MU_start: "<<start_parceli<<" ";
         cout<<"MU_H: "<<mh2MAX<<" ";
         cout<<"MU_P: "<<mp2MAX<<" ";
         cout<<"MU_T: "<<mt2MAX<<" ";
