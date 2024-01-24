@@ -2086,6 +2086,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   surfaceBased->putLine(i, p, h, t, d, a, v);
   mostUnstable->putLine(i, p, h, t, d, a, v);
   mostU500->putLine(i, p, h, t, d, a, v);
+  meanmostUnstable->putLine(i, p, h, t, d, a, v);
   lastp = p;
   lastt = t;
   lasth = h;
@@ -2123,7 +2124,6 @@ void Thermodynamics::prepareMeanLayer()
 void Thermodynamics::putMeanLine(int i, double p, double h, double t, double d, double a, double v)
 {
   this->meanLayer->putLine(i, p, h, t, d, a, v);
-  this->meanmostUnstable->putLine(i, p, h, t, d, a, v);
   determineDowndraftByMinTHTE(i, p, h, t, d, a, v);
   putShowalter(i, p, h, t, d, a, v);
 }
