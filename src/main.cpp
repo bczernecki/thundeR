@@ -1866,9 +1866,6 @@ void Thermodynamics::startConditions(int i, double p, double h, double t, double
 
 void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, double a, double v, double oe, double mr)
 {
-  cout<<"WYS0: "<<h<<" ";
-  cout<<"WYSH0: "<<h0<<" ";
-  
   if (oe > maxOE && h-h0 <= 3000){
     maxOE = oe;
     this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
@@ -1947,7 +1944,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
 
     if(wys == meanmostUnstableUP){
       oeLAST = (oe1+oe2+oe3+oe4+oe5+oe6)/6;
-      mhLAST = min(min(min(min(min(mh1,mh2),mh3),mh4),mh5),mh6);
+      mhLAST = (mh1,mh2,mh3,mh4,mh5,mh6)/6;
       mpLAST = max(max(max(max(max(mp1,mp2),mp3),mp4),mp5),mp6);
       mtLAST = (mt1+mt2+mt3+mt4+mt5+mt6)/6;
       mdLAST = (md1+md2+md3+md4+md5+md6)/6;
@@ -1967,12 +1964,15 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
          moMAX = moLAST;
          mumliMAX = mumliLAST;
     }
+
+        cout<<"MU_OE: "<<oeMAX<<" ";    
         cout<<"MU_H: "<<mhMAX<<" ";
         cout<<"MU_P: "<<mpMAX<<" ";
         cout<<"MU_T: "<<mtMAX<<" ";
         cout<<"MU_D: "<<mdMAX<<" ";
         cout<<"MU_MR: "<<mmrMAX<<" ";
         cout<<"MU_MO: "<<moMAX<<" ";
+        cout<<"MU_I: "<<mumliMAX<<" ";
 
     this->meanmostUnstable->setInitialConditions(mumliMAX, mpMAX, mhMAX, mtMAX, mdMAX, 0, 0, h0);
     this->meanmostUnstable->setInitialW(mmrMAX, moMAX);
@@ -1995,6 +1995,14 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
     mo += O(t,p);
     n += 1;
   }
+
+        cout<<"ML_H: "<<mh<<" ";
+        cout<<"ML_P: "<<mp<<" ";
+        cout<<"ML_T: "<<mt<<" ";
+        cout<<"ML_D: "<<md<<" ";
+        cout<<"ML_MR: "<<mmr<<" ";
+        cout<<"ML_MO: "<<mo<<" ";
+        cout<<"ML_N: "<<n<<" ";
   
   if((abs(h - h0) <= 1000)&&(abs(h - h0) >= 0) && (fmod(abs(h-h0),100.0)==0.0)){
     thet01d+=OE(t,d,p);
@@ -2224,15 +2232,7 @@ void Thermodynamics::prepareMeanLayer()
   thetd/=thetn;
   thet01d/=thet01n;
   thet02d/=thet02n;
-  mthet/=mthetn;
-
-        cout<<"ML_H: "<<mh<<" ";
-        cout<<"ML_P: "<<mp<<" ";
-        cout<<"ML_T: "<<mt<<" ";
-        cout<<"ML_D: "<<md<<" ";
-        cout<<"ML_MR: "<<mmr<<" ";
-        cout<<"ML_MO: "<<mo<<" ";
-  
+  mthet/=mthetn; 
   meanLayer->setInitialConditions(0, mp, mh, mt, md, 0, 0, h0);
   meanLayer->setInitialW(mmr, mo);
   downdraft->setInitialConditions(0, 0, 0, 0, 0, 0, 0, h0);
