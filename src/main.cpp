@@ -2153,12 +2153,11 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
     startConditions(i, p, h, t, d, a, v, oe);
     ZeroPosStartingConditions(i, p, h, t, d, a, v, wbt);
     putMeanLayerParameters(i, p, h, t, d, a, v, mr);	
-    
+    putMaxTHTE(i, p, h, t, d, a, v, oe, mr);
   }
   else
   {
     putMinTHTE(i, p, h, oe);
-    putMaxTHTE(i, p, h, t, d, a, v, oe, mr);
     putMeanLayerParameters(i, p, h, t, d, a, v, mr);
     putPWATER(i, p, h, t, d, a, v);
     putLowLapseRates(i, p, h, t, d, a, v);
