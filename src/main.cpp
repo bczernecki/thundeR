@@ -2146,13 +2146,16 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   this->oe->push_back(oe);
   this->mixing->push_back(mr);
   this->virt->push_back(virtt);
+  if (i >= 0)
+  {
+    putMaxTHTE(i, p, h, t, d, a, v, oe, mr);
+  }
+
   if (i == 0)
   {
-    
     startConditions(i, p, h, t, d, a, v, oe);
     ZeroPosStartingConditions(i, p, h, t, d, a, v, wbt);
     putMeanLayerParameters(i, p, h, t, d, a, v, mr);	
-    putMaxTHTE(i, p, h, t, d, a, v, oe, mr);
   }
   else
   {
