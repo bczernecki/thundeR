@@ -1948,6 +1948,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
       mo6 = O(t,p);
     }
 
+    cout<<"CEILING: "<<meanmostUnstableUP<<" ";
     if(wys == meanmostUnstableUP){
       oeLAST = (oe1+oe2+oe3+oe4+oe5+oe6)/6;
       mhLAST = (mh1+mh2+mh3+mh4+mh5+mh6)/6;
