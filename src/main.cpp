@@ -1981,11 +1981,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
 }
 
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
-{
-
-  cout<<"WYS0: "<<h<<" ";
-  cout<<"WYSH0: "<<h0<<" ";
-  
+{  
   if ((abs(h - h0) >= meanLayerBottom && abs(h - h0) <= meanLayerTop)  && ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)))
   {
     mh += h;
