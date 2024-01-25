@@ -939,9 +939,6 @@ void Kinematics::prepareCorfidiVectors()
 
 void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,double v)
 {	
-  cout<<"WYS0: "<<h<<" ";
-  cout<<"WYSH0: "<<h0<<" ";
-  
   Vector meanwind = this->mean06;
   
   if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
@@ -1985,6 +1982,10 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
 
 void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t, double d, double a, double v,double mr)
 {
+
+  cout<<"WYS0: "<<h<<" ";
+  cout<<"WYSH0: "<<h0<<" ";
+  
   if ((abs(h - h0) >= meanLayerBottom && abs(h - h0) <= meanLayerTop)  && ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)))
   {
     mh += h;
@@ -2248,6 +2249,7 @@ void Thermodynamics::finish(){
   this->mostU500->finish();
   this->surfaceBased->finish();
   this->meanLayer->finish();
+  this->meanmostUnstable->finish();
   this->downdraft->finish();
   this->finishLowLapseRates();
   pwater /= 98.1;
