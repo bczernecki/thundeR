@@ -1870,12 +1870,12 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
   if (oe > maxOE && h-h0 <= 3000){
     maxOE = oe;
     this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
-        cout<<"MU_OE: "<<oe<<" ";    
-        cout<<"MU_H: "<<h<<" ";
-        cout<<"MU_P: "<<p<<" ";
-        cout<<"MU_T: "<<t<<" ";
-        cout<<"MU_D: "<<d<<" ";
-        cout<<"MU_I: "<<i<<" ";
+        //cout<<"MU_OE: "<<oe<<" ";    
+        //cout<<"MU_H: "<<h<<" ";
+        //cout<<"MU_P: "<<p<<" ";
+        //cout<<"MU_T: "<<t<<" ";
+        //cout<<"MU_D: "<<d<<" ";
+        //cout<<"MU_I: "<<i<<" ";
   }
 
   if( ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)) && (meanmostUnstableUP <= 3000) ) {
@@ -1948,7 +1948,8 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
       mo6 = O(t,p);
     }
 
-    cout<<"CEILING: "<<meanmostUnstableUP<<" ";
+    //cout<<"CEILING: "<<meanmostUnstableUP<<" ";
+    
     if(wys == meanmostUnstableUP){
       oeLAST = (oe1+oe2+oe3+oe4+oe5+oe6)/6;
       mhLAST = (mh1+mh2+mh3+mh4+mh5+mh6)/6;
@@ -1971,14 +1972,14 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
          moMAX = moLAST;
          mumliMAX = mumliLAST;
 
-        cout<<"MU_OE: "<<oeMAX<<" ";    
-        cout<<"MU_H: "<<mhMAX<<" ";
-        cout<<"MU_P: "<<mpMAX<<" ";
-        cout<<"MU_T: "<<mtMAX<<" ";
-        cout<<"MU_D: "<<mdMAX<<" ";
-        cout<<"MU_MR: "<<mmrMAX<<" ";
-        cout<<"MU_MO: "<<moMAX<<" ";
-        cout<<"MU_I: "<<mumliMAX<<" ";
+        //cout<<"MU_OE: "<<oeMAX<<" ";    
+        //cout<<"MU_H: "<<mhMAX<<" ";
+        //cout<<"MU_P: "<<mpMAX<<" ";
+        //cout<<"MU_T: "<<mtMAX<<" ";
+        //cout<<"MU_D: "<<mdMAX<<" ";
+        //cout<<"MU_MR: "<<mmrMAX<<" ";
+        //cout<<"MU_MO: "<<moMAX<<" ";
+        //cout<<"MU_I: "<<mumliMAX<<" ";
 
     this->meanmostUnstable->setInitialConditions(mumliMAX, mpMAX, mhMAX, mtMAX, mdMAX, 0, 0, h0);
     this->meanmostUnstable->setInitialW(mmrMAX, moMAX);
@@ -2002,13 +2003,13 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
     mo += O(t,p);
     n += 1;
 
-        cout<<"ML_H: "<<mh/6<<" ";
-        cout<<"ML_P: "<<mp<<" ";
-        cout<<"ML_T: "<<mt/6<<" ";
-        cout<<"ML_D: "<<md/6<<" ";
-        cout<<"ML_MR: "<<mmr/6<<" ";
-        cout<<"ML_MO: "<<mo/6<<" ";
-        cout<<"ML_N: "<<n/6<<" ";
+        //cout<<"ML_H: "<<mh/6<<" ";
+        //cout<<"ML_P: "<<mp<<" ";
+        //cout<<"ML_T: "<<mt/6<<" ";
+        //cout<<"ML_D: "<<md/6<<" ";
+        //cout<<"ML_MR: "<<mmr/6<<" ";
+        //cout<<"ML_MO: "<<mo/6<<" ";
+        //cout<<"ML_N: "<<n/6<<" ";
   }
 
   if((abs(h - h0) <= 1000)&&(abs(h - h0) >= 0) && (fmod(abs(h-h0),100.0)==0.0)){
@@ -2741,7 +2742,9 @@ Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, d
     
     this->th->prepareMeanLayer();
     this->ks->finishPhase1();
-    cout<<"mlb_index: "<<mlb_index<<" ";
+    
+    //cout<<"mlb_index: "<<mlb_index<<" ";
+    
     this->th->meanLayer->startIndex = mlb_index; 
     if(storm_motion.Z() != 999) this->ks->rm = storm_motion;
     if(storm_motion.Z() != 999) this->ks->lm = storm_motion;
