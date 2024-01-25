@@ -1866,15 +1866,21 @@ void Thermodynamics::startConditions(int i, double p, double h, double t, double
 
 void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, double a, double v, double oe, double mr)
 {
+      //cout<<"WYS: "<<h<<" ";
   if (oe > maxOE && h-h0 <= 3000){
     maxOE = oe;
     this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
+        cout<<"MU_OE: "<<oe<<" ";    
+        cout<<"MU_H: "<<h<<" ";
+        cout<<"MU_P: "<<p<<" ";
+        cout<<"MU_T: "<<t<<" ";
+        cout<<"MU_D: "<<d<<" ";
+        cout<<"MU_I: "<<i<<" ";
   }
 
   if( ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)) && (meanmostUnstableUP <= 3000) ) {
 
     double wys = h-h0;
-    cout<<"WYS1: "<<wys<<" ";
     
    if(wys == 0 || wys == 600 || wys == 1200 || wys == 1800 || wys == 2400 || wys == 3000){
       mumli1 = i;
@@ -1963,7 +1969,6 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
          mmrMAX = mmrLAST;
          moMAX = moLAST;
          mumliMAX = mumliLAST;
-    }
 
         cout<<"MU_OE: "<<oeMAX<<" ";    
         cout<<"MU_H: "<<mhMAX<<" ";
@@ -1976,6 +1981,7 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
 
     this->meanmostUnstable->setInitialConditions(mumliMAX, mpMAX, mhMAX, mtMAX, mdMAX, 0, 0, h0);
     this->meanmostUnstable->setInitialW(mmrMAX, moMAX);
+    }
    }   
     if(oe>maxOE500&&h-h0<=3000 && h-h0>=500){
     maxOE500=oe;
@@ -1994,16 +2000,16 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
     mmr += mr;
     mo += O(t,p);
     n += 1;
+
+        cout<<"ML_H: "<<mh/6<<" ";
+        cout<<"ML_P: "<<mp/6<<" ";
+        cout<<"ML_T: "<<mt/6<<" ";
+        cout<<"ML_D: "<<md/6<<" ";
+        cout<<"ML_MR: "<<mmr/6<<" ";
+        cout<<"ML_MO: "<<mo/6<<" ";
+        cout<<"ML_N: "<<n/6<<" ";
   }
 
-        cout<<"ML_H: "<<mh<<" ";
-        cout<<"ML_P: "<<mp<<" ";
-        cout<<"ML_T: "<<mt<<" ";
-        cout<<"ML_D: "<<md<<" ";
-        cout<<"ML_MR: "<<mmr<<" ";
-        cout<<"ML_MO: "<<mo<<" ";
-        cout<<"ML_N: "<<n<<" ";
-  
   if((abs(h - h0) <= 1000)&&(abs(h - h0) >= 0) && (fmod(abs(h-h0),100.0)==0.0)){
     thet01d+=OE(t,d,p);
     thet01n+=1;
