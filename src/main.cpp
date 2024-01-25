@@ -1994,7 +1994,7 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
   if ((abs(h - h0) >= meanLayerBottom && abs(h - h0) <= meanLayerTop)  && ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)))
   {
     mh += h;
-    mp += p;
+    if(p>mp)mp=p;
     mt += t;
     md += d;
     mmr += mr;
@@ -2002,7 +2002,7 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
     n += 1;
 
         cout<<"ML_H: "<<mh/6<<" ";
-        cout<<"ML_P: "<<mp/6<<" ";
+        cout<<"ML_P: "<<mp<<" ";
         cout<<"ML_T: "<<mt/6<<" ";
         cout<<"ML_D: "<<md/6<<" ";
         cout<<"ML_MR: "<<mmr/6<<" ";
@@ -2227,7 +2227,7 @@ void Thermodynamics::prepareMeanLayer()
 {
   if (n == 0) n = 1;
   mh /= n;
-  mp = p0; 
+  mp = mp; 
   mt /= n;
   md /= n;
   mmr /= n;
