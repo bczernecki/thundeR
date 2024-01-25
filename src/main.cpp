@@ -1866,6 +1866,9 @@ void Thermodynamics::startConditions(int i, double p, double h, double t, double
 
 void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, double a, double v, double oe, double mr)
 {
+  cout<<"WYS0: "<<h<<" ";
+  cout<<"WYSH0: "<<h0<<" ";
+  
   if (oe > maxOE && h-h0 <= 3000){
     maxOE = oe;
     this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
