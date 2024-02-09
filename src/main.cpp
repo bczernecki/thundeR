@@ -40,15 +40,6 @@ double W(double t, double p)
   return 622 * ESAT(t) / (p - ESAT(t));
 }
 
-
-//double zmienna =0;
-//void dupa(double *d){
-//        (*d)=2;
-//}
-//dupa(&zmienna);
-//cout << zmienna <<endline;
-
-
 double heaviside(double x){   
   return (sign(x) + 1)/2;
 }
@@ -58,35 +49,38 @@ double compute_rsat(double T, double p, double iceflag){
   if(iceflag==0){
     double term1=(cpv-cpl)/Rv;
     double term2=(xlv-ttrip*(cpv-cpl))/Rv;
-    double esl=exp((T-ttrip)*term2/(T*ttrip))*eref*(T/ttrip)^(term1);
-    qsat=epsilon*esl/(p-esl)         
+    double esl=exp((T-ttrip)*term2/(T*ttrip))*eref*pow((T/ttrip),(term1));
+    double qsat=epsilon*esl/(p-esl);         
   }
   if(iceflag==1){
-    term1=(cpv-cpl)/Rv
-    term2=(xlv-ttrip*(cpv-cpl))/Rv
-    esl_l=exp((T-ttrip)*term2/(T*ttrip))*eref*(T/ttrip)^(term1)
-    qsat_l=epsilon*esl_l/(p-esl_l)
-    term1=(cpv-cpi)/Rv
-    term2=(xls-ttrip*(cpv-cpi))/Rv
-    esl_i=exp((T-ttrip)*term2/(T*ttrip))*eref*(T/ttrip)^(term1)
-    qsat_i=epsilon*esl_i/(p-esl_i)
-    qsat=(1-omeg)*qsat_l + (omeg)*qsat_i
+    double term1=(cpv-cpl)/Rv;
+    double term2=(xlv-ttrip*(cpv-cpl))/Rv;
+    double esl_l=exp((T-ttrip)*term2/(T*ttrip))*eref*pow((T/ttrip),(term1));
+    double qsat_l=epsilon*esl_l/(p-esl_l);
+    double term1=(cpv-cpi)/Rv;
+    double term2=(xls-ttrip*(cpv-cpi))/Rv;
+    double esl_i=exp((T-ttrip)*term2/(T*ttrip))*eref*pow((T/ttrip),(term1));
+    double qsat_i=epsilon*esl_i/(p-esl_i);
+    double qsat=(1-omeg)*qsat_l + (omeg)*qsat_i;
   }
   if(iceflag==2){
-    term1=(cpv-cpi)/Rv
-    term2=( xls-ttrip*(cpv-cpi))/Rv
-    esl=exp((T-ttrip)*term2/(T*ttrip))*eref*(T/ttrip)^(term1)
-    qsat=epsilon*esl/(p-esl)
+    double term1=(cpv-cpi)/Rv;
+    double term2=(xls-ttrip*(cpv-cpi))/Rv;
+    double esl=exp((T-ttrip)*term2/(T*ttrip))*eref*pow((T/ttrip),(term1));
+    double qsat=epsilon*esl/(p-esl);
   }
-  return(qsat)
+  return qsat;
 }
 
+double MSE0_F(double t0, double q0, double z0){
+  return (cp * t0 + xlv * q0 + g * z0);
+}
     
-#######
-ECAPE sekcja
-#######
-
-
+double MSE0_star_F(double t0, double p0, double z0){
+  double rsat = compute_rsat(t0,p0,0);
+  double qsat = (1 - rsat) * rsat;
+  return (cp * t0 + xlv * qsat + g * z0);
+}
 
 double O(double t, double p)
 {
@@ -2870,9 +2864,18 @@ void Sounding::secondPhase(){
     double v_ = *iv;
     double mse0i = *MSE0i;
 
-    ########
-    ECAPE funkcje
-    ########
+    std::vector<double> MSE0_bar_F(const std::vector<double>& MSE0, const std::vector<double>& z0) {
+    std::vector<double> MSE0_bar(MSE0.size(), 0);
+    MSE0_bar[0] = MSE0[0];
+    for (size_t iz = 1; iz < MSE0_bar.size(); ++iz) {
+        double sum = 0.0;
+        for (size_t j = 0; j < iz; ++j) {
+            sum += (MSE0[j] + MSE0[j + 1]) * (z0[j + 1] - z0[j]);
+        }
+        MSE0_bar[iz] = 0.5 * sum / (z0[iz] - z0[0]);
+    }
+    return MSE0_bar;
+    }
 
    if(h_-h0<4000)this->th->downdraft->putLine(i, p_, h_, t_, d_, a_, v_);
     ++ih;++it;++id;++ia;++iv;++i;++MSE0i;
