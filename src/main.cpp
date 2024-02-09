@@ -40,6 +40,54 @@ double W(double t, double p)
   return 622 * ESAT(t) / (p - ESAT(t));
 }
 
+
+//double zmienna =0;
+//void dupa(double *d){
+//        (*d)=2;
+//}
+//dupa(&zmienna);
+//cout << zmienna <<endline;
+
+
+double heaviside(double x){   
+  return (sign(x) + 1)/2;
+}
+
+double compute_rsat(double T, double p, double iceflag){
+  double omeg = ((T-T1)/(T2-T1))*heaviside((T-T1)/(T2-T1))*heaviside((1-(T-T1)/(T2-T1))) + heaviside(-(1 - (T-T1)/(T2-T1)));
+  if(iceflag==0){
+    double term1=(cpv-cpl)/Rv;
+    double term2=(xlv-ttrip*(cpv-cpl))/Rv;
+    double esl=exp((T-ttrip)*term2/(T*ttrip))*eref*(T/ttrip)^(term1);
+    qsat=epsilon*esl/(p-esl)         
+  }
+  if(iceflag==1){
+    term1=(cpv-cpl)/Rv
+    term2=(xlv-ttrip*(cpv-cpl))/Rv
+    esl_l=exp((T-ttrip)*term2/(T*ttrip))*eref*(T/ttrip)^(term1)
+    qsat_l=epsilon*esl_l/(p-esl_l)
+    term1=(cpv-cpi)/Rv
+    term2=(xls-ttrip*(cpv-cpi))/Rv
+    esl_i=exp((T-ttrip)*term2/(T*ttrip))*eref*(T/ttrip)^(term1)
+    qsat_i=epsilon*esl_i/(p-esl_i)
+    qsat=(1-omeg)*qsat_l + (omeg)*qsat_i
+  }
+  if(iceflag==2){
+    term1=(cpv-cpi)/Rv
+    term2=( xls-ttrip*(cpv-cpi))/Rv
+    esl=exp((T-ttrip)*term2/(T*ttrip))*eref*(T/ttrip)^(term1)
+    qsat=epsilon*esl/(p-esl)
+  }
+  return(qsat)
+}
+
+    
+#######
+ECAPE sekcja
+#######
+
+
+
 double O(double t, double p)
 {
   return (t + kel) * pow(1000.0 / p, 0.28541);
@@ -1606,6 +1654,8 @@ public:
   
   double meanmxr2;
   double meand2;  
+
+  list<double>* MSE0;
   
   LapseRate* mostUnstable;
   LapseRate* mostU500;
@@ -2157,7 +2207,10 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   double wbt=TW(t, d, p, &syf);
   double mr=W(d, p);
   double virtt = tv(t,mr);
+
+  double MSE0_= cp * t + xlv * mr + g * (h-h0);
   
+  this->MSE0->puck_back(MSE0_);
   this->wbt->push_back(wbt);
   this->oe->push_back(oe);
   this->mixing->push_back(mr);
@@ -2253,6 +2306,7 @@ void Thermodynamics::putMeanLine(int i, double p, double h, double t, double d, 
   determineDowndraftByMinTHTE(i, p, h, t, d, a, v);
   putShowalter(i, p, h, t, d, a, v);
 }
+
 void Thermodynamics::finish(){
   this->mostUnstable->finish();
   this->mostU500->finish();
@@ -2285,7 +2339,13 @@ private:
   inline void prepareElementaryCache(double lval, double rval, double * rarr, int rindex, list<double>* vlist, void(*pointer)(int, int, Cache*), Cache* C);
   void finish();
   void secondPhase();
-  public:  Thermodynamics *th;
+  public:
+    double MU_ECAPE;
+    double ML_ECAPE;
+    double SB_ECAPE;
+    double MU_ML_ECAPE;
+    double MU500_ECAPE;
+    Thermodynamics *th;
     Cache* cache;
     Kinematics *ks;
     list<double>* p;
@@ -2766,6 +2826,7 @@ void Sounding::finish(){
 void Sounding::secondPhase(){
   this->ks->muheight = Get(this->h,this->th->mostUnstable->startIndex);
   list<double>::iterator ip;
+  list<double>::iterator MSE0i = this->MSE0->begin();
   list<double>::iterator ih = this->h->begin();
   list<double>::iterator it = this->t->begin();
   list<double>::iterator id = this->d->begin();
@@ -2803,14 +2864,18 @@ void Sounding::secondPhase(){
     
     double p_ = *ip;
     double h_ = *ih;
-    if(h_-h0>=4000)break;
     double t_ = *it;
     double d_ = *id;
     double a_ = *ia;
     double v_ = *iv;
-    
-    this->th->downdraft->putLine(i, p_, h_, t_, d_, a_, v_);
-    ++ih;++it;++id;++ia;++iv;++i;
+    double mse0i = *MSE0i;
+
+    ########
+    ECAPE funkcje
+    ########
+
+   if(h_-h0<4000)this->th->downdraft->putLine(i, p_, h_, t_, d_, a_, v_);
+    ++ih;++it;++id;++ia;++iv;++i;++MSE0i;
   }
   
   list<double>::iterator vv=vals.begin(); list<double>::iterator vvv=virtvals.begin();
