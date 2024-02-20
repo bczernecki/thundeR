@@ -44,7 +44,7 @@ Typ Get(list<Typ> *lista, int index){
   return *it;
 }
 
-double sign(double x, double y){
+double sign(double x){
   if (x > 0) return 1;
   else if (x < 0) return -1;
   else if (x == 0) return 0;
@@ -66,29 +66,30 @@ double heaviside(double x){
 }
 
 double compute_rsat(double T, double p, double iceflag){
+  double qsat = 0;
   double omeg = ((T-EC_T1)/(EC_T2-EC_T1))*heaviside((T-EC_T1)/(EC_T2-EC_T1))*heaviside((1-(T-EC_T1)/(EC_T2-EC_T1))) + heaviside(-(1 - (T-EC_T1)/(EC_T2-EC_T1)));
   if(iceflag==0){
     double term1=(cpv-cpl)/Rv;
     double term2=(xlv-ttrip*(cpv-cpl))/Rv;
     double esl=exp((T-ttrip)*term2/(T*ttrip))*eref*pow((T/ttrip),(term1));
-    double qsat=epsilon*esl/(p-esl);         
+    qsat=epsilon*esl/(p-esl);         
   }
   if(iceflag==1){
     double term1=(cpv-cpl)/Rv;
     double term2=(xlv-ttrip*(cpv-cpl))/Rv;
     double esl_l=exp((T-ttrip)*term2/(T*ttrip))*eref*pow((T/ttrip),(term1));
     double qsat_l=epsilon*esl_l/(p-esl_l);
-    double term1=(cpv-cpi)/Rv;
-    double term2=(xls-ttrip*(cpv-cpi))/Rv;
+    term1=(cpv-cpi)/Rv;
+    term2=(xls-ttrip*(cpv-cpi))/Rv;
     double esl_i=exp((T-ttrip)*term2/(T*ttrip))*eref*pow((T/ttrip),(term1));
     double qsat_i=epsilon*esl_i/(p-esl_i);
-    double qsat=(1-omeg)*qsat_l + (omeg)*qsat_i;
+    qsat=(1-omeg)*qsat_l + (omeg)*qsat_i;
   }
   if(iceflag==2){
     double term1=(cpv-cpi)/Rv;
     double term2=(xls-ttrip*(cpv-cpi))/Rv;
     double esl=exp((T-ttrip)*term2/(T*ttrip))*eref*pow((T/ttrip),(term1));
-    double qsat=epsilon*esl/(p-esl);
+    qsat=epsilon*esl/(p-esl);
   }
   return qsat;
 }
@@ -2225,7 +2226,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
 
   double MSE0_= cp * t + xlv * mr + g * (h-h0);
   
-  this->MSE0->puck_back(MSE0_);
+  this->MSE0->push_back(MSE0_);
   this->wbt->push_back(wbt);
   this->oe->push_back(oe);
   this->mixing->push_back(mr);
