@@ -2877,6 +2877,8 @@ void Sounding::secondPhase(){
     return MSE0_bar;
     }
 
+    cout MSE0_bar;
+
    if(h_-h0<4000)this->th->downdraft->putLine(i, p_, h_, t_, d_, a_, v_);
     ++ih;++it;++id;++ia;++iv;++i;++MSE0i;
   }
