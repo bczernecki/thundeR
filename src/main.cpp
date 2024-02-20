@@ -9,6 +9,28 @@ using namespace std;
 
 const double kel = 273.15;
 const double g = 9.81;
+const double Rd=287.04;
+const double Rv=461.5;
+const double epsilon=Rd/Rv;
+const double cp=1005;
+const double xlv=2501000;
+const double xls=2834000;
+const double cpv=1870;
+const double cpl=4190;
+const double cpi=2106;
+const double ttrip=273.15;
+const double eref=611.2;
+const double gamma=Rd/cp;
+const double Gamma_d=g/cp;
+const double pref=611.65;
+const double EC_T1=273.15;
+const double EC_T2=253.15;
+const double EC_L=250;
+const double sigma=1.1;
+const double alpha=0.8;
+const double Pr=1/3;
+const double ksq=0.18;
+  
 class IndicesCollector;
 class InfoCollector;
 class Sounding;
@@ -23,9 +45,10 @@ Typ Get(list<Typ> *lista, int index){
   return *it;
 }
 
-double SIGN(double x, double y){
-  if (y < 0) return -abs(x);
-  else return abs(x);
+double sign(double x, double y){
+  if (x > 0) return 1;
+  else if (x < 0) return -1;
+  else if (x == 0) return 0;
 }
 
 double ESAT(double t)
@@ -33,7 +56,6 @@ double ESAT(double t)
   double temp = t + kel;
   return (pow(10, 23.832241 - 5.02808 * log10(temp) - 0.00000013816 * pow(10, 11.344 - 0.0303998 * temp) + 0.0081328 * pow(10, 3.49149 - 1302.8844 / temp) - 2949.076 / temp));
 }
-
 
 double W(double t, double p)
 {
@@ -45,7 +67,7 @@ double heaviside(double x){
 }
 
 double compute_rsat(double T, double p, double iceflag){
-  double omeg = ((T-T1)/(T2-T1))*heaviside((T-T1)/(T2-T1))*heaviside((1-(T-T1)/(T2-T1))) + heaviside(-(1 - (T-T1)/(T2-T1)));
+  double omeg = ((T-EC_T1)/(EC_T2-EC_T1))*heaviside((T-EC_T1)/(EC_T2-EC_T1))*heaviside((1-(T-EC_T1)/(EC_T2-EC_T1))) + heaviside(-(1 - (T-EC_T1)/(EC_T2-EC_T1)));
   if(iceflag==0){
     double term1=(cpv-cpl)/Rv;
     double term2=(xlv-ttrip*(cpv-cpl))/Rv;
