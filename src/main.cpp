@@ -20,7 +20,6 @@ const double cpl=4190;
 const double cpi=2106;
 const double ttrip=273.15;
 const double eref=611.2;
-const double gamma=Rd/cp;
 const double Gamma_d=g/cp;
 const double pref=611.65;
 const double EC_T1=273.15;
