@@ -2240,11 +2240,11 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   double mr=W(d, p);
   double virtt = tv(t,mr);
 
-  double MSE0_ = cp * t + xlv * mr + g * (h-h0);
+  double MSE0_ = cp * (t+kel) + xlv * mr + g * (h-h0);
 
-  double rsat_ = compute_rsat(t,p,0);
+  double rsat_ = compute_rsat(t+kel,p*100,0);
   double qsat_ = (1 - rsat_) * rsat_;
-  double MSE0_star_ = cp * t + xlv * qsat_ + g * (h-h0);
+  double MSE0_star_ = cp * (t+kel) + xlv * qsat_ + g * (h-h0);
 
   aggregated_MSE0 += (last_MSE0 + MSE0_) * (h-lasth);  
   double MSE0_bar_ = 0.5 * aggregated_MSE0 / (lasth-h0);
