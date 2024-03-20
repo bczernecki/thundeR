@@ -2243,7 +2243,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   double MSE0_bar_ = 0.5 * aggregated_MSE0 / (lasth-h0);
   last_MSE0 = MSE0_;
 
-  double int_arg_MSE0_ = (g/(cp*(t+kel)))*( MSE0_bar_ - MSE0_star_)
+  double int_arg_MSE0_ = (g/(cp*(t+kel)))*( MSE0_bar_ - MSE0_star_);
   
   this->MSE0->push_back(MSE0_);
   this->MSE0_star->push_back(MSE0_star_);
