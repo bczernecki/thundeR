@@ -3069,7 +3069,7 @@ double* IndicesCollector::MU_ECAPE()
   cout<< E_tilde << " E_tilde \n";
   cout<< eps << " eps \n";
   cout<< E_tilde_ << " E_tilde \n";
-  cout<< varepsilion << " varepsiolon \n";
+  cout<< varepsilon << " varepsiolon \n";
   cout<< Radius << " Radius ";
   cout<< ECAPE << " ECAPE ";
     
