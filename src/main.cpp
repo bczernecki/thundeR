@@ -27,7 +27,6 @@ const double EC_T2=253.15;
 const double EC_L=250;
 const double sigma=1.1;
 const double alpha=0.8;
-const double Pr=1/3;
 const double ksq=0.18;
   
 class IndicesCollector;
@@ -3037,6 +3036,7 @@ double IndicesCollector::SWEATIndex(){
 double* IndicesCollector::MU_ECAPE()
 {  
   double L = 250;
+  double Pr = 1/3;
   double EL = Get(S->h, S->th->mostUnstable->vElIndex);
   double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex);
   double CAPE = S->th->mostUnstable->vcape;
