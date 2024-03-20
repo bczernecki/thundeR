@@ -94,16 +94,6 @@ double compute_rsat(double T, double p, double iceflag){
   return qsat;
 }
 
-double MSE0_F(double t0, double q0, double z0){
-  return (cp * t0 + xlv * q0 + g * z0);
-}
-    
-double MSE0_star_F(double t0, double p0, double z0){
-  double rsat = compute_rsat(t0,p0,0);
-  double qsat = (1 - rsat) * rsat;
-  return (cp * t0 + xlv * qsat + g * z0);
-}
-
 double O(double t, double p)
 {
   return (t + kel) * pow(1000.0 / p, 0.28541);
@@ -2240,7 +2230,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   double mr=W(d, p);
   double virtt = tv(t,mr);
 
-  double MSE0_ = cp * (t+kel) + xlv * mr + g * (h-h0);
+  double MSE0_ = cp * (t+kel) + xlv * (mr/1000) + g * (h-h0);
 
   double rsat_ = compute_rsat(t+kel,p*100,0);
   double qsat_ = (1 - rsat_) * rsat_;
