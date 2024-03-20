@@ -3056,7 +3056,11 @@ double* IndicesCollector::MU_ECAPE()
   cout<< NCAPE << " NCAPE \n";
   cout<< S->th->mostUnstable->NCAPE_N << " NCAPE_N \n";
   cout<< S->th->mostUnstable->NCAPE << " NCAPE_abs \n";
-    
+
+  cout<< pitchfork << " pitchfork \n";
+  cout<< V_SR << " V_SR \n";
+  cout<< vsr_tilde << " vsr_tilde \n";
+
   double N_tilde = NCAPE / CAPE;   
   double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt(pow((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde),2) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
   double eps = 2*ksq*L/(EL*Pr);
