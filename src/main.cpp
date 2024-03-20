@@ -3065,6 +3065,12 @@ double* IndicesCollector::MU_ECAPE()
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
   double ECAPE = E_tilde*CAPE;  
 
+  cout<< N_tilde << " N_tilde \n";
+  cout<< E_tilde << " E_tilde \n";
+  cout<< eps << " eps \n";
+  cout<< E_tilde_ << " E_tilde \n";
+  cout<< varepsilion << " varepsiolon \n";
+  cout<< Radius << " Radius ";
   cout<< ECAPE << " ECAPE ";
     
   double* result = new double[2];
