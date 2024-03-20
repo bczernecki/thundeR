@@ -2258,7 +2258,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   this->MSE0_bar->push_back(MSE0_bar_);
   this->int_arg_MSE0->push_back(int_arg_MSE0_);
 
-  if(h-h0 < 5000){
+  if(h-h0 < 1000){
   cout<< int_arg_MSE0_ << " " << h << "\n"; 
   }
   
