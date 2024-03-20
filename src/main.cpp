@@ -2258,8 +2258,10 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   this->MSE0_bar->push_back(MSE0_bar_);
   this->int_arg_MSE0->push_back(int_arg_MSE0_);
 
-  cout<< int_arg_MSE0_ << " " << h  << "\n"; 
-
+  if(h-h0 < 5000){
+  cout<< int_arg_MSE0_ << " " << h << "\n"; 
+  }
+  
   this->wbt->push_back(wbt);
   this->oe->push_back(oe);
   this->mixing->push_back(mr);
