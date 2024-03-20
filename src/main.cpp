@@ -3070,7 +3070,8 @@ double* IndicesCollector::MU_ECAPE()
   cout<< vsr_tilde << " vsr_tilde \n";
 
   double N_tilde = NCAPE / CAPE;   
-  double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt(pow((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde),2) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
+  double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - 
+    (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt((((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))*((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
   double eps = 2*ksq*L/(EL*Pr);
   double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
   double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
