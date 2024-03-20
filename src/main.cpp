@@ -3044,6 +3044,14 @@ double* IndicesCollector::MU_ECAPE()
   double l = L/EL;
   double NCAPE = 0;
   double pitchfork = ksq*(alpha*alpha)*(M_PI*M_PI)*L/(4*Pr*(sigma*sigma)*EL);
+
+      cout<< ksq << " ksq \n";
+      cout<< alpha << " alpha \n";
+      cout<< M_PI << " M_PI \n";
+      cout<< L << " L \n";
+      cout<< Pr << " Pr \n";
+      cout<< sigma << " sigma \n";
+    
   double vsr_tilde = V_SR/sqrt(2*CAPE);
 
   NCAPE = S->th->mostUnstable->NCAPE / S->th->mostUnstable->NCAPE_N;  
