@@ -1668,6 +1668,7 @@ public:
   list<double>* MSE0;
   list<double>* MSE0_star;
   list<double>* MSE0_bar;
+  list<double>* int_arg_MSE0;
 
   LapseRate* mostUnstable;
   LapseRate* mostU500;
@@ -1728,6 +1729,7 @@ Thermodynamics::Thermodynamics(){
   this->MSE0 = new list<double>();
   this->MSE0_star = new list<double>();
   this->MSE0_bar = new list<double>();
+  this->int_arg_MSE0 = new list<double>();
   
   mr1000 = 0;
   meanLayerZHeight=500.0;
@@ -1896,6 +1898,7 @@ Thermodynamics::~Thermodynamics(){
   delete(this->MSE0);
   delete(this->MSE0_star);
   delete(this->MSE0_bar);
+  delete(this->int_arg_MSE0);
 }
 void Thermodynamics::startConditions(int i, double p, double h, double t, double d, double a, double v, double oe)
 {
@@ -2239,12 +2242,15 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   aggregated_MSE0 += (last_MSE0 + MSE0_) * (h-lasth);  
   double MSE0_bar_ = 0.5 * aggregated_MSE0 / (lasth-h0);
   last_MSE0 = MSE0_;
-    
+
+  double int_arg_MSE0_ = (g/(cp*(t+kel)))*( MSE0_bar_ - MSE0_star_)
+  
   this->MSE0->push_back(MSE0_);
   this->MSE0_star->push_back(MSE0_star_);
   this->MSE0_bar->push_back(MSE0_bar_);
+  this->int_arg_MSE0->push_back(int_arg_MSE0_);
 
-  cout<< MSE0_bar_ << " " << h  << "\n"; 
+  cout<< int_arg_MSE0_ << " " << h  << "\n"; 
 
   this->wbt->push_back(wbt);
   this->oe->push_back(oe);
