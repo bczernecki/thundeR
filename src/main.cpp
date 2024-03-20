@@ -2254,7 +2254,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   this->MSE0_star->push_back(MSE0_star_);
   this->MSE0_bar->push_back(MSE0_bar_);
 
-  cout<< MSE0_bar_ << "\n"; 
+  cout<< MSE0_bar_ << " " << h  << "\n"; 
 
   this->wbt->push_back(wbt);
   this->oe->push_back(oe);
