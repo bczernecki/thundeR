@@ -1239,6 +1239,14 @@ private:
   
   
 public:
+  double NCAPE;
+  double NCAPE_N;
+  void putNCAPE(int i, double value){
+    if(i >= vLfcIndex && i <= vElIndex){
+      NCAPE += value;
+      NCAPE_N += 1;
+    }
+  } 
   list<double> *values;
   list<double> *virtualValues;
   double lasth;
@@ -2243,7 +2251,7 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   double MSE0_bar_ = 0.5 * aggregated_MSE0 / (lasth-h0);
   last_MSE0 = MSE0_;
 
-  double int_arg_MSE0_ = (g/(cp*(t+kel)))*( MSE0_bar_ - MSE0_star_);
+  double int_arg_MSE0_ = -(g/(cp*(t+kel)))*( MSE0_bar_ - MSE0_star_);
   
   this->MSE0->push_back(MSE0_);
   this->MSE0_star->push_back(MSE0_star_);
@@ -2702,6 +2710,9 @@ public:
   double MU500_buoyancy_M10();
   double ML_buoyancy_M10();
   double SB_buoyancy_M10();
+
+  double* MU_ECAPE();
+
 };
 
 void Sounding::alloc(){
@@ -2867,7 +2878,7 @@ void Sounding::finish(){
 void Sounding::secondPhase(){
   this->ks->muheight = Get(this->h,this->th->mostUnstable->startIndex);
   list<double>::iterator ip;
-  list<double>::iterator MSE0i = this->th->MSE0->begin();
+  list<double>::iterator MSE0i = this->th->int_arg_MSE0->begin();
   list<double>::iterator ih = this->h->begin();
   list<double>::iterator it = this->t->begin();
   list<double>::iterator id = this->d->begin();
@@ -2910,6 +2921,11 @@ void Sounding::secondPhase(){
     double a_ = *ia;
     double v_ = *iv;
     double mse0i = *MSE0i;
+    this->th->mostUnstable->putNCAPE(i, mse0i);
+    this->th->mostU500->putNCAPE(i, mse0i);
+    this->th->surfaceBased->putNCAPE(i, mse0i);
+    this->th->meanLayer->putNCAPE(i, mse0i);
+    this->th->meanmostUnstable->putNCAPE(i, mse0i);
 
    if(h_-h0<4000)this->th->downdraft->putLine(i, p_, h_, t_, d_, a_, v_);
     ++ih;++it;++id;++ia;++iv;++i;++MSE0i;
@@ -2998,6 +3014,37 @@ double IndicesCollector::SWEATIndex(){
   return res;
 }
 
+// NCAPE 
+
+double* IndicesCollector::MU_ECAPE()
+{  
+  double L = 250;
+  double EL = Get(S->h, S->th->mostUnstable->vElIndex);
+  double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex);
+  double CAPE = S->th->mostUnstable->vcape;
+  double V_SR = Peters_SR_inflow_eff();
+  double l = L/EL;
+  double NCAPE = 0;
+  double pitchfork = ksq*(alpha*alpha)*(M_PI*M_PI)*L/(4*Pr*(sigma*sigma)*EL);
+  double vsr_tilde = V_SR/sqrt(2*CAPE);
+
+  NCAPE = S->th->mostUnstable->NCAPE / S->th->mostUnstable->NCAPE_N;  
+  NCAPE *=  EL - LFC; 
+  if(NCAPE < 0) NCAPE = 0;
+    
+  double N_tilde = NCAPE / CAPE;   
+  double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt(pow((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde),2) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
+  double eps = 2*ksq*L/(EL*Pr);
+  double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
+  double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
+  double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
+  double ECAPE = E_tilde*CAPE;  
+  double* result = new double[2];
+  result[0] = ECAPE;
+  result[1] = Radius;
+  return result;
+}
+    
 double IndicesCollector::VMostUnstableCAPE()
 {
   
@@ -4818,7 +4865,7 @@ double IndicesCollector::SB_buoyancy_M10(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[228];
+  double * vec = new double[230];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->MU_coldcape();	
   vec[2]=(*S)->getIndicesCollectorPointer()->MU_coldcapeTV();	
@@ -5047,6 +5094,12 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[225]=(*S)->getIndicesCollectorPointer()->ML_buoyancy_M10();
   vec[226]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy();
   vec[227]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy_M10();
+  
+  double* ECAPE = (*S)->getIndicesCollectorPointer()->MU_ECAPE(); 
+  vec[228] = ECAPE[0];
+  vec[229] = ECAPE[1];
+  delete[] ECAPE;
+
   return vec;
 }
 
@@ -5610,6 +5663,8 @@ double * sounding_default2(double* pressure,
 //'  \item ML_buoyancy_M10
 //'  \item MU500_buoyancy
 //'  \item MU500_buoyancy_M10
+//'  \item MU_ECAPE
+//'  \item MU_ECAPE_radius
 //' }
  // [[Rcpp::export]]
  
@@ -5646,7 +5701,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 228;
+   int reslen= 230;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
