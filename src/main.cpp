@@ -1509,6 +1509,10 @@ void LapseRate::finish(){
 class Thermodynamics:public InfoCollector{
   friend class IndicesCollector;
 public:
+
+  double last_MSE0;
+  double aggregated_MSE0;
+
   double meanLayerZHeight;
   double meanLayerBottom;
   double meanLayerTop;
@@ -1672,7 +1676,9 @@ public:
   double meand2;  
 
   list<double>* MSE0;
-  
+  list<double>* MSE0_star;
+  list<double>* MSE0_bar;
+
   LapseRate* mostUnstable;
   LapseRate* mostU500;
   LapseRate* surfaceBased;
@@ -1726,6 +1732,13 @@ void Thermodynamics::putMlLine(int i, double p, double h, double t, double d, do
   this->meanLayer->putLine(i, p, h, t, d, a, v);
 }
 Thermodynamics::Thermodynamics(){
+
+  last_MSE0 = 0;
+  aggregated_MSE0 = 0;
+  this->MSE0 = new list<double>();
+  this->MSE0_star = new list<double>();
+  this->MSE0_bar = new list<double>();
+  
   mr1000 = 0;
   meanLayerZHeight=500.0;
   n=0;
@@ -1890,6 +1903,9 @@ Thermodynamics::~Thermodynamics(){
   delete(this->virt);
   delete(this->mostU500);
   delete(this->meanmostUnstable);
+  delete(this->MSE0);
+  delete(this->MSE0_star);
+  delete(this->MSE0_bar);
 }
 void Thermodynamics::startConditions(int i, double p, double h, double t, double d, double a, double v, double oe)
 {
@@ -2224,9 +2240,22 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   double mr=W(d, p);
   double virtt = tv(t,mr);
 
-  double MSE0_= cp * t + xlv * mr + g * (h-h0);
-  
+  double MSE0_ = cp * t + xlv * mr + g * (h-h0);
+
+  double rsat_ = compute_rsat(t,p,0);
+  double qsat_ = (1 - rsat_) * rsat_;
+  double MSE0_star_ = cp * t + xlv * qsat_ + g * (h-h0);
+
+  aggregated_MSE0 += (last_MSE0 + MSE0_) * (h-lasth);  
+  double MSE0_bar_ = 0.5 * aggregated_MSE0 / (lasth-h0);
+  last_MSE0 = MSE0_;
+    
   this->MSE0->push_back(MSE0_);
+  this->MSE0_star->push_back(MSE0_star_);
+  this->MSE0_bar->push_back(MSE0_bar_);
+
+  cout<< MSE0_bar_ << "\n"; 
+
   this->wbt->push_back(wbt);
   this->oe->push_back(oe);
   this->mixing->push_back(mr);
@@ -2842,7 +2871,7 @@ void Sounding::finish(){
 void Sounding::secondPhase(){
   this->ks->muheight = Get(this->h,this->th->mostUnstable->startIndex);
   list<double>::iterator ip;
-  list<double>::iterator MSE0i = this->MSE0->begin();
+  list<double>::iterator MSE0i = this->th->MSE0->begin();
   list<double>::iterator ih = this->h->begin();
   list<double>::iterator it = this->t->begin();
   list<double>::iterator id = this->d->begin();
@@ -2885,21 +2914,6 @@ void Sounding::secondPhase(){
     double a_ = *ia;
     double v_ = *iv;
     double mse0i = *MSE0i;
-
-    std::vector<double> MSE0_bar_F(const std::vector<double>& MSE0, const std::vector<double>& z0) {
-    std::vector<double> MSE0_bar(MSE0.size(), 0);
-    MSE0_bar[0] = MSE0[0];
-    for (size_t iz = 1; iz < MSE0_bar.size(); ++iz) {
-        double sum = 0.0;
-        for (size_t j = 0; j < iz; ++j) {
-            sum += (MSE0[j] + MSE0[j + 1]) * (z0[j + 1] - z0[j]);
-        }
-        MSE0_bar[iz] = 0.5 * sum / (z0[iz] - z0[0]);
-    }
-    return MSE0_bar;
-    }
-
-    cout MSE0_bar;
 
    if(h_-h0<4000)this->th->downdraft->putLine(i, p_, h_, t_, d_, a_, v_);
     ++ih;++it;++id;++ia;++iv;++i;++MSE0i;
