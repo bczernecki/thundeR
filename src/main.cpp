@@ -2272,11 +2272,11 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   this->MSE0_bar->push_back(MSE0_bar_);
   this->int_arg_MSE0->push_back(int_arg_MSE0_);
 
-  if(h-h0 < 1000){
-  cout<< MSE0_bar_ << " MSE0_bar " << lasth << "\n";
-  cout<< MSE0_star_ << " MSE0_star " << lasth << "\n"; 
+  //if(h-h0 < 1000){
+  //cout<< MSE0_bar_ << " MSE0_bar " << lasth << "\n";
+  //cout<< MSE0_star_ << " MSE0_star " << lasth << "\n"; 
   cout<< int_arg_MSE0_ << " int_arg " << lasth << "\n"; 
-  }
+  //}
   
   this->wbt->push_back(wbt);
   this->oe->push_back(oe);
@@ -3049,6 +3049,8 @@ double* IndicesCollector::MU_ECAPE()
   NCAPE = S->th->mostUnstable->NCAPE / S->th->mostUnstable->NCAPE_N;  
   NCAPE *=  EL - LFC; 
   if(NCAPE < 0) NCAPE = 0;
+
+  cout<< NCAPE << " NCAPE ";
     
   double N_tilde = NCAPE / CAPE;   
   double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt(pow((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde),2) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
@@ -3057,6 +3059,9 @@ double* IndicesCollector::MU_ECAPE()
   double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
   double ECAPE = E_tilde*CAPE;  
+
+  cout<< ECAPE << " ECAPE ";
+    
   double* result = new double[2];
   result[0] = ECAPE;
   result[1] = Radius;
