@@ -2267,7 +2267,9 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   this->int_arg_MSE0->push_back(int_arg_MSE0_);
 
   if(h-h0 < 1000){
-  cout<< int_arg_MSE0_ << " " << h << "\n"; 
+  cout<< MSE0_bar_ << " MSE0_bar " << h << "\n";
+  cout<< MSE0_star_ << " MSE0_star " << h << "\n"; 
+  cout<< int_arg_MSE0_ << " int_arg " << h << "\n"; 
   }
   
   this->wbt->push_back(wbt);
