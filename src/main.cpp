@@ -3050,7 +3050,12 @@ double* IndicesCollector::MU_ECAPE()
   NCAPE *=  EL - LFC; 
   if(NCAPE < 0) NCAPE = 0;
 
-  cout<< NCAPE << " NCAPE ";
+  cout<< EL << " EL \n";
+  cout<< LFC << " LFC \n";
+  cout<< CAPE << " CAPE \n";
+  cout<< NCAPE << " NCAPE \n";
+  cout<< S->th->mostUnstable->NCAPE_N << " NCAPE_N \n";
+  cout<< S->th->mostUnstable->NCAPE << " NCAPE_abs \n";
     
   double N_tilde = NCAPE / CAPE;   
   double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt(pow((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde),2) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
