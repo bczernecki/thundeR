@@ -2241,17 +2241,25 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   double mr=W(d, p);
   double virtt = tv(t,mr);
 
-  double MSE0_ = cp * (t+kel) + xlv * (mr/1000) + g * (h-h0);
-
-  double rsat_ = compute_rsat(t+kel,p*100,0);
-  double qsat_ = (1 - rsat_) * rsat_;
-  double MSE0_star_ = cp * (t+kel) + xlv * qsat_ + g * (h-h0);
+  double MSE0_ = 0;
+  double rsat_ = 0;
+  double MSE0_star_ = 0;
+  double qsat_ = 0; 
+  double MSE0_bar_ = 0;
+  double int_arg_MSE0_ = 0;
+  
+  if(i > 0){
+  MSE0_ = cp * (t+kel) + xlv * (mr/1000) + g * (h-h0);
+  rsat_ = compute_rsat(t+kel,p*100,0);
+  qsat_ = (1 - rsat_) * rsat_;
+  MSE0_star_ = cp * (t+kel) + xlv * qsat_ + g * (h-h0);
 
   aggregated_MSE0 += (last_MSE0 + MSE0_) * (h-lasth);  
   double MSE0_bar_ = 0.5 * aggregated_MSE0 / (lasth-h0);
   last_MSE0 = MSE0_;
 
-  double int_arg_MSE0_ = -(g/(cp*(t+kel)))*( MSE0_bar_ - MSE0_star_);
+  int_arg_MSE0_ = -(g/(cp*(t+kel)))*( MSE0_bar_ - MSE0_star_);
+  }
   
   this->MSE0->push_back(MSE0_);
   this->MSE0_star->push_back(MSE0_star_);
