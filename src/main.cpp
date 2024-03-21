@@ -1267,6 +1267,8 @@ public:
 };
 
 void LapseRate::allocate(){
+  NCAPE=0;
+  NCAPE_N=0;
   values = new list<double>();
   virtualValues = new list<double>();
   cape = cin = to3cape = to2cape = vcape = vcin = vto3cape = vto2cape = os = o = w = vos=vo=vw=dcape=dvcape=0;
