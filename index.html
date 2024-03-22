@@ -291,34 +291,34 @@
 </h4>
 <p>It is possible to launch <code>thunder</code> under Python via rpy2 library. Below you can find the minimum reproducible example:</p>
 <p>Make sure that pandas and rpy2 libraries are available for your Python environment. If not install required python packages:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandas  </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install rpy2  </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">pip</span> install pandas  </span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">pip</span> install rpy2  </span></code></pre></div>
 <p>Launch <code>thunder</code> under Python with <code>rpy2</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load required packages</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rpy2.robjects.packages <span class="im">import</span> importr</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> rpy2.robjects <span class="im">import</span> r,pandas2ri</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> rpy2.robjects <span class="im">as</span> robjects</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>pandas2ri.activate()</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># load thunder package (make sure that it was installed in R before)</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>importr(<span class="st">'thunder'</span>)</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># download North Platte sounding </span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>profile <span class="op">=</span> robjects.r[<span class="st">'get_sounding'</span>](wmo_id <span class="op">=</span> <span class="dv">72562</span>, yy <span class="op">=</span> <span class="dv">1999</span>, mm <span class="op">=</span> <span class="dv">7</span>, dd <span class="op">=</span> <span class="dv">3</span>,hh <span class="op">=</span> <span class="dv">0</span>)</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co"># compute convective parameters</span></span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>parameters <span class="op">=</span> robjects.r[<span class="st">'sounding_compute'</span>](profile[<span class="st">'pressure'</span>], profile[<span class="st">'altitude'</span>], profile[<span class="st">'temp'</span>], profile[<span class="st">'dpt'</span>], profile[<span class="st">'wd'</span>], profile[<span class="st">'ws'</span>], accuracy <span class="op">=</span> <span class="dv">2</span>)</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co"># customize output and print all computed variables, e.g. most-unstable CAPE (first element) equals 9413 J/kg</span></span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>, parameters)))</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>[<span class="st">'9413.29'</span>, <span class="st">'233.35'</span>, <span class="st">'1713.74'</span>, <span class="st">'0.00'</span>, <span class="st">'775.00'</span>, <span class="st">'775.00'</span>,</span>
-<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="st">'15500.00'</span>, <span class="st">'-16.55'</span>, <span class="st">'137.21'</span>, <span class="st">'-66.63'</span>, <span class="st">'23.98'</span>, <span class="st">'23.98'</span>,</span>
-<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="st">'23.36'</span>, <span class="st">'9413.29'</span>, <span class="st">'233.35'</span>, <span class="st">'1713.74'</span>, <span class="st">'0.00'</span>, <span class="st">'775.00'</span>,</span>
-<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="st">'775.00'</span>, <span class="st">'15500.00'</span>, <span class="st">'-16.55'</span>, <span class="st">'137.21'</span>, <span class="st">'-66.63'</span>, <span class="st">'23.98'</span>, </span>
-<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="st">'23.98'</span>, <span class="st">'23.36'</span>, <span class="st">'7805.13'</span>, <span class="st">'115.22'</span>, <span class="st">'1515.81'</span>, <span class="st">'-4.35'</span>, </span>
-<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="st">'950.00'</span>, <span class="st">'950.00'</span>, <span class="st">'15000.00'</span>, ...]</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode py"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># load required packages</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="im">from</span> rpy2.robjects.packages <span class="im">import</span> importr</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="im">from</span> rpy2.robjects <span class="im">import</span> r,pandas2ri</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="im">import</span> rpy2.robjects <span class="im">as</span> robjects</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>pandas2ri.activate()</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co"># load thunder package (make sure that it was installed in R before)</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>importr(<span class="st">'thunder'</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a><span class="co"># download North Platte sounding </span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>profile <span class="op">=</span> robjects.r[<span class="st">'get_sounding'</span>](wmo_id <span class="op">=</span> <span class="dv">72562</span>, yy <span class="op">=</span> <span class="dv">1999</span>, mm <span class="op">=</span> <span class="dv">7</span>, dd <span class="op">=</span> <span class="dv">3</span>,hh <span class="op">=</span> <span class="dv">0</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="co"># compute convective parameters</span></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>parameters <span class="op">=</span> robjects.r[<span class="st">'sounding_compute'</span>](profile[<span class="st">'pressure'</span>], profile[<span class="st">'altitude'</span>], profile[<span class="st">'temp'</span>], profile[<span class="st">'dpt'</span>], profile[<span class="st">'wd'</span>], profile[<span class="st">'ws'</span>], accuracy <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co"># customize output and print all computed variables, e.g. most-unstable CAPE (first element) equals 9413 J/kg</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">list</span>(<span class="bu">map</span>(<span class="st">'</span><span class="sc">{:.2f}</span><span class="st">'</span>.<span class="bu">format</span>, parameters)))</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>[<span class="st">'9413.29'</span>, <span class="st">'233.35'</span>, <span class="st">'1713.74'</span>, <span class="st">'0.00'</span>, <span class="st">'775.00'</span>, <span class="st">'775.00'</span>,</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="st">'15500.00'</span>, <span class="st">'-16.55'</span>, <span class="st">'137.21'</span>, <span class="st">'-66.63'</span>, <span class="st">'23.98'</span>, <span class="st">'23.98'</span>,</span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="st">'23.36'</span>, <span class="st">'9413.29'</span>, <span class="st">'233.35'</span>, <span class="st">'1713.74'</span>, <span class="st">'0.00'</span>, <span class="st">'775.00'</span>,</span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a><span class="st">'775.00'</span>, <span class="st">'15500.00'</span>, <span class="st">'-16.55'</span>, <span class="st">'137.21'</span>, <span class="st">'-66.63'</span>, <span class="st">'23.98'</span>, </span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="st">'23.98'</span>, <span class="st">'23.36'</span>, <span class="st">'7805.13'</span>, <span class="st">'115.22'</span>, <span class="st">'1515.81'</span>, <span class="st">'-4.35'</span>, </span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="st">'950.00'</span>, <span class="st">'950.00'</span>, <span class="st">'15000.00'</span>, ...]</span></code></pre></div>
 </div>
 <div class="section level4">
 <h4 id="accuracy-tables-for-sounding_compute">Accuracy tables for <code>sounding_compute()</code>
@@ -358,6 +358,11 @@
 <h3 id="contributions">Contributions<a class="anchor" aria-label="anchor" href="#contributions"></a>
 </h3>
 <p><a href="https://github.com/bczernecki/thunder/issues" class="external-link">Feel free to submit issues and enhancement requests.</a></p>
+</div>
+<div class="section level3">
+<h3 id="acknowledgments">Acknowledgments:<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
+</h3>
+<p>Development of the thundeR package has been supported by the by the Polish National Science Center (Grant No. 2020/39/D/ST10/00768)</p>
 </div>
 </div>
   </div>
