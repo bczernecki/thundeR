@@ -306,3 +306,6 @@ having an equal contribution (listed in alphabetical order):
 
 [Feel free to submit issues and enhancement
 requests.](https://github.com/bczernecki/thunder/issues)
+
+### Acknowledgments:
+Development of the thundeR package has been supported by the by the Polish National Science Center (Grant No. 2020/39/D/ST10/00768)
