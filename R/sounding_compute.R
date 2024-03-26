@@ -227,9 +227,12 @@
 #'  \item MU_buoyancy
 #'  \item SB_buoyancy
 #'  \item ML_buoyancy
+#'  \item MU500_buoyancy
 #'  \item MU_buoyancy_M10
 #'  \item SB_buoyancy_M10
 #'  \item ML_buoyancy_M10
+#'  \item MU500_buoyancy_M10
+
 #'  \item MU_ECAPE
 #'  \item MU_ECAPE_ent_rate
 #'  \item MU_ECAPE_upd_radius
@@ -243,8 +246,34 @@
 #'  \item ML_ECAPE_SM
 #'  \item MU_ECAPE_FIX_inflow
 #'  \item ML_ECAPE_FIX_inflow
-#'  \item MU500_buoyancy
-#'  \item MU500_buoyancy_M10
+#'  \item BS_14km 
+#'  \item BS_25km 
+#'  \item MU_ECAPE_etilde
+#'  \item MU_ECAPE_radius
+#'  \item MU_ECAPE
+#'  \item MU_ECAPE_HGL
+#'  \item MU_ECAPE_M10
+#'  \item SB_ML_ECAPE_etilde
+#'  \item SB_ML_ECAPE_radius
+#'  \item SB_ML_ECAPE
+#'  \item SB_ML_ECAPE_HGL
+#'  \item SB_ML_ECAPE_M10
+#'  \item ML_ECAPE_etilde
+#'  \item ML_ECAPE_radius
+#'  \item ML_ECAPE
+#'  \item ML_ECAPE_HGL
+#'  \item ML_ECAPE_M10
+#'  \item MU_ML_ECAPE_etilde
+#'  \item MU_ML_ECAPE_radius
+#'  \item MU_ML_ECAPE
+#'  \item MU_ML_ECAPE_HGL
+#'  \item MU_ML_ECAPE_M10
+#'  \item MU500_ECAPE_etilde
+#'  \item MU500_ECAPE_radius
+#'  \item MU500_ECAPE
+#'  \item MU500_ECAPE_HGL
+#'  \item MU500_ECAPE_M10
+#'  \item HSIv2
 
 #' }
 #'
@@ -519,11 +548,39 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "MU_buoyancy",
     "SB_buoyancy",
     "ML_buoyancy",
+    "MU500_buoyancy",
     "MU_buoyancy_M10",
     "SB_buoyancy_M10",
     "ML_buoyancy_M10",
-    "MU500_buoyancy",
-    "MU500_buoyancy_M10")
+    "MU500_buoyancy_M10",
+    "BS_14km",
+    "BS_25km", 
+    "MU_ECAPE_etilde", 
+    "MU_ECAPE_radius", 
+    "MU_ECAPE", 
+    "MU_ECAPE_HGL", 
+    "MU_ECAPE_M10", 
+    "SB_ML_ECAPE_etilde", 
+    "SB_ML_ECAPE_radius", 
+    "SB_ML_ECAPE", 
+    "SB_ML_ECAPE_HGL", 
+    "SB_ML_ECAPE_M10", 
+    "ML_ECAPE_etilde", 
+    "ML_ECAPE_radius", 
+    "ML_ECAPE", 
+    "ML_ECAPE_HGL", 
+    "ML_ECAPE_M10", 
+    "MU_ML_ECAPE_etilde", 
+    "MU_ML_ECAPE_radius", 
+    "MU_ML_ECAPE", 
+    "MU_ML_ECAPE_HGL", 
+    "MU_ML_ECAPE_M10", 
+    "MU500_ECAPE_etilde", 
+    "MU500_ECAPE_radius", 
+    "MU500_ECAPE", 
+    "MU500_ECAPE_HGL", 
+    "MU500_ECAPE_M10", 
+    "HSIv2")
 
 #'
 #' section for ECAPE #
