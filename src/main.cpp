@@ -1952,7 +1952,7 @@ void Thermodynamics::startConditions(int i, double p, double h, double t, double
 
 void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, double a, double v, double oe, double mr)
 {
-      //cout<<"WYS: "<<h<<" ";
+  
   if (oe > maxOE && h-h0 <= 3000){
     maxOE = oe;
     this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
@@ -2072,13 +2072,6 @@ void Thermodynamics::putMeanLayerParameters(int i, double p, double h, double t,
     mo += O(t,p);
     n += 1;
 
-        //cout<<"ML_H: "<<mh/6<<" ";
-        //cout<<"ML_P: "<<mp<<" ";
-        //cout<<"ML_T: "<<mt/6<<" ";
-        //cout<<"ML_D: "<<md/6<<" ";
-        //cout<<"ML_MR: "<<mmr/6<<" ";
-        //cout<<"ML_MO: "<<mo/6<<" ";
-        //cout<<"ML_N: "<<n/6<<" ";
   }
 
   if((abs(h - h0) <= 1000)&&(abs(h - h0) >= 0) && (fmod(abs(h-h0),100.0)==0.0)){
@@ -2261,14 +2254,6 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
   this->MSE0_star->push_back(MSE0_star_);
   this->MSE0_bar->push_back(MSE0_bar_);
   this->int_arg_MSE0->push_back(int_arg_MSE0_);
-
-  if(h-h0 < 500){
-  cout<< MSE0_ << " MSE0_ " << lasth-h0 << " " << h-lasth << " " << h-h0 << "\n";
-  cout<< MSE0_bar_ << " MSE0_bar " << lasth-h0 << " " << h-lasth << " " << h-h0 << "\n";
-  cout<< MSE0_star_ << " MSE0_star " << lasth-h0 << " " << h-lasth << " " << h-h0 << "\n"; 
-  cout<< int_arg_MSE0_ << " int_arg " << lasth-h0 << " " << h-lasth << " " << h-h0 << "\n"; 
-  }
-  
   this->wbt->push_back(wbt);
   this->oe->push_back(oe);
   this->mixing->push_back(mr);
@@ -2868,9 +2853,6 @@ Sounding::Sounding(double *p_, double *h_, double *t_, double *d_, double *a_, d
     
     this->th->prepareMeanLayer();
     this->ks->finishPhase1();
-    
-    //cout<<"mlb_index: "<<mlb_index<<" ";
-    
     this->th->meanLayer->startIndex = mlb_index; 
     if(storm_motion.Z() != 999) this->ks->rm = storm_motion;
     if(storm_motion.Z() != 999) this->ks->lm = storm_motion;
