@@ -1955,12 +1955,6 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
   if (oe > maxOE && h-h0 <= 3000){
     maxOE = oe;
     this->mostUnstable->setInitialConditions(i, p, h, t, d, a, v, h0);
-        //cout<<"MU_OE: "<<oe<<" ";    
-        //cout<<"MU_H: "<<h<<" ";
-        //cout<<"MU_P: "<<p<<" ";
-        //cout<<"MU_T: "<<t<<" ";
-        //cout<<"MU_D: "<<d<<" ";
-        //cout<<"MU_I: "<<i<<" ";
   }
 
   if( ((fmod(abs(h-h0),100.0)==0.0)  || (h==h0)) && (meanmostUnstableUP <= 3000) ) {
@@ -2033,8 +2027,6 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
       mo6 = O(t,p);
     }
 
-    //cout<<"CEILING: "<<meanmostUnstableUP<<" ";
-    
     if(wys == meanmostUnstableUP){
       oeLAST = (oe1+oe2+oe3+oe4+oe5+oe6)/6;
       mhLAST = (mh1+mh2+mh3+mh4+mh5+mh6)/6;
@@ -2056,15 +2048,6 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
          mmrMAX = mmrLAST;
          moMAX = moLAST;
          mumliMAX = mumliLAST;
-
-        //cout<<"MU_OE: "<<oeMAX<<" ";    
-        //cout<<"MU_H: "<<mhMAX<<" ";
-        //cout<<"MU_P: "<<mpMAX<<" ";
-        //cout<<"MU_T: "<<mtMAX<<" ";
-        //cout<<"MU_D: "<<mdMAX<<" ";
-        //cout<<"MU_MR: "<<mmrMAX<<" ";
-        //cout<<"MU_MO: "<<moMAX<<" ";
-        //cout<<"MU_I: "<<mumliMAX<<" ";
 
     this->meanmostUnstable->setInitialConditions(mumliMAX, mpMAX, mhMAX, mtMAX, mdMAX, 0, 0, h0);
     this->meanmostUnstable->setInitialW(mmrMAX, moMAX);
@@ -2737,7 +2720,10 @@ public:
   double SB_buoyancy_M10();
 
   double* MU_ECAPE();
-
+  double* ML_ECAPE();
+  double* MU_ML_ECAPE();
+  double* SB_ECAPE();
+  double* MU500_ECAPE();
 };
 
 void Sounding::alloc(){
@@ -3039,8 +3025,6 @@ double IndicesCollector::SWEATIndex(){
   return res;
 }
 
-// NCAPE 
-
 double* IndicesCollector::MU_ECAPE()
 {  
   double L = 250;
@@ -3050,32 +3034,11 @@ double* IndicesCollector::MU_ECAPE()
   double V_SR = Peters_SR_inflow_eff();
   double l = L/EL;
   double NCAPE = 0;
-  double pitchfork = ksq*(alpha*alpha)*(M_PI*M_PI)*L/(4*Pr*(sigma*sigma)*EL);
-
-      cout<< ksq << " ksq \n";
-      cout<< alpha << " alpha \n";
-      cout<< M_PI << " M_PI \n";
-      cout<< L << " L \n";
-      cout<< Pr << " Pr \n";
-      cout<< sigma << " sigma \n";
-    
+  double pitchfork = ksq*(alpha*alpha)*(M_PI*M_PI)*L/(4*Pr*(sigma*sigma)*EL);    
   double vsr_tilde = V_SR/sqrt(2*CAPE);
-
   NCAPE = S->th->mostUnstable->NCAPE / S->th->mostUnstable->NCAPE_N;  
   NCAPE *=  EL - LFC; 
   if(NCAPE < 0) NCAPE = 0;
-
-  cout<< EL << " EL \n";
-  cout<< LFC << " LFC \n";
-  cout<< CAPE << " CAPE \n";
-  cout<< NCAPE << " NCAPE \n";
-  cout<< S->th->mostUnstable->NCAPE_N << " NCAPE_N \n";
-  cout<< S->th->mostUnstable->NCAPE << " NCAPE_abs \n";
-
-  cout<< pitchfork << " pitchfork \n";
-  cout<< V_SR << " V_SR \n";
-  cout<< vsr_tilde << " vsr_tilde \n";
-
   double N_tilde = NCAPE / CAPE;   
   double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt((((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))*((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
   double eps = 2*ksq*L/(EL*Pr);
@@ -3083,21 +3046,120 @@ double* IndicesCollector::MU_ECAPE()
   double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
   double ECAPE = E_tilde*CAPE;  
-
-  cout<< N_tilde << " N_tilde \n";
-  cout<< E_tilde << " E_tilde \n";
-  cout<< eps << " eps \n";
-  cout<< E_tilde_ << " E_tilde \n";
-  cout<< varepsilon << " varepsiolon \n";
-  cout<< Radius << " Radius ";
-  cout<< ECAPE << " ECAPE ";
-    
   double* result = new double[2];
   result[0] = ECAPE;
   result[1] = Radius;
   return result;
 }
-    
+
+double* IndicesCollector::MU_ML_ECAPE()
+{  
+  double L = 250;
+  double EL = Get(S->h, S->th->meanmostUnstable->vElIndex);
+  double LFC = Get(S->h, S->th->meanmostUnstable->vLfcIndex);
+  double CAPE = S->th->meanmostUnstable->vcape;
+  double V_SR = Peters_SR_inflow_eff();
+  double l = L/EL;
+  double NCAPE = 0;
+  double pitchfork = ksq*(alpha*alpha)*(M_PI*M_PI)*L/(4*Pr*(sigma*sigma)*EL);    
+  double vsr_tilde = V_SR/sqrt(2*CAPE);
+  NCAPE = S->th->meanmostUnstable->NCAPE / S->th->meanmostUnstable->NCAPE_N;  
+  NCAPE *=  EL - LFC; 
+  if(NCAPE < 0) NCAPE = 0;
+  double N_tilde = NCAPE / CAPE;   
+  double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt((((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))*((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
+  double eps = 2*ksq*L/(EL*Pr);
+  double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
+  double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
+  double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
+  double ECAPE = E_tilde*CAPE;  
+  double* result = new double[2];
+  result[0] = ECAPE;
+  result[1] = Radius;
+  return result;
+}
+
+double* IndicesCollector::SB_ECAPE()
+{  
+  double L = 250;
+  double EL = Get(S->h, S->th->surfaceBased->vElIndex);
+  double LFC = Get(S->h, S->th->surfaceBased->vLfcIndex);
+  double CAPE = S->th->surfaceBased->vcape;
+  double V_SR = Peters_SR_inflow();
+  double l = L/EL;
+  double NCAPE = 0;
+  double pitchfork = ksq*(alpha*alpha)*(M_PI*M_PI)*L/(4*Pr*(sigma*sigma)*EL);    
+  double vsr_tilde = V_SR/sqrt(2*CAPE);
+  NCAPE = S->th->surfaceBased->NCAPE / S->th->surfaceBased->NCAPE_N;  
+  NCAPE *=  EL - LFC; 
+  if(NCAPE < 0) NCAPE = 0;
+  double N_tilde = NCAPE / CAPE;   
+  double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt((((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))*((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
+  double eps = 2*ksq*L/(EL*Pr);
+  double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
+  double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
+  double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
+  double ECAPE = E_tilde*CAPE;  
+  double* result = new double[2];
+  result[0] = ECAPE;
+  result[1] = Radius;
+  return result;
+}
+
+double* IndicesCollector::ML_ECAPE()
+{  
+  double L = 250;
+  double EL = Get(S->h, S->th->meanLayer->vElIndex);
+  double LFC = Get(S->h, S->th->meanLayer->vLfcIndex);
+  double CAPE = S->th->meanLayer->vcape;
+  double V_SR = Peters_SR_inflow();
+  double l = L/EL;
+  double NCAPE = 0;
+  double pitchfork = ksq*(alpha*alpha)*(M_PI*M_PI)*L/(4*Pr*(sigma*sigma)*EL);    
+  double vsr_tilde = V_SR/sqrt(2*CAPE);
+  NCAPE = S->th->meanLayer->NCAPE / S->th->meanLayer->NCAPE_N;  
+  NCAPE *=  EL - LFC; 
+  if(NCAPE < 0) NCAPE = 0;
+  double N_tilde = NCAPE / CAPE;   
+  double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt((((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))*((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
+  double eps = 2*ksq*L/(EL*Pr);
+  double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
+  double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
+  double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
+  double ECAPE = E_tilde*CAPE;  
+  double* result = new double[2];
+  result[0] = ECAPE;
+  result[1] = Radius;
+  return result;
+}
+
+double* IndicesCollector::MU500_ECAPE()
+{  
+  double L = 250;
+  double EL = Get(S->h, S->th->mostU500->vElIndex);
+  double LFC = Get(S->h, S->th->mostU500->vLfcIndex);
+  double CAPE = S->th->mostU500->vcape;
+  double V_SR = Peters_SR_inflow_eff();
+  double l = L/EL;
+  double NCAPE = 0;
+  double pitchfork = ksq*(alpha*alpha)*(M_PI*M_PI)*L/(4*Pr*(sigma*sigma)*EL);    
+  double vsr_tilde = V_SR/sqrt(2*CAPE);
+  NCAPE = S->th->mostU500->NCAPE / S->th->mostU500->NCAPE_N;  
+  NCAPE *=  EL - LFC; 
+  if(NCAPE < 0) NCAPE = 0;
+  double N_tilde = NCAPE / CAPE;   
+  double E_tilde = vsr_tilde*vsr_tilde + ( -1 - pitchfork - (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde + sqrt((((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))*((1 + pitchfork + (pitchfork/(vsr_tilde*vsr_tilde))*N_tilde))) + (4*(pitchfork/(vsr_tilde*vsr_tilde))*(1 - pitchfork*N_tilde) ) ) )/( 2*pitchfork/(vsr_tilde*vsr_tilde) );
+  double eps = 2*ksq*L/(EL*Pr);
+  double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
+  double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
+  double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
+  double ECAPE = E_tilde*CAPE;  
+  double* result = new double[2];
+  result[0] = ECAPE;
+  result[1] = Radius;
+  return result;
+}
+
 double IndicesCollector::VMostUnstableCAPE()
 {
   
@@ -3914,7 +3976,6 @@ double IndicesCollector::Peters_SR_inflow(){
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
   double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
-
   Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
   Vector dev = Vector(0, 0, 0);
@@ -3923,7 +3984,6 @@ double IndicesCollector::Peters_SR_inflow(){
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind - dev;
-   
   Vector res = S->ks->mean01 - Peters_SM;
   return res.abs();
 }
