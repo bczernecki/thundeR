@@ -2623,6 +2623,7 @@ public:
   double MU_coldcapeTV();
   double MU500_coldcapeTV();
   double HSI();
+  double HSIv2();
   
   double MSR_MW();
   double MSR_RM();
@@ -4747,6 +4748,33 @@ double IndicesCollector::HSI(){
   return HSI;
 }
 
+double IndicesCollector::HSIv2(){  
+  double* MU_ECAPE = (*S)->getIndicesCollectorPointer()->MU_ECAPE(); 
+  double CAPE = MU_ECAPE[2];
+  double BS06 = this->MSR_MW();
+  double FL = this->ZeroHeight();
+  double LCL = this->VMostUnstableLCL();
+  double EL = this->VMostUnstableEL();
+  double LR = -(this->LR26());
+  
+  if(CAPE<201)CAPE=201;
+  else if(CAPE>3000)CAPE=3000;
+  
+  if(BS06<2)BS06=2;
+  else if(BS06>16)BS06=16;
+  
+  if(FL<500)FL=500;
+  else if(FL>4000)FL=4000;
+  
+  if(LCL<500)LCL=500;
+  else if(LCL>1500)LCL=1500;
+  
+  if(LR<5)LR=5;
+  else if(LR>8)LR=8;
+  double HSI = ((sqrt(50*(CAPE-200)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000));
+  return HSI;
+}
+
 double IndicesCollector::MSR_MW(){
   Vector res = S->ks->mean02 - S->ks->mean06;
   return res.abs();
@@ -5016,7 +5044,7 @@ double IndicesCollector::SB_buoyancy_M10(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[255];
+  double * vec = new double[256];
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->MU_coldcape();	
   vec[2]=(*S)->getIndicesCollectorPointer()->MU_coldcapeTV();	
@@ -5257,7 +5285,6 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[232] = MU_ECAPE[2]; // CAPE
   vec[233] = MU_ECAPE[3]; // CAPE_HGL
   vec[234] = MU_ECAPE[4]; // CAPE_M10
-  delete[] MU_ECAPE;
 
   double* SB_ECAPE = (*S)->getIndicesCollectorPointer()->SB_ECAPE(); 
   vec[235] = SB_ECAPE[0]; // E_tilde
@@ -5265,7 +5292,6 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[237] = SB_ECAPE[2]; // CAPE
   vec[238] = SB_ECAPE[3]; // CAPE_HGL
   vec[239] = SB_ECAPE[4]; // CAPE_M10
-  delete[] SB_ECAPE;
 
   double* ML_ECAPE = (*S)->getIndicesCollectorPointer()->ML_ECAPE(); 
   vec[240] = ML_ECAPE[0]; // E_tilde
@@ -5273,7 +5299,6 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[242] = ML_ECAPE[2]; // CAPE
   vec[243] = ML_ECAPE[3]; // CAPE_HGL
   vec[244] = ML_ECAPE[4]; // CAPE_M10
-  delete[] ML_ECAPE;
 
   double* MU_ML_ECAPE = (*S)->getIndicesCollectorPointer()->MU_ML_ECAPE(); 
   vec[245] = MU_ML_ECAPE[0]; // E_tilde
@@ -5281,7 +5306,6 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[247] = MU_ML_ECAPE[2]; // CAPE
   vec[248] = MU_ML_ECAPE[3]; // CAPE_HGL
   vec[249] = MU_ML_ECAPE[4]; // CAPE_M10
-  delete[] MU_ML_ECAPE;
 
   double* MU500_ECAPE = (*S)->getIndicesCollectorPointer()->MU500_ECAPE(); 
   vec[250] = MU500_ECAPE[0]; // E_tilde
@@ -5289,7 +5313,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[252] = MU500_ECAPE[2]; // CAPE
   vec[253] = MU500_ECAPE[3]; // CAPE_HGL
   vec[254] = MU500_ECAPE[4]; // CAPE_M10
-  delete[] MU500_ECAPE;
+
+  vec[255]=(*S)->getIndicesCollectorPointer()->HSIv2();
+
   return vec;
 }
 
@@ -5312,7 +5338,7 @@ void listToArray(list<double> list, double * arr, int len){
 
 int interpolate(double **pu, double **hu, double **tu, double **du, double **au, double **vu, int n, double *p_arr=0, double *h_arr=0, int m=0, int o=0){
   double defp[]={850,700,500}; int plen = 3;
-  double defh[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3600, 3800, 4000, 4200, 4400, 4600, 4800, 5000, 5200, 5400, 5600, 5800, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 60;
+  double defh[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3200, 3400, 3600, 3800, 4000, 4200, 4400, 4600, 4800, 5000, 5200, 5400, 5600, 5800, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 68;
   
   double * p = *pu;
   double * h = *hu;
@@ -5424,7 +5450,7 @@ int interpolate(double **pu, double **hu, double **tu, double **du, double **au,
 }
 int interpolate2(double **pu, double **hu, double **tu, double **du, double **au, double **vu, int n, double *p_arr=0, double *h_arr=0, int m=0, int o=0){
   double defp[]={850,700,500}; int plen = 3;
-  double defh[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000, 3200, 3400, 3600, 3800, 4000, 4200, 4400, 4600, 4800, 5000, 5200, 5400, 5600, 5800, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 60;
+  double defh[]={0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3200, 3400, 3600, 3800, 4000, 4200, 4400, 4600, 4800, 5000, 5200, 5400, 5600, 5800, 6000, 6500, 7000, 7500, 8000, 8500, 9000, 9500, 10000, 10500, 11000, 11500, 12000, 12500, 13000, 13500, 14000, 15000, 16000, 17000, 18000, 19000, 20000}; int hlen = 68;
   
   double * p = *pu;
   double * h = *hu;
@@ -5878,6 +5904,7 @@ double * sounding_default2(double* pressure,
 //'  \item MU500_ECAPE
 //'  \item MU500_ECAPE_HGL
 //'  \item MU500_ECAPE_M10
+//'  \item HSIv2
 //' }
  // [[Rcpp::export]]
  
@@ -5914,7 +5941,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 255;
+   int reslen= 256;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
