@@ -3277,7 +3277,7 @@ double IndicesCollector::VMostUnstableLI(){
 }
 
 double IndicesCollector::VMostUnstableVmax(){
-  return sqrt(this->VmostUnstableCAPE()*2);
+  return sqrt(this->VMostUnstableCAPE()*2);
 
 }
 
@@ -5269,45 +5269,45 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[228]=(*S)->getIndicesCollectorPointer()->BS14();
   vec[229]=(*S)->getIndicesCollectorPointer()->BS25();
 
-  double* ECAPE = (*S)->getIndicesCollectorPointer()->MU_ECAPE(); 
-  vec[230] = ECAPE[0]; // E_tilde
-  vec[231] = ECAPE[1]; // Radius
-  vec[232] = ECAPE[2]; // CAPE
-  vec[233] = ECAPE[3]; // CAPE_HGL
-  vec[234] = ECAPE[4]; // CAPE_M10
-  delete[] ECAPE;
+  double* MU_ECAPE = (*S)->getIndicesCollectorPointer()->MU_ECAPE(); 
+  vec[230] = MU_ECAPE[0]; // E_tilde
+  vec[231] = MU_ECAPE[1]; // Radius
+  vec[232] = MU_ECAPE[2]; // CAPE
+  vec[233] = MU_ECAPE[3]; // CAPE_HGL
+  vec[234] = MU_ECAPE[4]; // CAPE_M10
+  delete[] MU_ECAPE;
 
-  double* ECAPE = (*S)->getIndicesCollectorPointer()->SB_ECAPE(); 
-  vec[235] = ECAPE[0]; // E_tilde
-  vec[236] = ECAPE[1]; // Radius
-  vec[237] = ECAPE[2]; // CAPE
-  vec[238] = ECAPE[3]; // CAPE_HGL
-  vec[239] = ECAPE[4]; // CAPE_M10
-  delete[] ECAPE;
+  double* SB_ECAPE = (*S)->getIndicesCollectorPointer()->SB_ECAPE(); 
+  vec[235] = SB_ECAPE[0]; // E_tilde
+  vec[236] = SB_ECAPE[1]; // Radius
+  vec[237] = SB_ECAPE[2]; // CAPE
+  vec[238] = SB_ECAPE[3]; // CAPE_HGL
+  vec[239] = SB_ECAPE[4]; // CAPE_M10
+  delete[] SB_ECAPE;
 
-  double* ECAPE = (*S)->getIndicesCollectorPointer()->ML_ECAPE(); 
-  vec[240] = ECAPE[0]; // E_tilde
-  vec[241] = ECAPE[1]; // Radius
-  vec[242] = ECAPE[2]; // CAPE
-  vec[243] = ECAPE[3]; // CAPE_HGL
-  vec[244] = ECAPE[4]; // CAPE_M10
-  delete[] ECAPE;
+  double* ML_ECAPE = (*S)->getIndicesCollectorPointer()->ML_ECAPE(); 
+  vec[240] = ML_ECAPE[0]; // E_tilde
+  vec[241] = ML_ECAPE[1]; // Radius
+  vec[242] = ML_ECAPE[2]; // CAPE
+  vec[243] = ML_ECAPE[3]; // CAPE_HGL
+  vec[244] = ML_ECAPE[4]; // CAPE_M10
+  delete[] ML_ECAPE;
 
-  double* ECAPE = (*S)->getIndicesCollectorPointer()->MU_ML_ECAPE(); 
-  vec[245] = ECAPE[0]; // E_tilde
-  vec[246] = ECAPE[1]; // Radius
-  vec[247] = ECAPE[2]; // CAPE
-  vec[248] = ECAPE[3]; // CAPE_HGL
-  vec[249] = ECAPE[4]; // CAPE_M10
-  delete[] ECAPE;
+  double* MU_ML_ECAPE = (*S)->getIndicesCollectorPointer()->MU_ML_ECAPE(); 
+  vec[245] = MU_ML_ECAPE[0]; // E_tilde
+  vec[246] = MU_ML_ECAPE[1]; // Radius
+  vec[247] = MU_ML_ECAPE[2]; // CAPE
+  vec[248] = MU_ML_ECAPE[3]; // CAPE_HGL
+  vec[249] = MU_ML_ECAPE[4]; // CAPE_M10
+  delete[] MU_ML_ECAPE;
 
-  double* ECAPE = (*S)->getIndicesCollectorPointer()->MU500_ECAPE(); 
-  vec[250] = ECAPE[0]; // E_tilde
-  vec[251] = ECAPE[1]; // Radius
-  vec[252] = ECAPE[2]; // CAPE
-  vec[253] = ECAPE[3]; // CAPE_HGL
-  vec[254] = ECAPE[4]; // CAPE_M10
-  delete[] ECAPE;
+  double* MU500_ECAPE = (*S)->getIndicesCollectorPointer()->MU500_ECAPE(); 
+  vec[250] = MU500_ECAPE[0]; // E_tilde
+  vec[251] = MU500_ECAPE[1]; // Radius
+  vec[252] = MU500_ECAPE[2]; // CAPE
+  vec[253] = MU500_ECAPE[3]; // CAPE_HGL
+  vec[254] = MU500_ECAPE[4]; // CAPE_M10
+  delete[] MU500_ECAPE;
   return vec;
 }
 
@@ -5876,21 +5876,21 @@ double * sounding_default2(double* pressure,
 //'  \item MU_ECAPE
 //'  \item MU_ECAPE_HGL
 //'  \item MU_ECAPE_M10
-//'  \item MU_ML_ECAPE_etilde
-//'  \item MU_ML_ECAPE_radius
-//'  \item MU_ML_ECAPE
-//'  \item MU_ML_ECAPE_HGL
-//'  \item MU_ML_ECAPE_M10
-//'  \item SB_ECAPE_etilde
-//'  \item SB_ECAPE_radius
-//'  \item SB_ECAPE
-//'  \item SB_ECAPE_HGL
-//'  \item SB_ECAPE_M10
+//'  \item SB_ML_ECAPE_etilde
+//'  \item SB_ML_ECAPE_radius
+//'  \item SB_ML_ECAPE
+//'  \item SB_ML_ECAPE_HGL
+//'  \item SB_ML_ECAPE_M10
 //'  \item ML_ECAPE_etilde
 //'  \item ML_ECAPE_radius
 //'  \item ML_ECAPE
 //'  \item ML_ECAPE_HGL
 //'  \item ML_ECAPE_M10
+//'  \item MU_ML_ECAPE_etilde
+//'  \item MU_ML_ECAPE_radius
+//'  \item MU_ML_ECAPE
+//'  \item MU_ML_ECAPE_HGL
+//'  \item MU_ML_ECAPE_M10
 //'  \item MU500_ECAPE_etilde
 //'  \item MU500_ECAPE_radius
 //'  \item MU500_ECAPE
