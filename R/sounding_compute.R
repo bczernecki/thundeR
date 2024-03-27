@@ -680,32 +680,32 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 
     
   names(tmp)[(length(tmp)-12):length(tmp)] = c(
-    "MU_ECAPE",
-    "MU_ECAPE_ent_rate",
-    "MU_ECAPE_upd_radius",
-    "SB_ECAPE",
-    "SB_ECAPE_ent_rate",
-    "SB_ECAPE_upd_radius",
-    "ML_ECAPE",
-    "ML_ECAPE_ent_rate",
-    "ML_ECAPE_upd_radius",
-    "MU_ECAPE_SM",
+    "MU_ECAPE_old",
+    "MU_ECAPE_ent_rate_old",
+    "MU_ECAPE_upd_radius_old",
+    "SB_ECAPE_old",
+    "SB_ECAPE_ent_rate_old",
+    "SB_ECAPE_upd_radius_old",
+    "ML_ECAPE_old",
+    "ML_ECAPE_ent_rate_old",
+    "ML_ECAPE_upd_radius_old",
+    "MU_ECAPE_SM_old",
 #    "SB_ECAPE_SM",
-    "ML_ECAPE_SM",
-    "MU_ECAPE_FIX_inflow",
+    "ML_ECAPE_SM_old",
+    "MU_ECAPE_FIX_inflow_old",
 #    "SB_ECAPE_FIX_inflow",
-    "ML_ECAPE_FIX_inflow")
+    "ML_ECAPE_FIX_inflow_old")
               
-  tmp[which(names(tmp)=="MU_ECAPE")] <- tmp[which(names(tmp)=="MU_ECAPE")]*tmp[which(names(tmp)=="MU_CAPE")]      
-  tmp[which(names(tmp)=="SB_ECAPE")] <- tmp[which(names(tmp)=="SB_ECAPE")]*tmp[which(names(tmp)=="SB_CAPE")]      
-  tmp[which(names(tmp)=="ML_ECAPE")] <- tmp[which(names(tmp)=="ML_ECAPE")]*tmp[which(names(tmp)=="ML_CAPE")]      
+  tmp[which(names(tmp)=="MU_ECAPE_old")] <- tmp[which(names(tmp)=="MU_ECAPE_old")]*tmp[which(names(tmp)=="MU_CAPE")]      
+  tmp[which(names(tmp)=="SB_ECAPE_old")] <- tmp[which(names(tmp)=="SB_ECAPE_old")]*tmp[which(names(tmp)=="SB_CAPE")]      
+  tmp[which(names(tmp)=="ML_ECAPE_old")] <- tmp[which(names(tmp)=="ML_ECAPE_old")]*tmp[which(names(tmp)=="ML_CAPE")]      
 
-  tmp[which(names(tmp)=="MU_ECAPE_SM")] <- tmp[which(names(tmp)=="MU_ECAPE_SM")]*tmp[which(names(tmp)=="MU_CAPE")]      
+  tmp[which(names(tmp)=="MU_ECAPE_SM_old")] <- tmp[which(names(tmp)=="MU_ECAPE_SM_old")]*tmp[which(names(tmp)=="MU_CAPE")]      
 #  tmp[which(names(tmp)=="SB_ECAPE_SM")] <- tmp[which(names(tmp)=="SB_ECAPE_SM")]*tmp[which(names(tmp)=="SB_CAPE")]      
-  tmp[which(names(tmp)=="ML_ECAPE_SM")] <- tmp[which(names(tmp)=="ML_ECAPE_SM")]*tmp[which(names(tmp)=="ML_CAPE")]      
-  tmp[which(names(tmp)=="MU_ECAPE_FIX_inflow")] <- tmp[which(names(tmp)=="MU_ECAPE_FIX_inflow")]*tmp[which(names(tmp)=="MU_CAPE")]      
+  tmp[which(names(tmp)=="ML_ECAPE_SM_old")] <- tmp[which(names(tmp)=="ML_ECAPE_SM_old")]*tmp[which(names(tmp)=="ML_CAPE")]      
+  tmp[which(names(tmp)=="MU_ECAPE_FIX_inflow_old")] <- tmp[which(names(tmp)=="MU_ECAPE_FIX_inflow_old")]*tmp[which(names(tmp)=="MU_CAPE")]      
 #  tmp[which(names(tmp)=="SB_ECAPE_FIX_inflow")] <- tmp[which(names(tmp)=="SB_ECAPE_FIX_inflow")]*tmp[which(names(tmp)=="SB_CAPE")]      
-  tmp[which(names(tmp)=="ML_ECAPE_FIX_inflow")] <- tmp[which(names(tmp)=="ML_ECAPE_FIX_inflow")]*tmp[which(names(tmp)=="ML_CAPE")]      
+  tmp[which(names(tmp)=="ML_ECAPE_FIX_inflow_old")] <- tmp[which(names(tmp)=="ML_ECAPE_FIX_inflow_old")]*tmp[which(names(tmp)=="ML_CAPE")]      
 
 #'
 #' end of section for ECAPE #
@@ -731,7 +731,7 @@ HSI <- function(CAPE,BS06,FL,LCL,LR,EL){
                   tmp[which(names(tmp)=="MU_LCL_HGT")],
                   tmp[which(names(tmp)=="LR_26km")]*-1,
                   tmp[which(names(tmp)=="MU_EL_HGT")])
-  names(tmp)[length(tmp)] = "HSI_v2"
+  names(tmp)[length(tmp)] = "HSI_v2_old"
 
 #'
 #' end of section for HSI_v2
