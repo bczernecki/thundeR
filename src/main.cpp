@@ -1276,8 +1276,8 @@ void LapseRate::allocate(){
   middlecape=0;
   coldcape=0;
   coldcapeTV=0;
-  peakB=999;
-  peakB_M10=999;
+  peakB=-999;
+  peakB_M10=-999;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
   startIndex=-1;
   isSet = false;
@@ -1436,14 +1436,14 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   double dz = abs(h - lasth);
 
   if (vLclIndex != -1) {  
-  double ttt = t_ - vt_parcel;
-  if(ttt<this->peakB) {
+  double ttt = (t_ - vt_parcel) / (vt_parcel+273.15) * 9.81;
+  if(ttt>this->peakB) {
     peakB = ttt;
   }
 
   if (t <= -10) {
-  double ttt2 = t_ - vt_parcel;
-  if(ttt2<this->peakB_M10) {
+  double ttt2 = (t_ - vt_parcel) / (vt_parcel+273.15) * 9.81;
+  if(ttt2>this->peakB_M10) {
     peakB_M10 = ttt2;
      }
    }
@@ -5339,9 +5339,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[201]=(*S)->getIndicesCollectorPointer()->MU_WMAXSHEAR();
   vec[202]=(*S)->getIndicesCollectorPointer()->SB_WMAXSHEAR();
   vec[203]=(*S)->getIndicesCollectorPointer()->ML_WMAXSHEAR();
-  vec[204]=(*S)->getIndicesCollectorPointer()->MU_EFF_WMAXSHEAR();
-  vec[205]=(*S)->getIndicesCollectorPointer()->SB_EFF_WMAXSHEAR();
-  vec[206]=(*S)->getIndicesCollectorPointer()->ML_EFF_WMAXSHEAR();
+  vec[204]=(*S)->getIndicesCollectorPointer()->BS01();
+  vec[205]=(*S)->getIndicesCollectorPointer()->BS01();
+  vec[206]=(*S)->getIndicesCollectorPointer()->BS01();
   vec[207]=(*S)->getIndicesCollectorPointer()->EHI500();
   vec[208]=(*S)->getIndicesCollectorPointer()->EHI01();	
   vec[209]=(*S)->getIndicesCollectorPointer()->EHI03();
@@ -5409,9 +5409,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[254] = MU500_ECAPE[4]; // CAPE_M10
   delete[] MU500_ECAPE;
   
-  vec[255]=(*S)->getIndicesCollectorPointer()->HSIv2();
-  vec[256]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux(); 
-  vec[257]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff(); 
+  vec[255]=(*S)->getIndicesCollectorPointer()->BS01();
+  vec[256]=(*S)->getIndicesCollectorPointer()->BS01(); 
+  vec[257]=(*S)->getIndicesCollectorPointer()->BS01(); 
   
   vec[258]=(*S)->getIndicesCollectorPointer()->MU_cold_cloud(); 
   vec[259]=(*S)->getIndicesCollectorPointer()->MU_warm_cloud(); 
