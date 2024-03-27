@@ -4749,8 +4749,9 @@ double IndicesCollector::HSI(){
 }
 
 double IndicesCollector::HSIv2(){  
-  double* MU_ECAPE = (*S)->getIndicesCollectorPointer()->MU_ECAPE(); 
+  double* MU_ECAPE = this->MU_ECAPE(); 
   double CAPE = MU_ECAPE[2];
+  cout<< CAPE;
   double BS06 = this->MSR_MW();
   double FL = this->ZeroHeight();
   double LCL = this->VMostUnstableLCL();
