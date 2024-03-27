@@ -3193,27 +3193,11 @@ double* IndicesCollector::MU500_ECAPE()
   return result;
 }
 
-double IndicesCollector::MU_equal_layer()
-{
-  double warm = this->MU_warm_cloud;
-  double cold = this->MU_cold_cloud;
-  result = min(warm,cold);
-  return result;  
-}
-
-double IndicesCollector::MU_ML_equal_layer()
-{
-  double warm = this->MU_ML_warm_cloud;
-  double cold = this->MU_ML_cold_cloud;
-  result = min(warm,cold);
-  return result;  
-}
-
 double IndicesCollector::MU_ML_warm_cloud()
 {
   double LFC = Get(S->h, S->th->meanmostUnstable->vLfcIndex);
   double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
-  result = FL-LFC;
+  double result = FL-LFC;
   if(result<0){
     result = 0;
   }
@@ -3224,7 +3208,7 @@ double IndicesCollector::MU_warm_cloud()
 {
   double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex);
   double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
-  result = FL-LFC;
+  double result = FL-LFC;
   if(result<0){
     result = 0;
   }
@@ -3235,7 +3219,7 @@ double IndicesCollector::MU_cold_cloud()
 {
   double EL = Get(S->h, S->th->mostUnstable->vElIndex);
   double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
-  result = EL-FL;
+  double result = EL-FL;
   if(result<0){
     result = 0;
   }
@@ -3246,10 +3230,26 @@ double IndicesCollector::MU_ML_cold_cloud()
 {
   double EL = Get(S->h, S->th->meanmostUnstable->vElIndex);
   double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
-  result = EL-FL;
+  double result = EL-FL;
   if(result<0){
     result = 0;
   }
+  return result;  
+}
+
+double IndicesCollector::MU_equal_layer()
+{
+  double warm = this->MU_warm_cloud;
+  double cold = this->MU_cold_cloud;
+  double result = min(warm,cold);
+  return result;  
+}
+
+double IndicesCollector::MU_ML_equal_layer()
+{
+  double warm = this->MU_ML_warm_cloud;
+  double cold = this->MU_ML_cold_cloud;
+  double result = min(warm,cold);
   return result;  
 }
 
@@ -4565,7 +4565,7 @@ double IndicesCollector::ML_WMAXSHEAR(){
   return this->VMeanLayerVmax()*this->BS06();
 }
 
-double IndicesCollector::MU_EFF_WMAXSHEAR()
+double IndicesCollector::MU_EFF_WMAXSHEAR(){
   double* CAPE_WXS = this->MU_ML_ECAPE(); 
   double CAPE = CAPE_WXS[5];
   delete[] CAPE_WXS;
