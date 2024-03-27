@@ -1436,13 +1436,13 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   double dz = abs(h - lasth);
 
   if (vLclIndex != -1) {  
-  double ttt = (t_ - vt_parcel) / (vt_parcel+273.15) * 9.81;
+  double ttt = (vt_parcel - t_) / (t_+273.15) * 9.81;
   if(ttt>this->peakB) {
     peakB = ttt;
   }
 
   if (t <= -10) {
-  double ttt2 = (t_ - vt_parcel) / (vt_parcel+273.15) * 9.81;
+  double ttt2 = (vt_parcel - t_) / (t_+273.15) * 9.81;
   if(ttt2>this->peakB_M10) {
     peakB_M10 = ttt2;
      }
@@ -3239,16 +3239,16 @@ double IndicesCollector::MU_ML_cold_cloud()
 
 double IndicesCollector::MU_equal_layer()
 {
-  double warm = 0;
-  double cold = 0;
+  double warm = this->MU_warm_cloud;
+  double cold = this->MU_cold_cloud;
   double result = min(warm,cold);
   return result;  
 }
 
 double IndicesCollector::MU_ML_equal_layer()
 {
-  double warm = 0;
-  double cold = 0;
+  double warm = this->MU_ML_warm_cloud;
+  double cold = this->MU_ML_cold_cloud;
   double result = min(warm,cold);
   return result;  
 }
