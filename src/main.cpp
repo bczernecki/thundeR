@@ -1276,8 +1276,8 @@ void LapseRate::allocate(){
   middlecape=0;
   coldcape=0;
   coldcapeTV=0;
-  peakB=999;
-  peakB_M10=999;
+  peakB=-999;
+  peakB_M10=-999;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
   startIndex=-1;
   isSet = false;
@@ -1436,14 +1436,14 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   double dz = abs(h - lasth);
 
   if (vLclIndex != -1) {  
-  double ttt = t_ - vt_parcel;
-  if(ttt<this->peakB) {
+  double ttt = (t_ - vt_parcel) / (vt_parcel+273.15) * 9.81;
+  if(ttt>this->peakB) {
     peakB = ttt;
   }
 
   if (t <= -10) {
-  double ttt2 = t_ - vt_parcel;
-  if(ttt2<this->peakB_M10) {
+  double ttt2 = (t_ - vt_parcel) / (vt_parcel+273.15) * 9.81;
+  if(ttt2>this->peakB_M10) {
     peakB_M10 = ttt2;
      }
    }
@@ -2708,6 +2708,17 @@ public:
   double ML_buoyancy_M10();
   double SB_buoyancy_M10();
 
+  double SR_moisture_flux();
+  double SR_moisture_flux_eff();
+
+  double MU_warm_cloud();
+  double MU_cold_cloud();
+  double MU_equal_layer();
+
+  double MU_ML_warm_cloud();
+  double MU_ML_cold_cloud();
+  double MU_ML_equal_layer();
+
   double* MU_ECAPE();
   double* ML_ECAPE();
   double* MU_ML_ECAPE();
@@ -3036,12 +3047,13 @@ double* IndicesCollector::MU_ECAPE()
   double CAPE_HGL = S->th->mostUnstable->middlecape;
   double CAPE_M10 = S->th->mostUnstable->coldcape;
 
-  double* result = new double[4];
+  double* result = new double[6];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
+  result[5] = sqrt(2*E_tilde*CAPE);
   return result;
 }
 
@@ -3069,12 +3081,13 @@ double* IndicesCollector::MU_ML_ECAPE()
   double CAPE_HGL = S->th->meanmostUnstable->middlecape;
   double CAPE_M10 = S->th->meanmostUnstable->coldcape;
 
-  double* result = new double[4];
+  double* result = new double[6];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
+  result[5] = sqrt(2*E_tilde*CAPE);
   return result;
 }
 
@@ -3102,12 +3115,13 @@ double* IndicesCollector::SB_ECAPE()
   double CAPE_HGL = S->th->surfaceBased->middlecape;
   double CAPE_M10 = S->th->surfaceBased->coldcape;
 
-  double* result = new double[4];
+  double* result = new double[6];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
+  result[5] = sqrt(2*E_tilde*CAPE);
   return result;
 }
 
@@ -3135,12 +3149,13 @@ double* IndicesCollector::ML_ECAPE()
   double CAPE_HGL = S->th->meanLayer->middlecape;
   double CAPE_M10 = S->th->meanLayer->coldcape;
 
-  double* result = new double[4];
+  double* result = new double[6];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
+  result[5] = sqrt(2*E_tilde*CAPE);
   return result;
 }
 
@@ -3168,13 +3183,74 @@ double* IndicesCollector::MU500_ECAPE()
   double CAPE_HGL = S->th->mostU500->middlecape;
   double CAPE_M10 = S->th->mostU500->coldcape;
 
-  double* result = new double[4];
+  double* result = new double[6];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
+  result[5] = sqrt(2*E_tilde*CAPE);
   return result;
+}
+
+double IndicesCollector::MU_equal_layer()
+{
+  double warm = this->MU_warm_cloud;
+  double cold = this->MU_cold_cloud;
+  result = min(warm,cold);
+  return result;  
+}
+
+double IndicesCollector::MU_ML_equal_layer()
+{
+  double warm = this->MU_ML_warm_cloud;
+  double cold = this->MU_ML_cold_cloud;
+  result = min(warm,cold);
+  return result;  
+}
+
+double IndicesCollector::MU_ML_warm_cloud()
+{
+  double LFC = Get(S->h, S->th->meanmostUnstable->vLfcIndex);
+  double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
+  result = FL-LFC;
+  if(result<0){
+    result = 0;
+  }
+  return result;  
+}
+
+double IndicesCollector::MU_warm_cloud()
+{
+  double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex);
+  double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
+  result = FL-LFC;
+  if(result<0){
+    result = 0;
+  }
+  return result;  
+}
+
+double IndicesCollector::MU_cold_cloud()
+{
+  double EL = Get(S->h, S->th->mostUnstable->vElIndex);
+  double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
+  result = EL-FL;
+  if(result<0){
+    result = 0;
+  }
+  return result;  
+}
+
+double IndicesCollector::MU_ML_cold_cloud()
+{
+  double EL = Get(S->h, S->th->meanmostUnstable->vElIndex);
+  double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
+  result = EL-FL;
+  if(result<0){
+    result = 0;
+  }
+  return result;  
 }
 
 double IndicesCollector::VMostUnstableCAPE()
@@ -3213,7 +3289,6 @@ double IndicesCollector::VMostUnstableLCL()
   double result = 0;
   int index = S->th->meanmostUnstable->vLclIndex;
   
-  
   result = Get(S->h,index)- S->th->h0;
   
   return result;
@@ -3226,7 +3301,6 @@ double IndicesCollector::VMostUnstableLFC()
   double result = 0;
   int index = S->th->meanmostUnstable->vLfcIndex;
   
-  
   result = Get(S->h,index)- S->th->h0;
   
   return result;
@@ -3235,15 +3309,10 @@ double IndicesCollector::VMostUnstableLFC()
 
 double IndicesCollector::VMostUnstableEL()
 {
-  
   double result = 0;
   int index = S->th->meanmostUnstable->vElIndex;
-  
-  
   result = Get(S->h,index)- S->th->h0;
-  
   return result;
-  
 } 
 
 double IndicesCollector::VMostUnstableLI(){
@@ -3774,7 +3843,8 @@ double IndicesCollector::MLMixingRatio(){
 }
 
 double IndicesCollector::MUMRatio(){
-  return Get(S->th->mixing,S->th->mostUnstable->startIndex);
+  return S->th->mmrMAX;
+  //return Get(S->th->mixing,S->th->mostUnstable->startIndex);
 }
 
 double IndicesCollector::SBMRatio(){
@@ -4495,16 +4565,25 @@ double IndicesCollector::ML_WMAXSHEAR(){
   return this->VMeanLayerVmax()*this->BS06();
 }
 
-double IndicesCollector::MU_EFF_WMAXSHEAR(){
-  return this->VMostUnstableVmax()*this->emubs();
+double IndicesCollector::MU_EFF_WMAXSHEAR()
+  double* CAPE_WXS = this->MU_ML_ECAPE(); 
+  double CAPE = CAPE_WXS[5];
+  delete[] CAPE_WXS;
+  return CAPE*this->emubs();
 }
 
 double IndicesCollector::SB_EFF_WMAXSHEAR(){
-  return this->VSurfaceBasedVmax()*this->esbbs();
+  double* CAPE_WXS = this->SB_ECAPE(); 
+  double CAPE = CAPE_WXS[5];
+  delete[] CAPE_WXS;
+  return CAPE*this->esbbs();
 }
 
 double IndicesCollector::ML_EFF_WMAXSHEAR(){
-  return this->VMeanLayerVmax()*this->emlbs();
+  double* CAPE_WXS = this->ML_ECAPE(); 
+  double CAPE = CAPE_WXS[5];
+  delete[] CAPE_WXS;
+  return CAPE*this->emlbs();
 }
 
 double IndicesCollector::BulkShearSfcTen(){
@@ -4584,6 +4663,16 @@ double IndicesCollector::BulkShearSBLFCTen(){
 
 double IndicesCollector::MoistureFlux(){
   double result = (S->th->meanmxr2)*(S->ks->mean02.abs());
+  return result;
+}
+
+double IndicesCollector::SR_moisture_flux(){
+  double result = this->MLMixingRatio() * this->Peters_SR_inflow();
+  return result;
+}
+
+double IndicesCollector::SR_moisture_flux_eff(){
+  double result = (S->th->mmrMAX) * this->Peters_SR_inflow_eff();
   return result;
 }
 
@@ -4749,7 +4838,7 @@ double IndicesCollector::HSI(){
 }
 
 double IndicesCollector::HSIv2(){  
-  double* CAPE_HSI = this->MU_ECAPE(); 
+  double* CAPE_HSI = this->MU_ML_ECAPE(); 
   double CAPE = CAPE_HSI[2];
   delete[] CAPE_HSI;
   double BS06 = this->MSR_MW();
@@ -5286,6 +5375,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[232] = MU_ECAPE[2]; // CAPE
   vec[233] = MU_ECAPE[3]; // CAPE_HGL
   vec[234] = MU_ECAPE[4]; // CAPE_M10
+  delete[] MU_ECAPE;
 
   double* SB_ECAPE = (*S)->getIndicesCollectorPointer()->SB_ECAPE(); 
   vec[235] = SB_ECAPE[0]; // E_tilde
@@ -5293,30 +5383,43 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[237] = SB_ECAPE[2]; // CAPE
   vec[238] = SB_ECAPE[3]; // CAPE_HGL
   vec[239] = SB_ECAPE[4]; // CAPE_M10
-
+  delete[] SB_ECAPE;
+  
   double* ML_ECAPE = (*S)->getIndicesCollectorPointer()->ML_ECAPE(); 
   vec[240] = ML_ECAPE[0]; // E_tilde
   vec[241] = ML_ECAPE[1]; // Radius
   vec[242] = ML_ECAPE[2]; // CAPE
   vec[243] = ML_ECAPE[3]; // CAPE_HGL
   vec[244] = ML_ECAPE[4]; // CAPE_M10
-
+  delete[] ML_ECAPE;
+  
   double* MU_ML_ECAPE = (*S)->getIndicesCollectorPointer()->MU_ML_ECAPE(); 
   vec[245] = MU_ML_ECAPE[0]; // E_tilde
   vec[246] = MU_ML_ECAPE[1]; // Radius
   vec[247] = MU_ML_ECAPE[2]; // CAPE
   vec[248] = MU_ML_ECAPE[3]; // CAPE_HGL
   vec[249] = MU_ML_ECAPE[4]; // CAPE_M10
-
+  delete[] MU_ML_ECAPE;
+  
   double* MU500_ECAPE = (*S)->getIndicesCollectorPointer()->MU500_ECAPE(); 
   vec[250] = MU500_ECAPE[0]; // E_tilde
   vec[251] = MU500_ECAPE[1]; // Radius
   vec[252] = MU500_ECAPE[2]; // CAPE
   vec[253] = MU500_ECAPE[3]; // CAPE_HGL
   vec[254] = MU500_ECAPE[4]; // CAPE_M10
-
+  delete[] MU500_ECAPE;
+  
   vec[255]=(*S)->getIndicesCollectorPointer()->HSIv2();
-
+  vec[256]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux(); 
+  vec[257]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff(); 
+  
+  vec[258]=(*S)->getIndicesCollectorPointer()->MU_cold_cloud(); 
+  vec[259]=(*S)->getIndicesCollectorPointer()->MU_warm_cloud(); 
+  vec[260]=(*S)->getIndicesCollectorPointer()->MU_equal_layer(); 
+  
+  vec[261]=(*S)->getIndicesCollectorPointer()->MU_ML_cold_cloud(); 
+  vec[262]=(*S)->getIndicesCollectorPointer()->MU_ML_warm_cloud(); 
+  vec[263]=(*S)->getIndicesCollectorPointer()->MU_ML_equal_layer(); 
   return vec;
 }
 
@@ -5906,6 +6009,14 @@ double * sounding_default2(double* pressure,
 //'  \item MU500_ECAPE_HGL
 //'  \item MU500_ECAPE_M10
 //'  \item HSIv2
+//'  \item SR_moisture_flux
+//'  \item SR_moisture_flux_eff
+//'  \item MU_cold_cloud
+//'  \item MU_warm_cloud
+//'  \item MU_equal_layer
+//'  \item MU_ML_cold_cloud
+//'  \item MU_ML_warm_cloud
+//'  \item MU_ML_equal_layer
 //' }
  // [[Rcpp::export]]
  
