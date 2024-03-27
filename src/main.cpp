@@ -3196,7 +3196,7 @@ double* IndicesCollector::MU500_ECAPE()
 double IndicesCollector::MU_ML_warm_cloud()
 {
   double LFC = Get(S->h, S->th->meanmostUnstable->vLfcIndex);
-  double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double result = FL-LFC;
   if(result<0){
     result = 0;
@@ -3207,7 +3207,7 @@ double IndicesCollector::MU_ML_warm_cloud()
 double IndicesCollector::MU_warm_cloud()
 {
   double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex);
-  double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double result = FL-LFC;
   if(result<0){
     result = 0;
@@ -3218,7 +3218,7 @@ double IndicesCollector::MU_warm_cloud()
 double IndicesCollector::MU_cold_cloud()
 {
   double EL = Get(S->h, S->th->mostUnstable->vElIndex);
-  double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double result = EL-FL;
   if(result<0){
     result = 0;
@@ -3229,7 +3229,7 @@ double IndicesCollector::MU_cold_cloud()
 double IndicesCollector::MU_ML_cold_cloud()
 {
   double EL = Get(S->h, S->th->meanmostUnstable->vElIndex);
-  double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double result = EL-FL;
   if(result<0){
     result = 0;
@@ -3240,7 +3240,7 @@ double IndicesCollector::MU_ML_cold_cloud()
 double IndicesCollector::MU_equal_layer()
 {
   double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex);
-  double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double EL = Get(S->h, S->th->mostUnstable->vElIndex);
   double warm = FL-LFC;
   double cold = EL-FL;
@@ -3257,7 +3257,7 @@ double IndicesCollector::MU_equal_layer()
 double IndicesCollector::MU_ML_equal_layer()
 {
   double LFC = Get(S->h, S->th->meanmostUnstable->vLfcIndex);
-  double FL = Get(S->h,S->th->zeropos)-Get(S->h,0);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double EL = Get(S->h, S->th->meanmostUnstable->vElIndex);
   double warm = FL-LFC;
   double cold = EL-FL;
