@@ -4749,8 +4749,7 @@ double IndicesCollector::HSI(){
 }
 
 double IndicesCollector::HSIv2(){  
-  double* MU_ECAPE = this->MU_ECAPE(); 
-  double CAPE = MU_ECAPE[2];
+  double CAPE = this->MU_ECAPE[2];
   cout<< CAPE;
   double BS06 = this->MSR_MW();
   double FL = this->ZeroHeight();
@@ -5885,11 +5884,11 @@ double * sounding_default2(double* pressure,
 //'  \item MU_ECAPE
 //'  \item MU_ECAPE_HGL
 //'  \item MU_ECAPE_M10
-//'  \item SB_ML_ECAPE_etilde
-//'  \item SB_ML_ECAPE_radius
-//'  \item SB_ML_ECAPE
-//'  \item SB_ML_ECAPE_HGL
-//'  \item SB_ML_ECAPE_M10
+//'  \item SB_ECAPE_etilde
+//'  \item SB_ECAPE_radius
+//'  \item SB_ECAPE
+//'  \item SB_ECAPE_HGL
+//'  \item SB_ECAPE_M10
 //'  \item ML_ECAPE_etilde
 //'  \item ML_ECAPE_radius
 //'  \item ML_ECAPE
