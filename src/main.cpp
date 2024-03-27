@@ -3239,16 +3239,16 @@ double IndicesCollector::MU_ML_cold_cloud()
 
 double IndicesCollector::MU_equal_layer()
 {
-  double warm = this->MU_warm_cloud;
-  double cold = this->MU_cold_cloud;
+  double warm = 0;
+  double cold = 0;
   double result = min(warm,cold);
   return result;  
 }
 
 double IndicesCollector::MU_ML_equal_layer()
 {
-  double warm = this->MU_ML_warm_cloud;
-  double cold = this->MU_ML_cold_cloud;
+  double warm = 0;
+  double cold = 0;
   double result = min(warm,cold);
   return result;  
 }
