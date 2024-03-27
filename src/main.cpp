@@ -5413,13 +5413,13 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[256]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux(); 
   vec[257]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff(); 
   
-  vec[258]=(*S)->getIndicesCollectorPointer()->MU_cold_cloud(); 
-  vec[259]=(*S)->getIndicesCollectorPointer()->MU_warm_cloud(); 
-  vec[260]=(*S)->getIndicesCollectorPointer()->MU_equal_layer(); 
+  vec[258]=(*S)->getIndicesCollectorPointer()->HSIv2(); 
+  vec[259]=(*S)->getIndicesCollectorPointer()->HSIv2(); 
+  vec[260]=(*S)->getIndicesCollectorPointer()->HSIv2(); 
   
-  vec[261]=(*S)->getIndicesCollectorPointer()->MU_ML_cold_cloud(); 
-  vec[262]=(*S)->getIndicesCollectorPointer()->MU_ML_warm_cloud(); 
-  vec[263]=(*S)->getIndicesCollectorPointer()->MU_ML_equal_layer(); 
+  vec[261]=(*S)->getIndicesCollectorPointer()->HSIv2(); 
+  vec[262]=(*S)->getIndicesCollectorPointer()->HSIv2(); 
+  vec[263]=(*S)->getIndicesCollectorPointer()->HSIv2(); 
   return vec;
 }
 
