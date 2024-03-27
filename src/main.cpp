@@ -3047,13 +3047,13 @@ double* IndicesCollector::MU_ECAPE()
   double CAPE_HGL = S->th->mostUnstable->middlecape;
   double CAPE_M10 = S->th->mostUnstable->coldcape;
 
-  double* result = new double[6];
+  double* result = new double[5];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
-  result[5] = sqrt(2*E_tilde*CAPE);
+  //result[5] = sqrt(2*E_tilde*CAPE);
   return result;
 }
 
@@ -3081,13 +3081,13 @@ double* IndicesCollector::MU_ML_ECAPE()
   double CAPE_HGL = S->th->meanmostUnstable->middlecape;
   double CAPE_M10 = S->th->meanmostUnstable->coldcape;
 
-  double* result = new double[6];
+  double* result = new double[5];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
-  result[5] = sqrt(2*E_tilde*CAPE);
+  //result[5] = sqrt(2*E_tilde*CAPE);
   return result;
 }
 
@@ -3115,13 +3115,13 @@ double* IndicesCollector::SB_ECAPE()
   double CAPE_HGL = S->th->surfaceBased->middlecape;
   double CAPE_M10 = S->th->surfaceBased->coldcape;
 
-  double* result = new double[6];
+  double* result = new double[5];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
-  result[5] = sqrt(2*E_tilde*CAPE);
+  //result[5] = sqrt(2*E_tilde*CAPE);
   return result;
 }
 
@@ -3149,13 +3149,13 @@ double* IndicesCollector::ML_ECAPE()
   double CAPE_HGL = S->th->meanLayer->middlecape;
   double CAPE_M10 = S->th->meanLayer->coldcape;
 
-  double* result = new double[6];
+  double* result = new double[5];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
-  result[5] = sqrt(2*E_tilde*CAPE);
+  //result[5] = sqrt(2*E_tilde*CAPE);
   return result;
 }
 
@@ -3183,13 +3183,13 @@ double* IndicesCollector::MU500_ECAPE()
   double CAPE_HGL = S->th->mostU500->middlecape;
   double CAPE_M10 = S->th->mostU500->coldcape;
 
-  double* result = new double[6];
+  double* result = new double[5];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
-  result[5] = sqrt(2*E_tilde*CAPE);
+  //result[5] = sqrt(2*E_tilde*CAPE);
   return result;
 }
 
@@ -3843,8 +3843,8 @@ double IndicesCollector::MLMixingRatio(){
 }
 
 double IndicesCollector::MUMRatio(){
-  return S->th->mmrMAX;
-  //return Get(S->th->mixing,S->th->mostUnstable->startIndex);
+  //return S->th->mmrMAX;
+  return Get(S->th->mixing,S->th->mostUnstable->startIndex);
 }
 
 double IndicesCollector::SBMRatio(){
@@ -4567,21 +4567,21 @@ double IndicesCollector::ML_WMAXSHEAR(){
 
 double IndicesCollector::MU_EFF_WMAXSHEAR(){
   double* CAPE_WXS = this->MU_ML_ECAPE(); 
-  double CAPE = CAPE_WXS[5];
+  double CAPE = CAPE_WXS[2];
   delete[] CAPE_WXS;
   return CAPE*this->emubs();
 }
 
 double IndicesCollector::SB_EFF_WMAXSHEAR(){
   double* CAPE_WXS = this->SB_ECAPE(); 
-  double CAPE = CAPE_WXS[5];
+  double CAPE = CAPE_WXS[2];
   delete[] CAPE_WXS;
   return CAPE*this->esbbs();
 }
 
 double IndicesCollector::ML_EFF_WMAXSHEAR(){
   double* CAPE_WXS = this->ML_ECAPE(); 
-  double CAPE = CAPE_WXS[5];
+  double CAPE = CAPE_WXS[2];
   delete[] CAPE_WXS;
   return CAPE*this->emlbs();
 }
@@ -5339,9 +5339,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[201]=(*S)->getIndicesCollectorPointer()->MU_WMAXSHEAR();
   vec[202]=(*S)->getIndicesCollectorPointer()->SB_WMAXSHEAR();
   vec[203]=(*S)->getIndicesCollectorPointer()->ML_WMAXSHEAR();
-  vec[204]=(*S)->getIndicesCollectorPointer()->BS01();
-  vec[205]=(*S)->getIndicesCollectorPointer()->BS01();
-  vec[206]=(*S)->getIndicesCollectorPointer()->BS01();
+  vec[204]=(*S)->getIndicesCollectorPointer()->MU_EFF_WMAXSHEAR();
+  vec[205]=(*S)->getIndicesCollectorPointer()->SB_EFF_WMAXSHEAR();
+  vec[206]=(*S)->getIndicesCollectorPointer()->ML_EFF_WMAXSHEAR();
   vec[207]=(*S)->getIndicesCollectorPointer()->EHI500();
   vec[208]=(*S)->getIndicesCollectorPointer()->EHI01();	
   vec[209]=(*S)->getIndicesCollectorPointer()->EHI03();
@@ -5375,7 +5375,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[232] = MU_ECAPE[2]; // CAPE
   vec[233] = MU_ECAPE[3]; // CAPE_HGL
   vec[234] = MU_ECAPE[4]; // CAPE_M10
-  delete[] MU_ECAPE;
+  //delete[] MU_ECAPE;
 
   double* SB_ECAPE = (*S)->getIndicesCollectorPointer()->SB_ECAPE(); 
   vec[235] = SB_ECAPE[0]; // E_tilde
@@ -5383,7 +5383,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[237] = SB_ECAPE[2]; // CAPE
   vec[238] = SB_ECAPE[3]; // CAPE_HGL
   vec[239] = SB_ECAPE[4]; // CAPE_M10
-  delete[] SB_ECAPE;
+  //delete[] SB_ECAPE;
   
   double* ML_ECAPE = (*S)->getIndicesCollectorPointer()->ML_ECAPE(); 
   vec[240] = ML_ECAPE[0]; // E_tilde
@@ -5391,7 +5391,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[242] = ML_ECAPE[2]; // CAPE
   vec[243] = ML_ECAPE[3]; // CAPE_HGL
   vec[244] = ML_ECAPE[4]; // CAPE_M10
-  delete[] ML_ECAPE;
+  //delete[] ML_ECAPE;
   
   double* MU_ML_ECAPE = (*S)->getIndicesCollectorPointer()->MU_ML_ECAPE(); 
   vec[245] = MU_ML_ECAPE[0]; // E_tilde
@@ -5399,7 +5399,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[247] = MU_ML_ECAPE[2]; // CAPE
   vec[248] = MU_ML_ECAPE[3]; // CAPE_HGL
   vec[249] = MU_ML_ECAPE[4]; // CAPE_M10
-  delete[] MU_ML_ECAPE;
+  //delete[] MU_ML_ECAPE;
   
   double* MU500_ECAPE = (*S)->getIndicesCollectorPointer()->MU500_ECAPE(); 
   vec[250] = MU500_ECAPE[0]; // E_tilde
@@ -5407,11 +5407,11 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[252] = MU500_ECAPE[2]; // CAPE
   vec[253] = MU500_ECAPE[3]; // CAPE_HGL
   vec[254] = MU500_ECAPE[4]; // CAPE_M10
-  delete[] MU500_ECAPE;
+  //delete[] MU500_ECAPE;
   
-  vec[255]=(*S)->getIndicesCollectorPointer()->BS01();
-  vec[256]=(*S)->getIndicesCollectorPointer()->BS01(); 
-  vec[257]=(*S)->getIndicesCollectorPointer()->BS01(); 
+  vec[255]=(*S)->getIndicesCollectorPointer()->HSIv2();
+  vec[256]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux(); 
+  vec[257]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff(); 
   
   vec[258]=(*S)->getIndicesCollectorPointer()->MU_cold_cloud(); 
   vec[259]=(*S)->getIndicesCollectorPointer()->MU_warm_cloud(); 
