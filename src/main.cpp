@@ -4752,7 +4752,6 @@ double IndicesCollector::HSIv2(){
   double* CAPE_HSI = this->MU_ECAPE(); 
   double CAPE = CAPE_HSI[2];
   delete[] CAPE_HSI;
-  cout<< CAPE;
   double BS06 = this->MSR_MW();
   double FL = this->ZeroHeight();
   double LCL = this->VMostUnstableLCL();
