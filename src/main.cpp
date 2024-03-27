@@ -2960,28 +2960,22 @@ IndicesCollector::IndicesCollector(Thermodynamics *t, Cache *c, Kinematics *k,So
 
 
 double IndicesCollector::K_Index() {
-  
   double val = 0;
   int i500 = cache->getPressureIndex(500);
   int i700 = cache->getPressureIndex(700);
   int i850 = cache->getPressureIndex(850);
-  
   list<double> *t = S->t;
   list<double> *d = S->d;
-  
   val = (Get(t,i850) - Get(t,i500) + Get(d,i850) - (Get(t,i700) - Get(d,i700)));
   return val;
 }
 
 double IndicesCollector::Showalter_Index(){
   int lindex = cache->getPressureIndex(500);
-  
   double lit = Get(S->t,lindex);
   int uindex = S->th->showalter->startIndex;
   int vindex = lindex - uindex;
-  
   double plit = Get(S->th->showalter->virtualValues,vindex);
-  
   double Showalter = lit - plit;
   return Showalter;
 }
@@ -3001,15 +2995,11 @@ double IndicesCollector::TotalTotals(){
 double IndicesCollector::SWEATIndex(){
   int i500 = cache->getPressureIndex(500);
   int i850 = cache->getPressureIndex(850);
-  
   double a500 = Get(S->a,i500);
   double a850 = Get(S->a,i850);
-  
   double v500 = Get(S->v,i500);
   double v850 = Get(S->v,i850);
-  
   double d850 = Get(S->d,i850);
-  
   double angle = a500 - a850;
   double angle2 = angle / 180;
   double sinus = sin(angle2 * M_PI);
@@ -3023,8 +3013,7 @@ double IndicesCollector::SWEATIndex(){
   return res;
 }
 
-double* IndicesCollector::MU_ECAPE()
-{  
+double* IndicesCollector::MU_ECAPE(){  
   double L = 250;
   double EL = Get(S->h, S->th->mostUnstable->vElIndex);
   double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex);
@@ -3043,10 +3032,8 @@ double* IndicesCollector::MU_ECAPE()
   double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
   double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
-
   double CAPE_HGL = S->th->mostUnstable->middlecape;
   double CAPE_M10 = S->th->mostUnstable->coldcape;
-
   double* result = new double[6];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3057,8 +3044,7 @@ double* IndicesCollector::MU_ECAPE()
   return result;
 }
 
-double* IndicesCollector::MU_ML_ECAPE()
-{  
+double* IndicesCollector::MU_ML_ECAPE(){  
   double L = 250;
   double EL = Get(S->h, S->th->meanmostUnstable->vElIndex);
   double LFC = Get(S->h, S->th->meanmostUnstable->vLfcIndex);
@@ -3077,10 +3063,8 @@ double* IndicesCollector::MU_ML_ECAPE()
   double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
   double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
-
   double CAPE_HGL = S->th->meanmostUnstable->middlecape;
   double CAPE_M10 = S->th->meanmostUnstable->coldcape;
-
   double* result = new double[6];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3091,8 +3075,7 @@ double* IndicesCollector::MU_ML_ECAPE()
   return result;
 }
 
-double* IndicesCollector::SB_ECAPE()
-{  
+double* IndicesCollector::SB_ECAPE(){  
   double L = 250;
   double EL = Get(S->h, S->th->surfaceBased->vElIndex);
   double LFC = Get(S->h, S->th->surfaceBased->vLfcIndex);
@@ -3111,10 +3094,8 @@ double* IndicesCollector::SB_ECAPE()
   double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
   double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
-
   double CAPE_HGL = S->th->surfaceBased->middlecape;
   double CAPE_M10 = S->th->surfaceBased->coldcape;
-
   double* result = new double[6];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3125,8 +3106,7 @@ double* IndicesCollector::SB_ECAPE()
   return result;
 }
 
-double* IndicesCollector::ML_ECAPE()
-{  
+double* IndicesCollector::ML_ECAPE(){  
   double L = 250;
   double EL = Get(S->h, S->th->meanLayer->vElIndex);
   double LFC = Get(S->h, S->th->meanLayer->vLfcIndex);
@@ -3145,10 +3125,8 @@ double* IndicesCollector::ML_ECAPE()
   double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
   double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
-
   double CAPE_HGL = S->th->meanLayer->middlecape;
   double CAPE_M10 = S->th->meanLayer->coldcape;
-
   double* result = new double[6];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3159,8 +3137,7 @@ double* IndicesCollector::ML_ECAPE()
   return result;
 }
 
-double* IndicesCollector::MU500_ECAPE()
-{  
+double* IndicesCollector::MU500_ECAPE(){  
   double L = 250;
   double EL = Get(S->h, S->th->mostU500->vElIndex);
   double LFC = Get(S->h, S->th->mostU500->vLfcIndex);
@@ -3179,10 +3156,8 @@ double* IndicesCollector::MU500_ECAPE()
   double E_tilde_ = E_tilde - vsr_tilde*vsr_tilde;
   double varepsilon = 2*((1 - E_tilde_) / (E_tilde_ + N_tilde))/(EL);
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
-
   double CAPE_HGL = S->th->mostU500->middlecape;
   double CAPE_M10 = S->th->mostU500->coldcape;
-
   double* result = new double[6];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3193,8 +3168,27 @@ double* IndicesCollector::MU500_ECAPE()
   return result;
 }
 
-double IndicesCollector::MU_ML_warm_cloud()
-{
+double IndicesCollector::SB_warm_cloud(){
+  double LFC = Get(S->h, S->th->surfaceBased->vLfcIndex);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
+  double result = FL-LFC;
+  if(result<0){
+    result = 0;
+  }
+  return result;  
+}
+
+double IndicesCollector::ML_warm_cloud(){
+  double LFC = Get(S->h, S->th->meanLayer->vLfcIndex);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
+  double result = FL-LFC;
+  if(result<0){
+    result = 0;
+  }
+  return result;  
+}
+
+double IndicesCollector::MU_ML_warm_cloud(){
   double LFC = Get(S->h, S->th->meanmostUnstable->vLfcIndex);
   double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double result = FL-LFC;
@@ -3204,8 +3198,7 @@ double IndicesCollector::MU_ML_warm_cloud()
   return result;  
 }
 
-double IndicesCollector::MU_warm_cloud()
-{
+double IndicesCollector::MU_warm_cloud(){
   double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex);
   double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double result = FL-LFC;
@@ -3215,8 +3208,27 @@ double IndicesCollector::MU_warm_cloud()
   return result;  
 }
 
-double IndicesCollector::MU_cold_cloud()
-{
+double IndicesCollector::ML_cold_cloud(){
+  double EL = Get(S->h, S->th->meanLayer->vElIndex);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
+  double result = EL-FL;
+  if(result<0){
+    result = 0;
+  }
+  return result;  
+}
+
+double IndicesCollector::SB_cold_cloud(){
+  double EL = Get(S->h, S->th->surfaceBased->vElIndex);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
+  double result = EL-FL;
+  if(result<0){
+    result = 0;
+  }
+  return result;  
+}
+
+double IndicesCollector::MU_cold_cloud(){
   double EL = Get(S->h, S->th->mostUnstable->vElIndex);
   double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double result = EL-FL;
@@ -3226,8 +3238,7 @@ double IndicesCollector::MU_cold_cloud()
   return result;  
 }
 
-double IndicesCollector::MU_ML_cold_cloud()
-{
+double IndicesCollector::MU_ML_cold_cloud(){
   double EL = Get(S->h, S->th->meanmostUnstable->vElIndex);
   double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double result = EL-FL;
@@ -3237,8 +3248,39 @@ double IndicesCollector::MU_ML_cold_cloud()
   return result;  
 }
 
-double IndicesCollector::MU_equal_layer()
-{
+double IndicesCollector::ML_equal_layer(){
+  double LFC = Get(S->h, S->th->meanLayer->vLfcIndex);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
+  double EL = Get(S->h, S->th->meanLayer->vElIndex);
+  double warm = FL-LFC;
+  double cold = EL-FL;
+  if(warm<0){
+    warm = 0;
+  }
+  if(cold<0){
+    cold = 0;
+  }  
+  double result = min(warm,cold);
+  return result;  
+}
+
+double IndicesCollector::SB_equal_layer(){
+  double LFC = Get(S->h, S->th->surfaceBased->vLfcIndex);
+  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
+  double EL = Get(S->h, S->th->surfaceBased->vElIndex);
+  double warm = FL-LFC;
+  double cold = EL-FL;
+  if(warm<0){
+    warm = 0;
+  }
+  if(cold<0){
+    cold = 0;
+  }  
+  double result = min(warm,cold);
+  return result;  
+}
+
+double IndicesCollector::MU_equal_layer(){
   double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex);
   double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double EL = Get(S->h, S->th->mostUnstable->vElIndex);
@@ -3254,8 +3296,7 @@ double IndicesCollector::MU_equal_layer()
   return result;  
 }
 
-double IndicesCollector::MU_ML_equal_layer()
-{
+double IndicesCollector::MU_ML_equal_layer(){
   double LFC = Get(S->h, S->th->meanmostUnstable->vLfcIndex);
   double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double EL = Get(S->h, S->th->meanmostUnstable->vElIndex);
@@ -3271,62 +3312,78 @@ double IndicesCollector::MU_ML_equal_layer()
   return result;  
 }
 
-double IndicesCollector::VMostUnstableCAPE()
-{
-  
+double IndicesCollector::VMostUnstableCAPE(){  
   double result = 0;
-  result = S->th->meanmostUnstable->vcape;
-  
+  result = S->th->mostUnstable->vcape; 
   return result;
-  
 }
 
-double IndicesCollector::VLLMostUnstableCAPE()
-{
-  
+double IndicesCollector::VMeanMostUnstableCAPE(){  
   double result = 0;
-  result = S->th->meanmostUnstable->vto3cape;
-  
+  result = S->th->meanmostUnstable->vcape; 
   return result;
-  
 }
 
-double IndicesCollector::VMostUnstableCIN()
-{
-  
+double IndicesCollector::VLLMostUnstableCAPE(){  
   double result = 0;
-  result = S->th->meanmostUnstable->vcin;
-  
+  result = S->th->mostUnstable->vto3cape;  
+  return result;  
+}
+
+double IndicesCollector::VLLMeanMostUnstableCAPE(){  
+  double result = 0;
+  result = S->th->meanmostUnstable->vto3cape;  
+  return result;  
+}
+
+double IndicesCollector::VMostUnstableCIN(){
+  double result = 0;
+  result = S->th->mostUnstable->vcin;
   return result;
-  
 }   
 
-double IndicesCollector::VMostUnstableLCL()
-{
-  
+double IndicesCollector::VMeanMostUnstableCIN(){
+  double result = 0;
+  result = S->th->meanmostUnstable->vcin;
+  return result;
+}   
+
+double IndicesCollector::VMostUnstableLCL(){  
+  double result = 0;
+  int index = S->th->mostUnstable->vLclIndex;
+  result = Get(S->h,index)- S->th->h0;  
+  return result;
+}
+
+double IndicesCollector::VMeanMostUnstableLCL(){  
   double result = 0;
   int index = S->th->meanmostUnstable->vLclIndex;
-  
-  result = Get(S->h,index)- S->th->h0;
-  
+  result = Get(S->h,index)- S->th->h0;  
   return result;
-  
 }
 
-double IndicesCollector::VMostUnstableLFC()
-{
-  
+double IndicesCollector::VMostUnstableLFC(){
   double result = 0;
-  int index = S->th->meanmostUnstable->vLfcIndex;
-  
-  result = Get(S->h,index)- S->th->h0;
-  
+  int index = S->th->mostUnstable->vLfcIndex;  
+  result = Get(S->h,index)- S->th->h0;  
   return result;
-  
 }
 
-double IndicesCollector::VMostUnstableEL()
-{
+double IndicesCollector::VMeanMostUnstableLFC(){
+  double result = 0;
+  int index = S->th->meanmostUnstable->vLfcIndex;  
+  result = Get(S->h,index)- S->th->h0;  
+  return result;
+}
+
+double IndicesCollector::VMostUnstableEL(){
+  double result = 0;
+  int index = S->th->mostUnstable->vElIndex;
+  result = Get(S->h,index)- S->th->h0;
+  return result;
+} 
+
+double IndicesCollector::VMeanMostUnstableEL(){
   double result = 0;
   int index = S->th->meanmostUnstable->vElIndex;
   result = Get(S->h,index)- S->th->h0;
@@ -3334,121 +3391,105 @@ double IndicesCollector::VMostUnstableEL()
 } 
 
 double IndicesCollector::VMostUnstableLI(){
-  int lindex = cache->getPressureIndex(500);
-  
+  int lindex = cache->getPressureIndex(500);  
   double lit = Get(S->t,lindex);
-  
-  int vindex = lindex - S->th->meanmostUnstable->startIndex;
-  
+  int vindex = lindex - S->th->mostUnstable->startIndex;  
+  double plit = Get(S->th->mostUnstable->virtualValues,vindex);
+  double Showalter = lit - plit;
+  return Showalter;
+}
+
+double IndicesCollector::VMeanMostUnstableLI(){
+  int lindex = cache->getPressureIndex(500);  
+  double lit = Get(S->t,lindex);
+  int vindex = lindex - S->th->meanmostUnstable->startIndex;  
   double plit = Get(S->th->meanmostUnstable->virtualValues,vindex);
-  
   double Showalter = lit - plit;
   return Showalter;
 }
 
 double IndicesCollector::VMostUnstableVmax(){
   return sqrt(this->VMostUnstableCAPE()*2);
+}
 
+double IndicesCollector::VMeanMostUnstableVmax(){
+  return sqrt(this->VMeanMostUnstableCAPE()*2);
 }
 
 double IndicesCollector::MUELTemperature(){
+  return Get(S->t,S->th->mostUnstable->vElIndex);
+}
+
+double IndicesCollector::MUMLELTemperature(){
   return Get(S->t,S->th->meanmostUnstable->vElIndex);
 }
 
 double IndicesCollector::MULCLTemperature(){
+  return Get(S->t,S->th->mostUnstable->vLclIndex);
+}
+
+double IndicesCollector::MUMLLCLTemperature(){
   return Get(S->t,S->th->meanmostUnstable->vLclIndex);
 }
 
 double IndicesCollector::MULFCTemperature(){
+  return Get(S->t,S->th->mostUnstable->vLfcIndex);
+}
+
+double IndicesCollector::MUMLLFCTemperature(){
   return Get(S->t,S->th->meanmostUnstable->vLfcIndex);
 }
 
-double IndicesCollector::VSurfaceBasedCAPE()
-{
-  
+double IndicesCollector::VSurfaceBasedCAPE(){  
   double result = 0;
   result = S->th->surfaceBased->vcape;
-  
   return result;
-  
 }
 
-double IndicesCollector::VLLSurfaceBasedCAPE()
-{
-  
+double IndicesCollector::VLLSurfaceBasedCAPE(){
   double result = 0;
   result = S->th->surfaceBased->vto3cape;
-  
   return result;
-  
 }
 
-double IndicesCollector::VSurfaceBasedCIN()
-{
-  
+double IndicesCollector::VSurfaceBasedCIN(){  
   double result = 0;
   result = S->th->surfaceBased->vcin;
-  
-  return result;
-  
+  return result;  
 }   
 
-double IndicesCollector::VSurfaceBasedLCL()
-{
-  
+double IndicesCollector::VSurfaceBasedLCL(){  
   double result = 0;
-  int index = S->th->surfaceBased->vLclIndex;
-  
-  
-  result = Get(S->h,index)- S->th->h0;
-  
+  int index = S->th->surfaceBased->vLclIndex;  
+  result = Get(S->h,index)- S->th->h0;  
   return result;
-  
 }
 
-double IndicesCollector::VSurfaceBasedLFC()
-{
-  
+double IndicesCollector::VSurfaceBasedLFC(){  
   double result = 0;
-  int index = S->th->surfaceBased->vLfcIndex;
-  
-  
+  int index = S->th->surfaceBased->vLfcIndex;  
   result = Get(S->h,index)- S->th->h0;
-  
-  return result;
-  
+  return result;  
 }
 
-double IndicesCollector::VSurfaceBasedEL()
-{
-  
+double IndicesCollector::VSurfaceBasedEL(){  
   double result = 0;
-  int index = S->th->surfaceBased->vElIndex;
-  
-  
+  int index = S->th->surfaceBased->vElIndex;  
   result = Get(S->h,index)- S->th->h0;
-  
-  return result;
-  
+  return result;  
 } 
 
 double IndicesCollector::VSurfaceBasedLI(){
-  int lindex = cache->getPressureIndex(500);
-  
+  int lindex = cache->getPressureIndex(500);  
   double lit = Get(S->t,lindex);
-  
-  int vindex = lindex - S->th->surfaceBased->startIndex;
-  
-  
-  double plit = Get(S->th->surfaceBased->virtualValues,vindex);
-  
+  int vindex = lindex - S->th->surfaceBased->startIndex;  
+  double plit = Get(S->th->surfaceBased->virtualValues,vindex);  
   double Showalter = lit - plit;
   return Showalter;
 }
 
 double IndicesCollector::VSurfaceBasedVmax(){
   return sqrt(this->VSurfaceBasedCAPE()*2);
-  
 }
 
 double IndicesCollector::SBELTemperature(){
@@ -3463,85 +3504,50 @@ double IndicesCollector::SBLFCTemperature(){
   return Get(S->t,S->th->surfaceBased->vLfcIndex);
 }
 
-double IndicesCollector::VMeanLayerCAPE()
-{
-  
+double IndicesCollector::VMeanLayerCAPE(){
   double result = 0;
-  result = S->th->meanLayer->vcape;
-  
+  result = S->th->meanLayer->vcape;  
   return result;
-  
 }
 
-double IndicesCollector::VLLMeanLayerCAPE()
-{
-  
+double IndicesCollector::VLLMeanLayerCAPE(){  
   double result = 0;
-  result = S->th->meanLayer->vto3cape;
-  
-  return result;
-  
+  result = S->th->meanLayer->vto3cape;  
+  return result;  
 }
 
-double IndicesCollector::VMeanLayerCIN()
-{
-  
+double IndicesCollector::VMeanLayerCIN(){  
   double result = 0;
-  result = S->th->meanLayer->vcin;
-  
-  return result;
-  
+  result = S->th->meanLayer->vcin;  
+  return result;  
 }        
 
-double IndicesCollector::VMeanLayerLCL()
-{
-  
+double IndicesCollector::VMeanLayerLCL(){  
   double result = 0;
-  int index = S->th->meanLayer->vLclIndex;
-  
-  
-  result = Get(S->h,index)- S->th->h0;
-  
+  int index = S->th->meanLayer->vLclIndex;  
+  result = Get(S->h,index)- S->th->h0;  
   return result;
-  
 }
 
-double IndicesCollector::VMeanLayerLFC()
-{
-  
+double IndicesCollector::VMeanLayerLFC(){  
   double result = 0;
-  int index = S->th->meanLayer->vLfcIndex;
-  
-  
-  result = Get(S->h,index)- S->th->h0;
-  
+  int index = S->th->meanLayer->vLfcIndex;  
+  result = Get(S->h,index)- S->th->h0; 
   return result;
-  
 }
 
-double IndicesCollector::VMeanLayerEL()
-{
-  
+double IndicesCollector::VMeanLayerEL(){  
   double result = 0;
-  int index = S->th->meanLayer->vElIndex;
-  
-  
-  result = Get(S->h,index)- S->th->h0;
-  
-  return result;
-  
+  int index = S->th->meanLayer->vElIndex;  
+  result = Get(S->h,index)- S->th->h0;  
+  return result;  
 } 
 
 double IndicesCollector::VMeanLayerLI(){
-  int lindex = cache->getPressureIndex(500);
-  
-  double lit = Get(S->t,lindex);
-  
-  int vindex = lindex - S->th->meanLayer->startIndex;
-  
-  
-  double plit = Get(S->th->meanLayer->virtualValues,vindex);
-  
+  int lindex = cache->getPressureIndex(500);  
+  double lit = Get(S->t,lindex);  
+  int vindex = lindex - S->th->meanLayer->startIndex;  
+  double plit = Get(S->th->meanLayer->virtualValues,vindex);  
   double Showalter = lit - plit;
   return Showalter;
 }
@@ -3584,6 +3590,18 @@ double IndicesCollector::VMeanLayerLI_M10(){
 
 double IndicesCollector::VMostUnstableLI_M10(){
   int minten = S->th->mintenpos;
+  int mintencheck = S->th->mostUnstable->startIndex;
+  if(minten<mintencheck){
+    minten = mintencheck;
+  }
+  int vindex = minten - S->th->mostUnstable->startIndex;
+  double lit = Get(S->t,minten);
+  double plit = Get(S->th->mostUnstable->virtualValues,vindex);
+  return lit - plit;
+}
+
+double IndicesCollector::VMeanMostUnstableLI_M10(){
+  int minten = S->th->mintenpos;
   int mintencheck = S->th->meanmostUnstable->startIndex;
   if(minten<mintencheck){
     minten = mintencheck;
@@ -3594,11 +3612,8 @@ double IndicesCollector::VMostUnstableLI_M10(){
   return lit - plit;
 }
 
-
-
 double IndicesCollector::VMeanLayerVmax(){
-  return sqrt(this->VMeanLayerCAPE()*2);
-  
+  return sqrt(this->VMeanLayerCAPE()*2);  
 }
 
 double IndicesCollector::MLELTemperature(){
@@ -3626,51 +3641,42 @@ double IndicesCollector::LapseRate24(){
 }
 
 double IndicesCollector::lapserate03(){
-  
   int lower = 0;
-  int upper = cache->getHeightIndex(3000);
-  
+  int upper = cache->getHeightIndex(3000);  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
-  double tup = Get(S->t,upper);
-  
+  double tup = Get(S->t,upper);  
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
 double IndicesCollector::LR36(){
   int lower = cache->getHeightIndex(3000);
   int upper = cache->getHeightIndex(6000);
-  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
-  
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
 double IndicesCollector::LR16(){
   int lower = cache->getHeightIndex(1000);
-  int upper = cache->getHeightIndex(6000);
-  
+  int upper = cache->getHeightIndex(6000);  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
-  
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
 double IndicesCollector::LR26(){
   int lower = cache->getHeightIndex(2000);
-  int upper = cache->getHeightIndex(6000);
-  
+  int upper = cache->getHeightIndex(6000);  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
-  
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
@@ -3682,7 +3688,6 @@ double IndicesCollector::max_LR26_2km(){
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
   double LR12 = 1000*((tup-tlow)/(hup-hlow)); 
-  
   int lower2 = cache->getHeightIndex(3000);
   int upper2 = cache->getHeightIndex(5000);
   double hlow2 = Get(S->h,lower2);
@@ -3690,7 +3695,6 @@ double IndicesCollector::max_LR26_2km(){
   double tlow2 = Get(S->t,lower2);
   double tup2 = Get(S->t,upper2);
   double LR23 = 1000*((tup2-tlow2)/(hup2-hlow2)); 
-  
   int lower3 = cache->getHeightIndex(4000);
   int upper3 = cache->getHeightIndex(6000);
   double hlow3 = Get(S->h,lower3);
@@ -3698,94 +3702,77 @@ double IndicesCollector::max_LR26_2km(){
   double tlow3 = Get(S->t,lower3);
   double tup3 = Get(S->t,upper3);
   double LR34 = 1000*((tup3-tlow3)/(hup3-hlow3)); 
-  
   return min(min(LR12,LR23),LR34);
 }
 
 double IndicesCollector::LR0500(){
   int lower = 0;
   int upper = cache->getHeightIndex(500);
-  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
-  
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
 double IndicesCollector::LR02(){
   int lower = 0;
   int upper = cache->getHeightIndex(2000);
-  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
-  
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
 double IndicesCollector::LR04(){
   int lower = 0;
   int upper = cache->getHeightIndex(4000);
-  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
-  
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
 double IndicesCollector::LR06(){
   int lower = 0;
   int upper = cache->getHeightIndex(6000);
-  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
-  
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
 double IndicesCollector::lapseRate500700(){
   int lower = cache->getPressureIndex(700);
   int upper = cache->getPressureIndex(500);
-  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
-  
   return 1000*((tup-tlow)/(hup-hlow));
-  
 }
 
 double IndicesCollector::lapseRate500800(){
   int lower = cache->getPressureIndex(800);
   int upper = cache->getPressureIndex(500);
-  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
-  
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
 double IndicesCollector::lapseRate600800(){
   int lower = cache->getPressureIndex(800);
   int upper = cache->getPressureIndex(600);
-  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->t,lower);
   double tup = Get(S->t,upper);
-  
   return 1000*((tup-tlow)/(hup-hlow));
-  
 }
 
 double IndicesCollector::ZeroHeight(){
@@ -3803,6 +3790,13 @@ double IndicesCollector::WetBulbZeroHeight(){
 }
 
 double IndicesCollector::MUHeight(){
+  int zeroIndex = S->th->mostUnstable->startIndex;
+  double h0 = Get(S->h,0);
+  double hz = Get(S->h,zeroIndex);
+  return hz-h0;
+}
+
+double IndicesCollector::MUMLHeight(){
   int zeroIndex = S->th->meanmostUnstable->startIndex;
   double h0 = Get(S->h,0);
   double hz = Get(S->h,zeroIndex);
@@ -3861,8 +3855,11 @@ double IndicesCollector::MLMixingRatio(){
 }
 
 double IndicesCollector::MUMRatio(){
+  return Get(S->th->mixing,S->th->mostUnstable->startIndex);
+}
+
+double IndicesCollector::MUMLMRatio(){
   return S->th->mmrMAX;
-  //return Get(S->th->mixing,S->th->mostUnstable->startIndex);
 }
 
 double IndicesCollector::SBMRatio(){
@@ -3871,133 +3868,109 @@ double IndicesCollector::SBMRatio(){
 
 double IndicesCollector::BS500(){
   int tail=0;
-  int head = cache->getHeightIndex(500);
-  
+  int head = cache->getHeightIndex(500);  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS01(){
   int tail=0;
   int head = cache->getHeightIndex(1000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS02(){
   int tail=0;
   int head = cache->getHeightIndex(2000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS03(){
   int tail=0;
   int head = cache->getHeightIndex(3000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS36(){
   int tail=cache->getHeightIndex(3000);
   int head = cache->getHeightIndex(6000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS06(){
   int tail=0;
   int head = cache->getHeightIndex(6000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS08(){
   int tail=0;
   int head = cache->getHeightIndex(8000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS18(){
   int tail=cache->getHeightIndex(1000);
   int head = cache->getHeightIndex(8000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS14(){
   int tail=cache->getHeightIndex(1000);
   int head = cache->getHeightIndex(4000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS25(){
   int tail=cache->getHeightIndex(2000);
   int head = cache->getHeightIndex(5000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS13(){
   int tail=cache->getHeightIndex(1000);
   int head = cache->getHeightIndex(3000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
 double IndicesCollector::BS16(){
   int tail=cache->getHeightIndex(1000);
   int head = cache->getHeightIndex(6000);
-  
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  
   return result.abs();
 }
 
@@ -4098,7 +4071,6 @@ double IndicesCollector::SRH01SM_eff(){
 }
 
 double IndicesCollector::Peters_SR_inflow(){
-  
   double SRH_mean = S->ks->srh03sm;
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
@@ -4116,12 +4088,10 @@ double IndicesCollector::Peters_SR_inflow(){
 }
 
 double IndicesCollector::Peters_SR_inflow_eff(){
-  
   double SRH_mean = S->ks->srh03sm_eff;
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
   double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
-
   Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
   Vector dev = Vector(0, 0, 0);
@@ -4130,18 +4100,15 @@ double IndicesCollector::Peters_SR_inflow_eff(){
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind - dev;
-
   Vector res = S->ks->mean01eff - Peters_SM;
   return res.abs();
 }
 
 double IndicesCollector::Peters_vector_A(){
-  
   double SRH_mean = S->ks->srh03sm;
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
   double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
-
   Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
   Vector dev = Vector(0, 0, 0);
@@ -4150,7 +4117,6 @@ double IndicesCollector::Peters_vector_A(){
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind - dev;
-    
   double *tab = Peters_SM.toAV(); 
   double angle = tab[0];
   delete[] tab;
@@ -4158,12 +4124,10 @@ double IndicesCollector::Peters_vector_A(){
 }
 
 double IndicesCollector::Peters_vector_M(){
-  
   double SRH_mean = S->ks->srh03sm;
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
   double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
-
   Vector meanwind = S->ks->mean06;
   Vector tv = Vector(0, 0, 1);
   Vector dev = Vector(0, 0, 0);
@@ -4172,13 +4136,50 @@ double IndicesCollector::Peters_vector_M(){
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind - dev;
-    
   double *tab = Peters_SM.toAV(); 
   double magnitude = tab[1];
   delete[] tab;
   return magnitude;
 }
-     
+
+double IndicesCollector::Peters_vector_eff_A(){
+  double SRH_mean = S->ks->srh03sm_eff;
+  double sign_SRH = SRH_mean/abs(SRH_mean);
+  double fact = 1;
+  double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
+  Vector meanwind = S->ks->mean06;
+  Vector tv = Vector(0, 0, 1);
+  Vector dev = Vector(0, 0, 0);
+  Vector tshear = S->ks->mean6 - S->ks->mean0;
+  dev = Vector::vec(tshear,tv);
+  dev *= 7.5*propfac;
+  dev *= 1.0 / tshear.abs();
+  Vector Peters_SM = meanwind - dev;
+  double *tab = Peters_SM.toAV(); 
+  double angle = tab[0];
+  delete[] tab;
+  return angle;
+}
+
+double IndicesCollector::Peters_vector_eff_M(){
+  double SRH_mean = S->ks->srh03sm_eff;
+  double sign_SRH = SRH_mean/abs(SRH_mean);
+  double fact = 1;
+  double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
+  Vector meanwind = S->ks->mean06;
+  Vector tv = Vector(0, 0, 1);
+  Vector dev = Vector(0, 0, 0);
+  Vector tshear = S->ks->mean6 - S->ks->mean0;
+  dev = Vector::vec(tshear,tv);
+  dev *= 7.5*propfac;
+  dev *= 1.0 / tshear.abs();
+  Vector Peters_SM = meanwind - dev;
+  double *tab = Peters_SM.toAV(); 
+  double magnitude = tab[1];
+  delete[] tab;
+  return magnitude;
+}
+
 double IndicesCollector::SRH03LM_eff(){
   return S->ks->srh03lm_eff;
 }
@@ -4192,16 +4193,13 @@ double IndicesCollector::SRH03SM_eff(){
 }
 
 double IndicesCollector::emubs(){
-  Vector gVector = Get(S->ks->vw,S->th->meanmostUnstable->startIndex);
-  int index=S->th->meanmostUnstable->startIndex+((S->th->meanmostUnstable->vElIndex-S->th->meanmostUnstable->startIndex)/2);
-  double h0 = Get(S->h,S->th->meanmostUnstable->startIndex);
-  double hn = Get(S->h,S->th->meanmostUnstable->vElIndex);
-  
+  Vector gVector = Get(S->ks->vw,S->th->mostUnstable->startIndex);
+  int index=S->th->mostUnstable->startIndex+((S->th->mostUnstable->vElIndex-S->th->mostUnstable->startIndex)/2);
+  double h0 = Get(S->h,S->th->mostUnstable->startIndex);
+  double hn = Get(S->h,S->th->mostUnstable->vElIndex);  
   double middle = h0+((hn-h0)/2.0);
   double hindex = Get(S->h,index);
-  
-  int destindex =-1;
-  
+  int destindex =-1;  
   if(middle ==hindex )destindex = index;
   else if (middle > hindex){
     for(size_t i = index;i<S->h->size()-1;i++){
@@ -4211,7 +4209,6 @@ double IndicesCollector::emubs(){
         if(abs(middle-lower)>abs(upper-middle)){
           destindex = i+1;
         }else destindex=i;
-        
         break;
       }
     }
@@ -4222,18 +4219,53 @@ double IndicesCollector::emubs(){
       if(middle>=lower && middle<=upper){
         if(abs(middle-lower)>abs(upper-middle)){
           destindex = i+1;
-        }else destindex=i;
-        
+        }else destindex=i;        
         break;
       }
     }
   }
-  
-  
   Vector middleVector =  Get(S->ks->vw,destindex);
-  
   double effSHR = (middleVector - gVector).abs();
   double mucape = this->VMostUnstableCAPE();
+  if(mucape==0)effSHR=0;  
+  return effSHR;
+}
+
+double IndicesCollector::emumlbs(){
+  Vector gVector = Get(S->ks->vw,S->th->meanmostUnstable->startIndex);
+  int index=S->th->meanmostUnstable->startIndex+((S->th->meanmostUnstable->vElIndex-S->th->meanmostUnstable->startIndex)/2);
+  double h0 = Get(S->h,S->th->meanmostUnstable->startIndex);
+  double hn = Get(S->h,S->th->meanmostUnstable->vElIndex);  
+  double middle = h0+((hn-h0)/2.0);
+  double hindex = Get(S->h,index);
+  int destindex =-1;  
+  if(middle ==hindex )destindex = index;
+  else if (middle > hindex){
+    for(size_t i = index;i<S->h->size()-1;i++){
+      double upper = Get(S->h,i+1);
+      double lower = Get(S->h, i);
+      if(middle>=lower && middle<=upper){
+        if(abs(middle-lower)>abs(upper-middle)){
+          destindex = i+1;
+        }else destindex=i;
+        break;
+      }
+    }
+  }else{
+    for(int i = index;i>1;i--){
+      double upper = Get(S->h,i);
+      double lower = Get(S->h, i-1);
+      if(middle>=lower && middle<=upper){
+        if(abs(middle-lower)>abs(upper-middle)){
+          destindex = i+1;
+        }else destindex=i;        
+        break;
+      }
+    }
+  }
+  Vector middleVector =  Get(S->ks->vw,destindex);
+  double effSHR = (middleVector - gVector).abs();
+  double mucape = this->VMeanMostUnstableCAPE();
   if(mucape==0)effSHR=0;  
   return effSHR;
 }
@@ -4243,12 +4275,9 @@ double IndicesCollector::esbbs(){
   int index=S->th->surfaceBased->startIndex+((S->th->surfaceBased->vElIndex-S->th->surfaceBased->startIndex)/2);
   double h0 = Get(S->h,S->th->surfaceBased->startIndex);
   double hn = Get(S->h,S->th->surfaceBased->vElIndex);
-  
   double middle = h0+((hn-h0)/2.0);
-  double hindex = Get(S->h,index);
-  
+  double hindex = Get(S->h,index);  
   int destindex =-1;
-  
   if(middle ==hindex )destindex = index;
   else if (middle > hindex){
     for(size_t i = index;i<S->h->size()-1;i++){
@@ -4257,8 +4286,7 @@ double IndicesCollector::esbbs(){
       if(middle>=lower && middle<=upper){
         if(abs(middle-lower)>abs(upper-middle)){
           destindex = i+1;
-        }else destindex=i;
-        
+        }else destindex=i;        
         break;
       }
     }
@@ -4270,15 +4298,11 @@ double IndicesCollector::esbbs(){
         if(abs(middle-lower)>abs(upper-middle)){
           destindex = i+1;
         }else destindex=i;
-        
         break;
       }
     }
-  }
-  
-  
+  }  
   Vector middleVector =  Get(S->ks->vw,destindex);
-  
   double effSHR = (middleVector - gVector).abs();
   double mucape = this->VSurfaceBasedCAPE();
   if(mucape==0)effSHR=0;  
@@ -4289,13 +4313,10 @@ double IndicesCollector::emlbs(){
   Vector gVector = Get(S->ks->vw,S->th->meanLayer->startIndex);
   int index=S->th->meanLayer->startIndex+((S->th->meanLayer->vElIndex-S->th->meanLayer->startIndex)/2);
   double h0 = Get(S->h,S->th->meanLayer->startIndex);
-  double hn = Get(S->h,S->th->meanLayer->vElIndex);
-  
+  double hn = Get(S->h,S->th->meanLayer->vElIndex);  
   double middle = h0+((hn-h0)/2.0);
   double hindex = Get(S->h,index);
-  
-  int destindex =-1;
-  
+  int destindex =-1;  
   if(middle ==hindex )destindex = index;
   else if (middle > hindex){
     for(size_t i = index;i<S->h->size()-1;i++){
@@ -4305,7 +4326,6 @@ double IndicesCollector::emlbs(){
         if(abs(middle-lower)>abs(upper-middle)){
           destindex = i+1;
         }else destindex=i;
-        
         break;
       }
     }
@@ -4316,16 +4336,12 @@ double IndicesCollector::emlbs(){
       if(middle>=lower && middle<=upper){
         if(abs(middle-lower)>abs(upper-middle)){
           destindex = i+1;
-        }else destindex=i;
-        
+        }else destindex=i;        
         break;
       }
     }
   }
-  
-  
-  Vector middleVector =  Get(S->ks->vw,destindex);
-  
+  Vector middleVector =  Get(S->ks->vw,destindex);  
   double effSHR = (middleVector - gVector).abs();
   double mucape = this->VMeanLayerCAPE();
   if(mucape==0)effSHR=0;  
@@ -4333,6 +4349,10 @@ double IndicesCollector::emlbs(){
 }
 
 double IndicesCollector::MUmiddlecape(){
+  return S->th->mostUnstable->middlecape;
+}
+
+double IndicesCollector::MUMLmiddlecape(){
   return S->th->meanmostUnstable->middlecape;
 }
 
@@ -4350,19 +4370,15 @@ double IndicesCollector::STP(){
   double srh1 = this->SRH01RM()/150;
   double bwd = this->BS06();
   double cin = this->VSurfaceBasedCIN();	
-  
   if(sblcl<1000)sblcl=1;
   else if(sblcl>2000)sblcl=0;
-  else sblcl=(2000-sblcl)/1000;
-  
+  else sblcl=(2000-sblcl)/1000;  
   if(cin>-50)cin=1;
   else if(cin<-200)cin=0;
   else cin=(200+cin)/150;
-  
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
-  else bwd/=20;
-  
+  else bwd/=20;  
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -4372,19 +4388,15 @@ double IndicesCollector::STPeff(){
   double srh1 = this->SRH500RM()/75;
   double bwd = this->emlbs();
   double cin = this->VMeanLayerCIN();	
-  
   if(sblcl<1000)sblcl=1;
   else if(sblcl>2000)sblcl=0;
-  else sblcl=(2000-sblcl)/1000;
-  
+  else sblcl=(2000-sblcl)/1000;  
   if(cin>-50)cin=1;
   else if(cin<-200)cin=0;
   else cin=(200+cin)/150;
-  
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
-  else bwd/=20;
-  
+  else bwd/=20;  
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -4394,19 +4406,15 @@ double IndicesCollector::STP_LM(){
   double srh1 = this->SRH01LM()/150;
   double bwd = this->BS06();
   double cin = this->VSurfaceBasedCIN();	
-  
   if(sblcl<1000)sblcl=1;
   else if(sblcl>2000)sblcl=0;
-  else sblcl=(2000-sblcl)/1000;
-  
+  else sblcl=(2000-sblcl)/1000;  
   if(cin>-50)cin=1;
   else if(cin<-200)cin=0;
   else cin=(200+cin)/150;
-  
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
-  else bwd/=20;
-  
+  else bwd/=20;  
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -4416,19 +4424,15 @@ double IndicesCollector::STPeff_LM(){
   double srh1 = this->SRH500LM()/75;
   double bwd = this->emlbs();
   double cin = this->VMeanLayerCIN();	
-  
   if(sblcl<1000)sblcl=1;
   else if(sblcl>2000)sblcl=0;
-  else sblcl=(2000-sblcl)/1000;
-  
+  else sblcl=(2000-sblcl)/1000;  
   if(cin>-50)cin=1;
   else if(cin<-200)cin=0;
   else cin=(200+cin)/150;
-  
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
-  else bwd/=20;
-  
+  else bwd/=20;  
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -4449,14 +4453,14 @@ double IndicesCollector::SHERBE(){
 double IndicesCollector::SHERBS3_v2(){
   double T1 = this->BS03()/26;
   double T2 = this->lapserate03()/-(5.2);
-  double T3 = this->max_LR26_2km()/-(5.6);
+  double T3 = this->LR26()/-(5.6);
   return T1*T2*T3;
 }
 
 double IndicesCollector::SHERBE_v2(){
   double T1 = this->emubs()/27;
   double T2 = this->lapserate03()/-(5.2);
-  double T3 = this->max_LR26_2km()/-(5.6);
+  double T3 = this->LR26()/-(5.6);
   return T1*T2*T3;
 }
 
@@ -4494,7 +4498,6 @@ double IndicesCollector::SCP(){
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
-  
   return mucape*srh*ewd;
 }
 
@@ -4503,14 +4506,11 @@ double IndicesCollector::SCPeff(){
   double srh = this->SRH03RM()/50;
   double ewd = this->emubs();
   double cin = this->VMostUnstableCIN();
-  
   if(cin>-40)cin=1;
   else cin=(-40)/cin;
-  
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
-  
   return mucape*srh*ewd*cin;
 }
 
@@ -4521,7 +4521,6 @@ double IndicesCollector::SCP_LM(){
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
-  
   return mucape*srh*ewd;
 }
 
@@ -4530,14 +4529,11 @@ double IndicesCollector::SCPeff_LM(){
   double srh = this->SRH03LM()/50;
   double ewd = this->emubs();
   double cin = this->VMostUnstableCIN();
-  
   if(cin>-40)cin=1;
   else cin=(-40)/cin;
-  
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
-  
   return mucape*srh*ewd*cin;
 }
 
@@ -4547,13 +4543,10 @@ double IndicesCollector::SHP(){
   double lr = -(this->lapseRate500700());
   double t500 = Get(S->t,cache->getPressureIndex(500));
   double dls = this->BS06();
-  
   if(dls<7)dls=7;
   else if(dls>27)dls=27;
-  
   if(mumr<11)mumr =11;
   else if(mumr>13.6)mumr = 13.6;
-  
   if(t500>-5.5)t500 = -5.5;
   double ship = (mucape*mumr*lr*(-t500)*dls)/42000000;
   if(mucape<1300)ship*=(mucape/1300);
@@ -4563,7 +4556,6 @@ double IndicesCollector::SHP(){
 }
 
 double IndicesCollector::DCP(){
-  
   double dcape = this->VDCAPE()/980;
   double mucape = this->VMostUnstableCAPE()/2000;
   double shear = this->BS06()/(20*0.514444444 );
@@ -4575,12 +4567,23 @@ double IndicesCollector::MU_WMAXSHEAR(){
   return this->VMostUnstableVmax()*this->BS06();
 }
 
+double IndicesCollector::MUML_WMAXSHEAR(){
+  return this->VMeanMostUnstableVmax()*this->BS06();
+}
+
 double IndicesCollector::SB_WMAXSHEAR(){
   return this->VSurfaceBasedVmax()*this->BS06();
 }
 
 double IndicesCollector::ML_WMAXSHEAR(){
   return this->VMeanLayerVmax()*this->BS06();
+}
+
+double IndicesCollector::MUML_EFF_WMAXSHEAR(){
+  double* CAPE_WXS = this->MU_ML_ECAPE(); 
+  double CAPE = CAPE_WXS[5];
+  delete[] CAPE_WXS;
+  return CAPE*this->emumlbs();
 }
 
 double IndicesCollector::MU_EFF_WMAXSHEAR(){
