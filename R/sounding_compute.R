@@ -273,6 +273,14 @@
 #'  \item MU500_ECAPE_HGL
 #'  \item MU500_ECAPE_M10
 #'  \item HSIv2
+#'  \item SR_moisture_flux
+#'  \item SR_moisture_flux_eff
+#'  \item MU_cold_cloud
+#'  \item MU_warm_cloud
+#'  \item MU_equal_layer
+#'  \item MU_ML_cold_cloud
+#'  \item MU_ML_warm_cloud
+#'  \item MU_ML_equal_layer
 
 #' }
 #'
@@ -579,7 +587,15 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
     "MU500_ECAPE", 
     "MU500_ECAPE_HGL", 
     "MU500_ECAPE_M10", 
-    "HSIv2")
+    "HSIv2",
+    "SR_moisture_flux",
+    "SR_moisture_flux_eff",
+    "MU_cold_cloud",
+    "MU_warm_cloud",
+    "MU_equal_layer",
+    "MU_ML_cold_cloud",
+    "MU_ML_warm_cloud",
+    "MU_ML_equal_layer")
 
   return(tmp)
 }
