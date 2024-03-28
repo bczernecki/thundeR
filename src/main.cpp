@@ -1008,8 +1008,9 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     }
   }
   
-  if ((size_t)i < vw->size()-1&&h-h0<=6000)
-  {
+ // if ((size_t)i < vw->size()-1 && h-h0<=6000){
+    if((fmod(abs(h-h0),100.0)==0.0) || (h==h0) && h-h0<=6000){  
+      
     std::list<Vector>::iterator it = vw->begin();
     std::advance(it, i);
     
@@ -1057,20 +1058,6 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     srh13lm += tmps2;
     srh13sm += tmps3;
     
-    //    if (tmps1>0)
-    //      srh13rmf += tmps1;
-    //    else srh13lmf -= tmps1;
-    //    if (tmps2>0) 
-    //      srh13lmf += tmps2;
-    //    else srh13rmf -= tmps2;
-    //	  
-    //    if (OMEGA_rm>0)
-    //      sw13rmf += OMEGA_rm;
-    //    else sw13lmf -= OMEGA_rm;
-    //    if (OMEGA_lm>0) 
-    //      sw13lmf += OMEGA_lm;
-    //    else sw13rmf -= OMEGA_lm;
-
     if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
     
     double h_MU = this->mumlheight;
@@ -1113,7 +1100,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
       }
     }
     
-    if(h-h0 >= 3000){
+    if(h-h0 >= 3000 && h-h0 <= 6000){
       srh36rm = srh13rm;
       srh36lm = srh13lm;
       srh36sm = srh13sm;
@@ -2448,6 +2435,21 @@ public:
   double MULCLTemperature();
   double MULFCTemperature();
   double MUMRatio();			
+
+  double VMeanMostUnstableCAPE();
+  double VLLMeanMostUnstableCAPE();
+  double MUMLmiddlecape();
+  double VMeanMostUnstableCIN();		
+  double VMeanMostUnstableLCL();
+  double VMeanMostUnstableLFC();
+  double VMeanMostUnstableEL();
+  double VMeanMostUnstableLI();
+  double VMeanMostUnstableVmax();
+  double MUMLELTemperature();
+  double MUMLLCLTemperature();
+  double MUMLLFCTemperature();
+  double MUMLMRatio();			
+
   double VSurfaceBasedCAPE();
   double VLLSurfaceBasedCAPE();
   double SBmiddlecape();
@@ -2461,6 +2463,7 @@ public:
   double SBLCLTemperature();
   double SBLFCTemperature();	
   double SBMRatio();
+
   double VMeanLayerCAPE();
   double VLLMeanLayerCAPE();
   double MLmiddlecape();
@@ -2474,15 +2477,28 @@ public:
   double MLLCLTemperature();
   double MLLFCTemperature();	
   double MLMixingRatio();
+
   double LapseRate01();
   double lapserate03();
   double LapseRate24();	
   double LR36();
   double lapseRate500700();
   double lapseRate500800();	
+  double lapseRate600800();
+  double LR0500();
+  double LR02();
+  double LR04();
+  double LR06();  
+  double LR16();
+  double LR26();
+  double max_LR26_2km();
+
   double ZeroHeight();
   double WetBulbZeroHeight();		
+
   double MUHeight();
+  double MUMLHeight();
+
   double MinTHTEHeight();
   double DeltaThetaE();
   double DeltaThetaE_min04km();
@@ -2493,10 +2509,14 @@ public:
   double WindIndex();
   double PWATER();
   double MoistureFlux();
+
   double RH01();
   double RH02();
   double RH25();
+  double RH14();
+  double RH36();
   double RHMIDDLE();		
+
   double BS500();
   double BS01();
   double BS02();
@@ -2505,24 +2525,39 @@ public:
   double BS08();
   double BS36();
   double BS18();
+  double BS16();
+  double BS13();
+  double BS14();
+  double BS25();
+
   double emubs();
+  double emumlbs();
   double esbbs();
   double emlbs();
+
   double BulkShearSfcTen();
-  double BulkShearMULFCTen();
-  double BulkShearSBLFCTen();
-  double BulkShearMLLFCTen();
+  double BulkShear1kmTen();
+  double BulkShear2kmTen();
+
+  double BulkShearMUMLLCLTen();
+  double BulkShearMULCLTen();
+  double BulkShearSBLCLTen();
+  double BulkShearMLLCLTen();
+
   double MeanWind500();
   double MeanWind01();
   double MeanWind02();
   double MeanWind06();
   double MeanWind13();
+  double MeanWind03();
+
   double SRH100RM();
   double SRH250RM();
   double SRH500RM();
   double SRH01RM();
   double SRH03RM();
   double SRH36RM();
+
   double SRH100LM();
   double SRH250LM();
   double SRH500LM();
@@ -2546,6 +2581,7 @@ public:
   double Bunkers_LM_M();
   double Bunkers_MW_A();
   double Bunkers_MW_M();
+
   double K_Index();
   double Showalter_Index();	
   double TotalTotals();		
@@ -2567,47 +2603,22 @@ public:
   double TIP();	 
   double SHP();
   double DCP();
+
   double MU_WMAXSHEAR();
+  double MUML_WMAXSHEAR();
   double SB_WMAXSHEAR();
   double ML_WMAXSHEAR();
-  double MU_EFF_WMAXSHEAR();
-  double SB_EFF_WMAXSHEAR();
-  double ML_EFF_WMAXSHEAR();
-  
-  double RH14();
-  double RH36();
-  double BulkShearSfc20();
-  double BulkShearSfczero();
-  double BulkShear1kmzero();
-  double BulkShear1km20();
-  double BulkShear1kmTen();
-  double BS16();
-  double BulkShearMULFCzero();
-  double BulkShearMULFC20();
-  double BulkShearSBLFCzero();
-  double BulkShearSBLFC20();
-  double BulkShearMLLFCzero();
-  double BulkShearMLLFC20();
-  
-  double BulkShear2kmzero();
-  double BulkShear2km20();
-  double BulkShear2kmTen();
-  double BS13();
-  double BS14();
-  double BS25();
-  double lapseRate600800();
-  
-  double LR0500();
-  double LR02();
-  double LR04();
-  double LR06();
-  
-  double LR16();
-  double LR26();
-  double max_LR26_2km();
-  
-  double MeanWind03();
-  
+
+  double MU_EFF_EWMAXSHEAR();
+  double MUML_EFF_EWMAXSHEAR();
+  double SB_EFF_EWMAXSHEAR();
+  double ML_EFF_EWMAXSHEAR();
+
+  double MU_EFF_EWMAXSHEAR_HGL();
+  double MUML_EFF_EWMAXSHEAR_HGL();
+  double SB_EFF_EWMAXSHEAR_HGL();
+  double ML_EFF_EWMAXSHEAR_HGL();
+    
   double Corfidi_downwind_A();
   double Corfidi_downwind_M();
   double Corfidi_upwind_A();
@@ -2616,11 +2627,13 @@ public:
   double ML_coldcape();
   double SB_coldcape();
   double MU_coldcape();
+  double MUML_coldcape();
   double MU500_coldcape();
   
   double ML_coldcapeTV();
   double SB_coldcapeTV();
   double MU_coldcapeTV();
+  double MUML_coldcapeTV();
   double MU500_coldcapeTV();
   double HSI();
   double HSIv2();
@@ -2635,10 +2648,6 @@ public:
   double MU500_CAPE();
   double MU500_CIN();
   double MU500_LI();
-  
-  double N02MUCAPE();
-  double N02SBCAPE();
-  double N02MLCAPE();
   
   double EHI03();
   double EHI01();
@@ -2694,22 +2703,37 @@ public:
   double Peters_vector_A();
   double Peters_vector_M();
 
+  double Peters_vector_eff_A();
+  double Peters_vector_eff_M();
+
   double VSurfaceBasedLI_M10();
   double VMeanLayerLI_M10();
   double VMostUnstableLI_M10();
+  double VMeanMostUnstableLI_M10();
   double VMostU500LI_M10();	
 
   double MU_buoyancy();
+  double MUML_buoyancy();
   double MU500_buoyancy();
   double ML_buoyancy();
   double SB_buoyancy();
+
   double MU_buoyancy_M10();
+  double MUML_buoyancy_M10();
   double MU500_buoyancy_M10();
   double ML_buoyancy_M10();
   double SB_buoyancy_M10();
 
   double SR_moisture_flux();
   double SR_moisture_flux_eff();
+
+  double SB_warm_cloud();
+  double SB_cold_cloud();
+  double SB_equal_layer();
+
+  double ML_warm_cloud();
+  double ML_cold_cloud();
+  double ML_equal_layer();
 
   double MU_warm_cloud();
   double MU_cold_cloud();
@@ -5275,9 +5299,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[103]=(*S)->getIndicesCollectorPointer()->BulkShearSfcTen();	
   vec[104]=(*S)->getIndicesCollectorPointer()->BulkShear1kmTen();
   vec[105]=(*S)->getIndicesCollectorPointer()->BulkShear2kmTen();
-  vec[106]=(*S)->getIndicesCollectorPointer()->BulkShearMULFCTen();
-  vec[107]=(*S)->getIndicesCollectorPointer()->BulkShearSBLFCTen();
-  vec[108]=(*S)->getIndicesCollectorPointer()->BulkShearMLLFCTen();
+  vec[106]=(*S)->getIndicesCollectorPointer()->BulkShearMULCLTen();
+  vec[107]=(*S)->getIndicesCollectorPointer()->BulkShearSBLCLTen();
+  vec[108]=(*S)->getIndicesCollectorPointer()->BulkShearMLLCLTen();
   vec[109]=(*S)->getIndicesCollectorPointer()->MSR_MW();
   vec[110]=(*S)->getIndicesCollectorPointer()->MSR_RM();
   vec[111]=(*S)->getIndicesCollectorPointer()->MSR_LM();
