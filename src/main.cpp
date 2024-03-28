@@ -6212,11 +6212,11 @@ double * sounding_default2(double* pressure,
      vlen = sret->v->size();
      tvlen = sret->th->virt->size();
      
-     mulen = sret->th->meanmostUnstable->getVirtualValues()->size();
+     mulen = sret->th->mostUnstable->getVirtualValues()->size();
      sblen = sret->th->surfaceBased->getVirtualValues()->size();
      mllen = sret->th->meanLayer->getVirtualValues()->size();
      dnlen = sret->th->downdraft->getVirtualValues()->size();
-     mustart= sret->th->meanmostUnstable->startIndex;
+     mustart= sret->th->mostUnstable->startIndex;
      mlstart= sret->th->meanLayer->startIndex;
      maxl+=2+mulen+1+sblen+2+mllen+plen+1+hlen+1+tlen+1+dlen+1+alen+1+vlen+1+tvlen+1+dnlen+10;
    }
@@ -6232,7 +6232,7 @@ double * sounding_default2(double* pressure,
      out[i] = mulen;i++;
      out[i] = mustart;i++;
      
-     for (std::list<double>::iterator it = sret->th->meanmostUnstable->getVirtualValues()->begin(); it != sret->th->meanmostUnstable->getVirtualValues()->end(); ++it){
+     for (std::list<double>::iterator it = sret->th->mostUnstable->getVirtualValues()->begin(); it != sret->th->mostUnstable->getVirtualValues()->end(); ++it){
        double temp = 0;
        temp= *it;
        out[i]=temp;
