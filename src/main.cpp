@@ -1008,8 +1008,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     }
   }
   
- // if ((size_t)i < vw->size()-1 && h-h0<=6000){
-    if((fmod(abs(h-h0),100.0)==0.0) || (h==h0) && h-h0<=6000){  
+ if ((size_t)i < vw->size()-1 && h-h0<=6000){
       
     std::list<Vector>::iterator it = vw->begin();
     std::advance(it, i);
@@ -1058,7 +1057,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     srh13lm += tmps2;
     srh13sm += tmps3;
     
-    if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
+    // if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
     
     double h_MU = this->mumlheight;
     Vector v_ = Get(this->vw, i);
@@ -1076,7 +1075,7 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
       srh03lm_eff = srh13lm;
       srh03sm_eff = srh13sm;
     }
-    }
+    // }
     
     if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
       if(h-h0<=500){
@@ -1115,15 +1114,13 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
       shear3000m = shear_l;
     }
     
-    if (h-h0<=1000)
-    {
+    if (h-h0<=1000){
       srh01rm = srh13rm;
       srh01lm = srh13lm;
       srh01sm = srh13sm;
       sw01rm = sw13rm;
       sw01lm = sw13lm;
       shear1000m = shear_l;
-      
     }	  
     
     if(h-h0<=500){
