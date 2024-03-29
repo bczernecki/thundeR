@@ -205,7 +205,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   
   if(ECAPE == TRUE){
   rect(12.25, 40.75, 26.1, 29.5, col = rgb(255, 255, 255, maxColorValue = 255, alpha = 200), lwd = 0.2)
-  text(13, 40.15, substitute(paste(bold('Entraining CAPE:'))), col = "black", cex = 0.55, adj = c(0, 1))
+  text(13, 40.15, substitute(paste(bold('Entraining CAPE'))), col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 39, "SB ECAPE:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 38, "Radius:", col = "black", cex = 0.55, adj = c(0, 1))
   text(13, 37, "Etilde:", col = "black", cex = 0.55, adj = c(0, 1))
