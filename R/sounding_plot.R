@@ -638,35 +638,35 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     text(0.55, 25.55, "[m2/s2]", cex = FONTSIZE - 0.075, adj = c(1, 0))
     
     text(0.345, 22.55, "Sfc - 100 m:", cex = FONTSIZE, adj = c(1, 0))
-    text(0.36, 22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
-    text(0.4725, 22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_LM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.36, 22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_0100m_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.4725, 22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_0100m_LM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
     #
     text(0.345, 19.15, "Sfc - 500 m:", cex = FONTSIZE, adj = c(1, 0))
-    text(0.36, 19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
-    text(0.4725, 19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_LM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.36, 19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_0500m_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.4725, 19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_0500m_LM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
     
     text(0.345, 15.75, "Sfc - 1 km:", cex = FONTSIZE, adj = c(1, 0))
-    text(0.36, 15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
-    text(0.4725, 15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_LM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.36, 15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_01km_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.4725, 15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_01km_LM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
     
     text(0.345, 12.35, "Sfc - 3 km:", cex = FONTSIZE, adj = c(1, 0))
-    text(0.36, 12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
-    text(0.4725, 12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_LM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.36, 12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_03km_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.4725, 12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_03km_LM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
   } else {
     text(0.4375, 27.55, "SRH MSM", cex = FONTSIZE, adj = c(1, 0))
     text(0.4375, 25.55, "[m2/s2]", cex = FONTSIZE - 0.075, adj = c(1, 0))
     
     text(0.345, 22.55, "Sfc - 100 m:", cex = FONTSIZE, adj = c(1, 0))
-    text(0.36, 22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_100m_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.36, 22.55, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_0100m_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
     #
     text(0.345, 19.15, "Sfc - 500 m:", cex = FONTSIZE, adj = c(1, 0))
-    text(0.36, 19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_500m_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.36, 19.15, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_0500m_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
     
     text(0.345, 15.75, "Sfc - 1 km:", cex = FONTSIZE, adj = c(1, 0))
-    text(0.36, 15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_1km_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.36, 15.75, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_01km_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
     
     text(0.345, 12.35, "Sfc - 3 km:", cex = FONTSIZE, adj = c(1, 0))
-    text(0.36, 12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_3km_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+    text(0.36, 12.35, paste0(round(parametry[which(names(parametry[1:LP]) == "SRH_03km_RM")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
   }
   segments(0.565, 10.25, 0.565, 30.22)
   segments(0.19, 10.25, 0.6, 10.25)
