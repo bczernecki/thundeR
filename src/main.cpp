@@ -5206,10 +5206,10 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[1]=(*S)->getIndicesCollectorPointer()->MU_coldcape();	
   vec[2]=(*S)->getIndicesCollectorPointer()->MU_coldcapeTV();	
-  vec[3]=(*S)->getIndicesCollectorPointer()->MU_buoyancy();
-  vec[4]=(*S)->getIndicesCollectorPointer()->MU_buoyancy_M10();
-  vec[5]=(*S)->getIndicesCollectorPointer()->VLLMostUnstableCAPE();
-  vec[6]=(*S)->getIndicesCollectorPointer()->MUmiddlecape();
+  vec[3]=(*S)->getIndicesCollectorPointer()->VLLMostUnstableCAPE();
+  vec[4]=(*S)->getIndicesCollectorPointer()->MUmiddlecape();
+  vec[5]=(*S)->getIndicesCollectorPointer()->MU_buoyancy();
+  vec[6]=(*S)->getIndicesCollectorPointer()->MU_buoyancy_M10();
   vec[7]=(*S)->getIndicesCollectorPointer()->VMostUnstableCIN();  
   vec[8]=(*S)->getIndicesCollectorPointer()->VMostUnstableLCL();
   vec[9]=(*S)->getIndicesCollectorPointer()->VMostUnstableLFC();
@@ -5237,10 +5237,10 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[27]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableCAPE();
   vec[28]=(*S)->getIndicesCollectorPointer()->MUML_coldcape();	
   vec[29]=(*S)->getIndicesCollectorPointer()->MUML_coldcapeTV();	
-  vec[30]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy();
-  vec[31]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy_M10();
-  vec[32]=(*S)->getIndicesCollectorPointer()->VLLMeanMostUnstableCAPE();
-  vec[33]=(*S)->getIndicesCollectorPointer()->MUMLmiddlecape();
+  vec[30]=(*S)->getIndicesCollectorPointer()->VLLMeanMostUnstableCAPE();
+  vec[31]=(*S)->getIndicesCollectorPointer()->MUMLmiddlecape();
+  vec[32]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy();
+  vec[33]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy_M10();
   vec[34]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableCIN();  
   vec[35]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLCL();
   vec[36]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLFC();
@@ -5268,10 +5268,10 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[54]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedCAPE();
   vec[55]=(*S)->getIndicesCollectorPointer()->SB_coldcape();
   vec[56]=(*S)->getIndicesCollectorPointer()->SB_coldcapeTV();
-  vec[57]=(*S)->getIndicesCollectorPointer()->SB_buoyancy();
-  vec[58]=(*S)->getIndicesCollectorPointer()->SB_buoyancy_M10();
-  vec[59]=(*S)->getIndicesCollectorPointer()->VLLSurfaceBasedCAPE();
-  vec[60]=(*S)->getIndicesCollectorPointer()->SBmiddlecape();
+  vec[57]=(*S)->getIndicesCollectorPointer()->VLLSurfaceBasedCAPE();
+  vec[58]=(*S)->getIndicesCollectorPointer()->SBmiddlecape();
+  vec[59]=(*S)->getIndicesCollectorPointer()->SB_buoyancy();
+  vec[60]=(*S)->getIndicesCollectorPointer()->SB_buoyancy_M10();
   vec[61]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedCIN();  
   vec[62]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedLCL();
   vec[63]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedLFC();
@@ -5299,10 +5299,10 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[81]=(*S)->getIndicesCollectorPointer()->VMeanLayerCAPE();
   vec[82]=(*S)->getIndicesCollectorPointer()->ML_coldcape();	
   vec[83]=(*S)->getIndicesCollectorPointer()->ML_coldcapeTV();
-  vec[84]=(*S)->getIndicesCollectorPointer()->ML_buoyancy();
-  vec[85]=(*S)->getIndicesCollectorPointer()->ML_buoyancy_M10();
-  vec[86]=(*S)->getIndicesCollectorPointer()->VLLMeanLayerCAPE();
-  vec[87]=(*S)->getIndicesCollectorPointer()->MLmiddlecape();
+  vec[84]=(*S)->getIndicesCollectorPointer()->VLLMeanLayerCAPE();
+  vec[85]=(*S)->getIndicesCollectorPointer()->MLmiddlecape();
+  vec[86]=(*S)->getIndicesCollectorPointer()->ML_buoyancy();
+  vec[87]=(*S)->getIndicesCollectorPointer()->ML_buoyancy_M10();
   vec[88]=(*S)->getIndicesCollectorPointer()->VMeanLayerCIN();  
   vec[89]=(*S)->getIndicesCollectorPointer()->VMeanLayerLCL();
   vec[90]=(*S)->getIndicesCollectorPointer()->VMeanLayerLFC();
@@ -5901,63 +5901,128 @@ double * sounding_default2(double* pressure,
 //' @export
 //' @return 
 //' \enumerate{
-//'  \item MU_CAPE 
+//'  \item MU_CAPE
 //'  \item MU_CAPE_M10
 //'  \item MU_CAPE_M10_PT
-//'  \item MU_02km_CAPE 
-//'  \item MU_03km_CAPE 
-//'  \item MU_HGL_CAPE 
-//'  \item MU_CIN 
-//'  \item MU_LCL_HGT 
-//'  \item MU_LFC_HGT 
-//'  \item MU_EL_HGT 
-//'  \item MU_LI 
-//'  \item MU_LI_M10 
-//'  \item MU_WMAX 
-//'  \item MU_EL_TEMP 
-//'  \item MU_LCL_TEMP 
-//'  \item MU_LFC_TEMP 
-//'  \item MU_MIXR 
-//'  \item MU_CAPE_500
-//'  \item MU_CAPE_500_M10
-//'  \item MU_CAPE_500_M10_PT
-//'  \item MU_CIN_500
-//'  \item MU_LI_500
-//'  \item MU_LI_500_M10
-//'  \item SB_CAPE 
+//'  \item MU_CAPE_3km
+//'  \item MU_CAPE_HGL
+//'  \item MU_buoyancy
+//'  \item MU_buoyancy_M10
+//'  \item MU_CIN
+//'  \item MU_LCL_HGT
+//'  \item MU_LFC_HGT
+//'  \item MU_EL_HGT
+//'  \item MU_LI
+//'  \item MU_LI_M10
+//'  \item MU_WMAX
+//'  \item MU_EL_TEMP
+//'  \item MU_LCL_TEMP
+//'  \item MU_LFC_TEMP
+//'  \item MU_MIXR
+//'  \item MU_cold_cloud
+//'  \item MU_warm_cloud
+//'  \item MU_equal_layer
+//'  \item MU_etilde
+//'  \item MU_updraft_radius
+//'  \item MU_ECAPE
+//'  \item MU_ECAPE_HGL
+//'  \item MU_ECAPE_M10
+//'  \item MU_EWMAX
+//'  \item MUML_CAPE
+//'  \item MUML_CAPE_M10
+//'  \item MUML_CAPE_M10_PT
+//'  \item MUML_CAPE_3km
+//'  \item MUML_CAPE_HGL
+//'  \item MUML_buoyancy
+//'  \item MUML_buoyancy_M10
+//'  \item MUML_CIN
+//'  \item MUML_LCL_HGT
+//'  \item MUML_LFC_HGT
+//'  \item MUML_EL_HGT
+//'  \item MUML_LI
+//'  \item MUML_LI_M10
+//'  \item MUML_WMAX
+//'  \item MUML_EL_TEMP
+//'  \item MUML_LCL_TEMP
+//'  \item MUML_LFC_TEMP
+//'  \item MUML_MIXR
+//'  \item MUML_cold_cloud
+//'  \item MUML_warm_cloud
+//'  \item MUML_equal_layer
+//'  \item MUML_etilde
+//'  \item MUML_updraft_radius
+//'  \item MUML_ECAPE
+//'  \item MUML_ECAPE_HGL
+//'  \item MUML_ECAPE_M10
+//'  \item MUML_EWMAX
+//'  \item SB_CAPE
 //'  \item SB_CAPE_M10
 //'  \item SB_CAPE_M10_PT
-//'  \item SB_02km_CAPE 
-//'  \item SB_03km_CAPE 
-//'  \item SB_HGL_CAPE 
-//'  \item SB_CIN 
-//'  \item SB_LCL_HGT 
-//'  \item SB_LFC_HGT 
-//'  \item SB_EL_HGT 
-//'  \item SB_LI 
-//'  \item SB_LI_M10 
-//'  \item SB_WMAX 
-//'  \item SB_EL_TEMP 
-//'  \item SB_LCL_TEMP 
-//'  \item SB_LFC_TEMP 
-//'  \item SB_MIXR 
-//'  \item ML_CAPE 
-//'  \item ML_CAPE_M10 
-//'  \item ML_CAPE_M10_PT 
-//'  \item ML_02km_CAPE
-//'  \item ML_03km_CAPE 
-//'  \item ML_HGL_CAPE 
-//'  \item ML_CIN 
-//'  \item ML_LCL_HGT 
-//'  \item ML_LFC_HGT 
-//'  \item ML_EL_HGT 
-//'  \item ML_LI 
+//'  \item SB_CAPE_3km
+//'  \item SB_CAPE_HGL
+//'  \item SB_buoyancy
+//'  \item SB_buoyancy_M10
+//'  \item SB_CIN
+//'  \item SB_LCL_HGT
+//'  \item SB_LFC_HGT
+//'  \item SB_EL_HGT
+//'  \item SB_LI
+//'  \item SB_LI_M10
+//'  \item SB_WMAX
+//'  \item SB_EL_TEMP
+//'  \item SB_LCL_TEMP
+//'  \item SB_LFC_TEMP
+//'  \item SB_MIXR
+//'  \item SB_cold_cloud
+//'  \item SB_warm_cloud
+//'  \item SB_equal_layer
+//'  \item SB_etilde
+//'  \item SB_updraft_radius
+//'  \item SB_ECAPE
+//'  \item SB_ECAPE_HGL
+//'  \item SB_ECAPE_M10
+//'  \item SB_EWMAX
+//'  \item ML_CAPE
+//'  \item ML_CAPE_M10
+//'  \item ML_CAPE_M10_PT
+//'  \item ML_CAPE_3km
+//'  \item ML_CAPE_HGL
+//'  \item ML_buoyancy
+//'  \item ML_buoyancy_M10
+//'  \item ML_CIN
+//'  \item ML_LCL_HGT
+//'  \item ML_LFC_HGT
+//'  \item ML_EL_HGT
+//'  \item ML_LI
 //'  \item ML_LI_M10
-//'  \item ML_WMAX 
-//'  \item ML_EL_TEMP 
-//'  \item ML_LCL_TEMP 
-//'  \item ML_LFC_TEMP 
-//'  \item ML_MIXR 
+//'  \item ML_WMAX
+//'  \item ML_EL_TEMP
+//'  \item ML_LCL_TEMP
+//'  \item ML_LFC_TEMP
+//'  \item ML_MIXR
+//'  \item ML_cold_cloud
+//'  \item ML_warm_cloud
+//'  \item ML_equal_layer
+//'  \item ML_etilde
+//'  \item ML_updraft_radius
+//'  \item ML_ECAPE
+//'  \item ML_ECAPE_HGL
+//'  \item ML_ECAPE_M10
+//'  \item ML_EWMAX
+//'  \item MU500_CAPE
+//'  \item MU500_CAPE_M10
+//'  \item MU500_CAPE_M10_PT
+//'  \item MU500_CIN
+//'  \item MU500_LI
+//'  \item MU500_LI_M10
+//'  \item MU500_buoyancy
+//'  \item MU500_buoyancy_M10
+//'  \item MU500_etilde
+//'  \item MU500_radius
+//'  \item MU500_ECAPE
+//'  \item MU500_ECAPE_HGL
+//'  \item MU500_ECAPE_M10
+//'  \item MU500_EWMAX
 //'  \item LR_0500m 
 //'  \item LR_01km 
 //'  \item LR_02km 
@@ -5972,9 +6037,17 @@ double * sounding_default2(double* pressure,
 //'  \item LR_500700hPa 
 //'  \item LR_500800hPa 
 //'  \item LR_600800hPa 
+//'  \item RH_01km 
+//'  \item RH_02km 
+//'  \item RH_14km 
+//'  \item RH_25km 
+//'  \item RH_36km 
+//'  \item RH_HGL 
 //'  \item FRZG_HGT 
+//'  \item M10_HGT
 //'  \item FRZG_wetbulb_HGT 
-//'  \item HGT_max_thetae_03km 
+//'  \item MU_HGT
+//'  \item MUML_HGT
 //'  \item HGT_min_thetae_04km 
 //'  \item Delta_thetae 
 //'  \item Delta_thetae_min04km 
@@ -5982,15 +6055,10 @@ double * sounding_default2(double* pressure,
 //'  \item Thetae_02km 
 //'  \item DCAPE 
 //'  \item Cold_Pool_Strength 
-//'  \item Wind_Index 
 //'  \item PRCP_WATER 
-//'  \item Moisture_Flux_02km 
-//'  \item RH_01km 
-//'  \item RH_02km 
-//'  \item RH_14km 
-//'  \item RH_25km 
-//'  \item RH_36km 
-//'  \item RH_HGL 
+//'  \item Moisture_Flux
+//'  \item Moisture_Flux_SR
+//'  \item Moisture_Flux_SR_eff
 //'  \item BS_0500m
 //'  \item BS_01km 
 //'  \item BS_02km 
@@ -6001,21 +6069,45 @@ double * sounding_default2(double* pressure,
 //'  \item BS_13km 
 //'  \item BS_16km 
 //'  \item BS_18km 
-//'  \item BS_EFF_MU 
-//'  \item BS_EFF_SB 
-//'  \item BS_EFF_ML 
-//'  \item BS_SFC_to_M10 
+//'  \item BS_14km 
+//'  \item BS_25km 
+//'  \item BS_eff_MU 
+//'  \item BS_eff_MUML
+//'  \item BS_eff_SB 
+//'  \item BS_eff_ML 
+//'  \item BS_sfc_to_M10 
 //'  \item BS_1km_to_M10 
 //'  \item BS_2km_to_M10 
-//'  \item BS_MU_LFC_to_M10 
-//'  \item BS_SB_LFC_to_M10 
-//'  \item BS_ML_LFC_to_M10
-//'  \item BS_MW02_to_SM 
-//'  \item BS_MW02_to_RM 
-//'  \item BS_MW02_to_LM 
-//'  \item BS_HGL_to_SM 
-//'  \item BS_HGL_to_RM 
-//'  \item BS_HGL_to_LM 
+//'  \item BS_MU_LCL_to_M10 
+//'  \item BS_MUML_LCL_to_M10 
+//'  \item BS_SB_LCL_to_M10 
+//'  \item BS_ML_LCL_to_M10
+//'  \item MW_SR_0500m_RM
+//'  \item MW_SR_01km_RM
+//'  \item MW_SR_02km_RM
+//'  \item MW_SR_03km_RM
+//'  \item MW_SR_HGL_RM
+//'  \item MW_SR_1km_RM_eff
+//'  \item MW_SRVM_0500m_RM
+//'  \item MW_SRVM_01km_RM
+//'  \item MW_SRVM_03km_RM
+//'  \item MW_SR_0500m_LM
+//'  \item MW_SR_01km_LM
+//'  \item MW_SR_02km_LM
+//'  \item MW_SR_03km_LM
+//'  \item MW_SR_HGL_LM
+//'  \item MW_SR_01km_LM_eff
+//'  \item MW_SRVM_0500m_LM
+//'  \item MW_SRVM_01km_LM
+//'  \item MW_SRVM_03km_LM
+//'  \item MW_SR_0500m_SM
+//'  \item MW_SR_01km_SM
+//'  \item MW_SR_02km_SM
+//'  \item MW_SR_03km_SM
+//'  \item MW_SR_HGL_SM
+//'  \item MW_SR_01km_SM_eff
+//'  \item Peters_SR_inflow
+//'  \item Peters_SR_inflow_eff
 //'  \item MW_0500m
 //'  \item MW_01km 
 //'  \item MW_02km 
@@ -6037,60 +6129,43 @@ double * sounding_default2(double* pressure,
 //'  \item SRH_1km_SM
 //'  \item SRH_3km_SM
 //'  \item SRH_36km_SM
-//'  \item SRH_1km_RM_eff
-//'  \item SRH_1km_LM_eff
-//'  \item SRH_1km_SM_eff
-//'  \item SRH_3km_RM_eff
-//'  \item SRH_3km_LM_eff
-//'  \item SRH_3km_SM_eff
-//'  \item SV_500m_RM
+//'  \item SRH_01km_RM_eff
+//'  \item SRH_01km_LM_eff
+//'  \item SRH_01km_SM_eff
+//'  \item SRH_03km_RM_eff
+//'  \item SRH_03km_LM_eff
+//'  \item SRH_03km_SM_eff
+//'  \item SV_0500m_RM
 //'  \item SV_01km_RM
 //'  \item SV_03km_RM
-//'  \item SV_500m_LM
+//'  \item SV_0500m_LM
 //'  \item SV_01km_LM
 //'  \item SV_03km_LM
-//'  \item MW_SR_500m_RM
-//'  \item MW_SR_01km_RM
-//'  \item MW_SR_03km_RM
-//'  \item MW_SR_500m_LM
-//'  \item MW_SR_01km_LM
-//'  \item MW_SR_03km_LM
-//'  \item MW_SR_500m_MW
-//'  \item MW_SR_01km_MW
-//'  \item MW_SR_03km_MW
-//'  \item MW_SR_500m_RM_eff
-//'  \item MW_SR_01km_LM_eff
-//'  \item MW_SR_03km_MW_eff
-//'  \item MW_SR_VM_500m_RM
-//'  \item MW_SR_VM_01km_RM
-//'  \item MW_SR_VM_03km_RM
-//'  \item MW_SR_VM_500m_LM
-//'  \item MW_SR_VM_01km_LM
-//'  \item MW_SR_VM_03km_LM
-//'  \item SV_FRA_500m_RM
+//'  \item SV_FRA_0500m_RM
 //'  \item SV_FRA_01km_RM
 //'  \item SV_FRA_03km_RM
-//'  \item SV_FRA_500m_LM
+//'  \item SV_FRA_0500m_LM
 //'  \item SV_FRA_01km_LM
 //'  \item SV_FRA_03km_LM
 //'  \item Bunkers_RM_A 
 //'  \item Bunkers_RM_M 
 //'  \item Bunkers_LM_A 
 //'  \item Bunkers_LM_M 
-//'  \item Bunkers_MW_A 
-//'  \item Bunkers_MW_M 
+//'  \item Bunkers_SM_A 
+//'  \item Bunkers_SM_M 
 //'  \item Corfidi_downwind_A 
 //'  \item Corfidi_downwind_M 
 //'  \item Corfidi_upwind_A 
 //'  \item Corfidi_upwind_M 
-//'  \item Peters_SR_inflow
-//'  \item Peters_SR_inflow_eff
 //'  \item Peters_vector_A
 //'  \item Peters_vector_M
+//'  \item Peters_vector_eff_A
+//'  \item Peters_vector_eff_M
 //'  \item K_Index 
 //'  \item Showalter_Index 
 //'  \item TotalTotals_Index 
 //'  \item SWEAT_Index 
+//'  \item Wind_Index 
 //'  \item STP_fix 
 //'  \item STP_new 
 //'  \item STP_fix_LM 
@@ -6101,13 +6176,20 @@ double * sounding_default2(double* pressure,
 //'  \item SCP_new_LM 
 //'  \item SHIP 
 //'  \item HSI 
+//'  \item HSIv2 
 //'  \item DCP 
 //'  \item MU_WMAXSHEAR 
+//'  \item MUML_WMAXSHEAR
 //'  \item SB_WMAXSHEAR 
 //'  \item ML_WMAXSHEAR 
-//'  \item MU_EFF_WMAXSHEAR 
-//'  \item SB_EFF_WMAXSHEAR 
-//'  \item ML_EFF_WMAXSHEAR 
+//'  \item MU_EFF_EWMAXSHEAR 
+//'  \item MUML_EFF_EWMAXSHEAR
+//'  \item SB_EFF_EWMAXSHEAR 
+//'  \item ML_EFF_EWMAXSHEAR 
+//'  \item MU_EFF_EWMAXSHEAR_HGL 
+//'  \item MUML_EFF_EWMAXSHEAR_HGL
+//'  \item SB_EFF_EWMAXSHEAR_HGL
+//'  \item ML_EFF_EWMAXSHEAR_HGL
 //'  \item EHI_500m 
 //'  \item EHI_01km 
 //'  \item EHI_03km
@@ -6121,50 +6203,6 @@ double * sounding_default2(double* pressure,
 //'  \item DEI
 //'  \item DEI_eff
 //'  \item TIP
-//'  \item MU_buoyancy
-//'  \item SB_buoyancy
-//'  \item ML_buoyancy
-//'  \item MU500_buoyancy
-//'  \item MU_buoyancy_M10
-//'  \item SB_buoyancy_M10
-//'  \item ML_buoyancy_M10
-//'  \item MU500_buoyancy_M10
-//'  \item BS_14km 
-//'  \item BS_25km 
-//'  \item MU_ECAPE_etilde
-//'  \item MU_ECAPE_radius
-//'  \item MU_ECAPE
-//'  \item MU_ECAPE_HGL
-//'  \item MU_ECAPE_M10
-//'  \item SB_ECAPE_etilde
-//'  \item SB_ECAPE_radius
-//'  \item SB_ECAPE
-//'  \item SB_ECAPE_HGL
-//'  \item SB_ECAPE_M10
-//'  \item ML_ECAPE_etilde
-//'  \item ML_ECAPE_radius
-//'  \item ML_ECAPE
-//'  \item ML_ECAPE_HGL
-//'  \item ML_ECAPE_M10
-//'  \item MU_ML_ECAPE_etilde
-//'  \item MU_ML_ECAPE_radius
-//'  \item MU_ML_ECAPE
-//'  \item MU_ML_ECAPE_HGL
-//'  \item MU_ML_ECAPE_M10
-//'  \item MU500_ECAPE_etilde
-//'  \item MU500_ECAPE_radius
-//'  \item MU500_ECAPE
-//'  \item MU500_ECAPE_HGL
-//'  \item MU500_ECAPE_M10
-//'  \item HSIv2
-//'  \item SR_moisture_flux
-//'  \item SR_moisture_flux_eff
-//'  \item MU_cold_cloud
-//'  \item MU_warm_cloud
-//'  \item MU_equal_layer
-//'  \item MU_ML_cold_cloud
-//'  \item MU_ML_warm_cloud
-//'  \item MU_ML_equal_layer
 //' }
  // [[Rcpp::export]]
  
