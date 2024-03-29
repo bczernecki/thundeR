@@ -190,7 +190,7 @@
 #'  \item MW_SR_02km_RM
 #'  \item MW_SR_03km_RM
 #'  \item MW_SR_HGL_RM
-#'  \item MW_SR_1km_RM_eff
+#'  \item MW_SR_01km_RM_eff
 #'  \item MW_SRVM_0500m_RM
 #'  \item MW_SRVM_01km_RM
 #'  \item MW_SRVM_03km_RM
@@ -203,12 +203,12 @@
 #'  \item MW_SRVM_0500m_LM
 #'  \item MW_SRVM_01km_LM
 #'  \item MW_SRVM_03km_LM
-#'  \item MW_SR_0500m_SM
-#'  \item MW_SR_01km_SM
-#'  \item MW_SR_02km_SM
-#'  \item MW_SR_03km_SM
-#'  \item MW_SR_HGL_SM
-#'  \item MW_SR_01km_SM_eff
+#'  \item MW_SR_0500m_MW
+#'  \item MW_SR_01km_MW
+#'  \item MW_SR_02km_MW
+#'  \item MW_SR_03km_MW
+#'  \item MW_SR_HGL_MW
+#'  \item MW_SR_01km_MW_eff
 #'  \item Peters_SR_inflow
 #'  \item Peters_SR_inflow_eff
 #'  \item MW_0500m
@@ -229,15 +229,15 @@
 #'  \item SRH_1km_LM 
 #'  \item SRH_3km_LM 
 #'  \item SRH_36km_LM
-#'  \item SRH_1km_SM
-#'  \item SRH_3km_SM
-#'  \item SRH_36km_SM
+#'  \item SRH_1km_MW
+#'  \item SRH_3km_MW
+#'  \item SRH_36km_MW
 #'  \item SRH_01km_RM_eff
 #'  \item SRH_01km_LM_eff
-#'  \item SRH_01km_SM_eff
+#'  \item SRH_01km_MW_eff
 #'  \item SRH_03km_RM_eff
 #'  \item SRH_03km_LM_eff
-#'  \item SRH_03km_SM_eff
+#'  \item SRH_03km_MW_eff
 #'  \item SV_0500m_RM
 #'  \item SV_01km_RM
 #'  \item SV_03km_RM
@@ -254,8 +254,8 @@
 #'  \item Bunkers_RM_M 
 #'  \item Bunkers_LM_A 
 #'  \item Bunkers_LM_M 
-#'  \item Bunkers_SM_A 
-#'  \item Bunkers_SM_M 
+#'  \item Bunkers_MW_A 
+#'  \item Bunkers_MW_M 
 #'  \item Corfidi_downwind_A 
 #'  \item Corfidi_downwind_M 
 #'  \item Corfidi_upwind_A 
@@ -543,7 +543,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MW_SR_02km_RM",
 "MW_SR_03km_RM",
 "MW_SR_HGL_RM",
-"MW_SR_1km_RM_eff",
+"MW_SR_01km_RM_eff",
 "MW_SRVM_0500m_RM",
 "MW_SRVM_01km_RM",
 "MW_SRVM_03km_RM",
@@ -556,12 +556,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MW_SRVM_0500m_LM",
 "MW_SRVM_01km_LM",
 "MW_SRVM_03km_LM",
-"MW_SR_0500m_SM",
-"MW_SR_01km_SM",
-"MW_SR_02km_SM",
-"MW_SR_03km_SM",
-"MW_SR_HGL_SM",
-"MW_SR_01km_SM_eff",
+"MW_SR_0500m_MW",
+"MW_SR_01km_MW",
+"MW_SR_02km_MW",
+"MW_SR_03km_MW",
+"MW_SR_HGL_MW",
+"MW_SR_01km_MW_eff",
 "Peters_SR_inflow",
 "Peters_SR_inflow_eff",
 "MW_0500m",
@@ -582,15 +582,15 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SRH_1km_LM",
 "SRH_3km_LM",
 "SRH_36km_LM",
-"SRH_1km_SM",
-"SRH_3km_SM",
-"SRH_36km_SM",
+"SRH_1km_MW",
+"SRH_3km_MW",
+"SRH_36km_MW",
 "SRH_01km_RM_eff",
 "SRH_01km_LM_eff",
-"SRH_01km_SM_eff",
+"SRH_01km_MW_eff",
 "SRH_03km_RM_eff",
 "SRH_03km_LM_eff",
-"SRH_03km_SM_eff",
+"SRH_03km_MW_eff",
 "SV_0500m_RM",
 "SV_01km_RM",
 "SV_03km_RM",
@@ -607,8 +607,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "Bunkers_RM_M",
 "Bunkers_LM_A",
 "Bunkers_LM_M",
-"Bunkers_SM_A",
-"Bunkers_SM_M",
+"Bunkers_MW_A",
+"Bunkers_MW_M",
 "Corfidi_downwind_A",
 "Corfidi_downwind_M",
 "Corfidi_upwind_A",
