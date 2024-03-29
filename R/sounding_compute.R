@@ -217,20 +217,20 @@
 #'  \item MW_03km 
 #'  \item MW_06km 
 #'  \item MW_13km 
-#'  \item SRH_100m_RM 
-#'  \item SRH_250m_RM 
-#'  \item SRH_500m_RM 
-#'  \item SRH_1km_RM 
-#'  \item SRH_3km_RM 
+#'  \item SRH_0100m_RM 
+#'  \item SRH_0250m_RM 
+#'  \item SRH_0500m_RM 
+#'  \item SRH_01km_RM 
+#'  \item SRH_03km_RM 
 #'  \item SRH_36km_RM 
-#'  \item SRH_100m_LM 
-#'  \item SRH_250m_LM 
-#'  \item SRH_500m_LM 
-#'  \item SRH_1km_LM 
-#'  \item SRH_3km_LM 
+#'  \item SRH_0100m_LM 
+#'  \item SRH_0250m_LM 
+#'  \item SRH_0500m_LM 
+#'  \item SRH_01km_LM 
+#'  \item SRH_03km_LM 
 #'  \item SRH_36km_LM
-#'  \item SRH_1km_MW
-#'  \item SRH_3km_MW
+#'  \item SRH_01km_MW
+#'  \item SRH_03km_MW
 #'  \item SRH_36km_MW
 #'  \item SRH_01km_RM_eff
 #'  \item SRH_01km_LM_eff
@@ -570,20 +570,20 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MW_03km",
 "MW_06km",
 "MW_13km",
-"SRH_100m_RM",
-"SRH_250m_RM",
-"SRH_500m_RM",
-"SRH_1km_RM",
-"SRH_3km_RM",
+"SRH_0100m_RM",
+"SRH_0250m_RM",
+"SRH_0500m_RM",
+"SRH_01km_RM",
+"SRH_03km_RM",
 "SRH_36km_RM",
-"SRH_100m_LM",
-"SRH_250m_LM",
-"SRH_500m_LM",
-"SRH_1km_LM",
-"SRH_3km_LM",
+"SRH_0100m_LM",
+"SRH_0250m_LM",
+"SRH_0500m_LM",
+"SRH_01km_LM",
+"SRH_03km_LM",
 "SRH_36km_LM",
-"SRH_1km_MW",
-"SRH_3km_MW",
+"SRH_01km_MW",
+"SRH_03km_MW",
 "SRH_36km_MW",
 "SRH_01km_RM_eff",
 "SRH_01km_LM_eff",
