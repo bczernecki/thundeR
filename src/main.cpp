@@ -4619,7 +4619,7 @@ double IndicesCollector::MUML_EFF_EWMAXSHEAR(){
 }
 
 double IndicesCollector::MU_EFF_EWMAXSHEAR(){
-  double* CAPE_WXS = this->MU_ML_ECAPE(); 
+  double* CAPE_WXS = this->MU_ECAPE(); 
   double CAPE = CAPE_WXS[5];
   delete[] CAPE_WXS;
   return CAPE*this->emubs();
@@ -4647,7 +4647,7 @@ double IndicesCollector::MUML_EFF_EWMAXSHEAR_HGL(){
 }
 
 double IndicesCollector::MU_EFF_EWMAXSHEAR_HGL(){
-  double* CAPE_WXS = this->MU_ML_ECAPE(); 
+  double* CAPE_WXS = this->MU_ECAPE(); 
   double CAPE = sqrt(2*CAPE_WXS[3]);
   delete[] CAPE_WXS;
   return CAPE*this->emubs();
