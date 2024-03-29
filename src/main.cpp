@@ -4048,7 +4048,7 @@ double IndicesCollector::SRH03RM(){
 }
 
 double IndicesCollector::SRH36RM(){
-  return S->ks->srh36rm;
+  return S->ks->srh36rm - S->ks->srh03rm;
 }
 
 double IndicesCollector::SRH100LM(){
@@ -4072,7 +4072,7 @@ double IndicesCollector::SRH03LM(){
 }
 
 double IndicesCollector::SRH36LM(){
-  return S->ks->srh36lm;
+  return S->ks->srh36lm - S->ks->srh03lm;
 }
 
 double IndicesCollector::SRH01SM(){
@@ -4084,7 +4084,7 @@ double IndicesCollector::SRH03SM(){
 }
 
 double IndicesCollector::SRH36SM(){
-  return S->ks->srh36sm;
+  return S->ks->srh36sm - S->ks->srh03sm;
 }
 
 double IndicesCollector::SRH01LM_eff(){
