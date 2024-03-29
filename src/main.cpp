@@ -1064,28 +1064,28 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     
     if (h-h_MU >= 0 && h-h_MU <= 1000)
     {
-      srh01rm_eff = srh13rm;
-      srh01lm_eff = srh13lm;
-      srh01sm_eff = srh13sm;
+      srh01rm_eff += tmps1;
+      srh01lm_eff += tmps2;
+      srh01sm_eff += tmps3;
     }
 
     if (h-h_MU >= 0 && h-h_MU <= 3000)
     {
-      srh03rm_eff = srh13rm;
-      srh03lm_eff = srh13lm;
-      srh03sm_eff = srh13sm;
+      srh03rm_eff += tmps1;
+      srh03lm_eff += tmps2;
+      srh03sm_eff += tmps3;
     }
     // }
     
     if((fmod(abs(h-h0),100.0)==0.0)||(h==h0)){
       if(h-h0<=500){
-        SR_500_RM+=SR_M_rm;
-        SR_500_LM+=SR_M_lm;
+        SR_500_RM += SR_M_rm;
+        SR_500_LM += SR_M_lm;
         n500+=1;
       }
       if(h-h0<=1000){
-        SR_1000_RM+=SR_M_rm;
-        SR_1000_LM+=SR_M_lm;
+        SR_1000_RM += SR_M_rm;
+        SR_1000_LM += SR_M_lm;
         n1000+=1;
       }
       
@@ -1093,8 +1093,8 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     
     if((fmod(abs(h-h0),200.0)==0.0)||(h==h0)){
       if(h-h0<=3000){
-        SR_3000_RM+=SR_M_rm;
-        SR_3000_LM+=SR_M_lm;
+        SR_3000_RM += SR_M_rm;
+        SR_3000_LM += SR_M_lm;
         n3000+=1;
       }
     }
