@@ -4112,7 +4112,7 @@ double IndicesCollector::Peters_SR_inflow(){
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind - dev;
-  Vector res = S->ks->mean01 - Peters_SM;
+  Vector res = S->ks->mean0 - Peters_SM;
   return res.abs();
 }
 
@@ -5130,17 +5130,17 @@ double IndicesCollector::SV_3000_LM_FRA(){
   return S->ks->sw03lm / S->ks->shear3000m;
 }
 
-double IndicesCollector::MeanSR01_LM_eff(){
+double IndicesCollector::MeanSR0500_LM_eff(){
   Vector res = S->ks->mean01eff - S->ks->lm;
   return res.abs();
 }
 
-double IndicesCollector::MeanSR01_RM_eff(){
+double IndicesCollector::MeanSR0500_RM_eff(){
   Vector res = S->ks->mean01eff - S->ks->rm;
   return res.abs();
 }
 
-double IndicesCollector::MeanSR01_MW_eff(){
+double IndicesCollector::MeanSR0500_MW_eff(){
   Vector res = S->ks->mean01eff - S->ks->mean06;
   return res.abs();
 }
@@ -5414,7 +5414,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[183]=(*S)->getIndicesCollectorPointer()->MSR_RM();
   vec[184]=(*S)->getIndicesCollectorPointer()->MeanSR03_RM();
   vec[185]=(*S)->getIndicesCollectorPointer()->MSR_RM_HGL();
-  vec[186]=(*S)->getIndicesCollectorPointer()->MeanSR01_RM_eff();
+  vec[186]=(*S)->getIndicesCollectorPointer()->MeanSR0500_RM_eff();
   vec[187]=(*S)->getIndicesCollectorPointer()->MeanVMSR500_RM();
   vec[188]=(*S)->getIndicesCollectorPointer()->MeanVMSR01_RM();
   vec[189]=(*S)->getIndicesCollectorPointer()->MeanVMSR03_RM();
@@ -5424,7 +5424,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[192]=(*S)->getIndicesCollectorPointer()->MSR_LM();
   vec[193]=(*S)->getIndicesCollectorPointer()->MeanSR03_LM();
   vec[194]=(*S)->getIndicesCollectorPointer()->MSR_LM_HGL();
-  vec[195]=(*S)->getIndicesCollectorPointer()->MeanSR01_LM_eff();
+  vec[195]=(*S)->getIndicesCollectorPointer()->MeanSR0500_LM_eff();
   vec[196]=(*S)->getIndicesCollectorPointer()->MeanVMSR500_LM();
   vec[197]=(*S)->getIndicesCollectorPointer()->MeanVMSR01_LM();
   vec[198]=(*S)->getIndicesCollectorPointer()->MeanVMSR03_LM();
@@ -5434,7 +5434,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[201]=(*S)->getIndicesCollectorPointer()->MSR_MW();
   vec[202]=(*S)->getIndicesCollectorPointer()->MeanSR03_MW();
   vec[203]=(*S)->getIndicesCollectorPointer()->MSR_MW_HGL();
-  vec[204]=(*S)->getIndicesCollectorPointer()->MeanSR01_MW_eff();
+  vec[204]=(*S)->getIndicesCollectorPointer()->MeanSR0500_MW_eff();
 
   vec[205]=(*S)->getIndicesCollectorPointer()->Peters_SR_inflow();
   vec[206]=(*S)->getIndicesCollectorPointer()->Peters_SR_inflow_eff();
@@ -6084,7 +6084,7 @@ double * sounding_default2(double* pressure,
 //'  \item MW_SR_02km_RM
 //'  \item MW_SR_03km_RM
 //'  \item MW_SR_HGL_RM
-//'  \item MW_SR_01km_RM_eff
+//'  \item MW_SR_0500m_RM_eff
 //'  \item MW_SRVM_0500m_RM
 //'  \item MW_SRVM_01km_RM
 //'  \item MW_SRVM_03km_RM
@@ -6093,7 +6093,7 @@ double * sounding_default2(double* pressure,
 //'  \item MW_SR_02km_LM
 //'  \item MW_SR_03km_LM
 //'  \item MW_SR_HGL_LM
-//'  \item MW_SR_01km_LM_eff
+//'  \item MW_SR_0500m_LM_eff
 //'  \item MW_SRVM_0500m_LM
 //'  \item MW_SRVM_01km_LM
 //'  \item MW_SRVM_03km_LM
@@ -6102,7 +6102,7 @@ double * sounding_default2(double* pressure,
 //'  \item MW_SR_02km_MW
 //'  \item MW_SR_03km_MW
 //'  \item MW_SR_HGL_MW
-//'  \item MW_SR_01km_MW_eff
+//'  \item MW_SR_0500m_MW_eff
 //'  \item Peters_SR_inflow
 //'  \item Peters_SR_inflow_eff
 //'  \item MW_0500m
