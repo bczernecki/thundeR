@@ -3056,13 +3056,15 @@ double* IndicesCollector::MU_ECAPE(){
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
   double CAPE_HGL = S->th->mostUnstable->middlecape;
   double CAPE_M10 = S->th->mostUnstable->coldcape;
-  double* result = new double[6];
+  double CAPE_3km = S->th->mostUnstable->vto3cape;
+  double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
   result[5] = sqrt(2*E_tilde*CAPE);
+  result[6] = E-tilde*CAPE_3km;
   return result;
 }
 
@@ -3087,13 +3089,15 @@ double* IndicesCollector::MU_ML_ECAPE(){
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
   double CAPE_HGL = S->th->meanmostUnstable->middlecape;
   double CAPE_M10 = S->th->meanmostUnstable->coldcape;
-  double* result = new double[6];
+  double CAPE_3km = S->th->meanmostUnstable->vto3cape;
+  double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
   result[5] = sqrt(2*E_tilde*CAPE);
+  result[6] = E_tilde*CAPE_3km;
   return result;
 }
 
@@ -3118,13 +3122,15 @@ double* IndicesCollector::SB_ECAPE(){
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
   double CAPE_HGL = S->th->surfaceBased->middlecape;
   double CAPE_M10 = S->th->surfaceBased->coldcape;
-  double* result = new double[6];
+  double CAPE_3km = S->th->surfaceBased->vto3cape;
+  double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
   result[5] = sqrt(2*E_tilde*CAPE);
+  result[6] = E_tilde*CAPE_3km;
   return result;
 }
 
@@ -3149,13 +3155,15 @@ double* IndicesCollector::ML_ECAPE(){
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
   double CAPE_HGL = S->th->meanLayer->middlecape;
   double CAPE_M10 = S->th->meanLayer->coldcape;
-  double* result = new double[6];
+  double CAPE_3km = S->th->meanLayer->vto3cape;
+  double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
   result[5] = sqrt(2*E_tilde*CAPE);
+  result[6] = E_tilde*CAPE_3km;
   return result;
 }
 
@@ -3180,13 +3188,15 @@ double* IndicesCollector::MU500_ECAPE(){
   double Radius = sqrt(2*ksq*L/(Pr*varepsilon));
   double CAPE_HGL = S->th->mostU500->middlecape;
   double CAPE_M10 = S->th->mostU500->coldcape;
-  double* result = new double[6];
+  double CAPE_3km = S->th->mostU500->vto3cape;
+  double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
   result[2] = E_tilde*CAPE;
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
   result[5] = sqrt(2*E_tilde*CAPE);
+  result[6] = E_tilde*CAPE_3km;
   return result;
 }
 
