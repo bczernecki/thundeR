@@ -2683,9 +2683,9 @@ public:
   double MeanSR01_MW();
   double MeanSR03_MW();
 
-  double MeanSR01_RM_eff();
-  double MeanSR01_LM_eff();
-  double MeanSR01_MW_eff();
+  double MeanSR0500_RM_eff();
+  double MeanSR0500_LM_eff();
+  double MeanSR0500_MW_eff();
 
   double MeanVMSR500_RM();
   double MeanVMSR01_RM();
