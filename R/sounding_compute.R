@@ -190,7 +190,7 @@
 #'  \item MW_SR_02km_RM
 #'  \item MW_SR_03km_RM
 #'  \item MW_SR_HGL_RM
-#'  \item MW_SR_01km_RM_eff
+#'  \item MW_SR_0500m_RM_eff
 #'  \item MW_SRVM_0500m_RM
 #'  \item MW_SRVM_01km_RM
 #'  \item MW_SRVM_03km_RM
@@ -199,7 +199,7 @@
 #'  \item MW_SR_02km_LM
 #'  \item MW_SR_03km_LM
 #'  \item MW_SR_HGL_LM
-#'  \item MW_SR_01km_LM_eff
+#'  \item MW_SR_0500m_LM_eff
 #'  \item MW_SRVM_0500m_LM
 #'  \item MW_SRVM_01km_LM
 #'  \item MW_SRVM_03km_LM
@@ -208,7 +208,7 @@
 #'  \item MW_SR_02km_MW
 #'  \item MW_SR_03km_MW
 #'  \item MW_SR_HGL_MW
-#'  \item MW_SR_01km_MW_eff
+#'  \item MW_SR_0500m_MW_eff
 #'  \item Peters_SR_inflow
 #'  \item Peters_SR_inflow_eff
 #'  \item MW_0500m
@@ -543,7 +543,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MW_SR_02km_RM",
 "MW_SR_03km_RM",
 "MW_SR_HGL_RM",
-"MW_SR_01km_RM_eff",
+"MW_SR_0500m_RM_eff",
 "MW_SRVM_0500m_RM",
 "MW_SRVM_01km_RM",
 "MW_SRVM_03km_RM",
@@ -552,7 +552,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MW_SR_02km_LM",
 "MW_SR_03km_LM",
 "MW_SR_HGL_LM",
-"MW_SR_01km_LM_eff",
+"MW_SR_0500m_LM_eff",
 "MW_SRVM_0500m_LM",
 "MW_SRVM_01km_LM",
 "MW_SRVM_03km_LM",
@@ -561,7 +561,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MW_SR_02km_MW",
 "MW_SR_03km_MW",
 "MW_SR_HGL_MW",
-"MW_SR_01km_MW_eff",
+"MW_SR_0500m_MW_eff",
 "Peters_SR_inflow",
 "Peters_SR_inflow_eff",
 "MW_0500m",
