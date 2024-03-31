@@ -54,11 +54,15 @@ get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE, bufr = FALSE) 
   
   # take another attempt if object empty
   i = 1
-  while (is.null(sounding_data) && i < 5) {
+  while (is.null(sounding_data) && i < 2) {
     message("\nProblems with downloading. Re-trying in 5 seconds...")
     Sys.sleep(5)
     sounding_data = sounding_wyoming(wmo_id, yy, mm, dd, hh, bufr=bufr)
     i = i + 1
+  }
+
+  if (is.null(sounding_data)) {
+    return(NULL)
   }
   
   if ((!is.null(sounding_data)) & (ncol(sounding_data[[1]]) > 0)) {
