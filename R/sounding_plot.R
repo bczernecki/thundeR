@@ -740,10 +740,10 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.965, 6.5, sprintf("%.1f", (round(parametry[which(names(parametry[1:LP]) == "SHIP")], digits = 1))), cex = FONTSIZE, adj = c(0, 0))
   
   text(0.955, 2.9, "SCP:", cex = FONTSIZE, adj = c(1, 0))
-  text(0.965, 2.9, sprintf("%.1f", (round(parametry[which(names(parametry[1:LP]) == "SCP_new")], digits = 1))), cex = FONTSIZE, adj = c(0, 0))
+  text(0.965, 2.9, sprintf("%.1f", (round(parametry[which(names(parametry[1:LP]) == "SCP_new_RM")], digits = 1))), cex = FONTSIZE, adj = c(0, 0))
   
   text(0.955, -0.7, "STP:", cex = FONTSIZE, adj = c(1, 0))
-  text(0.965, -0.7, sprintf("%.1f", (round(parametry[which(names(parametry[1:LP]) == "STP_new")], digits = 1))), cex = FONTSIZE, adj = c(0, 0))
+  text(0.965, -0.7, sprintf("%.1f", (round(parametry[which(names(parametry[1:LP]) == "STP_new_RM")], digits = 1))), cex = FONTSIZE, adj = c(0, 0))
   
   ###
   par(fig = c(0.54, 0.99, 0, 0.06), new = TRUE, mar = c(0, 0, 0, 0), oma = c(0, 0, 0, 0))
