@@ -3064,7 +3064,7 @@ double* IndicesCollector::MU_ECAPE(){
   result[3] = E_tilde*CAPE_HGL;
   result[4] = E_tilde*CAPE_M10;
   result[5] = sqrt(2*E_tilde*CAPE);
-  result[6] = E-tilde*CAPE_3km;
+  result[6] = E_tilde*CAPE_3km;
   return result;
 }
 
