@@ -31,6 +31,7 @@
 #'  \item MU_ECAPE_HGL
 #'  \item MU_ECAPE_M10
 #'  \item MU_EWMAX
+#'  \item MU_ECAPE_3km
 #'  \item MUML_CAPE
 #'  \item MUML_CAPE_M10
 #'  \item MUML_CAPE_M10_PT
@@ -58,6 +59,7 @@
 #'  \item MUML_ECAPE_HGL
 #'  \item MUML_ECAPE_M10
 #'  \item MUML_EWMAX
+#'  \item MUML_ECAPE_3km
 #'  \item SB_CAPE
 #'  \item SB_CAPE_M10
 #'  \item SB_CAPE_M10_PT
@@ -85,6 +87,7 @@
 #'  \item SB_ECAPE_HGL
 #'  \item SB_ECAPE_M10
 #'  \item SB_EWMAX
+#'  \item SB_ECAPE_3km
 #'  \item ML_CAPE
 #'  \item ML_CAPE_M10
 #'  \item ML_CAPE_M10_PT
@@ -112,9 +115,12 @@
 #'  \item ML_ECAPE_HGL
 #'  \item ML_ECAPE_M10
 #'  \item ML_EWMAX
+#'  \item ML_ECAPE_3km
 #'  \item MU500_CAPE
 #'  \item MU500_CAPE_M10
 #'  \item MU500_CAPE_M10_PT
+#'  \item MU500_CAPE_3km
+#'  \item MU500_CAPE_HGL
 #'  \item MU500_CIN
 #'  \item MU500_LI
 #'  \item MU500_LI_M10
@@ -126,6 +132,7 @@
 #'  \item MU500_ECAPE_HGL
 #'  \item MU500_ECAPE_M10
 #'  \item MU500_EWMAX
+#'  \item MU500_ECAPE_3km
 #'  \item LR_0500m 
 #'  \item LR_01km 
 #'  \item LR_02km 
@@ -384,6 +391,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU_ECAPE_HGL",
 "MU_ECAPE_M10",
 "MU_EWMAX",
+"MU_ECAPE_3km",
 "MUML_CAPE",
 "MUML_CAPE_M10",
 "MUML_CAPE_M10_PT",
@@ -411,6 +419,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MUML_ECAPE_HGL",
 "MUML_ECAPE_M10",
 "MUML_EWMAX",
+"MUML_ECAPE_3km",
 "SB_CAPE",
 "SB_CAPE_M10",
 "SB_CAPE_M10_PT",
@@ -438,6 +447,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SB_ECAPE_HGL",
 "SB_ECAPE_M10",
 "SB_EWMAX",
+"SB_ECAPE_3km",
 "ML_CAPE",
 "ML_CAPE_M10",
 "ML_CAPE_M10_PT",
@@ -465,9 +475,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "ML_ECAPE_HGL",
 "ML_ECAPE_M10",
 "ML_EWMAX",
+"ML_ECAPE_3km",
 "MU500_CAPE",
 "MU500_CAPE_M10",
 "MU500_CAPE_M10_PT",
+"MU500_CAPE_3km",
+"MU500_CAPE_HGL",
 "MU500_CIN",
 "MU500_LI",
 "MU500_LI_M10",
@@ -479,6 +492,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU500_ECAPE_HGL",
 "MU500_ECAPE_M10",
 "MU500_EWMAX",
+"MU500_ECAPE_3km",
 "LR_0500m",
 "LR_01km",
 "LR_02km",
