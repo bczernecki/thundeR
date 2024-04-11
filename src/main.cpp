@@ -2490,6 +2490,13 @@ public:
   double LR26();
   double max_LR26_2km();
 
+  double THTE_LR5_eff();
+  double THTE_LR4_eff();
+  double THTE_LR14();
+  double THTE_LR13();
+  double THTE_LR04();
+  double THTE_LR03();
+
   double ZeroHeight();
   double M10Height();
   double WetBulbZeroHeight();		
@@ -3850,6 +3857,66 @@ double IndicesCollector::MinTHTEHeight(){
   double h0 = Get(S->h,0);
   double hz = Get(S->h,zeroIndex);
   return hz-h0;
+}
+
+double IndicesCollector::THTE_LR03(){
+  int lower = 0;
+  int upper = cache->getHeightIndex(3000);  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->th->oe,lower);
+  double tup = Get(S->th->oe,upper);
+  return 1000*((tup-tlow)/(hup-hlow));
+}
+
+double IndicesCollector::THTE_LR04(){
+  int lower = 0;
+  int upper = cache->getHeightIndex(4000);  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->th->oe,lower);
+  double tup = Get(S->th->oe,upper);
+  return 1000*((tup-tlow)/(hup-hlow));
+}
+
+double IndicesCollector::THTE_LR13(){
+  int lower = cache->getHeightIndex(1000);
+  int upper = cache->getHeightIndex(3000);  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->th->oe,lower);
+  double tup = Get(S->th->oe,upper);
+  return 1000*((tup-tlow)/(hup-hlow));
+}
+
+double IndicesCollector::THTE_LR14(){
+  int lower = cache->getHeightIndex(1000);
+  int upper = cache->getHeightIndex(4000);  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->th->oe,lower);
+  double tup = Get(S->th->oe,upper);
+  return 1000*((tup-tlow)/(hup-hlow));
+}
+
+double IndicesCollector::THTE_LR4_eff(){
+  int lower = S->th->mostUnstable->startIndex;
+  int upper = cache->getHeightIndex(4000);  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->th->oe,lower);
+  double tup = Get(S->th->oe,upper);
+  return 1000*((tup-tlow)/(hup-hlow));
+}
+
+double IndicesCollector::THTE_LR5_eff(){
+  int lower = S->th->mostUnstable->startIndex;
+  int upper = cache->getHeightIndex(5000);  
+  double hlow = Get(S->h,lower);
+  double hup = Get(S->h,upper);
+  double tlow = Get(S->th->oe,lower);
+  double tup = Get(S->th->oe,upper);
+  return 1000*((tup-tlow)/(hup-hlow));
 }
 
 double IndicesCollector::DeltaThetaE(){
@@ -5220,7 +5287,7 @@ double IndicesCollector::SB_buoyancy_M10(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[309];
+  double * vec = new double[315];
 
 // MU parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
@@ -5595,6 +5662,14 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[306]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[307]=(*S)->getIndicesCollectorPointer()->DEI_eff();
   vec[308]=(*S)->getIndicesCollectorPointer()->TIP();
+  
+  vec[309]=(*S)->getIndicesCollectorPointer()->THTE_LR03();
+  vec[310]=(*S)->getIndicesCollectorPointer()->THTE_LR04();
+  vec[311]=(*S)->getIndicesCollectorPointer()->THTE_LR13();
+  vec[312]=(*S)->getIndicesCollectorPointer()->THTE_LR14();
+  vec[313]=(*S)->getIndicesCollectorPointer()->THTE_LR5_eff();
+  vec[314]=(*S)->getIndicesCollectorPointer()->THTE_LR4_eff();
+
   return vec;
 }
 
@@ -6237,6 +6312,12 @@ double * sounding_default2(double* pressure,
 //'  \item DEI
 //'  \item DEI_eff
 //'  \item TIP
+//'  \item THTE_LR03
+//'  \item THTE_LR04
+//'  \item THTE_LR13
+//'  \item THTE_LR14
+//'  \item THTE_LR5_eff
+//'  \item THTE_LR4_eff
 //' }
  // [[Rcpp::export]]
  
@@ -6273,7 +6354,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 309;
+   int reslen= 315;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
