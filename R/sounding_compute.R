@@ -313,6 +313,12 @@
 #'  \item DEI
 #'  \item DEI_eff
 #'  \item TIP
+#'  \item THTE_LR03
+#'  \item THTE_LR04
+#'  \item THTE_LR13
+#'  \item THTE_LR14
+#'  \item THTE_LR5_eff
+#'  \item THTE_LR4_eff
 
 #' }
 #'
@@ -672,7 +678,13 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE_v2",
 "DEI",
 "DEI_eff",
-"TIP")
-
+"TIP",
+"THTE_LR03",
+"THTE_LR04",
+"THTE_LR13",
+"THTE_LR14",
+"THTE_LR5_eff",
+"THTE_LR4_eff")
+  
   return(tmp)
 }
