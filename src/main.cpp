@@ -588,10 +588,6 @@ private:
   double srh36lm;
   double srh36rm;
   double srh36sm;
-
-  double srh13lm;
-  double srh13rm;
-  double srh13sm;
   
   double sw500rm;
   double sw500lm;
@@ -2566,6 +2562,8 @@ public:
   double SRH01RM();
   double SRH03RM();
   double SRH36RM();
+  double SRH13_RM();
+  double SRH16RM();
 
   double SRH100LM();
   double SRH250LM();
@@ -2573,10 +2571,15 @@ public:
   double SRH01LM();
   double SRH03LM();
   double SRH36LM();
+  double SRH13_LM();
+  double SRH16LM();
 
   double SRH01SM();
   double SRH03SM();
   double SRH36SM();
+  double SRH13_SM();
+  double SRH16SM();
+
   double SRH01LM_eff();
   double SRH01RM_eff();
   double SRH01SM_eff();
