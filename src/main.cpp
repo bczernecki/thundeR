@@ -592,10 +592,6 @@ private:
   double srh13lm;
   double srh13rm;
   double srh13sm;
-
-  double srh16lm;
-  double srh16rm;
-  double srh16sm;
   
   double sw500rm;
   double sw500lm;
@@ -2499,7 +2495,7 @@ public:
   double max_LR26_2km();
 
   double THTE_LR5_eff();
-  double THTE_LR4_eff();
+  double THTE_LR5_LCL();
   double THTE_LR14();
   double THTE_LR13();
   double THTE_LR04();
@@ -2631,7 +2627,12 @@ public:
   double MUML_EFF_EWMAXSHEAR_HGL();
   double SB_EFF_EWMAXSHEAR_HGL();
   double ML_EFF_EWMAXSHEAR_HGL();
-    
+
+  double MU_EFF_EWMAXSHEAR_3km();
+  double MUML_EFF_EWMAXSHEAR_3km();
+  double SB_EFF_EWMAXSHEAR_3km();
+  double ML_EFF_EWMAXSHEAR_3km();
+
   double Corfidi_downwind_A();
   double Corfidi_downwind_M();
   double Corfidi_upwind_A();
@@ -3087,7 +3088,7 @@ double* IndicesCollector::MU_ECAPE(){
   double CAPE_HGL = S->th->mostUnstable->middlecape;
   double CAPE_M10 = S->th->mostUnstable->coldcape;
   double CAPE_3km = S->th->mostUnstable->vto3cape;
-  if(E_tilde>10){E_tilde = 10};
+  if(E_tilde>10) E_tilde = 10;
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3121,7 +3122,7 @@ double* IndicesCollector::MU_ML_ECAPE(){
   double CAPE_HGL = S->th->meanmostUnstable->middlecape;
   double CAPE_M10 = S->th->meanmostUnstable->coldcape;
   double CAPE_3km = S->th->meanmostUnstable->vto3cape;
-  if(E_tilde>10){E_tilde = 10};
+  if(E_tilde>10) E_tilde = 10;
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3155,7 +3156,7 @@ double* IndicesCollector::SB_ECAPE(){
   double CAPE_HGL = S->th->surfaceBased->middlecape;
   double CAPE_M10 = S->th->surfaceBased->coldcape;
   double CAPE_3km = S->th->surfaceBased->vto3cape;
-  if(E_tilde>10){E_tilde = 10};
+  if(E_tilde>10) E_tilde = 10;
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3189,7 +3190,7 @@ double* IndicesCollector::ML_ECAPE(){
   double CAPE_HGL = S->th->meanLayer->middlecape;
   double CAPE_M10 = S->th->meanLayer->coldcape;
   double CAPE_3km = S->th->meanLayer->vto3cape;
-  if(E_tilde>10){E_tilde = 10};
+  if(E_tilde>10) E_tilde = 10;
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3223,7 +3224,7 @@ double* IndicesCollector::MU500_ECAPE(){
   double CAPE_HGL = S->th->mostU500->middlecape;
   double CAPE_M10 = S->th->mostU500->coldcape;
   double CAPE_3km = S->th->mostU500->vto3cape;
-  if(E_tilde>10){E_tilde = 10};
+  if(E_tilde>10) E_tilde = 10;
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -4156,7 +4157,7 @@ double IndicesCollector::SRH36RM(){
   return S->ks->srh36rm - S->ks->srh03rm;
 }
 
-double IndicesCollector::SRH13RM(){
+double IndicesCollector::SRH13_RM(){
   return S->ks->srh03rm - S->ks->srh01rm;
 }
 
@@ -4188,7 +4189,7 @@ double IndicesCollector::SRH36LM(){
   return S->ks->srh36lm - S->ks->srh03lm;
 }
 
-double IndicesCollector::SRH13LM(){
+double IndicesCollector::SRH13_LM(){
   return S->ks->srh03lm - S->ks->srh01lm;
 }
 
@@ -4208,7 +4209,7 @@ double IndicesCollector::SRH36SM(){
   return S->ks->srh36sm - S->ks->srh03sm;
 }
 
-double IndicesCollector::SRH13SM(){
+double IndicesCollector::SRH13_SM(){
   return S->ks->srh03sm - S->ks->srh01sm;
 }
 
@@ -4835,7 +4836,7 @@ double IndicesCollector::MU_ebuoyancy(){
   double* CAPE_WXS = this->MU_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
-  if(E_tilde>2){E_tilde = 2};
+  if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MU_buoyancy();
   return E_tilde * buoyancy;
 }
@@ -4844,16 +4845,16 @@ double IndicesCollector::ML_ebuoyancy(){
   double* CAPE_WXS = this->ML_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
-  if(E_tilde>2){E_tilde = 2};
+  if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->ML_buoyancy();
   return E_tilde * buoyancy;
 }
 
 double IndicesCollector::MUML_ebuoyancy(){
-  double* CAPE_WXS = this->MUML_ECAPE();
+  double* CAPE_WXS = this->MU_ML_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
-  if(E_tilde>2){E_tilde = 2};
+  if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MUML_buoyancy();
   return E_tilde * buoyancy;
 }
@@ -4862,7 +4863,7 @@ double IndicesCollector::MU500_ebuoyancy(){
   double* CAPE_WXS = this->MU500_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
-  if(E_tilde>2){E_tilde = 2};
+  if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MU500_buoyancy();
   return E_tilde * buoyancy;
 }
@@ -4871,7 +4872,7 @@ double IndicesCollector::SB_ebuoyancy(){
   double* CAPE_WXS = this->SB_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
-  if(E_tilde>2){E_tilde = 2};
+  if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->SB_buoyancy();
   return E_tilde * buoyancy;
 }
@@ -4880,7 +4881,7 @@ double IndicesCollector::MU_ebuoyancy_M10(){
   double* CAPE_WXS = this->MU_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
-  if(E_tilde>2){E_tilde = 2};
+  if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MU_buoyancy_M10();
   return E_tilde * buoyancy;
 }
@@ -4889,16 +4890,16 @@ double IndicesCollector::ML_ebuoyancy_M10(){
   double* CAPE_WXS = this->ML_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
-  if(E_tilde>2){E_tilde = 2};
+  if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->ML_buoyancy_M10();
   return E_tilde * buoyancy;
 }
 
 double IndicesCollector::MUML_ebuoyancy_M10(){
-  double* CAPE_WXS = this->MUML_ECAPE();
+  double* CAPE_WXS = this->MU_ML_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
-  if(E_tilde>2){E_tilde = 2};
+  if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MUML_buoyancy_M10();
   return E_tilde * buoyancy;
 }
@@ -4907,7 +4908,7 @@ double IndicesCollector::MU500_ebuoyancy_M10(){
   double* CAPE_WXS = this->MU500_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
-  if(E_tilde>2){E_tilde = 2};
+  if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MU500_buoyancy_M10();
   return E_tilde * buoyancy;
 }
@@ -4916,7 +4917,7 @@ double IndicesCollector::SB_ebuoyancy_M10(){
   double* CAPE_WXS = this->SB_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
-  if(E_tilde>2){E_tilde = 2};
+  if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->SB_buoyancy_M10();
   return E_tilde * buoyancy;
 }
@@ -5197,7 +5198,7 @@ double IndicesCollector::HSIv2(){
   else if(LR>8)LR=8;
   double HSI = ((sqrt(50*(CAPE-200)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000));
   double HSI_old = this->HSI();
-  if(HSI_old > HSI){HSI = HSI_old}
+  if(HSI_old > HSI) HSI = HSI_old;
   return HSI;
 }
 
@@ -5737,7 +5738,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[238]=(*S)->getIndicesCollectorPointer()->SRH01RM();
   vec[239]=(*S)->getIndicesCollectorPointer()->SRH03RM();
   vec[240]=(*S)->getIndicesCollectorPointer()->SRH36RM();	
-  vec[241]=(*S)->getIndicesCollectorPointer()->SRH13RM();	
+  vec[241]=(*S)->getIndicesCollectorPointer()->SRH13_RM();	
   vec[242]=(*S)->getIndicesCollectorPointer()->SRH16RM();	
 
   vec[243]=(*S)->getIndicesCollectorPointer()->SRH100LM();
@@ -5746,13 +5747,13 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[246]=(*S)->getIndicesCollectorPointer()->SRH01LM();
   vec[247]=(*S)->getIndicesCollectorPointer()->SRH03LM();
   vec[248]=(*S)->getIndicesCollectorPointer()->SRH36LM();
-  vec[249]=(*S)->getIndicesCollectorPointer()->SRH13LM();	
+  vec[249]=(*S)->getIndicesCollectorPointer()->SRH13_LM();	
   vec[250]=(*S)->getIndicesCollectorPointer()->SRH16LM();	
 
   vec[251]=(*S)->getIndicesCollectorPointer()->SRH01SM();
   vec[252]=(*S)->getIndicesCollectorPointer()->SRH03SM();
   vec[253]=(*S)->getIndicesCollectorPointer()->SRH36SM();
-  vec[254]=(*S)->getIndicesCollectorPointer()->SRH13SM();	
+  vec[254]=(*S)->getIndicesCollectorPointer()->SRH13_SM();	
   vec[255]=(*S)->getIndicesCollectorPointer()->SRH16SM();	
 
   vec[256]=(*S)->getIndicesCollectorPointer()->SRH01RM_eff();
