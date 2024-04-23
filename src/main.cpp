@@ -588,6 +588,14 @@ private:
   double srh36lm;
   double srh36rm;
   double srh36sm;
+
+  double srh13lm;
+  double srh13rm;
+  double srh13sm;
+
+  double srh16lm;
+  double srh16rm;
+  double srh16sm;
   
   double sw500rm;
   double sw500lm;
@@ -3899,9 +3907,9 @@ double IndicesCollector::THTE_LR14(){
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
-double IndicesCollector::THTE_LR4_eff(){
-  int lower = S->th->mostUnstable->startIndex;
-  int upper = cache->getHeightIndex(4000);  
+double IndicesCollector::THTE_LR5_LCL(){
+  int lower = S->th->meanLayer->vLclIndex;
+  int upper = cache->getHeightIndex(5000);  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->th->oe,lower);
@@ -4131,6 +4139,14 @@ double IndicesCollector::SRH36RM(){
   return S->ks->srh36rm - S->ks->srh03rm;
 }
 
+double IndicesCollector::SRH13RM(){
+  return S->ks->srh03rm - S->ks->srh01rm;
+}
+
+double IndicesCollector::SRH16RM(){
+  return (S->ks->srh36rm + S->ks->srh03rm) - S->ks->srh01rm;
+}
+
 double IndicesCollector::SRH100LM(){
   return S->ks->srh100lm;
 }
@@ -4155,6 +4171,14 @@ double IndicesCollector::SRH36LM(){
   return S->ks->srh36lm - S->ks->srh03lm;
 }
 
+double IndicesCollector::SRH13LM(){
+  return S->ks->srh03lm - S->ks->srh01lm;
+}
+
+double IndicesCollector::SRH16LM(){
+  return (S->ks->srh36lm + S->ks->srh03lm) - S->ks->srh01lm;
+}
+
 double IndicesCollector::SRH01SM(){
   return S->ks->srh01sm;
 }
@@ -4165,6 +4189,14 @@ double IndicesCollector::SRH03SM(){
 
 double IndicesCollector::SRH36SM(){
   return S->ks->srh36sm - S->ks->srh03sm;
+}
+
+double IndicesCollector::SRH13SM(){
+  return S->ks->srh03sm - S->ks->srh01sm;
+}
+
+double IndicesCollector::SRH16SM(){
+  return (S->ks->srh36sm + S->ks->srh03sm) - S->ks->srh01sm;
 }
 
 double IndicesCollector::SRH01LM_eff(){
@@ -4753,6 +4785,44 @@ double IndicesCollector::ML_EFF_EWMAXSHEAR_HGL(){
   delete[] CAPE_WXS;
   return CAPE*this->emlbs();
 }
+
+double IndicesCollector::MUML_EFF_EWMAXSHEAR_3km(){
+  double* CAPE_WXS = this->MU_ML_ECAPE(); 
+  double CAPE = sqrt(2*CAPE_WXS[6]);
+  delete[] CAPE_WXS;
+  return CAPE*this->emumlbs();
+}
+
+double IndicesCollector::MU_EFF_EWMAXSHEAR_3km(){
+  double* CAPE_WXS = this->MU_ECAPE(); 
+  double CAPE = sqrt(2*CAPE_WXS[6]);
+  delete[] CAPE_WXS;
+  return CAPE*this->emubs();
+}
+
+double IndicesCollector::SB_EFF_EWMAXSHEAR_3km(){
+  double* CAPE_WXS = this->SB_ECAPE(); 
+  double CAPE = sqrt(2*CAPE_WXS[6]);
+  delete[] CAPE_WXS;
+  return CAPE*this->esbbs();
+}
+
+double IndicesCollector::ML_EFF_EWMAXSHEAR_3km(){
+  double* CAPE_WXS = this->ML_ECAPE(); 
+  double CAPE = sqrt(2*CAPE_WXS[6]);
+  delete[] CAPE_WXS;
+  return CAPE*this->emlbs();
+}
+
+double IndicesCollector::MU_ebuoyancy(){
+  double* CAPE = this->MU_ECAPE();
+  double E_tilde = CAPE[0];
+  if(E_tilde>2){E_tilde = 2};
+  double CAPE = sqrt(2*CAPE_WXS[3]);
+  delete[] CAPE_WXS;
+  return CAPE*this->emumlbs();
+}
+
 
 double IndicesCollector::BulkShearSfcTen(){
   int tail=0;
@@ -5552,6 +5622,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[224]=(*S)->getIndicesCollectorPointer()->SRH03RM();
   vec[225]=(*S)->getIndicesCollectorPointer()->SRH36RM();	
 
+  vec[225]=(*S)->getIndicesCollectorPointer()->SRH13RM();	
+  vec[225]=(*S)->getIndicesCollectorPointer()->SRH16RM();	
+
   vec[226]=(*S)->getIndicesCollectorPointer()->SRH100LM();
   vec[227]=(*S)->getIndicesCollectorPointer()->SRH250LM();
   vec[228]=(*S)->getIndicesCollectorPointer()->SRH500LM();
@@ -5559,9 +5632,15 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[230]=(*S)->getIndicesCollectorPointer()->SRH03LM();
   vec[231]=(*S)->getIndicesCollectorPointer()->SRH36LM();
 
+  vec[225]=(*S)->getIndicesCollectorPointer()->SRH13LM();	
+  vec[225]=(*S)->getIndicesCollectorPointer()->SRH16LM();	
+
   vec[232]=(*S)->getIndicesCollectorPointer()->SRH01SM();
   vec[233]=(*S)->getIndicesCollectorPointer()->SRH03SM();
   vec[234]=(*S)->getIndicesCollectorPointer()->SRH36SM();
+
+  vec[225]=(*S)->getIndicesCollectorPointer()->SRH13SM();	
+  vec[225]=(*S)->getIndicesCollectorPointer()->SRH16SM();	
 
   vec[235]=(*S)->getIndicesCollectorPointer()->SRH01RM_eff();
   vec[236]=(*S)->getIndicesCollectorPointer()->SRH01LM_eff();
@@ -5645,7 +5724,12 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[293]=(*S)->getIndicesCollectorPointer()->MUML_EFF_EWMAXSHEAR_HGL();
   vec[294]=(*S)->getIndicesCollectorPointer()->SB_EFF_EWMAXSHEAR_HGL();
   vec[295]=(*S)->getIndicesCollectorPointer()->ML_EFF_EWMAXSHEAR_HGL();
-  
+
+  vec[292]=(*S)->getIndicesCollectorPointer()->MU_EFF_EWMAXSHEAR_3km();
+  vec[293]=(*S)->getIndicesCollectorPointer()->MUML_EFF_EWMAXSHEAR_3km();
+  vec[294]=(*S)->getIndicesCollectorPointer()->SB_EFF_EWMAXSHEAR_3km();
+  vec[295]=(*S)->getIndicesCollectorPointer()->ML_EFF_EWMAXSHEAR_3km();
+
   vec[296]=(*S)->getIndicesCollectorPointer()->EHI500();
   vec[297]=(*S)->getIndicesCollectorPointer()->EHI01();	
   vec[298]=(*S)->getIndicesCollectorPointer()->EHI03();
@@ -5668,7 +5752,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[311]=(*S)->getIndicesCollectorPointer()->THTE_LR13();
   vec[312]=(*S)->getIndicesCollectorPointer()->THTE_LR14();
   vec[313]=(*S)->getIndicesCollectorPointer()->THTE_LR5_eff();
-  vec[314]=(*S)->getIndicesCollectorPointer()->THTE_LR4_eff();
+  vec[314]=(*S)->getIndicesCollectorPointer()->THTE_LR5_LCL();
 
   return vec;
 }
@@ -6317,7 +6401,7 @@ double * sounding_default2(double* pressure,
 //'  \item THTE_LR13
 //'  \item THTE_LR14
 //'  \item THTE_LR5_eff
-//'  \item THTE_LR4_eff
+//'  \item THTE_LR5_LCL
 //' }
  // [[Rcpp::export]]
  
