@@ -3087,6 +3087,7 @@ double* IndicesCollector::MU_ECAPE(){
   double CAPE_HGL = S->th->mostUnstable->middlecape;
   double CAPE_M10 = S->th->mostUnstable->coldcape;
   double CAPE_3km = S->th->mostUnstable->vto3cape;
+  if(E_tilde>10){E_tilde = 10};
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3120,6 +3121,7 @@ double* IndicesCollector::MU_ML_ECAPE(){
   double CAPE_HGL = S->th->meanmostUnstable->middlecape;
   double CAPE_M10 = S->th->meanmostUnstable->coldcape;
   double CAPE_3km = S->th->meanmostUnstable->vto3cape;
+  if(E_tilde>10){E_tilde = 10};
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3153,6 +3155,7 @@ double* IndicesCollector::SB_ECAPE(){
   double CAPE_HGL = S->th->surfaceBased->middlecape;
   double CAPE_M10 = S->th->surfaceBased->coldcape;
   double CAPE_3km = S->th->surfaceBased->vto3cape;
+  if(E_tilde>10){E_tilde = 10};
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3186,6 +3189,7 @@ double* IndicesCollector::ML_ECAPE(){
   double CAPE_HGL = S->th->meanLayer->middlecape;
   double CAPE_M10 = S->th->meanLayer->coldcape;
   double CAPE_3km = S->th->meanLayer->vto3cape;
+  if(E_tilde>10){E_tilde = 10};
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3219,6 +3223,7 @@ double* IndicesCollector::MU500_ECAPE(){
   double CAPE_HGL = S->th->mostU500->middlecape;
   double CAPE_M10 = S->th->mostU500->coldcape;
   double CAPE_3km = S->th->mostU500->vto3cape;
+  if(E_tilde>10){E_tilde = 10};
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -4647,7 +4652,7 @@ double IndicesCollector::TIP(){
 
 double IndicesCollector::DEI_eff(){
   double CPS = this->VirtualColdPoolStrength();
-  double WXS = this->MU_EFF_EWMAXSHEAR();
+  double WXS = this->SB_EFF_EWMAXSHEAR();
   double DEI = (1560*(CPS-13)+13*WXS)/10000;
   if(DEI<(-2))DEI=(-2);
   if(WXS==0)DEI=(-2);
@@ -5732,7 +5737,6 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[238]=(*S)->getIndicesCollectorPointer()->SRH01RM();
   vec[239]=(*S)->getIndicesCollectorPointer()->SRH03RM();
   vec[240]=(*S)->getIndicesCollectorPointer()->SRH36RM();	
-
   vec[241]=(*S)->getIndicesCollectorPointer()->SRH13RM();	
   vec[242]=(*S)->getIndicesCollectorPointer()->SRH16RM();	
 
@@ -5742,14 +5746,12 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[246]=(*S)->getIndicesCollectorPointer()->SRH01LM();
   vec[247]=(*S)->getIndicesCollectorPointer()->SRH03LM();
   vec[248]=(*S)->getIndicesCollectorPointer()->SRH36LM();
-
   vec[249]=(*S)->getIndicesCollectorPointer()->SRH13LM();	
   vec[250]=(*S)->getIndicesCollectorPointer()->SRH16LM();	
 
   vec[251]=(*S)->getIndicesCollectorPointer()->SRH01SM();
   vec[252]=(*S)->getIndicesCollectorPointer()->SRH03SM();
   vec[253]=(*S)->getIndicesCollectorPointer()->SRH36SM();
-
   vec[254]=(*S)->getIndicesCollectorPointer()->SRH13SM();	
   vec[255]=(*S)->getIndicesCollectorPointer()->SRH16SM();	
 
@@ -6218,6 +6220,8 @@ double * sounding_default2(double* pressure,
 //'  \item MU_ECAPE_M10
 //'  \item MU_EWMAX
 //'  \item MU_ECAPE_3km
+//'  \item MU_Ebuoyancy
+//'  \item MU_Ebuoyancy_M10
 //'  \item MUML_CAPE
 //'  \item MUML_CAPE_M10
 //'  \item MUML_CAPE_M10_PT
@@ -6246,6 +6250,8 @@ double * sounding_default2(double* pressure,
 //'  \item MUML_ECAPE_M10
 //'  \item MUML_EWMAX
 //'  \item MUML_ECAPE_3km
+//'  \item MUML_Ebuoyancy
+//'  \item MUML_Ebuoyancy_M10
 //'  \item SB_CAPE
 //'  \item SB_CAPE_M10
 //'  \item SB_CAPE_M10_PT
@@ -6274,6 +6280,8 @@ double * sounding_default2(double* pressure,
 //'  \item SB_ECAPE_M10
 //'  \item SB_EWMAX
 //'  \item SB_ECAPE_3km
+//'  \item SB_Ebuoyancy
+//'  \item SB_Ebuoyancy_M10
 //'  \item ML_CAPE
 //'  \item ML_CAPE_M10
 //'  \item ML_CAPE_M10_PT
@@ -6302,6 +6310,8 @@ double * sounding_default2(double* pressure,
 //'  \item ML_ECAPE_M10
 //'  \item ML_EWMAX
 //'  \item ML_ECAPE_3km
+//'  \item ML_Ebuoyancy
+//'  \item ML_Ebuoyancy_M10
 //'  \item MU500_CAPE
 //'  \item MU500_CAPE_M10
 //'  \item MU500_CAPE_M10_PT
@@ -6319,6 +6329,8 @@ double * sounding_default2(double* pressure,
 //'  \item MU500_ECAPE_M10
 //'  \item MU500_EWMAX
 //'  \item MU500_ECAPE_3km
+//'  \item MU500_Ebuoyancy
+//'  \item MU500_Ebuoyancy_M10
 //'  \item LR_0500m 
 //'  \item LR_01km 
 //'  \item LR_02km 
@@ -6354,7 +6366,6 @@ double * sounding_default2(double* pressure,
 //'  \item THTE_LR14
 //'  \item THTE_LR5_eff
 //'  \item THTE_LR5_LCL
-
 //'  \item DCAPE 
 //'  \item Cold_Pool_Strength 
 //'  \item PRCP_WATER 
@@ -6422,15 +6433,21 @@ double * sounding_default2(double* pressure,
 //'  \item SRH_01km_RM 
 //'  \item SRH_03km_RM 
 //'  \item SRH_36km_RM 
+//'  \item SRH_13km_RM 
+//'  \item SRH_16km_RM 
 //'  \item SRH_0100m_LM 
 //'  \item SRH_0250m_LM 
 //'  \item SRH_0500m_LM 
 //'  \item SRH_01km_LM 
 //'  \item SRH_03km_LM 
 //'  \item SRH_36km_LM
+//'  \item SRH_13km_LM 
+//'  \item SRH_16km_LM 
 //'  \item SRH_01km_MW
 //'  \item SRH_03km_MW
 //'  \item SRH_36km_MW
+//'  \item SRH_13km_MW 
+//'  \item SRH_16km_MW 
 //'  \item SRH_01km_RM_eff
 //'  \item SRH_01km_LM_eff
 //'  \item SRH_01km_MW_eff
@@ -6492,6 +6509,10 @@ double * sounding_default2(double* pressure,
 //'  \item MUML_EFF_EWMAXSHEAR_HGL
 //'  \item SB_EFF_EWMAXSHEAR_HGL
 //'  \item ML_EFF_EWMAXSHEAR_HGL
+//'  \item MU_EFF_EWMAXSHEAR_3km 
+//'  \item MUML_EFF_EWMAXSHEAR_3km
+//'  \item SB_EFF_EWMAXSHEAR_3km
+//'  \item ML_EFF_EWMAXSHEAR_3km
 //'  \item EHI_500m 
 //'  \item EHI_01km 
 //'  \item EHI_03km
