@@ -1,5 +1,5 @@
 #'
-#' ECAPE calculation procedure implemented with support of Dr John M Peters
+#' ECAPE parcel trace calculation procedure 
 #' 
 
 #' CONSTANTS
@@ -26,10 +26,6 @@ alpha=0.8
 Pr=1/3 #PRANDTL NUMBER
 ksq=0.18 #VON KARMAN CONSTANT
 
-#'
-#' FUNCTIONS
-#'
-
 heaviside <- function(x, a = 0){   
   result = (sign(x-a) + 1)/2
   return(result)
@@ -42,7 +38,6 @@ dpt2w <- function(p,t,dpt){
   W = aiRthermo::rh2w(p*100, t+273.15, RH, consts = export_constants())
   return(W)
 }
-
 
 compute_rsat <- function(T,p,iceflag){
   omeg = ((T - T1)/(T2-T1))*heaviside((T - T1)/(T2-T1))*heaviside((1 - (T - T1)/(T2-T1))) + heaviside(-(1 - (T - T1)/(T2-T1)))
@@ -139,22 +134,3 @@ ECAPE_parcel <- function(p0,z0,t0,q0,LFC,EL,CAPE,V_SR,Tv,Tp){
   Te = -(g*Tv)/(B_ent-g)
   return(Te-273.15)
 }
-
-ECAPE_value <- function(p0,z0,t0,q0,LFC,EL,CAPE,V_SR){
-  ECAPE = compute_ETILDE(p0,z0,q0,t0,LFC,EL,CAPE,V_SR)[1]*CAPE
-  return(ECAPE)
-}
-
-ENTRAINMENT_rate <- function(p0,z0,t0,q0,LFC,EL,CAPE,V_SR){
-  ENTRAINMENT = compute_ETILDE(p0,z0,q0,t0,LFC,EL,CAPE,V_SR)[1]
-  return(ENTRAINMENT)
-}
-
-UPDRAFT_width <- function(p0,z0,t0,q0,LFC,EL,CAPE,V_SR){
-  UPDRAFT = compute_ETILDE(p0,z0,q0,t0,LFC,EL,CAPE,V_SR)[3]
-  return(UPDRAFT)
-}
-
-#'
-#' 
-#'
