@@ -32,6 +32,8 @@
 #'  \item MU_ECAPE_M10
 #'  \item MU_EWMAX
 #'  \item MU_ECAPE_3km
+#'  \item MU_Ebuoyancy
+#'  \item MU_Ebuoyancy_M10
 #'  \item MUML_CAPE
 #'  \item MUML_CAPE_M10
 #'  \item MUML_CAPE_M10_PT
@@ -60,6 +62,8 @@
 #'  \item MUML_ECAPE_M10
 #'  \item MUML_EWMAX
 #'  \item MUML_ECAPE_3km
+#'  \item MUML_Ebuoyancy
+#'  \item MUML_Ebuoyancy_M10
 #'  \item SB_CAPE
 #'  \item SB_CAPE_M10
 #'  \item SB_CAPE_M10_PT
@@ -88,6 +92,8 @@
 #'  \item SB_ECAPE_M10
 #'  \item SB_EWMAX
 #'  \item SB_ECAPE_3km
+#'  \item SB_Ebuoyancy
+#'  \item SB_Ebuoyancy_M10
 #'  \item ML_CAPE
 #'  \item ML_CAPE_M10
 #'  \item ML_CAPE_M10_PT
@@ -116,6 +122,8 @@
 #'  \item ML_ECAPE_M10
 #'  \item ML_EWMAX
 #'  \item ML_ECAPE_3km
+#'  \item ML_Ebuoyancy
+#'  \item ML_Ebuoyancy_M10
 #'  \item MU500_CAPE
 #'  \item MU500_CAPE_M10
 #'  \item MU500_CAPE_M10_PT
@@ -133,6 +141,8 @@
 #'  \item MU500_ECAPE_M10
 #'  \item MU500_EWMAX
 #'  \item MU500_ECAPE_3km
+#'  \item MU500_Ebuoyancy
+#'  \item MU500_Ebuoyancy_M10
 #'  \item LR_0500m 
 #'  \item LR_01km 
 #'  \item LR_02km 
@@ -163,6 +173,11 @@
 #'  \item Delta_thetae_min04km 
 #'  \item Thetae_01km 
 #'  \item Thetae_02km 
+#'  \item THTE_LR03
+#'  \item THTE_LR13
+#'  \item THTE_LR14
+#'  \item THTE_LR5_eff
+#'  \item THTE_LR5_LCL
 #'  \item DCAPE 
 #'  \item Cold_Pool_Strength 
 #'  \item PRCP_WATER 
@@ -230,15 +245,21 @@
 #'  \item SRH_01km_RM 
 #'  \item SRH_03km_RM 
 #'  \item SRH_36km_RM 
+#'  \item SRH_13km_RM 
+#'  \item SRH_16km_RM 
 #'  \item SRH_0100m_LM 
 #'  \item SRH_0250m_LM 
 #'  \item SRH_0500m_LM 
 #'  \item SRH_01km_LM 
 #'  \item SRH_03km_LM 
 #'  \item SRH_36km_LM
+#'  \item SRH_13km_LM 
+#'  \item SRH_16km_LM 
 #'  \item SRH_01km_MW
 #'  \item SRH_03km_MW
 #'  \item SRH_36km_MW
+#'  \item SRH_13km_MW 
+#'  \item SRH_16km_MW 
 #'  \item SRH_01km_RM_eff
 #'  \item SRH_01km_LM_eff
 #'  \item SRH_01km_MW_eff
@@ -276,12 +297,12 @@
 #'  \item TotalTotals_Index 
 #'  \item SWEAT_Index 
 #'  \item Wind_Index 
-#'  \item STP_fix_RM
-#'  \item STP_new_RM 
+#'  \item STP_fix 
+#'  \item STP_new 
 #'  \item STP_fix_LM 
 #'  \item STP_new_LM 
-#'  \item SCP_fix_RM 
-#'  \item SCP_new_RM 
+#'  \item SCP_fix 
+#'  \item SCP_new 
 #'  \item SCP_fix_LM 
 #'  \item SCP_new_LM 
 #'  \item SHIP 
@@ -300,9 +321,13 @@
 #'  \item MUML_EFF_EWMAXSHEAR_HGL
 #'  \item SB_EFF_EWMAXSHEAR_HGL
 #'  \item ML_EFF_EWMAXSHEAR_HGL
-#'  \item EHI_500m_RM 
-#'  \item EHI_01km_RM 
-#'  \item EHI_03km_RM
+#'  \item MU_EFF_EWMAXSHEAR_3km 
+#'  \item MUML_EFF_EWMAXSHEAR_3km
+#'  \item SB_EFF_EWMAXSHEAR_3km
+#'  \item ML_EFF_EWMAXSHEAR_3km
+#'  \item EHI_500m 
+#'  \item EHI_01km 
+#'  \item EHI_03km
 #'  \item EHI_500m_LM 
 #'  \item EHI_01km_LM
 #'  \item EHI_03km_LM
@@ -313,12 +338,6 @@
 #'  \item DEI
 #'  \item DEI_eff
 #'  \item TIP
-#'  \item THTE_LR03
-#'  \item THTE_LR04
-#'  \item THTE_LR13
-#'  \item THTE_LR14
-#'  \item THTE_LR5_eff
-#'  \item THTE_LR4_eff
 
 #' }
 #'
@@ -333,7 +352,7 @@
 #' @param meanlayer_bottom_top (optional) vector of length 2 for bottom and top heights used for computing parcel starting parameters; default: 0, 500
 #' @param storm_motion (optional) for moving storms only - one can define vector of length two with
 #' wind speed (m/s) and wind directions (degrees) that will be used to compute adjusted SRH parameters
-#' @return Named vector of 200+ convective indices
+#' @return Named vector of 300+ convective indices
 #' @export 
 #' @examples
 #' old_options = options(scipen = 99) 
@@ -398,6 +417,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU_ECAPE_M10",
 "MU_EWMAX",
 "MU_ECAPE_3km",
+"MU_Ebuoyancy",
+"MU_Ebuoyancy_M10",
 "MUML_CAPE",
 "MUML_CAPE_M10",
 "MUML_CAPE_M10_PT",
@@ -426,6 +447,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MUML_ECAPE_M10",
 "MUML_EWMAX",
 "MUML_ECAPE_3km",
+"MUML_Ebuoyancy",
+"MUML_Ebuoyancy_M10",
 "SB_CAPE",
 "SB_CAPE_M10",
 "SB_CAPE_M10_PT",
@@ -454,6 +477,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SB_ECAPE_M10",
 "SB_EWMAX",
 "SB_ECAPE_3km",
+"SB_Ebuoyancy",
+"SB_Ebuoyancy_M10",
 "ML_CAPE",
 "ML_CAPE_M10",
 "ML_CAPE_M10_PT",
@@ -482,6 +507,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "ML_ECAPE_M10",
 "ML_EWMAX",
 "ML_ECAPE_3km",
+"ML_Ebuoyancy",
+"ML_Ebuoyancy_M10",
 "MU500_CAPE",
 "MU500_CAPE_M10",
 "MU500_CAPE_M10_PT",
@@ -499,64 +526,71 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU500_ECAPE_M10",
 "MU500_EWMAX",
 "MU500_ECAPE_3km",
-"LR_0500m",
-"LR_01km",
-"LR_02km",
-"LR_03km",
-"LR_04km",
-"LR_06km",
-"LR_16km",
+"MU500_Ebuoyancy",
+"MU500_Ebuoyancy_M10",
+"LR_0500m ",
+"LR_01km ",
+"LR_02km ",
+"LR_03km ",
+"LR_04km  ",
+"LR_06km ",
+"LR_16km ",
 "LR_26km",
-"LR_24km",
-"LR_36km",
-"LR_26km_MAX",
-"LR_500700hPa",
-"LR_500800hPa",
-"LR_600800hPa",
-"RH_01km",
-"RH_02km",
-"RH_14km",
-"RH_25km",
-"RH_36km",
-"RH_HGL",
-"FRZG_HGT",
+"LR_24km ",
+"LR_36km ",
+"LR_26km_MAX ",
+"LR_500700hPa ",
+"LR_500800hPa ",
+"LR_600800hPa ",
+"RH_01km ",
+"RH_02km ",
+"RH_14km ",
+"RH_25km ",
+"RH_36km ",
+"RH_HGL ",
+"FRZG_HGT ",
 "M10_HGT",
-"FRZG_wetbulb_HGT",
+"FRZG_wetbulb_HGT ",
 "MU_HGT",
 "MUML_HGT",
-"HGT_min_thetae_04km",
-"Delta_thetae",
-"Delta_thetae_min04km",
-"Thetae_01km",
-"Thetae_02km",
-"DCAPE",
-"Cold_Pool_Strength",
-"PRCP_WATER",
+"HGT_min_thetae_04km ",
+"Delta_thetae ",
+"Delta_thetae_min04km ",
+"Thetae_01km ",
+"Thetae_02km ",
+"THTE_LR03",
+"THTE_LR13",
+"THTE_LR14",
+"THTE_LR5_eff",
+"THTE_LR5_LCL",
+"DCAPE ",
+"Cold_Pool_Strength ",
+"PRCP_WATER ",
 "Moisture_Flux",
 "Moisture_Flux_SR",
 "Moisture_Flux_SR_eff",
 "BS_0500m",
-"BS_01km",
-"BS_02km",
-"BS_03km",
-"BS_06km",
-"BS_08km",
-"BS_36km",
-"BS_13km",
-"BS_16km",
-"BS_18km",
-"BS_14km",
-"BS_25km",
-"BS_eff_MU",
+"BS_01km ",
+"BS_02km ",
+"BS_03km ",
+"BS_06km ",
+"BS_08km ",
+"BS_36km ",
+"BS_13km ",
+"BS_16km ",
+"BS_18km ",
+"BS_14km ",
+"BS_25km ",
+"BS_eff_MU ",
 "BS_eff_MUML",
-"BS_eff_SB",
-"BS_eff_ML",
-"BS_sfc_to_M10",
-"BS_1km_to_M10",
-"BS_2km_to_M10",
-"BS_MU_LCL_to_M10",
-"BS_MUML_LCL_to_M10",
-"BS_SB_LCL_to_M10",
+"BS_eff_SB ",
+"BS_eff_ML ",
+"BS_sfc_to_M10 ",
+"BS_1km_to_M10 ",
+"BS_2km_to_M10 ",
+"BS_MU_LCL_to_M10 ",
+"BS_MUML_LCL_to_M10 ",
+"BS_SB_LCL_to_M10 ",
 "BS_ML_LCL_to_M10",
 "MW_SR_0500m_RM",
 "MW_SR_01km_RM",
@@ -585,26 +619,32 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "Peters_SR_inflow",
 "Peters_SR_inflow_eff",
 "MW_0500m",
-"MW_01km",
-"MW_02km",
-"MW_03km",
-"MW_06km",
-"MW_13km",
-"SRH_0100m_RM",
-"SRH_0250m_RM",
-"SRH_0500m_RM",
-"SRH_01km_RM",
-"SRH_03km_RM",
-"SRH_36km_RM",
-"SRH_0100m_LM",
-"SRH_0250m_LM",
-"SRH_0500m_LM",
-"SRH_01km_LM",
-"SRH_03km_LM",
+"MW_01km ",
+"MW_02km ",
+"MW_03km ",
+"MW_06km ",
+"MW_13km ",
+"SRH_0100m_RM ",
+"SRH_0250m_RM ",
+"SRH_0500m_RM ",
+"SRH_01km_RM ",
+"SRH_03km_RM ",
+"SRH_36km_RM ",
+"SRH_13km_RM ",
+"SRH_16km_RM ",
+"SRH_0100m_LM ",
+"SRH_0250m_LM ",
+"SRH_0500m_LM ",
+"SRH_01km_LM ",
+"SRH_03km_LM ",
 "SRH_36km_LM",
+"SRH_13km_LM ",
+"SRH_16km_LM ",
 "SRH_01km_MW",
 "SRH_03km_MW",
 "SRH_36km_MW",
+"SRH_13km_MW ",
+"SRH_16km_MW ",
 "SRH_01km_RM_eff",
 "SRH_01km_LM_eff",
 "SRH_01km_MW_eff",
@@ -623,53 +663,57 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SV_FRA_0500m_LM",
 "SV_FRA_01km_LM",
 "SV_FRA_03km_LM",
-"Bunkers_RM_A",
-"Bunkers_RM_M",
-"Bunkers_LM_A",
-"Bunkers_LM_M",
-"Bunkers_MW_A",
-"Bunkers_MW_M",
-"Corfidi_downwind_A",
-"Corfidi_downwind_M",
-"Corfidi_upwind_A",
-"Corfidi_upwind_M",
+"Bunkers_RM_A ",
+"Bunkers_RM_M ",
+"Bunkers_LM_A ",
+"Bunkers_LM_M ",
+"Bunkers_MW_A ",
+"Bunkers_MW_M ",
+"Corfidi_downwind_A ",
+"Corfidi_downwind_M ",
+"Corfidi_upwind_A ",
+"Corfidi_upwind_M ",
 "Peters_vector_A",
 "Peters_vector_M",
 "Peters_vector_eff_A",
 "Peters_vector_eff_M",
-"K_Index",
-"Showalter_Index",
-"TotalTotals_Index",
-"SWEAT_Index",
-"Wind_Index",
-"STP_fix_RM",
-"STP_new_RM",
-"STP_fix_LM",
-"STP_new_LM",
-"SCP_fix_RM",
-"SCP_new_RM",
-"SCP_fix_LM",
-"SCP_new_LM",
-"SHIP",
-"HSI",
-"HSIv2",
-"DCP",
-"MU_WMAXSHEAR",
+"K_Index ",
+"Showalter_Index ",
+"TotalTotals_Index ",
+"SWEAT_Index ",
+"Wind_Index ",
+"STP_fix ",
+"STP_new ",
+"STP_fix_LM ",
+"STP_new_LM ",
+"SCP_fix ",
+"SCP_new ",
+"SCP_fix_LM ",
+"SCP_new_LM ",
+"SHIP ",
+"HSI ",
+"HSIv2 ",
+"DCP ",
+"MU_WMAXSHEAR ",
 "MUML_WMAXSHEAR",
-"SB_WMAXSHEAR",
-"ML_WMAXSHEAR",
-"MU_EFF_EWMAXSHEAR",
+"SB_WMAXSHEAR ",
+"ML_WMAXSHEAR ",
+"MU_EFF_EWMAXSHEAR ",
 "MUML_EFF_EWMAXSHEAR",
-"SB_EFF_EWMAXSHEAR",
-"ML_EFF_EWMAXSHEAR",
-"MU_EFF_EWMAXSHEAR_HGL",
+"SB_EFF_EWMAXSHEAR ",
+"ML_EFF_EWMAXSHEAR ",
+"MU_EFF_EWMAXSHEAR_HGL ",
 "MUML_EFF_EWMAXSHEAR_HGL",
 "SB_EFF_EWMAXSHEAR_HGL",
 "ML_EFF_EWMAXSHEAR_HGL",
-"EHI_500m_RM",
-"EHI_01km_RM",
-"EHI_03km_RM",
-"EHI_500m_LM",
+"MU_EFF_EWMAXSHEAR_3km ",
+"MUML_EFF_EWMAXSHEAR_3km",
+"SB_EFF_EWMAXSHEAR_3km",
+"ML_EFF_EWMAXSHEAR_3km",
+"EHI_500m ",
+"EHI_01km ",
+"EHI_03km",
+"EHI_500m_LM ",
 "EHI_01km_LM",
 "EHI_03km_LM",
 "SHERBS3",
@@ -678,13 +722,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE_v2",
 "DEI",
 "DEI_eff",
-"TIP",
-"THTE_LR03",
-"THTE_LR04",
-"THTE_LR13",
-"THTE_LR14",
-"THTE_LR5_eff",
-"THTE_LR4_eff")
+"TIP")
   
   return(tmp)
 }
