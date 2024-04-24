@@ -6361,7 +6361,7 @@ double * sounding_default2(double* pressure,
 //'  \item Delta_thetae_max 
 //'  \item Thetae_01km 
 //'  \item Thetae_02km 
-//'  \item Thetae_LR03
+//'  \item Thetae_LR_03km
 //'  \item Thetae_LR_13km
 //'  \item Thetae_LR_14km
 //'  \item Thetae_LCL_to_zero
