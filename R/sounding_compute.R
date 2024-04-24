@@ -169,15 +169,15 @@
 #'  \item MU_HGT
 #'  \item MUML_HGT
 #'  \item HGT_min_thetae_04km 
-#'  \item Delta_thetae 
-#'  \item Delta_thetae_min04km 
+#'  \item Delta_thetae_DCAPE 
+#'  \item Delta_thetae_max 
 #'  \item Thetae_01km 
 #'  \item Thetae_02km 
-#'  \item THTE_LR03
-#'  \item THTE_LR13
-#'  \item THTE_LR14
-#'  \item THTE_LR_LCL_to_zero
-#'  \item THTE_LR_MU_to_zero
+#'  \item Thetae_LR03
+#'  \item Thetae_LR_13km
+#'  \item Thetae_LR_14km
+#'  \item Thetae_LCL_to_zero
+#'  \item Thetae_MU_to_zero
 #'  \item DCAPE 
 #'  \item Cold_Pool_Strength 
 #'  \item PRCP_WATER 
@@ -554,15 +554,15 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU_HGT",
 "MUML_HGT",
 "HGT_min_thetae_04km",
-"Delta_thetae",
-"Delta_thetae_min04km",
-"Thetae_01km",
+"Delta_thetae_DCAPE", 
+"Delta_thetae_max", 
+"Thetae_01km", 
 "Thetae_02km",
-"THTE_LR03",
-"THTE_LR13",
-"THTE_LR14",
-"THTE_LR_LCL_to_zero",
-"THTE_LR_MU_to_zero",
+"Thetae_LR03",
+"Thetae_LR_13km",
+"Thetae_LR_14km",
+"Thetae_LCL_to_zero",
+"Thetae_MU_to_zero",
 "DCAPE",
 "Cold_Pool_Strength",
 "PRCP_WATER",
@@ -723,6 +723,5 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "DEI",
 "DEI_eff",
 "TIP")
-  
   return(tmp)
 }
