@@ -176,8 +176,8 @@
 #'  \item THTE_LR03
 #'  \item THTE_LR13
 #'  \item THTE_LR14
-#'  \item THTE_LR5_eff
-#'  \item THTE_LR5_LCL
+#'  \item THTE_LR_LCL_to_zero
+#'  \item THTE_LR_MU_to_zero
 #'  \item DCAPE 
 #'  \item Cold_Pool_Strength 
 #'  \item PRCP_WATER 
@@ -561,8 +561,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "THTE_LR03",
 "THTE_LR13",
 "THTE_LR14",
-"THTE_LR5_eff",
-"THTE_LR5_LCL",
+"THTE_LR_LCL_to_zero",
+"THTE_LR_MU_to_zero",
 "DCAPE",
 "Cold_Pool_Strength",
 "PRCP_WATER",
