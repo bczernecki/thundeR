@@ -297,12 +297,12 @@
 #'  \item TotalTotals_Index 
 #'  \item SWEAT_Index 
 #'  \item Wind_Index 
-#'  \item STP_fix 
-#'  \item STP_new 
+#'  \item STP_fix_RM 
+#'  \item STP_new_RM 
 #'  \item STP_fix_LM 
 #'  \item STP_new_LM 
-#'  \item SCP_fix 
-#'  \item SCP_new 
+#'  \item SCP_fix_RM 
+#'  \item SCP_new_RM 
 #'  \item SCP_fix_LM 
 #'  \item SCP_new_LM 
 #'  \item SHIP 
@@ -325,9 +325,9 @@
 #'  \item MUML_EFF_EWMAXSHEAR_3km
 #'  \item SB_EFF_EWMAXSHEAR_3km
 #'  \item ML_EFF_EWMAXSHEAR_3km
-#'  \item EHI_500m 
-#'  \item EHI_01km 
-#'  \item EHI_03km
+#'  \item EHI_500m_RM 
+#'  \item EHI_01km_RM 
+#'  \item EHI_03km_RM
 #'  \item EHI_500m_LM 
 #'  \item EHI_01km_LM
 #'  \item EHI_03km_LM
@@ -682,12 +682,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "TotalTotals_Index",
 "SWEAT_Index",
 "Wind_Index",
-"STP_fix",
-"STP_new",
+"STP_fix_RM",
+"STP_new_RM",
 "STP_fix_LM",
 "STP_new_LM",
-"SCP_fix",
-"SCP_new",
+"SCP_fix_RM",
+"SCP_new_RM",
 "SCP_fix_LM",
 "SCP_new_LM",
 "SHIP",
@@ -710,9 +710,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MUML_EFF_EWMAXSHEAR_3km",
 "SB_EFF_EWMAXSHEAR_3km",
 "ML_EFF_EWMAXSHEAR_3km",
-"EHI_500m",
-"EHI_01km",
-"EHI_03km",
+"EHI_500m_RM",
+"EHI_01km_RM",
+"EHI_03km_RM",
 "EHI_500m_LM",
 "EHI_01km_LM",
 "EHI_03km_LM",
