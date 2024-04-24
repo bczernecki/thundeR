@@ -173,7 +173,7 @@
 #'  \item Delta_thetae_max 
 #'  \item Thetae_01km 
 #'  \item Thetae_02km 
-#'  \item Thetae_LR03
+#'  \item Thetae_LR_03km
 #'  \item Thetae_LR_13km
 #'  \item Thetae_LR_14km
 #'  \item Thetae_LCL_to_zero
@@ -558,7 +558,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "Delta_thetae_max", 
 "Thetae_01km", 
 "Thetae_02km",
-"Thetae_LR03",
+"Thetae_LR_03km",
 "Thetae_LR_13km",
 "Thetae_LR_14km",
 "Thetae_LCL_to_zero",
