@@ -2490,8 +2490,8 @@ public:
   double LR26();
   double max_LR26_2km();
 
-  double THTE_LR5_eff();
-  double THTE_LR5_LCL();
+  double THTE_LR_LCL_to_zero();
+  double THTE_LR_MU_to_zero();
   double THTE_LR14();
   double THTE_LR13();
   double THTE_LR04();
@@ -3928,9 +3928,9 @@ double IndicesCollector::THTE_LR14(){
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
-double IndicesCollector::THTE_LR5_LCL(){
+double IndicesCollector::THTE_LR_LCL_to_zero(){
   int lower = S->th->meanLayer->vLclIndex;
-  int upper = cache->getHeightIndex(5000);  
+  int upper = S->th->mintenpos;  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->th->oe,lower);
@@ -3938,9 +3938,9 @@ double IndicesCollector::THTE_LR5_LCL(){
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
-double IndicesCollector::THTE_LR5_eff(){
+double IndicesCollector::THTE_LR_MU_to_zero(){
   int lower = S->th->mostUnstable->startIndex;
-  int upper = cache->getHeightIndex(5000);  
+  int upper = S->th->mintenpos;  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->th->oe,lower);
@@ -5661,8 +5661,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[169]=(*S)->getIndicesCollectorPointer()->THTE_LR03();
   vec[170]=(*S)->getIndicesCollectorPointer()->THTE_LR13();
   vec[171]=(*S)->getIndicesCollectorPointer()->THTE_LR14();
-  vec[172]=(*S)->getIndicesCollectorPointer()->THTE_LR5_eff();
-  vec[173]=(*S)->getIndicesCollectorPointer()->THTE_LR5_LCL();
+  vec[172]=(*S)->getIndicesCollectorPointer()->THTE_LR_LCL_to_zero();
+  vec[173]=(*S)->getIndicesCollectorPointer()->THTE_LR_MU_to_zero();
   vec[174]=(*S)->getIndicesCollectorPointer()->VDCAPE(); 
   vec[175]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();
   vec[176]=(*S)->getIndicesCollectorPointer()->PWATER();
@@ -6368,8 +6368,8 @@ double * sounding_default2(double* pressure,
 //'  \item THTE_LR03
 //'  \item THTE_LR13
 //'  \item THTE_LR14
-//'  \item THTE_LR5_eff
-//'  \item THTE_LR5_LCL
+//'  \item THTE_LR_LCL_to_zero
+//'  \item THTE_LR_MU_to_zero
 //'  \item DCAPE 
 //'  \item Cold_Pool_Strength 
 //'  \item PRCP_WATER 
