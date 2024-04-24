@@ -3930,22 +3930,18 @@ double IndicesCollector::THTE_LR14(){
 
 double IndicesCollector::THTE_LR_LCL_to_zero(){
   int lower = S->th->meanLayer->vLclIndex;
-  int upper = S->th->mintenpos;  
-  double hlow = Get(S->h,lower);
-  double hup = Get(S->h,upper);
+  int upper = S->th->zeropos;  
   double tlow = Get(S->th->oe,lower);
   double tup = Get(S->th->oe,upper);
-  return 1000*((tup-tlow)/(hup-hlow));
+  return tup-tlow;
 }
 
 double IndicesCollector::THTE_LR_MU_to_zero(){
   int lower = S->th->mostUnstable->startIndex;
-  int upper = S->th->mintenpos;  
-  double hlow = Get(S->h,lower);
-  double hup = Get(S->h,upper);
+  int upper = S->th->zeropos;  
   double tlow = Get(S->th->oe,lower);
   double tup = Get(S->th->oe,upper);
-  return 1000*((tup-tlow)/(hup-hlow));
+  return tup-tlow;
 }
 
 double IndicesCollector::DeltaThetaE(){
@@ -6361,15 +6357,15 @@ double * sounding_default2(double* pressure,
 //'  \item MU_HGT
 //'  \item MUML_HGT
 //'  \item HGT_min_thetae_04km 
-//'  \item Delta_thetae 
-//'  \item Delta_thetae_min04km 
+//'  \item Delta_thetae_DCAPE 
+//'  \item Delta_thetae_max 
 //'  \item Thetae_01km 
 //'  \item Thetae_02km 
-//'  \item THTE_LR03
-//'  \item THTE_LR13
-//'  \item THTE_LR14
-//'  \item THTE_LR_LCL_to_zero
-//'  \item THTE_LR_MU_to_zero
+//'  \item Thetae_LR03
+//'  \item Thetae_LR_13km
+//'  \item Thetae_LR_14km
+//'  \item Thetae_LCL_to_zero
+//'  \item Thetae_MU_to_zero
 //'  \item DCAPE 
 //'  \item Cold_Pool_Strength 
 //'  \item PRCP_WATER 
