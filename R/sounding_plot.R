@@ -730,7 +730,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.79, 2.9, paste0(round(parametry[which(names(parametry[1:LP]) == "DCAPE")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
   
   text(0.78, -0.7, "4 km delta theta-e [K]:", cex = FONTSIZE, adj = c(1, 0))
-  text(0.79, -0.7, paste0(round(parametry[which(names(parametry[1:LP]) == "Delta_thetae")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
+  text(0.79, -0.7, paste0(round(parametry[which(names(parametry[1:LP]) == "Delta_thetae_DCAPE")], digits = 0), ""), cex = FONTSIZE, adj = c(0, 0))
   
   segments(0.865, 10.25, 0.865, -3)
   
