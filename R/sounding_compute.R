@@ -176,8 +176,8 @@
 #'  \item Thetae_LR_03km
 #'  \item Thetae_LR_13km
 #'  \item Thetae_LR_14km
-#'  \item Thetae_LCL_to_zero
-#'  \item Thetae_MU_to_zero
+#'  \item Thetae_LCL_to_M10
+#'  \item Thetae_MU_to_M10
 #'  \item DCAPE 
 #'  \item Cold_Pool_Strength 
 #'  \item PRCP_WATER 
@@ -561,8 +561,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "Thetae_LR_03km",
 "Thetae_LR_13km",
 "Thetae_LR_14km",
-"Thetae_LCL_to_zero",
-"Thetae_MU_to_zero",
+"Thetae_LCL_to_M10",
+"Thetae_MU_to_M10",
 "DCAPE",
 "Cold_Pool_Strength",
 "PRCP_WATER",
