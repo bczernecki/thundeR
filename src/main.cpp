@@ -2490,8 +2490,8 @@ public:
   double LR26();
   double max_LR26_2km();
 
-  double THTE_LR_LCL_to_zero();
-  double THTE_LR_MU_to_zero();
+  double THTE_LR_LCL_to_M10();
+  double THTE_LR_MU_to_M10();
   double THTE_LR14();
   double THTE_LR13();
   double THTE_LR04();
@@ -3909,8 +3909,8 @@ double IndicesCollector::THTE_LR04(){
 }
 
 double IndicesCollector::THTE_LR13(){
-  int lower = S->th->mostUnstable->startIndex;
-  int upper = S->th->mintenpos;  
+  int lower = cache->getHeightIndex(1000);
+  int upper = cache->getHeightIndex(3000);  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->th->oe,lower);
@@ -3919,8 +3919,8 @@ double IndicesCollector::THTE_LR13(){
 }
 
 double IndicesCollector::THTE_LR14(){
-  int lower = S->th->meanLayer->vLclIndex;
-  int upper = S->th->mintenpos;  
+  int lower = cache->getHeightIndex(1000);
+  int upper = cache->getHeightIndex(4000);  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->th->oe,lower);
@@ -3928,7 +3928,7 @@ double IndicesCollector::THTE_LR14(){
   return 1000*((tup-tlow)/(hup-hlow));
 }
 
-double IndicesCollector::THTE_LR_LCL_to_zero(){
+double IndicesCollector::THTE_LR_LCL_to_M10(){
   int lower = S->th->meanLayer->vLclIndex;
   int upper = S->th->mintenpos;  
   double tlow = Get(S->th->oe,lower);
@@ -3936,7 +3936,7 @@ double IndicesCollector::THTE_LR_LCL_to_zero(){
   return tup-tlow;
 }
 
-double IndicesCollector::THTE_LR_MU_to_zero(){
+double IndicesCollector::THTE_LR_MU_to_M10(){
   int lower = S->th->mostUnstable->startIndex;
   int upper = S->th->mintenpos;  
   double tlow = Get(S->th->oe,lower);
@@ -5657,8 +5657,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[169]=(*S)->getIndicesCollectorPointer()->THTE_LR03();
   vec[170]=(*S)->getIndicesCollectorPointer()->THTE_LR13();
   vec[171]=(*S)->getIndicesCollectorPointer()->THTE_LR14();
-  vec[172]=(*S)->getIndicesCollectorPointer()->THTE_LR_LCL_to_zero();
-  vec[173]=(*S)->getIndicesCollectorPointer()->THTE_LR_MU_to_zero();
+  vec[172]=(*S)->getIndicesCollectorPointer()->THTE_LR_LCL_to_M10();
+  vec[173]=(*S)->getIndicesCollectorPointer()->THTE_LR_MU_to_M10();
   vec[174]=(*S)->getIndicesCollectorPointer()->VDCAPE(); 
   vec[175]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();
   vec[176]=(*S)->getIndicesCollectorPointer()->PWATER();
@@ -6364,8 +6364,8 @@ double * sounding_default2(double* pressure,
 //'  \item Thetae_LR_03km
 //'  \item Thetae_LR_13km
 //'  \item Thetae_LR_14km
-//'  \item Thetae_LCL_to_zero
-//'  \item Thetae_MU_to_zero
+//'  \item Thetae_LCL_to_M10
+//'  \item Thetae_MU_to_M10
 //'  \item DCAPE 
 //'  \item Cold_Pool_Strength 
 //'  \item PRCP_WATER 
