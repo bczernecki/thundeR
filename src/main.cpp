@@ -3909,8 +3909,8 @@ double IndicesCollector::THTE_LR04(){
 }
 
 double IndicesCollector::THTE_LR13(){
-  int lower = cache->getHeightIndex(1000);
-  int upper = cache->getHeightIndex(3000);  
+  int lower = S->th->mostUnstable->startIndex;
+  int upper = S->th->mintenpos;  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->th->oe,lower);
@@ -3919,8 +3919,8 @@ double IndicesCollector::THTE_LR13(){
 }
 
 double IndicesCollector::THTE_LR14(){
-  int lower = cache->getHeightIndex(1000);
-  int upper = cache->getHeightIndex(4000);  
+  int lower = S->th->meanLayer->vLclIndex;
+  int upper = S->th->mintenpos;  
   double hlow = Get(S->h,lower);
   double hup = Get(S->h,upper);
   double tlow = Get(S->th->oe,lower);
@@ -3930,7 +3930,7 @@ double IndicesCollector::THTE_LR14(){
 
 double IndicesCollector::THTE_LR_LCL_to_zero(){
   int lower = S->th->meanLayer->vLclIndex;
-  int upper = S->th->zeropos;  
+  int upper = S->th->mintenpos;  
   double tlow = Get(S->th->oe,lower);
   double tup = Get(S->th->oe,upper);
   return tup-tlow;
@@ -3938,7 +3938,7 @@ double IndicesCollector::THTE_LR_LCL_to_zero(){
 
 double IndicesCollector::THTE_LR_MU_to_zero(){
   int lower = S->th->mostUnstable->startIndex;
-  int upper = S->th->zeropos;  
+  int upper = S->th->mintenpos;  
   double tlow = Get(S->th->oe,lower);
   double tup = Get(S->th->oe,upper);
   return tup-tlow;
