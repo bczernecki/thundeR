@@ -588,7 +588,10 @@ private:
   double srh36lm;
   double srh36rm;
   double srh36sm;
-  
+
+  double sw100rm;
+  double sw100lm;
+
   double sw500rm;
   double sw500lm;
   
@@ -597,7 +600,8 @@ private:
   
   double sw03rm;
   double sw03lm;
-  
+
+  double shear100m;
   double shear500m;
   double shear1000m; 
   double shear3000m;
@@ -691,7 +695,10 @@ public:
     srh36lm = 0;
     srh36rm = 0;
     srh36sm = 0;
-    
+
+    sw100rm = 0;
+    sw100lm = 0;
+
     sw500rm = 0;
     sw500lm = 0;
     
@@ -700,7 +707,8 @@ public:
     
     sw03rm = 0;
     sw03lm = 0;
-    
+
+    shear100m = 0;
     shear500m = 0;
     shear1000m = 0;
     shear3000m = 0;
@@ -1139,6 +1147,10 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     if(h-h0<=100){
       srh100rm = srh13rm;
       srh100lm = srh13lm;
+      sw100rm = sw13rm;
+      sw100lm = sw13lm;
+      shear100m = shear_l;
+
     }
   }
 }
@@ -1585,6 +1597,7 @@ public:
 
   double t0;
   double pwater;
+  double pwater_eff;
   double lastp;
   double minTHTE;
   int minTHTEpos;
@@ -1814,6 +1827,7 @@ Thermodynamics::Thermodynamics(){
   t10=0;
   p10=0;
   pwater=0;
+  pwater_eff=0;
   lastp=1000;
   minTHTE=0;
   minTHTEpos=0;
@@ -2130,6 +2144,10 @@ void Thermodynamics::putPWATER( int i, double p, double h, double t, double d, d
   std::list<double>::iterator it = mixing->begin();
   std::advance(it, i);
   pwater += 0.5*(lastp - p) * (*(it)+*(--it));
+  
+  double it_eff = (*(it)+*(--it))*(ESAT(d)/ESAT(t));
+  pwater_eff+=0.5 *(lastp-p)*it_eff;
+
 }
 void Thermodynamics::putLowLapseRates(int i, double p, double h, double t, double d, double a,double v)
 {
@@ -2343,6 +2361,7 @@ void Thermodynamics::finish(){
   this->downdraft->finish();
   this->finishLowLapseRates();
   pwater /= 98.1;
+  pwater_eff /= 98.1;
   
   meanhum1/=meand1b;
   meanhum2/=meand2b;
@@ -2513,6 +2532,7 @@ public:
   double VirtualColdPoolStrength();
   double WindIndex();
   double PWATER();
+  double PWATER_eff();
   double MoistureFlux();
 
   double RH01();
@@ -2676,19 +2696,23 @@ public:
   double EHI03_LM();
   double EHI01_LM();
   double EHI500_LM();
-  
+
+  double SW100_RM();
   double SW500_RM();
   double SW01_RM();
   double SW03_RM();
-  
+
+  double SW100_LM();
   double SW500_LM();
   double SW01_LM();
   double SW03_LM();
-  
+
+  double SV_100_RM_FRA();
   double SV_500_RM_FRA();
   double SV_1000_RM_FRA();
   double SV_3000_RM_FRA();
-  
+
+  double SV_100_LM_FRA();
   double SV_500_LM_FRA();
   double SV_1000_LM_FRA();
   double SV_3000_LM_FRA();
@@ -3984,6 +4008,10 @@ double IndicesCollector::PWATER(){
   return S->th->pwater;
 }
 
+double IndicesCollector::PWATER_eff(){
+  return S->th->pwater_eff;
+}
+
 double IndicesCollector::MLMixingRatio(){
   return S->th->mmr;
 }
@@ -5272,6 +5300,10 @@ double IndicesCollector::EHI500_LM(){
   return (this->VSurfaceBasedCAPE()*this->SRH500LM())/160000;
 }
 
+double IndicesCollector::SW100_RM(){
+  return S->ks->sw100rm / 100;
+}
+
 double IndicesCollector::SW500_RM(){
   return S->ks->sw500rm / 500;
 }
@@ -5282,6 +5314,10 @@ double IndicesCollector::SW01_RM(){
 
 double IndicesCollector::SW03_RM(){
   return S->ks->sw03rm / 3000;
+}
+
+double IndicesCollector::SW100_LM(){
+  return S->ks->sw100lm / 100;
 }
 
 double IndicesCollector::SW500_LM(){
@@ -5365,6 +5401,10 @@ double IndicesCollector::MeanVMSR03_LM(){
   return S->ks->SR_3000_LM / S->ks->n3000;
 }
 
+double IndicesCollector::SV_100_RM_FRA(){
+  return S->ks->sw100rm / S->ks->shear100m;
+}
+
 double IndicesCollector::SV_500_RM_FRA(){
   return S->ks->sw500rm / S->ks->shear500m;
 }
@@ -5375,6 +5415,10 @@ double IndicesCollector::SV_1000_RM_FRA(){
 
 double IndicesCollector::SV_3000_RM_FRA(){
   return S->ks->sw03rm / S->ks->shear3000m;
+}
+
+double IndicesCollector::SV_100_LM_FRA(){
+  return S->ks->sw100lm / S->ks->shear100m;
 }
 
 double IndicesCollector::SV_500_LM_FRA(){
@@ -5456,7 +5500,7 @@ double IndicesCollector::SB_buoyancy_M10(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[334];
+  double * vec = new double[339];
 
 // MU parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
@@ -5662,6 +5706,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[174]=(*S)->getIndicesCollectorPointer()->VDCAPE(); 
   vec[175]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();
   vec[176]=(*S)->getIndicesCollectorPointer()->PWATER();
+
   vec[177]=(*S)->getIndicesCollectorPointer()->MoistureFlux(); 
   vec[178]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux(); 
   vec[179]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff(); 
@@ -5774,7 +5819,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[268]=(*S)->getIndicesCollectorPointer()->SV_500_RM_FRA();
   vec[269]=(*S)->getIndicesCollectorPointer()->SV_1000_RM_FRA();
   vec[270]=(*S)->getIndicesCollectorPointer()->SV_3000_RM_FRA();
-  
+
   vec[271]=(*S)->getIndicesCollectorPointer()->SV_500_LM_FRA();
   vec[272]=(*S)->getIndicesCollectorPointer()->SV_1000_LM_FRA();
   vec[273]=(*S)->getIndicesCollectorPointer()->SV_3000_LM_FRA();
@@ -5859,6 +5904,12 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[331]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[332]=(*S)->getIndicesCollectorPointer()->DEI_eff();
   vec[333]=(*S)->getIndicesCollectorPointer()->TIP();
+
+  vec[334]=(*S)->getIndicesCollectorPointer()->PWATER_eff();
+  vec[335]=(*S)->getIndicesCollectorPointer()->SW100_RM();
+  vec[336]=(*S)->getIndicesCollectorPointer()->SW100_LM();
+  vec[337]=(*S)->getIndicesCollectorPointer()->SV_100_RM_FRA();
+  vec[338]=(*S)->getIndicesCollectorPointer()->SV_100_LM_FRA();
   return vec;
 }
 
@@ -6526,6 +6577,11 @@ double * sounding_default2(double* pressure,
 //'  \item DEI
 //'  \item DEI_eff
 //'  \item TIP
+//'  \item PRCP_WATER 
+//'  \item SV_0100m_RM
+//'  \item SV_0100m_LM
+//'  \item SV_FRA_0100m_RM
+//'  \item SV_FRA_0100m_LM
 //' }
  // [[Rcpp::export]]
  
@@ -6562,7 +6618,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 334;
+   int reslen= 339;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
