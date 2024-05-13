@@ -338,7 +338,7 @@
 #'  \item DEI
 #'  \item DEI_eff
 #'  \item TIP
-#'  \item PRCP_WATER 
+#'  \item PRCP_WATER_eff 
 #'  \item SV_0100m_RM
 #'  \item SV_0100m_LM
 #'  \item SV_FRA_0100m_RM
@@ -728,7 +728,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "DEI",
 "DEI_eff",
 "TIP",
-"PRCP_WATER", 
+"PRCP_WATER_eff", 
 "SV_0100m_RM",
 "SV_0100m_LM",
 "SV_FRA_0100m_RM",
