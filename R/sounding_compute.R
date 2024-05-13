@@ -338,6 +338,11 @@
 #'  \item DEI
 #'  \item DEI_eff
 #'  \item TIP
+#'  \item PRCP_WATER 
+#'  \item SV_0100m_RM
+#'  \item SV_0100m_LM
+#'  \item SV_FRA_0100m_RM
+#'  \item SV_FRA_0100m_LM
 
 #' }
 #'
@@ -722,6 +727,11 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE_v2",
 "DEI",
 "DEI_eff",
-"TIP")
-  return(tmp)
+"TIP",
+"PRCP_WATER", 
+"SV_0100m_RM",
+"SV_0100m_LM",
+"SV_FRA_0100m_RM",
+"SV_FRA_0100m_LM")
+return(tmp)
 }
