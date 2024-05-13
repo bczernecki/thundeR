@@ -6577,7 +6577,7 @@ double * sounding_default2(double* pressure,
 //'  \item DEI
 //'  \item DEI_eff
 //'  \item TIP
-//'  \item PRCP_WATER 
+//'  \item PRCP_WATER_eff 
 //'  \item SV_0100m_RM
 //'  \item SV_0100m_LM
 //'  \item SV_FRA_0100m_RM
