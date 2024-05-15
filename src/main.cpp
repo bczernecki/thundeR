@@ -4647,7 +4647,7 @@ double IndicesCollector::SHERBE(){
 }
 
 double IndicesCollector::SHERBS3_v2(){
-  double T1 = this->BS03()/26;
+  double T1 = this->MeanWind03()/20;
   double T2 = this->lapserate03()/-(5.2);
   double T3 = this->LR26()/-(5.6);
   return T1*T2*T3;
