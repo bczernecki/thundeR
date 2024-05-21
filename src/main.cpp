@@ -4268,7 +4268,7 @@ double IndicesCollector::SRH01SM_eff(){
   return S->ks->srh01sm_eff;
 }
 
-double IndicesCollector::Peters_vector(){
+Vector IndicesCollector::Peters_vector(){
   double SRH_mean = S->ks->srh03sm;
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
