@@ -340,8 +340,8 @@ double Vector::abs(){
 }
 
 double distance(Vector x0, Vector x1, Vector x2){
-  Vector l = x0-x1;
-  Vector r = x0-x2;
+  Vector l = x2-x1;
+  Vector r = x1-x0;
   Vector up = Vector::vec(l,r);
   double u = up.abs();
   Vector down=x2-x1;
@@ -5510,8 +5510,8 @@ double IndicesCollector::ML_buoyancy(){
   return diff;
 }
 
-double IndicesCollector::SB_buoyancy_3km(){
-  double diff = S->th->surfaceBased->peakB_3km;
+double IndicesCollector::SB_buoyancy(){
+  double diff = S->th->surfaceBased->peakB;
   return diff;
 }
 
