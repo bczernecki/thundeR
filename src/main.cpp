@@ -1276,7 +1276,8 @@ private:
   double coldcapeTV; 
   double peakB;
   double peakB_M10;
-  
+  double peakB_3km;
+
   bool isSet;
   bool dcape_;
   
@@ -1336,6 +1337,7 @@ void LapseRate::allocate(){
   coldcapeTV=0;
   peakB=-999;
   peakB_M10=-999;
+  peakB_3km=-999;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
   startIndex=-1;
   isSet = false;
@@ -1503,6 +1505,13 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   double ttt2 = (vt_parcel - t_) / (t_+273.15) * 9.81;
   if(ttt2>this->peakB_M10) {
     peakB_M10 = ttt2;
+     }
+   }
+
+  if ( (h-h0) <= 3000) {
+  double ttt3 = (vt_parcel - t_) / (t_+273.15) * 9.81;
+  if(ttt3>this->peakB_3km) {
+    peakB_3km = ttt3;
      }
    }
   }
@@ -2833,6 +2842,12 @@ public:
   double MU500_buoyancy_M10();
   double ML_buoyancy_M10();
   double SB_buoyancy_M10();
+
+  double MU_buoyancy_3km();
+  double MUML_buoyancy_3km();
+  double MU500_buoyancy_3km();
+  double ML_buoyancy_3km();
+  double SB_buoyancy_3km();
 
   double MU_ebuoyancy();
   double MUML_ebuoyancy();
@@ -4970,6 +4985,51 @@ double IndicesCollector::SB_ebuoyancy_M10(){
   return E_tilde * buoyancy;
 }
 
+double IndicesCollector::MU_ebuoyancy_3km(){
+  double* CAPE_WXS = this->MU_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->MU_buoyancy_3km();
+  return E_tilde * buoyancy;
+}
+
+double IndicesCollector::ML_ebuoyancy_3km(){
+  double* CAPE_WXS = this->ML_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->ML_buoyancy_3km();
+  return E_tilde * buoyancy;
+}
+
+double IndicesCollector::MUML_ebuoyancy_3km(){
+  double* CAPE_WXS = this->MU_ML_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->MUML_buoyancy_3km();
+  return E_tilde * buoyancy;
+}
+
+double IndicesCollector::MU500_ebuoyancy_3km(){
+  double* CAPE_WXS = this->MU500_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->MU500_buoyancy_3km();
+  return E_tilde * buoyancy;
+}
+
+double IndicesCollector::SB_ebuoyancy_3km(){
+  double* CAPE_WXS = this->SB_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->SB_buoyancy_3km();
+  return E_tilde * buoyancy;
+}
+
 double IndicesCollector::BulkShearSfcTen(){
   int tail=0;
   int head = S->th->mintenpos;
@@ -5489,8 +5549,33 @@ double IndicesCollector::ML_buoyancy(){
   return diff;
 }
 
-double IndicesCollector::SB_buoyancy(){
-  double diff = S->th->surfaceBased->peakB;
+double IndicesCollector::SB_buoyancy_3km(){
+  double diff = S->th->surfaceBased->peakB_3km;
+  return diff;
+}
+
+double IndicesCollector::MU_buoyancy_3km(){
+  double diff = S->th->mostUnstable->peakB_3km;
+  return diff;
+}
+
+double IndicesCollector::MUML_buoyancy_3km(){
+  double diff = S->th->meanmostUnstable->peakB_3km;
+  return diff;
+}
+
+double IndicesCollector::MU500_buoyancy_3km(){
+  double diff = S->th->mostU500->peakB_3km;
+  return diff;
+}
+
+double IndicesCollector::ML_buoyancy_3km(){
+  double diff = S->th->meanLayer->peakB_3km;
+  return diff;
+}
+
+double IndicesCollector::SB_buoyancy_3km(){
+  double diff = S->th->surfaceBased->peakB_3km;
   return diff;
 }
 
@@ -5546,7 +5631,7 @@ double IndicesCollector::Ventilation_912km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[344];
+  double * vec = new double[354];
 
 // MU parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
@@ -5962,6 +6047,18 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[341]=(*S)->getIndicesCollectorPointer()->Ventilation_36km();
   vec[342]=(*S)->getIndicesCollectorPointer()->Ventilation_69km();
   vec[343]=(*S)->getIndicesCollectorPointer()->Ventilation_912km();
+
+  vec[344]=(*S)->getIndicesCollectorPointer()->SB_buoyancy_3km();
+  vec[345]=(*S)->getIndicesCollectorPointer()->ML_buoyancy_3km();
+  vec[346]=(*S)->getIndicesCollectorPointer()->MU_buoyancy_3km();
+  vec[347]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy_3km();
+  vec[348]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy_3km();
+
+  vec[349]=(*S)->getIndicesCollectorPointer()->SB_ebuoyancy_3km();
+  vec[350]=(*S)->getIndicesCollectorPointer()->ML_ebuoyancy_3km();
+  vec[351]=(*S)->getIndicesCollectorPointer()->MU_ebuoyancy_3km();
+  vec[352]=(*S)->getIndicesCollectorPointer()->MUML_ebuoyancy_3km();
+  vec[353]=(*S)->getIndicesCollectorPointer()->MU500_ebuoyancy_3km();
 
   return vec;
 }
@@ -6640,6 +6737,16 @@ double * sounding_default2(double* pressure,
 //'  \item Ventilation_36km
 //'  \item Ventilation_69km
 //'  \item Ventilation_912km
+//'  \item SB_buoyancy_3km
+//'  \item ML_buoyancy_3km
+//'  \item MU_buoyancy_3km
+//'  \item MUML_buoyancy_3km
+//'  \item MU500_buoyancy_3km
+//'  \item SB_Ebuoyancy_3km
+//'  \item ML_Ebuoyancy_3km
+//'  \item MU_Ebuoyancy_3km
+//'  \item MUML_Ebuoyancy_3km
+//'  \item MU500_Ebuoyancy_3km
 //' }
  // [[Rcpp::export]]
  
@@ -6676,7 +6783,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 344;
+   int reslen= 354;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
