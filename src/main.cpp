@@ -2849,6 +2849,12 @@ public:
   double ML_buoyancy_3km();
   double SB_buoyancy_3km();
 
+  double MU_ebuoyancy_3km();
+  double MUML_ebuoyancy_3km();
+  double MU500_ebuoyancy_3km();
+  double ML_ebuoyancy_3km();
+  double SB_ebuoyancy_3km();
+
   double MU_ebuoyancy();
   double MUML_ebuoyancy();
   double MU500_ebuoyancy();
@@ -4985,51 +4991,6 @@ double IndicesCollector::SB_ebuoyancy_M10(){
   return E_tilde * buoyancy;
 }
 
-double IndicesCollector::MU_ebuoyancy_3km(){
-  double* CAPE_WXS = this->MU_ECAPE();
-  double E_tilde = CAPE_WXS[0];
-  delete[] CAPE_WXS;
-  if(E_tilde>2)E_tilde = 2;
-  double buoyancy = this->MU_buoyancy_3km();
-  return E_tilde * buoyancy;
-}
-
-double IndicesCollector::ML_ebuoyancy_3km(){
-  double* CAPE_WXS = this->ML_ECAPE();
-  double E_tilde = CAPE_WXS[0];
-  delete[] CAPE_WXS;
-  if(E_tilde>2)E_tilde = 2;
-  double buoyancy = this->ML_buoyancy_3km();
-  return E_tilde * buoyancy;
-}
-
-double IndicesCollector::MUML_ebuoyancy_3km(){
-  double* CAPE_WXS = this->MU_ML_ECAPE();
-  double E_tilde = CAPE_WXS[0];
-  delete[] CAPE_WXS;
-  if(E_tilde>2)E_tilde = 2;
-  double buoyancy = this->MUML_buoyancy_3km();
-  return E_tilde * buoyancy;
-}
-
-double IndicesCollector::MU500_ebuoyancy_3km(){
-  double* CAPE_WXS = this->MU500_ECAPE();
-  double E_tilde = CAPE_WXS[0];
-  delete[] CAPE_WXS;
-  if(E_tilde>2)E_tilde = 2;
-  double buoyancy = this->MU500_buoyancy_3km();
-  return E_tilde * buoyancy;
-}
-
-double IndicesCollector::SB_ebuoyancy_3km(){
-  double* CAPE_WXS = this->SB_ECAPE();
-  double E_tilde = CAPE_WXS[0];
-  delete[] CAPE_WXS;
-  if(E_tilde>2)E_tilde = 2;
-  double buoyancy = this->SB_buoyancy_3km();
-  return E_tilde * buoyancy;
-}
-
 double IndicesCollector::BulkShearSfcTen(){
   int tail=0;
   int head = S->th->mintenpos;
@@ -5627,6 +5588,51 @@ double IndicesCollector::Ventilation_69km(){
 double IndicesCollector::Ventilation_912km(){
   double ventilation = distance(S->ks->mean912, this->Peters_vector(), S->ks->mean0);   
   return ventilation;
+}
+
+double IndicesCollector::MU_ebuoyancy_3km(){
+  double* CAPE_WXS = this->MU_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->MU_buoyancy_3km();
+  return E_tilde * buoyancy;
+}
+
+double IndicesCollector::ML_ebuoyancy_3km(){
+  double* CAPE_WXS = this->ML_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->ML_buoyancy_3km();
+  return E_tilde * buoyancy;
+}
+
+double IndicesCollector::MUML_ebuoyancy_3km(){
+  double* CAPE_WXS = this->MU_ML_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->MUML_buoyancy_3km();
+  return E_tilde * buoyancy;
+}
+
+double IndicesCollector::MU500_ebuoyancy_3km(){
+  double* CAPE_WXS = this->MU500_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->MU500_buoyancy_3km();
+  return E_tilde * buoyancy;
+}
+
+double IndicesCollector::SB_ebuoyancy_3km(){
+  double* CAPE_WXS = this->SB_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->SB_buoyancy_3km();
+  return E_tilde * buoyancy;
 }
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
