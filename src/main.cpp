@@ -219,6 +219,7 @@ private:
   double z;
   
 public:
+
   double X(){
     return this->x;
   }
@@ -336,6 +337,16 @@ double* Vector::toAV(){
 double Vector::abs(){
   double v = sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
   return v;
+}
+
+double distance(Vector x0, Vector x1, Vector x2){
+  Vector l = x0-x1;
+  Vector r = x0-x2;
+  Vector up = Vector::vec(l,r);
+  double u = up.abs();
+  Vector down=x2-x1;
+  double d = down.abs();
+  return u/d;
 }
 
 class InfoCollector
@@ -2744,6 +2755,7 @@ public:
   double Peters_SR_inflow();
   double Peters_SR_inflow_eff();
 
+  double Peters_vector();
   double Peters_vector_A();
   double Peters_vector_M();
 
@@ -4256,7 +4268,7 @@ double IndicesCollector::SRH01SM_eff(){
   return S->ks->srh01sm_eff;
 }
 
-double IndicesCollector::Peters_SR_inflow(){
+double IndicesCollector::Peters_vector(){
   double SRH_mean = S->ks->srh03sm;
   double sign_SRH = SRH_mean/abs(SRH_mean);
   double fact = 1;
@@ -4269,40 +4281,21 @@ double IndicesCollector::Peters_SR_inflow(){
   dev *= 7.5*propfac;
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind - dev;
-  Vector res = S->ks->mean0 - Peters_SM;
+  return Peters_SM;
+}
+
+double IndicesCollector::Peters_SR_inflow(){
+  Vector res = S->ks->mean0 - this->Peters_vector;
   return res.abs();
 }
 
 double IndicesCollector::Peters_SR_inflow_eff(){
-  double SRH_mean = S->ks->srh03sm_eff;
-  double sign_SRH = SRH_mean/abs(SRH_mean);
-  double fact = 1;
-  double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
-  Vector meanwind = S->ks->mean06;
-  Vector tv = Vector(0, 0, 1);
-  Vector dev = Vector(0, 0, 0);
-  Vector tshear = S->ks->mean6 - S->ks->mean0;
-  dev = Vector::vec(tshear,tv);
-  dev *= 7.5*propfac;
-  dev *= 1.0 / tshear.abs();
-  Vector Peters_SM = meanwind - dev;
-  Vector res = S->ks->mean01eff - Peters_SM;
+  Vector res = S->ks->mean01eff - this->Peters_vector;
   return res.abs();
 }
 
 double IndicesCollector::Peters_vector_A(){
-  double SRH_mean = S->ks->srh03sm;
-  double sign_SRH = SRH_mean/abs(SRH_mean);
-  double fact = 1;
-  double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
-  Vector meanwind = S->ks->mean06;
-  Vector tv = Vector(0, 0, 1);
-  Vector dev = Vector(0, 0, 0);
-  Vector tshear = S->ks->mean6 - S->ks->mean0;
-  dev = Vector::vec(tshear,tv);
-  dev *= 7.5*propfac;
-  dev *= 1.0 / tshear.abs();
-  Vector Peters_SM = meanwind - dev;
+  Vector Peters_SM = this->Peters_vector;
   double *tab = Peters_SM.toAV(); 
   double angle = tab[0];
   delete[] tab;
@@ -4310,18 +4303,7 @@ double IndicesCollector::Peters_vector_A(){
 }
 
 double IndicesCollector::Peters_vector_M(){
-  double SRH_mean = S->ks->srh03sm;
-  double sign_SRH = SRH_mean/abs(SRH_mean);
-  double fact = 1;
-  double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
-  Vector meanwind = S->ks->mean06;
-  Vector tv = Vector(0, 0, 1);
-  Vector dev = Vector(0, 0, 0);
-  Vector tshear = S->ks->mean6 - S->ks->mean0;
-  dev = Vector::vec(tshear,tv);
-  dev *= 7.5*propfac;
-  dev *= 1.0 / tshear.abs();
-  Vector Peters_SM = meanwind - dev;
+  Vector Peters_SM = this->Peters_vector;
   double *tab = Peters_SM.toAV(); 
   double magnitude = tab[1];
   delete[] tab;
@@ -4329,18 +4311,7 @@ double IndicesCollector::Peters_vector_M(){
 }
 
 double IndicesCollector::Peters_vector_eff_A(){
-  double SRH_mean = S->ks->srh03sm_eff;
-  double sign_SRH = SRH_mean/abs(SRH_mean);
-  double fact = 1;
-  double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
-  Vector meanwind = S->ks->mean06;
-  Vector tv = Vector(0, 0, 1);
-  Vector dev = Vector(0, 0, 0);
-  Vector tshear = S->ks->mean6 - S->ks->mean0;
-  dev = Vector::vec(tshear,tv);
-  dev *= 7.5*propfac;
-  dev *= 1.0 / tshear.abs();
-  Vector Peters_SM = meanwind - dev;
+  Vector Peters_SM = this->Peters_vector;
   double *tab = Peters_SM.toAV(); 
   double angle = tab[0];
   delete[] tab;
@@ -4348,18 +4319,7 @@ double IndicesCollector::Peters_vector_eff_A(){
 }
 
 double IndicesCollector::Peters_vector_eff_M(){
-  double SRH_mean = S->ks->srh03sm_eff;
-  double sign_SRH = SRH_mean/abs(SRH_mean);
-  double fact = 1;
-  double propfac = sign_SRH*min(abs(SRH_mean)/75,fact);
-  Vector meanwind = S->ks->mean06;
-  Vector tv = Vector(0, 0, 1);
-  Vector dev = Vector(0, 0, 0);
-  Vector tshear = S->ks->mean6 - S->ks->mean0;
-  dev = Vector::vec(tshear,tv);
-  dev *= 7.5*propfac;
-  dev *= 1.0 / tshear.abs();
-  Vector Peters_SM = meanwind - dev;
+  Vector Peters_SM = this->Peters_vector;
   double *tab = Peters_SM.toAV(); 
   double magnitude = tab[1];
   delete[] tab;
