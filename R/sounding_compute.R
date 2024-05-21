@@ -343,6 +343,21 @@
 #'  \item SV_0100m_LM
 #'  \item SV_FRA_0100m_RM
 #'  \item SV_FRA_0100m_LM
+#'  \item Ventilation_13km
+#'  \item Ventilation_16km
+#'  \item Ventilation_36km
+#'  \item Ventilation_69km
+#'  \item Ventilation_912km
+#'  \item SB_buoyancy_3km
+#'  \item ML_buoyancy_3km
+#'  \item MU_buoyancy_3km
+#'  \item MUML_buoyancy_3km
+#'  \item MU500_buoyancy_3km
+#'  \item SB_Ebuoyancy_3km
+#'  \item ML_Ebuoyancy_3km
+#'  \item MU_Ebuoyancy_3km
+#'  \item MUML_Ebuoyancy_3km
+#'  \item MU500_Ebuoyancy_3km
 
 #' }
 #'
@@ -732,6 +747,21 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SV_0100m_RM",
 "SV_0100m_LM",
 "SV_FRA_0100m_RM",
-"SV_FRA_0100m_LM")
+"SV_FRA_0100m_LM",
+"Ventilation_13km",
+"Ventilation_16km",
+"Ventilation_36km",
+"Ventilation_69km",
+"Ventilation_912km",
+"SB_buoyancy_3km",
+"ML_buoyancy_3km",
+"MU_buoyancy_3km",
+"MUML_buoyancy_3km",
+"MU500_buoyancy_3km",
+"SB_Ebuoyancy_3km",
+"ML_Ebuoyancy_3km",
+"MU_Ebuoyancy_3km",
+"MUML_Ebuoyancy_3km",
+"MU500_Ebuoyancy_3km")
 return(tmp)
 }
