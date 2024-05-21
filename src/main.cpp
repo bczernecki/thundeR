@@ -524,6 +524,11 @@ private:
   Vector mean13;
   Vector mean26;
   Vector mean020;
+
+  Vector mean36;
+  Vector mean69;
+  Vector mean912;
+  Vector mean16;
   
   double SR_500_RM;
   double SR_1000_RM;
@@ -754,9 +759,14 @@ Kinematics::Kinematics(){
   this->mean02 = Vector(0,0,0);
   this->mean03 = Vector(0,0,0);
   this->mean13 = Vector(0,0,0);	
-  this->mean0=Vector(0,0,0);
-  this->mean6=Vector(0,0,0);
+
+  this->mean36 = Vector(0,0,0);	
+  this->mean69 = Vector(0,0,0);	
+  this->mean912 = Vector(0,0,0);	
+  this->mean16 = Vector(0,0,0);	
   
+  this->mean0=Vector(0,0,0);
+  this->mean6=Vector(0,0,0);  
   this->mean26 = Vector(0,0,0);
   this->mean020 = Vector(0,0,0);
   
@@ -941,10 +951,28 @@ void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, d
     if (h-h0<=3000&&h-h0>=1000){
       mean13+=v_;
       n13+=1;
-      
     }
-    
-    
+
+     if (h-h0<=6000&&h-h0>=3000){
+      mean36+=v_;
+      n36+=1;
+    }
+
+     if (h-h0<=9000&&h-h0>=6000){
+      mean69+=v_;
+      n69+=1;
+    }
+
+     if (h-h0<=12000&&h-h0>=9000){
+      mean912+=v_;
+      n912+=1;
+    }
+
+    if (h-h0<=6000&&h-h0>=1000){
+      mean16+=v_;
+      n16+=1;
+    }
+
     if (h - h0 <= 6000)
     {
       mean06 += v_;
@@ -1172,6 +1200,18 @@ void Kinematics::finishMeanVectors()
   else mean06 = Vector(0, 0, 0);
   if (n1 != 0) mean01 *= 1.0 / n1;
   else mean01 = Vector(0, 0, 0);
+
+  if (n36 != 0) mean36 *= 1.0 / n36;
+  else mean36 = Vector(0, 0, 0);
+
+  if (n69 != 0) mean69 *= 1.0 / n69;
+  else mean69 = Vector(0, 0, 0);
+
+  if (n912 != 0) mean912 *= 1.0 / n912;
+  else mean912 = Vector(0, 0, 0);
+
+  if (n16 != 0) mean16 *= 1.0 / n16;
+  else mean16 = Vector(0, 0, 0);
 
   if (n13 != 0) mean13 *= 1.0 / n13;
   else mean13 = Vector(0, 0, 0);
@@ -2583,9 +2623,12 @@ public:
   double MeanWind500();
   double MeanWind01();
   double MeanWind02();
+  double MeanWind03();
   double MeanWind06();
   double MeanWind13();
-  double MeanWind03();
+  double MeanWind36();
+  double MeanWind69();
+  double MeanWind912();
 
   double SRH100RM();
   double SRH250RM();
@@ -5870,6 +5913,13 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[336]=(*S)->getIndicesCollectorPointer()->SW100_LM();
   vec[337]=(*S)->getIndicesCollectorPointer()->SV_100_RM_FRA();
   vec[338]=(*S)->getIndicesCollectorPointer()->SV_100_LM_FRA();
+
+
+  vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_02km();
+  vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_03km();
+  vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_06km();
+  vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_13km();
+  vec[340]=(*S)->getIndicesCollectorPointer()->SV_100_LM_FRA();
   return vec;
 }
 
