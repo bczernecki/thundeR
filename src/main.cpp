@@ -4285,17 +4285,17 @@ Vector IndicesCollector::Peters_vector(){
 }
 
 double IndicesCollector::Peters_SR_inflow(){
-  Vector res = S->ks->mean0 - this->Peters_vector;
+  Vector res = S->ks->mean0 - this->Peters_vector();
   return res.abs();
 }
 
 double IndicesCollector::Peters_SR_inflow_eff(){
-  Vector res = S->ks->mean01eff - this->Peters_vector;
+  Vector res = S->ks->mean01eff - this->Peters_vector();
   return res.abs();
 }
 
 double IndicesCollector::Peters_vector_A(){
-  Vector Peters_SM = this->Peters_vector;
+  Vector Peters_SM = this->Peters_vector();
   double *tab = Peters_SM.toAV(); 
   double angle = tab[0];
   delete[] tab;
@@ -4303,7 +4303,7 @@ double IndicesCollector::Peters_vector_A(){
 }
 
 double IndicesCollector::Peters_vector_M(){
-  Vector Peters_SM = this->Peters_vector;
+  Vector Peters_SM = this->Peters_vector();
   double *tab = Peters_SM.toAV(); 
   double magnitude = tab[1];
   delete[] tab;
@@ -4311,7 +4311,7 @@ double IndicesCollector::Peters_vector_M(){
 }
 
 double IndicesCollector::Peters_vector_eff_A(){
-  Vector Peters_SM = this->Peters_vector;
+  Vector Peters_SM = this->Peters_vector();
   double *tab = Peters_SM.toAV(); 
   double angle = tab[0];
   delete[] tab;
@@ -4319,7 +4319,7 @@ double IndicesCollector::Peters_vector_eff_A(){
 }
 
 double IndicesCollector::Peters_vector_eff_M(){
-  Vector Peters_SM = this->Peters_vector;
+  Vector Peters_SM = this->Peters_vector();
   double *tab = Peters_SM.toAV(); 
   double magnitude = tab[1];
   delete[] tab;
