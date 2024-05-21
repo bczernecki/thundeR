@@ -5520,27 +5520,27 @@ double IndicesCollector::SB_buoyancy_M10(){
 }
 
 double IndicesCollector::Ventilation_13km(){
-  double ventilation = distance(S->ks->mean13, this->Peters_vector(), S->ks->mean0)   
+  double ventilation = distance(S->ks->mean13, this->Peters_vector(), S->ks->mean0);   
   return ventilation;
 }
 
 double IndicesCollector::Ventilation_16km(){
-  double ventilation = distance(S->ks->mean16, this->Peters_vector(), S->ks->mean0)   
+  double ventilation = distance(S->ks->mean16, this->Peters_vector(), S->ks->mean0);   
   return ventilation;
 }
 
 double IndicesCollector::Ventilation_36km(){
-  double ventilation = distance(S->ks->mean36, this->Peters_vector(), S->ks->mean0)   
+  double ventilation = distance(S->ks->mean36, this->Peters_vector(), S->ks->mean0);   
   return ventilation;
 }
 
 double IndicesCollector::Ventilation_69km(){
-  double ventilation = distance(S->ks->mean69, this->Peters_vector(), S->ks->mean0)   
+  double ventilation = distance(S->ks->mean69, this->Peters_vector(), S->ks->mean0);   
   return ventilation;
 }
 
 double IndicesCollector::Ventilation_912km(){
-  double ventilation = distance(S->ks->mean912, this->Peters_vector(), S->ks->mean0)   
+  double ventilation = distance(S->ks->mean912, this->Peters_vector(), S->ks->mean0);   
   return ventilation;
 }
 
