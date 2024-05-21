@@ -544,6 +544,12 @@ private:
   double n26;
   double n020;
   double n13;
+
+  double n36;
+  double n69;
+  double n912;
+  double n16;
+
   double n2;
   double n3;
   double n6;
@@ -839,6 +845,10 @@ Kinematics::Kinematics(){
   SR_3000_LM=0;
   
   n26=0;
+  n36=0;
+  n69=0;
+  n912=0;
+  n16=0;  
   n020=0;
 }
 Kinematics::~Kinematics(){
@@ -1223,6 +1233,7 @@ void Kinematics::finishMeanVectors()
   else mean0=Vector(0,0,0);
   if(nsix!=0)mean6/=nsix;
   else mean6=Vector(0,0,0);
+  
   mean26/=n26;
   mean020/=n020;
 }
@@ -2859,6 +2870,13 @@ public:
   double* MU_ML_ECAPE();
   double* SB_ECAPE();
   double* MU500_ECAPE();
+
+  double Ventilation_13km();
+  double Ventilation_16km();
+  double Ventilation_36km();
+  double Ventilation_69km();
+  double Ventilation_912km();
+
 };
 
 void Sounding::alloc(){
@@ -5501,9 +5519,34 @@ double IndicesCollector::SB_buoyancy_M10(){
   return diff;
 }
 
+double IndicesCollector::Ventilation_13km(){
+  double ventilation = distance(S->ks->mean13, this->Peters_inflow(), S->ks->mean0)   
+  return ventilation;
+}
+
+double IndicesCollector::Ventilation_16km(){
+  double ventilation = distance(S->ks->mean16, this->Peters_inflow(), S->ks->mean0)   
+  return ventilation;
+}
+
+double IndicesCollector::Ventilation_36km(){
+  double ventilation = distance(S->ks->mean36, this->Peters_inflow(), S->ks->mean0)   
+  return ventilation;
+}
+
+double IndicesCollector::Ventilation_69km(){
+  double ventilation = distance(S->ks->mean69, this->Peters_inflow(), S->ks->mean0)   
+  return ventilation;
+}
+
+double IndicesCollector::Ventilation_912km(){
+  double ventilation = distance(S->ks->mean912, this->Peters_inflow(), S->ks->mean0)   
+  return ventilation;
+}
+
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[339];
+  double * vec = new double[344];
 
 // MU parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
@@ -5913,13 +5956,13 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[336]=(*S)->getIndicesCollectorPointer()->SW100_LM();
   vec[337]=(*S)->getIndicesCollectorPointer()->SV_100_RM_FRA();
   vec[338]=(*S)->getIndicesCollectorPointer()->SV_100_LM_FRA();
-
-
-  vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_02km();
-  vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_03km();
-  vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_06km();
+  
   vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_13km();
-  vec[340]=(*S)->getIndicesCollectorPointer()->SV_100_LM_FRA();
+  vec[340]=(*S)->getIndicesCollectorPointer()->Ventilation_16km();
+  vec[341]=(*S)->getIndicesCollectorPointer()->Ventilation_36km();
+  vec[342]=(*S)->getIndicesCollectorPointer()->Ventilation_69km();
+  vec[343]=(*S)->getIndicesCollectorPointer()->Ventilation_912km();
+
   return vec;
 }
 
@@ -6592,6 +6635,11 @@ double * sounding_default2(double* pressure,
 //'  \item SV_0100m_LM
 //'  \item SV_FRA_0100m_RM
 //'  \item SV_FRA_0100m_LM
+//'  \item Ventilation_13km
+//'  \item Ventilation_16km
+//'  \item Ventilation_36km
+//'  \item Ventilation_69km
+//'  \item Ventilation_912km
 //' }
  // [[Rcpp::export]]
  
@@ -6628,7 +6676,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 339;
+   int reslen= 344;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
