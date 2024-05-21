@@ -2755,7 +2755,7 @@ public:
   double Peters_SR_inflow();
   double Peters_SR_inflow_eff();
 
-  double Peters_vector();
+  Vector Peters_vector();
   double Peters_vector_A();
   double Peters_vector_M();
 
