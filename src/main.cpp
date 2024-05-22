@@ -346,7 +346,8 @@ double distance(Vector x0, Vector x1, Vector x2){
   double u = up.abs();
   Vector down=x2-x1;
   double d = down.abs();
-  return u/d;
+  double position = sign((x1.x - x2.x) * (x0.y - x2.y) - (x1.y - x2.y) * (x0.x - x2.x));
+  return (u/d) * position;
 }
 
 class InfoCollector
