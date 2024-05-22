@@ -346,7 +346,7 @@ double distance(Vector x0, Vector x1, Vector x2){
   double u = up.abs();
   Vector down=x2-x1;
   double d = down.abs();
-  double position = sign((x1.x - x2.x) * (x0.y - x2.y) - (x1.y - x2.y) * (x0.x - x2.x));
+  double position = sign((x1.X() - x2.X()) * (x0.Y() - x2.Y()) - (x1.Y() - x2.Y()) * (x0.X() - x2.X()));
   return (u/d) * position;
 }
 
