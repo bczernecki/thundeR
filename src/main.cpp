@@ -2825,10 +2825,14 @@ public:
   double MeanSR500_RM();
   double MeanSR01_RM();
   double MeanSR03_RM();
+  double MeanSR16_RM();
+  double MeanSR36_RM();
   
   double MeanSR500_LM();
   double MeanSR01_LM();
   double MeanSR03_LM();
+  double MeanSR16_LM();
+  double MeanSR36_LM();
 
   double MeanSR500_MW();
   double MeanSR01_MW();
@@ -2841,10 +2845,14 @@ public:
   double MeanVMSR500_RM();
   double MeanVMSR01_RM();
   double MeanVMSR03_RM();
+  double MeanVMSR16_RM();
+  double MeanVMSR36_RM();
   
   double MeanVMSR500_LM();
   double MeanVMSR01_LM();
   double MeanVMSR03_LM();
+  double MeanVMSR16_LM();
+  double MeanVMSR36_LM();
 
   double Peters_SR_inflow();
   double Peters_SR_inflow_eff();
@@ -5420,6 +5428,16 @@ double IndicesCollector::MeanSR03_RM(){
   return res.abs();
 }
 
+double IndicesCollector::MeanSR36_RM(){
+  Vector res = S->ks->mean36 - S->ks->rm;
+  return res.abs();
+}
+
+double IndicesCollector::MeanSR16_RM(){
+  Vector res = S->ks->mean16 - S->ks->rm;
+  return res.abs();
+}
+
 double IndicesCollector::MeanSR500_LM(){
   Vector res = S->ks->mean0 - S->ks->lm;
   return res.abs();
@@ -5432,6 +5450,16 @@ double IndicesCollector::MeanSR01_LM(){
 
 double IndicesCollector::MeanSR03_LM(){
   Vector res = S->ks->mean03 - S->ks->lm;
+  return res.abs();
+}
+
+double IndicesCollector::MeanSR36_LM(){
+  Vector res = S->ks->mean36 - S->ks->lm;
+  return res.abs();
+}
+
+double IndicesCollector::MeanSR16_LM(){
+  Vector res = S->ks->mean16 - S->ks->lm;
   return res.abs();
 }
 
@@ -5684,7 +5712,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[354];
+  double * vec = new double[362];
 
 // MU parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
@@ -6112,6 +6140,15 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[351]=(*S)->getIndicesCollectorPointer()->MU_ebuoyancy_3km();
   vec[352]=(*S)->getIndicesCollectorPointer()->MUML_ebuoyancy_3km();
   vec[353]=(*S)->getIndicesCollectorPointer()->MU500_ebuoyancy_3km();
+
+  vec[354]=(*S)->getIndicesCollectorPointer()->MeanVMSR16_RM();
+  vec[355]=(*S)->getIndicesCollectorPointer()->MeanVMSR36_RM();
+  vec[356]=(*S)->getIndicesCollectorPointer()->MeanVMSR16_LM();
+  vec[357]=(*S)->getIndicesCollectorPointer()->MeanVMSR36_LM();
+  vec[358]=(*S)->getIndicesCollectorPointer()->MeanSR16_RM();
+  vec[359]=(*S)->getIndicesCollectorPointer()->MeanSR36_RM();
+  vec[360]=(*S)->getIndicesCollectorPointer()->MeanSR16_LM();
+  vec[361]=(*S)->getIndicesCollectorPointer()->MeanSR36_LM();
 
   return vec;
 }
@@ -6800,6 +6837,14 @@ double * sounding_default2(double* pressure,
 //'  \item MU_Ebuoyancy_3km
 //'  \item MUML_Ebuoyancy_3km
 //'  \item MU500_Ebuoyancy_3km
+//'  \item MW_SRVM_16_RM
+//'  \item MW_SRVM_36_RM
+//'  \item MW_SRVM_16_LM
+//'  \item MW_SRVM_36_LM
+//'  \item MW_SR_16_RM
+//'  \item MW_SR_36_RM
+//'  \item MW_SR_16_LM
+//'  \item MW_SR_36_LM
 //' }
  // [[Rcpp::export]]
  
@@ -6836,7 +6881,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 354;
+   int reslen= 362;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
