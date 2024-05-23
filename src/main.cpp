@@ -534,10 +534,18 @@ private:
   double SR_500_RM;
   double SR_1000_RM;
   double SR_3000_RM;
+  double SR_16_RM;
+  double SR_36_RM;
+
   double SR_500_LM;
   double SR_1000_LM;
   double SR_3000_LM;
-  
+  double SR_16_LM;
+  double SR_36_LM;
+
+  double n16sr;
+  double n36sr;
+
   double n500;
   double n1000;
   double n3000;
@@ -746,10 +754,14 @@ public:
     SR_500_RM=0;
     SR_1000_RM=0;
     SR_3000_RM=0;
+    SR_16_RM=0;
+    SR_36_RM=0;
     
     SR_500_LM=0;
     SR_1000_LM=0;
     SR_3000_LM=0;
+    SR_16_LM=0;
+    SR_36_LM=0;
     
   }
   
@@ -840,10 +852,14 @@ Kinematics::Kinematics(){
   SR_500_RM=0;
   SR_1000_RM=0;
   SR_3000_RM=0;
+  SR_16_RM=0;
+  SR_36_RM=0;
   
   SR_500_LM=0;
   SR_1000_LM=0;
   SR_3000_LM=0;
+  SR_16_LM=0;
+  SR_36_LM=0;
   
   n26=0;
   n36=0;
@@ -851,6 +867,9 @@ Kinematics::Kinematics(){
   n912=0;
   n16=0;  
   n020=0;
+  n16sr=0;
+  n36sr=0;
+  
 }
 Kinematics::~Kinematics(){
   delete(this->vw);
@@ -1154,6 +1173,17 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
         SR_3000_RM += SR_M_rm;
         SR_3000_LM += SR_M_lm;
         n3000+=1;
+      }
+      if(h-h0 >= 3000 && h-h0 <= 6000){
+        SR_36_RM += SR_M_rm;
+        SR_36_LM += SR_M_lm;
+        n36sr+=1;
+      }
+      
+     if(h-h0 >= 1000 && h-h0 <= 6000){
+        SR_16_RM += SR_M_rm;
+        SR_16_LM += SR_M_lm;
+        n16sr+=1;
       }
     }
     
@@ -5432,6 +5462,14 @@ double IndicesCollector::MeanVMSR03_RM(){
   return S->ks->SR_3000_RM / S->ks->n3000;
 }
 
+double IndicesCollector::MeanVMSR36_RM(){
+  return S->ks->SR_36_RM / S->ks->n36sr;
+}
+
+double IndicesCollector::MeanVMSR16_RM(){
+  return S->ks->SR_16_RM / S->ks->n16sr;
+}
+
 double IndicesCollector::MeanVMSR500_LM(){
   return S->ks->SR_500_LM / S->ks->n500;
 }
@@ -5442,6 +5480,14 @@ double IndicesCollector::MeanVMSR01_LM(){
 
 double IndicesCollector::MeanVMSR03_LM(){
   return S->ks->SR_3000_LM / S->ks->n3000;
+}
+
+double IndicesCollector::MeanVMSR36_LM(){
+  return S->ks->SR_36_LM / S->ks->n36sr;
+}
+
+double IndicesCollector::MeanVMSR16_LM(){
+  return S->ks->SR_16_LM / S->ks->n16sr;
 }
 
 double IndicesCollector::SV_100_RM_FRA(){
