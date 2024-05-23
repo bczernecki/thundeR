@@ -358,6 +358,14 @@
 #'  \item MU_Ebuoyancy_3km
 #'  \item MUML_Ebuoyancy_3km
 #'  \item MU500_Ebuoyancy_3km
+#'  \item MW_SRVM_16_RM
+#'  \item MW_SRVM_36_RM
+#'  \item MW_SRVM_16_LM
+#'  \item MW_SRVM_36_LM
+#'  \item MW_SR_16_RM
+#'  \item MW_SR_36_RM
+#'  \item MW_SR_16_LM
+#'  \item MW_SR_36_LM
 
 #' }
 #'
@@ -762,6 +770,14 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "ML_Ebuoyancy_3km",
 "MU_Ebuoyancy_3km",
 "MUML_Ebuoyancy_3km",
-"MU500_Ebuoyancy_3km")
+"MU500_Ebuoyancy_3km",
+"MW_SRVM_16_RM",
+"MW_SRVM_36_RM",
+"MW_SRVM_16_LM",
+"MW_SRVM_36_LM",
+"MW_SR_16_RM",
+"MW_SR_36_RM",
+"MW_SR_16_LM",
+"MW_SR_36_LM")
 return(tmp)
 }
