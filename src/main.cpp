@@ -4196,72 +4196,107 @@ double IndicesCollector::SBMRatio(){
 }
 
 double IndicesCollector::BS06_var_SD(){
-  Vector V01 = Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0);
-  Vector V02 = Get(S->ks->vw,cache->getHeightIndex(1000)) - Get(S->ks->vw,cache->getHeightIndex(500));
-  Vector V03 = Get(S->ks->vw,cache->getHeightIndex(1500)) - Get(S->ks->vw,cache->getHeightIndex(1000));
-  Vector V04 = Get(S->ks->vw,cache->getHeightIndex(2000)) - Get(S->ks->vw,cache->getHeightIndex(1500));
-  Vector V05 = Get(S->ks->vw,cache->getHeightIndex(2500)) - Get(S->ks->vw,cache->getHeightIndex(2000));
-  Vector V06 = Get(S->ks->vw,cache->getHeightIndex(3000)) - Get(S->ks->vw,cache->getHeightIndex(2500));
-  Vector V07 = Get(S->ks->vw,cache->getHeightIndex(3500)) - Get(S->ks->vw,cache->getHeightIndex(3000));
-  Vector V08 = Get(S->ks->vw,cache->getHeightIndex(4000)) - Get(S->ks->vw,cache->getHeightIndex(3500));
-  Vector V09 = Get(S->ks->vw,cache->getHeightIndex(4500)) - Get(S->ks->vw,cache->getHeightIndex(4000));
-  Vector V10 = Get(S->ks->vw,cache->getHeightIndex(5000)) - Get(S->ks->vw,cache->getHeightIndex(4500));
-  Vector V11 = Get(S->ks->vw,cache->getHeightIndex(5500)) - Get(S->ks->vw,cache->getHeightIndex(5000));
-  Vector V12 = Get(S->ks->vw,cache->getHeightIndex(6000)) - Get(S->ks->vw,cache->getHeightIndex(5500));
+  int H500 = cache->getHeightIndex(500); 
+  int H1000 = cache->getHeightIndex(1000); 
+  int H1500 = cache->getHeightIndex(1500); 
+  int H2000 = cache->getHeightIndex(2000); 
+  int H2500 = cache->getHeightIndex(2500); 
+  int H3000 = cache->getHeightIndex(3000); 
+  int H3500 = cache->getHeightIndex(3500); 
+  int H4000 = cache->getHeightIndex(4000); 
+  int H4500 = cache->getHeightIndex(4500); 
+  int H5000 = cache->getHeightIndex(5000); 
+  int H5500 = cache->getHeightIndex(5500); 
+  int H6000 = cache->getHeightIndex(6000); 
+  Vector V01 = Get(S->ks->vw,H500) - Get(S->ks->vw,0);
+  Vector V02 = Get(S->ks->vw,H1000) - Get(S->ks->vw,H500);
+  Vector V03 = Get(S->ks->vw,H1500) - Get(S->ks->vw,H1000);
+  Vector V04 = Get(S->ks->vw,H2000) - Get(S->ks->vw,H1500);
+  Vector V05 = Get(S->ks->vw,H2500) - Get(S->ks->vw,H2000);
+  Vector V06 = Get(S->ks->vw,H3000) - Get(S->ks->vw,H2500);
+  Vector V07 = Get(S->ks->vw,H3500) - Get(S->ks->vw,H3000);
+  Vector V08 = Get(S->ks->vw,H4000) - Get(S->ks->vw,H3500);
+  Vector V09 = Get(S->ks->vw,H4500) - Get(S->ks->vw,H4000);
+  Vector V10 = Get(S->ks->vw,H5000) - Get(S->ks->vw,H4500);
+  Vector V11 = Get(S->ks->vw,H5500) - Get(S->ks->vw,H5000);
+  Vector V12 = Get(S->ks->vw,H6000) - Get(S->ks->vw,H5500);
   vector<int> diffs = { V01.abs() - V02.abs(),
-                     V02.abs() - V03.abs(),
-                     V03.abs() - V04.abs(),
-                     V04.abs() - V05.abs(),
-                     V05.abs() - V06.abs(),
-                     V06.abs() - V07.abs(),
-                     V07.abs() - V08.abs(),
-                     V08.abs() - V09.abs(),
-                     V09.abs() - V10.abs(),
-                     V10.abs() - V11.abs(),
-                     V11.abs() - V12.abs() };
+                        V02.abs() - V03.abs(),
+                        V03.abs() - V04.abs(),
+                        V04.abs() - V05.abs(),
+                        V05.abs() - V06.abs(),
+                        V06.abs() - V07.abs(),
+                        V07.abs() - V08.abs(),
+                        V08.abs() - V09.abs(),
+                        V09.abs() - V10.abs(),
+                        V10.abs() - V11.abs(),
+                        V11.abs() - V12.abs() };
   double result = computeStandardDeviation(diffs);
   return result;
 }
 
-double IndicesCollector::BS06_var_ID(){
-  Vector V01 = Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0);
-  Vector V02 = Get(S->ks->vw,cache->getHeightIndex(1000)) - Get(S->ks->vw,cache->getHeightIndex(500));
-  Vector V03 = Get(S->ks->vw,cache->getHeightIndex(1500)) - Get(S->ks->vw,cache->getHeightIndex(1000));
-  Vector V04 = Get(S->ks->vw,cache->getHeightIndex(2000)) - Get(S->ks->vw,cache->getHeightIndex(1500));
-  Vector V05 = Get(S->ks->vw,cache->getHeightIndex(2500)) - Get(S->ks->vw,cache->getHeightIndex(2000));
-  Vector V06 = Get(S->ks->vw,cache->getHeightIndex(3000)) - Get(S->ks->vw,cache->getHeightIndex(2500));
-  Vector V07 = Get(S->ks->vw,cache->getHeightIndex(3500)) - Get(S->ks->vw,cache->getHeightIndex(3000));
-  Vector V08 = Get(S->ks->vw,cache->getHeightIndex(4000)) - Get(S->ks->vw,cache->getHeightIndex(3500));
-  Vector V09 = Get(S->ks->vw,cache->getHeightIndex(4500)) - Get(S->ks->vw,cache->getHeightIndex(4000));
-  Vector V10 = Get(S->ks->vw,cache->getHeightIndex(5000)) - Get(S->ks->vw,cache->getHeightIndex(4500));
-  Vector V11 = Get(S->ks->vw,cache->getHeightIndex(5500)) - Get(S->ks->vw,cache->getHeightIndex(5000));
-  Vector V12 = Get(S->ks->vw,cache->getHeightIndex(6000)) - Get(S->ks->vw,cache->getHeightIndex(5500));
+double IndicesCollector::BS06_var_SI(){
+  int H500 = cache->getHeightIndex(500); 
+  int H1000 = cache->getHeightIndex(1000); 
+  int H1500 = cache->getHeightIndex(1500); 
+  int H2000 = cache->getHeightIndex(2000); 
+  int H2500 = cache->getHeightIndex(2500); 
+  int H3000 = cache->getHeightIndex(3000); 
+  int H3500 = cache->getHeightIndex(3500); 
+  int H4000 = cache->getHeightIndex(4000); 
+  int H4500 = cache->getHeightIndex(4500); 
+  int H5000 = cache->getHeightIndex(5000); 
+  int H5500 = cache->getHeightIndex(5500); 
+  int H6000 = cache->getHeightIndex(6000); 
+  Vector V01 = Get(S->ks->vw,H500) - Get(S->ks->vw,0);
+  Vector V02 = Get(S->ks->vw,H1000) - Get(S->ks->vw,H500);
+  Vector V03 = Get(S->ks->vw,H1500) - Get(S->ks->vw,H1000);
+  Vector V04 = Get(S->ks->vw,H2000) - Get(S->ks->vw,H1500);
+  Vector V05 = Get(S->ks->vw,H2500) - Get(S->ks->vw,H2000);
+  Vector V06 = Get(S->ks->vw,H3000) - Get(S->ks->vw,H2500);
+  Vector V07 = Get(S->ks->vw,H3500) - Get(S->ks->vw,H3000);
+  Vector V08 = Get(S->ks->vw,H4000) - Get(S->ks->vw,H3500);
+  Vector V09 = Get(S->ks->vw,H4500) - Get(S->ks->vw,H4000);
+  Vector V10 = Get(S->ks->vw,H5000) - Get(S->ks->vw,H4500);
+  Vector V11 = Get(S->ks->vw,H5500) - Get(S->ks->vw,H5000);
+  Vector V12 = Get(S->ks->vw,H6000) - Get(S->ks->vw,H5500);  
   vector<int> diffs = { V01.abs() - V02.abs(),
-                     V02.abs() - V03.abs(),
-                     V03.abs() - V04.abs(),
-                     V04.abs() - V05.abs(),
-                     V05.abs() - V06.abs(),
-                     V06.abs() - V07.abs(),
-                     V07.abs() - V08.abs(),
-                     V08.abs() - V09.abs(),
-                     V09.abs() - V10.abs(),
-                     V10.abs() - V11.abs(),
-                     V11.abs() - V12.abs() };  
+                        V02.abs() - V03.abs(),
+                        V03.abs() - V04.abs(),
+                        V04.abs() - V05.abs(),
+                        V05.abs() - V06.abs(),
+                        V06.abs() - V07.abs(),
+                        V07.abs() - V08.abs(),
+                        V08.abs() - V09.abs(),
+                        V09.abs() - V10.abs(),
+                        V10.abs() - V11.abs(),
+                        V11.abs() - V12.abs() };  
   double result = computeStandardDeviation(diffs) / abs(computeMean(diffs));
   return result;
 }
 
 double IndicesCollector::BS16_var_SD(){
-  Vector V03 = Get(S->ks->vw,cache->getHeightIndex(1500)) - Get(S->ks->vw,cache->getHeightIndex(1000));
-  Vector V04 = Get(S->ks->vw,cache->getHeightIndex(2000)) - Get(S->ks->vw,cache->getHeightIndex(1500));
-  Vector V05 = Get(S->ks->vw,cache->getHeightIndex(2500)) - Get(S->ks->vw,cache->getHeightIndex(2000));
-  Vector V06 = Get(S->ks->vw,cache->getHeightIndex(3000)) - Get(S->ks->vw,cache->getHeightIndex(2500));
-  Vector V07 = Get(S->ks->vw,cache->getHeightIndex(3500)) - Get(S->ks->vw,cache->getHeightIndex(3000));
-  Vector V08 = Get(S->ks->vw,cache->getHeightIndex(4000)) - Get(S->ks->vw,cache->getHeightIndex(3500));
-  Vector V09 = Get(S->ks->vw,cache->getHeightIndex(4500)) - Get(S->ks->vw,cache->getHeightIndex(4000));
-  Vector V10 = Get(S->ks->vw,cache->getHeightIndex(5000)) - Get(S->ks->vw,cache->getHeightIndex(4500));
-  Vector V11 = Get(S->ks->vw,cache->getHeightIndex(5500)) - Get(S->ks->vw,cache->getHeightIndex(5000));
-  Vector V12 = Get(S->ks->vw,cache->getHeightIndex(6000)) - Get(S->ks->vw,cache->getHeightIndex(5500));
+  int H1000 = cache->getHeightIndex(1000); 
+  int H1500 = cache->getHeightIndex(1500); 
+  int H2000 = cache->getHeightIndex(2000); 
+  int H2500 = cache->getHeightIndex(2500); 
+  int H3000 = cache->getHeightIndex(3000); 
+  int H3500 = cache->getHeightIndex(3500); 
+  int H4000 = cache->getHeightIndex(4000); 
+  int H4500 = cache->getHeightIndex(4500); 
+  int H5000 = cache->getHeightIndex(5000); 
+  int H5500 = cache->getHeightIndex(5500); 
+  int H6000 = cache->getHeightIndex(6000); 
+  Vector V03 = Get(S->ks->vw,H1500) - Get(S->ks->vw,H1000);
+  Vector V04 = Get(S->ks->vw,H2000) - Get(S->ks->vw,H1500);
+  Vector V05 = Get(S->ks->vw,H2500) - Get(S->ks->vw,H2000);
+  Vector V06 = Get(S->ks->vw,H3000) - Get(S->ks->vw,H2500);
+  Vector V07 = Get(S->ks->vw,H3500) - Get(S->ks->vw,H3000);
+  Vector V08 = Get(S->ks->vw,H4000) - Get(S->ks->vw,H3500);
+  Vector V09 = Get(S->ks->vw,H4500) - Get(S->ks->vw,H4000);
+  Vector V10 = Get(S->ks->vw,H5000) - Get(S->ks->vw,H4500);
+  Vector V11 = Get(S->ks->vw,H5500) - Get(S->ks->vw,H5000);
+  Vector V12 = Get(S->ks->vw,H6000) - Get(S->ks->vw,H5500);
   vector<int> diffs = { V03.abs() - V04.abs(),
                      V04.abs() - V05.abs(),
                      V05.abs() - V06.abs(),
@@ -4275,17 +4310,28 @@ double IndicesCollector::BS16_var_SD(){
   return result;
 }
 
-double IndicesCollector::BS16_var_ID(){
-  Vector V03 = Get(S->ks->vw,cache->getHeightIndex(1500)) - Get(S->ks->vw,cache->getHeightIndex(1000));
-  Vector V04 = Get(S->ks->vw,cache->getHeightIndex(2000)) - Get(S->ks->vw,cache->getHeightIndex(1500));
-  Vector V05 = Get(S->ks->vw,cache->getHeightIndex(2500)) - Get(S->ks->vw,cache->getHeightIndex(2000));
-  Vector V06 = Get(S->ks->vw,cache->getHeightIndex(3000)) - Get(S->ks->vw,cache->getHeightIndex(2500));
-  Vector V07 = Get(S->ks->vw,cache->getHeightIndex(3500)) - Get(S->ks->vw,cache->getHeightIndex(3000));
-  Vector V08 = Get(S->ks->vw,cache->getHeightIndex(4000)) - Get(S->ks->vw,cache->getHeightIndex(3500));
-  Vector V09 = Get(S->ks->vw,cache->getHeightIndex(4500)) - Get(S->ks->vw,cache->getHeightIndex(4000));
-  Vector V10 = Get(S->ks->vw,cache->getHeightIndex(5000)) - Get(S->ks->vw,cache->getHeightIndex(4500));
-  Vector V11 = Get(S->ks->vw,cache->getHeightIndex(5500)) - Get(S->ks->vw,cache->getHeightIndex(5000));
-  Vector V12 = Get(S->ks->vw,cache->getHeightIndex(6000)) - Get(S->ks->vw,cache->getHeightIndex(5500));
+double IndicesCollector::BS16_var_SI(){
+  int H1000 = cache->getHeightIndex(1000); 
+  int H1500 = cache->getHeightIndex(1500); 
+  int H2000 = cache->getHeightIndex(2000); 
+  int H2500 = cache->getHeightIndex(2500); 
+  int H3000 = cache->getHeightIndex(3000); 
+  int H3500 = cache->getHeightIndex(3500); 
+  int H4000 = cache->getHeightIndex(4000); 
+  int H4500 = cache->getHeightIndex(4500); 
+  int H5000 = cache->getHeightIndex(5000); 
+  int H5500 = cache->getHeightIndex(5500); 
+  int H6000 = cache->getHeightIndex(6000); 
+  Vector V03 = Get(S->ks->vw,H1500) - Get(S->ks->vw,H1000);
+  Vector V04 = Get(S->ks->vw,H2000) - Get(S->ks->vw,H1500);
+  Vector V05 = Get(S->ks->vw,H2500) - Get(S->ks->vw,H2000);
+  Vector V06 = Get(S->ks->vw,H3000) - Get(S->ks->vw,H2500);
+  Vector V07 = Get(S->ks->vw,H3500) - Get(S->ks->vw,H3000);
+  Vector V08 = Get(S->ks->vw,H4000) - Get(S->ks->vw,H3500);
+  Vector V09 = Get(S->ks->vw,H4500) - Get(S->ks->vw,H4000);
+  Vector V10 = Get(S->ks->vw,H5000) - Get(S->ks->vw,H4500);
+  Vector V11 = Get(S->ks->vw,H5500) - Get(S->ks->vw,H5000);
+  Vector V12 = Get(S->ks->vw,H6000) - Get(S->ks->vw,H5500);
   vector<int> diffs = { V03.abs() - V04.abs(),
                      V04.abs() - V05.abs(),
                      V05.abs() - V06.abs(),
