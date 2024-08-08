@@ -1793,6 +1793,7 @@ public:
   double meand14;
 
   double meanhum850500;
+  double meand850500;
   double meanhumMIDDLE;
   double meandMIDDLE;
   
