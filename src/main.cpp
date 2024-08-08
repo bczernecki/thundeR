@@ -50,7 +50,7 @@ double sign(double x){
   else if (x == 0) return 0;
 }
 
-double computeMean(const vector<int>& arr){ 
+double computeMean(const vector<double>& arr){ 
     double sum = 0.0, mean, standardDeviation = 0.0;   
     int size = arr.size(); 
     for (int i = 0; i < size; ++i) { 
@@ -60,7 +60,7 @@ double computeMean(const vector<int>& arr){
     return mean; 
 } 
 
-double computeStandardDeviation(const vector<int>& arr){ 
+double computeStandardDeviation(const vector<double>& arr){ 
     double sum = 0.0, mean, standardDeviation = 0.0;   
     int size = arr.size(); 
     for (int i = 0; i < size; ++i) { 
@@ -4220,7 +4220,7 @@ double IndicesCollector::BS06_var_SD(){
   Vector V10 = Get(S->ks->vw,H5000) - Get(S->ks->vw,H4500);
   Vector V11 = Get(S->ks->vw,H5500) - Get(S->ks->vw,H5000);
   Vector V12 = Get(S->ks->vw,H6000) - Get(S->ks->vw,H5500);
-  vector<int> diffs = { V01.abs() - V02.abs(),
+  vector<double> diffs = { V01.abs() - V02.abs(),
                         V02.abs() - V03.abs(),
                         V03.abs() - V04.abs(),
                         V04.abs() - V05.abs(),
@@ -4260,7 +4260,7 @@ double IndicesCollector::BS06_var_SI(){
   Vector V10 = Get(S->ks->vw,H5000) - Get(S->ks->vw,H4500);
   Vector V11 = Get(S->ks->vw,H5500) - Get(S->ks->vw,H5000);
   Vector V12 = Get(S->ks->vw,H6000) - Get(S->ks->vw,H5500);  
-  vector<int> diffs = { V01.abs() - V02.abs(),
+  vector<double> diffs = { V01.abs() - V02.abs(),
                         V02.abs() - V03.abs(),
                         V03.abs() - V04.abs(),
                         V04.abs() - V05.abs(),
@@ -4297,7 +4297,7 @@ double IndicesCollector::BS16_var_SD(){
   Vector V10 = Get(S->ks->vw,H5000) - Get(S->ks->vw,H4500);
   Vector V11 = Get(S->ks->vw,H5500) - Get(S->ks->vw,H5000);
   Vector V12 = Get(S->ks->vw,H6000) - Get(S->ks->vw,H5500);
-  vector<int> diffs = { V03.abs() - V04.abs(),
+  vector<double> diffs = { V03.abs() - V04.abs(),
                      V04.abs() - V05.abs(),
                      V05.abs() - V06.abs(),
                      V06.abs() - V07.abs(),
@@ -4332,7 +4332,7 @@ double IndicesCollector::BS16_var_SI(){
   Vector V10 = Get(S->ks->vw,H5000) - Get(S->ks->vw,H4500);
   Vector V11 = Get(S->ks->vw,H5500) - Get(S->ks->vw,H5000);
   Vector V12 = Get(S->ks->vw,H6000) - Get(S->ks->vw,H5500);
-  vector<int> diffs = { V03.abs() - V04.abs(),
+  vector<double> diffs = { V03.abs() - V04.abs(),
                      V04.abs() - V05.abs(),
                      V05.abs() - V06.abs(),
                      V06.abs() - V07.abs(),
