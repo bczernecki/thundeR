@@ -50,6 +50,29 @@ double sign(double x){
   else if (x == 0) return 0;
 }
 
+double computeMean(const vector<int>& arr){ 
+    double sum = 0.0, mean, standardDeviation = 0.0;   
+    int size = arr.size(); 
+    for (int i = 0; i < size; ++i) { 
+        sum += arr[i]; 
+    } 
+    mean = sum / size; 
+    return mean; 
+} 
+
+double computeStandardDeviation(const vector<int>& arr){ 
+    double sum = 0.0, mean, standardDeviation = 0.0;   
+    int size = arr.size(); 
+    for (int i = 0; i < size; ++i) { 
+        sum += arr[i]; 
+    } 
+    mean = sum / size; 
+    for (int i = 0; i < size; ++i) { 
+        standardDeviation += pow(arr[i] - mean, 2); 
+    } 
+    return sqrt(standardDeviation / size); 
+} 
+
 double ESAT(double t)
 {
   double temp = t + kel;
@@ -2644,6 +2667,11 @@ public:
   double RH36();
   double RHMIDDLE();		
 
+  double BS06_var_SD();
+  double BS06_var_SI();
+  double BS16_var_SD();
+  double BS16_var_SI();
+
   double BS500();
   double BS01();
   double BS02();
@@ -2930,6 +2958,12 @@ public:
   double* MU_ML_ECAPE();
   double* SB_ECAPE();
   double* MU500_ECAPE();
+
+  double MU_ELI();
+  double ML_ELI();
+  double MUML_ELI();
+  double SB_ELI();
+  double MU500_ELI();
 
   double Ventilation_13km();
   double Ventilation_16km();
@@ -4161,6 +4195,110 @@ double IndicesCollector::SBMRatio(){
   return Get(S->th->mixing,S->th->surfaceBased->startIndex);
 }
 
+double IndicesCollector::BS06_var_SD(){
+  Vector V01 = Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0);
+  Vector V02 = Get(S->ks->vw,cache->getHeightIndex(1000)) - Get(S->ks->vw,getHeightIndex(500));
+  Vector V03 = Get(S->ks->vw,cache->getHeightIndex(1500)) - Get(S->ks->vw,getHeightIndex(1000));
+  Vector V04 = Get(S->ks->vw,cache->getHeightIndex(2000)) - Get(S->ks->vw,getHeightIndex(1500));
+  Vector V05 = Get(S->ks->vw,cache->getHeightIndex(2500)) - Get(S->ks->vw,getHeightIndex(2000));
+  Vector V06 = Get(S->ks->vw,cache->getHeightIndex(3000)) - Get(S->ks->vw,getHeightIndex(2500));
+  Vector V07 = Get(S->ks->vw,cache->getHeightIndex(3500)) - Get(S->ks->vw,getHeightIndex(3000));
+  Vector V08 = Get(S->ks->vw,cache->getHeightIndex(4000)) - Get(S->ks->vw,getHeightIndex(3500));
+  Vector V09 = Get(S->ks->vw,cache->getHeightIndex(4500)) - Get(S->ks->vw,getHeightIndex(4000));
+  Vector V10 = Get(S->ks->vw,cache->getHeightIndex(5000)) - Get(S->ks->vw,getHeightIndex(4500));
+  Vector V11 = Get(S->ks->vw,cache->getHeightIndex(5500)) - Get(S->ks->vw,getHeightIndex(5000));
+  Vector V12 = Get(S->ks->vw,cache->getHeightIndex(6000)) - Get(S->ks->vw,getHeightIndex(5500));
+  vector[] diffs = { V01.abs() - V02.abs(),
+                     V02.abs() - V03.abs(),
+                     V03.abs() - V04.abs(),
+                     V04.abs() - V05.abs(),
+                     V05.abs() - V06.abs(),
+                     V06.abs() - V07.abs(),
+                     V07.abs() - V08.abs(),
+                     V08.abs() - V09.abs(),
+                     V09.abs() - V10.abs(),
+                     V10.abs() - V11.abs(),
+                     V11.abs() - V12.abs() };
+  double result = computeStandardDeviation(diffs);
+  return result;
+}
+
+double IndicesCollector::BS06_var_SD(){
+  Vector V01 = Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0);
+  Vector V02 = Get(S->ks->vw,cache->getHeightIndex(1000)) - Get(S->ks->vw,getHeightIndex(500));
+  Vector V03 = Get(S->ks->vw,cache->getHeightIndex(1500)) - Get(S->ks->vw,getHeightIndex(1000));
+  Vector V04 = Get(S->ks->vw,cache->getHeightIndex(2000)) - Get(S->ks->vw,getHeightIndex(1500));
+  Vector V05 = Get(S->ks->vw,cache->getHeightIndex(2500)) - Get(S->ks->vw,getHeightIndex(2000));
+  Vector V06 = Get(S->ks->vw,cache->getHeightIndex(3000)) - Get(S->ks->vw,getHeightIndex(2500));
+  Vector V07 = Get(S->ks->vw,cache->getHeightIndex(3500)) - Get(S->ks->vw,getHeightIndex(3000));
+  Vector V08 = Get(S->ks->vw,cache->getHeightIndex(4000)) - Get(S->ks->vw,getHeightIndex(3500));
+  Vector V09 = Get(S->ks->vw,cache->getHeightIndex(4500)) - Get(S->ks->vw,getHeightIndex(4000));
+  Vector V10 = Get(S->ks->vw,cache->getHeightIndex(5000)) - Get(S->ks->vw,getHeightIndex(4500));
+  Vector V11 = Get(S->ks->vw,cache->getHeightIndex(5500)) - Get(S->ks->vw,getHeightIndex(5000));
+  Vector V12 = Get(S->ks->vw,cache->getHeightIndex(6000)) - Get(S->ks->vw,getHeightIndex(5500));
+  vector[] diffs = { V01.abs() - V02.abs(),
+                     V02.abs() - V03.abs(),
+                     V03.abs() - V04.abs(),
+                     V04.abs() - V05.abs(),
+                     V05.abs() - V06.abs(),
+                     V06.abs() - V07.abs(),
+                     V07.abs() - V08.abs(),
+                     V08.abs() - V09.abs(),
+                     V09.abs() - V10.abs(),
+                     V10.abs() - V11.abs(),
+                     V11.abs() - V12.abs() };  
+  double result = computeStandardDeviation(diffs) / abs(computeMean(diffs));
+  return result;
+}
+
+double IndicesCollector::BS16_var_SD(){
+  Vector V03 = Get(S->ks->vw,cache->getHeightIndex(1500)) - Get(S->ks->vw,getHeightIndex(1000));
+  Vector V04 = Get(S->ks->vw,cache->getHeightIndex(2000)) - Get(S->ks->vw,getHeightIndex(1500));
+  Vector V05 = Get(S->ks->vw,cache->getHeightIndex(2500)) - Get(S->ks->vw,getHeightIndex(2000));
+  Vector V06 = Get(S->ks->vw,cache->getHeightIndex(3000)) - Get(S->ks->vw,getHeightIndex(2500));
+  Vector V07 = Get(S->ks->vw,cache->getHeightIndex(3500)) - Get(S->ks->vw,getHeightIndex(3000));
+  Vector V08 = Get(S->ks->vw,cache->getHeightIndex(4000)) - Get(S->ks->vw,getHeightIndex(3500));
+  Vector V09 = Get(S->ks->vw,cache->getHeightIndex(4500)) - Get(S->ks->vw,getHeightIndex(4000));
+  Vector V10 = Get(S->ks->vw,cache->getHeightIndex(5000)) - Get(S->ks->vw,getHeightIndex(4500));
+  Vector V11 = Get(S->ks->vw,cache->getHeightIndex(5500)) - Get(S->ks->vw,getHeightIndex(5000));
+  Vector V12 = Get(S->ks->vw,cache->getHeightIndex(6000)) - Get(S->ks->vw,getHeightIndex(5500));
+  vector[] diffs = { V03.abs() - V04.abs(),
+                     V04.abs() - V05.abs(),
+                     V05.abs() - V06.abs(),
+                     V06.abs() - V07.abs(),
+                     V07.abs() - V08.abs(),
+                     V08.abs() - V09.abs(),
+                     V09.abs() - V10.abs(),
+                     V10.abs() - V11.abs(),
+                     V11.abs() - V12.abs() };
+  double result = computeStandardDeviation(diffs);
+  return result;
+}
+
+double IndicesCollector::BS16_var_SD(){
+  Vector V03 = Get(S->ks->vw,cache->getHeightIndex(1500)) - Get(S->ks->vw,getHeightIndex(1000));
+  Vector V04 = Get(S->ks->vw,cache->getHeightIndex(2000)) - Get(S->ks->vw,getHeightIndex(1500));
+  Vector V05 = Get(S->ks->vw,cache->getHeightIndex(2500)) - Get(S->ks->vw,getHeightIndex(2000));
+  Vector V06 = Get(S->ks->vw,cache->getHeightIndex(3000)) - Get(S->ks->vw,getHeightIndex(2500));
+  Vector V07 = Get(S->ks->vw,cache->getHeightIndex(3500)) - Get(S->ks->vw,getHeightIndex(3000));
+  Vector V08 = Get(S->ks->vw,cache->getHeightIndex(4000)) - Get(S->ks->vw,getHeightIndex(3500));
+  Vector V09 = Get(S->ks->vw,cache->getHeightIndex(4500)) - Get(S->ks->vw,getHeightIndex(4000));
+  Vector V10 = Get(S->ks->vw,cache->getHeightIndex(5000)) - Get(S->ks->vw,getHeightIndex(4500));
+  Vector V11 = Get(S->ks->vw,cache->getHeightIndex(5500)) - Get(S->ks->vw,getHeightIndex(5000));
+  Vector V12 = Get(S->ks->vw,cache->getHeightIndex(6000)) - Get(S->ks->vw,getHeightIndex(5500));
+  vector[] diffs = { V03.abs() - V04.abs(),
+                     V04.abs() - V05.abs(),
+                     V05.abs() - V06.abs(),
+                     V06.abs() - V07.abs(),
+                     V07.abs() - V08.abs(),
+                     V08.abs() - V09.abs(),
+                     V09.abs() - V10.abs(),
+                     V10.abs() - V11.abs(),
+                     V11.abs() - V12.abs() };  
+  double result = computeStandardDeviation(diffs) / abs(computeMean(diffs));
+  return result;
+}
+
 double IndicesCollector::BS500(){
   int tail=0;
   int head = cache->getHeightIndex(500);  
@@ -4940,13 +5078,64 @@ double IndicesCollector::ML_EFF_EWMAXSHEAR_3km(){
   return CAPE*this->emlbs();
 }
 
+double IndicesCollector::MU_ELI(){
+  double* CAPE_WXS = this->MU_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->VMostUnstableLI();
+  if(buoyancy<0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
+}
+
+double IndicesCollector::SB_ELI(){
+  double* CAPE_WXS = this->SB_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->VSurfaceBasedLI();
+  if(buoyancy<0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
+}
+
+double IndicesCollector::ML_ELI(){
+  double* CAPE_WXS = this->ML_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->VMeanLayerLI();
+  if(buoyancy<0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
+}
+
+double IndicesCollector::MUML_ELI(){
+  double* CAPE_WXS = this->MUML_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->VMeanMostUnstableLI();
+  if(buoyancy<0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
+}
+
+double IndicesCollector::MU500_ELI(){
+  double* CAPE_WXS = this->MU500_ECAPE();
+  double E_tilde = CAPE_WXS[0];
+  delete[] CAPE_WXS;
+  if(E_tilde>2)E_tilde = 2;
+  double buoyancy = this->MU500_LI();
+  if(buoyancy<0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
+}
+
 double IndicesCollector::MU_ebuoyancy(){
   double* CAPE_WXS = this->MU_ECAPE();
   double E_tilde = CAPE_WXS[0];
   delete[] CAPE_WXS;
   if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MU_buoyancy();
-  return E_tilde * buoyancy;
+  if(buoyancy>0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
 }
 
 double IndicesCollector::ML_ebuoyancy(){
@@ -4955,7 +5144,8 @@ double IndicesCollector::ML_ebuoyancy(){
   delete[] CAPE_WXS;
   if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->ML_buoyancy();
-  return E_tilde * buoyancy;
+  if(buoyancy>0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
 }
 
 double IndicesCollector::MUML_ebuoyancy(){
@@ -4964,7 +5154,8 @@ double IndicesCollector::MUML_ebuoyancy(){
   delete[] CAPE_WXS;
   if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MUML_buoyancy();
-  return E_tilde * buoyancy;
+  if(buoyancy>0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
 }
 
 double IndicesCollector::MU500_ebuoyancy(){
@@ -4973,7 +5164,8 @@ double IndicesCollector::MU500_ebuoyancy(){
   delete[] CAPE_WXS;
   if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MU500_buoyancy();
-  return E_tilde * buoyancy;
+  if(buoyancy>0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
 }
 
 double IndicesCollector::SB_ebuoyancy(){
@@ -4982,7 +5174,8 @@ double IndicesCollector::SB_ebuoyancy(){
   delete[] CAPE_WXS;
   if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->SB_buoyancy();
-  return E_tilde * buoyancy;
+  if(buoyancy>0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
 }
 
 double IndicesCollector::MU_ebuoyancy_M10(){
@@ -4991,7 +5184,8 @@ double IndicesCollector::MU_ebuoyancy_M10(){
   delete[] CAPE_WXS;
   if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MU_buoyancy_M10();
-  return E_tilde * buoyancy;
+  if(buoyancy>0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
 }
 
 double IndicesCollector::ML_ebuoyancy_M10(){
@@ -5000,7 +5194,8 @@ double IndicesCollector::ML_ebuoyancy_M10(){
   delete[] CAPE_WXS;
   if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->ML_buoyancy_M10();
-  return E_tilde * buoyancy;
+  if(buoyancy>0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
 }
 
 double IndicesCollector::MUML_ebuoyancy_M10(){
@@ -5009,7 +5204,8 @@ double IndicesCollector::MUML_ebuoyancy_M10(){
   delete[] CAPE_WXS;
   if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MUML_buoyancy_M10();
-  return E_tilde * buoyancy;
+  if(buoyancy>0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
 }
 
 double IndicesCollector::MU500_ebuoyancy_M10(){
@@ -5018,7 +5214,8 @@ double IndicesCollector::MU500_ebuoyancy_M10(){
   delete[] CAPE_WXS;
   if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->MU500_buoyancy_M10();
-  return E_tilde * buoyancy;
+  if(buoyancy>0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
 }
 
 double IndicesCollector::SB_ebuoyancy_M10(){
@@ -5027,7 +5224,8 @@ double IndicesCollector::SB_ebuoyancy_M10(){
   delete[] CAPE_WXS;
   if(E_tilde>2)E_tilde = 2;
   double buoyancy = this->SB_buoyancy_M10();
-  return E_tilde * buoyancy;
+  if(buoyancy>0)buoyancy = E_tilde * buoyancy;
+  return buoyancy;
 }
 
 double IndicesCollector::BulkShearSfcTen(){
