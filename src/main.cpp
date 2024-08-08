@@ -6424,7 +6424,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[368]=(*S)->getIndicesCollectorPointer()->BS06_var_SI();
   vec[369]=(*S)->getIndicesCollectorPointer()->BS16_var_SD();
   vec[370]=(*S)->getIndicesCollectorPointer()->BS16_var_SI();
-  vec[371]=(*S)->getIndicesCollectorPointer()->RHMIDDLE(); 
+  vec[371]=(*S)->getIndicesCollectorPointer()->RH850500(); 
   return vec;
 }
 
@@ -7120,6 +7120,16 @@ double * sounding_default2(double* pressure,
 //'  \item MW_SR_36_RM
 //'  \item MW_SR_16_LM
 //'  \item MW_SR_36_LM
+//'  \item SB_ELI
+//'  \item ML_ELI
+//'  \item MU_ELI
+//'  \item MUML_ELI
+//'  \item MU500_ELI
+//'  \item BS06_var_SD
+//'  \item BS06_var_SI
+//'  \item BS16_var_SD
+//'  \item BS16_var_SI
+//'  \item RH850500 
 //' }
  // [[Rcpp::export]]
  
