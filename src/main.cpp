@@ -1791,7 +1791,8 @@ public:
   
   double meanhum14;
   double meand14;
-  
+
+  double meanhum850500;
   double meanhumMIDDLE;
   double meandMIDDLE;
   
@@ -1987,6 +1988,9 @@ Thermodynamics::Thermodynamics(){
   
   meanhum2=0;
   meand2b=0;
+
+  meanhum850500=0;
+  meand850500=0;
   
   meanhumMIDDLE=0;
   meandMIDDLE=0;
@@ -2068,7 +2072,10 @@ void Thermodynamics::startConditions(int i, double p, double h, double t, double
   
   meanhumMIDDLE=ESAT(d)/ESAT(t);
   meandMIDDLE=1;
-  
+
+  meanhum850500=ESAT(d)/ESAT(t);
+  meand850500=1;
+
   meanmxr2=W(d, p);
   meand2=1;
 }
@@ -2436,6 +2443,12 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
       meanhumMIDDLE+=ESAT(d)/ESAT(t);
       meandMIDDLE+=1;
     }
+
+   if (p<=850&&p>=500){
+      meanhum850500+=ESAT(d)/ESAT(t);
+      meand850500+=1;
+    }
+
     
   }
   if (abs(h - h0) <= 1000 && mr1000<mr) mr1000 = mr;
@@ -2494,6 +2507,7 @@ void Thermodynamics::finish(){
   meanhum36/=meand36;
   meanhum14/=meand14;
   meanhumMIDDLE/=meandMIDDLE; 
+  meanhum850500/=meand850500; 
   meanmxr2/=meand2;
 }
 
@@ -2666,6 +2680,7 @@ public:
   double RH14();
   double RH36();
   double RHMIDDLE();		
+  double RH850500();		
 
   double BS06_var_SD();
   double BS06_var_SI();
@@ -5340,6 +5355,10 @@ double IndicesCollector::RHMIDDLE(){
   return S->th->meanhumMIDDLE;
 }
 
+double IndicesCollector::RH850500(){
+  return S->th->meanhum850500;
+}
+
 double IndicesCollector::Bunkers_RM_A(){
   double *tab = S->ks->rm.toAV(); 
   double angle = tab[0];
@@ -5956,7 +5975,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[362];
+  double * vec = new double[372];
 
 // MU parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
@@ -6394,6 +6413,17 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[360]=(*S)->getIndicesCollectorPointer()->MeanSR16_LM();
   vec[361]=(*S)->getIndicesCollectorPointer()->MeanSR36_LM();
 
+  vec[362]=(*S)->getIndicesCollectorPointer()->SB_ELI();
+  vec[363]=(*S)->getIndicesCollectorPointer()->ML_ELI();
+  vec[364]=(*S)->getIndicesCollectorPointer()->MU_ELI();
+  vec[365]=(*S)->getIndicesCollectorPointer()->MUML_ELI();
+  vec[366]=(*S)->getIndicesCollectorPointer()->MU500_ELI();
+
+  vec[367]=(*S)->getIndicesCollectorPointer()->BS06_var_SD();
+  vec[368]=(*S)->getIndicesCollectorPointer()->BS06_var_SI();
+  vec[369]=(*S)->getIndicesCollectorPointer()->BS16_var_SD();
+  vec[370]=(*S)->getIndicesCollectorPointer()->BS16_var_SI();
+  vec[371]=(*S)->getIndicesCollectorPointer()->RHMIDDLE(); 
   return vec;
 }
 
@@ -7125,7 +7155,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 362;
+   int reslen= 372;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
