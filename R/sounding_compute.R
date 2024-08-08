@@ -366,7 +366,16 @@
 #'  \item MW_SR_36_RM
 #'  \item MW_SR_16_LM
 #'  \item MW_SR_36_LM
-
+#'  \item SB_ELI
+#'  \item ML_ELI
+#'  \item MU_ELI
+#'  \item MUML_ELI
+#'  \item MU500_ELI
+#'  \item BS06_var_SD
+#'  \item BS06_var_SI
+#'  \item BS16_var_SD
+#'  \item BS16_var_SI
+#'  \item RH850500 
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -778,6 +787,16 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MW_SR_16_RM",
 "MW_SR_36_RM",
 "MW_SR_16_LM",
-"MW_SR_36_LM")
+"MW_SR_36_LM",
+"SB_ELI",
+"ML_ELI",
+"MU_ELI",
+"MUML_ELI",
+"MU500_ELI",
+"BS06_var_SD",
+"BS06_var_SI",
+"BS16_var_SD",
+"BS16_var_SI",
+"RH850500")
 return(tmp)
 }
