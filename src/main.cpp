@@ -4248,7 +4248,7 @@ double IndicesCollector::BS06_var_SD(){
                         V10.abs() - V11.abs(),
                         V11.abs() - V12.abs() };
   double result = computeStandardDeviation(diffs);
-  return result;
+  return 1/result;
 }
 
 double IndicesCollector::BS06_var_SI(){
@@ -4288,7 +4288,7 @@ double IndicesCollector::BS06_var_SI(){
                         V10.abs() - V11.abs(),
                         V11.abs() - V12.abs() };  
   double result = computeStandardDeviation(diffs) / abs(computeMean(diffs));
-  return result;
+  return 1/result;
 }
 
 double IndicesCollector::BS16_var_SD(){
@@ -4323,7 +4323,7 @@ double IndicesCollector::BS16_var_SD(){
                      V10.abs() - V11.abs(),
                      V11.abs() - V12.abs() };
   double result = computeStandardDeviation(diffs);
-  return result;
+  return 1/result;
 }
 
 double IndicesCollector::BS16_var_SI(){
@@ -4358,7 +4358,7 @@ double IndicesCollector::BS16_var_SI(){
                      V10.abs() - V11.abs(),
                      V11.abs() - V12.abs() };  
   double result = computeStandardDeviation(diffs) / abs(computeMean(diffs));
-  return result;
+  return 1/result;
 }
 
 double IndicesCollector::BS500(){
