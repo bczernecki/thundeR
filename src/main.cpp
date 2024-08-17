@@ -2705,6 +2705,7 @@ public:
   double emumlbs();
   double esbbs();
   double emlbs();
+  double emu500bs()
 
   double BulkShearSfcTen();
   double BulkShear1kmTen();
@@ -4776,6 +4777,45 @@ double IndicesCollector::esbbs(){
   return effSHR;
 }
 
+double IndicesCollector::emu500bs(){
+  Vector gVector = Get(S->ks->vw,S->th->mostU500->startIndex);
+  int index=S->th->mostU500->startIndex+((S->th->mostU500->vElIndex-S->th->mostU500->startIndex)/2);
+  double h0 = Get(S->h,S->th->mostU500->startIndex);
+  double hn = Get(S->h,S->th->mostU500->vElIndex);  
+  double middle = h0+((hn-h0)/2.0);
+  double hindex = Get(S->h,index);
+  int destindex =-1;  
+  if(middle ==hindex )destindex = index;
+  else if (middle > hindex){
+    for(size_t i = index;i<S->h->size()-1;i++){
+      double upper = Get(S->h,i+1);
+      double lower = Get(S->h, i);
+      if(middle>=lower && middle<=upper){
+        if(abs(middle-lower)>abs(upper-middle)){
+          destindex = i+1;
+        }else destindex=i;
+        break;
+      }
+    }
+  }else{
+    for(int i = index;i>1;i--){
+      double upper = Get(S->h,i);
+      double lower = Get(S->h, i-1);
+      if(middle>=lower && middle<=upper){
+        if(abs(middle-lower)>abs(upper-middle)){
+          destindex = i+1;
+        }else destindex=i;        
+        break;
+      }
+    }
+  }
+  Vector middleVector =  Get(S->ks->vw,destindex);  
+  double effSHR = (middleVector - gVector).abs();
+  double mucape = this->MU500CAPE();
+  if(mucape==0)effSHR=0;  
+  return effSHR;
+}
+
 double IndicesCollector::emlbs(){
   Vector gVector = Get(S->ks->vw,S->th->meanLayer->startIndex);
   int index=S->th->meanLayer->startIndex+((S->th->meanLayer->vElIndex-S->th->meanLayer->startIndex)/2);
@@ -6208,7 +6248,6 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[176]=(*S)->getIndicesCollectorPointer()->PWATER();
   vec[334]=(*S)->getIndicesCollectorPointer()->PWATER_eff();
 
-
   vec[177]=(*S)->getIndicesCollectorPointer()->MoistureFlux(); 
   vec[178]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux(); 
   vec[179]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff(); 
@@ -6222,21 +6261,22 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[185]=(*S)->getIndicesCollectorPointer()->BS08();
   vec[186]=(*S)->getIndicesCollectorPointer()->BS36();
   vec[187]=(*S)->getIndicesCollectorPointer()->BS13();
+  vec[190]=(*S)->getIndicesCollectorPointer()->BS14();
   vec[188]=(*S)->getIndicesCollectorPointer()->BS16();
   vec[189]=(*S)->getIndicesCollectorPointer()->BS18();
-  vec[190]=(*S)->getIndicesCollectorPointer()->BS14();
   vec[191]=(*S)->getIndicesCollectorPointer()->BS25();
-  vec[192]=(*S)->getIndicesCollectorPointer()->emubs();
-  vec[193]=(*S)->getIndicesCollectorPointer()->emumlbs();
   vec[194]=(*S)->getIndicesCollectorPointer()->esbbs();
   vec[195]=(*S)->getIndicesCollectorPointer()->emlbs();
+  vec[192]=(*S)->getIndicesCollectorPointer()->emubs();
+  vec[193]=(*S)->getIndicesCollectorPointer()->emumlbs();
+  vec[195]=(*S)->getIndicesCollectorPointer()->emu500bs();
+
   vec[196]=(*S)->getIndicesCollectorPointer()->BulkShearSfcTen();	
   vec[197]=(*S)->getIndicesCollectorPointer()->BulkShear1kmTen();
   vec[198]=(*S)->getIndicesCollectorPointer()->BulkShear2kmTen();  
-  vec[199]=(*S)->getIndicesCollectorPointer()->BulkShearMULCLTen();
-  vec[200]=(*S)->getIndicesCollectorPointer()->BulkShearMUMLLCLTen();
-  vec[201]=(*S)->getIndicesCollectorPointer()->BulkShearSBLCLTen();
   vec[202]=(*S)->getIndicesCollectorPointer()->BulkShearMLLCLTen();
+  vec[200]=(*S)->getIndicesCollectorPointer()->BulkShearMULCLTen();
+  vec[200]=(*S)->getIndicesCollectorPointer()->BulkShearMUMLLCLTen();
 
   // Storm-relative winds
   vec[203]=(*S)->getIndicesCollectorPointer()->MeanSR500_RM();
