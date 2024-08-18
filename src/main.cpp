@@ -6025,7 +6025,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[372];
+  double * vec = new double[358];
 
 // vec[0] = MU_ECAPE[5]; // EWMAX
 // vec[0] = ML_ECAPE[5]; // EWMAX
@@ -6247,6 +6247,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[178]=(*S)->getIndicesCollectorPointer()->MUHeight();
   vec[179]=(*S)->getIndicesCollectorPointer()->MUMLHeight();
   vec[180]=(*S)->getIndicesCollectorPointer()->MinTHTEHeight();
+
+  // Theta-e & downdraft 
   vec[181]=(*S)->getIndicesCollectorPointer()->DeltaThetaE();
   vec[182]=(*S)->getIndicesCollectorPointer()->DeltaThetaE_min04km();
   vec[183]=(*S)->getIndicesCollectorPointer()->THTE_LR_LCL_to_M10();
@@ -6260,7 +6262,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[190]=(*S)->getIndicesCollectorPointer()->VDCAPE(); 
   vec[191]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();
 
-// RH
+// Moisture parameters
   vec[192]=(*S)->getIndicesCollectorPointer()->RH01();
   vec[193]=(*S)->getIndicesCollectorPointer()->RH02();
   vec[194]=(*S)->getIndicesCollectorPointer()->RH14();
@@ -6274,7 +6276,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[202]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux(); 
   vec[203]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff(); 
 
-  // Mean flow
+  // Mean winnd
   vec[204]=(*S)->getIndicesCollectorPointer()->MeanWind500();
   vec[205]=(*S)->getIndicesCollectorPointer()->MeanWind01();
   vec[206]=(*S)->getIndicesCollectorPointer()->MeanWind02();
@@ -6420,8 +6422,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[336]=(*S)->getIndicesCollectorPointer()->STPeff();	
   vec[337]=(*S)->getIndicesCollectorPointer()->STPeff_LM();
   vec[338]=(*S)->getIndicesCollectorPointer()->SCP();
-  vec[339]=(*S)->getIndicesCollectorPointer()->SCPeff();
-  vec[340]=(*S)->getIndicesCollectorPointer()->SCP_LM();
+  vec[339]=(*S)->getIndicesCollectorPointer()->SCP_LM();
+  vec[340]=(*S)->getIndicesCollectorPointer()->SCPeff();
   vec[341]=(*S)->getIndicesCollectorPointer()->SCPeff_LM();
   vec[342]=(*S)->getIndicesCollectorPointer()->SHP();
   vec[343]=(*S)->getIndicesCollectorPointer()->HSI();
@@ -7180,7 +7182,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 372;
+   int reslen= 358;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
