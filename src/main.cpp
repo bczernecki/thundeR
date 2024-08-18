@@ -6125,359 +6125,320 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[70]=(*S)->getIndicesCollectorPointer()->VMostUnstableCAPE();
   vec[71]=(*S)->getIndicesCollectorPointer()->MU_coldcape();	
   vec[72]=(*S)->getIndicesCollectorPointer()->MU_coldcapeTV();	
-  vec[2]=(*S)->getIndicesCollectorPointer()->VLLMostUnstableCAPE();
-  vec[3]=(*S)->getIndicesCollectorPointer()->MUmiddlecape();
-  vec[4]=(*S)->getIndicesCollectorPointer()->MU_buoyancy(); 
-  vec[5]=(*S)->getIndicesCollectorPointer()->MU_buoyancy_M10();
-  vec[6]=(*S)->getIndicesCollectorPointer()->MU_buoyancy_3km();
-  vec[7]=(*S)->getIndicesCollectorPointer()->VMostUnstableLI();
-  vec[8]=(*S)->getIndicesCollectorPointer()->VMostUnstableLI_M10();   
-  vec[9]=(*S)->getIndicesCollectorPointer()->VMostUnstableCIN();  
-  vec[10]=(*S)->getIndicesCollectorPointer()->VMostUnstableLCL();
-  vec[11]=(*S)->getIndicesCollectorPointer()->VMostUnstableLFC();
-  vec[12]=(*S)->getIndicesCollectorPointer()->VMostUnstableEL();
-  vec[13]=(*S)->getIndicesCollectorPointer()->MULCLTemperature();
-  vec[14]=(*S)->getIndicesCollectorPointer()->MULFCTemperature();
-  vec[15]=(*S)->getIndicesCollectorPointer()->MUELTemperature();
-  vec[16]=(*S)->getIndicesCollectorPointer()->MU_cold_cloud(); 
-  vec[17]=(*S)->getIndicesCollectorPointer()->MU_warm_cloud(); 
-  vec[18]=(*S)->getIndicesCollectorPointer()->MU_equal_layer();
-  vec[19]=(*S)->getIndicesCollectorPointer()->MUMRatio();   
-  vec[305]=(*S)->getIndicesCollectorPointer()->MU_WMAXSHEAR();
+  vec[73]=(*S)->getIndicesCollectorPointer()->VLLMostUnstableCAPE();
+  vec[74]=(*S)->getIndicesCollectorPointer()->MUmiddlecape();
+  vec[75]=(*S)->getIndicesCollectorPointer()->MU_buoyancy(); 
+  vec[76]=(*S)->getIndicesCollectorPointer()->MU_buoyancy_M10();
+  vec[77]=(*S)->getIndicesCollectorPointer()->MU_buoyancy_3km();
+  vec[78]=(*S)->getIndicesCollectorPointer()->VMostUnstableLI();
+  vec[79]=(*S)->getIndicesCollectorPointer()->VMostUnstableLI_M10();   
+  vec[80]=(*S)->getIndicesCollectorPointer()->VMostUnstableCIN();  
+  vec[81]=(*S)->getIndicesCollectorPointer()->VMostUnstableLCL();
+  vec[82]=(*S)->getIndicesCollectorPointer()->VMostUnstableLFC();
+  vec[83]=(*S)->getIndicesCollectorPointer()->VMostUnstableEL();
+  vec[84]=(*S)->getIndicesCollectorPointer()->MULCLTemperature();
+  vec[85]=(*S)->getIndicesCollectorPointer()->MULFCTemperature();
+  vec[86]=(*S)->getIndicesCollectorPointer()->MUELTemperature();
+  vec[87]=(*S)->getIndicesCollectorPointer()->MU_cold_cloud(); 
+  vec[88]=(*S)->getIndicesCollectorPointer()->MU_warm_cloud(); 
+  vec[89]=(*S)->getIndicesCollectorPointer()->MU_equal_layer();
+  vec[90]=(*S)->getIndicesCollectorPointer()->MUMRatio();   
+  vec[91]=(*S)->getIndicesCollectorPointer()->MU_WMAXSHEAR();
   double* MU_ECAPE = (*S)->getIndicesCollectorPointer()->MU_ECAPE(); 
-  vec[20] = MU_ECAPE[2]; // CAPE
-  vec[21] = MU_ECAPE[4]; // CAPE_M10
-  vec[22] = MU_ECAPE[6]; // CAPE_3km
-  vec[23] = MU_ECAPE[3]; // CAPE_HGL
-  vec[24]=(*S)->getIndicesCollectorPointer()->MU_ebuoyancy();
-  vec[25]=(*S)->getIndicesCollectorPointer()->MU_ebuoyancy_M10();
-  vec[26]=(*S)->getIndicesCollectorPointer()->MU_ebuoyancy_3km();
-  vec[27]=(*S)->getIndicesCollectorPointer()->MU_ELI();
-  vec[28] = MU_ECAPE[0]; // E_tilde
-  vec[29] = MU_ECAPE[1]; // Radius
+  vec[92] = MU_ECAPE[2]; // CAPE
+  vec[93] = MU_ECAPE[4]; // CAPE_M10
+  vec[94] = MU_ECAPE[6]; // CAPE_3km
+  vec[95] = MU_ECAPE[3]; // CAPE_HGL
+  vec[96]=(*S)->getIndicesCollectorPointer()->MU_ebuoyancy();
+  vec[97]=(*S)->getIndicesCollectorPointer()->MU_ebuoyancy_M10();
+  vec[98]=(*S)->getIndicesCollectorPointer()->MU_ebuoyancy_3km();
+  vec[99]=(*S)->getIndicesCollectorPointer()->MU_ELI();
+  vec[100] = MU_ECAPE[0]; // E_tilde
+  vec[101] = MU_ECAPE[1]; // Radius
   delete[] MU_ECAPE;
-  vec[309]=(*S)->getIndicesCollectorPointer()->MU_EFF_EWMAXSHEAR();
-  vec[313]=(*S)->getIndicesCollectorPointer()->MU_EFF_EWMAXSHEAR_HGL();
-  vec[317]=(*S)->getIndicesCollectorPointer()->MU_EFF_EWMAXSHEAR_3km();
+  vec[102]=(*S)->getIndicesCollectorPointer()->MU_EFF_EWMAXSHEAR();
+  vec[103]=(*S)->getIndicesCollectorPointer()->MU_EFF_EWMAXSHEAR_HGL();
+  vec[104]=(*S)->getIndicesCollectorPointer()->MU_EFF_EWMAXSHEAR_3km();
 
 // MU_ML parcel
-  vec[30]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableCAPE();
-  vec[31]=(*S)->getIndicesCollectorPointer()->MUML_coldcape();	
-  vec[100]=(*S)->getIndicesCollectorPointer()->MUML_coldcapeTV();	
-  vec[33]=(*S)->getIndicesCollectorPointer()->VLLMeanMostUnstableCAPE();
-  vec[34]=(*S)->getIndicesCollectorPointer()->MUMLmiddlecape();
-  vec[35]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy();
-  vec[36]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy_M10();
-  vec[347]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy_3km();
-  vec[41]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLI();
-  vec[42]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLI_M10(); 
-  vec[37]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableCIN();  
-  vec[38]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLCL();
-  vec[39]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLFC();
-  vec[40]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableEL();
-  vec[45]=(*S)->getIndicesCollectorPointer()->MUMLLCLTemperature();
-  vec[46]=(*S)->getIndicesCollectorPointer()->MUMLLFCTemperature();
-  vec[44]=(*S)->getIndicesCollectorPointer()->MUMLELTemperature();
-  vec[48]=(*S)->getIndicesCollectorPointer()->MU_ML_cold_cloud(); 
-  vec[49]=(*S)->getIndicesCollectorPointer()->MU_ML_warm_cloud(); 
-  vec[50]=(*S)->getIndicesCollectorPointer()->MU_ML_equal_layer(); 
-  vec[47]=(*S)->getIndicesCollectorPointer()->MUMLMRatio();   
-  vec[306]=(*S)->getIndicesCollectorPointer()->MUML_WMAXSHEAR();
+  vec[105]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableCAPE();
+  vec[106]=(*S)->getIndicesCollectorPointer()->MUML_coldcape();	
+  vec[107]=(*S)->getIndicesCollectorPointer()->MUML_coldcapeTV();	
+  vec[108]=(*S)->getIndicesCollectorPointer()->VLLMeanMostUnstableCAPE();
+  vec[109]=(*S)->getIndicesCollectorPointer()->MUMLmiddlecape();
+  vec[110]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy();
+  vec[111]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy_M10();
+  vec[112]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy_3km();
+  vec[113]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLI();
+  vec[114]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLI_M10(); 
+  vec[115]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableCIN();  
+  vec[116]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLCL();
+  vec[117]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLFC();
+  vec[118]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableEL();
+  vec[119]=(*S)->getIndicesCollectorPointer()->MUMLLCLTemperature();
+  vec[120]=(*S)->getIndicesCollectorPointer()->MUMLLFCTemperature();
+  vec[121]=(*S)->getIndicesCollectorPointer()->MUMLELTemperature();
+  vec[122]=(*S)->getIndicesCollectorPointer()->MU_ML_cold_cloud(); 
+  vec[123]=(*S)->getIndicesCollectorPointer()->MU_ML_warm_cloud(); 
+  vec[124]=(*S)->getIndicesCollectorPointer()->MU_ML_equal_layer(); 
+  vec[125]=(*S)->getIndicesCollectorPointer()->MUMLMRatio();   
+  vec[126]=(*S)->getIndicesCollectorPointer()->MUML_WMAXSHEAR();
   double* MU_ML_ECAPE = (*S)->getIndicesCollectorPointer()->MU_ML_ECAPE(); 
-  vec[53] = MU_ML_ECAPE[2]; // CAPE
-  vec[55] = MU_ML_ECAPE[4]; // CAPE_M10
-  vec[57] = MU_ML_ECAPE[6]; // CAPE_3km
-  vec[54] = MU_ML_ECAPE[3]; // CAPE_HGL
-  vec[58]=(*S)->getIndicesCollectorPointer()->MUML_ebuoyancy();
-  vec[59]=(*S)->getIndicesCollectorPointer()->MUML_ebuoyancy_M10();
-  vec[352]=(*S)->getIndicesCollectorPointer()->MUML_ebuoyancy_3km();
-  vec[365]=(*S)->getIndicesCollectorPointer()->MUML_ELI();
-  vec[51] = MU_ML_ECAPE[0]; // E_tilde
-  vec[52] = MU_ML_ECAPE[1]; // Radius
+  vec[127] = MU_ML_ECAPE[2]; // CAPE
+  vec[128] = MU_ML_ECAPE[4]; // CAPE_M10
+  vec[129] = MU_ML_ECAPE[6]; // CAPE_3km
+  vec[130] = MU_ML_ECAPE[3]; // CAPE_HGL
+  vec[131]=(*S)->getIndicesCollectorPointer()->MUML_ebuoyancy();
+  vec[132]=(*S)->getIndicesCollectorPointer()->MUML_ebuoyancy_M10();
+  vec[133]=(*S)->getIndicesCollectorPointer()->MUML_ebuoyancy_3km();
+  vec[134]=(*S)->getIndicesCollectorPointer()->MUML_ELI();
+  vec[135] = MU_ML_ECAPE[0]; // E_tilde
+  vec[136] = MU_ML_ECAPE[1]; // Radius
   delete[] MU_ML_ECAPE;
-  vec[310]=(*S)->getIndicesCollectorPointer()->MUML_EFF_EWMAXSHEAR();
-  vec[314]=(*S)->getIndicesCollectorPointer()->MUML_EFF_EWMAXSHEAR_HGL();
-  vec[318]=(*S)->getIndicesCollectorPointer()->MUML_EFF_EWMAXSHEAR_3km();
+  vec[137]=(*S)->getIndicesCollectorPointer()->MUML_EFF_EWMAXSHEAR();
+  vec[138]=(*S)->getIndicesCollectorPointer()->MUML_EFF_EWMAXSHEAR_HGL();
+  vec[139]=(*S)->getIndicesCollectorPointer()->MUML_EFF_EWMAXSHEAR_3km();
   
 // MU500 parcel
-  vec[120]=(*S)->getIndicesCollectorPointer()->MU500_CAPE();
-  vec[121]=(*S)->getIndicesCollectorPointer()->MU500_coldcape();
-  vec[100]=(*S)->getIndicesCollectorPointer()->MU500_coldcapeTV();
-  vec[123]=(*S)->getIndicesCollectorPointer()->VLLMU500CAPE();
-  vec[124]=(*S)->getIndicesCollectorPointer()->MLmiddlecape();
-  vec[128]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy();
-  vec[129]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy_M10();
-  vec[348]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy_3km();
-  vec[126]=(*S)->getIndicesCollectorPointer()->MU500_LI();
-  vec[127]=(*S)->getIndicesCollectorPointer()->VMostU500LI_M10();
-  vec[125]=(*S)->getIndicesCollectorPointer()->MU500_CIN();
+  vec[140]=(*S)->getIndicesCollectorPointer()->MU500_CAPE();
+  vec[141]=(*S)->getIndicesCollectorPointer()->MU500_coldcape();
+  vec[142]=(*S)->getIndicesCollectorPointer()->MU500_coldcapeTV();
+  vec[143]=(*S)->getIndicesCollectorPointer()->VLLMU500CAPE();
+  vec[144]=(*S)->getIndicesCollectorPointer()->MLmiddlecape();
+  vec[145]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy();
+  vec[146]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy_M10();
+  vec[147]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy_3km();
+  vec[148]=(*S)->getIndicesCollectorPointer()->MU500_LI();
+  vec[149]=(*S)->getIndicesCollectorPointer()->VMostU500LI_M10();
+  vec[150]=(*S)->getIndicesCollectorPointer()->MU500_CIN();
   double* MU500_ECAPE = (*S)->getIndicesCollectorPointer()->MU500_ECAPE(); 
-  vec[132] = MU500_ECAPE[2]; // CAPE
-  vec[134] = MU500_ECAPE[4]; // CAPE_M10
-  vec[136] = MU500_ECAPE[6]; // CAPE_3km
-  vec[133] = MU500_ECAPE[3]; // CAPE_HGL
-  vec[137]=(*S)->getIndicesCollectorPointer()->MU500_ebuoyancy();
-  vec[138]=(*S)->getIndicesCollectorPointer()->MU500_ebuoyancy_M10();
-  vec[353]=(*S)->getIndicesCollectorPointer()->MU500_ebuoyancy_3km();
-  vec[366]=(*S)->getIndicesCollectorPointer()->MU500_ELI();
-  vec[130] = MU500_ECAPE[0]; // E_tilde
-  vec[131] = MU500_ECAPE[1]; // Radius
+  vec[151] = MU500_ECAPE[2]; // CAPE
+  vec[152] = MU500_ECAPE[4]; // CAPE_M10
+  vec[153] = MU500_ECAPE[6]; // CAPE_3km
+  vec[154] = MU500_ECAPE[3]; // CAPE_HGL
+  vec[155]=(*S)->getIndicesCollectorPointer()->MU500_ebuoyancy();
+  vec[156]=(*S)->getIndicesCollectorPointer()->MU500_ebuoyancy_M10();
+  vec[157]=(*S)->getIndicesCollectorPointer()->MU500_ebuoyancy_3km();
+  vec[158]=(*S)->getIndicesCollectorPointer()->MU500_ELI();
+  vec[159] = MU500_ECAPE[0]; // E_tilde
+  vec[160] = MU500_ECAPE[1]; // Radius
   delete[] MU500_ECAPE;
 
   // Lapse rates
-  vec[139]=(*S)->getIndicesCollectorPointer()->LR0500();
-  vec[140]=(*S)->getIndicesCollectorPointer()->LapseRate01();
-  vec[141]=(*S)->getIndicesCollectorPointer()->LR02();
-  vec[142]=(*S)->getIndicesCollectorPointer()->lapserate03();
-  vec[143]=(*S)->getIndicesCollectorPointer()->LR04(); 
-  vec[144]=(*S)->getIndicesCollectorPointer()->LR06();
-  vec[145]=(*S)->getIndicesCollectorPointer()->LR16(); 
-  vec[147]=(*S)->getIndicesCollectorPointer()->LapseRate24(); 
-  vec[146]=(*S)->getIndicesCollectorPointer()->LR26();	
-  vec[148]=(*S)->getIndicesCollectorPointer()->LR36();
-  vec[149]=(*S)->getIndicesCollectorPointer()->max_LR26_2km();
-  vec[150]=(*S)->getIndicesCollectorPointer()->lapseRate500700();
-  vec[151]=(*S)->getIndicesCollectorPointer()->lapseRate500800(); 
-  vec[152]=(*S)->getIndicesCollectorPointer()->lapseRate600800();
+  vec[161]=(*S)->getIndicesCollectorPointer()->LR0500();
+  vec[162]=(*S)->getIndicesCollectorPointer()->LapseRate01();
+  vec[163]=(*S)->getIndicesCollectorPointer()->LR02();
+  vec[164]=(*S)->getIndicesCollectorPointer()->lapserate03();
+  vec[165]=(*S)->getIndicesCollectorPointer()->LR04(); 
+  vec[166]=(*S)->getIndicesCollectorPointer()->LR06();
+  vec[167]=(*S)->getIndicesCollectorPointer()->LR16(); 
+  vec[168]=(*S)->getIndicesCollectorPointer()->LapseRate24(); 
+  vec[169]=(*S)->getIndicesCollectorPointer()->LR26();	
+  vec[170]=(*S)->getIndicesCollectorPointer()->LR36();
+  vec[171]=(*S)->getIndicesCollectorPointer()->max_LR26_2km();
+  vec[172]=(*S)->getIndicesCollectorPointer()->lapseRate500700();
+  vec[173]=(*S)->getIndicesCollectorPointer()->lapseRate500800(); 
+  vec[174]=(*S)->getIndicesCollectorPointer()->lapseRate600800();
 
   // Other & theta-e
-  vec[159]=(*S)->getIndicesCollectorPointer()->ZeroHeight();
-  vec[161]=(*S)->getIndicesCollectorPointer()->WetBulbZeroHeight();  
-  vec[160]=(*S)->getIndicesCollectorPointer()->M10Height();
-  vec[162]=(*S)->getIndicesCollectorPointer()->MUHeight();
-  vec[163]=(*S)->getIndicesCollectorPointer()->MUMLHeight();
-  vec[164]=(*S)->getIndicesCollectorPointer()->MinTHTEHeight();
-  vec[165]=(*S)->getIndicesCollectorPointer()->DeltaThetaE();
-  vec[166]=(*S)->getIndicesCollectorPointer()->DeltaThetaE_min04km();
-  vec[172]=(*S)->getIndicesCollectorPointer()->THTE_LR_LCL_to_M10();
-  vec[173]=(*S)->getIndicesCollectorPointer()->THTE_LR_MU_to_M10();
+  vec[175]=(*S)->getIndicesCollectorPointer()->ZeroHeight();
+  vec[176]=(*S)->getIndicesCollectorPointer()->WetBulbZeroHeight();  
+  vec[177]=(*S)->getIndicesCollectorPointer()->M10Height();
+  vec[178]=(*S)->getIndicesCollectorPointer()->MUHeight();
+  vec[179]=(*S)->getIndicesCollectorPointer()->MUMLHeight();
+  vec[180]=(*S)->getIndicesCollectorPointer()->MinTHTEHeight();
+  vec[181]=(*S)->getIndicesCollectorPointer()->DeltaThetaE();
+  vec[182]=(*S)->getIndicesCollectorPointer()->DeltaThetaE_min04km();
+  vec[183]=(*S)->getIndicesCollectorPointer()->THTE_LR_LCL_to_M10();
+  vec[184]=(*S)->getIndicesCollectorPointer()->THTE_LR_MU_to_M10();
   
-  vec[167]=(*S)->getIndicesCollectorPointer()->thetae01();
-  vec[168]=(*S)->getIndicesCollectorPointer()->thetae02();
-  vec[169]=(*S)->getIndicesCollectorPointer()->THTE_LR03();
-  vec[170]=(*S)->getIndicesCollectorPointer()->THTE_LR13();
-  vec[171]=(*S)->getIndicesCollectorPointer()->THTE_LR14();
-  vec[174]=(*S)->getIndicesCollectorPointer()->VDCAPE(); 
-  vec[175]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();
+  vec[185]=(*S)->getIndicesCollectorPointer()->thetae01();
+  vec[186]=(*S)->getIndicesCollectorPointer()->thetae02();
+  vec[187]=(*S)->getIndicesCollectorPointer()->THTE_LR03();
+  vec[188]=(*S)->getIndicesCollectorPointer()->THTE_LR13();
+  vec[189]=(*S)->getIndicesCollectorPointer()->THTE_LR14();
+  vec[190]=(*S)->getIndicesCollectorPointer()->VDCAPE(); 
+  vec[191]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();
 
 // RH
-  vec[153]=(*S)->getIndicesCollectorPointer()->RH01();
-  vec[154]=(*S)->getIndicesCollectorPointer()->RH02();
-  vec[155]=(*S)->getIndicesCollectorPointer()->RH14();
-  vec[156]=(*S)->getIndicesCollectorPointer()->RH25();
-  vec[157]=(*S)->getIndicesCollectorPointer()->RH36();
-  vec[158]=(*S)->getIndicesCollectorPointer()->RHMIDDLE(); 
-  vec[371]=(*S)->getIndicesCollectorPointer()->RH850500();   
-  vec[176]=(*S)->getIndicesCollectorPointer()->PWATER();
-  vec[334]=(*S)->getIndicesCollectorPointer()->PWATER_eff();
-  vec[177]=(*S)->getIndicesCollectorPointer()->MoistureFlux(); 
-  vec[178]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux(); 
-  vec[179]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff(); 
+  vec[192]=(*S)->getIndicesCollectorPointer()->RH01();
+  vec[193]=(*S)->getIndicesCollectorPointer()->RH02();
+  vec[194]=(*S)->getIndicesCollectorPointer()->RH14();
+  vec[195]=(*S)->getIndicesCollectorPointer()->RH25();
+  vec[196]=(*S)->getIndicesCollectorPointer()->RH36();
+  vec[197]=(*S)->getIndicesCollectorPointer()->RHMIDDLE(); 
+  vec[198]=(*S)->getIndicesCollectorPointer()->RH850500();   
+  vec[199]=(*S)->getIndicesCollectorPointer()->PWATER();
+  vec[200]=(*S)->getIndicesCollectorPointer()->PWATER_eff();
+  vec[201]=(*S)->getIndicesCollectorPointer()->MoistureFlux(); 
+  vec[202]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux(); 
+  vec[203]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff(); 
 
   // Mean flow
-  vec[229]=(*S)->getIndicesCollectorPointer()->MeanWind500();
-  vec[230]=(*S)->getIndicesCollectorPointer()->MeanWind01();
-  vec[231]=(*S)->getIndicesCollectorPointer()->MeanWind02();
-  vec[232]=(*S)->getIndicesCollectorPointer()->MeanWind03();
-  vec[233]=(*S)->getIndicesCollectorPointer()->MeanWind06();
-  vec[234]=(*S)->getIndicesCollectorPointer()->MeanWind13();
+  vec[204]=(*S)->getIndicesCollectorPointer()->MeanWind500();
+  vec[205]=(*S)->getIndicesCollectorPointer()->MeanWind01();
+  vec[206]=(*S)->getIndicesCollectorPointer()->MeanWind02();
+  vec[207]=(*S)->getIndicesCollectorPointer()->MeanWind03();
+  vec[208]=(*S)->getIndicesCollectorPointer()->MeanWind06();
+  vec[209]=(*S)->getIndicesCollectorPointer()->MeanWind13();
 
   // Bulk wind shear
-  vec[180]=(*S)->getIndicesCollectorPointer()->BS500();
-  vec[181]=(*S)->getIndicesCollectorPointer()->BS01();
-  vec[182]=(*S)->getIndicesCollectorPointer()->BS02();
-  vec[183]=(*S)->getIndicesCollectorPointer()->BS03();
-  vec[184]=(*S)->getIndicesCollectorPointer()->BS06();
-  vec[185]=(*S)->getIndicesCollectorPointer()->BS08();
-  vec[186]=(*S)->getIndicesCollectorPointer()->BS36();
-  vec[187]=(*S)->getIndicesCollectorPointer()->BS13();
-  vec[190]=(*S)->getIndicesCollectorPointer()->BS14();
-  vec[188]=(*S)->getIndicesCollectorPointer()->BS16();
-  vec[189]=(*S)->getIndicesCollectorPointer()->BS18();
-  vec[191]=(*S)->getIndicesCollectorPointer()->BS25();
-  vec[194]=(*S)->getIndicesCollectorPointer()->esbbs();
-  vec[195]=(*S)->getIndicesCollectorPointer()->emlbs();
-  vec[192]=(*S)->getIndicesCollectorPointer()->emubs();
-  vec[193]=(*S)->getIndicesCollectorPointer()->emumlbs();
-  vec[195]=(*S)->getIndicesCollectorPointer()->emu500bs();
-  vec[196]=(*S)->getIndicesCollectorPointer()->BulkShearSfcTen();	
-  vec[197]=(*S)->getIndicesCollectorPointer()->BulkShear1kmTen();
-  vec[198]=(*S)->getIndicesCollectorPointer()->BulkShear2kmTen();  
-  vec[202]=(*S)->getIndicesCollectorPointer()->BulkShearMLLCLTen();
-  vec[200]=(*S)->getIndicesCollectorPointer()->BulkShearMULCLTen();
-  vec[200]=(*S)->getIndicesCollectorPointer()->BulkShearMUMLLCLTen();
-  vec[368]=(*S)->getIndicesCollectorPointer()->BS06_var_SI();
-  vec[370]=(*S)->getIndicesCollectorPointer()->BS16_var_SI();
+  vec[210]=(*S)->getIndicesCollectorPointer()->BS500();
+  vec[211]=(*S)->getIndicesCollectorPointer()->BS01();
+  vec[212]=(*S)->getIndicesCollectorPointer()->BS02();
+  vec[213]=(*S)->getIndicesCollectorPointer()->BS03();
+  vec[214]=(*S)->getIndicesCollectorPointer()->BS06();
+  vec[215]=(*S)->getIndicesCollectorPointer()->BS08();
+  vec[216]=(*S)->getIndicesCollectorPointer()->BS36();
+  vec[217]=(*S)->getIndicesCollectorPointer()->BS13();
+  vec[218]=(*S)->getIndicesCollectorPointer()->BS14();
+  vec[219]=(*S)->getIndicesCollectorPointer()->BS16();
+  vec[220]=(*S)->getIndicesCollectorPointer()->BS18();
+  vec[221]=(*S)->getIndicesCollectorPointer()->BS25();
+  vec[222]=(*S)->getIndicesCollectorPointer()->esbbs();
+  vec[223]=(*S)->getIndicesCollectorPointer()->emlbs();
+  vec[224]=(*S)->getIndicesCollectorPointer()->emubs();
+  vec[225]=(*S)->getIndicesCollectorPointer()->emumlbs();
+  vec[226]=(*S)->getIndicesCollectorPointer()->emu500bs();
+  vec[227]=(*S)->getIndicesCollectorPointer()->BulkShearSfcTen();	
+  vec[228]=(*S)->getIndicesCollectorPointer()->BulkShear1kmTen();
+  vec[229]=(*S)->getIndicesCollectorPointer()->BulkShear2kmTen();  
+  vec[230]=(*S)->getIndicesCollectorPointer()->BulkShearMLLCLTen();
+  vec[231]=(*S)->getIndicesCollectorPointer()->BulkShearMULCLTen();
+  vec[232]=(*S)->getIndicesCollectorPointer()->BulkShearMUMLLCLTen();
+  vec[233]=(*S)->getIndicesCollectorPointer()->BS06_var_SI();
+  vec[234]=(*S)->getIndicesCollectorPointer()->BS16_var_SI();
 
   // Storm-relative winds
-  vec[203]=(*S)->getIndicesCollectorPointer()->MeanSR500_RM();
-  vec[212]=(*S)->getIndicesCollectorPointer()->MeanSR500_LM();
-  vec[221]=(*S)->getIndicesCollectorPointer()->MeanSR500_MW();
-  vec[227]=(*S)->getIndicesCollectorPointer()->Peters_SR_inflow();
-
-  vec[204]=(*S)->getIndicesCollectorPointer()->MeanSR01_RM();
-  vec[213]=(*S)->getIndicesCollectorPointer()->MeanSR01_LM();
-  vec[222]=(*S)->getIndicesCollectorPointer()->MeanSR01_MW();
-
-  vec[205]=(*S)->getIndicesCollectorPointer()->MSR_RM();
-  vec[214]=(*S)->getIndicesCollectorPointer()->MSR_LM();
-  vec[223]=(*S)->getIndicesCollectorPointer()->MSR_MW();
-
-  vec[206]=(*S)->getIndicesCollectorPointer()->MeanSR03_RM();
-  vec[215]=(*S)->getIndicesCollectorPointer()->MeanSR03_LM();
-  vec[224]=(*S)->getIndicesCollectorPointer()->MeanSR03_MW();
-
-  vec[358]=(*S)->getIndicesCollectorPointer()->MeanSR16_RM();
-  vec[360]=(*S)->getIndicesCollectorPointer()->MeanSR16_LM();
-  vec[359]=(*S)->getIndicesCollectorPointer()->MeanSR36_RM();
-  vec[361]=(*S)->getIndicesCollectorPointer()->MeanSR36_LM();
-
-  vec[207]=(*S)->getIndicesCollectorPointer()->MSR_RM_HGL();
-  vec[216]=(*S)->getIndicesCollectorPointer()->MSR_LM_HGL();
-  vec[225]=(*S)->getIndicesCollectorPointer()->MSR_MW_HGL();
-
-  vec[208]=(*S)->getIndicesCollectorPointer()->MeanSR0500_RM_eff();
-  vec[217]=(*S)->getIndicesCollectorPointer()->MeanSR0500_LM_eff();
-  vec[226]=(*S)->getIndicesCollectorPointer()->MeanSR0500_MW_eff();
-  vec[228]=(*S)->getIndicesCollectorPointer()->Peters_SR_inflow_eff();
-
-  vec[209]=(*S)->getIndicesCollectorPointer()->MeanVMSR500_RM();
-  vec[218]=(*S)->getIndicesCollectorPointer()->MeanVMSR500_LM();
+  vec[235]=(*S)->getIndicesCollectorPointer()->MeanSR500_RM();
+  vec[236]=(*S)->getIndicesCollectorPointer()->MeanSR500_LM();
+  vec[237]=(*S)->getIndicesCollectorPointer()->MeanSR500_MW();
+  vec[238]=(*S)->getIndicesCollectorPointer()->Peters_SR_inflow();
+  vec[239]=(*S)->getIndicesCollectorPointer()->MeanSR01_RM();
+  vec[240]=(*S)->getIndicesCollectorPointer()->MeanSR01_LM();
+  vec[241]=(*S)->getIndicesCollectorPointer()->MeanSR01_MW();
+  vec[242]=(*S)->getIndicesCollectorPointer()->MSR_RM();
+  vec[243]=(*S)->getIndicesCollectorPointer()->MSR_LM();
+  vec[244]=(*S)->getIndicesCollectorPointer()->MSR_MW();
+  vec[245]=(*S)->getIndicesCollectorPointer()->MeanSR03_RM();
+  vec[246]=(*S)->getIndicesCollectorPointer()->MeanSR03_LM();
+  vec[247]=(*S)->getIndicesCollectorPointer()->MeanSR03_MW();
+  vec[248]=(*S)->getIndicesCollectorPointer()->MeanSR16_RM();
+  vec[249]=(*S)->getIndicesCollectorPointer()->MeanSR16_LM();
+  vec[250]=(*S)->getIndicesCollectorPointer()->MeanSR36_RM();
+  vec[251]=(*S)->getIndicesCollectorPointer()->MeanSR36_LM();
+  vec[252]=(*S)->getIndicesCollectorPointer()->MSR_RM_HGL();
+  vec[253]=(*S)->getIndicesCollectorPointer()->MSR_LM_HGL();
+  vec[254]=(*S)->getIndicesCollectorPointer()->MSR_MW_HGL();
+  vec[255]=(*S)->getIndicesCollectorPointer()->MeanSR0500_RM_eff();
+  vec[256]=(*S)->getIndicesCollectorPointer()->MeanSR0500_LM_eff();
+  vec[257]=(*S)->getIndicesCollectorPointer()->MeanSR0500_MW_eff();
+  vec[258]=(*S)->getIndicesCollectorPointer()->Peters_SR_inflow_eff();
+  vec[259]=(*S)->getIndicesCollectorPointer()->MeanVMSR500_RM();
+  vec[260]=(*S)->getIndicesCollectorPointer()->MeanVMSR500_LM();
+  vec[261]=(*S)->getIndicesCollectorPointer()->MeanVMSR01_RM();
+  vec[262]=(*S)->getIndicesCollectorPointer()->MeanVMSR01_LM();
+  vec[263]=(*S)->getIndicesCollectorPointer()->MeanVMSR03_RM();
+  vec[264]=(*S)->getIndicesCollectorPointer()->MeanVMSR03_LM();
+  vec[265]=(*S)->getIndicesCollectorPointer()->MeanVMSR16_RM();
+  vec[266]=(*S)->getIndicesCollectorPointer()->MeanVMSR16_LM();
+  vec[267]=(*S)->getIndicesCollectorPointer()->MeanVMSR36_RM();
+  vec[268]=(*S)->getIndicesCollectorPointer()->MeanVMSR36_LM();
+  vec[269]=(*S)->getIndicesCollectorPointer()->Ventilation_13km();
+  vec[270]=(*S)->getIndicesCollectorPointer()->Ventilation_16km();
+  vec[271]=(*S)->getIndicesCollectorPointer()->Ventilation_36km();
+  vec[272]=(*S)->getIndicesCollectorPointer()->Ventilation_69km();
+  vec[273]=(*S)->getIndicesCollectorPointer()->Ventilation_912km();
   
-  vec[210]=(*S)->getIndicesCollectorPointer()->MeanVMSR01_RM();
-  vec[219]=(*S)->getIndicesCollectorPointer()->MeanVMSR01_LM();
-  
-  vec[211]=(*S)->getIndicesCollectorPointer()->MeanVMSR03_RM();
-  vec[220]=(*S)->getIndicesCollectorPointer()->MeanVMSR03_LM();
-
-  vec[354]=(*S)->getIndicesCollectorPointer()->MeanVMSR16_RM();
-  vec[356]=(*S)->getIndicesCollectorPointer()->MeanVMSR16_LM();
-  vec[355]=(*S)->getIndicesCollectorPointer()->MeanVMSR36_RM();
-  vec[357]=(*S)->getIndicesCollectorPointer()->MeanVMSR36_LM();
-
-  vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_13km();
-  vec[340]=(*S)->getIndicesCollectorPointer()->Ventilation_16km();
-  vec[341]=(*S)->getIndicesCollectorPointer()->Ventilation_36km();
-  vec[342]=(*S)->getIndicesCollectorPointer()->Ventilation_69km();
-  vec[343]=(*S)->getIndicesCollectorPointer()->Ventilation_912km();
-
   // Storm-relative helicity and vorticity
-  vec[235]=(*S)->getIndicesCollectorPointer()->SRH100RM();
-  vec[243]=(*S)->getIndicesCollectorPointer()->SRH100LM();
-
-  vec[236]=(*S)->getIndicesCollectorPointer()->SRH250RM();
-  vec[244]=(*S)->getIndicesCollectorPointer()->SRH250LM();
-
-  vec[237]=(*S)->getIndicesCollectorPointer()->SRH500RM();
-  vec[245]=(*S)->getIndicesCollectorPointer()->SRH500LM();
-
-  vec[238]=(*S)->getIndicesCollectorPointer()->SRH01RM();
-  vec[246]=(*S)->getIndicesCollectorPointer()->SRH01LM();
-  vec[251]=(*S)->getIndicesCollectorPointer()->SRH01SM();
+  vec[274]=(*S)->getIndicesCollectorPointer()->SRH100RM();
+  vec[275]=(*S)->getIndicesCollectorPointer()->SRH100LM();
+  vec[276]=(*S)->getIndicesCollectorPointer()->SRH250RM();
+  vec[277]=(*S)->getIndicesCollectorPointer()->SRH250LM();
+  vec[278]=(*S)->getIndicesCollectorPointer()->SRH500RM();
+  vec[279]=(*S)->getIndicesCollectorPointer()->SRH500LM();
+  vec[280]=(*S)->getIndicesCollectorPointer()->SRH01RM();
+  vec[281]=(*S)->getIndicesCollectorPointer()->SRH01LM();
+  vec[282]=(*S)->getIndicesCollectorPointer()->SRH01SM();
+  vec[283]=(*S)->getIndicesCollectorPointer()->SRH03RM();
+  vec[284]=(*S)->getIndicesCollectorPointer()->SRH03LM();
+  vec[285]=(*S)->getIndicesCollectorPointer()->SRH03SM();
+  vec[286]=(*S)->getIndicesCollectorPointer()->SRH36RM();	
+  vec[287]=(*S)->getIndicesCollectorPointer()->SRH36LM();
+  vec[288]=(*S)->getIndicesCollectorPointer()->SRH36SM();
+  vec[289]=(*S)->getIndicesCollectorPointer()->SRH13_RM();	
+  vec[290]=(*S)->getIndicesCollectorPointer()->SRH13_LM();
+  vec[291]=(*S)->getIndicesCollectorPointer()->SRH13_SM();	
+  vec[292]=(*S)->getIndicesCollectorPointer()->SRH16RM();	
+  vec[293]=(*S)->getIndicesCollectorPointer()->SRH16LM();
+  vec[294]=(*S)->getIndicesCollectorPointer()->SRH16SM();	
+  vec[295]=(*S)->getIndicesCollectorPointer()->SRH01RM_eff();
+  vec[296]=(*S)->getIndicesCollectorPointer()->SRH01LM_eff();
+  vec[297]=(*S)->getIndicesCollectorPointer()->SRH01SM_eff();
+  vec[298]=(*S)->getIndicesCollectorPointer()->SRH03RM_eff();
+  vec[299]=(*S)->getIndicesCollectorPointer()->SRH03LM_eff();
+  vec[300]=(*S)->getIndicesCollectorPointer()->SRH03SM_eff();
+  vec[301]=(*S)->getIndicesCollectorPointer()->SW100_RM();
+  vec[302]=(*S)->getIndicesCollectorPointer()->SW100_LM();
+  vec[303]=(*S)->getIndicesCollectorPointer()->SW500_RM();
+  vec[304]=(*S)->getIndicesCollectorPointer()->SW500_LM();
+  vec[305]=(*S)->getIndicesCollectorPointer()->SW01_RM();
+  vec[306]=(*S)->getIndicesCollectorPointer()->SW01_LM();
+  vec[307]=(*S)->getIndicesCollectorPointer()->SW03_RM();  
+  vec[308]=(*S)->getIndicesCollectorPointer()->SW03_LM();	
+  vec[309]=(*S)->getIndicesCollectorPointer()->SV_100_RM_FRA();
+  vec[310]=(*S)->getIndicesCollectorPointer()->SV_100_LM_FRA();
+  vec[311]=(*S)->getIndicesCollectorPointer()->SV_500_RM_FRA();
+  vec[312]=(*S)->getIndicesCollectorPointer()->SV_500_LM_FRA();
+  vec[313]=(*S)->getIndicesCollectorPointer()->SV_1000_RM_FRA();
+  vec[314]=(*S)->getIndicesCollectorPointer()->SV_1000_LM_FRA();
+  vec[315]=(*S)->getIndicesCollectorPointer()->SV_3000_RM_FRA();
+  vec[316]=(*S)->getIndicesCollectorPointer()->SV_3000_LM_FRA();
   
-  vec[239]=(*S)->getIndicesCollectorPointer()->SRH03RM();
-  vec[247]=(*S)->getIndicesCollectorPointer()->SRH03LM();
-  vec[252]=(*S)->getIndicesCollectorPointer()->SRH03SM();
-  
-  vec[240]=(*S)->getIndicesCollectorPointer()->SRH36RM();	
-  vec[248]=(*S)->getIndicesCollectorPointer()->SRH36LM();
-  vec[253]=(*S)->getIndicesCollectorPointer()->SRH36SM();
-  
-  vec[241]=(*S)->getIndicesCollectorPointer()->SRH13_RM();	
-  vec[249]=(*S)->getIndicesCollectorPointer()->SRH13_LM();
-  vec[254]=(*S)->getIndicesCollectorPointer()->SRH13_SM();	
-  
-  vec[242]=(*S)->getIndicesCollectorPointer()->SRH16RM();	
-  vec[250]=(*S)->getIndicesCollectorPointer()->SRH16LM();
-  vec[255]=(*S)->getIndicesCollectorPointer()->SRH16SM();	
-
-  vec[256]=(*S)->getIndicesCollectorPointer()->SRH01RM_eff();
-  vec[257]=(*S)->getIndicesCollectorPointer()->SRH01LM_eff();
-  vec[258]=(*S)->getIndicesCollectorPointer()->SRH01SM_eff();
-  
-  vec[259]=(*S)->getIndicesCollectorPointer()->SRH03RM_eff();
-  vec[260]=(*S)->getIndicesCollectorPointer()->SRH03LM_eff();
-  vec[261]=(*S)->getIndicesCollectorPointer()->SRH03SM_eff();
-
-  vec[335]=(*S)->getIndicesCollectorPointer()->SW100_RM();
-  vec[336]=(*S)->getIndicesCollectorPointer()->SW100_LM();
-
-  vec[262]=(*S)->getIndicesCollectorPointer()->SW500_RM();
-  vec[265]=(*S)->getIndicesCollectorPointer()->SW500_LM();
-
-  vec[263]=(*S)->getIndicesCollectorPointer()->SW01_RM();
-  vec[266]=(*S)->getIndicesCollectorPointer()->SW01_LM();
-
-  vec[264]=(*S)->getIndicesCollectorPointer()->SW03_RM();  
-  vec[267]=(*S)->getIndicesCollectorPointer()->SW03_LM();	
-
-  vec[337]=(*S)->getIndicesCollectorPointer()->SV_100_RM_FRA();
-  vec[338]=(*S)->getIndicesCollectorPointer()->SV_100_LM_FRA();
-
-  vec[268]=(*S)->getIndicesCollectorPointer()->SV_500_RM_FRA();
-  vec[271]=(*S)->getIndicesCollectorPointer()->SV_500_LM_FRA();
-
-  vec[269]=(*S)->getIndicesCollectorPointer()->SV_1000_RM_FRA();
-  vec[272]=(*S)->getIndicesCollectorPointer()->SV_1000_LM_FRA();
-
-  vec[270]=(*S)->getIndicesCollectorPointer()->SV_3000_RM_FRA();
-  vec[273]=(*S)->getIndicesCollectorPointer()->SV_3000_LM_FRA();
- 
   // Vectors
-  vec[274]=(*S)->getIndicesCollectorPointer()->Bunkers_RM_A();
-  vec[275]=(*S)->getIndicesCollectorPointer()->Bunkers_RM_M();
-  
-  vec[276]=(*S)->getIndicesCollectorPointer()->Bunkers_LM_A();
-  vec[277]=(*S)->getIndicesCollectorPointer()->Bunkers_LM_M();
-  
-  vec[278]=(*S)->getIndicesCollectorPointer()->Bunkers_MW_A();
-  vec[279]=(*S)->getIndicesCollectorPointer()->Bunkers_MW_M();	
+  vec[317]=(*S)->getIndicesCollectorPointer()->Bunkers_RM_A();
+  vec[318]=(*S)->getIndicesCollectorPointer()->Bunkers_RM_M();
+  vec[319]=(*S)->getIndicesCollectorPointer()->Bunkers_LM_A();
+  vec[320]=(*S)->getIndicesCollectorPointer()->Bunkers_LM_M();
+  vec[321]=(*S)->getIndicesCollectorPointer()->Bunkers_MW_A();
+  vec[322]=(*S)->getIndicesCollectorPointer()->Bunkers_MW_M();	
+  vec[323]=(*S)->getIndicesCollectorPointer()->Peters_vector_A();
+  vec[324]=(*S)->getIndicesCollectorPointer()->Peters_vector_M();
+  vec[325]=(*S)->getIndicesCollectorPointer()->Corfidi_downwind_A();
+  vec[326]=(*S)->getIndicesCollectorPointer()->Corfidi_downwind_M();
+  vec[327]=(*S)->getIndicesCollectorPointer()->Corfidi_upwind_A();
+  vec[328]=(*S)->getIndicesCollectorPointer()->Corfidi_upwind_M();
 
-  vec[284]=(*S)->getIndicesCollectorPointer()->Peters_vector_A();
-  vec[285]=(*S)->getIndicesCollectorPointer()->Peters_vector_M();
-
-  vec[280]=(*S)->getIndicesCollectorPointer()->Corfidi_downwind_A();
-  vec[281]=(*S)->getIndicesCollectorPointer()->Corfidi_downwind_M();
-  
-  vec[282]=(*S)->getIndicesCollectorPointer()->Corfidi_upwind_A();
-  vec[283]=(*S)->getIndicesCollectorPointer()->Corfidi_upwind_M();
-  
   // Composite metrics
-  vec[288]=(*S)->getIndicesCollectorPointer()->K_Index();
-  vec[289]=(*S)->getIndicesCollectorPointer()->Showalter_Index(); 
-  vec[290]=(*S)->getIndicesCollectorPointer()->TotalTotals();  
-  vec[291]=(*S)->getIndicesCollectorPointer()->SWEATIndex(); 
-  vec[292]=(*S)->getIndicesCollectorPointer()->WindIndex();
-  
-  vec[293]=(*S)->getIndicesCollectorPointer()->STP();
-  vec[295]=(*S)->getIndicesCollectorPointer()->STP_LM();
-  vec[294]=(*S)->getIndicesCollectorPointer()->STPeff();	
-  vec[296]=(*S)->getIndicesCollectorPointer()->STPeff_LM();
-
-  vec[297]=(*S)->getIndicesCollectorPointer()->SCP();
-  vec[298]=(*S)->getIndicesCollectorPointer()->SCPeff();
-  vec[299]=(*S)->getIndicesCollectorPointer()->SCP_LM();
-  vec[300]=(*S)->getIndicesCollectorPointer()->SCPeff_LM();
-  
-  vec[301]=(*S)->getIndicesCollectorPointer()->SHP();
-  vec[302]=(*S)->getIndicesCollectorPointer()->HSI();
-  vec[303]=(*S)->getIndicesCollectorPointer()->HSIv2();
-  vec[304]=(*S)->getIndicesCollectorPointer()->DCP();
-  
-  vec[321]=(*S)->getIndicesCollectorPointer()->EHI500();
-  vec[324]=(*S)->getIndicesCollectorPointer()->EHI500_LM();
-  vec[322]=(*S)->getIndicesCollectorPointer()->EHI01();	
-  vec[325]=(*S)->getIndicesCollectorPointer()->EHI01_LM();	
-  vec[323]=(*S)->getIndicesCollectorPointer()->EHI03();
-  vec[326]=(*S)->getIndicesCollectorPointer()->EHI03_LM();
-  
-  vec[327]=(*S)->getIndicesCollectorPointer()->SHERBS3();
-  vec[328]=(*S)->getIndicesCollectorPointer()->SHERBE();	
-  vec[329]=(*S)->getIndicesCollectorPointer()->SHERBS3_v2();
-  vec[330]=(*S)->getIndicesCollectorPointer()->SHERBE_v2();	
-  
-  vec[331]=(*S)->getIndicesCollectorPointer()->DEI();
-  vec[332]=(*S)->getIndicesCollectorPointer()->DEI_eff();
+  vec[329]=(*S)->getIndicesCollectorPointer()->K_Index();
+  vec[330]=(*S)->getIndicesCollectorPointer()->Showalter_Index(); 
+  vec[331]=(*S)->getIndicesCollectorPointer()->TotalTotals();  
+  vec[332]=(*S)->getIndicesCollectorPointer()->SWEATIndex(); 
+  vec[333]=(*S)->getIndicesCollectorPointer()->WindIndex();
+  vec[334]=(*S)->getIndicesCollectorPointer()->STP();
+  vec[335]=(*S)->getIndicesCollectorPointer()->STP_LM();
+  vec[336]=(*S)->getIndicesCollectorPointer()->STPeff();	
+  vec[337]=(*S)->getIndicesCollectorPointer()->STPeff_LM();
+  vec[338]=(*S)->getIndicesCollectorPointer()->SCP();
+  vec[339]=(*S)->getIndicesCollectorPointer()->SCPeff();
+  vec[340]=(*S)->getIndicesCollectorPointer()->SCP_LM();
+  vec[341]=(*S)->getIndicesCollectorPointer()->SCPeff_LM();
+  vec[342]=(*S)->getIndicesCollectorPointer()->SHP();
+  vec[343]=(*S)->getIndicesCollectorPointer()->HSI();
+  vec[344]=(*S)->getIndicesCollectorPointer()->HSIv2();
+  vec[345]=(*S)->getIndicesCollectorPointer()->DCP();
+  vec[346]=(*S)->getIndicesCollectorPointer()->EHI500();
+  vec[347]=(*S)->getIndicesCollectorPointer()->EHI500_LM();
+  vec[348]=(*S)->getIndicesCollectorPointer()->EHI01();	
+  vec[349]=(*S)->getIndicesCollectorPointer()->EHI01_LM();	
+  vec[350]=(*S)->getIndicesCollectorPointer()->EHI03();
+  vec[351]=(*S)->getIndicesCollectorPointer()->EHI03_LM();
+  vec[352]=(*S)->getIndicesCollectorPointer()->SHERBS3();
+  vec[353]=(*S)->getIndicesCollectorPointer()->SHERBE();	
+  vec[354]=(*S)->getIndicesCollectorPointer()->SHERBS3_v2();
+  vec[355]=(*S)->getIndicesCollectorPointer()->SHERBE_v2();	
+  vec[356]=(*S)->getIndicesCollectorPointer()->DEI();
+  vec[357]=(*S)->getIndicesCollectorPointer()->DEI_eff();
   return vec;
 }
 
