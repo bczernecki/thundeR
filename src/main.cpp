@@ -2705,7 +2705,7 @@ public:
   double emumlbs();
   double esbbs();
   double emlbs();
-  double emu500bs()
+  double emu500bs();
 
   double BulkShearSfcTen();
   double BulkShear1kmTen();
@@ -4856,7 +4856,7 @@ double IndicesCollector::emu500bs(){
   }
   Vector middleVector =  Get(S->ks->vw,destindex);  
   double effSHR = (middleVector - gVector).abs();
-  double mucape = this->MU500CAPE();
+  double mucape = this->MU500_CAPE();
   if(mucape==0)effSHR=0;  
   return effSHR;
 }
