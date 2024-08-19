@@ -5758,11 +5758,12 @@ double IndicesCollector::MU500_CAPE(){
 }
 
 double IndicesCollector::MU500_CIN(){
-  return S->th->mostU500->vcin;
+  double result = S->th->mostU500->vcin;
   double cape = this->MU500_CAPE();
   if(cape==0){
     result = sqrt(-1); 
   }
+  return result;
 }
 
 double IndicesCollector::MU500_LI(){
