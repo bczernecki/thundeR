@@ -3650,7 +3650,7 @@ double IndicesCollector::VMostUnstableLFC(){
   int index = S->th->mostUnstable->vLfcIndex;  
   result = Get(S->h,index)- S->th->h0;  
   double cape = this->VMostUnstableCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 }
 
@@ -3659,7 +3659,7 @@ double IndicesCollector::VMeanMostUnstableLFC(){
   int index = S->th->meanmostUnstable->vLfcIndex;  
   result = Get(S->h,index)- S->th->h0;  
   double cape = this->VMeanMostUnstableCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 }
 
@@ -3668,7 +3668,7 @@ double IndicesCollector::VMostUnstableEL(){
   int index = S->th->mostUnstable->vElIndex;
   result = Get(S->h,index)- S->th->h0;
   double cape = this->VMostUnstableCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 } 
 
@@ -3677,7 +3677,7 @@ double IndicesCollector::VMeanMostUnstableEL(){
   int index = S->th->meanmostUnstable->vElIndex;
   result = Get(S->h,index)- S->th->h0;
   double cape = this->VMeanMostUnstableCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 } 
 
@@ -3710,14 +3710,14 @@ double IndicesCollector::VMeanMostUnstableVmax(){
 double IndicesCollector::MUELTemperature(){
   double result = Get(S->t,S->th->mostUnstable->vElIndex);
   double cape = this->VMostUnstableCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 }
 
 double IndicesCollector::MUMLELTemperature(){
   double result = Get(S->t,S->th->meanmostUnstable->vElIndex);
   double cape = this->VMeanMostUnstableCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 }
 
@@ -3732,14 +3732,14 @@ double IndicesCollector::MUMLLCLTemperature(){
 double IndicesCollector::MULFCTemperature(){
   double result = Get(S->t,S->th->mostUnstable->vLfcIndex);
   double cape = this->VMostUnstableCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 }
 
 double IndicesCollector::MUMLLFCTemperature(){
   double result = Get(S->t,S->th->meanmostUnstable->vLfcIndex);
   double cape = this->VMeanMostUnstableCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 }
 
@@ -3773,7 +3773,7 @@ double IndicesCollector::VSurfaceBasedLFC(){
   int index = S->th->surfaceBased->vLfcIndex;  
   result = Get(S->h,index)- S->th->h0;
   double cape = this->VSurfaceBasedCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;  
 }
 
@@ -3782,7 +3782,7 @@ double IndicesCollector::VSurfaceBasedEL(){
   int index = S->th->surfaceBased->vElIndex;  
   result = Get(S->h,index)- S->th->h0;
   double cape = this->VSurfaceBasedCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;  
 } 
 
@@ -3802,7 +3802,7 @@ double IndicesCollector::VSurfaceBasedVmax(){
 double IndicesCollector::SBELTemperature(){
   double result = Get(S->t,S->th->surfaceBased->vElIndex);
   double cape = this->VSurfaceBasedCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 
 }
@@ -3814,7 +3814,7 @@ double IndicesCollector::SBLCLTemperature(){
 double IndicesCollector::SBLFCTemperature(){
   double result = Get(S->t,S->th->surfaceBased->vLfcIndex);
   double cape = this->VSurfaceBasedCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 }
 
@@ -3848,7 +3848,7 @@ double IndicesCollector::VMeanLayerLFC(){
   int index = S->th->meanLayer->vLfcIndex;  
   result = Get(S->h,index)- S->th->h0; 
   double cape = this->VMeanLayerCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 }
 
@@ -3857,7 +3857,7 @@ double IndicesCollector::VMeanLayerEL(){
   int index = S->th->meanLayer->vElIndex;  
   result = Get(S->h,index)- S->th->h0;  
   double cape = this->VMeanLayerCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;  
 } 
 
@@ -3937,7 +3937,7 @@ double IndicesCollector::VMeanLayerVmax(){
 double IndicesCollector::MLELTemperature(){
   double result = Get(S->t,S->th->meanLayer->vElIndex);
   double cape = this->VMeanLayerCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 }
 
@@ -3948,7 +3948,7 @@ double IndicesCollector::MLLCLTemperature(){
 double IndicesCollector::MLLFCTemperature(){
   double result = Get(S->t,S->th->meanLayer->vLfcIndex);
   double cape = this->VMeanLayerCAPE();
-  if(cape==0)result=0/0; 
+  if(cape==0)result=sqrt(-1); 
   return result;
 }
 
