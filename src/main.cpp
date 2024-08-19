@@ -3458,6 +3458,10 @@ double IndicesCollector::SB_warm_cloud(){
   if(result<0){
     result = 0;
   }
+  double cape = this->VSurfaceBasedCAPE();
+  if(cape==0){
+    result = 0; 
+  }
   return result;  
 }
 
@@ -3467,6 +3471,10 @@ double IndicesCollector::ML_warm_cloud(){
   double result = FL-LFC;
   if(result<0){
     result = 0;
+  }
+    double cape = this->VMeanLayerCAPE();
+  if(cape==0){
+    result = 0; 
   }
   return result;  
 }
@@ -3478,6 +3486,10 @@ double IndicesCollector::MU_ML_warm_cloud(){
   if(result<0){
     result = 0;
   }
+    double cape = this->VMeanMostUnstableCAPE();
+  if(cape==0){
+    result = 0; 
+  }
   return result;  
 }
 
@@ -3487,6 +3499,10 @@ double IndicesCollector::MU_warm_cloud(){
   double result = FL-LFC;
   if(result<0){
     result = 0;
+  }
+    double cape = this->VMostUnstableCAPE();
+  if(cape==0){
+    result = 0; 
   }
   return result;  
 }
@@ -3498,6 +3514,10 @@ double IndicesCollector::ML_cold_cloud(){
   if(result<0){
     result = 0;
   }
+    double cape = this->VMeanLayerCAPE();
+  if(cape==0){
+    result = 0; 
+  }
   return result;  
 }
 
@@ -3507,6 +3527,10 @@ double IndicesCollector::SB_cold_cloud(){
   double result = EL-FL;
   if(result<0){
     result = 0;
+  }
+    double cape = this->VSurfaceBasedCAPE();
+  if(cape==0){
+    result = 0; 
   }
   return result;  
 }
@@ -3518,6 +3542,10 @@ double IndicesCollector::MU_cold_cloud(){
   if(result<0){
     result = 0;
   }
+    double cape = this->VMostUnstableCAPE();
+  if(cape==0){
+    result = 0; 
+  }
   return result;  
 }
 
@@ -3527,6 +3555,10 @@ double IndicesCollector::MU_ML_cold_cloud(){
   double result = EL-FL;
   if(result<0){
     result = 0;
+  }
+    double cape = this->VMeanMostUnstableCAPE();
+  if(cape==0){
+    result = 0; 
   }
   return result;  
 }
@@ -3544,6 +3576,10 @@ double IndicesCollector::ML_equal_layer(){
     cold = 0;
   }  
   double result = min(warm,cold);
+    double cape = this->VMeanLayerCAPE();
+  if(cape==0){
+    result = 0; 
+  }
   return result;  
 }
 
@@ -3560,6 +3596,10 @@ double IndicesCollector::SB_equal_layer(){
     cold = 0;
   }  
   double result = min(warm,cold);
+    double cape = this->VSurfaceBasedCAPE();
+  if(cape==0){
+    result = 0; 
+  }
   return result;  
 }
 
@@ -3576,6 +3616,10 @@ double IndicesCollector::MU_equal_layer(){
     cold = 0;
   }  
   double result = min(warm,cold);
+    double cape = this->VMostUnstableCAPE();
+  if(cape==0){
+    result = 0; 
+  }
   return result;  
 }
 
@@ -3592,6 +3636,10 @@ double IndicesCollector::MU_ML_equal_layer(){
     cold = 0;
   }  
   double result = min(warm,cold);
+    double cape = this->VMeanMostUnstableCAPE();
+  if(cape==0){
+    result = 0; 
+  }
   return result;  
 }
 
@@ -3622,12 +3670,20 @@ double IndicesCollector::VLLMeanMostUnstableCAPE(){
 double IndicesCollector::VMostUnstableCIN(){
   double result = 0;
   result = S->th->mostUnstable->vcin;
+  double cape = this->VMostUnstableCAPE();
+  if(cape==0){
+    result = sqrt(-1); 
+  }
   return result;
 }   
 
 double IndicesCollector::VMeanMostUnstableCIN(){
   double result = 0;
   result = S->th->meanmostUnstable->vcin;
+  double cape = this->VMeanMostUnstableCAPE();
+  if(cape==0){
+    result = sqrt(-1); 
+  }
   return result;
 }   
 
@@ -3758,6 +3814,10 @@ double IndicesCollector::VLLSurfaceBasedCAPE(){
 double IndicesCollector::VSurfaceBasedCIN(){  
   double result = 0;
   result = S->th->surfaceBased->vcin;
+    double cape = this->VSurfaceBasedCAPE();
+  if(cape==0){
+    result = sqrt(-1); 
+  }
   return result;  
 }   
 
@@ -3833,6 +3893,10 @@ double IndicesCollector::VLLMeanLayerCAPE(){
 double IndicesCollector::VMeanLayerCIN(){  
   double result = 0;
   result = S->th->meanLayer->vcin;  
+    double cape = this->VMeanLayerCAPE();
+  if(cape==0){
+    result = sqrt(-1); 
+  }
   return result;  
 }        
 
@@ -5695,6 +5759,10 @@ double IndicesCollector::MU500_CAPE(){
 
 double IndicesCollector::MU500_CIN(){
   return S->th->mostU500->vcin;
+  double cape = this->MU500_CAPE();
+  if(cape==0){
+    result = sqrt(-1); 
+  }
 }
 
 double IndicesCollector::MU500_LI(){
