@@ -93,7 +93,7 @@ compute_NCAPE <- function(p0,z0,t0,q0,LFC,EL){
   MSE0_star = MSE0_star_F(t0,p0,z0)
   MSE0_bar = MSE0_bar_F(MSE0,z0)
   int_arg = - ( g/(cp*t0) )*( MSE0_bar - MSE0_star)
-  if( !(is.na(LFC) | is.nan(LFC)  | is.na(EL) | is.nan(EL)) ){
+  if( !(length(EL) == 0 | length(LFC) == 0) ){
   ind_LFC = which(abs(z0 - LFC) == min(abs(z0 - LFC)))
   ind_EL = which(abs(z0 - EL) == min(abs(z0 - EL)))
   NCAPE = mean(int_arg[ind_LFC:ind_EL]) * (EL-LFC)
