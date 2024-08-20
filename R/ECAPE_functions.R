@@ -93,8 +93,6 @@ compute_NCAPE <- function(p0,z0,t0,q0,LFC,EL){
   MSE0_star = MSE0_star_F(t0,p0,z0)
   MSE0_bar = MSE0_bar_F(MSE0,z0)
   int_arg = - ( g/(cp*t0) )*( MSE0_bar - MSE0_star)
-  print(LFC)
-  print(EL)
   if((LFC + EL) > 0){
   ind_LFC = which(abs(z0 - LFC) == min(abs(z0 - LFC)))
   ind_EL = which(abs(z0 - EL) == min(abs(z0 - EL)))
