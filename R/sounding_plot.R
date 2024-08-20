@@ -130,8 +130,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    output$altitude-output$altitude[1], 
                                    output$temp+273.15, 
                                    SH,  
-                                   ifelse(length(parametry[which(names(parametry)=="MU_LFC_HGT")])==0,0,parametry[which(names(parametry)=="MU_LFC_HGT")]),
-                                   ifelse(length(parametry[which(names(parametry)=="MU_EL_HGT")])==0,0,parametry[which(names(parametry)=="MU_EL_HGT")]),
+                                   ifelse(length(parametry[which(names(parametry)=="MU_LFC_hgt")])==0,0,parametry[which(names(parametry)=="MU_LFC_hgt")]),
+                                   ifelse(length(parametry[which(names(parametry)=="MU_EL_hgt")])==0,0,parametry[which(names(parametry)=="MU_EL_hgt")]),
                                    parametry[which(names(parametry)=="MU_CAPE")],
                                    parametry[which(names(parametry)=="SRW_eff_CBV")],
                                    output$tempV+273.15,
@@ -141,8 +141,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    output$altitude-output$altitude[1], 
                                    output$temp+273.15, 
                                    SH,  
-                                   ifelse(length(parametry[which(names(parametry)=="SB_LFC_HGT")])==0,0,parametry[which(names(parametry)=="SB_LFC_HGT")]),
-                                   ifelse(length(parametry[which(names(parametry)=="SB_EL_HGT")])==0,0,parametry[which(names(parametry)=="SB_EL_HGT")]),
+                                   ifelse(length(parametry[which(names(parametry)=="SB_LFC_hgt")])==0,0,parametry[which(names(parametry)=="SB_LFC_hgt")]),
+                                   ifelse(length(parametry[which(names(parametry)=="SB_EL_hgt")])==0,0,parametry[which(names(parametry)=="SB_EL_hgt")]),
                                    parametry[which(names(parametry)=="SB_CAPE")],
                                    parametry[which(names(parametry)=="SRW_0500m_CBV")],
                                    output$tempV+273.15,
@@ -152,8 +152,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    output$altitude-output2$altitude[1], 
                                    output$temp+273.15, 
                                    SH,  
-                                   ifelse(length(parametry[which(names(parametry)=="ML_LFC_HGT")])==0,0,parametry[which(names(parametry)=="ML_LFC_HGT")]),
-                                   ifelse(length(parametry[which(names(parametry)=="ML_EL_HGT")])==0,0,parametry[which(names(parametry)=="ML_EL_HGT")]),
+                                   ifelse(length(parametry[which(names(parametry)=="ML_LFC_hgt")])==0,0,parametry[which(names(parametry)=="ML_LFC_hgt")]),
+                                   ifelse(length(parametry[which(names(parametry)=="ML_EL_hgt")])==0,0,parametry[which(names(parametry)=="ML_EL_hgt")]),
                                    parametry[which(names(parametry)=="ML_CAPE")],
                                    parametry[which(names(parametry)=="SRW_0500m_CBV")],
                                    output$tempV+273.15,
@@ -234,13 +234,13 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   if (parcel != "none") {
     
     if (parcel == "ML") {
-      vsb_lcl = parametry[which(names(parametry[1:LP]) == "ML_LCL_HGT")] + output$altitude[1]
-      vsb_lfc = parametry[which(names(parametry[1:LP]) == "ML_LFC_HGT")] + output$altitude[1]
+      vsb_lcl = parametry[which(names(parametry[1:LP]) == "ML_LCL_hgt")] + output$altitude[1]
+      vsb_lfc = parametry[which(names(parametry[1:LP]) == "ML_LFC_hgt")] + output$altitude[1]
       vsb_muhgt = meanlayer_bottom_top[1] + output$altitude[1]
-      vsb_el = parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")] + output$altitude[1]
+      vsb_el = parametry[which(names(parametry[1:LP]) == "ML_EL_hgt")] + output$altitude[1]
       vsb_el = ifelse(length(vsb_el) == 0, 0 + output$altitude[1], vsb_el)
       vsb_lfc = ifelse(length(vsb_lfc) == 0, 0 + output$altitude[1], vsb_lfc)
-      vsb_eff = (parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")]/2) + output$altitude[1]
+      vsb_eff = (parametry[which(names(parametry[1:LP]) == "ML_EL_hgt")]/2) + output$altitude[1]
       ind_lcl = which.min(abs(output$altitude - vsb_lcl))
       ind_lfc = which.min(abs(output$altitude - vsb_lfc))
       ind_muhgt = which.min(abs(output$altitude - vsb_muhgt))
@@ -295,13 +295,13 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     }
     
     if (parcel == "MU") {
-      vsb_lcl = parametry[which(names(parametry[1:LP]) == "MU_LCL_HGT")] + output$altitude[1]
-      vsb_lfc = parametry[which(names(parametry[1:LP]) == "MU_LFC_HGT")] + output$altitude[1]
+      vsb_lcl = parametry[which(names(parametry[1:LP]) == "MU_LCL_hgt")] + output$altitude[1]
+      vsb_lfc = parametry[which(names(parametry[1:LP]) == "MU_LFC_hgt")] + output$altitude[1]
       vsb_muhgt = parametry[which(names(parametry[1:LP]) == "HGT_MU")] + output$altitude[1]
-      vsb_el = parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")] + output$altitude[1]
+      vsb_el = parametry[which(names(parametry[1:LP]) == "MU_EL_hgt")] + output$altitude[1]
       vsb_el = ifelse(length(vsb_el) == 0, 0 + output$altitude[1], vsb_el)
       vsb_lfc = ifelse(length(vsb_lfc) == 0, 0 + output$altitude[1], vsb_lfc)
-      vsb_eff = ((parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")] - parametry[which(names(parametry[1:LP]) == "HGT_MU")])/2) + output$altitude[1]
+      vsb_eff = ((parametry[which(names(parametry[1:LP]) == "MU_EL_hgt")] - parametry[which(names(parametry[1:LP]) == "HGT_MU")])/2) + output$altitude[1]
       ind_lcl = which.min(abs(output$altitude - vsb_lcl))
       ind_lfc = which.min(abs(output$altitude - vsb_lfc))
       ind_muhgt = which.min(abs(output$altitude - vsb_muhgt)) 
@@ -358,12 +358,12 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     }
     
     if (parcel == "SB") {
-      vsb_lcl = parametry[which(names(parametry[1:LP]) == "SB_LCL_HGT")] + output$altitude[1]
-      vsb_lfc = parametry[which(names(parametry[1:LP]) == "SB_LFC_HGT")] + output$altitude[1]
-      vsb_el = parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")] + output$altitude[1]
+      vsb_lcl = parametry[which(names(parametry[1:LP]) == "SB_LCL_hgt")] + output$altitude[1]
+      vsb_lfc = parametry[which(names(parametry[1:LP]) == "SB_LFC_hgt")] + output$altitude[1]
+      vsb_el = parametry[which(names(parametry[1:LP]) == "SB_EL_hgt")] + output$altitude[1]
       vsb_el = ifelse(length(vsb_el) == 0, 0 + output$altitude[1], vsb_el)
       vsb_lfc = ifelse(length(vsb_lfc) == 0, 0 + output$altitude[1], vsb_lfc)
-      vsb_eff = (parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")]/2) + output$altitude[1]
+      vsb_eff = (parametry[which(names(parametry[1:LP]) == "SB_EL_hgt")]/2) + output$altitude[1]
       ind_lcl = which.min(abs(output$altitude - vsb_lcl))
       ind_lfc = which.min(abs(output$altitude - vsb_lfc))
       ind_el = which.min(abs(output$altitude - vsb_el))
@@ -421,7 +421,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     if (parcel == "SB") {
       if (parametry[which(names(parametry[1:LP]) == "SB_CAPE")] > 0) {
         # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-        if (length(parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")]) != 0) {
+        if (length(parametry[which(names(parametry[1:LP]) == "SB_EL_hgt")]) != 0) {
           text(x_el, y_el, paste0("---- SB EL"), pos = 4, cex = 0.62, col = "black")
         }
         text(x_lcl, y_lcl, paste0("---- SB LCL"), pos = 4, cex = 0.62, col = "black")
@@ -431,7 +431,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     if (parcel == "MU") {
       if (parametry[which(names(parametry[1:LP]) == "MU_CAPE")] > 0) {
         # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-        if (length(parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")]) != 0) {
+        if (length(parametry[which(names(parametry[1:LP]) == "MU_EL_hgt")]) != 0) {
           text(x_el, y_el, paste0("---- MU EL"), pos = 4, cex = 0.62, col = "black")
         }
         text(x_lcl, y_lcl, paste0("---- MU LCL"), pos = 4, cex = 0.62, col = "black")
@@ -442,7 +442,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       if (meanlayer_bottom_top[1] == 0) {
         if (parametry[which(names(parametry[1:LP]) == "ML_CAPE")] > 0) {
           # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-          if (length(parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")]) != 0) {
+          if (length(parametry[which(names(parametry[1:LP]) == "ML_EL_hgt")]) != 0) {
             text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black")
           }
           text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")
@@ -450,7 +450,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       } else {
         if (parametry[which(names(parametry[1:LP]) == "ML_CAPE")] > 0) {
           # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-          if (length(parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")]) != 0) {
+          if (length(parametry[which(names(parametry[1:LP]) == "ML_EL_hgt")]) != 0) {
             text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black")
           }
           text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")
@@ -582,17 +582,17 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   text(0.54, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_LI")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
   text(0.54, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_LI")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
   
-  text(0.60, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_LCL_HGT")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
-  text(0.60, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_LCL_HGT")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
-  text(0.60, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_LCL_HGT")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
+  text(0.60, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_LCL_hgt")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
+  text(0.60, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_LCL_hgt")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
+  text(0.60, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_LCL_hgt")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
   
-  text(0.68, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_LFC_HGT")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
-  text(0.68, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_LFC_HGT")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
-  text(0.68, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_LFC_HGT")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
+  text(0.68, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_LFC_hgt")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
+  text(0.68, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_LFC_hgt")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
+  text(0.68, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_LFC_hgt")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
   
-  text(0.76, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
-  text(0.76, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
-  text(0.76, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
+  text(0.76, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_EL_hgt")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
+  text(0.76, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_EL_hgt")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
+  text(0.76, 31.5, round(parametry[which(names(parametry[1:LP]) == "ML_EL_hgt")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
   
   text(0.855, 37.9, round(parametry[which(names(parametry[1:LP]) == "SB_WMAXSHEAR")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
   text(0.855, 34.7, round(parametry[which(names(parametry[1:LP]) == "MU_WMAXSHEAR")], digits = 0), cex = FONTSIZE, adj = c(0, 0))
