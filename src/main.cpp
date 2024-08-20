@@ -5129,7 +5129,7 @@ double IndicesCollector::SCP(){
 
 double IndicesCollector::SCPeff(){
   double mucape = this->VMostUnstableCAPE()/1000;
-  double srh = this->SRH03RM()/50;
+  double srh = this->SRH03RM_eff()/50;
   double ewd = this->emubs();
   double cin = this->VMostUnstableCIN();
   if(cin>-40)cin=1;
@@ -5152,7 +5152,7 @@ double IndicesCollector::SCP_LM(){
 
 double IndicesCollector::SCPeff_LM(){
   double mucape = this->VMostUnstableCAPE()/1000;
-  double srh = this->SRH03LM()/50;
+  double srh = this->SRH03LM_eff()/50;
   double ewd = this->emubs();
   double cin = this->VMostUnstableCIN();
   if(cin>-40)cin=1;
@@ -5659,9 +5659,7 @@ double IndicesCollector::BulkShearMLLCLTen(){
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
-  double effSHR = result.abs();
-  double mucape = this->VMeanLayerCAPE();
-  if(mucape==0)effSHR=0;  
+  double effSHR = result.abs(); 
   return effSHR;
 }
 
