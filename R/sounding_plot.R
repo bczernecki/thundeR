@@ -238,6 +238,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       vsb_lfc = parametry[which(names(parametry[1:LP]) == "ML_LFC_HGT")] + output$altitude[1]
       vsb_muhgt = meanlayer_bottom_top[1] + output$altitude[1]
       vsb_el = parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")] + output$altitude[1]
+      vsb_el = ifelse(length(vsb_el) == 0, 0 + output$altitude[1], vsb_el)
+      vsb_lfc = ifelse(length(vsb_lfc) == 0, 0 + output$altitude[1], vsb_lfc)
       vsb_eff = (parametry[which(names(parametry[1:LP]) == "ML_EL_HGT")]/2) + output$altitude[1]
       ind_lcl = which.min(abs(output$altitude - vsb_lcl))
       ind_lfc = which.min(abs(output$altitude - vsb_lfc))
@@ -297,6 +299,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       vsb_lfc = parametry[which(names(parametry[1:LP]) == "MU_LFC_HGT")] + output$altitude[1]
       vsb_muhgt = parametry[which(names(parametry[1:LP]) == "HGT_MU")] + output$altitude[1]
       vsb_el = parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")] + output$altitude[1]
+      vsb_el = ifelse(length(vsb_el) == 0, 0 + output$altitude[1], vsb_el)
+      vsb_lfc = ifelse(length(vsb_lfc) == 0, 0 + output$altitude[1], vsb_lfc)
       vsb_eff = ((parametry[which(names(parametry[1:LP]) == "MU_EL_HGT")] - parametry[which(names(parametry[1:LP]) == "HGT_MU")])/2) + output$altitude[1]
       ind_lcl = which.min(abs(output$altitude - vsb_lcl))
       ind_lfc = which.min(abs(output$altitude - vsb_lfc))
@@ -357,6 +361,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       vsb_lcl = parametry[which(names(parametry[1:LP]) == "SB_LCL_HGT")] + output$altitude[1]
       vsb_lfc = parametry[which(names(parametry[1:LP]) == "SB_LFC_HGT")] + output$altitude[1]
       vsb_el = parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")] + output$altitude[1]
+      vsb_el = ifelse(length(vsb_el) == 0, 0 + output$altitude[1], vsb_el)
+      vsb_lfc = ifelse(length(vsb_lfc) == 0, 0 + output$altitude[1], vsb_lfc)
       vsb_eff = (parametry[which(names(parametry[1:LP]) == "SB_EL_HGT")]/2) + output$altitude[1]
       ind_lcl = which.min(abs(output$altitude - vsb_lcl))
       ind_lfc = which.min(abs(output$altitude - vsb_lfc))
