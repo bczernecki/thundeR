@@ -130,8 +130,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    output$altitude-output$altitude[1], 
                                    output$temp+273.15, 
                                    SH,  
-                                   ifelse(length(parametry[which(names(parametry)=="MU_LFC_hgt")])==0,0,as.numeric(parametry[which(names(parametry)=="MU_LFC_hgt")])),
-                                   ifelse(length(parametry[which(names(parametry)=="MU_EL_hgt")])==0,0,as.numeric(parametry[which(names(parametry)=="MU_EL_hgt")])),
+                                   ifelse(is.nan(as.numeric(parametry[which(names(parametry)=="MU_LFC_hgt")])),0,as.numeric(parametry[which(names(parametry)=="MU_LFC_hgt")])),
+                                   ifelse(is.nan(as.numeric(parametry[which(names(parametry)=="MU_EL_hgt")])),0,as.numeric(parametry[which(names(parametry)=="MU_EL_hgt")])),
                                    parametry[which(names(parametry)=="MU_CAPE")],
                                    parametry[which(names(parametry)=="SRW_eff_CBV")],
                                    output$tempV+273.15,
@@ -141,8 +141,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    output$altitude-output$altitude[1], 
                                    output$temp+273.15, 
                                    SH,  
-                                   ifelse(length(parametry[which(names(parametry)=="SB_LFC_hgt")])==0,0,as.numeric(parametry[which(names(parametry)=="SB_LFC_hgt")])),
-                                   ifelse(length(parametry[which(names(parametry)=="SB_EL_hgt")])==0,0,as.numeric(parametry[which(names(parametry)=="SB_EL_hgt")])),
+                                   ifelse(is.nan(as.numeric(parametry[which(names(parametry)=="SB_LFC_hgt")])),0,as.numeric(parametry[which(names(parametry)=="SB_LFC_hgt")])),
+                                   ifelse(is.nan(as.numeric(parametry[which(names(parametry)=="SB_EL_hgt")])),0,as.numeric(parametry[which(names(parametry)=="SB_EL_hgt")])),
                                    parametry[which(names(parametry)=="SB_CAPE")],
                                    parametry[which(names(parametry)=="SRW_0500m_CBV")],
                                    output$tempV+273.15,
@@ -152,8 +152,8 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
                                    output$altitude-output2$altitude[1], 
                                    output$temp+273.15, 
                                    SH,  
-                                   ifelse(length(parametry[which(names(parametry)=="ML_LFC_hgt")])==0,0,as.numeric(parametry[which(names(parametry)=="ML_LFC_hgt")])),
-                                   ifelse(length(parametry[which(names(parametry)=="ML_EL_hgt")])==0,0,as.numeric(parametry[which(names(parametry)=="ML_EL_hgt")])),
+                                   ifelse(is.nan(as.numeric(parametry[which(names(parametry)=="ML_LFC_hgt")])),0,as.numeric(parametry[which(names(parametry)=="ML_LFC_hgt")])),
+                                   ifelse(is.nan(as.numeric(parametry[which(names(parametry)=="ML_EL_hgt")])),0,as.numeric(parametry[which(names(parametry)=="ML_EL_hgt")])),
                                    parametry[which(names(parametry)=="ML_CAPE")],
                                    parametry[which(names(parametry)=="SRW_0500m_CBV")],
                                    output$tempV+273.15,
@@ -421,7 +421,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     if (parcel == "SB") {
       if (parametry[which(names(parametry[1:LP]) == "SB_CAPE")] > 0) {
         # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-        if (length(parametry[which(names(parametry[1:LP]) == "SB_EL_hgt")]) != 0) {
+        if (!is.nan(as.numeric(parametry[which(names(parametry[1:LP]) == "SB_EL_hgt")]))) {
           text(x_el, y_el, paste0("---- SB EL"), pos = 4, cex = 0.62, col = "black")
         }
         text(x_lcl, y_lcl, paste0("---- SB LCL"), pos = 4, cex = 0.62, col = "black")
@@ -431,7 +431,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     if (parcel == "MU") {
       if (parametry[which(names(parametry[1:LP]) == "MU_CAPE")] > 0) {
         # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-        if (length(parametry[which(names(parametry[1:LP]) == "MU_EL_hgt")]) != 0) {
+        if (!is.nan(as.numeric(parametry[which(names(parametry[1:LP]) == "MU_EL_hgt")]))) {
           text(x_el, y_el, paste0("---- MU EL"), pos = 4, cex = 0.62, col = "black")
         }
         text(x_lcl, y_lcl, paste0("---- MU LCL"), pos = 4, cex = 0.62, col = "black")
@@ -442,7 +442,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       if (meanlayer_bottom_top[1] == 0) {
         if (parametry[which(names(parametry[1:LP]) == "ML_CAPE")] > 0) {
           # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-          if (length(parametry[which(names(parametry[1:LP]) == "ML_EL_hgt")]) != 0) {
+          if (!is.nan(as.numeric(parametry[which(names(parametry[1:LP]) == "ML_EL_hgt")]))) {
             text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black")
           }
           text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")
@@ -450,7 +450,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
       } else {
         if (parametry[which(names(parametry[1:LP]) == "ML_CAPE")] > 0) {
           # text(x_eff, y_eff, paste0("---- Effective"), pos = 4, cex = 0.62, col = "black")
-          if (length(parametry[which(names(parametry[1:LP]) == "ML_EL_hgt")]) != 0) {
+          if (!is.nan(as.numeric(parametry[which(names(parametry[1:LP]) == "ML_EL_hgt")]))) {
             text(x_el, y_el, paste0("---- ML EL"), pos = 4, cex = 0.62, col = "black")
           }
           text(x_lcl, y_lcl, paste0("---- ML LCL"), pos = 4, cex = 0.62, col = "black")
