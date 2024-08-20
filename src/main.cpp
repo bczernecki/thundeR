@@ -5648,8 +5648,6 @@ double IndicesCollector::BulkShearMUMLLCLTen(){
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
   double effSHR = result.abs();
-  double mucape = this->VMeanMostUnstableCAPE();
-  if(mucape==0)effSHR=0;  
   return effSHR;
 }
 
@@ -5670,8 +5668,6 @@ double IndicesCollector::BulkShearSBLCLTen(){
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
   double effSHR = result.abs();
-  double mucape = this->VSurfaceBasedCAPE();
-  if(mucape==0)effSHR=0;  
   return effSHR;
 }
 
