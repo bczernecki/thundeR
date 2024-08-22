@@ -5,6 +5,7 @@
 #include <cstddef>
 #include <cstdlib>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
 const double kel = 273.15;
