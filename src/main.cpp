@@ -1389,9 +1389,9 @@ void LapseRate::allocate(){
   middlecape=0;
   coldcape=0;
   coldcapeTV=0;
-  peakB=-999;
-  peakB_M10=-999;
-  peakB_3km=-999;
+  peakB=0;
+  peakB_M10=0;
+  peakB_3km=0;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
   startIndex=-1;
   isSet = false;
@@ -3304,6 +3304,7 @@ double* IndicesCollector::MU_ECAPE(){
   double CAPE_M10 = S->th->mostUnstable->coldcape;
   double CAPE_3km = S->th->mostUnstable->vto3cape;
   if(E_tilde>10) E_tilde = 10;
+  if(isnan(E_tilde)) E_tilde = 0;
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3338,6 +3339,7 @@ double* IndicesCollector::MU_ML_ECAPE(){
   double CAPE_M10 = S->th->meanmostUnstable->coldcape;
   double CAPE_3km = S->th->meanmostUnstable->vto3cape;
   if(E_tilde>10) E_tilde = 10;
+  if(isnan(E_tilde)) E_tilde = 0;
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3372,6 +3374,7 @@ double* IndicesCollector::SB_ECAPE(){
   double CAPE_M10 = S->th->surfaceBased->coldcape;
   double CAPE_3km = S->th->surfaceBased->vto3cape;
   if(E_tilde>10) E_tilde = 10;
+  if(isnan(E_tilde)) E_tilde = 0;
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3406,6 +3409,7 @@ double* IndicesCollector::ML_ECAPE(){
   double CAPE_M10 = S->th->meanLayer->coldcape;
   double CAPE_3km = S->th->meanLayer->vto3cape;
   if(E_tilde>10) E_tilde = 10;
+  if(isnan(E_tilde)) E_tilde = 0;
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
@@ -3440,6 +3444,7 @@ double* IndicesCollector::MU500_ECAPE(){
   double CAPE_M10 = S->th->mostU500->coldcape;
   double CAPE_3km = S->th->mostU500->vto3cape;
   if(E_tilde>10) E_tilde = 10;
+  if(isnan(E_tilde)) E_tilde = 0;
   double* result = new double[7];
   result[0] = E_tilde;
   result[1] = Radius;
