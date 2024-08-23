@@ -5005,6 +5005,7 @@ double IndicesCollector::STP(){
   double srh1 = this->SRH01RM()/150;
   double bwd = this->BS06();
   double cin = this->VSurfaceBasedCIN();	
+  if(isnan(cin)) cin = 0;
   if(sblcl<1000)sblcl=1;
   else if(sblcl>2000)sblcl=0;
   else sblcl=(2000-sblcl)/1000;  
@@ -5014,7 +5015,6 @@ double IndicesCollector::STP(){
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
   else bwd/=20;  
-  if(isnan(cin)) cin = 0;
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -5024,6 +5024,7 @@ double IndicesCollector::STPeff(){
   double srh1 = this->SRH500RM()/75;
   double bwd = this->emlbs();
   double cin = this->VMeanLayerCIN();	
+  if(isnan(cin)) cin = 0;
   if(sblcl<1000)sblcl=1;
   else if(sblcl>2000)sblcl=0;
   else sblcl=(2000-sblcl)/1000;  
@@ -5033,7 +5034,6 @@ double IndicesCollector::STPeff(){
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
   else bwd/=20;  
-  if(isnan(cin)) cin = 0;
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -5043,6 +5043,7 @@ double IndicesCollector::STP_LM(){
   double srh1 = this->SRH01LM()/150;
   double bwd = this->BS06();
   double cin = this->VSurfaceBasedCIN();	
+  if(isnan(cin)) cin = 0;
   if(sblcl<1000)sblcl=1;
   else if(sblcl>2000)sblcl=0;
   else sblcl=(2000-sblcl)/1000;  
@@ -5052,7 +5053,6 @@ double IndicesCollector::STP_LM(){
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
   else bwd/=20;
-  if(isnan(cin)) cin = 0;  
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -5062,6 +5062,7 @@ double IndicesCollector::STPeff_LM(){
   double srh1 = this->SRH500LM()/75;
   double bwd = this->emlbs();
   double cin = this->VMeanLayerCIN();	
+  if(isnan(cin)) cin = 0;
   if(sblcl<1000)sblcl=1;
   else if(sblcl>2000)sblcl=0;
   else sblcl=(2000-sblcl)/1000;  
@@ -5071,7 +5072,6 @@ double IndicesCollector::STPeff_LM(){
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
   else bwd/=20;  
-  if(isnan(cin)) cin = 0;
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -5145,12 +5145,12 @@ double IndicesCollector::SCPeff(){
   double srh = this->SRH03RM_eff()/50;
   double ewd = this->emubs();
   double cin = this->VMostUnstableCIN();
+  if(isnan(cin)) cin = 0;
   if(cin>-40)cin=1;
   else cin=(-40)/cin;
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
-  if(isnan(cin)) cin = 0;
   return mucape*srh*ewd*cin;
 }
 
@@ -5161,7 +5161,6 @@ double IndicesCollector::SCP_LM(){
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
-  if(isnan(cin)) cin = 0;
   return mucape*srh*ewd;
 }
 
@@ -5170,12 +5169,12 @@ double IndicesCollector::SCPeff_LM(){
   double srh = this->SRH03LM_eff()/50;
   double ewd = this->emubs();
   double cin = this->VMostUnstableCIN();
+  if(isnan(cin)) cin = 0;
   if(cin>-40)cin=1;
   else cin=(-40)/cin;
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
-  if(isnan(cin)) cin = 0;
   return mucape*srh*ewd*cin;
 }
 
@@ -5208,7 +5207,7 @@ double IndicesCollector::DCP(){
 double IndicesCollector::DCP_eff(){
   double dcape = this->VDCAPE()/980;
   double* CAPE_WXS = this->MU_ECAPE(); 
-  double mucape = CAPE_WXS[5];
+  double CAPE = CAPE_WXS[5];
   delete[] CAPE_WXS;
   double mucape = CAPE/2000;
   double shear = this->emubs()/(20*0.514444444);
