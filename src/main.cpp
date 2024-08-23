@@ -2785,7 +2785,8 @@ public:
   double DEI_eff();
   double TIP();	 
   double SHP();
-  double DCP();
+  double DCP(); 
+  double DCP_eff();
 
   double MU_WMAXSHEAR();
   double MUML_WMAXSHEAR();
@@ -4403,8 +4404,9 @@ double IndicesCollector::BS06_var_SI(){
                         V09.abs() - V10.abs(),
                         V10.abs() - V11.abs(),
                         V11.abs() - V12.abs() };  
-  double result = computeStandardDeviation(diffs) / abs(computeMean(diffs));
-  return 1/result;
+  double result = 1 / (computeStandardDeviation(diffs) / abs(computeMean(diffs)));
+  if(result > 1) result = 1;
+  return result;
 }
 
 double IndicesCollector::BS16_var_SD(){
@@ -4473,8 +4475,9 @@ double IndicesCollector::BS16_var_SI(){
                      V09.abs() - V10.abs(),
                      V10.abs() - V11.abs(),
                      V11.abs() - V12.abs() };  
-  double result = computeStandardDeviation(diffs) / abs(computeMean(diffs));
-  return 1/result;
+  double result = 1 / (computeStandardDeviation(diffs) / abs(computeMean(diffs)));
+  if(result > 1) result = 1;
+  return result;
 }
 
 double IndicesCollector::BS500(){
@@ -5011,6 +5014,7 @@ double IndicesCollector::STP(){
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
   else bwd/=20;  
+  if(isnan(cin)) cin = 0;
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -5029,6 +5033,7 @@ double IndicesCollector::STPeff(){
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
   else bwd/=20;  
+  if(isnan(cin)) cin = 0;
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -5046,7 +5051,8 @@ double IndicesCollector::STP_LM(){
   else cin=(200+cin)/150;
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
-  else bwd/=20;  
+  else bwd/=20;
+  if(isnan(cin)) cin = 0;  
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -5065,6 +5071,7 @@ double IndicesCollector::STPeff_LM(){
   if(bwd<12.5)bwd=0.0;
   else if(bwd>30)bwd = 1.5;
   else bwd/=20;  
+  if(isnan(cin)) cin = 0;
   return sbcape*sblcl*srh1*bwd*cin;
 }
 
@@ -5143,6 +5150,7 @@ double IndicesCollector::SCPeff(){
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
+  if(isnan(cin)) cin = 0;
   return mucape*srh*ewd*cin;
 }
 
@@ -5153,6 +5161,7 @@ double IndicesCollector::SCP_LM(){
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
+  if(isnan(cin)) cin = 0;
   return mucape*srh*ewd;
 }
 
@@ -5166,6 +5175,7 @@ double IndicesCollector::SCPeff_LM(){
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
+  if(isnan(cin)) cin = 0;
   return mucape*srh*ewd*cin;
 }
 
@@ -5192,6 +5202,17 @@ double IndicesCollector::DCP(){
   double mucape = this->VMostUnstableCAPE()/2000;
   double shear = this->BS06()/(20*0.514444444 );
   double mw = this->MeanWind06()/(16*0.514444444 );
+  return dcape*mucape*shear*mw;
+}
+
+double IndicesCollector::DCP_eff(){
+  double dcape = this->VDCAPE()/980;
+  double* CAPE_WXS = this->MU_ECAPE(); 
+  double mucape = CAPE_WXS[5];
+  delete[] CAPE_WXS;
+  double mucape = CAPE/2000;
+  double shear = this->emubs()/(20*0.514444444);
+  double mw = this->MeanWind06()/(16*0.514444444);
   return dcape*mucape*shear*mw;
 }
 
@@ -5695,6 +5716,7 @@ double IndicesCollector::HSI(){
   if(LR<5)LR=5;
   else if(LR>8)LR=8;
   double HSI = ((sqrt(10*(CAPE-200)) * (BS06-5) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-4)*(LR-4))/10000000));
+  if(isnan(HSI)) HSI = 0;
   return HSI;
 }
 
@@ -5718,6 +5740,7 @@ double IndicesCollector::HSIv2(){
   if(LR<5)LR=5;
   else if(LR>8)LR=8;
   double HSI = ((sqrt(50*(CAPE-200)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000));
+  if(isnan(HSI)) HSI = 0;
   double HSI_old = this->HSI();
   if(HSI_old > HSI) HSI = HSI_old;
   return HSI;
@@ -6060,27 +6083,27 @@ double IndicesCollector::SB_buoyancy_M10(){
 
 double IndicesCollector::Ventilation_13km(){
   double ventilation = distance(S->ks->mean13, this->Peters_vector(), S->ks->mean0);   
-  return ventilation;
+  return ventilation*(-1);
 }
 
 double IndicesCollector::Ventilation_16km(){
   double ventilation = distance(S->ks->mean16, this->Peters_vector(), S->ks->mean0);   
-  return ventilation;
+  return ventilation*(-1);
 }
 
 double IndicesCollector::Ventilation_36km(){
   double ventilation = distance(S->ks->mean36, this->Peters_vector(), S->ks->mean0);   
-  return ventilation;
+  return ventilation*(-1);
 }
 
 double IndicesCollector::Ventilation_69km(){
   double ventilation = distance(S->ks->mean69, this->Peters_vector(), S->ks->mean0);   
-  return ventilation;
+  return ventilation*(-1);
 }
 
 double IndicesCollector::Ventilation_912km(){
   double ventilation = distance(S->ks->mean912, this->Peters_vector(), S->ks->mean0);   
-  return ventilation;
+  return ventilation*(-1);
 }
 
 double IndicesCollector::MU_ebuoyancy_3km(){
@@ -6523,22 +6546,22 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
 
   // Composite metrics
   vec[329]=(*S)->getIndicesCollectorPointer()->K_Index();
-  vec[330]=(*S)->getIndicesCollectorPointer()->Showalter_Index(); 
-  vec[331]=(*S)->getIndicesCollectorPointer()->TotalTotals();  
-  vec[332]=(*S)->getIndicesCollectorPointer()->SWEATIndex(); 
-  vec[333]=(*S)->getIndicesCollectorPointer()->WindIndex();
-  vec[334]=(*S)->getIndicesCollectorPointer()->STP();
-  vec[335]=(*S)->getIndicesCollectorPointer()->STP_LM();
-  vec[336]=(*S)->getIndicesCollectorPointer()->STPeff();	
-  vec[337]=(*S)->getIndicesCollectorPointer()->STPeff_LM();
-  vec[338]=(*S)->getIndicesCollectorPointer()->SCP();
-  vec[339]=(*S)->getIndicesCollectorPointer()->SCP_LM();
-  vec[340]=(*S)->getIndicesCollectorPointer()->SCPeff();
-  vec[341]=(*S)->getIndicesCollectorPointer()->SCPeff_LM();
-  vec[342]=(*S)->getIndicesCollectorPointer()->SHP();
-  vec[343]=(*S)->getIndicesCollectorPointer()->HSI();
-  vec[344]=(*S)->getIndicesCollectorPointer()->HSIv2();
-  vec[345]=(*S)->getIndicesCollectorPointer()->DCP();
+  vec[330]=(*S)->getIndicesCollectorPointer()->TotalTotals();  
+  vec[331]=(*S)->getIndicesCollectorPointer()->SWEATIndex(); 
+  vec[332]=(*S)->getIndicesCollectorPointer()->WindIndex();
+  vec[333]=(*S)->getIndicesCollectorPointer()->STP();
+  vec[334]=(*S)->getIndicesCollectorPointer()->STP_LM();
+  vec[335]=(*S)->getIndicesCollectorPointer()->STPeff();	
+  vec[336]=(*S)->getIndicesCollectorPointer()->STPeff_LM();
+  vec[337]=(*S)->getIndicesCollectorPointer()->SCP();
+  vec[338]=(*S)->getIndicesCollectorPointer()->SCP_LM();
+  vec[339]=(*S)->getIndicesCollectorPointer()->SCPeff();
+  vec[340]=(*S)->getIndicesCollectorPointer()->SCPeff_LM();
+  vec[341]=(*S)->getIndicesCollectorPointer()->SHP();
+  vec[342]=(*S)->getIndicesCollectorPointer()->HSI();
+  vec[343]=(*S)->getIndicesCollectorPointer()->HSIv2();
+  vec[344]=(*S)->getIndicesCollectorPointer()->DCP();
+  vec[345]=(*S)->getIndicesCollectorPointer()->DCP_eff();
   vec[346]=(*S)->getIndicesCollectorPointer()->EHI500();
   vec[347]=(*S)->getIndicesCollectorPointer()->EHI500_LM();
   vec[348]=(*S)->getIndicesCollectorPointer()->EHI01();	
@@ -7214,7 +7237,6 @@ double * sounding_default2(double* pressure,
 //'  \item 	Corfidi_upwind_A
 //'  \item 	Corfidi_upwind_M
 //'  \item 	K_Index
-//'  \item 	Showalted_Index
 //'  \item 	TotalTotals_Index
 //'  \item 	SWEAT_Index
 //'  \item 	Wind_Index
@@ -7230,6 +7252,7 @@ double * sounding_default2(double* pressure,
 //'  \item 	HSI
 //'  \item 	HSI_mod
 //'  \item 	DCP
+//'  \item 	DCP_eff
 //'  \item 	EHI_0500m_RM
 //'  \item 	EHI_0500m_LM
 //'  \item 	EHI_01km_RM
