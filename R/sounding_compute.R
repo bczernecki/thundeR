@@ -334,7 +334,6 @@
 #'  \item 	Corfidi_upwind_A
 #'  \item 	Corfidi_upwind_M
 #'  \item 	K_Index
-#'  \item 	Showalted_Index
 #'  \item 	TotalTotals_Index
 #'  \item 	SWEAT_Index
 #'  \item 	Wind_Index
@@ -350,6 +349,7 @@
 #'  \item 	HSI
 #'  \item 	HSI_mod
 #'  \item 	DCP
+#'  \item 	DCP_eff
 #'  \item 	EHI_0500m_RM
 #'  \item 	EHI_0500m_LM
 #'  \item 	EHI_01km_RM
@@ -742,7 +742,6 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "Corfidi_upwind_A",
 "Corfidi_upwind_M",
 "K_Index",
-"Showalted_Index",
 "TotalTotals_Index",
 "SWEAT_Index",
 "Wind_Index",
@@ -758,6 +757,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "HSI",
 "HSI_mod",
 "DCP",
+"DCP_eff",
 "EHI_0500m_RM",
 "EHI_0500m_LM",
 "EHI_01km_RM",
