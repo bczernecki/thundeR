@@ -4747,7 +4747,7 @@ Vector IndicesCollector::Bunkers4_RM_vector(){
   return Bunkers4;
 }
 
-double IndicesCollector::Bunkers4_RM_vector_A(){
+double IndicesCollector::Bunkers4_RM_A(){
   Vector Bunkers4_SM = this->Bunkers4_RM_vector();
   double *tab = Bunkers4_SM.toAV(); 
   double angle = tab[0];
@@ -4755,7 +4755,7 @@ double IndicesCollector::Bunkers4_RM_vector_A(){
   return angle;
 }
 
-double IndicesCollector::Bunkers4_RM_vector_M(){
+double IndicesCollector::Bunkers4_RM_M(){
   Vector Bunkers4_SM = this->Bunkers4_RM_vector();
   double *tab = Bunkers4_SM.toAV(); 
   double magnitude = tab[1];
@@ -4775,7 +4775,7 @@ Vector IndicesCollector::Bunkers4_LM_vector(){
   return Bunkers4;
 }
 
-double IndicesCollector::Bunkers4_LM_vector_A(){
+double IndicesCollector::Bunkers4_LM_A(){
   Vector Bunkers4_SM = this->Bunkers4_LM_vector();
   double *tab = Bunkers4_SM.toAV(); 
   double angle = tab[0];
@@ -4783,7 +4783,7 @@ double IndicesCollector::Bunkers4_LM_vector_A(){
   return angle;
 }
 
-double IndicesCollector::Bunkers4_LM_vector_M(){
+double IndicesCollector::Bunkers4_LM_M(){
   Vector Bunkers4_SM = this->Bunkers4_LM_vector();
   double *tab = Bunkers4_SM.toAV(); 
   double magnitude = tab[1];
