@@ -2696,8 +2696,8 @@ public:
   double BS06();
   double BS08();
   double BS36();
-  double BS012();
-  double BS112();
+  double BS010();
+  double BS110();
   double BS18();
   double BS16();
   double BS13();
@@ -4525,9 +4525,9 @@ double IndicesCollector::BS03(){
   return result.abs();
 }
 
-double IndicesCollector::BS012(){
+double IndicesCollector::BS010(){
   int tail=0;
-  int head = cache->getHeightIndex(12000);
+  int head = cache->getHeightIndex(10000);
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
@@ -4570,9 +4570,9 @@ double IndicesCollector::BS18(){
   return result.abs();
 }
 
-double IndicesCollector::BS112(){
+double IndicesCollector::BS110(){
   int tail=cache->getHeightIndex(1000);
-  int head = cache->getHeightIndex(12000);
+  int head = cache->getHeightIndex(10000);
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
@@ -6476,11 +6476,11 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[180]=(*S)->getIndicesCollectorPointer()->BS03();
   vec[181]=(*S)->getIndicesCollectorPointer()->BS06();
   vec[182]=(*S)->getIndicesCollectorPointer()->BS08();
-  vec[183]=(*S)->getIndicesCollectorPointer()->BS012();
+  vec[183]=(*S)->getIndicesCollectorPointer()->BS010();
   vec[184]=(*S)->getIndicesCollectorPointer()->BS14();
   vec[185]=(*S)->getIndicesCollectorPointer()->BS16();
   vec[186]=(*S)->getIndicesCollectorPointer()->BS18();
-  vec[187]=(*S)->getIndicesCollectorPointer()->BS112();
+  vec[187]=(*S)->getIndicesCollectorPointer()->BS110();
   vec[188]=(*S)->getIndicesCollectorPointer()->esbbs();
   vec[189]=(*S)->getIndicesCollectorPointer()->emlbs();
   vec[190]=(*S)->getIndicesCollectorPointer()->emubs();
@@ -7109,11 +7109,11 @@ double * sounding_default2(double* pressure,
 //'  \item 	BS_03km
 //'  \item 	BS_06km
 //'  \item 	BS_08km
-//'  \item 	BS_012km
+//'  \item 	BS_010km
 //'  \item 	BS_14km
 //'  \item 	BS_16km
 //'  \item 	BS_18km
-//'  \item 	BS_112km
+//'  \item 	BS_110km
 //'  \item 	BS_eff_SB
 //'  \item 	BS_eff_ML
 //'  \item 	BS_eff_MU
