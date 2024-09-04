@@ -2766,12 +2766,13 @@ public:
   double Bunkers_LM_M();
   double Bunkers_MW_A();
   double Bunkers_MW_M();
+
+  Vector Bunkers4_RM_vector();
+  Vector Bunkers4_LM_vector();
   double Bunkers4_RM_A();
   double Bunkers4_RM_M();
   double Bunkers4_LM_A();
   double Bunkers4_LM_M();
-  double Bunkers4_RM_vector();
-  double Bunkers4_LM_vector();
 
   double K_Index();
   double Showalter_Index();	
