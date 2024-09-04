@@ -4414,7 +4414,6 @@ double IndicesCollector::BS06_var_SI(){
                         V10.abs() - V11.abs(),
                         V11.abs() - V12.abs() };  
   double result = 1 / (computeStandardDeviation(diffs) / abs(computeMean(diffs)));
-  if(result > 1) result = 1;
   return result;
 }
 
@@ -4485,7 +4484,6 @@ double IndicesCollector::BS16_var_SI(){
                      V10.abs() - V11.abs(),
                      V11.abs() - V12.abs() };  
   double result = 1 / (computeStandardDeviation(diffs) / abs(computeMean(diffs)));
-  if(result > 1) result = 1;
   return result;
 }
 
