@@ -296,6 +296,14 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
+#'  \item 	SRH_0100m_RM_F
+#'  \item 	SRH_0100m_LM_F
+#'  \item 	SRH_0500m_RM_F
+#'  \item 	SRH_0500m_LM_F
+#'  \item 	SV_0100m_RM_F
+#'  \item 	SV_0100m_LM_F
+#'  \item 	SV_0500m_RM_F
+#'  \item 	SV_0500m_LM_F
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -637,6 +645,14 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE",
 "SHERB_mod",
 "DEI",
-"DEI_eff")
+"DEI_eff",
+"SRH_0100m_RM_F",
+"SRH_0100m_LM_F",
+"SRH_0500m_RM_F",
+"SRH_0500m_LM_F",
+"SV_0100m_RM_F",
+"SV_0100m_LM_F",
+"SV_0500m_RM_F",
+"SV_0500m_LM_F")
 return(tmp)
 }
