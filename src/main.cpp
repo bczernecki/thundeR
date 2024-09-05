@@ -632,6 +632,13 @@ private:
   double srh13rmf;
   double srh13smf;
 
+  double shear_l2;
+  double sw13rm2;
+  double sw13lm2;
+  double srh13rm2;
+  double srh13lm2;
+  double srh13sm2;
+
   double srh03lm;
   double srh03rm;
   double srh03sm;
@@ -755,6 +762,13 @@ public:
     srh13lmf=0;
     srh13rmf=0;
     srh13smf=0;
+
+    shear_l2=0;
+    sw13rm2=0;
+    sw13lm2=0;
+    srh13rm2=0;
+    srh13lm2=0;
+    srh13sm2=0;
     
     srh03lm = 0;
     srh03rm = 0;
@@ -1311,7 +1325,6 @@ void Kinematics::doSRH2(int i, double p, double h, double t, double d, double a,
    
     if(i==0){
       v1 = Vector(0,0,0);
-      v2 = Vector(0,0,0);
     }
 
     double tmps1 = (v1.X() - rm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - rm.Y()) * (v2.X() - v1.X());
@@ -1343,29 +1356,29 @@ void Kinematics::doSRH2(int i, double p, double h, double t, double d, double a,
     
     double shear_layer = sqrt(((v2.X() - v1.X()) * (v2.X() - v1.X())) + ((v2.Y() - v1.Y()) * (v2.Y() - v1.Y())));
     
-    shear_l += shear_layer;
+    shear_l2 += shear_layer;
     
-    sw13rm += OMEGA_rm;
-    sw13lm += OMEGA_lm;
+    sw13rm2 += OMEGA_rm;
+    sw13lm2 += OMEGA_lm;
   
-    srh13rm += tmps1;
-    srh13lm += tmps2;
-    srh13sm += tmps3;
+    srh13rm2 += tmps1;
+    srh13lm2 += tmps2;
+    srh13sm2 += tmps3;
            
     if(h-h0<=500){
-      srh500rm2 = srh13rm;
-      srh500lm2 = srh13lm;
-      sw500rm2 = sw13rm;
-      sw500lm2 = sw13lm;
-      shear500m2 = shear_l;
+      srh500rm2 = srh13rm2;
+      srh500lm2 = srh13lm2;
+      sw500rm2 = sw13rm2;
+      sw500lm2 = sw13lm2;
+      shear500m2 = shear_l2;
     }
     
     if(h-h0<=100){
-      srh100rm2 = srh13rm;
-      srh100lm2 = srh13lm;
-      sw100rm2 = sw13rm;
-      sw100lm2 = sw13lm;
-      shear100m2 = shear_l;
+      srh100rm2 = srh13rm2;
+      srh100lm2 = srh13lm2;
+      sw100rm2 = sw13rm2;
+      sw100lm2 = sw13lm2;
+      shear100m2 = shear_l2;
     }
   }
 }
