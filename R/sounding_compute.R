@@ -599,7 +599,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SV_0500m_RM",
 "SV_0500m_LM",
 "SV_0500m_RM_G",
-"SV_0500m_LM_G"
+"SV_0500m_LM_G",
 "SV_01km_RM",
 "SV_01km_LM",
 "SV_03km_RM",
