@@ -226,8 +226,12 @@
 #'  \item 	Ventilation_69km
 #'  \item 	SRH_0100m_RM
 #'  \item 	SRH_0100m_LM
+#'  \item 	SRH_0100m_RM_F
+#'  \item 	SRH_0100m_LM_F
 #'  \item 	SRH_0500m_RM
 #'  \item 	SRH_0500m_LM
+#'  \item 	SRH_0500m_RM_F
+#'  \item 	SRH_0500m_LM_F
 #'  \item 	SRH_01km_RM
 #'  \item 	SRH_01km_LM
 #'  \item 	SRH_03km_RM
@@ -240,8 +244,12 @@
 #'  \item 	SRH_eff_3km_LM
 #'  \item 	SV_0100m_RM
 #'  \item 	SV_0100m_LM
+#'  \item 	SV_0100m_RM_F
+#'  \item 	SV_0100m_LM_F
 #'  \item 	SV_0500m_RM
 #'  \item 	SV_0500m_LM
+#'  \item 	SV_0500m_RM_F
+#'  \item 	SV_0500m_LM_F
 #'  \item 	SV_01km_RM
 #'  \item 	SV_01km_LM
 #'  \item 	SV_03km_RM
@@ -296,14 +304,6 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
-#'  \item 	SRH_0100m_RM_F
-#'  \item 	SRH_0100m_LM_F
-#'  \item 	SRH_0500m_RM_F
-#'  \item 	SRH_0500m_LM_F
-#'  \item 	SV_0100m_RM_F
-#'  \item 	SV_0100m_LM_F
-#'  \item 	SV_0500m_RM_F
-#'  \item 	SV_0500m_LM_F
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -576,8 +576,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "Ventilation_69km",
 "SRH_0100m_RM",
 "SRH_0100m_LM",
+"SRH_0100m_RM_G",
+"SRH_0100m_LM_G",
 "SRH_0500m_RM",
 "SRH_0500m_LM",
+"SRH_0500m_RM_G",
+"SRH_0500m_LM_G",
 "SRH_01km_RM",
 "SRH_01km_LM",
 "SRH_03km_RM",
@@ -590,8 +594,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SRH_eff_3km_LM",
 "SV_0100m_RM",
 "SV_0100m_LM",
+"SV_0100m_RM_G",
+"SV_0100m_LM_G",
 "SV_0500m_RM",
 "SV_0500m_LM",
+"SV_0500m_RM_G",
+"SV_0500m_LM_G"
 "SV_01km_RM",
 "SV_01km_LM",
 "SV_03km_RM",
@@ -645,14 +653,6 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE",
 "SHERB_mod",
 "DEI",
-"DEI_eff",
-"SRH_0100m_RM_F",
-"SRH_0100m_LM_F",
-"SRH_0500m_RM_F",
-"SRH_0500m_LM_F",
-"SV_0100m_RM_F",
-"SV_0100m_LM_F",
-"SV_0500m_RM_F",
-"SV_0500m_LM_F")
+"DEI_eff")
 return(tmp)
 }
