@@ -1307,12 +1307,13 @@ void Kinematics::doSRH2(int i, double p, double h, double t, double d, double a,
     Vector v1 = *it;
     Vector v2 = *it2;
 
-    cout << " " << i << " ";
+  // cout << " " << i << " ";
    
     if(i==0){
       v1 = Vector(0,0,0);
+      v2 = Vector(0,0,0);
     }
-    
+
     double tmps1 = (v1.X() - rm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - rm.Y()) * (v2.X() - v1.X());
     double tmps2 = (v1.X() - lm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - lm.Y()) * (v2.X() - v1.X());
     double tmps3 = (v1.X() - meanwind.X()) * (v2.Y() - v1.Y()) - (v1.Y() - meanwind.Y()) * (v2.X() - v1.X());
