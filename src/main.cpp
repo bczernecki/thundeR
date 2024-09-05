@@ -7381,6 +7381,14 @@ double * sounding_default2(double* pressure,
 //'  \item 	SHERB_mod
 //'  \item 	DEI
 //'  \item 	DEI_eff
+//'  \item 	SRH_0100m_RM_F
+//'  \item 	SRH_0100m_LM_F
+//'  \item 	SRH_0500m_RM_F
+//'  \item 	SRH_0500m_LM_F
+//'  \item 	SV_0100m_RM_F
+//'  \item 	SV_0100m_LM_F
+//'  \item 	SV_0500m_RM_F
+//'  \item 	SV_0500m_LM_F
 //' }
  // [[Rcpp::export]]
  
