@@ -597,13 +597,19 @@ private:
   
   double srh100rm;
   double srh100lm;
-  
+
+  double srh100rm2;
+  double srh100lm2;
+
   double srh250rm;
   double srh250lm;
   
   double srh500rm;
   double srh500lm;
-  
+
+  double srh500rm2;
+  double srh500lm2;
+
   double srh01lm;
   double srh01rm;
   double srh01sm;
@@ -647,9 +653,15 @@ private:
   double sw100rm;
   double sw100lm;
 
+  double sw100rm2;
+  double sw100lm2;
+
   double sw500rm;
   double sw500lm;
-  
+
+  double sw500rm2;
+  double sw500lm2;
+
   double sw01rm;
   double sw01lm;
   
@@ -660,7 +672,10 @@ private:
   double shear500m;
   double shear1000m; 
   double shear3000m;
-  
+
+  double shear100m2;
+  double shear500m2;
+
   double sw13rm;
   double sw13lm;
   
@@ -676,6 +691,7 @@ private:
   void prepareSupercellVectors();
   void prepareCorfidiVectors();
   void doSRH(int i, double p, double h, double t, double d, double a,double v);
+  void doSRH2(int i, double p, double h, double t, double d, double a,double v);
   void finishMeanVectors();
   Vector shear06();
   
@@ -691,6 +707,7 @@ public:
   void putSecondPhaseLine(int i, double p, double h, double t, double d, double a, double v)
   {
     doSRH(i, p, h, t, d, a, v);
+    doSRH2(i, p, h, t, d, a, v);
     lasth = h;
   }
   void effvec(){
@@ -707,13 +724,19 @@ public:
     
     srh100rm=0;
     srh100lm=0;
-    
+
+    srh100rm2=0;
+    srh100lm2=0;
+
     srh250rm=0;
     srh250lm=0;
     
     srh500rm=0;
     srh500lm=0;
-    
+
+    srh500rm2=0;
+    srh500lm2=0;
+
     srh01lm=0;
     srh01rm=0;
     srh01sm=0;
@@ -754,9 +777,15 @@ public:
     sw100rm = 0;
     sw100lm = 0;
 
+    sw100rm2 = 0;
+    sw100lm2 = 0;
+
     sw500rm = 0;
     sw500lm = 0;
-    
+
+    sw500rm2 = 0;
+    sw500lm2 = 0;
+
     sw01rm = 0;
     sw01lm = 0;
     
@@ -765,6 +794,10 @@ public:
 
     shear100m = 0;
     shear500m = 0;
+
+    shear100m2 = 0;
+    shear500m2 = 0;
+
     shear1000m = 0;
     shear3000m = 0;
     
@@ -1258,6 +1291,82 @@ void Kinematics::doSRH(int i, double p, double h, double t, double d, double a,d
     }
   }
 }
+
+void Kinematics::doSRH2(int i, double p, double h, double t, double d, double a, double v)
+{	
+  Vector meanwind = this->mean06;
+  
+ if ((size_t)i < vw->size()-1 && h-h0<=6000){
+
+    std::list<Vector>::iterator it = vw->begin();
+    std::advance(it, i);
+    
+    std::list<Vector>::iterator it2 = vw->begin();
+    std::advance(it2, i+1);
+    
+    Vector v1 = *it;
+    Vector v2 = *it2;
+
+    if(h-h0==0){
+      v1 = Vector(0,0,0);
+    }
+    
+    double tmps1 = (v1.X() - rm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - rm.Y()) * (v2.X() - v1.X());
+    double tmps2 = (v1.X() - lm.X()) * (v2.Y() - v1.Y()) - (v1.Y() - lm.Y()) * (v2.X() - v1.X());
+    double tmps3 = (v1.X() - meanwind.X()) * (v2.Y() - v1.Y()) - (v1.Y() - meanwind.Y()) * (v2.X() - v1.X());
+    
+    double SR_U_rm = ( (v1.Y()+v2.Y() ) / 2 ) - rm.Y();
+    double SR_V_rm = ( (v1.X()+v2.X() ) / 2 ) - rm.X();
+    
+    double SR_U_lm = ( (v1.Y()+v2.Y() ) / 2 ) - lm.Y();
+    double SR_V_lm = ( (v1.X()+v2.X() ) / 2 ) - lm.X();
+
+    double SR_U_sm = ( (v1.Y()+v2.Y() ) / 2 ) - meanwind.Y();
+    double SR_V_sm = ( (v1.X()+v2.X() ) / 2 ) - meanwind.X();
+
+    Vector SR_vec_lm = Vector(SR_U_lm, SR_V_lm,0);
+    Vector SR_vec_rm = Vector(SR_U_rm, SR_V_rm,0);
+    Vector SR_vec_sm = Vector(SR_U_sm, SR_V_sm,0);
+    
+    double SR_M_lm = SR_vec_lm.abs(); 
+    double SR_M_rm = SR_vec_rm.abs();
+    double SR_M_sm = SR_vec_sm.abs();
+    
+    double VORT_U = -(v2.X()-v1.X()); // (h-lasth);
+    double VORT_V = (v2.Y()-v1.Y()); // (h-lasth);	  
+    
+    double OMEGA_rm = (SR_U_rm*VORT_U+SR_V_rm*VORT_V) / (sqrt( (SR_U_rm*SR_U_rm) + (SR_V_rm*SR_V_rm) ) );
+    double OMEGA_lm = (SR_U_lm*VORT_U+SR_V_lm*VORT_V) / (sqrt( (SR_U_lm*SR_U_lm) + (SR_V_lm*SR_V_lm) ) );
+    
+    double shear_layer = sqrt(((v2.X() - v1.X()) * (v2.X() - v1.X())) + ((v2.Y() - v1.Y()) * (v2.Y() - v1.Y())));
+    
+    shear_l += shear_layer;
+    
+    sw13rm += OMEGA_rm;
+    sw13lm += OMEGA_lm;
+  
+    srh13rm += tmps1;
+    srh13lm += tmps2;
+    srh13sm += tmps3;
+           
+    if(h-h0<=500){
+      srh500rm2 = srh13rm;
+      srh500lm2 = srh13lm;
+      sw500rm2 = sw13rm;
+      sw500lm2 = sw13lm;
+      shear500m2 = shear_l;
+    }
+    
+    if(h-h0<=100){
+      srh100rm2 = srh13rm;
+      srh100lm2 = srh13lm;
+      sw100rm2 = sw13rm;
+      sw100lm2 = sw13lm;
+      shear100m2 = shear_l;
+    }
+  }
+}
+
 
 void Kinematics::finishMeanVectors()
 {
@@ -2728,6 +2837,16 @@ public:
   double MeanWind36();
   double MeanWind69();
   double MeanWind912();
+
+  double SRH100RM_F();
+  double SRH100LM_F();
+  double SRH500RM_F();
+  double SRH500LM_F();
+
+  double SW100_RM_F();
+  double SW100_LM_F();
+  double SW500_RM_F();
+  double SW500_LM_F();
 
   double SRH100RM();
   double SRH250RM();
@@ -4641,12 +4760,28 @@ double IndicesCollector::SRH100RM(){
   return S->ks->srh100rm;
 }
 
+double IndicesCollector::SRH100RM_F(){
+  return S->ks->srh100rm2;
+}
+
+double IndicesCollector::SRH100LM_F(){
+  return S->ks->srh100lm2;
+}
+
 double IndicesCollector::SRH250RM(){
   return S->ks->srh250rm;
 }
 
 double IndicesCollector::SRH500RM(){
   return S->ks->srh500rm;
+}
+
+double IndicesCollector::SRH500RM_F(){
+  return S->ks->srh500rm2;
+}
+
+double IndicesCollector::SRH500LM_F(){
+  return S->ks->srh500lm2;
 }
 
 double IndicesCollector::SRH01RM(){
@@ -5902,6 +6037,22 @@ double IndicesCollector::EHI500_LM(){
   return (this->VSurfaceBasedCAPE()*this->SRH500LM())/160000;
 }
 
+double IndicesCollector::SW100_RM_F(){
+  return S->ks->sw100rm2 / 100;
+}
+
+double IndicesCollector::SW500_RM_F(){
+  return S->ks->sw500rm2 / 500;
+}
+
+double IndicesCollector::SW100_LM_F(){
+  return S->ks->sw100lm2 / 100;
+}
+
+double IndicesCollector::SW500_LM_F(){
+  return S->ks->sw500lm2 / 500;
+}
+
 double IndicesCollector::SW100_RM(){
   return S->ks->sw100rm / 100;
 }
@@ -6238,7 +6389,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[292];
+  double * vec = new double[300];
 
 // vec[0] = MU_ECAPE[5]; // EWMAX
 // vec[0] = ML_ECAPE[5]; // EWMAX
@@ -6517,8 +6668,10 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   // Storm-relative helicity and vorticity
   vec[220]=(*S)->getIndicesCollectorPointer()->SRH100RM();
   vec[221]=(*S)->getIndicesCollectorPointer()->SRH100LM();
+
   vec[222]=(*S)->getIndicesCollectorPointer()->SRH500RM();
   vec[223]=(*S)->getIndicesCollectorPointer()->SRH500LM();
+
   vec[224]=(*S)->getIndicesCollectorPointer()->SRH01RM();
   vec[225]=(*S)->getIndicesCollectorPointer()->SRH01LM();
   vec[226]=(*S)->getIndicesCollectorPointer()->SRH03RM();
@@ -6531,8 +6684,10 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[233]=(*S)->getIndicesCollectorPointer()->SRH03LM_eff();
   vec[234]=(*S)->getIndicesCollectorPointer()->SW100_RM();
   vec[235]=(*S)->getIndicesCollectorPointer()->SW100_LM();
+
   vec[236]=(*S)->getIndicesCollectorPointer()->SW500_RM();
   vec[237]=(*S)->getIndicesCollectorPointer()->SW500_LM();
+
   vec[238]=(*S)->getIndicesCollectorPointer()->SW01_RM();
   vec[239]=(*S)->getIndicesCollectorPointer()->SW01_LM();
   vec[240]=(*S)->getIndicesCollectorPointer()->SW03_RM();  
@@ -6591,6 +6746,16 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[289]=(*S)->getIndicesCollectorPointer()->SHERBS3_v2();
   vec[290]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[291]=(*S)->getIndicesCollectorPointer()->DEI_eff();
+
+  vec[292]=(*S)->getIndicesCollectorPointer()->SRH100RM_F();
+  vec[293]=(*S)->getIndicesCollectorPointer()->SRH100LM_F();
+  vec[294]=(*S)->getIndicesCollectorPointer()->SRH500RM_F();
+  vec[295]=(*S)->getIndicesCollectorPointer()->SRH500LM_F();
+  vec[296]=(*S)->getIndicesCollectorPointer()->SW100_RM_F();
+  vec[297]=(*S)->getIndicesCollectorPointer()->SW100_LM_F();
+  vec[298]=(*S)->getIndicesCollectorPointer()->SW500_RM_F();
+  vec[299]=(*S)->getIndicesCollectorPointer()->SW500_LM_F();
+
   return vec;
 }
 
@@ -7252,7 +7417,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 292;
+   int reslen= 300;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
