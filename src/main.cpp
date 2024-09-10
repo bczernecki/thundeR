@@ -4521,7 +4521,7 @@ double IndicesCollector::BS06_var_SD(){
                         V10.abs() - V11.abs(),
                         V11.abs() - V12.abs() };
   double result = computeStandardDeviation(diffs);
-  return 1/result;
+  return 1.0/result;
 }
 
 double IndicesCollector::BS06_var_SI(){
@@ -4560,7 +4560,7 @@ double IndicesCollector::BS06_var_SI(){
                         V09.abs() - V10.abs(),
                         V10.abs() - V11.abs(),
                         V11.abs() - V12.abs() };  
-  double result = 1 / (computeStandardDeviation(diffs) / abs(computeMean(diffs)));
+  double result = 1.0 / (computeStandardDeviation(diffs) / abs(computeMean(diffs)));
   return result;
 }
 
@@ -4596,7 +4596,7 @@ double IndicesCollector::BS16_var_SD(){
                      V10.abs() - V11.abs(),
                      V11.abs() - V12.abs() };
   double result = computeStandardDeviation(diffs);
-  return 1/result;
+  return 1.0/result;
 }
 
 double IndicesCollector::BS16_var_SI(){
@@ -4630,7 +4630,7 @@ double IndicesCollector::BS16_var_SI(){
                      V09.abs() - V10.abs(),
                      V10.abs() - V11.abs(),
                      V11.abs() - V12.abs() };  
-  double result = 1 / (computeStandardDeviation(diffs) / abs(computeMean(diffs)));
+  double result = 1.0 / (computeStandardDeviation(diffs) / abs(computeMean(diffs)));
   return result;
 }
 
@@ -6484,32 +6484,30 @@ double IndicesCollector::STEP10_CIN(){
 double IndicesCollector::STEP11_temp_sfc_850(){
 	double sfc = Get(S->t,0);
   double P850 = Get(S->t,cache->getPressureIndex(850));
-  sfc = (sfc * (9/5)) + 32;
-  P850 = (P850 * (9/5)) + 32;
+  sfc = (sfc * (9.0 / 5)) + 32;
+  P850 = (P850 * (9.0 / 5)) + 32;
   return P850 - sfc;
 }
 
 double IndicesCollector::STEP12_Temp_sfc_700(){
 	double sfc = Get(S->t,0);
   double P850 = Get(S->t,cache->getPressureIndex(700));
-  sfc = (sfc * (9/5)) + 32;
-  P850 = (P850 * (9/5)) + 32;
+  sfc = (sfc * (9.0 / 5)) + 32;
+  P850 = (P850 * (9.0 / 5)) + 32;
   return P850 - sfc;
 }
 
 double IndicesCollector::STEP13_Temp_sfc_500(){
 	double sfc = Get(S->t,0);
   double P850 = Get(S->t,cache->getPressureIndex(500));
-  sfc = (sfc * (9/5)) + 32;
-  P850 = (P850 * (9/5)) + 32;
+  sfc = (sfc * (9.0 / 5)) + 32;
+  P850 = (P850 * (9.0 / 5)) + 32;
   return P850 - sfc;
 }
 
 double IndicesCollector::STEP14_Dpt_sfc(){
   double sfc = Get(S->d,0);
-  cout << " " << sfc;
-  sfc = (sfc * (9/5)) + 32;
-  cout << " " << sfc;
+  sfc = (sfc * (9.0 / 5)) + 32;
   return sfc;
 }
 
@@ -6523,16 +6521,16 @@ double IndicesCollector::STEP15_LCL(){
 double IndicesCollector::STEP16_Dpt_sfc_850(){
 	double sfc = Get(S->d,0);
   double P850 = Get(S->d,cache->getPressureIndex(850));
-  sfc = (sfc * (9/5)) + 32;
-  P850 = (P850 * (9/5)) + 32;
+  sfc = (sfc * (9.0 / 5)) + 32;
+  P850 = (P850 * (9.0 / 5)) + 32;
   return P850 - sfc;
 }
 
 double IndicesCollector::STEP17_Dpt_sfc_500(){
 	double sfc = Get(S->d,0);
   double P850 = Get(S->d,cache->getPressureIndex(500));
-  sfc = (sfc * (9/5)) + 32;
-  P850 = (P850 * (9/5)) + 32;
+  sfc = (sfc * (9.0 / 5)) + 32;
+  P850 = (P850 * (9.0 / 5)) + 32;
   return P850 - sfc;
 }
 
