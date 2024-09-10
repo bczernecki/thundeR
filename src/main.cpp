@@ -6403,9 +6403,128 @@ double IndicesCollector::SB_ebuoyancy_3km(){
   return buoyancy;
 }
 
+/////////////////////////////
+// STEP parameters for SPC //
+/////////////////////////////
+
+double IndicesCollector::STEP1_STP(){
+  double sbcape = this->VSurfaceBasedCAPE()/1500;
+  double sblcl = this->VSurfaceBasedLCL();
+  double srh1 = this->SRH01RM()/150;
+  double bwd = this->BS06();
+  double cin = this->VSurfaceBasedCIN();	
+  if(isnan(cin)) cin = 0;
+  if(sblcl<1000)sblcl=1;
+  else if(sblcl>2000)sblcl=0;
+  else sblcl=(2000-sblcl)/1000;  
+  if(cin>-50)cin=1;
+  else if(cin<-200)cin=0;
+  else cin=(200+cin)/150;
+  if(bwd<12.5)bwd=0.0;
+  else if(bwd>30)bwd = 1.5;
+  else bwd/=20;  
+  return sbcape*sblcl*srh1*bwd*cin;
+}
+double IndicesCollector::STEP2_SCP(){
+  double mucape = this->VMostUnstableCAPE()/1000;
+  double srh = this->SRH03RM()/50;
+  double ewd = this->BS06();
+  if(ewd<10)ewd=0;
+  else if(ewd>20)ewd=1;
+  else ewd/=20;
+  return mucape*srh*ewd;
+}
+
+double IndicesCollector::STEP4_BS01(){
+  int tail=0;
+  int head = cache->getHeightIndex(1000);
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  return result.abs()*1.94384;
+}
+
+double IndicesCollector::STEP5_wind_sfc_850_A(){
+  double *sfc = Get(S->ks->vw,0).toAV();
+  double *P850 = Get(S->ks->vw,cache->getPressureIndex(850)).toAV(); 
+  double magnitude = abs(P850[0] - sfc[0]);
+  if(magnitude>180)abs(magnitude-360);  
+	return magnitude; 
+}
+
+double IndicesCollector::STEP6_wind_sfc_850_M(){
+  double *sfc = Get(S->ks->vw,0).toAV();
+  double *P850 = Get(S->ks->vw,cache->getPressureIndex(850)).toAV(); 
+  double magnitude = P850[1] - sfc[1]; 
+	return magnitude*1.94384; 
+}
+
+double IndicesCollector::STEP10_CIN(){  
+  double result = 0;
+  result = S->th->meanLayer->vcin;  
+    double cape = this->VMeanLayerCAPE();
+  if(cape==0){
+    result = sqrt(-1); 
+  }
+  return result;  
+}  
+
+double IndicesCollector::STEP11_temp_sfc_850(){
+	double sfc = Get(S->t,0);
+  double P850 = Get(S->t,cache->getPressureIndex(850));
+  sfc = (sfc * (9/5)) + 32;
+  P850 = (P850 * (9/5)) + 32;
+  return P850 - sfc;
+}
+
+double IndicesCollector::STEP12_Temp_sfc_700(){
+	double sfc = Get(S->t,0);
+  double P850 = Get(S->t,cache->getPressureIndex(700));
+  sfc = (sfc * (9/5)) + 32;
+  P850 = (P850 * (9/5)) + 32;
+  return P850 - sfc;
+}
+
+double IndicesCollector::STEP13_Temp_sfc_500(){
+	double sfc = Get(S->t,0);
+  double P850 = Get(S->t,cache->getPressureIndex(500));
+  sfc = (sfc * (9/5)) + 32;
+  P850 = (P850 * (9/5)) + 32;
+  return P850 - sfc;
+}
+
+double IndicesCollector::STEP14_Dpt_sfc(){
+	double sfc = Get(S->d,0);
+  sfc = (sfc * (9/5)) + 32;
+  return sfc;
+}
+
+double IndicesCollector::STEP15_LCL(){  
+  double result = 0;
+  int index = S->th->meanLayer->vLclIndex;  
+  result = Get(S->h,index)- S->th->h0;  
+  return result;
+}
+
+double IndicesCollector::STEP16_Dpt_sfc_850(){
+	double sfc = Get(S->d,0);
+  double P850 = Get(S->d,cache->getPressureIndex(850));
+  sfc = (sfc * (9/5)) + 32;
+  P850 = (P850 * (9/5)) + 32;
+  return P850 - sfc;
+}
+
+double IndicesCollector::STEP17_Dpt_sfc_500(){
+	double sfc = Get(S->d,0);
+  double P850 = Get(S->d,cache->getPressureIndex(500));
+  sfc = (sfc * (9/5)) + 32;
+  P850 = (P850 * (9/5)) + 32;
+  return P850 - sfc;
+}
+
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[300];
+  double * vec = new double[313];
 
 // vec[0] = MU_ECAPE[5]; // EWMAX
 // vec[0] = ML_ECAPE[5]; // EWMAX
@@ -6766,6 +6885,19 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[297]=(*S)->getIndicesCollectorPointer()->SHERBS3_v2();
   vec[298]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[299]=(*S)->getIndicesCollectorPointer()->DEI_eff();
+  vec[300]=(*S)->getIndicesCollectorPointer()->STEP1_STP();
+  vec[301]=(*S)->getIndicesCollectorPointer()->STEP2_SCP();
+  vec[302]=(*S)->getIndicesCollectorPointer()->STEP4_BS01();
+  vec[303]=(*S)->getIndicesCollectorPointer()->STEP5_wind_sfc_850_A();
+  vec[304]=(*S)->getIndicesCollectorPointer()->STEP6_wind_sfc_850_M();
+  vec[305]=(*S)->getIndicesCollectorPointer()->STEP10_CIN();
+  vec[306]=(*S)->getIndicesCollectorPointer()->STEP11_temp_sfc_850();
+  vec[307]=(*S)->getIndicesCollectorPointer()->STEP12_Temp_sfc_700();
+  vec[308]=(*S)->getIndicesCollectorPointer()->STEP13_Temp_sfc_500();
+  vec[309]=(*S)->getIndicesCollectorPointer()->STEP14_Dpt_sfc();
+  vec[310]=(*S)->getIndicesCollectorPointer()->STEP15_LCL();  
+  vec[311]=(*S)->getIndicesCollectorPointer()->STEP16_Dpt_sfc_850();
+  vec[312]=(*S)->getIndicesCollectorPointer()->STEP17_Dpt_sfc_500();
   return vec;
 }
 
@@ -7399,6 +7531,19 @@ double * sounding_default2(double* pressure,
 //'  \item 	SV_0100m_LM_F
 //'  \item 	SV_0500m_RM_F
 //'  \item 	SV_0500m_LM_F
+//'  \item 	STEP01_STP
+//'  \item 	STEP02_SCP
+//'  \item 	STEP04_BS_01km
+//'  \item 	STEP05_wind_sfc_850_A
+//'  \item 	STEP06_wind_sfc_850_M
+//'  \item 	STEP10_CIN
+//'  \item 	STEP11_tmp_sfc_850
+//'  \item 	STEP12_tmp_sfc_700
+//'  \item 	STEP13_tmp_sfc_500
+//'  \item 	STEP14_dpt_sfc
+//'  \item 	STEP15_LCL  
+//'  \item 	STEP16_dpt_sfc_850
+//'  \item 	STEP17_dpt_sfc_500
 //' }
  // [[Rcpp::export]]
  
@@ -7435,7 +7580,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 300;
+   int reslen= 313;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
