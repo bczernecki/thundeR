@@ -6509,7 +6509,7 @@ double IndicesCollector::STEP14_Dpt_sfc(){
   double sfc = Get(S->d,0);
   cout << " " << sfc;
   sfc = (sfc * (9/5)) + 32;
-  cout << " " << sfc;Get(S->
+  cout << " " << sfc;
   return sfc;
 }
 
