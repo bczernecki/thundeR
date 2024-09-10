@@ -3137,7 +3137,19 @@ public:
   double Ventilation_36km();
   double Ventilation_69km();
   double Ventilation_912km();
-
+  double STEP1_STP();
+  double STEP2_SCP();
+  double STEP4_BS01();
+  double STEP5_wind_sfc_850_A();
+  double STEP6_wind_sfc_850_M();
+  double STEP10_CIN();
+  double STEP11_temp_sfc_850();
+  double STEP12_Temp_sfc_700();
+  double STEP13_Temp_sfc_500();
+  double STEP14_Dpt_sfc();
+  double STEP15_LCL();  
+  double STEP16_Dpt_sfc_850();
+  double STEP17_Dpt_sfc_500();
 };
 
 void Sounding::alloc(){
