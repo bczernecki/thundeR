@@ -3150,6 +3150,20 @@ public:
   double STEP15_LCL();  
   double STEP16_Dpt_sfc_850();
   double STEP17_Dpt_sfc_500();
+  double SRW_sfc_LM();
+  double SRW_sfc_RM();
+  double VTP_RM();
+  double VTP_LM();
+  double LTTP_RM();
+  double LTTP_LM();
+  double CA500_RM();
+  double CA500_LM();
+  double BS_LLmax();
+  double BS_MLmax();
+  double BS_ULmax();
+  double WS_LLmax();
+  double WS_MLmax();
+  double WS_ULmax();
 };
 
 void Sounding::alloc(){
@@ -4484,6 +4498,71 @@ double IndicesCollector::SBMRatio(){
   return Get(S->th->mixing,S->th->surfaceBased->startIndex);
 }
 
+double IndicesCollector::WS_ULmax(){
+  int h1 = cache->getHeightIndex(5000); 
+  int h2 = cache->getHeightIndex(5500); 
+  int h3 = cache->getHeightIndex(6000); 
+  int h4 = cache->getHeightIndex(6500); 
+  int h5 = cache->getHeightIndex(7000); 
+  int h6 = cache->getHeightIndex(7500); 
+  int h7 = cache->getHeightIndex(8000); 
+  int h8 = cache->getHeightIndex(8500); 
+  int h9 = cache->getHeightIndex(9000); 
+  double BS1 = (Get(S->ks->vw,h1)).abs();
+  double BS2 = (Get(S->ks->vw,h2)).abs();
+  double BS3 = (Get(S->ks->vw,h3)).abs();
+  double BS4 = (Get(S->ks->vw,h4)).abs();
+  double BS5 = (Get(S->ks->vw,h5)).abs();
+  double BS6 = (Get(S->ks->vw,h6)).abs();
+  double BS7 = (Get(S->ks->vw,h7)).abs();
+  double BS8 = (Get(S->ks->vw,h8)).abs();
+  double BS9 = (Get(S->ks->vw,h9)).abs();
+  return max = max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9);
+}
+
+double IndicesCollector::WS_LLmax(){
+  int h1 = cache->getHeightIndex(200); 
+  int h2 = cache->getHeightIndex(400); 
+  int h3 = cache->getHeightIndex(600); 
+  int h4 = cache->getHeightIndex(800); 
+  int h5 = cache->getHeightIndex(1000); 
+  int h6 = cache->getHeightIndex(1200); 
+  int h7 = cache->getHeightIndex(1400); 
+  int h8 = cache->getHeightIndex(1600); 
+  int h9 = cache->getHeightIndex(1800); 
+  int h10 = cache->getHeightIndex(2000); 
+  double BS1 = (Get(S->ks->vw,h1)).abs();
+  double BS2 = (Get(S->ks->vw,h2)).abs();
+  double BS3 = (Get(S->ks->vw,h3)).abs();
+  double BS4 = (Get(S->ks->vw,h4)).abs();
+  double BS5 = (Get(S->ks->vw,h5)).abs();
+  double BS6 = (Get(S->ks->vw,h6)).abs();
+  double BS7 = (Get(S->ks->vw,h7)).abs();
+  double BS8 = (Get(S->ks->vw,h8)).abs();
+  double BS9 = (Get(S->ks->vw,h9)).abs();
+  double BS10 = (Get(S->ks->vw,h10)).abs();
+  return max = max(max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9),BS10);
+}
+
+double IndicesCollector::WS_MLmax(){
+  int h0 = cache->getHeightIndex(1000); 
+  int h1 = cache->getHeightIndex(3000); 
+  int h2 = cache->getHeightIndex(3500); 
+  int h3 = cache->getHeightIndex(4000); 
+  int h4 = cache->getHeightIndex(4500); 
+  int h5 = cache->getHeightIndex(5000); 
+  int h6 = cache->getHeightIndex(5500); 
+  int h7 = cache->getHeightIndex(6000); 
+  double BS1 = (Get(S->ks->vw,h1)).abs();
+  double BS2 = (Get(S->ks->vw,h2)).abs();
+  double BS3 = (Get(S->ks->vw,h3)).abs();
+  double BS4 = (Get(S->ks->vw,h4)).abs();
+  double BS5 = (Get(S->ks->vw,h5)).abs();
+  double BS6 = (Get(S->ks->vw,h6)).abs();
+  double BS7 = (Get(S->ks->vw,h7)).abs();
+  return max = max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7);
+}
+
 double IndicesCollector::BS_LLmax(){
   int h1 = cache->getHeightIndex(200); 
   int h2 = cache->getHeightIndex(400); 
@@ -4729,6 +4808,15 @@ double IndicesCollector::BS02(){
 double IndicesCollector::BS03(){
   int tail=0;
   int head = cache->getHeightIndex(3000);
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  return result.abs();
+}
+
+double IndicesCollector::BS04(){
+  int tail=0;
+  int head = cache->getHeightIndex(4000);
   Vector vtail = Get(S->ks->vw,tail);
   Vector vhead = Get(S->ks->vw,head);
   Vector result = vhead-vtail;
@@ -5308,6 +5396,78 @@ double IndicesCollector::VLLMU500CAPE(){
   return result;  
 }
 
+double IndicesCollector::LTTP_RM(){
+
+  double CAPEml = this->VMeanLayerCAPE();
+  double LCLml = this->VMeanLayerLCL();	
+  double CINml = this->VMeanLayerCIN();	
+	
+  double tcape = max(min((CAPEml / (321.59)), (1501.74 / 321.59)), 0.0);
+  double tcin = min(max((200.0 – CINml) / (150.0), 0.0), 1.0)
+  double tlcl = min(max(((2100.0 – LCLml) / (700.0)), 0.0 ), 1.0);
+  if(LCLml > 2100)tcl=0;
+  if(LCLml < 700)tcl=1;
+  double LTTPt = tcape * tlcl * tcin;
+
+  double SRH500 = this->SRH500RM();
+  double SRWSSFC = this->SRW_sfc_RM();
+  double SRMLIKE = this->MeanSR500_RM() * this->MeanSR500_RM();  	
+  double BWD500 = this->BS500();
+  double BWD4000 = this->BS04(); 	
+  double BWDULMAX = this->BS_ULmax();
+  double WSLLMAX = this->WS_LLmax();
+  double WSULMAX = this->WS_ULmax();
+  double WS4000 = Get(S->ks->vw,cache->getHeightIndex(4000)).abs(); 	
+	
+  double LTTPk = max(min((SRH500 / (34.21)), (272.85 / 34.21)), 0.0) *
+	         max(min((SRWSSFC / (10.96)), (24.87 / 10.96)), 0.0) *
+	         max(min((SRMLIKE / (134.92)), (411.86/ 134.923)) ,0.0) * 
+	         max(min((BWD500 / (4.60)), (15.48 / 4.60)), 0.0) *
+	         max(min((BWD4000 / (14.22)), (30.61 / 14.22)), 0.0) *
+	         max(min((BWDULMAX / (20.93)), (41.64 / 20.93)), 0.0) *
+	         max(min((WSLLMAX / (11.96)),(29.81 / 11.96)), 0.0) * 
+	         max(min((WS4000 / (14.97)), (34.59 / 14.97)), 0.0) * 
+	         max(min((WSULMAX /(21.65)), (46.47 / 21.65)), 0.0)
+	
+  return LTTPt * LTTPk;
+}
+
+double IndicesCollector::LTTP_LM(){
+
+  double CAPEml = this->VMeanLayerCAPE();
+  double LCLml = this->VMeanLayerLCL();	
+  double CINml = this->VMeanLayerCIN();	
+	
+  double tcape = max(min((CAPEml / (321.59)), (1501.74 / 321.59)), 0.0);
+  double tcin = min(max((200.0 – CINml) / (150.0), 0.0), 1.0)
+  double tlcl = min(max(((2100.0 – LCLml) / (700.0)), 0.0 ), 1.0);
+  if(LCLml > 2100)tcl=0;
+  if(LCLml < 700)tcl=1;
+  double LTTPt = tcape * tlcl * tcin;
+
+  double SRH500 = this->SRH500LM()*(-1.0);
+  double SRWSSFC = this->SRW_sfc_LM();
+  double SRMLIKE = this->MeanSR500_LM() * this->MeanSR500_LM();  	
+  double BWD500 = this->BS500();
+  double BWD4000 = this->BS04(); 	
+  double BWDULMAX = this->BS_ULmax();
+  double WSLLMAX = this->WS_LLmax();
+  double WSULMAX = this->WS_ULmax();
+  double WS4000 = Get(S->ks->vw,cache->getHeightIndex(4000)).abs(); 	
+	
+  double LTTPk = max(min((SRH500 / (34.21)), (272.85 / 34.21)), 0.0) *
+	         max(min((SRWSSFC / (10.96)), (24.87 / 10.96)), 0.0) *
+	         max(min((SRMLIKE / (134.92)), (411.86/ 134.923)) ,0.0) * 
+	         max(min((BWD500 / (4.60)), (15.48 / 4.60)), 0.0) *
+	         max(min((BWD4000 / (14.22)), (30.61 / 14.22)), 0.0) *
+	         max(min((BWDULMAX / (20.93)), (41.64 / 20.93)), 0.0) *
+	         max(min((WSLLMAX / (11.96)),(29.81 / 11.96)), 0.0) * 
+	         max(min((WS4000 / (14.97)), (34.59 / 14.97)), 0.0) * 
+	         max(min((WSULMAX /(21.65)), (46.47 / 21.65)), 0.0)
+	
+  return LTTPt * LTTPk;
+}
+
 double IndicesCollector::VTP_RM(){
   double sbcape = this->VMeanLayerCAPE()/1500;
   double sblcl = this->VMeanLayerLCL();
@@ -5315,7 +5475,7 @@ double IndicesCollector::VTP_RM(){
   double bwd = this->emlbs();
   double cin = this->VMeanLayerCIN();	
   double cape03 = this->VLLMeanLayerCAPE();
-  double LR03 = this->lapserate03()*-1;
+  double LR03 = this->lapserate03()*(-1.0);
   if(isnan(cin)) cin = 0;
   LR03 = LR03 / 6.5;
   if(cape03>100)LR03=2;
@@ -5339,7 +5499,7 @@ double IndicesCollector::VTP_LM(){
   double bwd = this->emlbs();
   double cin = this->VMeanLayerCIN();	
   double cape03 = this->VLLMeanLayerCAPE();
-  double LR03 = this->lapserate03()*-1;
+  double LR03 = this->lapserate03()*(-1.0);
   if(isnan(cin)) cin = 0;
   LR03 = LR03 / 6.5;
   if(cape03>100)LR03=2;
@@ -6226,6 +6386,32 @@ double IndicesCollector::SW03_LM(){
   return S->ks->sw03lm / 3000;
 }
 
+double IndicesCollector::CA500_RM(){
+  double SRW_A = ((Get(S->ks->vw,0) - S->ks->rm)).toAV();   
+  double BS500_A = (Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0)).toAV();
+  double magnitude = abs(BS500_A[0] - SRW_A[0]);
+  if(magnitude>180)abs(magnitude-360);  
+  return magnitude;	
+}
+
+double IndicesCollector::CA500_LM(){
+  double SRW_A = ((Get(S->ks->vw,0) - S->ks->lm)).toAV();   
+  double BS500_A = (Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0)).toAV();
+  double magnitude = abs(BS500_A[0] - SRW_A[0]);
+  if(magnitude>180)abs(magnitude-360);  
+  return magnitude;	
+}
+
+double IndicesCollector::SRW_sfc_RM(){
+  Vector res = (Get(S->ks->vw,0) - S->ks->rm);   
+  return res.abs();
+}
+
+double IndicesCollector::SRW_sfc_LM(){
+  Vector res = (Get(S->ks->vw,0) - S->ks->lm);
+  return res.abs();
+}
+
 double IndicesCollector::MeanSR500_RM(){
   Vector res = S->ks->mean0 - S->ks->rm;
   return res.abs();
@@ -6581,7 +6767,7 @@ double IndicesCollector::STEP6_wind_sfc_850_M(){
   double *sfc = Get(S->ks->vw,0).toAV();
   double *P850 = Get(S->ks->vw,cache->getPressureIndex(850)).toAV(); 
   double magnitude = P850[1] - sfc[1]; 
-	return magnitude*1.94384; 
+  return magnitude*1.94384; 
 }
 
 double IndicesCollector::STEP10_CIN(){  
@@ -7023,6 +7209,18 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[310]=(*S)->getIndicesCollectorPointer()->STEP15_LCL();  
   vec[311]=(*S)->getIndicesCollectorPointer()->STEP16_Dpt_sfc_850();
   vec[312]=(*S)->getIndicesCollectorPointer()->STEP17_Dpt_sfc_500();
+  vec[313]=(*S)->getIndicesCollectorPointer()->VTP_RM();
+  vec[314]=(*S)->getIndicesCollectorPointer()->VTP_LM();
+  vec[315]=(*S)->getIndicesCollectorPointer()->BS_LLmax();
+  vec[316]=(*S)->getIndicesCollectorPointer()->BS_MLmax();
+  vec[317]=(*S)->getIndicesCollectorPointer()->BS_ULmax();
+  vec[318]=(*S)->getIndicesCollectorPointer()->WS_LLmax();
+  vec[319]=(*S)->getIndicesCollectorPointer()->WS_MLmax();
+  vec[320]=(*S)->getIndicesCollectorPointer()->WS_ULmax();
+  vec[321]=(*S)->getIndicesCollectorPointer()->LTTP_RM();
+  vec[322]=(*S)->getIndicesCollectorPointer()->LTTP_LM();
+  vec[323]=(*S)->getIndicesCollectorPointer()->CA500_LM();
+  vec[324]=(*S)->getIndicesCollectorPointer()->CA500_RM();
   return vec;
 }
 
