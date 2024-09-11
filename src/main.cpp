@@ -6835,7 +6835,7 @@ double IndicesCollector::STEP17_Dpt_sfc_500(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[313];
+  double * vec = new double[325];
 
 // vec[0] = MU_ECAPE[5]; // EWMAX
 // vec[0] = ML_ECAPE[5]; // EWMAX
@@ -7867,6 +7867,18 @@ double * sounding_default2(double* pressure,
 //'  \item 	STEP15_LCL  
 //'  \item 	STEP16_dpt_sfc_850
 //'  \item 	STEP17_dpt_sfc_500
+//'  \item 	VTP_RM();
+//'  \item 	VTP_LM();
+//'  \item 	BS_LLmax();
+//'  \item 	BS_MLmax();
+//'  \item 	BS_ULmax();
+//'  \item 	WS_LLmax();
+//'  \item 	WS_MLmax();
+//'  \item 	WS_ULmax();
+//'  \item 	LTTP_RM();
+//'  \item 	LTTP_LM();
+//'  \item 	CA500_LM();
+//'  \item 	CA500_RM();
 //' }
  // [[Rcpp::export]]
  
@@ -7903,7 +7915,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 313;
+   int reslen= 325;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
