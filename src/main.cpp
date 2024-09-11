@@ -5428,7 +5428,7 @@ double IndicesCollector::LTTP_RM(){
 	         max(min((BWDULMAX / (20.93)), (41.64 / 20.93)), 0.0) *
 	         max(min((WSLLMAX / (11.96)),(29.81 / 11.96)), 0.0) * 
 	         max(min((WS4000 / (14.97)), (34.59 / 14.97)), 0.0) * 
-	         max(min((WSULMAX /(21.65)), (46.47 / 21.65)), 0.0)
+	         max(min((WSULMAX /(21.65)), (46.47 / 21.65)), 0.0);
 	
   return LTTPt * LTTPk;
 }
@@ -5464,7 +5464,7 @@ double IndicesCollector::LTTP_LM(){
 	         max(min((BWDULMAX / (20.93)), (41.64 / 20.93)), 0.0) *
 	         max(min((WSLLMAX / (11.96)),(29.81 / 11.96)), 0.0) * 
 	         max(min((WS4000 / (14.97)), (34.59 / 14.97)), 0.0) * 
-	         max(min((WSULMAX /(21.65)), (46.47 / 21.65)), 0.0)
+	         max(min((WSULMAX /(21.65)), (46.47 / 21.65)), 0.0);
 	
   return LTTPt * LTTPk;
 }
