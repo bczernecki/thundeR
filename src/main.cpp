@@ -5399,7 +5399,8 @@ double IndicesCollector::LTTP_RM(){
 
   double CAPEml = this->VMeanLayerCAPE();
   double LCLml = this->VMeanLayerLCL();	
-  double CINml = this->VMeanLayerCIN();	
+  double CINml = this->VMeanLayerCIN();		
+  if(isnan(CINml)) CINml = 0;
 	
   double tcape = max(min((CAPEml / (321.59)), (1501.74 / 321.59)), 0.0);
   double tcin = min(max((200.0 - CINml) / (150.0), 0.0), 1.0);
@@ -5437,6 +5438,7 @@ double IndicesCollector::LTTP_LM(){
   double CAPEml = this->VMeanLayerCAPE();
   double LCLml = this->VMeanLayerLCL();	
   double CINml = this->VMeanLayerCIN();	
+  if(isnan(CINml)) CINml = 0;
 	
   double tcape = max(min((CAPEml / (321.59)), (1501.74 / 321.59)), 0.0);
   double tcin = min(max((200.0 - CINml) / (150.0), 0.0), 1.0);
