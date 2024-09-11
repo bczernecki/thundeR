@@ -2818,6 +2818,7 @@ public:
   double BS01();
   double BS02();
   double BS03();
+  double BS04();
   double BS06();
   double BS08();
   double BS36();
@@ -4517,7 +4518,7 @@ double IndicesCollector::WS_ULmax(){
   double BS7 = (Get(S->ks->vw,h7)).abs();
   double BS8 = (Get(S->ks->vw,h8)).abs();
   double BS9 = (Get(S->ks->vw,h9)).abs();
-  return max = max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9);
+  return max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9);
 }
 
 double IndicesCollector::WS_LLmax(){
@@ -4541,7 +4542,7 @@ double IndicesCollector::WS_LLmax(){
   double BS8 = (Get(S->ks->vw,h8)).abs();
   double BS9 = (Get(S->ks->vw,h9)).abs();
   double BS10 = (Get(S->ks->vw,h10)).abs();
-  return max = max(max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9),BS10);
+  return max(max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9),BS10);
 }
 
 double IndicesCollector::WS_MLmax(){
@@ -4560,7 +4561,7 @@ double IndicesCollector::WS_MLmax(){
   double BS5 = (Get(S->ks->vw,h5)).abs();
   double BS6 = (Get(S->ks->vw,h6)).abs();
   double BS7 = (Get(S->ks->vw,h7)).abs();
-  return max = max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7);
+  return max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7);
 }
 
 double IndicesCollector::BS_LLmax(){
@@ -4584,7 +4585,7 @@ double IndicesCollector::BS_LLmax(){
   double BS8 = (Get(S->ks->vw,h8) - Get(S->ks->vw,0)).abs();
   double BS9 = (Get(S->ks->vw,h9) - Get(S->ks->vw,0)).abs();
   double BS10 = (Get(S->ks->vw,h10) - Get(S->ks->vw,0)).abs();
-  return max = max(max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9),BS10);
+  return max(max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9),BS10);
 }
 
 double IndicesCollector::BS_ULmax(){
@@ -4606,7 +4607,7 @@ double IndicesCollector::BS_ULmax(){
   double BS7 = (Get(S->ks->vw,h7) - Get(S->ks->vw,0)).abs();
   double BS8 = (Get(S->ks->vw,h8) - Get(S->ks->vw,0)).abs();
   double BS9 = (Get(S->ks->vw,h9) - Get(S->ks->vw,0)).abs();
-  return max = max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9);
+  return max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9);
 }
 
 double IndicesCollector::BS_MLmax(){
@@ -4625,7 +4626,7 @@ double IndicesCollector::BS_MLmax(){
   double BS5 = (Get(S->ks->vw,h5) - Get(S->ks->vw,h0)).abs();
   double BS6 = (Get(S->ks->vw,h6) - Get(S->ks->vw,h0)).abs();
   double BS7 = (Get(S->ks->vw,h7) - Get(S->ks->vw,h0)).abs();
-  return max = max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7);
+  return max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7);
 }
 
 double IndicesCollector::BS06_var_SD(){
@@ -5403,7 +5404,7 @@ double IndicesCollector::LTTP_RM(){
   double CINml = this->VMeanLayerCIN();	
 	
   double tcape = max(min((CAPEml / (321.59)), (1501.74 / 321.59)), 0.0);
-  double tcin = min(max((200.0 - CINml) / (150.0), 0.0), 1.0)
+  double tcin = min(max((200.0 - CINml) / (150.0), 0.0), 1.0);
   double tlcl = min(max(((2100.0 - LCLml) / (700.0)), 0.0 ), 1.0);
   if(LCLml > 2100)tlcl=0;
   if(LCLml < 700)tlcl=1;
@@ -5439,10 +5440,10 @@ double IndicesCollector::LTTP_LM(){
   double CINml = this->VMeanLayerCIN();	
 	
   double tcape = max(min((CAPEml / (321.59)), (1501.74 / 321.59)), 0.0);
-  double tcin = min(max((200.0 - CINml) / (150.0), 0.0), 1.0)
+  double tcin = min(max((200.0 - CINml) / (150.0), 0.0), 1.0);
   double tlcl = min(max(((2100.0 - LCLml) / (700.0)), 0.0 ), 1.0);
-  if(LCLml > 2100)tcl=0;
-  if(LCLml < 700)tcl=1;
+  if(LCLml > 2100)tlcl=0;
+  if(LCLml < 700)tlcl=1;
   double LTTPt = tcape * tlcl * tcin;
 
   double SRH500 = this->SRH500LM()*(-1.0);
@@ -6387,16 +6388,16 @@ double IndicesCollector::SW03_LM(){
 }
 
 double IndicesCollector::CA500_RM(){
-  double SRW_A = ((Get(S->ks->vw,0) - S->ks->rm)).toAV();   
-  double BS500_A = (Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0)).toAV();
+  double *SRW_A = ((Get(S->ks->vw,0) - S->ks->rm)).toAV();   
+  double *BS500_A = (Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0)).toAV();
   double magnitude = abs(BS500_A[0] - SRW_A[0]);
   if(magnitude>180)abs(magnitude-360);  
   return magnitude;	
 }
 
 double IndicesCollector::CA500_LM(){
-  double SRW_A = ((Get(S->ks->vw,0) - S->ks->lm)).toAV();   
-  double BS500_A = (Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0)).toAV();
+  double *SRW_A = ((Get(S->ks->vw,0) - S->ks->lm)).toAV();   
+  double *BS500_A = (Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0)).toAV();
   double magnitude = abs(BS500_A[0] - SRW_A[0]);
   if(magnitude>180)abs(magnitude-360);  
   return magnitude;	
