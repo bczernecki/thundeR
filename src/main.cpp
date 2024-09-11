@@ -6395,7 +6395,7 @@ double IndicesCollector::CA500_RM(){
   cout << " BS: " << BS500_A[0] << " SM: " << SRW_A[0]; 
   double magnitude = abs(BS500_A[0] - SRW_A[0]);
   cout << " MAG: " << magnitude; 
-  if(magnitude>180)abs(magnitude-360);  
+  if(magnitude>180)magnitude=abs(magnitude-360);  
   cout << " MAG_C: " << magnitude; 
   return magnitude;	
 }
@@ -6404,7 +6404,7 @@ double IndicesCollector::CA500_LM(){
   double *SRW_A = ((Get(S->ks->vw,0) - S->ks->lm)).toAV();   
   double *BS500_A = (Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0)).toAV();
   double magnitude = abs(BS500_A[0] - SRW_A[0]);
-  if(magnitude>180)abs(magnitude-360);  
+  if(magnitude>180)magnitude=abs(magnitude-360);  
   return magnitude;	
 }
 
