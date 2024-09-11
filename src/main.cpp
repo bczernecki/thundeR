@@ -5403,10 +5403,10 @@ double IndicesCollector::LTTP_RM(){
   double CINml = this->VMeanLayerCIN();	
 	
   double tcape = max(min((CAPEml / (321.59)), (1501.74 / 321.59)), 0.0);
-  double tcin = min(max((200.0 – CINml) / (150.0), 0.0), 1.0)
-  double tlcl = min(max(((2100.0 – LCLml) / (700.0)), 0.0 ), 1.0);
-  if(LCLml > 2100)tcl=0;
-  if(LCLml < 700)tcl=1;
+  double tcin = min(max((200.0 - CINml) / (150.0), 0.0), 1.0)
+  double tlcl = min(max(((2100.0 - LCLml) / (700.0)), 0.0 ), 1.0);
+  if(LCLml > 2100)tlcl=0;
+  if(LCLml < 700)tlcl=1;
   double LTTPt = tcape * tlcl * tcin;
 
   double SRH500 = this->SRH500RM();
@@ -5439,8 +5439,8 @@ double IndicesCollector::LTTP_LM(){
   double CINml = this->VMeanLayerCIN();	
 	
   double tcape = max(min((CAPEml / (321.59)), (1501.74 / 321.59)), 0.0);
-  double tcin = min(max((200.0 – CINml) / (150.0), 0.0), 1.0)
-  double tlcl = min(max(((2100.0 – LCLml) / (700.0)), 0.0 ), 1.0);
+  double tcin = min(max((200.0 - CINml) / (150.0), 0.0), 1.0)
+  double tlcl = min(max(((2100.0 - LCLml) / (700.0)), 0.0 ), 1.0);
   if(LCLml > 2100)tcl=0;
   if(LCLml < 700)tcl=1;
   double LTTPt = tcape * tlcl * tcin;
