@@ -5953,24 +5953,24 @@ double IndicesCollector::HSI(){
 
 double IndicesCollector::HSIv2(){  
   double* CAPE_HSI = this->MU_ML_ECAPE(); 
-  double CAPE = CAPE_HSI[2];
+  double CAPE = CAPE_HSI[3];
   delete[] CAPE_HSI;
   double BS06 = this->MSR_MW();
-  double FL = this->ZeroHeight();
+  double FL = this->M10Height();
   double LCL = this->VMeanMostUnstableLCL();
   double EL = this->VMeanMostUnstableEL();
   double LR = -(this->LR26());
-  if(CAPE<201)CAPE=201;
-  else if(CAPE>3000)CAPE=3000;
+  if(CAPE<101)CAPE=101;
+  else if(CAPE>1250)CAPE=1250;
   if(BS06<2)BS06=2;
   else if(BS06>16)BS06=16;
-  if(FL<500)FL=500;
-  else if(FL>4000)FL=4000;
+  if(FL<1500)FL=1500;
+  else if(FL>5000)FL=5000;
   if(LCL<500)LCL=500;
-  else if(LCL>1500)LCL=1500;
+  else if(LCL>2000)LCL=2000;
   if(LR<5)LR=5;
   else if(LR>8)LR=8;
-  double HSI = ((sqrt(50*(CAPE-200)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000));
+  double HSI = ((sqrt(100*(CAPE-100)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000));
   if(isnan(HSI)) HSI = 0;
   double HSI_old = this->HSI();
   if(HSI_old > HSI) HSI = HSI_old;
