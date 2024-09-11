@@ -6765,8 +6765,8 @@ double IndicesCollector::STEP5_wind_sfc_850_A(){
   double *sfc = Get(S->ks->vw,0).toAV();
   double *P850 = Get(S->ks->vw,cache->getPressureIndex(850)).toAV(); 
   double magnitude = abs(P850[0] - sfc[0]);
-  if(magnitude>180)abs(magnitude-360);  
-	return magnitude; 
+  if(magnitude>180)magnitude=abs(magnitude-360);  
+  return magnitude; 
 }
 
 double IndicesCollector::STEP6_wind_sfc_850_M(){
