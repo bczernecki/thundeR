@@ -304,6 +304,19 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
+#'  \item 	STEP01_STP
+#'  \item 	STEP02_SCP
+#'  \item 	STEP04_BS_01km
+#'  \item 	STEP05_wind_sfc_850_A
+#'  \item 	STEP06_wind_sfc_850_M
+#'  \item 	STEP10_CIN
+#'  \item 	STEP11_tmp_sfc_850
+#'  \item 	STEP12_tmp_sfc_700
+#'  \item 	STEP13_tmp_sfc_500
+#'  \item 	STEP14_dpt_sfc
+#'  \item 	STEP15_LCL  
+#'  \item 	STEP16_dpt_sfc_850
+#'  \item 	STEP17_dpt_sfc_500
 #'  \item 	VTP_RM
 #'  \item 	VTP_LM
 #'  \item 	BS_LLmax
@@ -666,6 +679,19 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERB_mod",
 "DEI",
 "DEI_eff",
+"STEP01_STP",
+"STEP02_SCP",
+"STEP04_BS_01km",
+"STEP05_wind_sfc_850_A",
+"STEP06_wind_sfc_850_M",
+"STEP10_CIN",
+"STEP11_tmp_sfc_850",
+"STEP12_tmp_sfc_700",
+"STEP13_tmp_sfc_500",
+"STEP14_dpt_sfc",
+"STEP15_LCL",
+"STEP16_dpt_sfc_850",
+"STEP17_dpt_sfc_500",
 "VTP_RM",
 "VTP_LM",
 "BS_LLmax",
