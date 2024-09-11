@@ -5408,6 +5408,7 @@ double IndicesCollector::LTTP_RM(){
   double tlcl = min(max(((2100.0 - LCLml) / (700.0)), 0.0 ), 1.0);
   if(LCLml > 2100)tlcl=0;
   if(LCLml < 700)tlcl=1;
+	
   double LTTPt = tcape * tlcl * tcin;
 
   double SRH500 = this->SRH500RM();
@@ -5444,9 +5445,10 @@ double IndicesCollector::LTTP_LM(){
   double tlcl = min(max(((2100.0 - LCLml) / (700.0)), 0.0 ), 1.0);
   if(LCLml > 2100)tlcl=0;
   if(LCLml < 700)tlcl=1;
+	
   double LTTPt = tcape * tlcl * tcin;
 
-  double SRH500 = this->SRH500LM()*(-1.0);
+  double SRH500 = (this->SRH500LM())*(-1.0);
   double SRWSSFC = this->SRW_sfc_LM();
   double SRMLIKE = this->MeanSR500_LM() * this->MeanSR500_LM();  	
   double BWD500 = this->BS500();
@@ -6390,8 +6392,11 @@ double IndicesCollector::SW03_LM(){
 double IndicesCollector::CA500_RM(){
   double *SRW_A = ((Get(S->ks->vw,0) - S->ks->rm)).toAV();   
   double *BS500_A = (Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0)).toAV();
+  cout << " BS: " << BS500_A[0] << " SM: " << SRW_A[0]; 
   double magnitude = abs(BS500_A[0] - SRW_A[0]);
+  cout << " MAG: " << magnitude; 
   if(magnitude>180)abs(magnitude-360);  
+  cout << " MAG_C: " << magnitude; 
   return magnitude;	
 }
 
