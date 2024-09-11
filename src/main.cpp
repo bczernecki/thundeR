@@ -1320,8 +1320,6 @@ void Kinematics::doSRH2(int i, double p, double h, double t, double d, double a,
     
     Vector v1 = *it;
     Vector v2 = *it2;
-
-  // cout << " " << i << " ";
    
     if(i==0){
       v1 = Vector(0,0,0);
@@ -6761,7 +6759,6 @@ double IndicesCollector::STEP4_BS01(){
 double IndicesCollector::STEP5_wind_sfc_850_A(){
   double *sfc = Get(S->ks->vw,0).toAV();
   double *P850 = Get(S->ks->vw,cache->getPressureIndex(850)).toAV(); 
-  cout << " P850: " << P850[0] << " SFC: " << sfc[0]; 
   double magnitude = abs(P850[0] - sfc[0]);
   if(magnitude>180)magnitude=abs(magnitude-360);  
   return magnitude; 
