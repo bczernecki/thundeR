@@ -304,6 +304,18 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
+#'  \item 	VTP_RM
+#'  \item 	VTP_LM
+#'  \item 	BS_LLmax
+#'  \item 	BS_MLmax
+#'  \item 	BS_ULmax
+#'  \item 	WS_LLmax
+#'  \item 	WS_MLmax
+#'  \item 	WS_ULmax
+#'  \item 	LTTP_RM
+#'  \item 	LTTP_LM
+#'  \item 	CA500_LM
+#'  \item 	CA500_RM
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -653,6 +665,18 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE",
 "SHERB_mod",
 "DEI",
-"DEI_eff")
+"DEI_eff",
+"VTP_RM",
+"VTP_LM",
+"BS_LLmax",
+"BS_MLmax",
+"BS_ULmax",
+"WS_LLmax",
+"WS_MLmax",
+"WS_ULmax",
+"LTTP_RM",
+"LTTP_LM",
+"CA500_LM",
+"CA500_RM)
 return(tmp)
 }
