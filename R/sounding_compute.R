@@ -677,6 +677,6 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "LTTP_RM",
 "LTTP_LM",
 "CA500_LM",
-"CA500_RM)
+"CA500_RM")
 return(tmp)
 }
