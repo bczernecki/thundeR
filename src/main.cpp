@@ -6390,7 +6390,7 @@ double IndicesCollector::SW03_LM(){
 }
 
 double IndicesCollector::CA500_RM(){
-  double *SRW_A = ((Get(S->ks->vw,0) - S->ks->rm)).toAV();   
+  double *SRW_A = (S->ks->rm - Get(S->ks->vw,0)).toAV();   
   double *BS500_A = (Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0)).toAV();
   cout << " BS: " << BS500_A[0] << " SM: " << SRW_A[0]; 
   double magnitude = abs(BS500_A[0] - SRW_A[0]);
@@ -6401,7 +6401,7 @@ double IndicesCollector::CA500_RM(){
 }
 
 double IndicesCollector::CA500_LM(){
-  double *SRW_A = ((Get(S->ks->vw,0) - S->ks->lm)).toAV();   
+  double *SRW_A = (S->ks->lm - Get(S->ks->vw,0)).toAV();   
   double *BS500_A = (Get(S->ks->vw,cache->getHeightIndex(500)) - Get(S->ks->vw,0)).toAV();
   double magnitude = abs(BS500_A[0] - SRW_A[0]);
   if(magnitude>180)magnitude=abs(magnitude-360);  
