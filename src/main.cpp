@@ -5961,7 +5961,7 @@ double IndicesCollector::HSIv2(){
   double EL = this->VMeanMostUnstableEL();
   double LR = -(this->LR26());
   if(CAPE<201)CAPE=201;
-  else if(CAPE>2600)CAPE=2600;
+  else if(CAPE>2500)CAPE=2500;
   if(BS06<2)BS06=2;
   else if(BS06>16)BS06=16;
   if(FL<500)FL=500;
