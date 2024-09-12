@@ -6721,11 +6721,11 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 /////////////////////////////
 
 double IndicesCollector::STEP1_STP(){
-  double sbcape = this->VSurfaceBasedCAPE()/1500;
-  double sblcl = this->VSurfaceBasedLCL();
+  double sbcape = this->VMeanLayerCAPE()/1500;
+  double sblcl = this->VMeanLayerLCL();
   double srh1 = this->SRH01RM()/150;
-  double bwd = this->BS06();
-  double cin = this->VSurfaceBasedCIN();	
+  double bwd = this->emubs();
+  double cin = this->VMeanLayerCIN();	
   if(isnan(cin)) cin = 0;
   if(sblcl<1000)sblcl=1;
   else if(sblcl>2000)sblcl=0;
@@ -6740,8 +6740,8 @@ double IndicesCollector::STEP1_STP(){
 }
 double IndicesCollector::STEP2_SCP(){
   double mucape = this->VMostUnstableCAPE()/1000;
-  double srh = this->SRH03RM()/50;
-  double ewd = this->BS06();
+  double srh = this->SRH03RM_eff/50;
+  double ewd = this->emubs();
   if(ewd<10)ewd=0;
   else if(ewd>20)ewd=1;
   else ewd/=20;
