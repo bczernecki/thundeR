@@ -5971,7 +5971,7 @@ double IndicesCollector::HSIv2(){
   if(LR<5)LR=5;
   else if(LR>8)LR=8;
   double HSI = ((sqrt(100*(CAPE-200)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000));
-  HSI = pow(HSI,0.75);
+  HSI = pow(HSI,0.8);
   if(isnan(HSI)) HSI = 0;
   double HSI_old = this->HSI();
   if(HSI_old > HSI) HSI = HSI_old;
