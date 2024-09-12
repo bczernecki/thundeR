@@ -5466,54 +5466,6 @@ double IndicesCollector::LTTP_LM(){
   return sqrt(sqrt(LTTPt * LTTPk));
 }
 
-double IndicesCollector::VTP_RM(){
-  double sbcape = this->VMeanLayerCAPE()/1500;
-  double sblcl = this->VMeanLayerLCL();
-  double srh1 = this->SRH01RM()/150;
-  double bwd = this->emlbs();
-  double cin = this->VMeanLayerCIN();	
-  double cape03 = this->VLLMeanLayerCAPE();
-  double LR03 = this->lapserate03()*(-1.0);
-  if(isnan(cin)) cin = 0;
-  LR03 = LR03 / 6.5;
-  if(cape03>100)LR03=2;
-  cape03 = cape03 / 50;
-  if(sblcl<1000)sblcl=1;
-  else if(sblcl>2000)sblcl=0;
-  else sblcl=(2000-sblcl)/1000;  
-  if(cin>-50)cin=1;
-  else if(cin<-200)cin=0;
-  else cin=(200+cin)/150;
-  if(bwd<12.5)bwd=0.0;
-  else if(bwd>30)bwd = 1.5;
-  else bwd/=20;  
-  return sbcape*sblcl*srh1*bwd*cin*LR03*cape03;
-}
-
-double IndicesCollector::VTP_LM(){
-  double sbcape = this->VMeanLayerCAPE()/1500;
-  double sblcl = this->VMeanLayerLCL();
-  double srh1 = this->SRH01LM()/150;
-  double bwd = this->emlbs();
-  double cin = this->VMeanLayerCIN();	
-  double cape03 = this->VLLMeanLayerCAPE();
-  double LR03 = this->lapserate03()*(-1.0);
-  if(isnan(cin)) cin = 0;
-  LR03 = LR03 / 6.5;
-  if(cape03>100)LR03=2;
-  cape03 = cape03 / 50;
-  if(sblcl<1000)sblcl=1;
-  else if(sblcl>2000)sblcl=0;
-  else sblcl=(2000-sblcl)/1000;  
-  if(cin>-50)cin=1;
-  else if(cin<-200)cin=0;
-  else cin=(200+cin)/150;
-  if(bwd<12.5)bwd=0.0;
-  else if(bwd>30)bwd = 1.5;
-  else bwd/=20;  
-  return sbcape*sblcl*srh1*bwd*cin*LR03*cape03;
-}
-
 double IndicesCollector::STP(){
   double sbcape = this->VSurfaceBasedCAPE()/1500;
   double sblcl = this->VSurfaceBasedLCL();
