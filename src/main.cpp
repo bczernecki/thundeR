@@ -4544,14 +4544,13 @@ double IndicesCollector::WS_LLmax(){
 }
 
 double IndicesCollector::WS_MLmax(){
-  int h0 = cache->getHeightIndex(1000); 
-  int h1 = cache->getHeightIndex(3000); 
-  int h2 = cache->getHeightIndex(3500); 
-  int h3 = cache->getHeightIndex(4000); 
-  int h4 = cache->getHeightIndex(4500); 
-  int h5 = cache->getHeightIndex(5000); 
-  int h6 = cache->getHeightIndex(5500); 
-  int h7 = cache->getHeightIndex(6000); 
+  int h1 = cache->getHeightIndex(2000); 
+  int h2 = cache->getHeightIndex(2500); 
+  int h3 = cache->getHeightIndex(3000); 
+  int h4 = cache->getHeightIndex(3500); 
+  int h5 = cache->getHeightIndex(4000); 
+  int h6 = cache->getHeightIndex(4500); 
+  int h7 = cache->getHeightIndex(5000); 
   double BS1 = (Get(S->ks->vw,h1)).abs();
   double BS2 = (Get(S->ks->vw,h2)).abs();
   double BS3 = (Get(S->ks->vw,h3)).abs();
@@ -4609,21 +4608,20 @@ double IndicesCollector::BS_ULmax(){
 }
 
 double IndicesCollector::BS_MLmax(){
-  int h0 = cache->getHeightIndex(1000); 
-  int h1 = cache->getHeightIndex(3000); 
-  int h2 = cache->getHeightIndex(3500); 
-  int h3 = cache->getHeightIndex(4000); 
-  int h4 = cache->getHeightIndex(4500); 
-  int h5 = cache->getHeightIndex(5000); 
-  int h6 = cache->getHeightIndex(5500); 
-  int h7 = cache->getHeightIndex(6000); 
-  double BS1 = (Get(S->ks->vw,h1) - Get(S->ks->vw,h0)).abs();
-  double BS2 = (Get(S->ks->vw,h2) - Get(S->ks->vw,h0)).abs();
-  double BS3 = (Get(S->ks->vw,h3) - Get(S->ks->vw,h0)).abs();
-  double BS4 = (Get(S->ks->vw,h4) - Get(S->ks->vw,h0)).abs();
-  double BS5 = (Get(S->ks->vw,h5) - Get(S->ks->vw,h0)).abs();
-  double BS6 = (Get(S->ks->vw,h6) - Get(S->ks->vw,h0)).abs();
-  double BS7 = (Get(S->ks->vw,h7) - Get(S->ks->vw,h0)).abs();
+  int h1 = cache->getHeightIndex(2000); 
+  int h2 = cache->getHeightIndex(2500); 
+  int h3 = cache->getHeightIndex(3000); 
+  int h4 = cache->getHeightIndex(3500); 
+  int h5 = cache->getHeightIndex(4000); 
+  int h6 = cache->getHeightIndex(4500); 
+  int h7 = cache->getHeightIndex(5000); 
+  double BS1 = (Get(S->ks->vw,h1) - Get(S->ks->vw,0)).abs();
+  double BS2 = (Get(S->ks->vw,h2) - Get(S->ks->vw,0)).abs();
+  double BS3 = (Get(S->ks->vw,h3) - Get(S->ks->vw,0)).abs();
+  double BS4 = (Get(S->ks->vw,h4) - Get(S->ks->vw,0)).abs();
+  double BS5 = (Get(S->ks->vw,h5) - Get(S->ks->vw,0)).abs();
+  double BS6 = (Get(S->ks->vw,h6) - Get(S->ks->vw,0)).abs();
+  double BS7 = (Get(S->ks->vw,h7) - Get(S->ks->vw,0)).abs();
   return max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7);
 }
 
@@ -5430,7 +5428,7 @@ double IndicesCollector::LTTP_RM(){
 	         max(min((WS4000 / (14.97)), (34.59 / 14.97)), 0.0) * 
 	         max(min((WSULMAX /(21.65)), (46.47 / 21.65)), 0.0);
 	
-  return LTTPt * LTTPk;
+  return sqrt(sqrt(LTTPt * LTTPk));
 }
 
 double IndicesCollector::LTTP_LM(){
@@ -5468,7 +5466,7 @@ double IndicesCollector::LTTP_LM(){
 	         max(min((WS4000 / (14.97)), (34.59 / 14.97)), 0.0) * 
 	         max(min((WSULMAX /(21.65)), (46.47 / 21.65)), 0.0);
 	
-  return LTTPt * LTTPk;
+  return sqrt(sqrt(LTTPt * LTTPk));
 }
 
 double IndicesCollector::VTP_RM(){
@@ -6249,7 +6247,7 @@ double IndicesCollector::HSIv2(){
   double EL = this->VMeanMostUnstableEL();
   double LR = -(this->LR26());
   if(CAPE<201)CAPE=201;
-  else if(CAPE>3000)CAPE=3000;
+  else if(CAPE>2500)CAPE=2500;
   if(BS06<2)BS06=2;
   else if(BS06>16)BS06=16;
   if(FL<500)FL=500;
@@ -6258,7 +6256,8 @@ double IndicesCollector::HSIv2(){
   else if(LCL>1500)LCL=1500;
   if(LR<5)LR=5;
   else if(LR>8)LR=8;
-  double HSI = ((sqrt(50*(CAPE-200)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000));
+  double HSI = ((sqrt(100*(CAPE-200)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000));
+  HSI = pow(HSI,0.8);
   if(isnan(HSI)) HSI = 0;
   double HSI_old = this->HSI();
   if(HSI_old > HSI) HSI = HSI_old;
