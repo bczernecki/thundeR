@@ -3103,6 +3103,12 @@ public:
 
   double SR_moisture_flux();
   double SR_moisture_flux_eff();
+  double SR_moisture_flux_RM();
+  double SR_moisture_flux_eff_RM();
+  double SR_moisture_flux_LM();
+  double SR_moisture_flux_eff_LM();
+  double SR_moisture_flux_MW();
+  double SR_moisture_flux_eff_MW();
 
   double SB_warm_cloud();
   double SB_cold_cloud();
@@ -5974,6 +5980,36 @@ double IndicesCollector::SR_moisture_flux_eff(){
   return result;
 }
 
+double IndicesCollector::SR_moisture_flux_RM(){
+  double result = this->MLMixingRatio() * this->MeanSR500_RM();
+  return result;
+}
+
+double IndicesCollector::SR_moisture_flux_eff_RM(){
+  double result = (S->th->mmrMAX) * this->MeanSR500_RM();
+  return result;
+}
+
+double IndicesCollector::SR_moisture_flux_LM(){
+  double result = this->MLMixingRatio() * this->MeanSR500_LM();
+  return result;
+}
+
+double IndicesCollector::SR_moisture_flux_eff_LM(){
+  double result = (S->th->mmrMAX) * this->MeanSR500_LM();
+  return result;
+}
+
+double IndicesCollector::SR_moisture_flux_MW(){
+  double result = this->MLMixingRatio() * this->MeanSR500_MW();
+  return result;
+}
+
+double IndicesCollector::SR_moisture_flux_eff_MW(){
+  double result = (S->th->mmrMAX) * this->MeanSR500_MW();
+  return result;
+}
+
 double IndicesCollector::RH01(){
   return S->th->meanhum1;
 }
@@ -6707,7 +6743,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[321];
+  double * vec = new double[327];
 
 // vec[0] = MU_ECAPE[5]; // EWMAX
 // vec[0] = ML_ECAPE[5]; // EWMAX
@@ -7089,6 +7125,12 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[318]=(*S)->getIndicesCollectorPointer()->Ventilation_16km();
   vec[319]=(*S)->getIndicesCollectorPointer()->Ventilation_36km();
   vec[320]=(*S)->getIndicesCollectorPointer()->Ventilation_69km();
+  vec[321]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_RM(); 
+  vec[322]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff_RM();
+  vec[323]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_LM(); 
+  vec[324]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff_LM();
+  vec[325]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_MW(); 
+  vec[326]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_eff_MW();
   return vec;
 }
 
@@ -7743,6 +7785,12 @@ double * sounding_default2(double* pressure,
 //'  \item 	Ventilation_16km
 //'  \item 	Ventilation_36km
 //'  \item 	Ventilation_69km
+//'  \item 	Moisture_Flux_SR_RM
+//'  \item 	Moisture_Flux_SR_eff_RM
+//'  \item 	Moisture_Flux_SR_LM
+//'  \item 	Moisture_Flux_SR_eff_LM
+//'  \item 	Moisture_Flux_SR_MW
+//'  \item 	Moisture_Flux_SR_eff_MW
 //' }
  // [[Rcpp::export]]
  
@@ -7779,7 +7827,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 321;
+   int reslen= 327;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
