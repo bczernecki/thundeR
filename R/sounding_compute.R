@@ -182,6 +182,9 @@
 #'  \item 	MW_03km
 #'  \item 	MW_06km
 #'  \item 	MW_13km
+#'  \item 	WS_LLmax
+#'  \item 	WS_MLmax
+#'  \item 	WS_ULmax
 #'  \item 	BS_0500m
 #'  \item 	BS_01km
 #'  \item 	BS_03km
@@ -192,6 +195,9 @@
 #'  \item 	BS_16km
 #'  \item 	BS_18km
 #'  \item 	BS_110km
+#'  \item 	BS_LLmax
+#'  \item 	BS_MLmax
+#'  \item 	BS_ULmax
 #'  \item 	BS_eff_SB
 #'  \item 	BS_eff_ML
 #'  \item 	BS_eff_MU
@@ -213,6 +219,9 @@
 #'  \item 	SRW_03km_RM
 #'  \item 	SRW_03km_LM
 #'  \item 	SRW_03km_MW
+#'  \item 	SRW_36km_RM
+#'  \item 	SRW_36km_LM
+#'  \item 	SRW_36km_MW
 #'  \item 	SRW_HGL_RM
 #'  \item 	SRW_HGL_LM
 #'  \item 	SRW_HGL_MW
@@ -220,18 +229,23 @@
 #'  \item 	SRW_eff_LM
 #'  \item 	SRW_eff_MW
 #'  \item 	SRW_eff_CBV
-#'  \item 	Ventilation_13km
-#'  \item 	Ventilation_16km
-#'  \item 	Ventilation_36km
-#'  \item 	Ventilation_69km
+#'  \item 	Ventilation_16km_RM
+#'  \item 	Ventilation_16km_LM
+#'  \item 	Ventilation_16km_MW
+#'  \item 	Ventilation_36km_RM
+#'  \item 	Ventilation_36km_LM
+#'  \item 	Ventilation_36km_MW
+#'  \item 	Ventilation_69km_RM
+#'  \item 	Ventilation_69km_LM
+#'  \item 	Ventilation_69km_MW
 #'  \item 	SRH_0100m_RM
 #'  \item 	SRH_0100m_LM
-#'  \item 	SRH_0100m_RM_F
-#'  \item 	SRH_0100m_LM_F
+#'  \item 	SRH_0100m_RM_G
+#'  \item 	SRH_0100m_LM_G
 #'  \item 	SRH_0500m_RM
 #'  \item 	SRH_0500m_LM
-#'  \item 	SRH_0500m_RM_F
-#'  \item 	SRH_0500m_LM_F
+#'  \item 	SRH_0500m_RM_G
+#'  \item 	SRH_0500m_LM_G
 #'  \item 	SRH_01km_RM
 #'  \item 	SRH_01km_LM
 #'  \item 	SRH_03km_RM
@@ -244,12 +258,12 @@
 #'  \item 	SRH_eff_3km_LM
 #'  \item 	SV_0100m_RM
 #'  \item 	SV_0100m_LM
-#'  \item 	SV_0100m_RM_F
-#'  \item 	SV_0100m_LM_F
+#'  \item 	SV_0100m_RM_G
+#'  \item 	SV_0100m_LM_G
 #'  \item 	SV_0500m_RM
 #'  \item 	SV_0500m_LM
-#'  \item 	SV_0500m_RM_F
-#'  \item 	SV_0500m_LM_F
+#'  \item 	SV_0500m_RM_G
+#'  \item 	SV_0500m_LM_G
 #'  \item 	SV_01km_RM
 #'  \item 	SV_01km_LM
 #'  \item 	SV_03km_RM
@@ -262,6 +276,8 @@
 #'  \item 	SV_01km_LM_fra
 #'  \item 	SV_03km_RM_fra
 #'  \item 	SV_03km_LM_fra
+#'  \item 	CA500_LM
+#'  \item 	CA500_RM
 #'  \item 	Bunkers_RM_A
 #'  \item 	Bunkers_RM_M
 #'  \item 	Bunkers_LM_A
@@ -288,6 +304,8 @@
 #'  \item 	SCP_fix_LM
 #'  \item 	SCP_eff_RM
 #'  \item 	SCP_eff_LM
+#'  \item 	LTTP_RM();
+#'  \item 	LTTP_LM();
 #'  \item 	SHIP
 #'  \item 	HSI
 #'  \item 	HSI_mod
@@ -304,6 +322,9 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
+#'  \item 	Ventilation_16km
+#'  \item 	Ventilation_36km
+#'  \item 	Ventilation_69km
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -532,6 +553,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MW_03km",
 "MW_06km",
 "MW_13km",
+"WS_LLmax",
+"WS_MLmax",
+"WS_ULmax",
 "BS_0500m",
 "BS_01km",
 "BS_03km",
@@ -542,6 +566,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "BS_16km",
 "BS_18km",
 "BS_110km",
+"BS_LLmax",
+"BS_MLmax",
+"BS_ULmax",
 "BS_eff_SB",
 "BS_eff_ML",
 "BS_eff_MU",
@@ -563,6 +590,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SRW_03km_RM",
 "SRW_03km_LM",
 "SRW_03km_MW",
+"SRW_36km_RM",
+"SRW_36km_LM",
+"SRW_36km_MW",
 "SRW_HGL_RM",
 "SRW_HGL_LM",
 "SRW_HGL_MW",
@@ -570,10 +600,15 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SRW_eff_LM",
 "SRW_eff_MW",
 "SRW_eff_CBV",
-"Ventilation_13km",
-"Ventilation_16km",
-"Ventilation_36km",
-"Ventilation_69km",
+"Ventilation_16km_RM",
+"Ventilation_16km_LM",
+"Ventilation_16km_MW",
+"Ventilation_36km_RM",
+"Ventilation_36km_LM",
+"Ventilation_36km_MW",
+"Ventilation_69km_RM",
+"Ventilation_69km_LM",
+"Ventilation_69km_MW",
 "SRH_0100m_RM",
 "SRH_0100m_LM",
 "SRH_0100m_RM_G",
@@ -612,6 +647,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SV_01km_LM_fra",
 "SV_03km_RM_fra",
 "SV_03km_LM_fra",
+"CA500_LM",
+"CA500_RM",
 "Bunkers_RM_A",
 "Bunkers_RM_M",
 "Bunkers_LM_A",
@@ -638,6 +675,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SCP_fix_LM",
 "SCP_eff_RM",
 "SCP_eff_LM",
+"LTTP_RM();",
+"LTTP_LM();",
 "SHIP",
 "HSI",
 "HSI_mod",
@@ -653,6 +692,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE",
 "SHERB_mod",
 "DEI",
-"DEI_eff")
+"DEI_eff",
+"Ventilation_16km",
+"Ventilation_36km",
+"Ventilation_69km")
 return(tmp)
 }
