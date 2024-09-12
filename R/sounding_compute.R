@@ -304,8 +304,8 @@
 #'  \item 	SCP_fix_LM
 #'  \item 	SCP_eff_RM
 #'  \item 	SCP_eff_LM
-#'  \item 	LTTP_RM();
-#'  \item 	LTTP_LM();
+#'  \item 	LTTP_RM
+#'  \item 	LTTP_LM
 #'  \item 	SHIP
 #'  \item 	HSI
 #'  \item 	HSI_mod
@@ -325,6 +325,12 @@
 #'  \item 	Ventilation_16km
 #'  \item 	Ventilation_36km
 #'  \item 	Ventilation_69km
+#'  \item 	Moisture_Flux_SR_RM
+#'  \item 	Moisture_Flux_SR_eff_RM
+#'  \item 	Moisture_Flux_SR_LM
+#'  \item 	Moisture_Flux_SR_eff_LM
+#'  \item 	Moisture_Flux_SR_MW
+#'  \item 	Moisture_Flux_SR_eff_MW
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -675,8 +681,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SCP_fix_LM",
 "SCP_eff_RM",
 "SCP_eff_LM",
-"LTTP_RM();",
-"LTTP_LM();",
+"LTTP_RM",
+"LTTP_LM",
 "SHIP",
 "HSI",
 "HSI_mod",
@@ -695,6 +701,12 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "DEI_eff",
 "Ventilation_16km",
 "Ventilation_36km",
-"Ventilation_69km")
+"Ventilation_69km",
+"Moisture_Flux_SR_RM",
+"Moisture_Flux_SR_eff_RM",
+"Moisture_Flux_SR_LM",
+"Moisture_Flux_SR_eff_LM",
+"Moisture_Flux_SR_MW",
+"Moisture_Flux_SR_eff_MW")
 return(tmp)
 }
