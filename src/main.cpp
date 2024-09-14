@@ -6232,7 +6232,7 @@ double IndicesCollector::HSIv2(){
   double EL = this->VMeanMostUnstableEL();
   double LR = -(this->LR26());
   if(CAPE<201)CAPE=201;
-  else if(CAPE>2500)CAPE=2500;
+  else if(CAPE>2750)CAPE=2750;
   if(BS06<2)BS06=2;
   else if(BS06>16)BS06=16;
   if(FL<500)FL=500;
@@ -6241,11 +6241,11 @@ double IndicesCollector::HSIv2(){
   else if(LCL>1500)LCL=1500;
   if(LR<5)LR=5;
   else if(LR>8)LR=8;
-  double HSI = ((sqrt(100*(CAPE-200)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000));
-  HSI = pow(HSI,0.8);
+  double HSI = ((sqrt(95*(CAPE-200)) * (BS06+2) * (7000-FL+LCL))/194000) * sqrt(EL*(((LR-3)*(LR-3))/10000000));
+  HSI = HSI*0.48;
   if(isnan(HSI)) HSI = 0;
-  double HSI_old = this->HSI();
-  if(HSI_old > HSI) HSI = HSI_old;
+  //double HSI_old = this->HSI();
+  //if(HSI_old > HSI) HSI = HSI_old;
   return HSI;
 }
 
