@@ -2057,7 +2057,7 @@ Thermodynamics::Thermodynamics(){
   mo6=0;
 
   mumliLAST=0;
-  oeLAST=0;
+  oeLAST=-273.15;
   mpLAST=0;
   mhLAST=0;
   mtLAST=0;
