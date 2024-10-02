@@ -2066,7 +2066,7 @@ Thermodynamics::Thermodynamics(){
   moLAST=0;
   
   mumliMAX=0;
-  oeMAX=0;
+  oeMAX=-273.15;
   mpMAX=0;
   mhMAX=0;
   mtMAX=0;
