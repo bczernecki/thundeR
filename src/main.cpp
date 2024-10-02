@@ -2295,8 +2295,8 @@ void Thermodynamics::putMaxTHTE(int i, double p, double h, double t, double d, d
       meanmostUnstableUP += 100;
     }
 
-     cout << "meanmostUnstableUP = " << meanmostUnstableUP << endl
-     cout << oeLAST << " > " << oeMAX << endl
+     cout << "meanmostUnstableUP = " << meanmostUnstableUP << endl;
+     cout << oeLAST << " > " << oeMAX << endl;
 
     if(oeLAST > oeMAX){
          oeMAX = oeLAST;
