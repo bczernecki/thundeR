@@ -6932,7 +6932,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
 // MU500 parcel
   vec[120]=(*S)->getIndicesCollectorPointer()->MU500_CAPE();
   vec[121]=(*S)->getIndicesCollectorPointer()->MU500_coldcape();
-  vec[122]=(*S)->getIndicesCollectorPointer()->MLmiddlecape();
+  vec[122]=(*S)->getIndicesCollectorPointer()->MU500middlecape();
   vec[123]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy();
   vec[124]=(*S)->getIndicesCollectorPointer()->MU500_buoyancy_M10();
   vec[125]=(*S)->getIndicesCollectorPointer()->MU500_LI();
