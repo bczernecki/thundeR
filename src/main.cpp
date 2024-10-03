@@ -3632,7 +3632,11 @@ double* IndicesCollector::MU500_ECAPE(){
 
 double IndicesCollector::SB_warm_cloud(){
   double LFC = Get(S->h, S->th->surfaceBased->vLfcIndex) - S->th->h0;
-  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
+  double EL = Get(S->h, S->th->surfaceBased->vElIndex) - S->th->h0;
+  double FL = Get(S->h,S->th->mintenpos) - S->th->h0;
+  if(FL > EL){
+	  FL = EL;
+  }
   double result = FL-LFC;
   if(result<0){
     result = 0;
@@ -3646,7 +3650,11 @@ double IndicesCollector::SB_warm_cloud(){
 
 double IndicesCollector::ML_warm_cloud(){
   double LFC = Get(S->h, S->th->meanLayer->vLfcIndex) - S->th->h0;
-  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
+  double EL = Get(S->h, S->th->meanLayer->vElIndex) - S->th->h0;
+  double FL = Get(S->h,S->th->mintenpos) - S->th->h0;
+  if(FL > EL){
+	  FL = EL;
+  }
   double result = FL-LFC;
   if(result<0){
     result = 0;
@@ -3660,7 +3668,11 @@ double IndicesCollector::ML_warm_cloud(){
 
 double IndicesCollector::MU_ML_warm_cloud(){
   double LFC = Get(S->h, S->th->meanmostUnstable->vLfcIndex) - S->th->h0;
-  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
+  double EL = Get(S->h, S->th->meanmostUnstable->vElIndex) - S->th->h0;
+  double FL = Get(S->h,S->th->mintenpos) - S->th->h0;
+  if(FL > EL){
+	  FL = EL;
+  }
   double result = FL-LFC;
   if(result<0){
     result = 0;
@@ -3674,7 +3686,11 @@ double IndicesCollector::MU_ML_warm_cloud(){
 
 double IndicesCollector::MU_warm_cloud(){
   double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex) - S->th->h0;
-  double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
+  double EL = Get(S->h, S->th->mostUnstable->vElIndex) - S->th->h0;
+  double FL = Get(S->h,S->th->mintenpos) - S->th->h0;
+  if(FL > EL){
+	  FL = EL;
+  }  
   double result = FL-LFC;
   if(result<0){
     result = 0;
@@ -3746,8 +3762,11 @@ double IndicesCollector::ML_equal_layer(){
   double LFC = Get(S->h, S->th->meanLayer->vLfcIndex) - S->th->h0;
   double FL = Get(S->h,S->th->mintenpos) - Get(S->h,0);
   double EL = Get(S->h, S->th->meanLayer->vElIndex) - S->th->h0;
-  double warm = FL-LFC;
   double cold = EL-FL;
+  if(FL > EL){
+	  FL = EL;
+  } 
+  double warm = FL-LFC;
   if(warm<0){
     warm = 0;
   }
@@ -3766,8 +3785,11 @@ double IndicesCollector::SB_equal_layer(){
   double LFC = Get(S->h, S->th->surfaceBased->vLfcIndex) - S->th->h0;
   double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double EL = Get(S->h, S->th->surfaceBased->vElIndex) - S->th->h0;
-  double warm = FL-LFC;
   double cold = EL-FL;
+  if(FL > EL){
+	  FL = EL;
+  } 
+  double warm = FL-LFC;
   if(warm<0){
     warm = 0;
   }
@@ -3786,8 +3808,11 @@ double IndicesCollector::MU_equal_layer(){
   double LFC = Get(S->h, S->th->mostUnstable->vLfcIndex) - S->th->h0;
   double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double EL = Get(S->h, S->th->mostUnstable->vElIndex) - S->th->h0;
-  double warm = FL-LFC;
   double cold = EL-FL;
+  if(FL > EL){
+	  FL = EL;
+  } 
+  double warm = FL-LFC;
   if(warm<0){
     warm = 0;
   }
@@ -3806,8 +3831,11 @@ double IndicesCollector::MU_ML_equal_layer(){
   double LFC = Get(S->h, S->th->meanmostUnstable->vLfcIndex) - S->th->h0;
   double FL = Get(S->h,S->th->mintenpos)-Get(S->h,0);
   double EL = Get(S->h, S->th->meanmostUnstable->vElIndex) - S->th->h0;
-  double warm = FL-LFC;
   double cold = EL-FL;
+  if(FL > EL){
+	  FL = EL;
+  } 
+  double warm = FL-LFC;
   if(warm<0){
     warm = 0;
   }
