@@ -1652,7 +1652,6 @@ void LapseRate::putClassicLine(int i, double p, double h, double t,double d, dou
       if (vt_parcel < t_)
       {
         vcin += tvcap;
-	vcin500 += tvcap;
       }
     }
     
@@ -1706,8 +1705,8 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   
   double tcap = g * dz * (vt_parcel - t_) / (t_ + kel);
 
-   if(h <= starth+4000) {
-	vcin500 += tvcin;
+   if( (h <= starth+4000) && (tcap < 0) ) {
+	vcin500 += tcap;
    }
 	
   if (vLclIndex != -1) { 
