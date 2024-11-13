@@ -11,8 +11,9 @@
 #'  \item 	SB_buoy_HGL
 #'  \item 	SB_buoy_3km
 #'  \item 	SB_LI
-#'  \item 	SB_LI_M10
+#'  \item 	SB_LI_M25
 #'  \item 	SB_CIN
+#'  \item 	SB_CIN_4km
 #'  \item 	SB_LCL_hgt
 #'  \item 	SB_LFC_hgt
 #'  \item 	SB_EL_hgt
@@ -41,8 +42,9 @@
 #'  \item 	ML_buoy_HGL
 #'  \item 	ML_buoy_3km
 #'  \item 	ML_LI
-#'  \item 	ML_LI_M10
+#'  \item 	ML_LI_M25
 #'  \item 	ML_CIN
+#'  \item 	ML_CIN_4km
 #'  \item 	ML_LCL_hgt
 #'  \item 	ML_LFC_hgt
 #'  \item 	ML_EL_hgt
@@ -71,8 +73,9 @@
 #'  \item 	MU_buoy_HGL
 #'  \item 	MU_buoy_3km
 #'  \item 	MU_LI
-#'  \item 	MU_LI_M10
+#'  \item 	MU_LI_M25
 #'  \item 	MU_CIN
+#'  \item 	MU_CIN_4km
 #'  \item 	MU_LCL_hgt
 #'  \item 	MU_LFC_hgt
 #'  \item 	MU_EL_hgt
@@ -101,8 +104,9 @@
 #'  \item 	MUML_buoy_HGL
 #'  \item 	MUML_buoy_3km
 #'  \item 	MUML_LI
-#'  \item 	MUML_LI_M10
+#'  \item 	MUML_LI_M25
 #'  \item 	MUML_CIN
+#'  \item 	MUML_CIN_4km
 #'  \item 	MUML_LCL_hgt
 #'  \item 	MUML_LFC_hgt
 #'  \item 	MUML_EL_hgt
@@ -130,8 +134,9 @@
 #'  \item 	MU5_buoy
 #'  \item 	MU5_buoy_HGL
 #'  \item 	MU5_LI
-#'  \item 	MU5_LI_M10
+#'  \item 	MU5_LI_M25
 #'  \item 	MU5_CIN
+#'  \item 	MU5_CIN_4km
 #'  \item 	MU5_E_CAPE
 #'  \item 	MU5_E_CAPE_HGL
 #'  \item 	MU5_E_buoy
@@ -371,8 +376,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SB_buoy_HGL",
 "SB_buoy_3km",
 "SB_LI",
-"SB_LI_M10",
+"SB_LI_M25",
 "SB_CIN",
+"SB_CIN_4km",
 "SB_LCL_hgt",
 "SB_LFC_hgt",
 "SB_EL_hgt",
@@ -401,8 +407,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "ML_buoy_HGL",
 "ML_buoy_3km",
 "ML_LI",
-"ML_LI_M10",
+"ML_LI_M25",
 "ML_CIN",
+"ML_CIN_4km",
 "ML_LCL_hgt",
 "ML_LFC_hgt",
 "ML_EL_hgt",
@@ -431,8 +438,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU_buoy_HGL",
 "MU_buoy_3km",
 "MU_LI",
-"MU_LI_M10",
+"MU_LI_M25",
 "MU_CIN",
+"MU_CIN_4km",
 "MU_LCL_hgt",
 "MU_LFC_hgt",
 "MU_EL_hgt",
@@ -461,8 +469,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MUML_buoy_HGL",
 "MUML_buoy_3km",
 "MUML_LI",
-"MUML_LI_M10",
+"MUML_LI_M25",
 "MUML_CIN",
+"MUML_CIN_4km",
 "MUML_LCL_hgt",
 "MUML_LFC_hgt",
 "MUML_EL_hgt",
@@ -490,8 +499,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU5_buoy",
 "MU5_buoy_HGL",
 "MU5_LI",
-"MU5_LI_M10",
+"MU5_LI_M25",
 "MU5_CIN",
+"MU5_CIN_4km",
 "MU5_E_CAPE",
 "MU5_E_CAPE_HGL",
 "MU5_E_buoy",
