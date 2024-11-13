@@ -3928,12 +3928,12 @@ double IndicesCollector::VMeanMostUnstableCIN(){
 }   
 
 double IndicesCollector::VMostUnstableCIN500(){
-  result = S->th->mostUnstable->vcin500;
+  double result = S->th->mostUnstable->vcin500;
   return result;
 }   
 
 double IndicesCollector::VMeanMostUnstableCIN500(){
-  result = S->th->meanmostUnstable->vcin500;
+  double result = S->th->meanmostUnstable->vcin500;
   return result;
 }   
 
@@ -4072,7 +4072,7 @@ double IndicesCollector::VSurfaceBasedCIN(){
 }   
 
 double IndicesCollector::VSurfaceBasedCIN500(){  
-  result = S->th->surfaceBased->vcin500;
+  double result = S->th->surfaceBased->vcin500;
   return result;  
 }   
 
@@ -4156,7 +4156,7 @@ double IndicesCollector::VMeanLayerCIN(){
 }        
 
 double IndicesCollector::VMeanLayerCIN500(){  
-  result = S->th->meanLayer->vcin500;  
+  double result = S->th->meanLayer->vcin500;  
   return result;  
 }        
 
@@ -4207,7 +4207,7 @@ double IndicesCollector::VSurfaceBasedLI_M25(){
 }
 
 double IndicesCollector::VMostU500LI_M25(){
-  int minten = S->th->mint25pos;
+  int minten = S->th->min25pos;
   int mintencheck = S->th->mostU500->startIndex;
   if(minten<mintencheck){
     minten = mintencheck;
