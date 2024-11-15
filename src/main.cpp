@@ -1749,7 +1749,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
    if( (h <= starth+4000) && (tcap < 0) ) {
            vcin500 += tcap;
    }
-   cout << vcin500 << " " << vcin << endl; po 1709 linii
+   cout << vcin500 << " " << vcin << endl; 
 }
 void LapseRate::putLine(int i, double p, double h, double t, double d, double a, double v){
   if (i >= startIndex) {
