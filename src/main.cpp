@@ -1115,7 +1115,7 @@ void Kinematics::prepareSupercellVectors()
   Vector dev = Vector(0, 0, 0);
   Vector tshear = this->mean6-this->mean0;
   dev = Vector::vec(tshear,tv);
-  dev *= 7.5;
+  dev *= 4;
   dev *= 1.0 / tshear.abs();
   this->rm = meanwind - dev;
   this->lm = meanwind + dev;
@@ -5170,7 +5170,7 @@ Vector IndicesCollector::Peters_vector(){
   Vector dev = Vector(0, 0, 0);
   Vector tshear = S->ks->mean6 - S->ks->mean0;
   dev = Vector::vec(tshear,tv);
-  dev *= 7.5*propfac;
+  dev *= 4*propfac;
   dev *= 1.0 / tshear.abs();
   Vector Peters_SM = meanwind - dev;
   return Peters_SM;
