@@ -1632,32 +1632,8 @@ void LapseRate::putClassicLine(int i, double p, double h, double t,double d, dou
   {
     double TSA_ = TSA(os, p);
     this->doRest(i, p, h, t, TSA_, &lfcIndex, &cape, &to3cape, &to2cape, &cin, &elIndex, values);
-  }    else
-  {
-    
-    double dz = abs(h - lasth);
-    double tcap = g * dz * (tda - t) / (t + kel);
-    double t_parcel = tda;
-    double tch_ = W(t_parcel, p);
-    double tw = W(d, p);
-    double vt_parcel = tv(t_parcel, tch_);
-    double t_ = tv(t, tw);
-    double tvcap = g * dz * (vt_parcel - t_) / (t_ + kel);
-    if (vLclIndex == -1)
-    {
-      if (t_parcel < t)
-      {
-        cin += tcap;
-      }
-      if (vt_parcel < t_)
-      {
-        vcin += tvcap;
-      }
-    }
-    
-    
-  }
-  
+  }   
+	
 }
 void LapseRate::prepareForDCAPE(){
   this->free();
@@ -1704,14 +1680,17 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   }
   
   double tcap = g * dz * (vt_parcel - t_) / (t_ + kel);
- 	
+
+   if (vLclIndex == -1) {
+      if (vt_parcel < t_) {
+        vcin += tcap;
+      }
+    }
+	
   if (vLclIndex != -1) { 
-    if (vt_parcel >= t_)
-    {
-      {
+    if (vt_parcel >= t_) {
         if (vLfcIndex == -1) vLfcIndex = i;
-        if (vElIndex != -1)
-        {
+        if (vElIndex != -1) {
           vElIndex = -1;
           vcin += tvcin;
           tvcin = 0;
@@ -1722,7 +1701,6 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
         if(t<=-10&&t>=-40)middlecape+=tcap;
         if(t<= -10)coldcape+=tcap;
         if(vt_parcel<= -10)coldcapeTV+=tcap;
-      }
     }
     else
     {
@@ -1733,11 +1711,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
       else
       {
         tvcin += tcap;
-        if (vElIndex == -1)
-          
-          vElIndex = i;
-        
-        
+        if (vElIndex == -1) vElIndex = i;        
       }
       if (i <= i700index && this->dcape_)
       {
