@@ -1704,12 +1704,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   }
   
   double tcap = g * dz * (vt_parcel - t_) / (t_ + kel);
- 
-  if( (h <= starth+4000) && (tcap < 0) ) {
-        vcin500 += tcap;
-   cout << vcin500 << " " << vcin << " " << (h-h0) << endl;
-   } 
-	
+ 	
   if (vLclIndex != -1) { 
     if (vt_parcel >= t_)
     {
@@ -1750,6 +1745,12 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
       }
     }
   }
+
+  if( (h <= starth+4000) && (tcap < 0) ) {
+       vcin500 += tcap;
+   cout << vcin500 << " " << vcin << " " << (h-h0) << " " << vt_parcel << " " << t_ << endl;
+   } 
+
 }
 void LapseRate::putLine(int i, double p, double h, double t, double d, double a, double v){
   if (i >= startIndex) {
