@@ -1440,6 +1440,8 @@ private:
   double vto2cape;
 
   double vcin500;
+  double RH_i;
+  double RH_loop;
   
   double os;
   double o;
@@ -1515,6 +1517,8 @@ void LapseRate::allocate(){
   virtualValues = new list<double>();
   cape = cin = to3cape = to2cape = vcape = vcin = vto3cape = vto2cape = os = o = w = vos=vo=vw=dcape=dvcape=0;
   vcin500 = 0;
+  RH_loop = 0;
+  RH_i = 0;
   middlecape=0;
   coldcape=0;
   coldcapeTV=0;
@@ -1559,6 +1563,8 @@ void LapseRate::setInitialConditions(int i, double p, double h, double t, double
 
   this->starth=h;
   this->vcin500=0;
+  this->RH_i = 0;
+  this->RH_loop = 0;
   this->startIndex=i;
   this->lasth = h;
   this->tch= W(d,p);
@@ -1657,6 +1663,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   this->virtualValues->push_back(vt_parcel);
   double t_ = tv(t, tw);
   double dz = abs(h - lasth);
+  double RH = ESAT
 
   if (vLclIndex != -1) {  
   double ttt = (vt_parcel - t_) / (t_+273.15) * 9.81;
@@ -1688,6 +1695,24 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
     }
 	
   if (vLclIndex != -1) { 
+
+	  if(vLclIndex == i){ 
+  	  double lclh = h;
+ 	  cout << "znaleziono LCL h: " << lclh << " i: " << vLCLIndex << endl;
+	  }
+	  
+	  if(h <= lclh+3000){
+	  RH_loop += ESAT(d)/ESAT(t);
+          RH_i += 1; 
+  	  cout << "Petla RH: " << RH_loop << " i: " << RH_i << endl;
+	  }
+
+	  if(h > lclh+3000){
+	  RH_loop = RH_loop/RH_i;
+          RH_i = 1; 
+   	  cout << "Koniec petli RH: " << RH_loop << " i: " << RH_i << endl;
+	  }
+  
     if (vt_parcel >= t_) {
         if (vLfcIndex == -1) vLfcIndex = i;
         if (vElIndex != -1) {
@@ -3101,6 +3126,10 @@ public:
   double ML_ebuoyancy_M10();
   double SB_ebuoyancy_M10();
 
+  double MU_LCL_RH_3km();
+  double MUML_LCL_RH_3km();
+  double MU5_LCL_RH_3km();
+
   double SR_moisture_flux();
   double SR_moisture_flux_eff();
   double SR_moisture_flux_RM();
@@ -3898,6 +3927,21 @@ double IndicesCollector::VMeanMostUnstableCIN(){
   if(cape==0){
     result = sqrt(-1); 
   }
+  return result;
+}   
+
+double IndicesCollector::MU_RH_LCL_3km(){
+  double result = S->th->mostUnstable->RH_loop;
+  return result;
+}   
+
+double IndicesCollector::MUML_RH_LCL_3km(){
+  double result = S->th->meanmostUnstable->RH_loop;
+  return result;
+}   
+
+double IndicesCollector::MU5_RH_LCL_3km(){
+  double result = S->th->mostU500->RH_loop;
   return result;
 }   
 
@@ -6803,7 +6847,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[315];
+  double * vec = new double[318];
 
 // vec[0] = MU_ECAPE[5]; // EWMAX
 // vec[0] = ML_ECAPE[5]; // EWMAX
@@ -7179,6 +7223,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[312]=(*S)->getIndicesCollectorPointer()->SHERBS3_v2();
   vec[313]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[314]=(*S)->getIndicesCollectorPointer()->DEI_eff();
+  vec[315]=(*S)->getIndicesCollectorPointer()->MU_LCL_RH_3km();
+  vec[316]=(*S)->getIndicesCollectorPointer()->MUML_LCL_RH_3km();
+  vec[317]=(*S)->getIndicesCollectorPointer()->MU5_LCL_RH_3km();
   return vec;
 }
 
@@ -7827,6 +7874,9 @@ double * sounding_default2(double* pressure,
 //'  \item 	SHERB_mod
 //'  \item 	DEI
 //'  \item 	DEI_eff
+//'  \item 	MU_LCL_RH_3km
+//'  \item 	MUML_LCL_RH_3km
+//'  \item 	MU5_LCL_RH_3km
 //' }
  // [[Rcpp::export]]
  
@@ -7863,7 +7913,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 315;
+   int reslen= 318;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
