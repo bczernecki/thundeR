@@ -1461,6 +1461,7 @@ private:
   double peakB_3km;
 
   double starth;
+  double lclh;
 
   bool isSet;
   bool dcape_;
@@ -1562,6 +1563,7 @@ void LapseRate::setInitialConditions(int i, double p, double h, double t, double
   this->vw = W(d, p);
 
   this->starth=h;
+  this->lclh=0;
   this->vcin500=0;
   this->RH_i = 0;
   this->RH_loop = 0;
@@ -1663,7 +1665,6 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   this->virtualValues->push_back(vt_parcel);
   double t_ = tv(t, tw);
   double dz = abs(h - lasth);
-  double RH = ESAT
 
   if (vLclIndex != -1) {  
   double ttt = (vt_parcel - t_) / (t_+273.15) * 9.81;
@@ -1697,8 +1698,8 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
   if (vLclIndex != -1) { 
 
 	  if(vLclIndex == i){ 
-  	  double lclh = h;
- 	  cout << "znaleziono LCL h: " << lclh << " i: " << vLCLIndex << endl;
+  	  lclh = h;
+ 	  cout << "znaleziono LCL h: " << lclh << " i: " << vLclIndex << endl;
 	  }
 	  
 	  if(h <= lclh+3000){
@@ -3930,17 +3931,17 @@ double IndicesCollector::VMeanMostUnstableCIN(){
   return result;
 }   
 
-double IndicesCollector::MU_RH_LCL_3km(){
+double IndicesCollector::MU_LCL_RH_3km(){
   double result = S->th->mostUnstable->RH_loop;
   return result;
 }   
 
-double IndicesCollector::MUML_RH_LCL_3km(){
+double IndicesCollector::MUML_LCL_RH_3km(){
   double result = S->th->meanmostUnstable->RH_loop;
   return result;
 }   
 
-double IndicesCollector::MU5_RH_LCL_3km(){
+double IndicesCollector::MU5_LCL_RH_3km(){
   double result = S->th->mostU500->RH_loop;
   return result;
 }   
