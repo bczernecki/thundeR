@@ -176,6 +176,8 @@
 #'  \item 	RH_36km
 #'  \item 	RH_HGL
 #'  \item 	RH_500850
+#'  \item 	RH_MU_LCL_3km
+#'  \item 	RH_MUML_LCL_3km
 #'  \item 	PRCP_WATER
 #'  \item 	PRCP_WATER_eff
 #'  \item 	Moisture_Flux_0500m
@@ -319,9 +321,6 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
-#'  \item 	MU_LCL_RH_3km
-#'  \item 	MUML_LCL_RH_3km
-#'  \item 	MU5_LCL_RH_3km
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -544,6 +543,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "RH_36km",
 "RH_HGL",
 "RH_500850",
+"RH_MU_LCL_3km",
+"RH_MUML_LCL_3km",
 "PRCP_WATER",
 "PRCP_WATER_eff",
 "Moisture_Flux_0500m",
@@ -686,9 +687,6 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE",
 "SHERB_mod",
 "DEI",
-"DEI_eff",
-"MU_LCL_RH_3km",
-"MUML_LCL_RH_3km",
-"MU5_LCL_RH_3km")
+"DEI_eff")
 return(tmp)
 }
