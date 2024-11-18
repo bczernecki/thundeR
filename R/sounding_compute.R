@@ -319,6 +319,9 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
+#'  \item 	MU_LCL_RH_3km
+#'  \item 	MUML_LCL_RH_3km
+#'  \item 	MU5_LCL_RH_3km
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -683,6 +686,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE",
 "SHERB_mod",
 "DEI",
-"DEI_eff")
+"DEI_eff",
+"MU_LCL_RH_3km",
+"MUML_LCL_RH_3km",
+"MU5_LCL_RH_3km")
 return(tmp)
 }
