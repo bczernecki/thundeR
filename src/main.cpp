@@ -7046,8 +7046,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[169]=(*S)->getIndicesCollectorPointer()->RH36();
   vec[170]=(*S)->getIndicesCollectorPointer()->RHMIDDLE(); 
   vec[171]=(*S)->getIndicesCollectorPointer()->RH850500();
-  vec[172]=(*S)->getIndicesCollectorPointer()->MUML_LCL_RH_3km();
-  vec[173]=(*S)->getIndicesCollectorPointer()->MU_LCL_RH_3km();	
+  vec[172]=(*S)->getIndicesCollectorPointer()->MU_LCL_RH_3km();	
+  vec[173]=(*S)->getIndicesCollectorPointer()->MUML_LCL_RH_3km();
   vec[174]=(*S)->getIndicesCollectorPointer()->PWATER();
   vec[175]=(*S)->getIndicesCollectorPointer()->PWATER_eff();
   vec[176]=(*S)->getIndicesCollectorPointer()->MoistureFlux(); 
@@ -7708,6 +7708,8 @@ double * sounding_default2(double* pressure,
 //'  \item 	RH_36km
 //'  \item 	RH_HGL
 //'  \item 	RH_500850
+//'  \item 	RH_MU_LCL_3km
+//'  \item 	RH_MUML_LCL_3km
 //'  \item 	PRCP_WATER
 //'  \item 	PRCP_WATER_eff
 //'  \item 	Moisture_Flux_0500m
@@ -7851,9 +7853,6 @@ double * sounding_default2(double* pressure,
 //'  \item 	SHERB_mod
 //'  \item 	DEI
 //'  \item 	DEI_eff
-//'  \item 	MU_LCL_RH_3km
-//'  \item 	MUML_LCL_RH_3km
-//'  \item 	MU5_LCL_RH_3km
 //' }
  // [[Rcpp::export]]
  
