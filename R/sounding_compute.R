@@ -322,6 +322,8 @@
 #'  \item 	DEI
 #'  \item 	DEI_eff
 #'  \item 	MU5_E_CAPE_M10
+#'  \item 	RH_ML_LCL_3km
+#'  \item 	RH_ML_LCL_1500m
 #'  \item 	RH_MU5_LCL_3km
 #'  \item 	RH_MU5_LCL_1500m
 #'  \item 	RH_MU_LCL_1500m
@@ -698,6 +700,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "DEI",
 "DEI_eff",
 "MU5_E_CAPE_M10",
+"RH_ML_LCL_3km",
+"RH_ML_LCL_1500m"
 "RH_MU5_LCL_3km",
 "RH_MU5_LCL_1500m",
 "RH_MU_LCL_1500m",
