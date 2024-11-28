@@ -329,7 +329,7 @@
 #'  \item 	HGT_ISO_M10_wetbulb  
 #'  \item 	MU_LI_M15
 #'  \item 	MUML_LI_M15
-#'  \item 	MU5_LI_M25
+#'  \item 	MU5_LI_M15
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -705,6 +705,6 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "HGT_ISO_M10_wetbulb",
 "MU_LI_M15",
 "MUML_LI_M15",
-"MU5_LI_M2")
+"MU5_LI_M15")
 return(tmp)
 }
