@@ -321,6 +321,15 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
+#'  \item 	MU5_E_CAPE_M10
+#'  \item 	RH_MU5_LCL_3km
+#'  \item 	RH_MU5_LCL_1500m
+#'  \item 	RH_MU_LCL_1500m
+#'  \item 	RH_MUML_LCL_1500m
+#'  \item 	HGT_ISO_M10_wetbulb  
+#'  \item 	MU_LI_M15
+#'  \item 	MUML_LI_M15
+#'  \item 	MU5_LI_M25
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -687,6 +696,15 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE",
 "SHERB_mod",
 "DEI",
-"DEI_eff")
+"DEI_eff",
+"MU5_E_CAPE_M10",
+"RH_MU5_LCL_3km",
+"RH_MU5_LCL_1500m",
+"RH_MU_LCL_1500m",
+"RH_MUML_LCL_1500m",
+"HGT_ISO_M10_wetbulb",
+"MU_LI_M15",
+"MUML_LI_M15",
+"MU5_LI_M2")
 return(tmp)
 }
