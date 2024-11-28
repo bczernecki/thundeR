@@ -4398,7 +4398,7 @@ double IndicesCollector::VMostU500LI_M15(){
   double lit = Get(S->t,minten);
   double plit = Get(S->th->mostU500->virtualValues,vindex);
   double result = lit - plit;
-  double LCL = this->MU500Temperature();
+  double LCL = this->MU500LCLTemperature();
   if(LCL < (-15))result = sqrt(-1);
   return result;
 }
