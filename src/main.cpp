@@ -2845,6 +2845,7 @@ public:
   double ZeroHeight();
   double M10Height();
   double WetBulbZeroHeight();		
+  double WetBulbM10Height();		
 
   double MUHeight();
   double MUMLHeight();
@@ -3170,6 +3171,10 @@ public:
   double MU_LCL_RH_3km();
   double MUML_LCL_RH_3km();
   double MU5_LCL_RH_3km();
+
+  double MU_LCL_RH_1500m();
+  double MUML_LCL_RH_1500m();
+  double MU5_LCL_RH_1500m();
 
   double SR_moisture_flux();
   double SR_moisture_flux_eff();
