@@ -3169,10 +3169,12 @@ public:
   double ML_ebuoyancy_M10();
   double SB_ebuoyancy_M10();
 
+  double ML_LCL_RH_3km();
   double MU_LCL_RH_3km();
   double MUML_LCL_RH_3km();
   double MU5_LCL_RH_3km();
 
+  double SB_LCL_RH_1500m();
   double MU_LCL_RH_1500m();
   double MUML_LCL_RH_1500m();
   double MU5_LCL_RH_1500m();
@@ -3989,6 +3991,16 @@ double IndicesCollector::MUML_LCL_RH_3km(){
 
 double IndicesCollector::MU5_LCL_RH_3km(){
   double result = S->th->mostU500->RH_loop;
+  return result;
+}   
+
+double IndicesCollector::ML_LCL_RH_3km(){
+  double result = S->th->meanLayer->RH_loop;
+  return result;
+}   
+
+double IndicesCollector::ML_LCL_RH_1500m(){
+  double result = S->th->meanLayer->RH_loop15;
   return result;
 }   
 
@@ -6985,7 +6997,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[326];
+  double * vec = new double[328];
 
 // SB parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedCAPE();
@@ -7345,14 +7357,16 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[315]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[316]=(*S)->getIndicesCollectorPointer()->DEI_eff();
   // MU_E_CAPE_M10 jako element nr 317
-  vec[318]=(*S)->getIndicesCollectorPointer()->MU5_LCL_RH_3km();	
-  vec[319]=(*S)->getIndicesCollectorPointer()->MU5_LCL_RH_1500m();	
-  vec[320]=(*S)->getIndicesCollectorPointer()->MU_LCL_RH_1500m();	
-  vec[321]=(*S)->getIndicesCollectorPointer()->MUML_LCL_RH_1500m();
-  vec[322]=(*S)->getIndicesCollectorPointer()->WetBulbM10Height();  
-  vec[323]=(*S)->getIndicesCollectorPointer()->VMostUnstableLI_M15();
-  vec[324]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLI_M15();
-  vec[325]=(*S)->getIndicesCollectorPointer()->VMostU500LI_M15();
+  vec[318]=(*S)->getIndicesCollectorPointer()->ML_LCL_RH_3km();	
+  vec[319]=(*S)->getIndicesCollectorPointer()->ML_LCL_RH_1500m();	
+  vec[320]=(*S)->getIndicesCollectorPointer()->MU5_LCL_RH_3km();	
+  vec[321]=(*S)->getIndicesCollectorPointer()->MU5_LCL_RH_1500m();	
+  vec[322]=(*S)->getIndicesCollectorPointer()->MU_LCL_RH_1500m();	
+  vec[323]=(*S)->getIndicesCollectorPointer()->MUML_LCL_RH_1500m();
+  vec[324]=(*S)->getIndicesCollectorPointer()->WetBulbM10Height();  
+  vec[325]=(*S)->getIndicesCollectorPointer()->VMostUnstableLI_M15();
+  vec[326]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLI_M15();
+  vec[327]=(*S)->getIndicesCollectorPointer()->VMostU500LI_M15();
 	
   return vec;
 }
@@ -8005,6 +8019,8 @@ double * sounding_default2(double* pressure,
 //'  \item 	DEI
 //'  \item 	DEI_eff
 //'  \item 	MU5_E_CAPE_M10
+//'  \item 	RH_ML_LCL_3km
+//'  \item 	RH_ML_LCL_1500m
 //'  \item 	RH_MU5_LCL_3km
 //'  \item 	RH_MU5_LCL_1500m
 //'  \item 	RH_MU_LCL_1500m
@@ -8049,7 +8065,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 326;
+   int reslen= 328;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
