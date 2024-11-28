@@ -2775,6 +2775,7 @@ public:
   double VMostUnstableVmax();
   double MUELTemperature();
   double MULCLTemperature();
+  double MU500LCLTemperature();
   double MULFCTemperature();
   double MUMRatio();			
 
