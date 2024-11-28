@@ -1442,6 +1442,8 @@ private:
   double vcin500;
   double RH_i;
   double RH_loop;
+  double RH_i15;
+  double RH_loop15;
   
   double os;
   double o;
@@ -1520,6 +1522,8 @@ void LapseRate::allocate(){
   vcin500 = 0;
   RH_loop = 0;
   RH_i = 0;
+  RH_loop15 = 0;
+  RH_i15 = 0;
   middlecape=0;
   coldcape=0;
   coldcapeTV=0;
@@ -1567,6 +1571,8 @@ void LapseRate::setInitialConditions(int i, double p, double h, double t, double
   this->vcin500=0;
   this->RH_i = 0;
   this->RH_loop = 0;
+  this->RH_i15 = 0;
+  this->RH_loop15 = 0;
   this->startIndex=i;
   this->lasth = h;
   this->tch= W(d,p);
@@ -1706,11 +1712,21 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
           RH_i += 1; 
 	  }
 
+	  if(h <= lclh+1500){
+	  RH_loop15 += ESAT(d)/ESAT(t);
+          RH_i15 += 1; 
+	  }
+
 	  if(h > lclh+3000){
 	  RH_loop = RH_loop/RH_i;
           RH_i = 1; 
 	  }
-  
+
+ 	  if(h > lclh+1500){
+	  RH_loop15 = RH_loop15/RH_i15;
+          RH_i15 = 1; 
+	  }
+
     if (vt_parcel >= t_) {
         if (vLfcIndex == -1) vLfcIndex = i;
         if (vElIndex != -1) {
@@ -1866,8 +1882,10 @@ public:
   double mo;
   int zeropos;
   int wbzeropos;
+  int wbM10pos;
   double zero;
   double wb0;
+  double wbM10;
   
   int mintenpos;
   double minten;
@@ -1877,6 +1895,9 @@ public:
 
   int min25pos;
   double min25;
+
+  int min15pos;
+  double min15;
 
   double mr1000;
   
@@ -2099,8 +2120,10 @@ Thermodynamics::Thermodynamics(){
   maxOE=0;	
   zeropos=0;
   wbzeropos=0;
+  wbM10pos=0;
   zero=0;
   wb0=0;
+  wbM10=0;
   mr1000=0;
   lr01=0;
   h01=0;
@@ -2447,15 +2470,19 @@ void Thermodynamics::finishLowLapseRates()
 void Thermodynamics::ZeroPosStartingConditions(int i, double p, double h, double t, double d, double a, double v, double wbt)
 {
   wbzeropos = i;
+  wbM10pos = i;
   zeropos = i;
   mintenpos = i;
   min40pos = i;
   min25pos = i;
+  min15pos = i;
   zero = abs(t);
   wb0 = abs(wbt);
+  wbM10 = abs(wbt+10);
   minten = abs(t+10);
   min40 = abs(t+40);
   min25 = abs(t+25);
+  min15 = abs(t+15);
 }
 void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, double a, double v, double wbt)
 {
@@ -2466,7 +2493,7 @@ void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, d
     zeropos = i;
   }
   double t_wb0 = abs(wbt);
-  
+  double t_wbM10 = abs(wbt+10);
   double imten= abs(t+10);
   
   if(imten<minten){
@@ -2482,16 +2509,28 @@ void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, d
   }
 
   double im25= abs(t+25);
+  double im15= abs(t+15);
   
   if(im25<min25){
     min25 = im25;
     min25pos = i;
   }
-  
+
+  if(im15<min15){
+    min15 = im15;
+    min15pos = i;
+  }
+
   if (t_wb0 < wb0)
   {
     wb0 = t_wb0;
     wbzeropos = i;
+  }
+
+  if (t_wbM10 < wbM10)
+  {
+    wbM10 = t_wbM10;
+    wbM10pos = i;
   }
 }
 void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double d, double a, double v)
@@ -3087,6 +3126,10 @@ public:
   double VMostUnstableLI_M25();
   double VMeanMostUnstableLI_M25();
   double VMostU500LI_M25();	
+
+  double VMostUnstableLI_M15();
+  double VMeanMostUnstableLI_M15();
+  double VMostU500LI_M15();	
 
   double MU_buoyancy();
   double MUML_buoyancy();
@@ -3943,6 +3986,21 @@ double IndicesCollector::MU5_LCL_RH_3km(){
   return result;
 }   
 
+double IndicesCollector::MU_LCL_RH_1500m(){
+  double result = S->th->mostUnstable->RH_loop15;
+  return result;
+}   
+
+double IndicesCollector::MUML_LCL_RH_1500m(){
+  double result = S->th->meanmostUnstable->RH_loop15;
+  return result;
+}   
+
+double IndicesCollector::MU5_LCL_RH_1500m(){
+  double result = S->th->mostU500->RH_loop15;
+  return result;
+}   
+
 double IndicesCollector::VMostUnstableCIN500(){
   double result = S->th->mostUnstable->vcin500;
   return result;
@@ -4270,6 +4328,42 @@ double IndicesCollector::VMeanMostUnstableLI_M25(){
   return lit - plit;
 }
 
+double IndicesCollector::VMostUnstableLI_M15(){
+  int minten = S->th->min15pos;
+  int mintencheck = S->th->mostUnstable->startIndex;
+  if(minten<mintencheck){
+    minten = mintencheck;
+  }
+  int vindex = minten - S->th->mostUnstable->startIndex;
+  double lit = Get(S->t,minten);
+  double plit = Get(S->th->mostUnstable->virtualValues,vindex);
+  return lit - plit;
+}
+
+double IndicesCollector::VMeanMostUnstableLI_M15(){
+  int minten = S->th->min15pos;
+  int mintencheck = S->th->meanmostUnstable->startIndex;
+  if(minten<mintencheck){
+    minten = mintencheck;
+  }
+  int vindex = minten - S->th->meanmostUnstable->startIndex;
+  double lit = Get(S->t,minten);
+  double plit = Get(S->th->meanmostUnstable->virtualValues,vindex);
+  return lit - plit;
+}
+
+double IndicesCollector::VMostU500LI_M15(){
+  int minten = S->th->min15pos;
+  int mintencheck = S->th->mostU500->startIndex;
+  if(minten<mintencheck){
+    minten = mintencheck;
+  }
+  int vindex = minten - S->th->mostU500->startIndex;
+  double lit = Get(S->t,minten);
+  double plit = Get(S->th->mostU500->virtualValues,vindex);
+  return lit - plit;
+}
+
 double IndicesCollector::VMeanLayerVmax(){
   return sqrt(this->VMeanLayerCAPE()*2);  
 }
@@ -4448,6 +4542,13 @@ double IndicesCollector::M10Height(){
 
 double IndicesCollector::ZeroHeight(){
   int zeroIndex = S->th->zeropos;
+  double h0 = Get(S->h,0);
+  double hz = Get(S->h,zeroIndex);
+  return hz-h0;
+}
+
+double IndicesCollector::WetBulbM10Height(){
+  int zeroIndex = S->th->wbM10pos;
   double h0 = Get(S->h,0);
   double hz = Get(S->h,zeroIndex);
   return hz-h0;
@@ -6845,7 +6946,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[317];
+  double * vec = new double[326];
 
 // SB parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedCAPE();
@@ -7000,6 +7101,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   double* MU500_ECAPE = (*S)->getIndicesCollectorPointer()->MU500_ECAPE(); 
   vec[133] = MU500_ECAPE[2]; // CAPE
   vec[134] = MU500_ECAPE[3]; // CAPE_HGL
+  vec[317] = MU500_ECAPE[4]; // CAPE_M10
   vec[135]=(*S)->getIndicesCollectorPointer()->MU500_ebuoyancy();
   vec[136]=(*S)->getIndicesCollectorPointer()->MU500_ebuoyancy_M10();
   vec[137]=(*S)->getIndicesCollectorPointer()->MU500_ELI();
@@ -7203,6 +7305,16 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[314]=(*S)->getIndicesCollectorPointer()->SHERBS3_v2();
   vec[315]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[316]=(*S)->getIndicesCollectorPointer()->DEI_eff();
+  // MU_E_CAPE_M10 jako element nr 317
+  vec[318]=(*S)->getIndicesCollectorPointer()->MU5_LCL_RH_3km();	
+  vec[319]=(*S)->getIndicesCollectorPointer()->MU5_LCL_RH_1500m();	
+  vec[320]=(*S)->getIndicesCollectorPointer()->MU_LCL_RH_1500m();	
+  vec[321]=(*S)->getIndicesCollectorPointer()->MUML_LCL_RH_1500m();
+  vec[322]=(*S)->getIndicesCollectorPointer()->WetBulbM10Height();  
+  vec[323]=(*S)->getIndicesCollectorPointer()->VMostUnstableLI_M15();
+  vec[324]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLI_M15();
+  vec[325]=(*S)->getIndicesCollectorPointer()->VMostU500LI_M15();
+	
   return vec;
 }
 
@@ -7853,6 +7965,15 @@ double * sounding_default2(double* pressure,
 //'  \item 	SHERB_mod
 //'  \item 	DEI
 //'  \item 	DEI_eff
+//'  \item 	MU5_E_CAPE_M10
+//'  \item 	RH_MU5_LCL_3km
+//'  \item 	RH_MU5_LCL_1500m
+//'  \item 	RH_MU_LCL_1500m
+//'  \item 	RH_MUML_LCL_1500m
+//'  \item 	HGT_ISO_M10_wetbulb  
+//'  \item 	MU_LI_M15
+//'  \item 	MUML_LI_M15
+//'  \item 	MU5_LI_M25
 //' }
  // [[Rcpp::export]]
  
@@ -7889,7 +8010,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 317;
+   int reslen= 326;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
