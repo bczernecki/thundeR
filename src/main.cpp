@@ -4273,6 +4273,10 @@ double IndicesCollector::VMeanLayerLI(){
   return Showalter;
 }
 
+double IndicesCollector::MU500LCLTemperature(){
+  return Get(S->t,S->th->mostU500->vLclIndex);
+}
+
 double IndicesCollector::VSurfaceBasedLI_M25(){
   int minten = S->th->min25pos;
   int mintencheck = S->th->surfaceBased->startIndex;
@@ -4282,7 +4286,11 @@ double IndicesCollector::VSurfaceBasedLI_M25(){
   int vindex = minten - S->th->surfaceBased->startIndex;
   double lit = Get(S->t,minten);
   double plit = Get(S->th->surfaceBased->virtualValues,vindex);
-  return lit - plit;
+	
+  double result = lit - plit;
+  double LCL = this->SBLCLTemperature();
+  if(LCL < (-25))result = sqrt(-1);
+  return result;
 }
 
 double IndicesCollector::VMostU500LI_M25(){
@@ -4294,7 +4302,11 @@ double IndicesCollector::VMostU500LI_M25(){
   int vindex = minten - S->th->mostU500->startIndex;
   double lit = Get(S->t,minten);
   double plit = Get(S->th->mostU500->virtualValues,vindex);
-  return lit - plit;
+	
+  double result = lit - plit;
+  double LCL = this->MU500LCLTemperature();
+  if(LCL < (-25))result = sqrt(-1);
+  return result;
 }
 
 double IndicesCollector::VMeanLayerLI_M25(){
@@ -4306,7 +4318,11 @@ double IndicesCollector::VMeanLayerLI_M25(){
   int vindex = minten - S->th->meanLayer->startIndex;
   double lit = Get(S->t,minten);
   double plit = Get(S->th->meanLayer->virtualValues,vindex);
-  return lit - plit;
+	
+  double result = lit - plit;
+  double LCL = this->MLLCLTemperature();
+  if(LCL < (-25))result = sqrt(-1);
+  return result;
 }
 
 double IndicesCollector::VMostUnstableLI_M25(){
@@ -4318,7 +4334,11 @@ double IndicesCollector::VMostUnstableLI_M25(){
   int vindex = minten - S->th->mostUnstable->startIndex;
   double lit = Get(S->t,minten);
   double plit = Get(S->th->mostUnstable->virtualValues,vindex);
-  return lit - plit;
+	
+  double result = lit - plit;
+  double LCL = this->MULCLTemperature();
+  if(LCL < (-25))result = sqrt(-1);
+  return result;
 }
 
 double IndicesCollector::VMeanMostUnstableLI_M25(){
@@ -4330,7 +4350,11 @@ double IndicesCollector::VMeanMostUnstableLI_M25(){
   int vindex = minten - S->th->meanmostUnstable->startIndex;
   double lit = Get(S->t,minten);
   double plit = Get(S->th->meanmostUnstable->virtualValues,vindex);
-  return lit - plit;
+	
+  double result = lit - plit;
+  double LCL = this->MUMLLCLTemperature();
+  if(LCL < (-25))result = sqrt(-1);
+  return result;
 }
 
 double IndicesCollector::VMostUnstableLI_M15(){
@@ -4341,8 +4365,11 @@ double IndicesCollector::VMostUnstableLI_M15(){
   }
   int vindex = minten - S->th->mostUnstable->startIndex;
   double lit = Get(S->t,minten);
-  double plit = Get(S->th->mostUnstable->virtualValues,vindex);
-  return lit - plit;
+  double plit = Get(S->th->mostUnstable->virtualValues,vindex);	
+  double result = lit - plit;
+  double LCL = this->MULCLTemperature();
+  if(LCL < (-15))result = sqrt(-1);
+  return result;
 }
 
 double IndicesCollector::VMeanMostUnstableLI_M15(){
@@ -4354,7 +4381,10 @@ double IndicesCollector::VMeanMostUnstableLI_M15(){
   int vindex = minten - S->th->meanmostUnstable->startIndex;
   double lit = Get(S->t,minten);
   double plit = Get(S->th->meanmostUnstable->virtualValues,vindex);
-  return lit - plit;
+  double result = lit - plit;
+  double LCL = this->MUMLLCLTemperature();
+  if(LCL < (-15))result = sqrt(-1);
+  return result;
 }
 
 double IndicesCollector::VMostU500LI_M15(){
@@ -4366,7 +4396,10 @@ double IndicesCollector::VMostU500LI_M15(){
   int vindex = minten - S->th->mostU500->startIndex;
   double lit = Get(S->t,minten);
   double plit = Get(S->th->mostU500->virtualValues,vindex);
-  return lit - plit;
+  double result = lit - plit;
+  double LCL = this->MU500Temperature();
+  if(LCL < (-15))result = sqrt(-1);
+  return result;
 }
 
 double IndicesCollector::VMeanLayerVmax(){
@@ -7978,7 +8011,7 @@ double * sounding_default2(double* pressure,
 //'  \item 	HGT_ISO_M10_wetbulb  
 //'  \item 	MU_LI_M15
 //'  \item 	MUML_LI_M15
-//'  \item 	MU5_LI_M25
+//'  \item 	MU5_LI_M15
 //' }
  // [[Rcpp::export]]
  
