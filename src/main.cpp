@@ -3174,7 +3174,7 @@ public:
   double MUML_LCL_RH_3km();
   double MU5_LCL_RH_3km();
 
-  double SB_LCL_RH_1500m();
+  double ML_LCL_RH_1500m();
   double MU_LCL_RH_1500m();
   double MUML_LCL_RH_1500m();
   double MU5_LCL_RH_1500m();
