@@ -701,7 +701,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "DEI_eff",
 "MU5_E_CAPE_M10",
 "RH_ML_LCL_3km",
-"RH_ML_LCL_1500m"
+"RH_ML_LCL_1500m",
 "RH_MU5_LCL_3km",
 "RH_MU5_LCL_1500m",
 "RH_MU_LCL_1500m",
