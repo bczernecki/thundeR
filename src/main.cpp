@@ -7712,7 +7712,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 319;
+   int reslen= 24;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
