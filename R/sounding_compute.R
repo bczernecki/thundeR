@@ -323,6 +323,19 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
+#'  \item 	STEP_STP_fixed
+#'  \item 	STEP_SCP_fixed
+#'  \item 	STEP_BS_01km
+#'  \item 	STEP_wind_sfc_to_850_A
+#'  \item 	STEP_wind_sfc_to_850_M
+#'  \item 	STEP_ML_CIN
+#'  \item 	STEP_tmp_sfc_to_850
+#'  \item 	STEP_tmp_sfc_to_700
+#'  \item 	STEP_tmp_sfc_to_500
+#'  \item 	STEP_dpt_sfc
+#'  \item 	STEP_ML_LCL  
+#'  \item 	STEP_dpt_sfc_to_850
+#'  \item 	STEP_dpt_sfc_to_500
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -691,6 +704,19 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE",
 "SHERB_mod",
 "DEI",
-"DEI_eff")
+"DEI_eff",
+"STEP_STP_fixed",
+"STEP_SCP_fixed",
+"STEP_BS_01km",
+"STEP_wind_sfc_to_850_A",
+"STEP_wind_sfc_to_850_M",
+"STEP_ML_CIN",
+"STEP_tmp_sfc_to_850",
+"STEP_tmp_sfc_to_700",
+"STEP_tmp_sfc_to_500",
+"STEP_dpt_sfc",
+"STEP_ML_LCL",
+"STEP_dpt_sfc_to_850",
+"STEP_dpt_sfc_to_500")
 return(tmp)
 }
