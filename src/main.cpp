@@ -3251,6 +3251,19 @@ public:
   double VMostUnstableCIN500();		
   double MU500_CIN500();		
 
+  double STEP_STP();
+  double STEP_SCP();
+  double STEP_BS01();
+  double STEP_wind_sfc_850_A();
+  double STEP_wind_sfc_850_M();
+  double STEP_CIN();
+  double STEP_temp_sfc_850();
+  double STEP_Temp_sfc_700();
+  double STEP_Temp_sfc_500();
+  double STEP_Dpt_sfc();
+  double STEP_LCL();  
+  double STEP_Dpt_sfc_850();
+  double STEP_Dpt_sfc_500();
 };
 
 void Sounding::alloc(){
@@ -6995,9 +7008,128 @@ double IndicesCollector::SB_ebuoyancy_3km(){
   return buoyancy;
 }
 
+/////////////////////////////
+// STEP parameters for SPC //
+/////////////////////////////
+
+double IndicesCollector::STEP_STP(){
+  double sbcape = this->VSurfaceBasedCAPE()/1500;
+  double sblcl = this->VSurfaceBasedLCL();
+  double srh1 = this->SRH01RM()/150;
+  double bwd = this->emubs();
+  double cin = this->VSurfaceBasedCIN();	
+  if(isnan(cin)) cin = 0;
+  if(sblcl<1000)sblcl=1;
+  else if(sblcl>2000)sblcl=0;
+  else sblcl=(2000-sblcl)/1000;  
+  if(cin>-50)cin=1;
+  else if(cin<-200)cin=0;
+  else cin=(200+cin)/150;
+  if(bwd<12.5)bwd=0.0;
+  else if(bwd>30)bwd = 1.5;
+  else bwd/=20;  
+  return sbcape*sblcl*srh1*bwd*cin;
+}
+double IndicesCollector::STEP_SCP(){
+  double mucape = this->VMostUnstableCAPE()/1000;
+  double srh = this->SRH03RM()/50;
+  double ewd = this->BS06();
+  if(ewd<10)ewd=0;
+  else if(ewd>20)ewd=1;
+  else ewd/=20;
+  return mucape*srh*ewd;
+}
+
+double IndicesCollector::STEP_BS01(){
+  int tail=0;
+  int head = cache->getHeightIndex(1000);
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  return result.abs()*1.94384;
+}
+
+double IndicesCollector::STEP_wind_sfc_850_A(){
+  double *sfc = Get(S->ks->vw,0).toAV();
+  double *P850 = Get(S->ks->vw,cache->getPressureIndex(850)).toAV(); 
+  double magnitude = abs(P850[0] - sfc[0]);
+  if(magnitude>180)magnitude=abs(magnitude-360);  
+  return magnitude; 
+}
+
+double IndicesCollector::STEP_wind_sfc_850_M(){
+  double *sfc = Get(S->ks->vw,0).toAV();
+  double *P850 = Get(S->ks->vw,cache->getPressureIndex(850)).toAV(); 
+  double magnitude = P850[1] - sfc[1]; 
+  return magnitude*1.94384; 
+}
+
+double IndicesCollector::STEP_CIN(){  
+  double result = 0;
+  result = S->th->meanLayer->vcin;  
+    double cape = this->VMeanLayerCAPE();
+  if(cape==0){
+    result = sqrt(-1); 
+  }
+  return result;  
+}  
+
+double IndicesCollector::STEP_temp_sfc_850(){
+	double sfc = Get(S->t,0);
+  double P850 = Get(S->t,cache->getPressureIndex(850));
+  sfc = (sfc * (9.0 / 5)) + 32;
+  P850 = (P850 * (9.0 / 5)) + 32;
+  return P850 - sfc;
+}
+
+double IndicesCollector::STEP_Temp_sfc_700(){
+	double sfc = Get(S->t,0);
+  double P850 = Get(S->t,cache->getPressureIndex(700));
+  sfc = (sfc * (9.0 / 5)) + 32;
+  P850 = (P850 * (9.0 / 5)) + 32;
+  return P850 - sfc;
+}
+
+double IndicesCollector::STEP_Temp_sfc_500(){
+	double sfc = Get(S->t,0);
+  double P850 = Get(S->t,cache->getPressureIndex(500));
+  sfc = (sfc * (9.0 / 5)) + 32;
+  P850 = (P850 * (9.0 / 5)) + 32;
+  return P850 - sfc;
+}
+
+double IndicesCollector::STEP_Dpt_sfc(){
+  double sfc = Get(S->d,0);
+  sfc = (sfc * (9.0 / 5)) + 32;
+  return sfc;
+}
+
+double IndicesCollector::STEP_LCL(){  
+  double result = 0;
+  int index = S->th->meanLayer->vLclIndex;  
+  result = Get(S->h,index)- S->th->h0;  
+  return result;
+}
+
+double IndicesCollector::STEP_Dpt_sfc_850(){
+	double sfc = Get(S->d,0);
+  double P850 = Get(S->d,cache->getPressureIndex(850));
+  sfc = (sfc * (9.0 / 5)) + 32;
+  P850 = (P850 * (9.0 / 5)) + 32;
+  return P850 - sfc;
+}
+
+double IndicesCollector::STEP_Dpt_sfc_500(){
+	double sfc = Get(S->d,0);
+  double P850 = Get(S->d,cache->getPressureIndex(500));
+  sfc = (sfc * (9.0 / 5)) + 32;
+  P850 = (P850 * (9.0 / 5)) + 32;
+  return P850 - sfc;
+}
+
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[319];
+  double * vec = new double[332];
 
 // SB parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedCAPE();
@@ -7357,6 +7489,19 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[316]=(*S)->getIndicesCollectorPointer()->SHERBS3_v2();
   vec[317]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[318]=(*S)->getIndicesCollectorPointer()->DEI_eff();
+  vec[319]=(*S)->getIndicesCollectorPointer()->STEP_STP();
+  vec[320]=(*S)->getIndicesCollectorPointer()->STEP_SCP();
+  vec[321]=(*S)->getIndicesCollectorPointer()->STEP_BS01();
+  vec[322]=(*S)->getIndicesCollectorPointer()->STEP_wind_sfc_850_A();
+  vec[323]=(*S)->getIndicesCollectorPointer()->STEP_wind_sfc_850_M();
+  vec[324]=(*S)->getIndicesCollectorPointer()->STEP_CIN();
+  vec[325]=(*S)->getIndicesCollectorPointer()->STEP_temp_sfc_850();
+  vec[326]=(*S)->getIndicesCollectorPointer()->STEP_Temp_sfc_700();
+  vec[327]=(*S)->getIndicesCollectorPointer()->STEP_Temp_sfc_500();
+  vec[328]=(*S)->getIndicesCollectorPointer()->STEP_Dpt_sfc();
+  vec[329]=(*S)->getIndicesCollectorPointer()->STEP_LCL();  
+  vec[330]=(*S)->getIndicesCollectorPointer()->STEP_Dpt_sfc_850();
+  vec[331]=(*S)->getIndicesCollectorPointer()->STEP_Dpt_sfc_500();
   return vec;
 }
 
@@ -8009,6 +8154,19 @@ double * sounding_default2(double* pressure,
 //'  \item 	SHERB_mod
 //'  \item 	DEI
 //'  \item 	DEI_eff
+//'  \item 	STEP_STP_fixed
+//'  \item 	STEP_SCP_fixed
+//'  \item 	STEP_BS_01km
+//'  \item 	STEP_wind_sfc_to_850_A
+//'  \item 	STEP_wind_sfc_to_850_M
+//'  \item 	STEP_ML_CIN
+//'  \item 	STEP_tmp_sfc_to_850
+//'  \item 	STEP_tmp_sfc_to_700
+//'  \item 	STEP_tmp_sfc_to_500
+//'  \item 	STEP_dpt_sfc
+//'  \item 	STEP_ML_LCL  
+//'  \item 	STEP_dpt_sfc_to_850
+//'  \item 	STEP_dpt_sfc_to_500
 //' }
  // [[Rcpp::export]]
  
@@ -8045,7 +8203,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 319;
+   int reslen= 332;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
