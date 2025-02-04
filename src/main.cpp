@@ -7007,7 +7007,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[4]=(*S)->getIndicesCollectorPointer()->VMostU500LI_M25();
   vec[5]=(*S)->getIndicesCollectorPointer()->MU500_CIN500();
   vec[6]=(*S)->getIndicesCollectorPointer()->LR04(); 
-  vec[7]=(*S)->getIndicesCollectorPointer()->LR06();
+  vec[7]=(*S)->getIndicesCollectorPointer()->VMeanLayerLCL();
   vec[8]=(*S)->getIndicesCollectorPointer()->LR26();
   vec[9]=(*S)->getIndicesCollectorPointer()->WetBulbM10Height();  
   vec[10]=(*S)->getIndicesCollectorPointer()->thetae01();
@@ -7019,7 +7019,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[16]=(*S)->getIndicesCollectorPointer()->emumlbs();
   vec[17]=(*S)->getIndicesCollectorPointer()->emu500bs();
   vec[18]=(*S)->getIndicesCollectorPointer()->BS_MLmax();
-  vec[19]=(*S)->getIndicesCollectorPointer()->MeanSR01_MW();
+  vec[19]=(*S)->getIndicesCollectorPointer()->BS06_var_SI();
   vec[20]=(*S)->getIndicesCollectorPointer()->MeanSR500_MW();
   vec[21]=(*S)->getIndicesCollectorPointer()->Ventilation_16km_RM();
   vec[22]=(*S)->getIndicesCollectorPointer()->SV_1000_RM_FRA();
