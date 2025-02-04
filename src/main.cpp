@@ -7003,8 +7003,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[0]=(*S)->getIndicesCollectorPointer()->VMeanLayerLI_M25();
   vec[1]=(*S)->getIndicesCollectorPointer()->VMeanLayerCIN500();  
   vec[2]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLI();
-  vec[3]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLI_M25(); 
-  vec[4]=(*S)->getIndicesCollectorPointer()->VMostU500LI_M25();
+  vec[3]=(*S)->getIndicesCollectorPointer()->MUMLmiddlecape(); 
+  vec[4]=(*S)->getIndicesCollectorPointer()->MU500middlecape();
   vec[5]=(*S)->getIndicesCollectorPointer()->MU500_CIN500();
   vec[6]=(*S)->getIndicesCollectorPointer()->LR04(); 
   vec[7]=(*S)->getIndicesCollectorPointer()->VMeanLayerLCL();
