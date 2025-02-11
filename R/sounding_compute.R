@@ -279,6 +279,8 @@
 #'  \item 	SV_01km_LM_fra
 #'  \item 	SV_03km_RM_fra
 #'  \item 	SV_03km_LM_fra
+#'  \item 	CA0500_RM();
+#'  \item 	CA0500_LM();
 #'  \item 	Bunkers_RM_A
 #'  \item 	Bunkers_RM_M
 #'  \item 	Bunkers_LM_A
@@ -305,8 +307,6 @@
 #'  \item 	SCP_fix_LM
 #'  \item 	SCP_eff_RM
 #'  \item 	SCP_eff_LM
-#'  \item 	LTTP_RM();
-#'  \item 	LTTP_LM();
 #'  \item 	SHIP
 #'  \item 	HSI
 #'  \item 	HSI_mod
@@ -648,6 +648,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SV_01km_LM_fra",
 "SV_03km_RM_fra",
 "SV_03km_LM_fra",
+"CA_0500_RM",
+"CA_0500_LM",
 "Bunkers_RM_A",
 "Bunkers_RM_M",
 "Bunkers_LM_A",
