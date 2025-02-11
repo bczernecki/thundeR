@@ -7965,6 +7965,8 @@ double * sounding_default2(double* pressure,
 //'  \item 	SV_01km_LM_fra
 //'  \item 	SV_03km_RM_fra
 //'  \item 	SV_03km_LM_fra
+//'  \item 	CA500_RM();
+//'  \item 	CA500_LM();
 //'  \item 	Bunkers_RM_A
 //'  \item 	Bunkers_RM_M
 //'  \item 	Bunkers_LM_A
@@ -7991,8 +7993,6 @@ double * sounding_default2(double* pressure,
 //'  \item 	SCP_fix_LM
 //'  \item 	SCP_eff_RM
 //'  \item 	SCP_eff_LM
-//'  \item 	LTTP_RM();
-//'  \item 	LTTP_LM();
 //'  \item 	SHIP
 //'  \item 	HSI
 //'  \item 	HSI_mod
