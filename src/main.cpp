@@ -7309,38 +7309,38 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[272]=(*S)->getIndicesCollectorPointer()->SV_1000_LM_FRA();
   vec[273]=(*S)->getIndicesCollectorPointer()->SV_3000_RM_FRA();
   vec[274]=(*S)->getIndicesCollectorPointer()->SV_3000_LM_FRA();
-	
+  vec[275]=(*S)->getIndicesCollectorPointer()->CA500_RM();
+  vec[276]=(*S)->getIndicesCollectorPointer()->CA500_LM();
+
   // Vectors
-  vec[275]=(*S)->getIndicesCollectorPointer()->Bunkers_RM_A();
-  vec[276]=(*S)->getIndicesCollectorPointer()->Bunkers_RM_M();
-  vec[277]=(*S)->getIndicesCollectorPointer()->Bunkers_LM_A();
-  vec[278]=(*S)->getIndicesCollectorPointer()->Bunkers_LM_M();
-  vec[279]=(*S)->getIndicesCollectorPointer()->Bunkers_MW_A();
-  vec[280]=(*S)->getIndicesCollectorPointer()->Bunkers_MW_M();
-  vec[281]=(*S)->getIndicesCollectorPointer()->Bunkers4_RM_A();
-  vec[282]=(*S)->getIndicesCollectorPointer()->Bunkers4_RM_M();
-  vec[283]=(*S)->getIndicesCollectorPointer()->Bunkers4_LM_A();
-  vec[284]=(*S)->getIndicesCollectorPointer()->Bunkers4_LM_M();
-  vec[285]=(*S)->getIndicesCollectorPointer()->Peters_vector_A();
-  vec[286]=(*S)->getIndicesCollectorPointer()->Peters_vector_M();
-  vec[287]=(*S)->getIndicesCollectorPointer()->Corfidi_downwind_A();
-  vec[288]=(*S)->getIndicesCollectorPointer()->Corfidi_downwind_M();
-  vec[289]=(*S)->getIndicesCollectorPointer()->Corfidi_upwind_A();
-  vec[290]=(*S)->getIndicesCollectorPointer()->Corfidi_upwind_M();
+  vec[277]=(*S)->getIndicesCollectorPointer()->Bunkers_RM_A();
+  vec[278]=(*S)->getIndicesCollectorPointer()->Bunkers_RM_M();
+  vec[279]=(*S)->getIndicesCollectorPointer()->Bunkers_LM_A();
+  vec[280]=(*S)->getIndicesCollectorPointer()->Bunkers_LM_M();
+  vec[281]=(*S)->getIndicesCollectorPointer()->Bunkers_MW_A();
+  vec[282]=(*S)->getIndicesCollectorPointer()->Bunkers_MW_M();
+  vec[283]=(*S)->getIndicesCollectorPointer()->Bunkers4_RM_A();
+  vec[284]=(*S)->getIndicesCollectorPointer()->Bunkers4_RM_M();
+  vec[285]=(*S)->getIndicesCollectorPointer()->Bunkers4_LM_A();
+  vec[286]=(*S)->getIndicesCollectorPointer()->Bunkers4_LM_M();
+  vec[287]=(*S)->getIndicesCollectorPointer()->Peters_vector_A();
+  vec[288]=(*S)->getIndicesCollectorPointer()->Peters_vector_M();
+  vec[289]=(*S)->getIndicesCollectorPointer()->Corfidi_downwind_A();
+  vec[290]=(*S)->getIndicesCollectorPointer()->Corfidi_downwind_M();
+  vec[291]=(*S)->getIndicesCollectorPointer()->Corfidi_upwind_A();
+  vec[292]=(*S)->getIndicesCollectorPointer()->Corfidi_upwind_M();
 	
   // Composite metrics
-  vec[291]=(*S)->getIndicesCollectorPointer()->K_Index();
-  vec[292]=(*S)->getIndicesCollectorPointer()->TotalTotals();  
-  vec[293]=(*S)->getIndicesCollectorPointer()->STP();
-  vec[294]=(*S)->getIndicesCollectorPointer()->STP_LM();
-  vec[295]=(*S)->getIndicesCollectorPointer()->STPeff();
-  vec[296]=(*S)->getIndicesCollectorPointer()->STPeff_LM();
-  vec[297]=(*S)->getIndicesCollectorPointer()->SCP();
-  vec[298]=(*S)->getIndicesCollectorPointer()->SCP_LM();
-  vec[299]=(*S)->getIndicesCollectorPointer()->SCPeff();
-  vec[300]=(*S)->getIndicesCollectorPointer()->SCPeff_LM();
-  vec[301]=(*S)->getIndicesCollectorPointer()->LTTP_RM();
-  vec[302]=(*S)->getIndicesCollectorPointer()->LTTP_LM();
+  vec[293]=(*S)->getIndicesCollectorPointer()->K_Index();
+  vec[294]=(*S)->getIndicesCollectorPointer()->TotalTotals();  
+  vec[295]=(*S)->getIndicesCollectorPointer()->STP();
+  vec[296]=(*S)->getIndicesCollectorPointer()->STP_LM();
+  vec[297]=(*S)->getIndicesCollectorPointer()->STPeff();
+  vec[298]=(*S)->getIndicesCollectorPointer()->STPeff_LM();
+  vec[299]=(*S)->getIndicesCollectorPointer()->SCP();
+  vec[300]=(*S)->getIndicesCollectorPointer()->SCP_LM();
+  vec[301]=(*S)->getIndicesCollectorPointer()->SCPeff();
+  vec[302]=(*S)->getIndicesCollectorPointer()->SCPeff_LM();
   vec[303]=(*S)->getIndicesCollectorPointer()->SHP();
   vec[304]=(*S)->getIndicesCollectorPointer()->HSI();
   vec[305]=(*S)->getIndicesCollectorPointer()->HSIv2();
