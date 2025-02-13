@@ -6997,33 +6997,32 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[24];
+  double * vec = new double[23];
 
 // ML parcel
-  vec[0]=(*S)->getIndicesCollectorPointer()->VMeanLayerLI_M25();
-  vec[1]=(*S)->getIndicesCollectorPointer()->VMeanLayerCIN500();  
-  vec[2]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableLI();
-  vec[3]=(*S)->getIndicesCollectorPointer()->MUMLmiddlecape(); 
-  vec[4]=(*S)->getIndicesCollectorPointer()->MU500middlecape();
-  vec[5]=(*S)->getIndicesCollectorPointer()->MU500_CIN500();
-  vec[6]=(*S)->getIndicesCollectorPointer()->LR04(); 
-  vec[7]=(*S)->getIndicesCollectorPointer()->VMeanLayerLCL();
-  vec[8]=(*S)->getIndicesCollectorPointer()->LR26();
-  vec[9]=(*S)->getIndicesCollectorPointer()->WetBulbM10Height();  
-  vec[10]=(*S)->getIndicesCollectorPointer()->thetae01();
-  vec[11]=(*S)->getIndicesCollectorPointer()->MUML_LCL_RH_3km();
-  vec[12]=(*S)->getIndicesCollectorPointer()->SR_moisture_flux_MW(); 
-  vec[13]=(*S)->getIndicesCollectorPointer()->MeanWind500();
-  vec[14]=(*S)->getIndicesCollectorPointer()->MeanWind06();
-  vec[15]=(*S)->getIndicesCollectorPointer()->WS_MLmax();
-  vec[16]=(*S)->getIndicesCollectorPointer()->emumlbs();
-  vec[17]=(*S)->getIndicesCollectorPointer()->emu500bs();
-  vec[18]=(*S)->getIndicesCollectorPointer()->BS_MLmax();
-  vec[19]=(*S)->getIndicesCollectorPointer()->BS06_var_SI();
-  vec[20]=(*S)->getIndicesCollectorPointer()->MeanSR500_MW();
-  vec[21]=(*S)->getIndicesCollectorPointer()->Ventilation_16km_RM();
-  vec[22]=(*S)->getIndicesCollectorPointer()->SV_1000_RM_FRA();
-  vec[23]=(*S)->getIndicesCollectorPointer()->SW500_RM_F();
+  vec[0]=(*S)->getIndicesCollectorPointer()->MUMLmiddlecape();
+  vec[1]=(*S)->getIndicesCollectorPointer()->VMeanMostUnstableCIN500();
+  vec[2]=(*S)->getIndicesCollectorPointer()->MUML_LCL_RH_3km();
+  vec[3]=(*S)->getIndicesCollectorPointer()->MUMLLCLTemperature();
+  vec[4]=(*S)->getIndicesCollectorPointer()->MUMLMRatio();
+  vec[5]=(*S)->getIndicesCollectorPointer()->MUML_buoyancy_M10();
+  vec[6]=(*S)->getIndicesCollectorPointer()->emumlbs();
+  vec[7]=(*S)->getIndicesCollectorPointer()->WetBulbM10Height();
+  vec[8]=(*S)->getIndicesCollectorPointer()->WS_MLmax();
+  vec[9]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();
+  vec[10]=(*S)->getIndicesCollectorPointer()->MeanWind06();
+  vec[11]=(*S)->getIndicesCollectorPointer()->PWATER();
+  vec[12]=(*S)->getIndicesCollectorPointer()->LR26();
+  vec[13]=(*S)->getIndicesCollectorPointer()->SW500_RM_F();
+  vec[14]=(*S)->getIndicesCollectorPointer()->Ventilation_16km_RM();
+  vec[15]=(*S)->getIndicesCollectorPointer()->ML_buoyancy();
+  vec[16]=(*S)->getIndicesCollectorPointer()->BS_LLmax();
+  vec[17]=(*S)->getIndicesCollectorPointer()->thetae02();
+  vec[18]=(*S)->getIndicesCollectorPointer()->MSR_MW_HGL();
+  vec[19]=(*S)->getIndicesCollectorPointer()->lapserate03();
+  vec[20]=(*S)->getIndicesCollectorPointer()->MeanWind500();
+  vec[21]=(*S)->getIndicesCollectorPointer()->SRH03RM();
+  vec[22]=(*S)->getIndicesCollectorPointer()->BS_MLmax();
   return vec;
 }
 
@@ -7712,7 +7711,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 24;
+   int reslen= 23;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
