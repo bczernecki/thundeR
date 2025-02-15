@@ -6235,7 +6235,7 @@ double IndicesCollector::SR_moisture_flux_RM(){
 }
 
 double IndicesCollector::SR_moisture_flux_eff_RM(){
-  double result = (S->th->mmrMAX) * this->MeanSR500_RM();
+  double result = (S->th->mmrMAX) * this->MeanSR0500_RM_eff();
   return result;
 }
 
@@ -6245,7 +6245,7 @@ double IndicesCollector::SR_moisture_flux_LM(){
 }
 
 double IndicesCollector::SR_moisture_flux_eff_LM(){
-  double result = (S->th->mmrMAX) * this->MeanSR500_LM();
+  double result = (S->th->mmrMAX) * this->MeanSR0500_LM_eff();
   return result;
 }
 
