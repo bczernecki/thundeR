@@ -7019,7 +7019,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[16]=(*S)->getIndicesCollectorPointer()->BS_LLmax(); 
   vec[17]=(*S)->getIndicesCollectorPointer()->thetae02(); 
   vec[18]=(*S)->getIndicesCollectorPointer()->MSR_MW_HGL(); 
-  vec[19]=(*S)->getIndicesCollectorPointer()->lapserate01(); 
+  vec[19]=(*S)->getIndicesCollectorPointer()->LapseRate01(); 
   vec[20]=(*S)->getIndicesCollectorPointer()->BS_ULmax(); 
   vec[21]=(*S)->getIndicesCollectorPointer()->SRH03RM(); 
   vec[22]=(*S)->getIndicesCollectorPointer()->BS_MLmax(); 
