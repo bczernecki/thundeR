@@ -1461,6 +1461,7 @@ private:
   double peakB;
   double peakB_M10;
   double peakB_3km;
+  double LI_LCL_2km;
 
   double starth;
   double lclh;
@@ -1530,6 +1531,7 @@ void LapseRate::allocate(){
   peakB=0;
   peakB_M10=0;
   peakB_3km=0;
+  LI_LCL_2km=0;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
   startIndex=-1;
   isSet = false;
@@ -1705,6 +1707,13 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
 
 	  if(vLclIndex == i){ 
   	  lclh = h;
+	  }
+
+	  if (h >= lclh+2000) {
+          double ttt4 = (vt_parcel - t_);
+          if(ttt4>this->LI_LCL_2km) {
+          LI_LCL_2km = ttt4;
+	  }
 	  }
 	  
 	  if(h <= lclh+3000){
@@ -3144,6 +3153,12 @@ public:
   double MU500_buoyancy_M10();
   double ML_buoyancy_M10();
   double SB_buoyancy_M10();
+
+  double MU_LI_LCL_2km();
+  double SB_LI_LCL_2km();
+  double ML_LI_LCL_2km();
+  double MUML_LI_LCL_2km();
+  double MU500_LI_LCL_2km();
 
   double MU_buoyancy_3km();
   double MUML_buoyancy_3km();
@@ -6840,6 +6855,31 @@ double IndicesCollector::MU_buoyancy_3km(){
   return diff;
 }
 
+double IndicesCollector::MU_LI_LCL_2km(){
+  double diff = S->th->mostUnstable->LI_LCL_2km;
+  return diff;
+}
+
+double IndicesCollector::SB_LI_LCL_2km(){
+  double diff = S->th->surfaceBased->LI_LCL_2km;
+  return diff;
+}
+
+double IndicesCollector::ML_LI_LCL_2km(){
+  double diff = S->th->mixedLayer->LI_LCL_2km;
+  return diff;
+}
+
+double IndicesCollector::MUML_LI_LCL_2km(){
+  double diff = S->th->meanmostUnstable->LI_LCL_2km;
+  return diff;
+}
+
+double IndicesCollector::MU500_LI_LCL_2km(){
+  double diff = S->th->mostU500->LI_LCL_2km;
+  return diff;
+}
+
 double IndicesCollector::MUML_buoyancy_3km(){
   double diff = S->th->meanmostUnstable->peakB_3km;
   return diff;
@@ -6997,7 +7037,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[321];
+  double * vec = new double[324];
 
 // SB parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedCAPE();
@@ -7357,6 +7397,11 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[316]=(*S)->getIndicesCollectorPointer()->SHERBS3_v2();
   vec[317]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[318]=(*S)->getIndicesCollectorPointer()->DEI_eff();
+  vec[319]=(*S)->getIndicesCollectorPointer()->MU_LI_LCL_2km();
+  vec[320]=(*S)->getIndicesCollectorPointer()->SB_LI_LCL_2km();
+  vec[321]=(*S)->getIndicesCollectorPointer()->ML_LI_LCL_2km();
+  vec[322]=(*S)->getIndicesCollectorPointer()->MUML_LI_LCL_2km();
+  vec[323]=(*S)->getIndicesCollectorPointer()->MU500_LI_LCL_2km();
   return vec;
 }
 
@@ -7965,8 +8010,8 @@ double * sounding_default2(double* pressure,
 //'  \item 	SV_01km_LM_fra
 //'  \item 	SV_03km_RM_fra
 //'  \item 	SV_03km_LM_fra
-//'  \item 	CA0500_RM();
-//'  \item 	CA0500_LM();
+//'  \item 	CA0500_RM
+//'  \item 	CA0500_LM
 //'  \item 	Bunkers_RM_A
 //'  \item 	Bunkers_RM_M
 //'  \item 	Bunkers_LM_A
@@ -8009,6 +8054,11 @@ double * sounding_default2(double* pressure,
 //'  \item 	SHERB_mod
 //'  \item 	DEI
 //'  \item 	DEI_eff
+//'  \item 	MU_LI_LCL_2km
+//'  \item 	SB_LI_LCL_2km
+//'  \item 	ML_LI_LCL_2km
+//'  \item 	MUML_LI_LCL_2km
+//'  \item 	MU500_LI_LCL_2km
 //' }
  // [[Rcpp::export]]
  
@@ -8045,7 +8095,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 321;
+   int reslen= 324;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
