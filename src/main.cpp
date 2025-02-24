@@ -1711,7 +1711,7 @@ void LapseRate::putVirtualLine(int i, double p, double h, double t, double d, do
 
 	  if (h >= lclh+2000) {
           double ttt4 = (vt_parcel - t_);
-          if(ttt4>this->LI_LCL_2km) {
+          if(ttt4<this->LI_LCL_2km) {
           LI_LCL_2km = ttt4;
 	  }
 	  }
