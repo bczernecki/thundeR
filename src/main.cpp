@@ -1531,7 +1531,7 @@ void LapseRate::allocate(){
   peakB=0;
   peakB_M10=0;
   peakB_3km=0;
-  LI_LCL_2km=0;
+  LI_LCL_2km=1000;
   lclIndex = vLclIndex = lfcIndex = vLfcIndex = elIndex = vElIndex = -1;
   startIndex=-1;
   isSet = false;
