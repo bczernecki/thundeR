@@ -6866,7 +6866,7 @@ double IndicesCollector::SB_LI_LCL_2km(){
 }
 
 double IndicesCollector::ML_LI_LCL_2km(){
-  double diff = S->th->mixedLayer->LI_LCL_2km;
+  double diff = S->th->meanLayer->LI_LCL_2km;
   return diff;
 }
 
