@@ -1,3 +1,9 @@
+# thundeR 1.1.4
+
+* Fixing minor bugs in C++ code that caused the package to show warnings uninitialized variable with GCC 14.2 on Windows 
+* adding RadioSonde package as dependency
+* minor bug fixes and changes in CI/CD pipeline
+
 # thundeR 1.1.3
 
 * Adding new tests for thermodynamic indices failing with metPy 1.5, but working smoothly with thundeR and sharppy

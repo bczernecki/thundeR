@@ -64,8 +64,10 @@ get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE) {
   if ((!is.null(sounding_data)) & (ncol(sounding_data[[1]]) > 0)) {
   
     colnames(sounding_data[[1]]) = c("pressure", "altitude", "temp", "dpt",
-                                     "rh", "mixr", "wd", "ws", "thta", "thte", "thtv")
-    sounding_data[[1]] = sounding_data[[1]][, c("pressure", "altitude", "temp", "dpt","wd", "ws")]
+                                     "rh", "mixr", "wd", "ws", "thta", "thte", 
+                                     "thtv")
+    sounding_data[[1]] = sounding_data[[1]][, c("pressure", "altitude", "temp", 
+                                                "dpt","wd", "ws")]
     
     # extra correction for missing entries in the dew oint temperature (only for proper display of the profile):
     sounding_data[[1]]$dpt[is.na(sounding_data[[1]]$dpt) & !is.na(sounding_data[[1]]$temp)] = -273
