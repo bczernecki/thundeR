@@ -640,7 +640,7 @@ Kinematics::Kinematics(){
   
   this->mean26 = Vector(0,0,0);
   this->mean020 = Vector(0,0,0);
-  h0=0
+  h0=0;
   this->lasth = h0;
   this->vw = new list<Vector>();
   this->llj = Vector(0, 0, 0);
