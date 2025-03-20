@@ -40,12 +40,12 @@ In case of problems with downloading the chosen dataset the url is checked 5 tim
 }
 \examples{
 \donttest{
-# download rawinsonde profile from Leba station (WMO ID: 12120) for 20 August 2010 1200 UTC:
+# download rawinsonde profile from Vienna (WMO ID: 11035) for 23 August 2011 1200 UTC:
 
-  profile = get_sounding(wmo_id = 12120, 
-                         yy = 2010,
+  profile = get_sounding(wmo_id = 11035, 
+                         yy = 2011,
                          mm = 8, 
-                         dd = 20, 
+                         dd = 23, 
                          hh = 12)
   head(profile)
   
