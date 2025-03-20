@@ -40,7 +40,7 @@ Imports:
     RadioSonde,
     Rcpp (>= 0.12.9.4)
 Depends:
-    R (>= 3.5.0)
+    R (>= 4.0)
 Suggests:
     knitr,
     rmarkdown,
