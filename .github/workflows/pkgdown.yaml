@@ -27,7 +27,7 @@ jobs:
         run: |
           pwd
           ls -alh
-          R -e 'install.packages(c("remotes", "pkgdown", "Rcpp", "aiRthermo", "dplyr", "climate", "RadioSonde")'
+          R -e 'install.packages(c("remotes", "pkgdown", "Rcpp", "aiRthermo", "dplyr", "climate", "RadioSonde"))'
           R -e 'remotes::install_local(".", dependencies = TRUE)'
 
       - name: Deploy package
