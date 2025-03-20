@@ -17,6 +17,7 @@ skewty = function(pres) {
 #' Taken from the R Radiosonde package
 #'
 #' @noRd
+#' @importFrom RadioSonde wobf
 #' 
 
 satlft = function(thw, p) {
