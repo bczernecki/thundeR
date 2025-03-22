@@ -400,7 +400,8 @@ names(tmp) = c(
 "LR_26km",
 "MUML_buoy",
 "BS_ULmax",
-"SRH_0500m_RM_G",
+"SRH_0500m_RM_G",  
+"MU5_CIN_4km",
 "SRW_0500m_MW",
 "SRW_eff_MW"
 )
