@@ -7037,7 +7037,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[324];
+  double * vec = new double[30];
 
 // T 
   vec[0]=(*S)->getIndicesCollectorPointer()->MUML_LI_LCL_2km();
@@ -7084,7 +7084,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[26]=(*S)->getIndicesCollectorPointer()->VirtualColdPoolStrength();	
   vec[27]=(*S)->getIndicesCollectorPointer()->BS_ULmax(); 
   //WS_ML_max
-	
+
+  vec[28]=(*S)->getIndicesCollectorPointer()->SRH500RM(); 
+  vec[29]=(*S)->getIndicesCollectorPointer()->MU500_CIN500();
   return vec;
 }
 
@@ -7778,7 +7780,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 324;
+   int reslen= 30;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
