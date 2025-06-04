@@ -14,10 +14,12 @@ skewty = function(pres) {
 
 #' Calculate satlft
 #' 
-#' Taken from the R Radiosonde package
+#' Taken from the R Radiosonde package. Originally from the "thermo.f" routines and technical documentation
+#' National Oceanic and Atmospheric Administration 
+#' HM Stone 1986 — Part A:--Program Information and Installation Procedure. 
+#' Program Name; CONVECT.SV. AAL ID;. Revision No.; 01.00.
 #'
 #' @noRd
-#' @importFrom RadioSonde wobf
 #' 
 
 satlft = function(thw, p) {
@@ -51,3 +53,28 @@ tda = function(o, p) {
         tdak <- ok * ((p * 0.001)^0.286)
         tdak - 273.15
 }
+
+#' Calculate wobf
+#' 
+#' Taken from the R Radiosonde package. Originally from the "thermo.f" routines and technical documentation
+#' National Oceanic and Atmospheric Administration 
+#' HM Stone 1986 — Part A:--Program Information and Installation Procedure. 
+#' Program Name; CONVECT.SV. AAL ID;. Revision No.; 01.00.
+#'
+#' @noRd
+#' 
+wobf <- function (temp) {
+        x <- temp - 20
+        if (x <= 0) {
+         pol <- 1 + x * (-0.0088416605 + x * (0.00014714143 + 
+            x * (-9.671989e-07 + x * (-3.2607217e-08 + x * (-3.8598073e-10)))))
+        wbts <- 15.13/pol^4
+        }
+        else {
+         pol <- 1 + x * (0.0036182989 + x * (-1.3603273e-05 + 
+            x * (4.9618922e-07 + x * (-6.1059365e-09 + x * (3.9401551e-11 + 
+                x * (-1.2588129e-13 + x * (1.668828e-16)))))))
+         wbts <- 29.93/pol^4 + 0.96 * x - 14.8
+        }
+        return(wbts)
+        }

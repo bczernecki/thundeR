@@ -4535,7 +4535,7 @@ double * sounding_default2(double* pressure,
                            int custom_vec=1,
                            int interpolate_step=5,
                            double* meanlayer_bottom_top = NULL,
-                           Vector storm_motion = Vector(999,999))
+                           Vector storm_motion = Vector(999,999,999))
 {
   
   
@@ -4832,7 +4832,7 @@ double * sounding_default2(double* pressure,
    double * mlp = new double [2]; 
    mlp[0] = meanlayer_bottom_top[0];
    mlp[1] = meanlayer_bottom_top[1];
-   Vector sm = Vector(storm_motion[0],storm_motion[1], 0);
+   Vector sm = Vector(storm_motion[0],storm_motion[1],storm_motion[2]);
    
    double *p = new double[size], *h=new double[size], *d=new double[size],*t=new double[size], *a= new double[size], *v=new double[size];
    for(int i=0; i<size;i++){

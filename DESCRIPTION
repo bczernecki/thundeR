@@ -1,7 +1,7 @@
 Package: thunder
 Type: Package
 Title: Computation and Visualisation of Atmospheric Convective Parameters
-Version: 1.1.4
+Version: 1.1.5
 Authors@R: c(person("Bartosz", "Czernecki",
              email = "nwp@amu.edu.pl",
              role = c("aut", "cre"), comment = c(ORCID = "0000-0001-6496-1386")),
@@ -37,7 +37,6 @@ Imports:
     curl,
     dplyr,
     httr,
-    RadioSonde,
     Rcpp (>= 0.12.9.4)
 Depends:
     R (>= 4.0)
