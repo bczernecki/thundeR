@@ -48,7 +48,7 @@ sounding_export = function(pressure, altitude, temp, dpt, wd, ws, accuracy = 3,
     pressure = pressure, altitude = altitude,
     temp = temp, dpt = dpt, wd = wd, ws = ws,
     export_profile = 1, accuracy = accuracy, interpolate_step = interpolate_step,
-    meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = storm_motion
+    meanlayer_bottom_top = meanlayer_bottom_top, storm_motion = c(storm_motion, 999)
   )
 
   LP = length(sounding_default(

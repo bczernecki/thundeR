@@ -4604,7 +4604,7 @@ double * sounding_default2(double* pressure,
 //'                  accuracy = 3,
 //'                  export_profile = 0,
 //'                  interpolate_step = 5,
-//'                  storm_motion = c(999, 999),
+//'                  storm_motion = c(999, 999, 999),
 //'                  meanlayer_bottom_top = c(0, 500))
 //' @useDynLib thunder
 //' @importFrom Rcpp evalCpp

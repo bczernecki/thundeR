@@ -14,7 +14,7 @@ test_that("sounding_default should return the same values as sounding_compute fo
                                        accuracy = 2,
                                        interpolate_step = 1000,
                                        meanlayer_bottom_top = c(0, 500),
-                                       storm_motion = c(999, 999))
+                                       storm_motion = c(999, 999, 999))
         res_compute = sounding_compute(pressure, altitude, temp, dpt, wd, ws,
                                        accuracy = 2, 
                                        interpolate_step = 1000,
@@ -47,7 +47,7 @@ test_that("sounding_default should have CAPE 2k+ values for profile having CAPE=
                                  accuracy = 2,
                                  interpolate_step = 10,
                                  meanlayer_bottom_top = c(0, 500),
-                                 storm_motion = c(999, 999))
+                                 storm_motion = c(999, 999, 999))
   res_compute = sounding_compute(p, alt, t, q, wd, ws,
                                  accuracy = 2, 
                                  interpolate_step = 1000,
