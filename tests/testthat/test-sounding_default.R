@@ -2,12 +2,12 @@
 context("sounding_default and sounding_compute should be equal")
 
 test_that("sounding_default should return the same values as sounding_compute for thermodynamics", {
-        pressure <- c(1000, 855, 700, 500, 300, 100, 10)
-        altitude <- c(0, 1500, 2500, 6000, 8500, 12000, 25000)
-        temp <- c(25, 10, 0, -15, -30, -50, -92)
-        dpt <- c(20, 5, -5, -30, -55, -80, -99)
-        wd <- c(0, 90, 135, 180, 270, 350, 0)
-        ws <- c(5, 10, 20, 30, 40, 5, 0)
+        pressure = c(1000, 855, 700, 500, 300, 100, 10)
+        altitude = c(0, 1500, 2500, 6000, 8500, 12000, 25000)
+        temp = c(25, 10, 0, -15, -30, -50, -92)
+        dpt = c(20, 5, -5, -30, -55, -80, -99)
+        wd = c(0, 90, 135, 180, 270, 350, 0)
+        ws = c(5, 10, 20, 30, 40, 5, 0)
         options(scipen = 999) # change formatting
         res_default = sounding_default(pressure, altitude, temp, dpt, wd, ws,
                                        export_profile = 0,
@@ -24,8 +24,21 @@ test_that("sounding_default should return the same values as sounding_compute fo
         indices_cape = grep(x = names(res_compute), "CAPE")
         indices_cin = grep(x = names(res_compute), "CIN")
         
+        # check that the results are equal for CAPE and CIN in both,
+        # sounding_default and sounding_compute:
         expect_equal(as.numeric(res_compute[indices_cape]), res_default[indices_cape])
         expect_equal(as.numeric(res_compute[indices_cin]), res_default[indices_cin])
+        
+        sounding_test_results = readRDS("data/sounding_compute_df.rds")
+        
+        # let's assume that results for the same names shouldn't differ more than 0.01, 
+        # but only for matching names:
+        matching_names = intersect(names(res_compute), names(sounding_test_results))
+        expect_true(length(matching_names) > 0)
+        expect_equal(res_compute[matching_names],
+                     sounding_test_results[matching_names],
+                     tolerance = 0.01)
+        
 })
 
 

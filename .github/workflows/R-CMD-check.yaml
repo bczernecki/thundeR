@@ -11,7 +11,6 @@ on:
       - master
       - devel
       - dev
-      - 61-srh-bug
   pull_request:
     branches:
       - main
@@ -81,7 +80,6 @@ jobs:
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("covr")
           remotes::install_cran("xml2")
-          remotes::install_cran("RadioSonde")
           remotes::install_cran("climate")
         shell: Rscript {0}
 

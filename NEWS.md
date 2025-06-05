@@ -1,15 +1,16 @@
 # thundeR 1.1.5
 
 * Fixes for SRH-related calculations that were not working properly in thundeR 1.1.4
-* removed dependency to RadioSonde package due to problems with installing dependencies on no-root Linux systems
-* minor bug fixes and changes in CI/CD pipeline
+* Added tests to check whether calculations of indices matches expected results
+* Removed dependency to the RadioSonde package due to "heavy"" OS-related dependencies on some Linux distributions
+* Minor bug fixes
 
 
 # thundeR 1.1.4
 
 * Fixing minor bugs in C++ code that caused the package to show warnings uninitialized variable with GCC 14.2 on Windows 
-* adding RadioSonde package as dependency
-* minor bug fixes and changes in CI/CD pipeline
+* Adding RadioSonde package as dependency
+* Minor bug fixes and changes in CI/CD pipeline
 
 # thundeR 1.1.3
 
