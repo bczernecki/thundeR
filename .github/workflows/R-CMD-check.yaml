@@ -80,7 +80,6 @@ jobs:
           remotes::install_cran("rcmdcheck")
           remotes::install_cran("covr")
           remotes::install_cran("xml2")
-          remotes::install_cran("RadioSonde")
           remotes::install_cran("climate")
         shell: Rscript {0}
 

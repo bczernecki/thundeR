@@ -1,20 +1,14 @@
-# thundeR <img src="https://github.com/bczernecki/thundeR/raw/master/man/figures/logo.png" style="float:right" width="150"/>
-
-**Rapid computation and visualisation of convective parameters from
-rawinsonde and numerical weather prediction data**
+# thundeR <img src="https://github.com/bczernecki/thundeR/raw/master/man/figures/logo.png" align="right" width="150" />
 
 <!-- badges: start -->
-
 [![R-CMD-check](https://github.com/bczernecki/thunder/workflows/R-CMD-check/badge.svg)](https://github.com/bczernecki/thunder/actions)
-[![Codecov test
-coverage](https://codecov.io/gh/bczernecki/thunder/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/thunder?branch=master)
-[![CRAN
-status](https://www.r-pkg.org/badges/version/thunder)](https://cran.r-project.org/package=thunder)
-[![CRAN RStudio mirror
-downloads](http://cranlogs.r-pkg.org/badges/thunder)](https://cran.r-project.org/package=thunder)
+[![Codecov test coverage](https://codecov.io/gh/bczernecki/thunder/branch/master/graph/badge.svg)](https://app.codecov.io/gh/bczernecki/thunder?branch=master)
+[![CRAN status](https://www.r-pkg.org/badges/version/thunder)](https://cran.r-project.org/package=thunder)
+[![CRAN RStudio mirror downloads](http://cranlogs.r-pkg.org/badges/thunder)](https://cran.r-project.org/package=thunder)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/thunder?color=brightgreen)](https://cran.r-project.org/package=thunder)
-
 <!-- badges: end -->
+
+**Rapid computation and visualisation of convective parameters from rawinsonde  and numerical weather prediction data**
 
 **`thundeR`** is a freeware R package for
 rapid computation and visualisation of convective parameters commonly

@@ -47,8 +47,10 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     parcel = "ML"
   }
   
-  if (sum(storm_motion == c(999, 999), na.rm = TRUE) > 0) {
-    storm_motion = c(999, 999)
+  if (sum(storm_motion == c(999, 999), na.rm = TRUE) == 2) {
+    storm_motion = c(999, 999, 999)
+  } else {
+    storm_motion = c(storm_motion[1], storm_motion[2], 999)
   }
   
   convert = FALSE
@@ -117,7 +119,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
   ####
   parametry = sounding_compute(pressure, altitude, temp, dpt, wd, ws, accuracy = 3,
                                meanlayer_bottom_top = meanlayer_bottom_top,
-                               storm_motion = storm_motion)
+                               storm_motion = storm_motion[1:2])
   LP = max(which(!is.na(names(parametry))))
   
   ###
@@ -155,7 +157,7 @@ sounding_plot = function(pressure, altitude, temp, dpt, wd, ws,
     text(13, 43.35, "none", col = "black", cex = 0.55, adj = c(0, 1))
   }
   
-  
+  storm_motion = storm_motion[1:2]
   if (sum(storm_motion == c(999, 999)) == 2) {
     text(16.85, 42.25, "Bunkers ID", col = "black", cex = 0.55, adj = c(0, 1))
   } else {
