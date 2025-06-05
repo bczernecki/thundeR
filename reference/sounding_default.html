@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">thundeR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.5</span>
       </span>
     </div>
 
@@ -60,7 +60,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>R call to C++ function for calculating thermo- and kinematic indices derived from atmospheric profiling.</h1>
-    <small class="dont-index">Source: <a href="https://github.com/bczernecki/thunder/blob/v1.1.4/R/RcppExports.R" class="external-link"><code>R/RcppExports.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/bczernecki/thunder/blob/master/R/RcppExports.R" class="external-link"><code>R/RcppExports.R</code></a></small>
     <div class="hidden name"><code>sounding_default.Rd</code></div>
     </div>
 
@@ -351,7 +351,7 @@ wind speed (m/s) and wind directions (degrees) that will be used to compute adju
 <span class="r-in"><span>                 accuracy <span class="op">=</span> <span class="fl">3</span>,</span></span>
 <span class="r-in"><span>                 export_profile <span class="op">=</span> <span class="fl">0</span>,</span></span>
 <span class="r-in"><span>                 interpolate_step <span class="op">=</span> <span class="fl">5</span>,</span></span>
-<span class="r-in"><span>                 storm_motion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">999</span>, <span class="fl">999</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                 storm_motion <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">999</span>, <span class="fl">999</span>, <span class="fl">999</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>                 meanlayer_bottom_top <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">500</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]  2.284081e+03  1.004494e+03  3.221361e+02  2.512952e+02  5.795603e+02</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [6]  1.621657e+03  0.000000e+00  7.300000e+02  7.300000e+02  8.245000e+03</span>
@@ -375,25 +375,25 @@ wind speed (m/s) and wind directions (degrees) that will be used to compute adju
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [96]  1.740768e+01  9.369290e+00  1.333042e+01  1.664783e+01  2.027907e+01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [101]  1.417295e+01  1.417295e+01  1.383392e+01  1.548068e+01  1.361265e+01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [106]  9.838748e+00  1.403852e+01  1.403852e+01  1.367164e+01  7.304028e+00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [111]  1.410166e+03  1.410166e+03  4.893412e+00  1.419401e+03  1.419401e+03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [111]  1.014096e+01  1.078696e+01  4.893412e+00  7.785950e+00  9.988490e+00</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [116]  2.308638e+00  2.425112e+00  3.347647e+00  4.800332e+00  7.810701e+00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121]  6.838887e+00 -5.386997e+02 -1.308271e+03 -2.590889e+03 -5.156126e+03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [126] -1.716614e+04 -1.775201e+04 -5.386997e+02 -1.308271e+03 -2.590889e+03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [131] -5.156126e+03 -1.716614e+04 -1.775201e+04 -3.673263e-03 -3.655864e-03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [136] -4.056463e-03 -3.673263e-03 -3.655864e-03 -4.056463e-03  1.410678e+03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [141]  1.410374e+03  1.411080e+03  1.410678e+03  1.410374e+03  1.411080e+03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [146]  1.410675e+03  1.410372e+03  1.411089e+03  1.410675e+03  1.410372e+03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [151]  1.411089e+03 -9.484812e-01 -9.486851e-01 -8.162005e-01 -9.484812e-01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [156] -9.486851e-01 -8.162005e-01  4.500000e+01  1.412799e+03  4.500000e+01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [161]  1.412799e+03  1.519494e+02  7.810701e+00  2.186955e+02  1.469824e+01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [121]  6.838887e+00  4.060134e+00  9.860325e+00  1.952731e+01  3.886128e+01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [126]  1.513121e+02  2.320749e+02  1.434384e+00  3.483505e+00  6.898706e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [131]  1.372911e+01 -1.274811e+01 -3.752789e+01  3.866078e-03  3.806493e-03</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [136]  4.756327e-03  1.003270e-03  1.075628e-03 -1.411418e-03  1.008625e+01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [141]  1.015008e+01  9.535939e+00  1.378213e+01  1.285849e+01  8.457941e+00</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [146]  1.010765e+01  1.022222e+01  1.053760e+01  1.377391e+01  1.285374e+01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [151]  8.855384e+00  9.982686e-01  9.877730e-01  9.570202e-01  2.590565e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [156]  2.791221e-01 -2.839912e-01  2.094046e+02  7.793285e+00  1.220585e+02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [161]  1.318252e+01  1.519494e+02  7.810701e+00  2.186955e+02  1.469824e+01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [166]  2.313283e+02  9.179441e+00  2.435484e+01  3.841794e+00  4.435484e+01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [171]  1.064168e+02 -4.712253e+01 -2.616825e+01 -4.712253e+01 -2.616825e+01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [176] -7.059763e+02 -5.557047e+02 -7.059763e+02 -5.557047e+02  6.325821e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [171]  1.064168e+02  3.551585e-01  1.972279e-01  1.254722e-01  6.967765e-02</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [176]  6.222875e+00  4.898297e+00 -5.242800e-01 -4.126837e-01  6.325821e-01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [181]  1.707597e+00  1.193655e+00  1.216962e+03  1.216962e+03  1.032055e+03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [186]  9.579236e+02  9.579236e+02  7.929429e+02 -3.698625e+01 -7.360630e+01</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [191] -2.450552e+02 -3.698625e+01 -7.360630e+01 -2.450552e+02  6.481689e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [186]  9.579236e+02  9.579236e+02  7.929429e+02  2.787622e-01  5.547643e-01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [191]  2.160056e+00  9.848250e-02  1.959899e-01 -1.819857e-01  6.481689e-01</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [196]  6.989765e-01  8.642252e-01  9.319686e-01  1.536380e+00  1.199631e+00</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [201] -9.105982e+01</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [201]  2.436622e+00</span>
 </code></pre></div>
     </div>
   </div>
@@ -408,7 +408,7 @@ wind speed (m/s) and wind directions (degrees) that will be used to compute adju
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>

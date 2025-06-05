@@ -18,7 +18,7 @@ prediction of severe convective storms. Returns a vector of parameters."><meta p
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">thundeR</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.5</span>
       </span>
     </div>
 
@@ -61,7 +61,7 @@ prediction of severe convective storms. Returns a vector of parameters."><meta p
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Calculate convective parameters</h1>
-    <small class="dont-index">Source: <a href="https://github.com/bczernecki/thunder/blob/v1.1.4/R/sounding_compute.R" class="external-link"><code>R/sounding_compute.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/bczernecki/thunder/blob/master/R/sounding_compute.R" class="external-link"><code>R/sounding_compute.R</code></a></small>
     <div class="hidden name"><code>sounding_compute.Rd</code></div>
     </div>
 
@@ -424,41 +424,41 @@ wind speed (m/s) and wind directions (degrees) that will be used to compute adju
 <span class="r-out co"><span class="r-pr">#&gt;</span>        BS_2km_to_M10     BS_MU_LFC_to_M10     BS_SB_LFC_to_M10 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          9.883032095         14.073701016         14.073701016 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     BS_ML_LFC_to_M10        BS_MW02_to_SM        BS_MW02_to_RM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         13.686365658          7.304027597       1410.166307563 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         13.686365658          7.304027597         10.140964728 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        BS_MW02_to_LM         BS_HGL_to_SM         BS_HGL_to_RM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       1410.166307563          4.893411960       1419.400993508 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         10.786958453          4.893411960          7.785950290 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         BS_HGL_to_LM             MW_0500m              MW_01km </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       1419.400993508          2.308638103          2.425112273 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          9.988490342          2.308638103          2.425112273 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              MW_02km              MW_03km              MW_06km </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          3.347646594          4.800331697          7.810700539 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              MW_13km          SRH_100m_RM          SRH_250m_RM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          6.838886565       -564.352118627      -1333.923189481 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          6.838886565          4.253473515         10.053664673 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          SRH_500m_RM           SRH_1km_RM           SRH_3km_RM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      -2616.541640905      -5258.735650838     -17176.029039684 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         19.720649935         39.634639574        152.521946573 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          SRH_36km_RM          SRH_100m_LM          SRH_250m_LM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     -16372.885610568       -564.352118627      -1333.923189481 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        236.590130791          1.502688386          3.551808913 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          SRH_500m_LM           SRH_1km_LM           SRH_3km_LM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      -2616.541640905      -5258.735650838     -17176.029039684 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          6.967009791         14.002323601        -13.130823085 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          SRH_36km_LM           SV_500m_RM           SV_01km_RM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     -16372.885610568         -0.003709639         -0.003728649 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        -24.378976558          0.003904164          0.003879744 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           SV_03km_RM           SV_500m_LM           SV_01km_LM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         -0.004058794         -0.003709639         -0.003728649 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          0.004796086          0.001013916          0.001100521 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           SV_03km_LM        MW_SR_500m_RM        MW_SR_01km_RM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         -0.004058794       1410.677668707       1410.374236538 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         -0.001435868         10.086252358         10.150075094 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        MW_SR_03km_RM        MW_SR_500m_LM        MW_SR_01km_LM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       1411.079647471       1410.677668707       1410.374236538 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          9.535939066         13.782126361         12.858486067 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        MW_SR_03km_LM     MW_SR_VM_500m_RM     MW_SR_VM_01km_RM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       1411.079647471       1410.671731059       1410.366170618 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          8.457941382         10.107849533         10.225339777 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     MW_SR_VM_03km_RM     MW_SR_VM_500m_LM     MW_SR_VM_01km_LM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       1411.104774484       1410.671731059       1410.366170618 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         10.535820052         13.764654240         12.837090856 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     MW_SR_VM_03km_LM       SV_FRA_500m_RM       SV_FRA_01km_RM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       1411.104774484         -0.948483270         -0.948693278 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          8.834244774          0.998219354          0.987136746 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       SV_FRA_03km_RM       SV_FRA_500m_LM       SV_FRA_01km_LM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         -0.809043579         -0.948483270         -0.948693278 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          0.956008752          0.259238846          0.280009490 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       SV_FRA_03km_LM         Bunkers_RM_A         Bunkers_RM_M </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         -0.809043579         45.000000000       1412.799348811 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         -0.286213018        209.404566875          7.793284819 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Bunkers_LM_A         Bunkers_LM_M         Bunkers_MW_A </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>         45.000000000       1412.799348811        151.949436108 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        122.058537262         13.182518634        151.949436108 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         Bunkers_MW_M   Corfidi_downwind_A   Corfidi_downwind_M </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          7.810700539        218.695496108         14.698235841 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     Corfidi_upwind_A     Corfidi_upwind_M              K_Index </span>
@@ -466,25 +466,25 @@ wind speed (m/s) and wind directions (degrees) that will be used to compute adju
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Showalter_Index    TotalTotals_Index          SWEAT_Index </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          3.750147453         44.354838710        106.416793661 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>              STP_fix              STP_new           STP_fix_LM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        -47.762453213        -26.601437179        -47.762453213 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          0.359981513          0.200492750          0.127176069 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           STP_new_LM              SCP_fix              SCP_new </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        -26.601437179       -702.005580875       -554.538064161 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          0.070831081          6.233760868          4.924259548 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>           SCP_fix_LM           SCP_new_LM                 SHIP </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       -702.005580875       -554.538064161          0.628661858 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         -0.536673003         -0.423936243          0.628661858 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  HSI                  DCP         MU_WMAXSHEAR </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          1.715903102          1.150670745       1213.184834430 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         SB_WMAXSHEAR         ML_WMAXSHEAR     MU_EFF_WMAXSHEAR </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       1213.184834430       1033.105080761        958.335927637 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     SB_EFF_WMAXSHEAR     ML_EFF_WMAXSHEAR             EHI_500m </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        958.335927637        797.354807442        -37.120970018 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        958.335927637        797.354807442          0.279777567 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             EHI_01km             EHI_03km          EHI_500m_LM </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        -74.605871115       -243.676939457        -37.120970018 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          0.562298052          2.163834321          0.098841218 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          EHI_01km_LM          EHI_03km_LM              SHERBS3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        -74.605871115       -243.676939457          0.648168875 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          0.198651467         -0.186287458          0.648168875 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               SHERBE           SHERBS3_v2            SHERBE_v2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>          0.701454223          0.864225167          0.935272297 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                  DEI              DEI_eff                  TIP </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          1.519761039          1.188457460        -90.832654459 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>          1.519761039          1.188457460          2.435630415 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="va">old_options</span><span class="op">)</span> </span></span>
 </code></pre></div>
     </div>
@@ -500,7 +500,7 @@ wind speed (m/s) and wind directions (degrees) that will be used to compute adju
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
       </footer></div>
