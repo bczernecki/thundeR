@@ -2887,6 +2887,11 @@ public:
 
   double ZeroHeight();
   double M10Height();
+  double M05Height();
+  double M15Height();
+  double M25Height();
+  double M30Height();
+
   double WetBulbZeroHeight();		
   double WetBulbM10Height();		
 
