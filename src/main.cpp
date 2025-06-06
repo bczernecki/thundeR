@@ -1905,8 +1905,17 @@ public:
   int min25pos;
   double min25;
 
+  int min05pos;
+  double min05;
+
   int min15pos;
   double min15;
+
+  int min20pos;
+  double min20;
+
+  int min30pos;
+  double min30;
 
   double mr1000;
   
@@ -2485,13 +2494,19 @@ void Thermodynamics::ZeroPosStartingConditions(int i, double p, double h, double
   min40pos = i;
   min25pos = i;
   min15pos = i;
+  min05pos = i;
+  min20pos = i;
+  min30pos = i;
   zero = abs(t);
   wb0 = abs(wbt);
   wbM10 = abs(wbt+10);
   minten = abs(t+10);
   min40 = abs(t+40);
   min25 = abs(t+25);
+  min05 = abs(t+5);
   min15 = abs(t+15);
+  min20 = abs(t+20);
+  min30 = abs(t+30);
 }
 void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, double a, double v, double wbt)
 {
@@ -2518,8 +2533,16 @@ void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, d
   }
 
   double im25= abs(t+25);
+  double im05= abs(t+5);
   double im15= abs(t+15);
-  
+  double im20= abs(t+20);
+  double im30= abs(t+30);
+
+  if(im05<min05){
+    min05 = im05;
+    min05pos = i;
+  }
+	
   if(im25<min25){
     min25 = im25;
     min25pos = i;
@@ -2528,6 +2551,16 @@ void Thermodynamics::putZeroPos(int i, double p, double h, double t, double d, d
   if(im15<min15){
     min15 = im15;
     min15pos = i;
+  }
+	
+ if(im20<min20){
+    min20 = im20;
+    min20pos = i;
+  }
+
+ if(im30<min30){
+    min30 = im30;
+    min30pos = i;
   }
 
   if (t_wb0 < wb0)
@@ -4601,6 +4634,41 @@ double IndicesCollector::lapseRate600800(){
 
 double IndicesCollector::M10Height(){
   int zeroIndex = S->th->mintenpos;
+  double h0 = Get(S->h,0);
+  double hz = Get(S->h,zeroIndex);
+  return hz-h0;
+}
+
+double IndicesCollector::M05Height(){
+  int zeroIndex = S->th->min05pos;
+  double h0 = Get(S->h,0);
+  double hz = Get(S->h,zeroIndex);
+  return hz-h0;
+}
+
+double IndicesCollector::M15Height(){
+  int zeroIndex = S->th->min15pos;
+  double h0 = Get(S->h,0);
+  double hz = Get(S->h,zeroIndex);
+  return hz-h0;
+}
+
+double IndicesCollector::M20Height(){
+  int zeroIndex = S->th->min20pos;
+  double h0 = Get(S->h,0);
+  double hz = Get(S->h,zeroIndex);
+  return hz-h0;
+}
+
+double IndicesCollector::M25Height(){
+  int zeroIndex = S->th->min25pos;
+  double h0 = Get(S->h,0);
+  double hz = Get(S->h,zeroIndex);
+  return hz-h0;
+}
+
+double IndicesCollector::M30Height(){
+  int zeroIndex = S->th->min30pos;
   double h0 = Get(S->h,0);
   double hz = Get(S->h,zeroIndex);
   return hz-h0;
@@ -7037,7 +7105,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[324];
+  double * vec = new double[329];
 
 // SB parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedCAPE();
@@ -7402,6 +7470,11 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[321]=(*S)->getIndicesCollectorPointer()->SHERBS3_v2();
   vec[322]=(*S)->getIndicesCollectorPointer()->DEI();
   vec[323]=(*S)->getIndicesCollectorPointer()->DEI_eff();
+  vec[324]=(*S)->getIndicesCollectorPointer()->M05Height();
+  vec[325]=(*S)->getIndicesCollectorPointer()->M15Height();
+  vec[326]=(*S)->getIndicesCollectorPointer()->M20Height();
+  vec[327]=(*S)->getIndicesCollectorPointer()->M25Height();
+  vec[328]=(*S)->getIndicesCollectorPointer()->M30Height();
   return vec;
 }
 
@@ -8059,6 +8132,11 @@ double * sounding_default2(double* pressure,
 //'  \item 	SHERB_mod
 //'  \item 	DEI
 //'  \item 	DEI_eff
+//'  \item 	HGT_ISO_M05
+//'  \item 	HGT_ISO_M15
+//'  \item 	HGT_ISO_M20
+//'  \item 	HGT_ISO_M25
+//'  \item 	HGT_ISO_M30
 //' }
  // [[Rcpp::export]]
  
@@ -8095,7 +8173,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 324;
+   int reslen= 329;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
