@@ -2889,6 +2889,7 @@ public:
   double M10Height();
   double M05Height();
   double M15Height();
+  double M20Height();
   double M25Height();
   double M30Height();
 
