@@ -12,6 +12,7 @@
 #'  \item 	SB_buoy_3km
 #'  \item 	SB_LI
 #'  \item 	SB_LI_M25
+#'  \item 	SB_LI_eff
 #'  \item 	SB_CIN
 #'  \item 	SB_CIN_4km
 #'  \item 	SB_LCL_hgt
@@ -43,6 +44,7 @@
 #'  \item 	ML_buoy_3km
 #'  \item 	ML_LI
 #'  \item 	ML_LI_M25
+#'  \item 	ML_LI_eff
 #'  \item 	ML_CIN
 #'  \item 	ML_CIN_4km
 #'  \item 	ML_LCL_hgt
@@ -74,6 +76,7 @@
 #'  \item 	MU_buoy_3km
 #'  \item 	MU_LI
 #'  \item 	MU_LI_M25
+#'  \item 	MU_LI_eff
 #'  \item 	MU_CIN
 #'  \item 	MU_CIN_4km
 #'  \item 	MU_LCL_hgt
@@ -105,6 +108,7 @@
 #'  \item 	MUML_buoy_3km
 #'  \item 	MUML_LI
 #'  \item 	MUML_LI_M25
+#'  \item 	MUML_LI_eff
 #'  \item 	MUML_CIN
 #'  \item 	MUML_CIN_4km
 #'  \item 	MUML_LCL_hgt
@@ -135,6 +139,7 @@
 #'  \item 	MU5_buoy_HGL
 #'  \item 	MU5_LI
 #'  \item 	MU5_LI_M25
+#'  \item 	MU5_LI_eff
 #'  \item 	MU5_CIN
 #'  \item 	MU5_CIN_4km
 #'  \item 	MU5_E_CAPE
@@ -323,11 +328,6 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
-#'  \item 	MU_LI_LCL_2km
-#'  \item 	SB_LI_LCL_2km
-#'  \item 	ML_LI_LCL_2km
-#'  \item 	MUML_LI_LCL_2km
-#'  \item 	MU500_LI_LCL_2km
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -386,6 +386,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SB_buoy_3km",
 "SB_LI",
 "SB_LI_M25",
+"SB_LI_eff",
 "SB_CIN",
 "SB_CIN_4km",
 "SB_LCL_hgt",
@@ -417,6 +418,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "ML_buoy_3km",
 "ML_LI",
 "ML_LI_M25",
+"ML_LI_eff",
 "ML_CIN",
 "ML_CIN_4km",
 "ML_LCL_hgt",
@@ -448,6 +450,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU_buoy_3km",
 "MU_LI",
 "MU_LI_M25",
+"MU_LI_eff",
 "MU_CIN",
 "MU_CIN_4km",
 "MU_LCL_hgt",
@@ -479,6 +482,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MUML_buoy_3km",
 "MUML_LI",
 "MUML_LI_M25",
+"MUML_LI_eff",
 "MUML_CIN",
 "MUML_CIN_4km",
 "MUML_LCL_hgt",
@@ -509,6 +513,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU5_buoy_HGL",
 "MU5_LI",
 "MU5_LI_M25",
+"MU5_LI_eff",
 "MU5_CIN",
 "MU5_CIN_4km",
 "MU5_E_CAPE",
@@ -696,11 +701,6 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE",
 "SHERB_mod",
 "DEI",
-"DEI_eff",
-"MU_LI_LCL_2km",
-"SB_LI_LCL_2km",
-"ML_LI_LCL_2km",
-"MUML_LI_LCL_2km",
-"MU500_LI_LCL_2km")
+"DEI_eff")
 return(tmp)
 }
