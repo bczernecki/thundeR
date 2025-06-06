@@ -328,6 +328,11 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
+#'  \item 	HGT_ISO_M05
+#'  \item 	HGT_ISO_M15
+#'  \item 	HGT_ISO_M20
+#'  \item 	HGT_ISO_M25
+#'  \item 	HGT_ISO_M30
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -701,6 +706,11 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERBE",
 "SHERB_mod",
 "DEI",
-"DEI_eff")
+"DEI_eff",
+"HGT_ISO_M05",
+"HGT_ISO_M15",
+"HGT_ISO_M20",
+"HGT_ISO_M25",
+"HGT_ISO_M30")
 return(tmp)
 }
