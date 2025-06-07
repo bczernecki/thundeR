@@ -3258,6 +3258,10 @@ public:
   double MU_ML_cold_cloud();
   double MU_ML_equal_layer();
 
+  double MU5_warm_cloud();
+  double MU5_cold_cloud();
+  double MU5_equal_layer();
+
   double* MU_ECAPE();
   double* ML_ECAPE();
   double* MU_ML_ECAPE();
@@ -3891,6 +3895,57 @@ double IndicesCollector::MU_ML_cold_cloud(){
     result = 0;
   }
     double cape = this->VMeanMostUnstableCAPE();
+  if(cape==0){
+    result = 0; 
+  }
+  return result;  
+}
+
+double IndicesCollector::MU5_equal_layer(){
+  double LFC = Get(S->h, S->th->mostU500->vLfcIndex) - S->th->h0;
+  double FL = Get(S->h,S->th->mintenpos) - Get(S->h,0);
+  double EL = Get(S->h, S->th->mostU500->vElIndex) - S->th->h0;
+  double cold = EL-FL;
+  if(FL > EL){
+	  FL = EL;
+  } 
+  double warm = FL-LFC;
+  if(warm<0){
+    warm = 0;
+  }
+  if(cold<0){
+    cold = 0;
+  }  
+  double result = min(warm,cold);
+    double cape = this->VmostU500CAPE();
+  if(cape==0){
+    result = 0; 
+  }
+  return result;  
+}
+
+double IndicesCollector::MU5_cold_cloud(){
+  double EL = Get(S->h, S->th->mostU500->vElIndex) - S->th->h0;
+  double FL = Get(S->h,S->th->mintenpos) - Get(S->h,0);
+  double result = EL-FL;
+  if(result<0){
+    result = 0;
+  }
+    double cape = this->VmostU500CAPE();
+  if(cape==0){
+    result = 0; 
+  }
+  return result;  
+}
+
+double IndicesCollector::MU5_cold_cloud(){
+  double EL = Get(S->h, S->th->mostU500->vElIndex) - S->th->h0;
+  double FL = Get(S->h,S->th->mintenpos) - Get(S->h,0);
+  double result = EL-FL;
+  if(result<0){
+    result = 0;
+  }
+    double cape = this->VmostU500CAPE();
   if(cape==0){
     result = 0; 
   }
@@ -7111,7 +7166,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[329];
+  double * vec = new double[331];
 
 // SB parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedCAPE();
@@ -7481,6 +7536,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[326]=(*S)->getIndicesCollectorPointer()->M20Height();
   vec[327]=(*S)->getIndicesCollectorPointer()->M25Height();
   vec[328]=(*S)->getIndicesCollectorPointer()->M30Height();
+  vec[329]=(*S)->getIndicesCollectorPointer()->MU5_cold_cloud(); 
+  vec[330]=(*S)->getIndicesCollectorPointer()->MU5_equal_layer(); 
   return vec;
 }
 
@@ -8143,6 +8200,9 @@ double * sounding_default2(double* pressure,
 //'  \item 	HGT_ISO_M20
 //'  \item 	HGT_ISO_M25
 //'  \item 	HGT_ISO_M30
+//'  \item 	MU5_cold_cloud
+//'  \item 	MU5_equal_layer
+
 //' }
  // [[Rcpp::export]]
  
@@ -8179,7 +8239,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 329;
+   int reslen= 331;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
