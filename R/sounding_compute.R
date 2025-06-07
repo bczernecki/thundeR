@@ -333,6 +333,9 @@
 #'  \item 	HGT_ISO_M20
 #'  \item 	HGT_ISO_M25
 #'  \item 	HGT_ISO_M30
+#'  \item 	MU5_cold_cloud
+#'  \item 	MU5_equal_layer
+
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -711,6 +714,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "HGT_ISO_M15",
 "HGT_ISO_M20",
 "HGT_ISO_M25",
-"HGT_ISO_M30")
+"HGT_ISO_M30",
+"MU5_cold_cloud",
+"MU5_equal_layer")
 return(tmp)
 }
