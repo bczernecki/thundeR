@@ -3917,7 +3917,7 @@ double IndicesCollector::MU5_equal_layer(){
     cold = 0;
   }  
   double result = min(warm,cold);
-    double cape = this->VmostU500CAPE();
+    double cape = this->MU500_CAPE();
   if(cape==0){
     result = 0; 
   }
@@ -3931,21 +3931,25 @@ double IndicesCollector::MU5_cold_cloud(){
   if(result<0){
     result = 0;
   }
-    double cape = this->VmostU500CAPE();
+    double cape = this->MU500_CAPE();
   if(cape==0){
     result = 0; 
   }
   return result;  
 }
 
-double IndicesCollector::MU5_cold_cloud(){
+double IndicesCollector::MU5_warm_cloud(){
+  double LFC = Get(S->h, S->th->mostU500->vLfcIndex) - S->th->h0;
   double EL = Get(S->h, S->th->mostU500->vElIndex) - S->th->h0;
-  double FL = Get(S->h,S->th->mintenpos) - Get(S->h,0);
-  double result = EL-FL;
+  double FL = Get(S->h,S->th->mintenpos) - S->th->h0;
+  if(FL > EL){
+	  FL = EL;
+  }
+  double result = FL-LFC;
   if(result<0){
     result = 0;
   }
-    double cape = this->VmostU500CAPE();
+  double cape = this->MU500_CAPE();
   if(cape==0){
     result = 0; 
   }
