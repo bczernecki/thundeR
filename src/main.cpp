@@ -4558,14 +4558,14 @@ double * sounding_default2(double* pressure,
     ch=hlen;
   }else if(custom_vec==3){
     
-    int liczba_poziomow = 20000/interpolate_step;
-    double *tmp = new double[liczba_poziomow];
+    int n_of_layers = 20000/interpolate_step;
+    double *tmp = new double[n_of_layers];
     tmp[0]=0;
-    for(int g=1;g<liczba_poziomow;g++){
+    for(int g=1;g<n_of_layers;g++){
       tmp[g]=tmp[g-1]+interpolate_step;
     }
     hh=tmp;
-    ch=liczba_poziomow;
+    ch=n_of_layers;
   }
   u = interpolate2(&p, &h,&t, &d, &a, &v, u,pp, hh, 0, ch);
   if(custom_vec==3)delete[] hh;

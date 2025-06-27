@@ -37,7 +37,7 @@
 #'   
 #' }
 
-get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE) {
+get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE, bufr = FALSE) {
   # take examples as first if provided:
   if (wmo_id == 72562 && yy == 1999 && mm == 7 && dd == 3 && hh == 0) {
     int_env = new.env()
@@ -50,15 +50,19 @@ get_sounding = function(wmo_id, yy, mm, dd, hh, metadata = FALSE) {
     return(int_env$sounding_vienna)
   }
   
-  sounding_data = sounding_wyoming(wmo_id, yy, mm, dd, hh)
+  sounding_data = sounding_wyoming(wmo_id, yy, mm, dd, hh, bufr=bufr)
   
   # take another attempt if object empty
-  i = 1
-  while (is.null(sounding_data) && i < 5) {
-    message("\nProblems with downloading. Re-trying in 5 seconds...")
-    Sys.sleep(5)
-    sounding_data = sounding_wyoming(wmo_id, yy, mm, dd, hh)
-    i = i + 1
+  # i = 1
+  # while (is.null(sounding_data) && i < 2) {
+  #   message("\nProblems with downloading. Re-trying in 5 seconds...")
+  #   Sys.sleep(5)
+  #   sounding_data = sounding_wyoming(wmo_id, yy, mm, dd, hh, bufr=bufr)
+  #   i = i + 1
+  # }
+
+  if (is.null(sounding_data)) {
+    return(NULL)
   }
   
   if ((!is.null(sounding_data)) & (ncol(sounding_data[[1]]) > 0)) {
