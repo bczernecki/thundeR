@@ -725,16 +725,6 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "HGT_ISO_M25",
 "HGT_ISO_M30",
 "MU5_cold_cloud",
-"MU5_equal_layer",
-"BS_5002000m",
-"BS_5003000m",
-"BS_5004000m",
-"BS_500_1000m_max",
-"BS_500_2000m_max",
-"BS_13km",
-"Ventilation_25km_RM",
-"Ventilation_25km_LM",
-"Ventilation_25km",
-"Ventilation_16km")
+"MU5_equal_layer")
 return(tmp)
 }
