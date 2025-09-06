@@ -7606,16 +7606,16 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[329]=(*S)->getIndicesCollectorPointer()->MU5_cold_cloud(); 
   vec[330]=(*S)->getIndicesCollectorPointer()->MU5_equal_layer(); 
 
-  vec[331]=(*S)->getIndicesCollectorPointer()->BS5002000();
-  vec[332]=(*S)->getIndicesCollectorPointer()->BS5003000();
-  vec[333]=(*S)->getIndicesCollectorPointer()->BS5004000();
+  vec[331]=(*S)->getIndicesCollectorPointer()->BS13();
+  vec[332]=(*S)->getIndicesCollectorPointer()->BS13();
+  vec[333]=(*S)->getIndicesCollectorPointer()->BS13();
   vec[334]=(*S)->getIndicesCollectorPointer()->BS13();
   vec[335]=(*S)->getIndicesCollectorPointer()->BS13();
   vec[336]=(*S)->getIndicesCollectorPointer()->BS13();
-  vec[337]=(*S)->getIndicesCollectorPointer()->Ventilation_25km_RM();
-  vec[338]=(*S)->getIndicesCollectorPointer()->Ventilation_25km_LM();
-  vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_25km();
-  vec[340]=(*S)->getIndicesCollectorPointer()->Ventilation_16km();
+  vec[337]=(*S)->getIndicesCollectorPointer()->BS13();
+  vec[338]=(*S)->getIndicesCollectorPointer()->BS13();
+  vec[339]=(*S)->getIndicesCollectorPointer()->BS13();
+  vec[340]=(*S)->getIndicesCollectorPointer()->BS13();
   return vec;
 }
 
