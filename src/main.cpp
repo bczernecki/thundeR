@@ -7684,8 +7684,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[331]=(*S)->getIndicesCollectorPointer()->BS5002000();
   vec[332]=(*S)->getIndicesCollectorPointer()->BS5003000();
   vec[333]=(*S)->getIndicesCollectorPointer()->BS5004000();
-  vec[334]=(*S)->getIndicesCollectorPointer()->BS_500_1km_max();
-  vec[335]=(*S)->getIndicesCollectorPointer()->BS_500_2km_max();
+  vec[334]=(*S)->getIndicesCollectorPointer()->BS13();
+  vec[335]=(*S)->getIndicesCollectorPointer()->BS13();
   vec[336]=(*S)->getIndicesCollectorPointer()->BS13();
   vec[337]=(*S)->getIndicesCollectorPointer()->Ventilation_25km_RM();
   vec[338]=(*S)->getIndicesCollectorPointer()->Ventilation_25km_LM();
