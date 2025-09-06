@@ -940,6 +940,7 @@ Kinematics::Kinematics(){
   n69=0;
   n912=0;
   n16=0;  
+  n25=0;  
   n020=0;
   n16sr=0;
   n36sr=0;
