@@ -7605,6 +7605,9 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[328]=(*S)->getIndicesCollectorPointer()->M30Height();
   vec[329]=(*S)->getIndicesCollectorPointer()->MU5_cold_cloud(); 
   vec[330]=(*S)->getIndicesCollectorPointer()->MU5_equal_layer(); 
+  vec[331]=(*S)->getIndicesCollectorPointer()->BS5002000();
+  vec[332]=(*S)->getIndicesCollectorPointer()->BS5003000();
+  vec[333]=(*S)->getIndicesCollectorPointer()->BS5004000();
   return vec;
 }
 
@@ -8315,7 +8318,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 331;
+   int reslen= 334;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
