@@ -554,6 +554,7 @@ private:
   Vector mean69;
   Vector mean912;
   Vector mean16;
+  Vector mean25;
   
   double SR_500_RM;
   double SR_1000_RM;
@@ -582,6 +583,7 @@ private:
   double n69;
   double n912;
   double n16;
+  double n25;
 
   double n2;
   double n3;
@@ -854,6 +856,7 @@ Kinematics::Kinematics(){
   this->mean69 = Vector(0,0,0);	
   this->mean912 = Vector(0,0,0);	
   this->mean16 = Vector(0,0,0);	
+  this->mean25 = Vector(0,0,0);	
   
   this->mean0=Vector(0,0,0);
   this->mean6=Vector(0,0,0);  
@@ -1067,6 +1070,11 @@ void Kinematics::putMeanVectors(int i, double p, double h, double t, double d, d
      if (h-h0<=12000&&h-h0>=9000){
       mean912+=v_;
       n912+=1;
+    }
+
+     if (h-h0<=5000&&h-h0>=2000){
+      mean25+=v_;
+      n25+=1;
     }
 
     if (h-h0<=6000&&h-h0>=1000){
@@ -1400,6 +1408,9 @@ void Kinematics::finishMeanVectors()
 
   if (n16 != 0) mean16 *= 1.0 / n16;
   else mean16 = Vector(0, 0, 0);
+
+  if (n25 != 0) mean25 *= 1.0 / n25;
+  else mean25 = Vector(0, 0, 0);
 
   if (n13 != 0) mean13 *= 1.0 / n13;
   else mean13 = Vector(0, 0, 0);
@@ -2925,6 +2936,13 @@ public:
   double BS16_var_SI();
 
   double BS500();
+
+  double BS5002000();
+  double BS5003000();
+  double BS5004000();
+  double BS_500_1km_max();
+  double BS_500_2km_max();
+
   double BS01();
   double BS02();
   double BS03();
@@ -3278,10 +3296,12 @@ public:
   double Ventilation_36km();
   double Ventilation_69km();
 
+  double Ventilation_25km_LM();
   double Ventilation_16km_LM();
   double Ventilation_36km_LM();
   double Ventilation_69km_LM();
 
+  double Ventilation_25km_RM();
   double Ventilation_16km_RM();
   double Ventilation_36km_RM();
   double Ventilation_69km_RM();
@@ -5007,6 +5027,81 @@ double IndicesCollector::BS_ULmax(){
   return max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9);
 }
 
+double IndicesCollector::BS_500_2km_max(){
+  int h1 = cache->getHeightIndex(500); 
+  int h2 = cache->getHeightIndex(600); 
+  int h3 = cache->getHeightIndex(700); 
+  int h4 = cache->getHeightIndex(800); 
+  int h5 = cache->getHeightIndex(1000); 
+  int h6 = cache->getHeightIndex(1200); 
+  int h7 = cache->getHeightIndex(1400);
+  int h8 = cache->getHeightIndex(1600);
+  int h9 = cache->getHeightIndex(1800);
+  int h10 = cache->getHeightIndex(2000);
+  int h11 = cache->getHeightIndex(2500);
+  int h12 = cache->getHeightIndex(2600);
+  int h13 = cache->getHeightIndex(2700); 
+  int h14 = cache->getHeightIndex(2800);
+  int h15 = cache->getHeightIndex(3000);
+  int h16 = cache->getHeightIndex(3200);
+  int h17 = cache->getHeightIndex(3400);
+  int h18 = cache->getHeightIndex(3600);
+  int h19 = cache->getHeightIndex(3800);
+  int h20 = cache->getHeightIndex(4000);	
+  double BS1 = (Get(S->ks->vw,h11) - Get(S->ks->vw,hs1)).abs();
+  double BS2 = (Get(S->ks->vw,h12) - Get(S->ks->vw,hs2)).abs();
+  double BS3 = (Get(S->ks->vw,h13) - Get(S->ks->vw,hs3)).abs();
+  double BS4 = (Get(S->ks->vw,h14) - Get(S->ks->vw,hs4)).abs();
+  double BS5 = (Get(S->ks->vw,h15) - Get(S->ks->vw,hs5)).abs();
+  double BS6 = (Get(S->ks->vw,h16) - Get(S->ks->vw,hs6)).abs();
+  double BS7 = (Get(S->ks->vw,h17) - Get(S->ks->vw,hs7)).abs();
+  double BS8 = (Get(S->ks->vw,h18) - Get(S->ks->vw,hs8)).abs();
+  double BS9 = (Get(S->ks->vw,h19) - Get(S->ks->vw,hs9)).abs();
+  double BS10 = (Get(S->ks->vw,h20) - Get(S->ks->vw,hs10)).abs();
+  return max(max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9),BS10);
+}
+
+double IndicesCollector::BS_500_1km_max(){
+  int h1 = cache->getHeightIndex(500); 
+  int h2 = cache->getHeightIndex(600); 
+  int h3 = cache->getHeightIndex(700); 
+  int h4 = cache->getHeightIndex(800); 
+  int h5 = cache->getHeightIndex(1000); 
+  int h6 = cache->getHeightIndex(1200); 
+  int h7 = cache->getHeightIndex(1400);
+  int h8 = cache->getHeightIndex(1500); 
+  int h9 = cache->getHeightIndex(1600);
+  int h10 = cache->getHeightIndex(1700); 
+  int h11 = cache->getHeightIndex(1800);
+  int h12 = cache->getHeightIndex(2000);
+  int h13 = cache->getHeightIndex(2200);
+  int h14 = cache->getHeightIndex(2400);
+  int h15 = cache->getHeightIndex(2600);
+  int h16 = cache->getHeightIndex(2800);
+  int h17 = cache->getHeightIndex(3000);
+  int h18 = cache->getHeightIndex(3200);
+  int h19 = cache->getHeightIndex(3400);
+  int h20 = cache->getHeightIndex(3600);
+  int h21 = cache->getHeightIndex(3800);
+  int h22 = cache->getHeightIndex(4000);	
+  double BS1 = (Get(S->ks->vw,h8) - Get(S->ks->vw,hs1)).abs();
+  double BS2 = (Get(S->ks->vw,h9) - Get(S->ks->vw,hs2)).abs();
+  double BS3 = (Get(S->ks->vw,h10) - Get(S->ks->vw,hs3)).abs();
+  double BS4 = (Get(S->ks->vw,h11) - Get(S->ks->vw,hs4)).abs();
+  double BS5 = (Get(S->ks->vw,h12) - Get(S->ks->vw,hs5)).abs();
+  double BS6 = (Get(S->ks->vw,h13) - Get(S->ks->vw,hs6)).abs();
+  double BS7 = (Get(S->ks->vw,h14) - Get(S->ks->vw,hs7)).abs();
+  double BS8 = (Get(S->ks->vw,h15) - Get(S->ks->vw,hs9)).abs();
+  double BS9 = (Get(S->ks->vw,h16) - Get(S->ks->vw,hs11)).abs();
+  double BS10 = (Get(S->ks->vw,h17) - Get(S->ks->vw,hs12)).abs();
+  double BS11 = (Get(S->ks->vw,h18) - Get(S->ks->vw,hs13)).abs();
+  double BS12 = (Get(S->ks->vw,h19) - Get(S->ks->vw,hs14)).abs();
+  double BS13 = (Get(S->ks->vw,h20) - Get(S->ks->vw,hs15)).abs();
+  double BS14 = (Get(S->ks->vw,h21) - Get(S->ks->vw,hs16)).abs();
+  double BS15 = (Get(S->ks->vw,h22) - Get(S->ks->vw,hs17)).abs();
+  return max(max(max(max(max(max(max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9),BS10),BS11),BS12),BS13),BS14),BS15);
+}
+
 double IndicesCollector::BS_MLmax(){
   int h1 = cache->getHeightIndex(2000); 
   int h2 = cache->getHeightIndex(2500); 
@@ -5173,6 +5268,33 @@ double IndicesCollector::BS16_var_SI(){
                      V11.abs() - V12.abs() };  
   double result = 1.0 / (computeStandardDeviation(diffs) / abs(computeMean(diffs)));
   return result;
+}
+
+double IndicesCollector::BS5004000(){
+  int tail=cache->getHeightIndex(500);
+  int head = cache->getHeightIndex(4000);
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  return result.abs();
+}
+
+double IndicesCollector::BS5003000(){
+  int tail=cache->getHeightIndex(500);
+  int head = cache->getHeightIndex(3000);
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  return result.abs();
+}
+
+double IndicesCollector::BS5002000(){
+  int tail=cache->getHeightIndex(500);
+  int head = cache->getHeightIndex(2000);
+  Vector vtail = Get(S->ks->vw,tail);
+  Vector vhead = Get(S->ks->vw,head);
+  Vector result = vhead-vtail;
+  return result.abs();
 }
 
 double IndicesCollector::BS500(){
@@ -7058,6 +7180,11 @@ double IndicesCollector::SB_buoyancy_M10(){
   return diff;
 }
 
+double IndicesCollector::Ventilation_25km_RM(){
+  double ventilation = distance(S->ks->mean25, S->ks->rm, S->ks->mean0);   
+  return ventilation*(-1);
+}
+
 double IndicesCollector::Ventilation_16km_RM(){
   double ventilation = distance(S->ks->mean16, S->ks->rm, S->ks->mean0);   
   return ventilation*(-1);
@@ -7070,6 +7197,11 @@ double IndicesCollector::Ventilation_36km_RM(){
 
 double IndicesCollector::Ventilation_69km_RM(){
   double ventilation = distance(S->ks->mean69, S->ks->rm, S->ks->mean0);   
+  return ventilation*(-1);
+}
+
+double IndicesCollector::Ventilation_25km_LM(){
+  double ventilation = distance(S->ks->mean25, S->ks->lm, S->ks->mean0);   
   return ventilation*(-1);
 }
 
@@ -7100,6 +7232,11 @@ double IndicesCollector::Ventilation_36km_MW(){
 
 double IndicesCollector::Ventilation_69km_MW(){
   double ventilation = distance(S->ks->mean69, S->ks->mean06, S->ks->mean0);   
+  return ventilation*(-1);
+}
+
+double IndicesCollector::Ventilation_25km(){
+  double ventilation = distance(S->ks->mean25, this->Peters_vector(), S->ks->mean0);   
   return ventilation*(-1);
 }
 
@@ -7542,6 +7679,17 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[328]=(*S)->getIndicesCollectorPointer()->M30Height();
   vec[329]=(*S)->getIndicesCollectorPointer()->MU5_cold_cloud(); 
   vec[330]=(*S)->getIndicesCollectorPointer()->MU5_equal_layer(); 
+
+  vec[331]=(*S)->getIndicesCollectorPointer()->BS5002000();
+  vec[332]=(*S)->getIndicesCollectorPointer()->BS5003000();
+  vec[333]=(*S)->getIndicesCollectorPointer()->BS5004000();
+  vec[334]=(*S)->getIndicesCollectorPointer()->BS_500_1km_max();
+  vec[335]=(*S)->getIndicesCollectorPointer()->BS_500_2km_max();
+  vec[336]=(*S)->getIndicesCollectorPointer()->BS13km();
+  vec[337]=(*S)->getIndicesCollectorPointer()->Ventilation_25km_RM();
+  vec[338]=(*S)->getIndicesCollectorPointer()->Ventilation_25km_LM();
+  vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_25km();
+  vec[340]=(*S)->getIndicesCollectorPointer()->Ventilation_16km();
   return vec;
 }
 
@@ -8206,7 +8354,16 @@ double * sounding_default2(double* pressure,
 //'  \item 	HGT_ISO_M30
 //'  \item 	MU5_cold_cloud
 //'  \item 	MU5_equal_layer
-
+//'  \item 	BS_5002000m
+//'  \item 	BS_5003000m
+//'  \item 	BS_5004000m
+//'  \item 	BS_500_1000m_max
+//'  \item 	BS_500_2000m_max
+//'  \item 	BS_13km
+//'  \item 	Ventilation_25km_RM
+//'  \item 	Ventilation_25km_LM
+//'  \item 	Ventilation_25km
+//'  \item 	Ventilation_16km
 //' }
  // [[Rcpp::export]]
  
@@ -8243,7 +8400,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 331;
+   int reslen= 341;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
