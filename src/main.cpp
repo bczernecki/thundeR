@@ -3292,6 +3292,7 @@ public:
   double SB_ELI();
   double MU500_ELI();
 
+  double Ventilation_25km();
   double Ventilation_16km();
   double Ventilation_36km();
   double Ventilation_69km();
@@ -5048,16 +5049,16 @@ double IndicesCollector::BS_500_2km_max(){
   int h18 = cache->getHeightIndex(3600);
   int h19 = cache->getHeightIndex(3800);
   int h20 = cache->getHeightIndex(4000);	
-  double BS1 = (Get(S->ks->vw,h11) - Get(S->ks->vw,hs1)).abs();
-  double BS2 = (Get(S->ks->vw,h12) - Get(S->ks->vw,hs2)).abs();
-  double BS3 = (Get(S->ks->vw,h13) - Get(S->ks->vw,hs3)).abs();
-  double BS4 = (Get(S->ks->vw,h14) - Get(S->ks->vw,hs4)).abs();
-  double BS5 = (Get(S->ks->vw,h15) - Get(S->ks->vw,hs5)).abs();
-  double BS6 = (Get(S->ks->vw,h16) - Get(S->ks->vw,hs6)).abs();
-  double BS7 = (Get(S->ks->vw,h17) - Get(S->ks->vw,hs7)).abs();
-  double BS8 = (Get(S->ks->vw,h18) - Get(S->ks->vw,hs8)).abs();
-  double BS9 = (Get(S->ks->vw,h19) - Get(S->ks->vw,hs9)).abs();
-  double BS10 = (Get(S->ks->vw,h20) - Get(S->ks->vw,hs10)).abs();
+  double BS1 = (Get(S->ks->vw,h11) - Get(S->ks->vw,h1)).abs();
+  double BS2 = (Get(S->ks->vw,h12) - Get(S->ks->vw,h2)).abs();
+  double BS3 = (Get(S->ks->vw,h13) - Get(S->ks->vw,h3)).abs();
+  double BS4 = (Get(S->ks->vw,h14) - Get(S->ks->vw,h4)).abs();
+  double BS5 = (Get(S->ks->vw,h15) - Get(S->ks->vw,h5)).abs();
+  double BS6 = (Get(S->ks->vw,h16) - Get(S->ks->vw,h6)).abs();
+  double BS7 = (Get(S->ks->vw,h17) - Get(S->ks->vw,h7)).abs();
+  double BS8 = (Get(S->ks->vw,h18) - Get(S->ks->vw,h8)).abs();
+  double BS9 = (Get(S->ks->vw,h19) - Get(S->ks->vw,h9)).abs();
+  double BS10 = (Get(S->ks->vw,h20) - Get(S->ks->vw,h10)).abs();
   return max(max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9),BS10);
 }
 
@@ -5084,21 +5085,21 @@ double IndicesCollector::BS_500_1km_max(){
   int h20 = cache->getHeightIndex(3600);
   int h21 = cache->getHeightIndex(3800);
   int h22 = cache->getHeightIndex(4000);	
-  double BS1 = (Get(S->ks->vw,h8) - Get(S->ks->vw,hs1)).abs();
-  double BS2 = (Get(S->ks->vw,h9) - Get(S->ks->vw,hs2)).abs();
-  double BS3 = (Get(S->ks->vw,h10) - Get(S->ks->vw,hs3)).abs();
-  double BS4 = (Get(S->ks->vw,h11) - Get(S->ks->vw,hs4)).abs();
-  double BS5 = (Get(S->ks->vw,h12) - Get(S->ks->vw,hs5)).abs();
-  double BS6 = (Get(S->ks->vw,h13) - Get(S->ks->vw,hs6)).abs();
-  double BS7 = (Get(S->ks->vw,h14) - Get(S->ks->vw,hs7)).abs();
-  double BS8 = (Get(S->ks->vw,h15) - Get(S->ks->vw,hs9)).abs();
-  double BS9 = (Get(S->ks->vw,h16) - Get(S->ks->vw,hs11)).abs();
-  double BS10 = (Get(S->ks->vw,h17) - Get(S->ks->vw,hs12)).abs();
-  double BS11 = (Get(S->ks->vw,h18) - Get(S->ks->vw,hs13)).abs();
-  double BS12 = (Get(S->ks->vw,h19) - Get(S->ks->vw,hs14)).abs();
-  double BS13 = (Get(S->ks->vw,h20) - Get(S->ks->vw,hs15)).abs();
-  double BS14 = (Get(S->ks->vw,h21) - Get(S->ks->vw,hs16)).abs();
-  double BS15 = (Get(S->ks->vw,h22) - Get(S->ks->vw,hs17)).abs();
+  double BS1 = (Get(S->ks->vw,h8) - Get(S->ks->vw,h1)).abs();
+  double BS2 = (Get(S->ks->vw,h9) - Get(S->ks->vw,h2)).abs();
+  double BS3 = (Get(S->ks->vw,h10) - Get(S->ks->vw,h3)).abs();
+  double BS4 = (Get(S->ks->vw,h11) - Get(S->ks->vw,h4)).abs();
+  double BS5 = (Get(S->ks->vw,h12) - Get(S->ks->vw,h5)).abs();
+  double BS6 = (Get(S->ks->vw,h13) - Get(S->ks->vw,h6)).abs();
+  double BS7 = (Get(S->ks->vw,h14) - Get(S->ks->vw,h7)).abs();
+  double BS8 = (Get(S->ks->vw,h15) - Get(S->ks->vw,h9)).abs();
+  double BS9 = (Get(S->ks->vw,h16) - Get(S->ks->vw,h11)).abs();
+  double BS10 = (Get(S->ks->vw,h17) - Get(S->ks->vw,h12)).abs();
+  double BS11 = (Get(S->ks->vw,h18) - Get(S->ks->vw,h13)).abs();
+  double BS12 = (Get(S->ks->vw,h19) - Get(S->ks->vw,h14)).abs();
+  double BS13 = (Get(S->ks->vw,h20) - Get(S->ks->vw,h15)).abs();
+  double BS14 = (Get(S->ks->vw,h21) - Get(S->ks->vw,h16)).abs();
+  double BS15 = (Get(S->ks->vw,h22) - Get(S->ks->vw,h17)).abs();
   return max(max(max(max(max(max(max(max(max(max(max(max(max(max(BS1,BS2),BS3),BS4),BS5),BS6),BS7),BS8),BS9),BS10),BS11),BS12),BS13),BS14),BS15);
 }
 
@@ -7685,7 +7686,7 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[333]=(*S)->getIndicesCollectorPointer()->BS5004000();
   vec[334]=(*S)->getIndicesCollectorPointer()->BS_500_1km_max();
   vec[335]=(*S)->getIndicesCollectorPointer()->BS_500_2km_max();
-  vec[336]=(*S)->getIndicesCollectorPointer()->BS13km();
+  vec[336]=(*S)->getIndicesCollectorPointer()->BS13();
   vec[337]=(*S)->getIndicesCollectorPointer()->Ventilation_25km_RM();
   vec[338]=(*S)->getIndicesCollectorPointer()->Ventilation_25km_LM();
   vec[339]=(*S)->getIndicesCollectorPointer()->Ventilation_25km();
