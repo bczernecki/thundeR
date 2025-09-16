@@ -14,7 +14,6 @@ Description: A freeware R package and collection of functions for rapid computat
 License: GPL (>= 2)
 Imports:
     Rcpp (>= 0.12.9.4),
-    climate,
     dplyr,
     aiRthermo
 Depends:
