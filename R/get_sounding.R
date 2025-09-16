@@ -38,6 +38,9 @@
 #' }
 
 
+get_sounding = function(x) {
+  return(x*x)
+}
 
 
         
