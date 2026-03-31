@@ -2615,9 +2615,9 @@ void Thermodynamics::putSpecificLine(int i, double p, double h, double t, double
     
   aggregated_MSE0 += (last_MSE0 + MSE0_) * (h-lasth);  
 
-  if(i == 1){
-     lasth = h;
-  }
+  //if(i == 1){
+  //   lasth = h;
+  //}
 
   MSE0_bar_ = 0.5 * aggregated_MSE0 / (h-h0);
   last_MSE0 = MSE0_;
