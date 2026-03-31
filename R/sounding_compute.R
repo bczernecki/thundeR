@@ -12,7 +12,7 @@
 #'  \item 	SB_buoy_3km
 #'  \item 	SB_LI
 #'  \item 	SB_LI_M25
-#'  \item 	SB_LI_eff
+#'  \item 	SB_LI_LCL_2km
 #'  \item 	SB_CIN
 #'  \item 	SB_CIN_4km
 #'  \item 	SB_LCL_hgt
@@ -44,7 +44,7 @@
 #'  \item 	ML_buoy_3km
 #'  \item 	ML_LI
 #'  \item 	ML_LI_M25
-#'  \item 	ML_LI_eff
+#'  \item 	ML_LI_LCL_2km
 #'  \item 	ML_CIN
 #'  \item 	ML_CIN_4km
 #'  \item 	ML_LCL_hgt
@@ -76,7 +76,7 @@
 #'  \item 	MU_buoy_3km
 #'  \item 	MU_LI
 #'  \item 	MU_LI_M25
-#'  \item 	MU_LI_eff
+#'  \item 	MU_LI_LCL_2km
 #'  \item 	MU_CIN
 #'  \item 	MU_CIN_4km
 #'  \item 	MU_LCL_hgt
@@ -108,7 +108,7 @@
 #'  \item 	MUML_buoy_3km
 #'  \item 	MUML_LI
 #'  \item 	MUML_LI_M25
-#'  \item 	MUML_LI_eff
+#'  \item 	MUML_LI_LCL_2km
 #'  \item 	MUML_CIN
 #'  \item 	MUML_CIN_4km
 #'  \item 	MUML_LCL_hgt
@@ -133,20 +133,37 @@
 #'  \item 	MUML_E_WMAXSHEAR_HGL
 #'  \item 	MUML_E_WMAXSHEAR_3km
 #'  \item 	MU5_CAPE
-#'  \item 	MU5_CAPE_M10
+#'  \item 	MU5_CAPE_3km
 #'  \item 	MU5_CAPE_HGL
 #'  \item 	MU5_buoy
 #'  \item 	MU5_buoy_HGL
+#'  \item 	MU5_buoy_3km
 #'  \item 	MU5_LI
 #'  \item 	MU5_LI_M25
-#'  \item 	MU5_LI_eff
+#'  \item 	MU5_LI_LCL_2km
 #'  \item 	MU5_CIN
 #'  \item 	MU5_CIN_4km
+#'  \item 	MU5_LCL_hgt
+#'  \item 	MU5_LFC_hgt
+#'  \item 	MU5_EL_hgt
+#'  \item 	MU5_LCL_tmp
+#'  \item 	MU5_LFC_tmp
+#'  \item 	MU5_EL_tmp
+#'  \item 	MU5_cold_cloud
+#'  \item 	MU5_warm_cloud
+#'  \item 	MU5_equal_layer
+#'  \item 	MU5_MIXR
+#'  \item 	MU5_WMAXSHEAR
 #'  \item 	MU5_E_CAPE
+#'  \item 	MU5_E_CAPE_3km
 #'  \item 	MU5_E_CAPE_HGL
 #'  \item 	MU5_E_buoy
 #'  \item 	MU5_E_buoy_HGL
+#'  \item 	MU5_E_buoy_3km
 #'  \item 	MU5_E_LI
+#'  \item 	MU5_E_WMAXSHEAR
+#'  \item 	MU5_E_WMAXSHEAR_HGL
+#'  \item 	MU5_E_WMAXSHEAR_3km
 #'  \item 	LR_0500m
 #'  \item 	LR_01km
 #'  \item 	LR_03km
@@ -244,8 +261,13 @@
 #'  \item 	SRW_eff_CBV
 #'  \item 	Ventilation_16km_RM
 #'  \item 	Ventilation_16km_LM
+#'  \item 	Ventilation_16km_MW
 #'  \item 	Ventilation_36km_RM
 #'  \item 	Ventilation_36km_LM
+#'  \item 	Ventilation_36km_MW
+#'  \item 	Ventilation_HGL_RM
+#'  \item 	Ventilation_HGL_LM
+#'  \item 	Ventilation_HGL_MW
 #'  \item 	SRH_0100m_RM
 #'  \item 	SRH_0100m_LM
 #'  \item 	SRH_0100m_RM_G
@@ -284,8 +306,8 @@
 #'  \item 	SV_01km_LM_fra
 #'  \item 	SV_03km_RM_fra
 #'  \item 	SV_03km_LM_fra
-#'  \item 	CA0500_RM();
-#'  \item 	CA0500_LM();
+#'  \item 	CA0500_RM
+#'  \item 	CA0500_LM
 #'  \item 	Bunkers_RM_A
 #'  \item 	Bunkers_RM_M
 #'  \item 	Bunkers_LM_A
@@ -328,23 +350,9 @@
 #'  \item 	SHERB_mod
 #'  \item 	DEI
 #'  \item 	DEI_eff
-#'  \item 	HGT_ISO_M05
-#'  \item 	HGT_ISO_M15
-#'  \item 	HGT_ISO_M20
-#'  \item 	HGT_ISO_M25
-#'  \item 	HGT_ISO_M30
-#'  \item 	MU5_cold_cloud
-#'  \item 	MU5_equal_layer
-#'  \item 	BS_5002000m
-#'  \item 	BS_5003000m
+#'  \item 	MU5_coldcape
 #'  \item 	BS_5004000m
-#'  \item 	BS_500_1000m_max
-#'  \item 	BS_500_2000m_max
-#'  \item 	BS_13km
-#'  \item 	Ventilation_25km_RM
-#'  \item 	Ventilation_25km_LM
-#'  \item 	Ventilation_25km
-#'  \item 	Ventilation_16km
+#'  \item 	BS_5004000m_2km_max
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -403,7 +411,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SB_buoy_3km",
 "SB_LI",
 "SB_LI_M25",
-"SB_LI_eff",
+"SB_LI_LCL_2km",
 "SB_CIN",
 "SB_CIN_4km",
 "SB_LCL_hgt",
@@ -435,7 +443,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "ML_buoy_3km",
 "ML_LI",
 "ML_LI_M25",
-"ML_LI_eff",
+"ML_LI_LCL_2km",
 "ML_CIN",
 "ML_CIN_4km",
 "ML_LCL_hgt",
@@ -467,7 +475,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU_buoy_3km",
 "MU_LI",
 "MU_LI_M25",
-"MU_LI_eff",
+"MU_LI_LCL_2km",
 "MU_CIN",
 "MU_CIN_4km",
 "MU_LCL_hgt",
@@ -499,7 +507,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MUML_buoy_3km",
 "MUML_LI",
 "MUML_LI_M25",
-"MUML_LI_eff",
+"MUML_LI_LCL_2km",
 "MUML_CIN",
 "MUML_CIN_4km",
 "MUML_LCL_hgt",
@@ -524,20 +532,37 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MUML_E_WMAXSHEAR_HGL",
 "MUML_E_WMAXSHEAR_3km",
 "MU5_CAPE",
-"MU5_CAPE_M10",
+"MU5_CAPE_3km",
 "MU5_CAPE_HGL",
 "MU5_buoy",
 "MU5_buoy_HGL",
+"MU5_buoy_3km",
 "MU5_LI",
 "MU5_LI_M25",
-"MU5_LI_eff",
+"MU5_LI_LCL_2km",
 "MU5_CIN",
 "MU5_CIN_4km",
+"MU5_LCL_hgt",
+"MU5_LFC_hgt",
+"MU5_EL_hgt",
+"MU5_LCL_tmp",
+"MU5_LFC_tmp",
+"MU5_EL_tmp",
+"MU5_cold_cloud",
+"MU5_warm_cloud",
+"MU5_equal_layer",
+"MU5_MIXR",
+"MU5_WMAXSHEAR",
 "MU5_E_CAPE",
+"MU5_E_CAPE_3km",
 "MU5_E_CAPE_HGL",
 "MU5_E_buoy",
 "MU5_E_buoy_HGL",
+"MU5_E_buoy_3km",
 "MU5_E_LI",
+"MU5_E_WMAXSHEAR",
+"MU5_E_WMAXSHEAR_HGL",
+"MU5_E_WMAXSHEAR_3km",
 "LR_0500m",
 "LR_01km",
 "LR_03km",
@@ -553,7 +578,7 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "HGT_ISO_0",
 "HGT_ISO_0_wetbulb",
 "HGT_ISO_M10",
-"HGT_ISO_M10_wetbulb",
+"HGT_ISO_M10_wetbulb  ",
 "HGT_MU",
 "HGT_MUML",
 "THETAE_delta",
@@ -635,8 +660,13 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SRW_eff_CBV",
 "Ventilation_16km_RM",
 "Ventilation_16km_LM",
+"Ventilation_16km_MW",
 "Ventilation_36km_RM",
 "Ventilation_36km_LM",
+"Ventilation_36km_MW",
+"Ventilation_HGL_RM",
+"Ventilation_HGL_LM",
+"Ventilation_HGL_MW",
 "SRH_0100m_RM",
 "SRH_0100m_LM",
 "SRH_0100m_RM_G",
@@ -675,8 +705,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SV_01km_LM_fra",
 "SV_03km_RM_fra",
 "SV_03km_LM_fra",
-"CA_0500_RM",
-"CA_0500_LM",
+"CA0500_RM",
+"CA0500_LM",
 "Bunkers_RM_A",
 "Bunkers_RM_M",
 "Bunkers_LM_A",
@@ -719,22 +749,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "SHERB_mod",
 "DEI",
 "DEI_eff",
-"HGT_ISO_M05",
-"HGT_ISO_M15",
-"HGT_ISO_M20",
-"HGT_ISO_M25",
-"HGT_ISO_M30",
-"MU5_cold_cloud",
-"MU5_equal_layer",
-"BS_5002000m",
-"BS_5003000m",
+"MU5_coldcape",
 "BS_5004000m",
-"BS_500_1000m_max",
-"BS_500_2000m_max",
-"BS_13km",
-"Ventilation_25km_RM",
-"Ventilation_25km_LM",
-"Ventilation_25km",
-"Ventilation_16km")
+"BS_5004000m_2km_max")
 return(tmp)
 }
