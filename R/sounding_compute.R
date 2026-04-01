@@ -353,6 +353,9 @@
 #'  \item 	MU5_coldcape
 #'  \item 	BS_5004000m
 #'  \item 	BS_5004000m_2km_max
+#'  \item 	BS_01_HGL
+#'  \item 	BS_01_HGL_eff
+#'  \item 	BS_01_25
 #' }
 #'
 #' @param pressure pressure [hPa]
@@ -751,6 +754,9 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "DEI_eff",
 "MU5_coldcape",
 "BS_5004000m",
-"BS_5004000m_2km_max")
+"BS_5004000m_2km_max",
+"BS_01_HGL",
+"BS_01_HGL_eff",
+"BS_01_25")
 return(tmp)
 }
