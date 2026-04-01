@@ -2963,6 +2963,9 @@ public:
   double BS14();
   double BS25();
 
+  double BS_01_HGL();
+  double BS_01_25();
+
   double emubs();
   double emumlbs();
   double esbbs();
@@ -3254,6 +3257,7 @@ public:
   double ML_ebuoyancy_M10();
   double SB_ebuoyancy_M10();
 
+  double SB_LCL_RH_3km();
   double ML_LCL_RH_3km();
   double MU_LCL_RH_3km();
   double MUML_LCL_RH_3km();
@@ -4141,6 +4145,11 @@ double IndicesCollector::MUML_LCL_RH_3km(){
 
 double IndicesCollector::MU5_LCL_RH_3km(){
   double result = S->th->mostU500->RH_loop;
+  return result;
+}   
+
+double IndicesCollector::SB_LCL_RH_3km(){
+  double result = S->th->surfaceBased->RH_loop;
   return result;
 }   
 
@@ -6792,6 +6801,17 @@ double IndicesCollector::BulkShearMLLCLTen(){
   return effSHR;
 }
 
+double IndicesCollector::BS_01_HGL(){
+  Vector res = S->ks->mean01 - S->ks->mean020;
+  return res.abs();
+}
+
+double IndicesCollector::BS_01_25(){
+  Vector res = S->ks->mean01 - S->ks->mean25;
+  return res.abs();
+}
+
+
 double IndicesCollector::BulkShearSBLCLTen(){
   int tail=S->th->surfaceBased->vLclIndex;
   int head = S->th->mintenpos;
@@ -7405,7 +7425,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[349];
+  double * vec = new double[353];
 
 // SB parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedCAPE();
@@ -7795,6 +7815,11 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[346]=(*S)->getIndicesCollectorPointer()->MU500_coldcape();
   vec[347]=(*S)->getIndicesCollectorPointer()->BS5004000();
   vec[348]=(*S)->getIndicesCollectorPointer()->BS_500_2km_max();	
+  vec[349]=(*S)->getIndicesCollectorPointer()->SB_LCL_RH_3km();	
+  vec[350]=(*S)->getIndicesCollectorPointer()->ML_LCL_RH_3km();
+  vec[351]=(*S)->getIndicesCollectorPointer()->BS_01_HGL();	
+  vec[352]=(*S)->getIndicesCollectorPointer()->BS_01_25();
+
 	
   //vec[324]=(*S)->getIndicesCollectorPointer()->M05Height();
   //vec[325]=(*S)->getIndicesCollectorPointer()->M15Height();
@@ -8490,7 +8515,11 @@ double * sounding_default2(double* pressure,
 //'  \item 	DEI_eff
 //'  \item 	MU5_coldcape
 //'  \item 	BS_5004000m
-//'  \item 	BS_500_2000m_max
+//'  \item 	BS_5004000m_2km_max
+//'  \item 	RH_ML_LCL_3km
+//'  \item 	RH_SB_LCL_3km
+//'  \item 	BS_01_HGL
+//'  \item 	BS_01_25
 
 //////////////////////////////
 //'  \item 	HGT_ISO_M05
@@ -8545,7 +8574,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 349;
+   int reslen= 353;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
