@@ -2964,6 +2964,7 @@ public:
   double BS25();
 
   double BS_01_HGL();
+  double BS_01_HGL_eff();
   double BS_01_25();
 
   double emubs();
@@ -6806,6 +6807,11 @@ double IndicesCollector::BS_01_HGL(){
   return res.abs();
 }
 
+double IndicesCollector::BS_01_HGL_eff(){
+  Vector res = S->ks->mean01eff - S->ks->mean020;
+  return res.abs();
+}
+
 double IndicesCollector::BS_01_25(){
   Vector res = S->ks->mean01 - S->ks->mean25;
   return res.abs();
@@ -7425,7 +7431,7 @@ double IndicesCollector::SB_ebuoyancy_3km(){
 
 double * processSounding(double *p_, double *h_, double *t_, double *d_, double *a_, double *v_, int length, double dz, Sounding **S, double* meanlayer_bottom_top, Vector storm_motion){
   *S = new Sounding(p_,h_,t_,d_,a_,v_,length, dz, meanlayer_bottom_top, storm_motion);
-  double * vec = new double[353];
+  double * vec = new double[354];
 
 // SB parcel
   vec[0]=(*S)->getIndicesCollectorPointer()->VSurfaceBasedCAPE();
@@ -7818,7 +7824,8 @@ double * processSounding(double *p_, double *h_, double *t_, double *d_, double 
   vec[349]=(*S)->getIndicesCollectorPointer()->SB_LCL_RH_3km();	
   vec[350]=(*S)->getIndicesCollectorPointer()->ML_LCL_RH_3km();
   vec[351]=(*S)->getIndicesCollectorPointer()->BS_01_HGL();	
-  vec[352]=(*S)->getIndicesCollectorPointer()->BS_01_25();
+  vec[352]=(*S)->getIndicesCollectorPointer()->BS_01_HGL_eff();	
+  vec[353]=(*S)->getIndicesCollectorPointer()->BS_01_25();
 
 	
   //vec[324]=(*S)->getIndicesCollectorPointer()->M05Height();
@@ -8519,6 +8526,7 @@ double * sounding_default2(double* pressure,
 //'  \item 	RH_ML_LCL_3km
 //'  \item 	RH_SB_LCL_3km
 //'  \item 	BS_01_HGL
+//'  \item 	BS_01_HGL_eff
 //'  \item 	BS_01_25
 
 //////////////////////////////
@@ -8574,7 +8582,7 @@ double * sounding_default2(double* pressure,
    int mulen,sblen,mllen,dnlen,mustart,mlstart;
    
    double *result = sounding_default2(p,h,t,d,a,v,size,&sret,q, interpolate_step, mlp, sm);
-   int reslen= 353;
+   int reslen= 354;
    int maxl=reslen;
    if(export_profile[0]==1){
      plen = sret->p->size();
