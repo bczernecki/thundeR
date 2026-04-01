@@ -353,6 +353,8 @@
 #'  \item 	MU5_coldcape
 #'  \item 	BS_5004000m
 #'  \item 	BS_5004000m_2km_max
+#'  \item 	RH_ML_LCL_3km
+#'  \item 	RH_SB_LCL_3km
 #'  \item 	BS_01_HGL
 #'  \item 	BS_01_HGL_eff
 #'  \item 	BS_01_25
@@ -755,6 +757,8 @@ sounding_compute = function(pressure, altitude, temp, dpt, wd, ws,
 "MU5_coldcape",
 "BS_5004000m",
 "BS_5004000m_2km_max",
+"RH_ML_LCL_3km",
+"RH_SB_LCL_3km",
 "BS_01_HGL",
 "BS_01_HGL_eff",
 "BS_01_25")
